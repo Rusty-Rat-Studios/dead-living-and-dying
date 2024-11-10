@@ -2,26 +2,31 @@
 
 [ext_resource type="PackedScene" uid="uid://mt6b5vxmupgn" path="res://player.tscn" id="1_hu241"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_e2fj0"]
-size = Vector3(15, 0.5, 15)
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_7mwwj"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_w3pav"]
-size = Vector3(15, 0.5, 15)
+[sub_resource type="QuadMesh" id="QuadMesh_ggp70"]
+size = Vector2(20, 20)
+orientation = 1
 
 [node name="Game" type="Node3D"]
 
 [node name="Floor" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-shape = SubResource("BoxShape3D_e2fj0")
+shape = SubResource("WorldBoundaryShape3D_7mwwj")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("BoxMesh_w3pav")
+mesh = SubResource("QuadMesh_ggp70")
 
 [node name="Player" parent="." instance=ExtResource("1_hu241")]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, -0.353553, 0.612372, 0, 0.866025, 0.5, -0.707107, -0.353553, 0.612372, 10, 10, 10)
 shadow_enabled = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+skeleton = NodePath("../..")
