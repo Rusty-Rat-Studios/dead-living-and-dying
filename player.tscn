@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://player.gd" id="1_ndccg"]
 [ext_resource type="Texture2D" uid="uid://cey8vsju0vbgx" path="res://icon.svg" id="2_goh7u"]
-[ext_resource type="Script" path="res://player_state_machine.gd" id="3_732ij"]
+[ext_resource type="Script" path="res://state_machine.gd" id="3_732ij"]
 [ext_resource type="Script" path="res://state_dead.gd" id="4_lnc8y"]
 [ext_resource type="Script" path="res://state_living.gd" id="4_tmi3f"]
 [ext_resource type="Script" path="res://state_dying.gd" id="6_4l3er"]

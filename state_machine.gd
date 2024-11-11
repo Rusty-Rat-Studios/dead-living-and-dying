@@ -1,11 +1,12 @@
+class_name StateMachine
 extends Node
 
 @export var starting_state: State
 var current_state: State
 
 
-func init(parent: Player) -> void:
-	# give each child (state) a reference to parent (player) it belongs to
+func init(parent: Node3D) -> void:
+	# give each child (state) a reference to parent it belongs to
 	# and enter default starting_state
 	for child in get_children():
 		child.parent = parent
