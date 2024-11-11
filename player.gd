@@ -19,6 +19,15 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	# handle basic movement before passing to state-specific actions
+	handle_movement(delta) 
+	state_machine.process_physics(delta)
+
+
+func _process(delta: float) -> void:
+	state_machine.process_frame(delta)
+
+
+func handle_movement(delta: float) -> void:
 	if not is_on_floor(): # Add the gravity.
 		velocity += get_gravity() * delta
 	# Get the input direction and handle the movement/deceleration.
@@ -32,9 +41,3 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
 	move_and_slide()
-	
-	state_machine.process_physics(delta)
-
-
-func _process(delta: float) -> void:
-	state_machine.process_frame(delta)
