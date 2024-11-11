@@ -12,6 +12,7 @@ size = Vector2(20, 20)
 [node name="Game" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("1_hu241")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.707107, -0.353553, 0.612373, 0, 0.866026, 0.5, -0.707107, -0.353553, 0.612373, 16, 10, 10)
