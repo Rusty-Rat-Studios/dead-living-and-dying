@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://bs0y7abr3e306"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_wgvqw"]
+size = Vector2(20, 5)
+
+[node name="Wall" type="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+mesh = SubResource("QuadMesh_wgvqw")
+skeleton = NodePath("../..")
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="."]
+polygon = PackedVector2Array(10, 0, 10, 5, -10, 5, -10, 0)

@@ -1,27 +1,121 @@
-[gd_scene load_steps=4 format=3 uid="uid://dx3xbk4c7uji8"]
+[gd_scene load_steps=6 format=3 uid="uid://dx3xbk4c7uji8"]
 
 [ext_resource type="PackedScene" uid="uid://mt6b5vxmupgn" path="res://player.tscn" id="1_hu241"]
+[ext_resource type="PackedScene" uid="uid://bs0y7abr3e306" path="res://wall.tscn" id="2_edwe2"]
+[ext_resource type="PackedScene" uid="uid://d0qqt4aopern0" path="res://wall_door.tscn" id="3_i4llg"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_e2fj0"]
-size = Vector3(15, 0.5, 15)
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_7mwwj"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_w3pav"]
-size = Vector3(15, 0.5, 15)
+[sub_resource type="PlaneMesh" id="PlaneMesh_k5a1x"]
+size = Vector2(20, 20)
 
 [node name="Game" type="Node3D"]
-
-[node name="Floor" type="StaticBody3D" parent="."]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-shape = SubResource("BoxShape3D_e2fj0")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-mesh = SubResource("BoxMesh_w3pav")
 
 [node name="Player" parent="." instance=ExtResource("1_hu241")]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.707107, -0.353553, 0.612372, 0, 0.866025, 0.5, -0.707107, -0.353553, 0.612372, 10, 10, 10)
+transform = Transform3D(0.707107, -0.353553, 0.612373, 0, 0.866026, 0.5, -0.707107, -0.353553, 0.612373, 16, 10, 10)
 shadow_enabled = true
+
+[node name="RoomBottom" type="Node3D" parent="."]
+
+[node name="Floor" type="StaticBody3D" parent="RoomBottom"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomBottom/Floor"]
+shape = SubResource("WorldBoundaryShape3D_7mwwj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RoomBottom/Floor"]
+mesh = SubResource("PlaneMesh_k5a1x")
+
+[node name="WallLeft" parent="RoomBottom" instance=ExtResource("2_edwe2")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10, 0, 0)
+
+[node name="WallRight" parent="RoomBottom" instance=ExtResource("2_edwe2")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 10, 0, 0)
+
+[node name="WallBottom" parent="RoomBottom" instance=ExtResource("2_edwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+
+[node name="WallTopDoor" parent="RoomBottom" instance=ExtResource("3_i4llg")]
+
+[node name="RoomTop" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -40)
+
+[node name="Floor" type="StaticBody3D" parent="RoomTop"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomTop/Floor"]
+shape = SubResource("WorldBoundaryShape3D_7mwwj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RoomTop/Floor"]
+mesh = SubResource("PlaneMesh_k5a1x")
+
+[node name="WallLeft" parent="RoomTop" instance=ExtResource("2_edwe2")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10, 0, 0)
+
+[node name="WallRight" parent="RoomTop" instance=ExtResource("2_edwe2")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 10, 0, 0)
+
+[node name="WallTop" parent="RoomTop" instance=ExtResource("2_edwe2")]
+
+[node name="RoomRight" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -20)
+
+[node name="Floor" type="StaticBody3D" parent="RoomRight"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomRight/Floor"]
+shape = SubResource("WorldBoundaryShape3D_7mwwj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RoomRight/Floor"]
+mesh = SubResource("PlaneMesh_k5a1x")
+
+[node name="WallTop" parent="RoomRight" instance=ExtResource("2_edwe2")]
+
+[node name="WallRight" parent="RoomRight" instance=ExtResource("2_edwe2")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 10, 0, 0)
+
+[node name="WallBottom" parent="RoomRight" instance=ExtResource("2_edwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+
+[node name="WallLeftDoor" parent="RoomRight" instance=ExtResource("3_i4llg")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10, 0, 0)
+
+[node name="RoomLeft" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -20)
+
+[node name="Floor" type="StaticBody3D" parent="RoomLeft"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomLeft/Floor"]
+shape = SubResource("WorldBoundaryShape3D_7mwwj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RoomLeft/Floor"]
+mesh = SubResource("PlaneMesh_k5a1x")
+
+[node name="WallTop" parent="RoomLeft" instance=ExtResource("2_edwe2")]
+
+[node name="WallLeft" parent="RoomLeft" instance=ExtResource("2_edwe2")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10, 0, 0)
+
+[node name="WallBottom" parent="RoomLeft" instance=ExtResource("2_edwe2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+
+[node name="WallRightDoor" parent="RoomLeft" instance=ExtResource("3_i4llg")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 10, 0, 0)
+
+[node name="RoomCenter" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
+
+[node name="Floor" type="StaticBody3D" parent="RoomCenter"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RoomCenter/Floor"]
+shape = SubResource("WorldBoundaryShape3D_7mwwj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RoomCenter/Floor"]
+mesh = SubResource("PlaneMesh_k5a1x")
+
+[node name="WallLeftDoor" parent="RoomCenter" instance=ExtResource("3_i4llg")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10, 0, 0)
+
+[node name="WallRightDoor" parent="RoomCenter" instance=ExtResource("3_i4llg")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 10, 0, 0)
+
+[node name="WallTopDoor" parent="RoomCenter" instance=ExtResource("3_i4llg")]
