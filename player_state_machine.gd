@@ -10,7 +10,6 @@ func init(parent: Player) -> void:
 	for child in get_children():
 		child.parent = parent
 	
-	starting_state = $Living
 	change_state(starting_state)
 
 

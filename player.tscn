@@ -25,8 +25,9 @@ texture = ExtResource("2_goh7u")
 [node name="Camera3D" type="Camera3D" parent="RotationOffset/Sprite3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
 
-[node name="StateMachine" type="Node" parent="."]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
 script = ExtResource("3_732ij")
+starting_state = NodePath("Living")
 
 [node name="Dead" type="Node" parent="StateMachine" node_paths=PackedStringArray("state_dead", "state_living", "state_dying")]
 script = ExtResource("4_lnc8y")
