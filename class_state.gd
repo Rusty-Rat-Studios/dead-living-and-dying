@@ -1,20 +1,8 @@
 class_name State
 extends Node
 
-@export var state_dead: State
-@export var state_living: State
-@export var state_dying: State
-
-@export var speed: float = 6.0
-
-#@export var animation_name: String
-
-# reference to player passed into states to allow state-based control
-var parent: Player
-
 
 func enter() -> void:
-	#parent.animations.play(animation_name)
 	pass
 
 
