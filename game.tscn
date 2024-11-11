@@ -1,12 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://dx3xbk4c7uji8"]
+[gd_scene load_steps=7 format=3 uid="uid://dx3xbk4c7uji8"]
 
 [ext_resource type="PackedScene" uid="uid://mt6b5vxmupgn" path="res://player.tscn" id="1_hu241"]
+[ext_resource type="PackedScene" uid="uid://bs0y7abr3e306" path="res://wall.tscn" id="2_edwe2"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_7mwwj"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_ggp70"]
 size = Vector2(20, 20)
 orientation = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_s6y4q"]
+size = Vector2(9, 5)
+
+[sub_resource type="QuadMesh" id="QuadMesh_pod1b"]
+size = Vector2(2, 3)
 
 [node name="Game" type="Node3D"]
 
@@ -21,12 +28,32 @@ mesh = SubResource("QuadMesh_ggp70")
 [node name="Player" parent="." instance=ExtResource("1_hu241")]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.707107, -0.353553, 0.612372, 0, 0.866025, 0.5, -0.707107, -0.353553, 0.612372, 10, 10, 10)
+transform = Transform3D(0.707107, -0.353553, 0.612373, 0, 0.866026, 0.5, -0.707107, -0.353553, 0.612373, 12, 10, 10)
 shadow_enabled = true
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="Wall" parent="." instance=ExtResource("2_edwe2")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="Wall-door" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+[node name="MeshLeft" type="MeshInstance3D" parent="Wall-door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 2.5, 0)
+mesh = SubResource("QuadMesh_s6y4q")
 skeleton = NodePath("../..")
+
+[node name="MeshRight" type="MeshInstance3D" parent="Wall-door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 2.5, 0)
+mesh = SubResource("QuadMesh_s6y4q")
+skeleton = NodePath("../..")
+
+[node name="MeshTop" type="MeshInstance3D" parent="Wall-door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 0)
+mesh = SubResource("QuadMesh_pod1b")
+skeleton = NodePath("../..")
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="Wall-door"]
+polygon = PackedVector2Array(1, 0, 1, 2, -1, 2, -1, 0, -10, 0, -10, 5, 10, 5, 10, 0)
+
+[node name="Wall2" parent="." instance=ExtResource("2_edwe2")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 10, 0, 0)
