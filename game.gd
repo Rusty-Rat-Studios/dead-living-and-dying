@@ -30,7 +30,7 @@ func _process(delta: float) -> void:
 	state_machine.process_frame(delta)
 
 
-func _on_state_entered(state_name: String):
+func _on_state_entered(state_name: String) -> void:
 	print("State entered: ", state_name)
 	match state_name:
 		"Living":
