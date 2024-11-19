@@ -25,7 +25,6 @@ func _process(delta: float) -> void:
 	
 	# point light at mouse, ensuring parallel with floor
 	$LightOffset.look_at(light_target, Vector3.UP)
-	pass
 
 
 func _physics_process(delta: float) -> void:
