@@ -10,7 +10,7 @@ extends State
 #@export var animation_name: String
 
 # reference to player passed into states to allow state-based control
-var parent: Player
+@onready var parent: Player = $Player
 
 func enter() -> void:
 	#parent.animations.play(animation_name)

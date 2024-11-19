@@ -2,29 +2,15 @@ class_name Player
 extends CharacterBody3D
 
 @onready var speed: float = 6.0
-@onready var state_machine: Node = $StateMachine
-# state machine node-based design partially sourced from:
-# "Starter state machines in Godot 4" by "The Shaggy Dev"
-# https://www.youtube.com/watch?v=oqFbZoA2lnU
+
 
 func _ready() -> void:
-	# Initialize state machine
-	# pass reference of the player to the states
-	state_machine.init(self)
-
-
-func _unhandled_input(event: InputEvent) -> void:
-	state_machine.process_input(event)
+	pass
 
 
 func _physics_process(delta: float) -> void:
 	# handle basic movement before passing to state-specific actions
 	handle_movement(delta) 
-	state_machine.process_physics(delta)
-
-
-func _process(delta: float) -> void:
-	state_machine.process_frame(delta)
 
 
 func handle_movement(delta: float) -> void:
