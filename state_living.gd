@@ -7,6 +7,10 @@ func enter() -> void:
 	# DEBUG: modulate color according to state
 	parent.get_node("RotationOffset/Sprite3D").modulate = Color(0.5, 1, 0.5)
 
+	# adjust light strength
+	parent.light.omni_range = 8
+	parent.light.light_energy = 1
+
 
 func process_input(event: InputEvent) -> State:
 	# DEBUG: press tab to cycle state

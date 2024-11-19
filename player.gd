@@ -2,7 +2,7 @@ class_name Player
 extends CharacterBody3D
 
 @onready var speed: float = 6.0
-
+@onready var light: OmniLight3D = $OmniLight3D
 
 func _ready() -> void:
 	pass
