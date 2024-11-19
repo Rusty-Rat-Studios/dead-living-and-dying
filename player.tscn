@@ -20,3 +20,9 @@ texture = ExtResource("2_goh7u")
 
 [node name="Camera3D" type="Camera3D" parent="RotationOffset/Sprite3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(0.866225, 0.572037, 1.54018e-06, 1)
+shadow_enabled = true
+omni_range = 8.0
+omni_attenuation = 2.0
