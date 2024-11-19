@@ -11,6 +11,7 @@ func _ready() -> void:
 	# Initialize state machine
 	# pass reference of the player to the states
 	state_machine.init($Player)
+	state_machine.connect("state_entered", Callable(self, "_on_state_entered"))
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -24,3 +25,7 @@ func _physics_process(delta: float) -> void:
 
 func _process(delta: float) -> void:
 	state_machine.process_frame(delta)
+
+
+func _on_state_entered(state_name: String):
+	print("State entered: ", state_name)
