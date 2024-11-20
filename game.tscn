@@ -133,6 +133,9 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 10, 0,
 [node name="WallBottomDoor" parent="RoomCenter" instance=ExtResource("3_i4llg")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 10)
 
+[node name="Ghost" parent="RoomCenter" instance=ExtResource("9_t4a6d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 15)
+
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
 script = ExtResource("5_1w8up")
 starting_state = NodePath("Living")
@@ -154,6 +157,3 @@ script = ExtResource("8_isvo6")
 state_dead = NodePath("../Dead")
 state_living = NodePath("../Living")
 state_dying = NodePath(".")
-
-[node name="Ghost" parent="." instance=ExtResource("9_t4a6d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -22)
