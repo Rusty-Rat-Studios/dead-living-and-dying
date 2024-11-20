@@ -15,3 +15,7 @@ var parent: Player
 func enter() -> void:
 	#parent.animations.play(animation_name)
 	pass
+
+
+func process_input(event: InputEvent) -> State:
+	return null
