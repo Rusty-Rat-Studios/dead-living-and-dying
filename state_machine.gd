@@ -4,6 +4,9 @@ extends Node
 @export var starting_state: State
 var current_state: State
 
+# signal for communicating to Game for universal changes
+# based on state (e.g. lighting changes)
+signal state_entered(state_name)
 
 func init(parent: Node3D) -> void:
 	# give each child (state) a reference to parent it belongs to
@@ -21,6 +24,7 @@ func change_state(new_state: State) -> void:
 	
 	current_state = new_state
 	current_state.enter()
+	emit_signal("state_entered", current_state.name)
 
 
 func process_physics(delta: float) -> void:

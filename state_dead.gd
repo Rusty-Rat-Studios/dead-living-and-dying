@@ -1,6 +1,5 @@
 extends PlayerState
 
-
 func enter() -> void:
 	super()
 	parent.speed = 10.0
