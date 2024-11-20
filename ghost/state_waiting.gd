@@ -55,12 +55,12 @@ func set_random_target() -> void:
 
 
 func move_to_target(delta: float) -> void:
-	var direction: Vector3 = (target_pos - parent.global_position).normalized()
-	var distance_to_target: float = parent.global_position.distance_to(target_pos)
+	var direction: Vector3 = (target_pos - parent.position).normalized()
+	var distance_to_target: float = parent.position.distance_to(target_pos)
 	
 	if distance_to_target < parent.speed * delta:
 		# set target to ghost position if close enough
-		target_pos = parent.global_position
+		target_pos = parent.position
 		pause()
 	else:
 		parent.velocity = direction * parent.speed
