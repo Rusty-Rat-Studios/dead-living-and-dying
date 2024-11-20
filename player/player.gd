@@ -12,16 +12,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	# cast ray of mouse position from camera to floor
-	var mouse_pos: Vector2 = get_viewport().get_mouse_position()
-	var ray_origin: Vector3 = camera.project_ray_origin(mouse_pos)
-	var ray_direction: Vector3 = camera.project_ray_normal(mouse_pos)
-	
-	# calculate where ray intersects with floor plane, y = 0
-	var light_target = ray_origin + ray_direction * ((-ray_origin.y) / ray_direction.y)
-	
-	# point light at mouse, ensuring parallel with floor
-	$LightOffset.look_at(light_target)
+	point_spotlight()
 
 
 func _physics_process(delta: float) -> void:
@@ -43,3 +34,13 @@ func handle_movement(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
 	move_and_slide()
+
+
+func point_spotlight() -> void:
+	var mouse_pos_2d: Vector2 = get_viewport().get_mouse_position()
+	var player_pos_2d: Vector2 = camera.unproject_position(position)
+	var light_direction: Vector2 = (mouse_pos_2d - player_pos_2d)
+	var light_target: Vector3 = Vector3(light_direction.x, 1, light_direction.y)
+	
+	# point light at mouse, ensuring parallel with floor
+	$LightOffset.look_at(light_target)
