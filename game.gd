@@ -13,7 +13,7 @@ func _ready() -> void:
 	# Initialize state machine
 	# pass reference of the player to the states
 	state_machine.init($Player)
-	state_machine.connect("state_entered", Callable(self, "_on_state_entered"))
+	SignalBus.state_entered.connect(_on_state_entered)
 
 
 func _unhandled_input(event: InputEvent) -> void:
