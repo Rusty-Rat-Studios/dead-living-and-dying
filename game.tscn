@@ -1,13 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://dx3xbk4c7uji8"]
+[gd_scene load_steps=12 format=3 uid="uid://dx3xbk4c7uji8"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_77rk7"]
-[ext_resource type="PackedScene" uid="uid://mt6b5vxmupgn" path="res://player.tscn" id="1_hu241"]
-[ext_resource type="PackedScene" uid="uid://bs0y7abr3e306" path="res://wall.tscn" id="2_edwe2"]
-[ext_resource type="PackedScene" uid="uid://d0qqt4aopern0" path="res://wall_door.tscn" id="3_i4llg"]
-[ext_resource type="Script" path="res://state_machine.gd" id="5_1w8up"]
-[ext_resource type="Script" path="res://state_dead.gd" id="6_bheuf"]
-[ext_resource type="Script" path="res://state_living.gd" id="7_unc66"]
-[ext_resource type="Script" path="res://state_dying.gd" id="8_isvo6"]
+[ext_resource type="PackedScene" uid="uid://mt6b5vxmupgn" path="res://player/player.tscn" id="1_hu241"]
+[ext_resource type="PackedScene" uid="uid://bs0y7abr3e306" path="res://map/wall.tscn" id="2_edwe2"]
+[ext_resource type="PackedScene" uid="uid://d0qqt4aopern0" path="res://map/wall_door.tscn" id="3_i4llg"]
+[ext_resource type="Script" path="res://base_classes/state_machine.gd" id="5_1w8up"]
+[ext_resource type="Script" path="res://player/state_dead.gd" id="6_bheuf"]
+[ext_resource type="Script" path="res://player/state_living.gd" id="7_unc66"]
+[ext_resource type="Script" path="res://player/state_dying.gd" id="8_isvo6"]
+[ext_resource type="PackedScene" uid="uid://yihpxsaeuqdi" path="res://ghost/ghost.tscn" id="9_t4a6d"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_7mwwj"]
 
@@ -21,7 +22,7 @@ script = ExtResource("1_77rk7")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0)
+transform = Transform3D(0.873288, 0.0729331, 0.481714, -0.403253, -0.446664, 0.798673, 0.273414, -0.891724, -0.360656, 0, 10, 0)
 visible = false
 light_color = Color(0.29219, 0.29219, 0.29219, 1)
 shadow_enabled = true
@@ -131,6 +132,9 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 10, 0,
 
 [node name="WallBottomDoor" parent="RoomCenter" instance=ExtResource("3_i4llg")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 10)
+
+[node name="Ghost" parent="RoomCenter" instance=ExtResource("9_t4a6d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
 script = ExtResource("5_1w8up")

@@ -44,3 +44,25 @@ func _on_state_entered(state_name: String) -> void:
 			player.light_omni.visible = false
 			player.light_spot.visible = false
 			light_directional.visible = true
+	
+	# TEMPORARY
+	update_ghost_visibility(state_name)
+
+
+# TEMPORARY function to update ghost visibility based on player state
+func update_ghost_visibility(state_name: String):
+	var ghost: Ghost = get_node("RoomCenter/Ghost")
+	var ghost_mesh_instance: MeshInstance3D = ghost.get_node("MeshInstance3D")
+	var ghost_mesh: CapsuleMesh = ghost_mesh_instance.mesh
+	var material = ghost_mesh.material
+	
+	var opacity: float
+	match state_name:
+		"Living":
+			opacity = 0
+		"Dying":
+			opacity = 0.2
+		"Dead":
+			opacity = 0.8
+	
+	material.albedo_color.a = opacity
