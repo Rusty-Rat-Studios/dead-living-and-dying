@@ -4,6 +4,9 @@ extends PlayerState
 func enter() -> void:
 	super()
 	parent.speed = 4.0
+	
+	SignalBus.emit_signal("player_state_changed", "Dying")
+	
 	# DEBUG: modulate color according to state
 	parent.get_node("RotationOffset/Sprite3D").modulate = Color(1, 0.5, 0.5)
 	

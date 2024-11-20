@@ -13,7 +13,7 @@ func _ready() -> void:
 	# Initialize state machine
 	# pass reference of the player to the states
 	state_machine.init($Player)
-	SignalBus.state_entered.connect(_on_state_entered)
+	SignalBus.player_state_changed.connect(_on_player_state_changed)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -29,7 +29,7 @@ func _process(delta: float) -> void:
 	state_machine.process_frame(delta)
 
 
-func _on_state_entered(state_name: String) -> void:
+func _on_player_state_changed(state_name: String) -> void:
 	print("State entered: ", state_name)
 	match state_name:
 		"Living":

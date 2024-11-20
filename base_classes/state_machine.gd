@@ -21,7 +21,6 @@ func change_state(new_state: State) -> void:
 	
 	current_state = new_state
 	current_state.enter()
-	SignalBus.emit_signal("state_entered", current_state.name)
 
 
 func process_physics(delta: float) -> void:
