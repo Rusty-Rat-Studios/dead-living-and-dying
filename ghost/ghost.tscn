@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://yihpxsaeuqdi"]
 
 [ext_resource type="Script" path="res://ghost/ghost.gd" id="1_vr82v"]
-[ext_resource type="Script" path="res://base_classes/state_machine.gd" id="2_n1f5j"]
+[ext_resource type="Script" path="res://ghost/state_machine_ghost.gd" id="2_qkh1e"]
 [ext_resource type="Script" path="res://ghost/state_waiting.gd" id="3_gb04i"]
 [ext_resource type="Script" path="res://ghost/state_possessing.gd" id="4_muv24"]
 [ext_resource type="Script" path="res://ghost/state_possessing_waiting.gd" id="5_rk2xf"]
@@ -29,7 +29,7 @@ mesh = SubResource("CapsuleMesh_6tbxm")
 shape = SubResource("CapsuleShape3D_cokcw")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
-script = ExtResource("2_n1f5j")
+script = ExtResource("2_qkh1e")
 starting_state = NodePath("Waiting")
 
 [node name="Waiting" type="Node" parent="StateMachine" node_paths=PackedStringArray("state_waiting", "state_possessing_waiting", "state_possessing_attacking", "state_stunned", "state_attacking")]

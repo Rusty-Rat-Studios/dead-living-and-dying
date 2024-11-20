@@ -4,7 +4,6 @@ var movement_boundaries: Rect2 # select random points in room to wander to
 
 const PAUSE_DURATION_MAX: float = 2.0
 const PAUSE_DURATION_MIN: float = 0.5
-@onready var target_pos: Vector3 = Vector3.ZERO
 @onready var is_paused: bool = false
 @onready var rng = RandomNumberGenerator.new() # generating wait time and target positions
 
@@ -12,6 +11,9 @@ const PAUSE_DURATION_MIN: float = 0.5
 func enter() -> void:
 	super()
 	parent.speed = 3.0
+	
+	# DEBUG
+	print("ghost entered Waiting")
 	
 	# dynamically generate bounding box based on floor size of ghost's current room
 	var floor_mesh_instance: MeshInstance3D = parent.current_room.get_node("Floor/MeshInstance3D")
@@ -26,7 +28,6 @@ func enter() -> void:
 	
 	# set timer and connect to timeout function
 	$PauseTimer.wait_time = randf_range(PAUSE_DURATION_MIN, PAUSE_DURATION_MAX)
-	#$PauseTimer.connect("timeout", Callable(self, "_on_pause_timeout"))
 	$PauseTimer.timeout.connect(_on_pause_timeout)
 	
 	set_random_target()
@@ -34,7 +35,6 @@ func enter() -> void:
 
 func exit() -> void:
 	$PauseTimer.stop()
-	#$PauseTimer.disconnect("timeout", Callable(self, "_on_pause_timeout"))
 	$PauseTimer.timeout.disconnect(_on_pause_timeout)
 
 
@@ -42,7 +42,7 @@ func process_physics(delta: float) -> State:
 	if is_paused:
 		return null # stay in waiting state
 	
-	move_to_target(delta)
+	parent.move_to_target(delta)
 	return null # stay in waiting state
 
 
@@ -52,31 +52,13 @@ func set_random_target() -> void:
 					movement_boundaries.position.x + movement_boundaries.size.x)
 	var z: float = rng.randf_range(movement_boundaries.position.y,
 					movement_boundaries.position.y + movement_boundaries.size.y)
-	target_pos = Vector3(x, 1.0, z) # keep ghost above ground
+	parent.target_pos = Vector3(x, 1.0, z) # keep ghost above ground
 
-
-
-func move_to_target(delta: float) -> void:
-	var direction: Vector3 = (target_pos - parent.position).normalized()
-	var distance_to_target: float = parent.position.distance_to(target_pos)
-	
-	if distance_to_target < parent.speed * delta:
-		# set target to ghost position if close enough
-		target_pos = parent.position
-		pause()
-	else:
-		parent.velocity = direction * parent.speed
-		parent.move_and_slide()
-
-
-func pause() -> void:
-	is_paused = true
-	
-	$PauseTimer.start()
 
 func _on_pause_timeout() -> void:
-	is_paused = false
-	
+	is_paused = true
+		
 	# reset timer
 	$PauseTimer.wait_time = randf_range(PAUSE_DURATION_MIN, PAUSE_DURATION_MAX)
+	$PauseTimer.start()
 	set_random_target()
