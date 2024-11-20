@@ -19,7 +19,7 @@ material = SubResource("StandardMaterial3D_qtcw8")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cokcw"]
 
-[node name="Ghost" type="Area3D"]
+[node name="Ghost" type="CharacterBody3D"]
 script = ExtResource("1_vr82v")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -48,3 +48,5 @@ script = ExtResource("7_yplap")
 
 [node name="Attacking" type="Node" parent="StateMachine"]
 script = ExtResource("8_a4kr4")
+
+[node name="StateSelectTimer" type="Timer" parent="."]
