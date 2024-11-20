@@ -26,14 +26,16 @@ func enter() -> void:
 	
 	# set timer and connect to timeout function
 	$PauseTimer.wait_time = randf_range(PAUSE_DURATION_MIN, PAUSE_DURATION_MAX)
-	$PauseTimer.connect("timeout", Callable(self, "_on_pause_timeout"))
+	#$PauseTimer.connect("timeout", Callable(self, "_on_pause_timeout"))
+	$PauseTimer.timeout.connect(_on_pause_timeout)
 	
 	set_random_target()
 
 
 func exit() -> void:
 	$PauseTimer.stop()
-	$PauseTimer.disconnect("timeout", Callable(self, "_on_pause_timeout"))
+	#$PauseTimer.disconnect("timeout", Callable(self, "_on_pause_timeout"))
+	$PauseTimer.timeout.disconnect(_on_pause_timeout)
 
 
 func process_physics(delta: float) -> State:
