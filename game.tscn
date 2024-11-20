@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dx3xbk4c7uji8"]
+[gd_scene load_steps=12 format=3 uid="uid://dx3xbk4c7uji8"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_77rk7"]
 [ext_resource type="PackedScene" uid="uid://mt6b5vxmupgn" path="res://player.tscn" id="1_hu241"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://state_dead.gd" id="6_bheuf"]
 [ext_resource type="Script" path="res://state_living.gd" id="7_unc66"]
 [ext_resource type="Script" path="res://state_dying.gd" id="8_isvo6"]
+[ext_resource type="PackedScene" uid="uid://yihpxsaeuqdi" path="res://ghost.tscn" id="9_t4a6d"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_7mwwj"]
 
@@ -153,3 +154,6 @@ script = ExtResource("8_isvo6")
 state_dead = NodePath("../Dead")
 state_living = NodePath("../Living")
 state_dying = NodePath(".")
+
+[node name="Ghost" parent="." instance=ExtResource("9_t4a6d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -22)
