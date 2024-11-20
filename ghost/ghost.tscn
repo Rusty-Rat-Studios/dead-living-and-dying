@@ -1,13 +1,13 @@
 [gd_scene load_steps=12 format=3 uid="uid://yihpxsaeuqdi"]
 
-[ext_resource type="Script" path="res://ghost.gd" id="1_vr82v"]
-[ext_resource type="Script" path="res://state_machine.gd" id="2_n1f5j"]
-[ext_resource type="Script" path="res://state_waiting.gd" id="3_gb04i"]
-[ext_resource type="Script" path="res://state_possessing.gd" id="4_muv24"]
-[ext_resource type="Script" path="res://state_possessing_waiting.gd" id="5_rk2xf"]
-[ext_resource type="Script" path="res://state_possessing_attacking.gd" id="6_oelh1"]
-[ext_resource type="Script" path="res://state_stunned.gd" id="7_yplap"]
-[ext_resource type="Script" path="res://state_attacking.gd" id="8_a4kr4"]
+[ext_resource type="Script" path="res://ghost/ghost.gd" id="1_vr82v"]
+[ext_resource type="Script" path="res://base_classes/state_machine.gd" id="2_n1f5j"]
+[ext_resource type="Script" path="res://ghost/state_waiting.gd" id="3_gb04i"]
+[ext_resource type="Script" path="res://ghost/state_possessing.gd" id="4_muv24"]
+[ext_resource type="Script" path="res://ghost/state_possessing_waiting.gd" id="5_rk2xf"]
+[ext_resource type="Script" path="res://ghost/state_possessing_attacking.gd" id="6_oelh1"]
+[ext_resource type="Script" path="res://ghost/state_stunned.gd" id="7_yplap"]
+[ext_resource type="Script" path="res://ghost/state_attacking.gd" id="8_a4kr4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qtcw8"]
 render_priority = 1

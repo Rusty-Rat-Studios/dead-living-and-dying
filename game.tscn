@@ -1,14 +1,14 @@
 [gd_scene load_steps=12 format=3 uid="uid://dx3xbk4c7uji8"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_77rk7"]
-[ext_resource type="PackedScene" uid="uid://mt6b5vxmupgn" path="res://player.tscn" id="1_hu241"]
-[ext_resource type="PackedScene" uid="uid://bs0y7abr3e306" path="res://wall.tscn" id="2_edwe2"]
-[ext_resource type="PackedScene" uid="uid://d0qqt4aopern0" path="res://wall_door.tscn" id="3_i4llg"]
-[ext_resource type="Script" path="res://state_machine.gd" id="5_1w8up"]
-[ext_resource type="Script" path="res://state_dead.gd" id="6_bheuf"]
-[ext_resource type="Script" path="res://state_living.gd" id="7_unc66"]
-[ext_resource type="Script" path="res://state_dying.gd" id="8_isvo6"]
-[ext_resource type="PackedScene" uid="uid://yihpxsaeuqdi" path="res://ghost.tscn" id="9_t4a6d"]
+[ext_resource type="PackedScene" uid="uid://mt6b5vxmupgn" path="res://player/player.tscn" id="1_hu241"]
+[ext_resource type="PackedScene" uid="uid://bs0y7abr3e306" path="res://map/wall.tscn" id="2_edwe2"]
+[ext_resource type="PackedScene" uid="uid://d0qqt4aopern0" path="res://map/wall_door.tscn" id="3_i4llg"]
+[ext_resource type="Script" path="res://base_classes/state_machine.gd" id="5_1w8up"]
+[ext_resource type="Script" path="res://player/state_dead.gd" id="6_bheuf"]
+[ext_resource type="Script" path="res://player/state_living.gd" id="7_unc66"]
+[ext_resource type="Script" path="res://player/state_dying.gd" id="8_isvo6"]
+[ext_resource type="PackedScene" uid="uid://yihpxsaeuqdi" path="res://ghost/ghost.tscn" id="9_t4a6d"]
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_7mwwj"]
 
