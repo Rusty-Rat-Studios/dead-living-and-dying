@@ -2,8 +2,8 @@ extends GhostState
 
 var movement_boundaries: Rect2 # select random points in room to wander to
 
-const PAUSE_DURATION_MAX: float = 2.0
-const PAUSE_DURATION_MIN: float = 0.5
+const PAUSE_DURATION_MAX: float = 3.0
+const PAUSE_DURATION_MIN: float = 1.0
 @onready var is_paused: bool = false
 @onready var rng = RandomNumberGenerator.new() # generating wait time and target positions
 
@@ -11,9 +11,6 @@ const PAUSE_DURATION_MIN: float = 0.5
 func enter() -> void:
 	super()
 	parent.speed = 3.0
-	
-	# DEBUG
-	print("ghost entered Waiting")
 	
 	# dynamically generate bounding box based on floor size of ghost's current room
 	var floor_mesh_instance: MeshInstance3D = parent.current_room.get_node("Floor/MeshInstance3D")
@@ -26,27 +23,28 @@ func enter() -> void:
 	movement_boundaries = Rect2(Vector2(-floor_width / 2, -floor_depth / 2), 
 								Vector2(floor_width, floor_depth))
 	
-	# set timer and connect to timeout function
-	$PauseTimer.wait_time = randf_range(PAUSE_DURATION_MIN, PAUSE_DURATION_MAX)
-	$PauseTimer.timeout.connect(_on_pause_timeout)
-	
+	is_paused = false
 	set_random_target()
 
 
 func exit() -> void:
-	$PauseTimer.stop()
-	$PauseTimer.timeout.disconnect(_on_pause_timeout)
+	is_paused = false
 
 
 func process_physics(delta: float) -> State:
 	if is_paused:
 		return null # stay in waiting state
 	
-	parent.move_to_target(delta)
+	if parent.position != parent.target_pos:
+		# only move if not at target
+		parent.move_to_target(delta)
+	else:
+		pause()
 	return null # stay in waiting state
 
 
 func set_random_target() -> void:
+	print("setting random target")
 	# generate random movement target within room boundaries
 	var x: float = rng.randf_range(movement_boundaries.position.x,
 					movement_boundaries.position.x + movement_boundaries.size.x)
@@ -55,10 +53,15 @@ func set_random_target() -> void:
 	parent.target_pos = Vector3(x, 1.0, z) # keep ghost above ground
 
 
-func _on_pause_timeout() -> void:
+func pause() -> void:
 	is_paused = true
-		
-	# reset timer
-	$PauseTimer.wait_time = randf_range(PAUSE_DURATION_MIN, PAUSE_DURATION_MAX)
-	$PauseTimer.start()
+	# used with await inside pause_timeout() 
+	# to do nothing until timer expires
+	await pause_timeout() 
+
+
+func pause_timeout() -> void:
+	# pause function execution until timer expires
+	await get_tree().create_timer(randf_range(PAUSE_DURATION_MIN, PAUSE_DURATION_MAX)).timeout
+	is_paused = false
 	set_random_target()

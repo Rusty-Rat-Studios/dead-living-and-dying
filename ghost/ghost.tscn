@@ -40,9 +40,6 @@ state_possessing_attacking = NodePath("../Possessing/Attacking")
 state_stunned = NodePath("../Stunned")
 state_attacking = NodePath("../Attacking")
 
-[node name="PauseTimer" type="Timer" parent="StateMachine/Waiting"]
-one_shot = true
-
 [node name="Possessing" type="Node" parent="StateMachine" node_paths=PackedStringArray("state_waiting", "state_possessing_waiting", "state_possessing_attacking", "state_stunned", "state_attacking")]
 script = ExtResource("4_muv24")
 state_waiting = NodePath("../Waiting")
