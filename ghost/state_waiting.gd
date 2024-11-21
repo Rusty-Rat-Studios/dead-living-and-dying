@@ -55,9 +55,6 @@ func set_random_target() -> void:
 					room_boundaries.position.y + room_boundaries.size.y - 1)
 	
 	parent.target_pos = parent.current_room.global_position + Vector3(x, 1.0, z)
-	#parent.target_pos = parent.global_position + Vector3(x, 1.0, z) # keep ghost above ground
-	print("setting random target: ", parent.target_pos)
-
 
 
 func pause() -> void:

@@ -6,7 +6,6 @@ func init(parent: Node3D) -> void:
 	
 	# listen for player state change
 	SignalBus.player_state_changed.connect(_on_player_state_changed)
-	
 
 
 func _on_player_state_changed(state_name: String) -> void:
