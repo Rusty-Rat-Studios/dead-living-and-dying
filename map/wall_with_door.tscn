@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://cexvn2mosncly"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_n8nej"]
+size = Vector3(9, 5, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dc7b3"]
+size = Vector3(2, 2.5, 0.1)
+
+[node name="WallWithDoor" type="StaticBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 2.5, 0)
+mesh = SubResource("BoxMesh_n8nej")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 2.5, 0)
+mesh = SubResource("BoxMesh_n8nej")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.75, 0)
+mesh = SubResource("BoxMesh_dc7b3")
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="."]
+polygon = PackedVector2Array(-10, 0, -1, 0, -1, 2.5, 1, 2.5, 1, 0, 10, 0, 10, 5, -10, 5)
