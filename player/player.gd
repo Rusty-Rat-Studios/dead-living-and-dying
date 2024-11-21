@@ -6,6 +6,9 @@ extends CharacterBody3D
 @onready var light_spot: SpotLight3D = $LightOffset/SpotLight3D
 @onready var camera: Camera3D = $RotationOffset/Camera3D
 
+# used to check whether mouse or controller was last used to look around
+var last_mouse_pos: Vector2
+
 func _ready() -> void:
 	light_omni.light_color = Color("GOLDENROD")
 	light_spot.light_color = Color("GOLDENROD")
@@ -49,10 +52,30 @@ func handle_movement(delta: float) -> void:
 
 
 func point_spotlight() -> void:
-	var mouse_pos_2d: Vector2 = get_viewport().get_mouse_position()
-	var player_pos_2d: Vector2 = camera.unproject_position(position)
-	var light_direction: Vector2 = (mouse_pos_2d - player_pos_2d)
-	var light_target: Vector3 = Vector3(light_direction.x, 1, light_direction.y)
+	var light_direction: Vector2
+	# check for analog input
+	var input_dir: Vector2 = Focus.input_get_vector(
+		"joy_right_x_left", "joy_right_x_right", "joy_right_y_up", "joy_right_y_down"
+	)
+	if input_dir != Vector2.ZERO:
+		# analog input
+		# scale input to handle tiny analog inputs
+		light_direction = input_dir.normalized() * 100
+		# base target off of player position
+		light_direction += Vector2(position.x, position.z) 
+	else:
+		# check for digital input
+		# prevent mouse from regaining control if it hasn't moved
+		var mouse_pos_2d: Vector2 = get_viewport().get_mouse_position()
+		if mouse_pos_2d != last_mouse_pos: 
+			# player has moved mouse
+			last_mouse_pos = mouse_pos_2d
+			var player_pos_2d: Vector2 = camera.unproject_position(position)
+			light_direction = (mouse_pos_2d - player_pos_2d)
+		else: 
+			# no input, do not move light
+			return
 	
-	# point light at mouse, ensuring parallel with floor
+	var light_target: Vector3 = Vector3(light_direction.x, 1, light_direction.y)
+	# point light, ensuring parallel with floor
 	$LightOffset.look_at(light_target)
