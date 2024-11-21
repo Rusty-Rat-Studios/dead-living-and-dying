@@ -17,5 +17,6 @@ func enter() -> void:
 	pass
 
 
+# gdlint:ignore = unused-argument
 func process_input(event: InputEvent) -> State:
 	return null
