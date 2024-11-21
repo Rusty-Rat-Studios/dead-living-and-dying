@@ -1,6 +1,8 @@
 class_name Ghost
 extends CharacterBody3D
 
+signal player_in_room
+
 var movement_boundaries: Rect2
 
 @onready var state_machine: Node = $StateMachine
@@ -13,8 +15,10 @@ var movement_boundaries: Rect2
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Initialize state machine
-	# pass reference of the player to the states
+	# pass reference of the ghost to the states
 	state_machine.init(self)
+	
+	$PlayerDetector.body_entered.connect(_on_player_entered_room)
 
 
 func _physics_process(delta: float) -> void:
@@ -37,3 +41,10 @@ func move_to_target(delta: float) -> void:
 	else:
 		velocity = direction * speed
 		move_and_slide()
+
+
+func _on_player_entered_room(body: Node3D) -> void:
+	if body == PlayerHandler.get_player():
+		emit_signal("player_in_room")
+		pass
+	pass
