@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 SignalBus="*res://base_classes/signal_bus.gd"
 PlayerHandler="*res://player_handler.gd"
+Focus="*res://focus.gd"
 
 [debug]
 
