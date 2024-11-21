@@ -61,7 +61,7 @@ func pause() -> void:
 	is_paused = true
 	# used with await inside pause_timeout() 
 	# to do nothing until timer expires
-	await pause_timeout() 
+	pause_timeout() 
 
 
 func pause_timeout() -> void:
