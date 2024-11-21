@@ -1,14 +1,14 @@
 class_name Ghost
 extends CharacterBody3D
 
+var movement_boundaries: Rect2
+
 @onready var state_machine: Node = $StateMachine
 
 @onready var speed: float = 4.0
 @onready var current_room: Node3D = get_parent()
 @onready var target_pos: Vector3 = Vector3.ZERO
 @onready var at_target: bool = false
-
-var movement_boundaries: Rect2
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
