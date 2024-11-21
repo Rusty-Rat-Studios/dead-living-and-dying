@@ -26,7 +26,7 @@ func move_to_target(delta: float) -> void:
 	var direction: Vector3 = target_pos - global_position
 	var distance_to_target: float = global_position.distance_to(target_pos)
 	
-	if distance_to_target > 0:
+	if distance_to_target > 0.1:
 		direction = direction.normalized()
 	
 	if distance_to_target < speed * delta:

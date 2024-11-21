@@ -13,9 +13,6 @@ func enter() -> void:
 
 func process_physics(delta: float) -> State:
 	parent.target_pos = player.global_position
-	print("target pos: ", parent.target_pos,
-	"\nghost pos :" , parent.position, 
-	"\nplayer pos: ", player.global_position)
 	parent.move_to_target(delta)
 	
 	return null # remain in attacking state

@@ -47,13 +47,17 @@ func process_physics(delta: float) -> State:
 
 
 func set_random_target() -> void:
-	print("setting random target")
 	# generate random movement target within room boundaries
-	var x: float = rng.randf_range(room_boundaries.position.x,
-					room_boundaries.position.x + room_boundaries.size.x)
-	var z: float = rng.randf_range(room_boundaries.position.y,
-					room_boundaries.position.y + room_boundaries.size.y)
-	parent.target_pos = parent.global_position + Vector3(x, 1.0, z) # keep ghost above ground
+	# offset to avoid setting point within walls
+	var x: float = rng.randf_range(room_boundaries.position.x + 1,
+					room_boundaries.position.x + room_boundaries.size.x - 1)
+	var z: float = rng.randf_range(room_boundaries.position.y + 1,
+					room_boundaries.position.y + room_boundaries.size.y - 1)
+	
+	parent.target_pos = parent.current_room.global_position + Vector3(x, 1.0, z)
+	#parent.target_pos = parent.global_position + Vector3(x, 1.0, z) # keep ghost above ground
+	print("setting random target: ", parent.target_pos)
+
 
 
 func pause() -> void:
