@@ -59,14 +59,8 @@ func set_random_target() -> void:
 
 
 func pause() -> void:
+	# pause movement behavior until timer expires
 	is_paused = true
-	# used with await inside pause_timeout() 
-	# to do nothing until timer expires
-	pause_timeout() 
-
-
-func pause_timeout() -> void:
-	# pause function execution until timer expires
 	await get_tree().create_timer(randf_range(PAUSE_DURATION_MIN, PAUSE_DURATION_MAX)).timeout
 	is_paused = false
 	set_random_target()
