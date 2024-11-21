@@ -1,0 +1,12 @@
+name: Static Checks
+
+on: [push, pull_request]
+
+jobs:
+  static-checks:
+    name: 'Static Checks'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: Scony/godot-gdscript-toolkit@master
+    - run: gdlint .
