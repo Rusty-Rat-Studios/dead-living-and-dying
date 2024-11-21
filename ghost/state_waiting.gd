@@ -1,10 +1,9 @@
 extends GhostState
 
-var movement_boundaries: Rect2 # select random points in room to wander to
+var room_boundaries: Rect2 # select random points in room to wander to
 
-const PAUSE_DURATION_MAX: float = 2.0
-const PAUSE_DURATION_MIN: float = 0.5
-@onready var target_pos: Vector3 = Vector3.ZERO
+const PAUSE_DURATION_MAX: float = 3.0
+const PAUSE_DURATION_MIN: float = 1.0
 @onready var is_paused: bool = false
 @onready var rng = RandomNumberGenerator.new() # generating wait time and target positions
 
@@ -21,62 +20,52 @@ func enter() -> void:
 		
 	# create movement boundary, Rect2(Vector2 position, Vector2 size)
 	# Rect2 position starts in top-left corner; x-extends right and y-extends down
-	movement_boundaries = Rect2(Vector2(-floor_width / 2, -floor_depth / 2), 
+	room_boundaries = Rect2(Vector2(-floor_width / 2, -floor_depth / 2), 
 								Vector2(floor_width, floor_depth))
 	
-	# set timer and connect to timeout function
-	$PauseTimer.wait_time = randf_range(PAUSE_DURATION_MIN, PAUSE_DURATION_MAX)
-	#$PauseTimer.connect("timeout", Callable(self, "_on_pause_timeout"))
-	$PauseTimer.timeout.connect(_on_pause_timeout)
+	# update parent movement boundaries
+	parent.movement_boundaries = room_boundaries
 	
+	is_paused = false
 	set_random_target()
 
 
 func exit() -> void:
-	$PauseTimer.stop()
-	#$PauseTimer.disconnect("timeout", Callable(self, "_on_pause_timeout"))
-	$PauseTimer.timeout.disconnect(_on_pause_timeout)
+	is_paused = false
 
 
 func process_physics(delta: float) -> State:
 	if is_paused:
 		return null # stay in waiting state
 	
-	move_to_target(delta)
+	if parent.global_position != parent.target_pos:
+		# only move if not at target
+		parent.move_to_target(delta)
+	else:
+		pause()
 	return null # stay in waiting state
 
 
 func set_random_target() -> void:
 	# generate random movement target within room boundaries
-	var x: float = rng.randf_range(movement_boundaries.position.x,
-					movement_boundaries.position.x + movement_boundaries.size.x)
-	var z: float = rng.randf_range(movement_boundaries.position.y,
-					movement_boundaries.position.y + movement_boundaries.size.y)
-	target_pos = Vector3(x, 1.0, z) # keep ghost above ground
-
-
-
-func move_to_target(delta: float) -> void:
-	var direction: Vector3 = (target_pos - parent.position).normalized()
-	var distance_to_target: float = parent.position.distance_to(target_pos)
+	# offset to avoid setting point within walls
+	var x: float = rng.randf_range(room_boundaries.position.x + 1,
+					room_boundaries.position.x + room_boundaries.size.x - 1)
+	var z: float = rng.randf_range(room_boundaries.position.y + 1,
+					room_boundaries.position.y + room_boundaries.size.y - 1)
 	
-	if distance_to_target < parent.speed * delta:
-		# set target to ghost position if close enough
-		target_pos = parent.position
-		pause()
-	else:
-		parent.velocity = direction * parent.speed
-		parent.move_and_slide()
+	parent.target_pos = parent.current_room.global_position + Vector3(x, 1.0, z)
 
 
 func pause() -> void:
 	is_paused = true
-	
-	$PauseTimer.start()
+	# used with await inside pause_timeout() 
+	# to do nothing until timer expires
+	pause_timeout() 
 
-func _on_pause_timeout() -> void:
+
+func pause_timeout() -> void:
+	# pause function execution until timer expires
+	await get_tree().create_timer(randf_range(PAUSE_DURATION_MIN, PAUSE_DURATION_MAX)).timeout
 	is_paused = false
-	
-	# reset timer
-	$PauseTimer.wait_time = randf_range(PAUSE_DURATION_MIN, PAUSE_DURATION_MAX)
 	set_random_target()

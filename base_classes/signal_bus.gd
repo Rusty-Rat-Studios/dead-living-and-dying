@@ -1,5 +1,5 @@
 extends Node
 
-# signal for communicating to Game for universal changes
-# based on state (e.g. lighting changes)
-signal state_entered(state_name)
+# signal for communicating player state to all interested nodes
+# e.g. Game node making universal changes (e.g. lighting) based on player state 
+signal player_state_changed(state_name: String)

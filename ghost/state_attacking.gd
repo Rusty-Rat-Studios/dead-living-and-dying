@@ -1,11 +1,14 @@
 extends GhostState
 
+@onready var player = PlayerHandler.get_player()
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+func enter() -> void:
+	super()
+	parent.speed = 8.0
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func process_physics(delta: float) -> State:
+	parent.target_pos = player.global_position
+	parent.move_to_target(delta)
+	
+	return null # remain in attacking state
