@@ -19,6 +19,7 @@ func enter() -> void:
 
 func process_input(event: InputEvent) -> State:
 	# DEBUG: press tab to cycle state
-	if Input.is_action_just_pressed("ui_focus_next"):
-		return state_dying
+	if event is InputEventKey and event.pressed:
+		if event.keycode == KEY_TAB:
+			return state_dying
 	return null

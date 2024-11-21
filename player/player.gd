@@ -11,6 +11,7 @@ func _ready() -> void:
 	light_spot.light_color = Color("GOLDENROD")
 
 
+# gdlint:ignore = unused-argument
 func _process(delta: float) -> void:
 	point_spotlight()
 
