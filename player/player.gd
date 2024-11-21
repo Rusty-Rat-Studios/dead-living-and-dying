@@ -1,13 +1,13 @@
 class_name Player
 extends CharacterBody3D
 
+# used to check whether mouse or controller was last used to look around
+var last_mouse_pos: Vector2
+
 @onready var speed: float = 6.0
 @onready var light_omni: OmniLight3D = $OmniLight3D
 @onready var light_spot: SpotLight3D = $LightOffset/SpotLight3D
 @onready var camera: Camera3D = $RotationOffset/Camera3D
-
-# used to check whether mouse or controller was last used to look around
-var last_mouse_pos: Vector2
 
 func _ready() -> void:
 	light_omni.light_color = Color("GOLDENROD")
