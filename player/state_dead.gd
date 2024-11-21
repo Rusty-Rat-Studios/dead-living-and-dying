@@ -7,7 +7,7 @@ func enter() -> void:
 	SignalBus.emit_signal("player_state_changed", "Dead")
 	
 	# change collision layer out of physical plane into spirit plane
-	parent.collision_layer = 8
+	parent.collision_layer = 10
 	parent.collision_mask = 9
 	
 	# DEBUG: modulate color according to state
