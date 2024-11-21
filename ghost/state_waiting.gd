@@ -6,7 +6,7 @@ const PAUSE_DURATION_MIN: float = 1.0
 var room_boundaries: Rect2 # select random points in room to wander to
 
 @onready var is_paused: bool = false
-@onready var rng = RandomNumberGenerator.new() # generating wait time and target positions
+@onready var rng: RandomNumberGenerator = RandomNumberGenerator.new() # generating wait time and target positions
 
 
 func enter() -> void:

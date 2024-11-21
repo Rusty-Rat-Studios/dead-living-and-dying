@@ -1,6 +1,6 @@
 extends Node
 
-@onready var player = get_node("/root/Game/Player")
+@onready var player: Player = get_node("/root/Game/Player")
 
 
 # globally access to Player node

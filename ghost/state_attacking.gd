@@ -1,6 +1,6 @@
 extends GhostState
 
-@onready var player = PlayerHandler.get_player()
+@onready var player: Player = PlayerHandler.get_player()
 
 func enter() -> void:
 	super()

@@ -8,7 +8,7 @@ var current_state: State
 func init(parent: Node3D) -> void:
 	# give each child (state) a reference to parent it belongs to
 	# and enter default starting_state
-	for child in get_children():
+	for child: Node in get_children():
 		child.parent = parent
 	
 	change_state(starting_state)
