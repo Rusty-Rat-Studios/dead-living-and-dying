@@ -1,6 +1,6 @@
 extends GhostState
 
-var movement_boundaries: Rect2 # select random points in room to wander to
+var room_boundaries: Rect2 # select random points in room to wander to
 
 const PAUSE_DURATION_MAX: float = 3.0
 const PAUSE_DURATION_MIN: float = 1.0
@@ -20,8 +20,11 @@ func enter() -> void:
 		
 	# create movement boundary, Rect2(Vector2 position, Vector2 size)
 	# Rect2 position starts in top-left corner; x-extends right and y-extends down
-	movement_boundaries = Rect2(Vector2(-floor_width / 2, -floor_depth / 2), 
+	room_boundaries = Rect2(Vector2(-floor_width / 2, -floor_depth / 2), 
 								Vector2(floor_width, floor_depth))
+	
+	# update parent movement boundaries
+	parent.movement_boundaries = room_boundaries
 	
 	is_paused = false
 	set_random_target()
@@ -35,7 +38,7 @@ func process_physics(delta: float) -> State:
 	if is_paused:
 		return null # stay in waiting state
 	
-	if parent.position != parent.target_pos:
+	if parent.global_position != parent.target_pos:
 		# only move if not at target
 		parent.move_to_target(delta)
 	else:
@@ -46,11 +49,11 @@ func process_physics(delta: float) -> State:
 func set_random_target() -> void:
 	print("setting random target")
 	# generate random movement target within room boundaries
-	var x: float = rng.randf_range(movement_boundaries.position.x,
-					movement_boundaries.position.x + movement_boundaries.size.x)
-	var z: float = rng.randf_range(movement_boundaries.position.y,
-					movement_boundaries.position.y + movement_boundaries.size.y)
-	parent.target_pos = Vector3(x, 1.0, z) # keep ghost above ground
+	var x: float = rng.randf_range(room_boundaries.position.x,
+					room_boundaries.position.x + room_boundaries.size.x)
+	var z: float = rng.randf_range(room_boundaries.position.y,
+					room_boundaries.position.y + room_boundaries.size.y)
+	parent.target_pos = parent.global_position + Vector3(x, 1.0, z) # keep ghost above ground
 
 
 func pause() -> void:
