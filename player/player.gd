@@ -26,8 +26,19 @@ func handle_movement(delta: float) -> void:
 		velocity += get_gravity() * delta
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir: Vector2 = Focus.input_get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	var direction: Vector3 = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var direction: Vector3
+	
+	# check for analog input
+	var input_dir: Vector2 = Focus.input_get_vector(
+		"joy_left_x_left", "joy_left_x_right", "joy_left_y_up", "joy_left_y_down"
+	)
+	if input_dir != Vector2.ZERO:
+		# analog input
+		direction = Vector3(input_dir.x, 0, input_dir.y).normalized()
+	else: 
+		# digital input
+		input_dir = Focus.input_get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+		direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
 		velocity.x = direction.x * speed
 		velocity.z = direction.z * speed

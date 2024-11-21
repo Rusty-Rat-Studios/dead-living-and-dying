@@ -24,9 +24,9 @@ func event_is_action_pressed(event: InputEvent, action: StringName) -> bool:
 	return false
 
 
-func input_get_vector(x_neg: StringName, x_pos: StringName, 
-					y_neg: StringName, y_pos: StringName) -> Vector2:
+func input_get_vector(left: StringName, right: StringName, 
+					up: StringName, down: StringName) -> Vector2:
 	if focused:
-		return Input.get_vector(x_neg, x_pos, y_neg, y_pos)
+		return Input.get_vector(left, right, up, down)
 	
 	return Vector2.ZERO
