@@ -148,6 +148,10 @@ Come here to
 get hurt ;_ ;"
 font_size = 64
 
+[node name="HitCooldown" type="Timer" parent="World/RoomCenter/Hurtbox"]
+wait_time = 2.0
+one_shot = true
+
 [node name="RoomLeft" type="Node3D" parent="World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -20)
 
