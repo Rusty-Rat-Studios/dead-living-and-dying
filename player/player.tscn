@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://mt6b5vxmupgn"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_ndccg"]
-[ext_resource type="Texture2D" uid="uid://cecm7qkppnbxb" path="res://icon.svg" id="2_goh7u"]
+[ext_resource type="Texture2D" uid="uid://cey8vsju0vbgx" path="res://icon.svg" id="2_goh7u"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_psrej"]
 size = Vector3(1.283, 1, 0.643)
@@ -36,3 +36,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.1)
 light_size = 0.4
 shadow_enabled = true
 spot_range = 250.0
+
+[node name="HitCooldown" type="Timer" parent="."]
+one_shot = true

@@ -1,17 +1,29 @@
 class_name Player
 extends CharacterBody3D
 
+# used to set cooldown timer
+const HIT_COOLDOWN: float = 2.0
+
+var state_machine: Node
 # used to check whether mouse or controller was last used to look around
 var last_mouse_pos: Vector2
 
+@onready var hit_cooldown_active: bool = false
 @onready var speed: float = 6.0
 @onready var light_omni: OmniLight3D = $OmniLight3D
 @onready var light_spot: SpotLight3D = $LightOffset/SpotLight3D
 @onready var camera: Camera3D = $RotationOffset/Camera3D
 
+
 func _ready() -> void:
 	light_omni.light_color = Color("GOLDENROD")
 	light_spot.light_color = Color("GOLDENROD")
+	SignalBus.player_hurt.connect(_on_player_hurt)
+	$HitCooldown.timeout.connect(_on_hit_cooldown_timeout)
+
+
+func init(state_machine: Node) -> void:
+	self.state_machine = state_machine 
 
 
 # gdlint:ignore = unused-argument
@@ -79,3 +91,23 @@ func point_spotlight() -> void:
 	var light_target: Vector3 = Vector3(light_direction.x, 1, light_direction.y)
 	# point light, ensuring parallel with floor
 	$LightOffset.look_at(light_target)
+
+
+func _on_player_hurt() -> void:
+	if not hit_cooldown_active:
+		# hit cooldown is inactive, start cooldown
+		hit_cooldown_active = true
+		SignalBus.emit_signal("player_hurt")
+		$HitCooldown.wait_time = HIT_COOLDOWN
+		$HitCooldown.start()
+	# do nothing if cooldown active
+
+
+func _on_hit_cooldown_timeout() -> void:
+	print("Hit Cooldown finished")
+	# deactivate invincibility frames
+	hit_cooldown_active = false
+	
+	# reset cooldown
+	$HitCooldown.wait_time = HIT_COOLDOWN
+	SignalBus.emit_signal("hit_cooldown_finished")

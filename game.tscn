@@ -1,13 +1,14 @@
-[gd_scene load_steps=16 format=3 uid="uid://dx3xbk4c7uji8"]
+[gd_scene load_steps=18 format=3 uid="uid://dx3xbk4c7uji8"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_77rk7"]
 [ext_resource type="PackedScene" uid="uid://mt6b5vxmupgn" path="res://player/player.tscn" id="1_hu241"]
-[ext_resource type="Script" path="res://base_classes/state_machine.gd" id="5_1w8up"]
+[ext_resource type="Script" path="res://base_classes/state_machine.gd" id="3_fg5sk"]
 [ext_resource type="Script" path="res://player/state_dead.gd" id="6_bheuf"]
 [ext_resource type="Script" path="res://player/state_living.gd" id="7_unc66"]
 [ext_resource type="Script" path="res://player/state_dying.gd" id="8_isvo6"]
 [ext_resource type="PackedScene" uid="uid://yihpxsaeuqdi" path="res://ghost/ghost.tscn" id="9_t4a6d"]
 [ext_resource type="PackedScene" uid="uid://b3nn5u3a5o85j" path="res://map/floor.tscn" id="10_44xgk"]
+[ext_resource type="Script" path="res://hurtbox.gd" id="10_ejeyg"]
 [ext_resource type="Script" path="res://map/room.gd" id="10_uwref"]
 [ext_resource type="PackedScene" uid="uid://cexvn2mosncly" path="res://map/wall_with_door.tscn" id="11_odxui"]
 [ext_resource type="PackedScene" uid="uid://bson3umirpot2" path="res://map/wall_without_door.tscn" id="12_5tnol"]
@@ -46,7 +47,7 @@ light_color = Color(0.29219, 0.29219, 0.29219, 1)
 shadow_enabled = true
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
-script = ExtResource("5_1w8up")
+script = ExtResource("3_fg5sk")
 starting_state = NodePath("Living")
 
 [node name="Dead" type="Node" parent="StateMachine" node_paths=PackedStringArray("state_dead", "state_living", "state_dying")]
@@ -87,6 +88,10 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 9.95, 
 
 [node name="Hurtbox" type="Area3D" parent="World/RoomBottom"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -5)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("10_ejeyg")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/RoomBottom/Hurtbox"]
 shape = SubResource("CylinderShape3D_eitr8")
@@ -115,8 +120,8 @@ mesh = SubResource("CylinderMesh_fvtqe")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1, 0)
 text = "SHRINE
 
-Come here to 
-revive as a ghost."
+Come here as a
+ghost to revive."
 font_size = 64
 
 [node name="RoomCenter" type="Node3D" parent="World"]
