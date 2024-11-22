@@ -13,7 +13,7 @@ var movement_boundaries: Rect2
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Initialize state machine
-	# pass reference of the player to the states
+	# pass reference of the ghost to the states
 	state_machine.init(self)
 
 
