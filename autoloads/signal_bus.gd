@@ -16,3 +16,5 @@ signal hit_cooldown_finished
 # current_room variable
 signal player_entered_room(room: Node3D)
 signal player_exited_room(room: Node3D)
+
+signal player_entered_shrine
