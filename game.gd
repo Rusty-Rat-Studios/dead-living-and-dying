@@ -10,6 +10,10 @@ extends Node3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# Initialize player
+	# pass reference of state machine to the player
+	player.init($StateMachine)
+	
 	# Initialize state machine
 	# pass reference of the player to the states
 	state_machine.init($Player)

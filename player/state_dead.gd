@@ -1,9 +1,12 @@
 extends PlayerState
 
+
 func enter() -> void:
 	super()
 	parent.speed = 10.0
 	
+	SignalBus.player_hurt.connect(_on_player_hurt)
+	SignalBus.player_entered_shrine.connect(_on_player_entered_shrine)
 	SignalBus.emit_signal("player_state_changed", "Dead")
 	
 	# change collision layer out of physical plane into spirit plane
@@ -19,6 +22,9 @@ func exit() -> void:
 	# change collision layer out of spirit plane into physical plane
 	parent.collision_layer = 2
 	parent.collision_mask = 5
+	
+	SignalBus.player_hurt.disconnect(_on_player_hurt)
+	SignalBus.player_entered_shrine.disconnect(_on_player_entered_shrine)
 
 
 func process_input(event: InputEvent) -> State:
@@ -27,3 +33,12 @@ func process_input(event: InputEvent) -> State:
 		if event.keycode == KEY_TAB:
 			return state_living
 	return null
+
+
+func _on_player_hurt() -> void:
+	# TODO: Implement game-over signal
+	pass
+
+
+func _on_player_entered_shrine() -> void:
+	parent.state_machine.change_state(state_living)
