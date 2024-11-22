@@ -2,8 +2,8 @@ extends Node3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$PlayerDetector.body_entered.connect(_on_player_entered_room)
-	$PlayerDetector.body_exited.connect(_on_player_exited_room)
+	$Floor/PlayerDetector.body_entered.connect(_on_player_entered_room)
+	$Floor/PlayerDetector.body_exited.connect(_on_player_exited_room)
 
 
 func _on_player_entered_room(body: Node3D) -> void:
