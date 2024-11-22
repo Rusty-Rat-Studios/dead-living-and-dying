@@ -104,10 +104,8 @@ func _on_player_hurt() -> void:
 
 
 func _on_hit_cooldown_timeout() -> void:
-	print("Hit Cooldown finished")
 	# deactivate invincibility frames
 	hit_cooldown_active = false
 	
 	# reset cooldown
 	$HitCooldown.wait_time = HIT_COOLDOWN
-	SignalBus.emit_signal("hit_cooldown_finished")

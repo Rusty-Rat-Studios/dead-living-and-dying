@@ -23,11 +23,13 @@ func hurt_player() -> void:
 		$HitCooldown.start()
 
 
+# gdlint:ignore = unused-argument
 func _on_body_entered(body: Node3D) -> void:
 	player_colliding = true
 	hurt_player()
 
 
+# gdlint:ignore = unused-argument
 func _on_body_exited(body: Node3D) -> void:
 	player_colliding = false
 
