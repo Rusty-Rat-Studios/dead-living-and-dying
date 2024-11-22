@@ -17,21 +17,21 @@
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_eitr8"]
 radius = 2.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j7r0k"]
-transparency = 1
-albedo_color = Color(0.909081, 0, 0.138258, 0.396078)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_ml2oq"]
-material = SubResource("StandardMaterial3D_j7r0k")
-top_radius = 2.0
-bottom_radius = 2.0
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_apiwq"]
 transparency = 1
 albedo_color = Color(0.0470588, 1, 0.0392157, 0.243137)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_fvtqe"]
 material = SubResource("StandardMaterial3D_apiwq")
+top_radius = 2.0
+bottom_radius = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j7r0k"]
+transparency = 1
+albedo_color = Color(0.909081, 0, 0.138258, 0.396078)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ml2oq"]
+material = SubResource("StandardMaterial3D_j7r0k")
 top_radius = 2.0
 bottom_radius = 2.0
 
@@ -87,27 +87,6 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.95,
 [node name="WallWithoutDoor3" parent="World/RoomBottom" instance=ExtResource("12_5tnol")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 9.95, 0, 0)
 
-[node name="Hurtbox" type="Area3D" parent="World/RoomBottom"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
-collision_layer = 0
-collision_mask = 2
-monitorable = false
-script = ExtResource("10_ejeyg")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/RoomBottom/Hurtbox"]
-shape = SubResource("CylinderShape3D_eitr8")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="World/RoomBottom/Hurtbox"]
-mesh = SubResource("CylinderMesh_ml2oq")
-
-[node name="Label3D" type="Label3D" parent="World/RoomBottom/Hurtbox"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1, 0)
-text = "HURTBOX
-
-Come here to 
-get hurt ;_ ;"
-font_size = 64
-
 [node name="Shrine" type="Area3D" parent="World/RoomBottom"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
 collision_layer = 0
@@ -148,6 +127,26 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 9.95, 
 
 [node name="Ghost" parent="World/RoomCenter" instance=ExtResource("9_t4a6d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Hurtbox" type="Area3D" parent="World/RoomCenter"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("10_ejeyg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/RoomCenter/Hurtbox"]
+shape = SubResource("CylinderShape3D_eitr8")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/RoomCenter/Hurtbox"]
+mesh = SubResource("CylinderMesh_ml2oq")
+
+[node name="Label3D" type="Label3D" parent="World/RoomCenter/Hurtbox"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1, 0)
+text = "HURTBOX
+
+Come here to 
+get hurt ;_ ;"
+font_size = 64
 
 [node name="RoomLeft" type="Node3D" parent="World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -20)
