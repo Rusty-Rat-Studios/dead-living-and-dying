@@ -97,7 +97,6 @@ func _on_player_hurt() -> void:
 	if not hit_cooldown_active:
 		# hit cooldown is inactive, start cooldown
 		hit_cooldown_active = true
-		SignalBus.emit_signal("player_hurt")
 		$HitCooldown.wait_time = HIT_COOLDOWN
 		$HitCooldown.start()
 	# do nothing if cooldown active
