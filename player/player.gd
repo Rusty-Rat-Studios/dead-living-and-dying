@@ -4,9 +4,15 @@ extends CharacterBody3D
 # used to set cooldown timer
 const HIT_COOLDOWN: float = 2.0
 
+# base turning speed; can be modified to add acceleration, etc
+const ROTATION_SPEED: float = 2
+
 var state_machine: Node
 # used to check whether mouse or controller was last used to look around
 var last_mouse_pos: Vector2
+
+# store the location of the last direction-input (mouse or right-joystick)
+@onready var light_target: Vector3 = Vector3.ZERO
 
 @onready var hit_cooldown_active: bool = false
 @onready var speed: float = 6.0
@@ -28,7 +34,8 @@ func init(state_machine: Node) -> void:
 
 # gdlint:ignore = unused-argument
 func _process(delta: float) -> void:
-	point_spotlight()
+	set_light_target()
+	rotate_to_target(delta)
 
 
 func _physics_process(delta: float) -> void:
@@ -63,7 +70,7 @@ func handle_movement(delta: float) -> void:
 	move_and_slide()
 
 
-func point_spotlight() -> void:
+func set_light_target() -> void:
 	var light_direction: Vector2
 	# check for analog input
 	var input_dir: Vector2 = Focus.input_get_vector(
@@ -88,9 +95,21 @@ func point_spotlight() -> void:
 			# no input, do not move light
 			return
 	
-	var light_target: Vector3 = Vector3(light_direction.x, 1, light_direction.y)
-	# point light, ensuring parallel with floor
-	$LightOffset.look_at(light_target)
+	light_target = Vector3(light_direction.x, 1, light_direction.y)
+
+
+func rotate_to_target(delta: float) -> void:
+	var light_target_xz: Vector3 = Vector3(light_target.x, 0, light_target.z).normalized()
+	var current_rotation: float = $LightOffset.rotation.y
+	var target_rotation: float = Vector3.FORWARD.signed_angle_to(light_target_xz, Vector3.UP)
+	
+	# interpolate the rotation angle from current to target
+	var new_rotation: float = lerp_angle(current_rotation, target_rotation, ROTATION_SPEED * delta)
+	$LightOffset.rotation.y = new_rotation
+	
+	# stop rotating when close enough
+	if abs(new_rotation - target_rotation) < 0.01:
+		$LightOffset.rotation.y = target_rotation
 
 
 func _on_player_hurt() -> void:
