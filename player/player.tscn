@@ -1,18 +1,15 @@
 [gd_scene load_steps=4 format=3 uid="uid://mt6b5vxmupgn"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_ndccg"]
+[ext_resource type="Shape3D" uid="uid://d140c2qk5hbt2" path="res://player/player_collision_shape.tres" id="2_a56u6"]
 [ext_resource type="Texture2D" uid="uid://cey8vsju0vbgx" path="res://icon.svg" id="2_goh7u"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_psrej"]
-size = Vector3(1.283, 1, 0.643)
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
-collision_mask = 5
 script = ExtResource("1_ndccg")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_psrej")
+shape = ExtResource("2_a56u6")
 
 [node name="RotationOffset" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0)
@@ -39,3 +36,11 @@ spot_range = 250.0
 
 [node name="HitCooldown" type="Timer" parent="."]
 one_shot = true
+
+[node name="DamageDetector" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DamageDetector"]
+shape = ExtResource("2_a56u6")
