@@ -18,13 +18,9 @@ var last_mouse_pos: Vector2
 
 @onready var hit_cooldown_active: bool = false
 @onready var speed: float = 6.0
-# track whether player is moving or not
-@onready var is_moving: bool = false
 @onready var light_omni: OmniLight3D = $OmniLight3D
 @onready var light_spot: SpotLight3D = $LightOffset/SpotLight3D
 @onready var camera: Camera3D = $RotationOffset/Camera3D
-
-@onready var ticks: int = 0
 
 func _ready() -> void:
 	light_omni.light_color = Color("GOLDENROD")
@@ -37,14 +33,12 @@ func init(state_machine: Node) -> void:
 	self.state_machine = state_machine 
 
 
-# gdlint:ignore = unused-argument
 func _process(delta: float) -> void:
 	if is_rotating:
 		rotate_to_target(delta)
 
 
 func _physics_process(delta: float) -> void:
-	# handle basic movement before passing to state-specific actions
 	handle_movement(delta) 
 
 
