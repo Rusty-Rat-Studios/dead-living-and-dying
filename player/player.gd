@@ -13,13 +13,18 @@ var last_mouse_pos: Vector2
 
 # store the location of the last direction-input (mouse or right-joystick)
 @onready var light_target: Vector3 = Vector3.ZERO
+# track whether spotlight is currently rotating or not
+@onready var is_rotating: bool = false
 
 @onready var hit_cooldown_active: bool = false
 @onready var speed: float = 6.0
+# track whether player is moving or not
+@onready var is_moving: bool = false
 @onready var light_omni: OmniLight3D = $OmniLight3D
 @onready var light_spot: SpotLight3D = $LightOffset/SpotLight3D
 @onready var camera: Camera3D = $RotationOffset/Camera3D
 
+@onready var ticks: int = 0
 
 func _ready() -> void:
 	light_omni.light_color = Color("GOLDENROD")
@@ -34,13 +39,24 @@ func init(state_machine: Node) -> void:
 
 # gdlint:ignore = unused-argument
 func _process(delta: float) -> void:
-	set_light_target()
-	rotate_to_target(delta)
+	if is_rotating:
+		rotate_to_target(delta)
 
 
 func _physics_process(delta: float) -> void:
 	# handle basic movement before passing to state-specific actions
 	handle_movement(delta) 
+
+
+func _input(event: InputEvent) -> void:
+	# check for mouse or joystick-right input
+	if (event is InputEventMouseMotion or
+		event.is_action_pressed("joy_right_x_left") or
+		event.is_action_pressed("joy_right_x_right") or
+		event.is_action_pressed("joy_right_x_up") or
+		event.is_action_pressed("joy_right_x_down")
+		):
+			set_light_target()
 
 
 func handle_movement(delta: float) -> void:
@@ -96,6 +112,7 @@ func set_light_target() -> void:
 			return
 	
 	light_target = Vector3(light_direction.x, 1, light_direction.y)
+	is_rotating = true
 
 
 func rotate_to_target(delta: float) -> void:
@@ -110,6 +127,7 @@ func rotate_to_target(delta: float) -> void:
 	# stop rotating when close enough
 	if abs(new_rotation - target_rotation) < 0.01:
 		$LightOffset.rotation.y = target_rotation
+		is_rotating = false
 
 
 func _on_player_hurt() -> void:
