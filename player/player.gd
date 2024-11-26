@@ -8,10 +8,6 @@ var state_machine: Node
 # used to check whether mouse or controller was last used to look around
 var last_mouse_pos: Vector2
 
-# used to store all current overlapping enemy collision areas 
-# for checking hit detection after hit invincibility-period expires
-var overlapping_enemies: Array[Area3D]
-
 @onready var hit_cooldown_active: bool = false
 @onready var speed: float = 6.0
 @onready var light_omni: OmniLight3D = $OmniLight3D
@@ -24,7 +20,6 @@ func _ready() -> void:
 	light_spot.light_color = Color("GOLDENROD")
 	
 	$DamageDetector.area_entered.connect(_on_enemy_entered)
-	$DamageDetector.area_exited.connect(_on_enemy_exited)
 	$HitCooldown.timeout.connect(_on_hit_cooldown_timeout)
 
 
@@ -109,18 +104,13 @@ func hit() -> void:
 
 
 func _on_enemy_entered(area: Area3D) -> void:
-	overlapping_enemies.append(area)
 	if not hit_cooldown_active:
 		hit()
 	# do nothing if cooldown active
 
 
-func _on_enemy_exited(area: Area3D) -> void:
-	overlapping_enemies.remove_at(overlapping_enemies.find(area))
-
-
 func _on_hit_cooldown_timeout() -> void:
 	# deactivate invincibility frames
 	hit_cooldown_active = false
-	if not overlapping_enemies.is_empty():
+	if $DamageDetector.has_overlapping_areas():
 		hit()
