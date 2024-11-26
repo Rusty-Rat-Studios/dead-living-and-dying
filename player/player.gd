@@ -18,7 +18,8 @@ var last_mouse_pos: Vector2
 func _ready() -> void:
 	light_omni.light_color = Color("GOLDENROD")
 	light_spot.light_color = Color("GOLDENROD")
-	SignalBus.player_hurt.connect(_on_player_hurt)
+	
+	$DamageDetector.area_entered.connect(_on_enemy_entered)
 	$HitCooldown.timeout.connect(_on_hit_cooldown_timeout)
 
 
@@ -93,19 +94,23 @@ func point_spotlight() -> void:
 	$LightOffset.look_at(light_target)
 
 
-func _on_player_hurt() -> void:
+func hit() -> void:
+	hit_cooldown_active = true
+	# start hit cooldown
+	$HitCooldown.wait_time = HIT_COOLDOWN
+	$HitCooldown.start()
+	# pass signal for state-specific behavior
+	SignalBus.emit_signal("player_hurt")
+
+
+func _on_enemy_entered(_area: Area3D) -> void:
 	if not hit_cooldown_active:
-		# hit cooldown is inactive, start cooldown
-		hit_cooldown_active = true
-		SignalBus.emit_signal("player_hurt")
-		$HitCooldown.wait_time = HIT_COOLDOWN
-		$HitCooldown.start()
+		hit()
 	# do nothing if cooldown active
 
 
 func _on_hit_cooldown_timeout() -> void:
 	# deactivate invincibility frames
 	hit_cooldown_active = false
-	
-	# reset cooldown
-	$HitCooldown.wait_time = HIT_COOLDOWN
+	if $DamageDetector.has_overlapping_areas():
+		hit()
