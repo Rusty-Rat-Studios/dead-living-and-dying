@@ -12,7 +12,7 @@ func enter() -> void:
 	# change collision layers out of physical plane into spirit plane
 	parent.collision_layer = 10
 	parent.collision_mask = 9
-	parent.get_node("DamageDetector"). collision_mask = 8
+	parent.get_node("DamageDetector").collision_mask = 8
 	
 	# DEBUG: modulate color according to state
 	parent.get_node("RotationOffset/Sprite3D").modulate = Color(0.5, 0.5, 0.5, 0.5)
@@ -23,7 +23,7 @@ func exit() -> void:
 	# change collision layers out of spirit plane into physical plane
 	parent.collision_layer = 2
 	parent.collision_mask = 5
-	parent.get_node("DamageDetector"). collision_mask = 4
+	parent.get_node("DamageDetector").collision_mask = 4
 	
 	SignalBus.player_hurt.disconnect(_on_player_hurt)
 	SignalBus.player_entered_shrine.disconnect(_on_player_entered_shrine)
