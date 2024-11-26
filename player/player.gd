@@ -103,7 +103,7 @@ func hit() -> void:
 	SignalBus.emit_signal("player_hurt")
 
 
-func _on_enemy_entered(area: Area3D) -> void:
+func _on_enemy_entered(_area: Area3D) -> void:
 	if not hit_cooldown_active:
 		hit()
 	# do nothing if cooldown active
