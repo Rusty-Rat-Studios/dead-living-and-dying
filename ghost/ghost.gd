@@ -7,6 +7,7 @@ var movement_boundaries: Rect2
 
 @onready var speed: float = 4.0
 @onready var current_room: Node3D = get_parent()
+@onready var player_in_room: bool = false
 @onready var target_pos: Vector3 = Vector3.ZERO
 @onready var at_target: bool = false
 

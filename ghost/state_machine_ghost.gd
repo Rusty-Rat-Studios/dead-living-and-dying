@@ -11,7 +11,8 @@ func init(parent: Node3D) -> void:
 func _on_player_state_changed(state_name: String) -> void:
 	match state_name:
 		"Dead":
-			change_state($Attacking)
+			if get_parent().player_in_room: 
+				change_state($Attacking)
 		"Living":
 			change_state($Waiting)
 		"Dying":
