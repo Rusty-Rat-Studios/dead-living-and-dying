@@ -70,6 +70,7 @@ func pause() -> void:
 
 
 func _on_player_entered_room(room: Node3D) -> void:
-	parent.player_in_room = true
-	if room == parent.current_room and PlayerHandler.get_player_state() == "Dead":
+	if room == parent.current_room:
+		parent.player_in_room = true
+	if parent.player_in_room and PlayerHandler.get_player_state() == "Dead":
 		parent.state_machine.change_state(state_attacking)
