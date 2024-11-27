@@ -4,8 +4,12 @@ extends CharacterBody3D
 # used to set cooldown timer
 const HIT_COOLDOWN: float = 2.0
 
-# base turning speed; can be modified to add acceleration, etc
-const ROTATION_SPEED: float = 2
+# for controlling player rotation in a momentum-like fashion
+const MAX_ANGULAR_SPEED: float = 3.0
+const ANGULAR_ACCELERATION: float = 10.0
+const ANGULAR_DECELERATION: float = 40.0
+const TARGET_THRESHOLD: float = 0.01
+const DECELERATION_THRESHOLD: float = 10 * TARGET_THRESHOLD
 
 var state_machine: Node
 # used to check whether mouse or controller was last used to look around
@@ -15,6 +19,8 @@ var last_mouse_pos: Vector2
 @onready var light_target: Vector3 = Vector3.ZERO
 # track whether spotlight is currently rotating or not
 @onready var is_rotating: bool = false
+# used when rotating field of view
+@onready var angular_velocity: float = 0.0
 
 @onready var hit_cooldown_active: bool = false
 @onready var speed: float = 6.0
@@ -35,7 +41,7 @@ func init(state_machine: Node) -> void:
 
 func _process(delta: float) -> void:
 	if is_rotating:
-		rotate_to_target(delta)
+		rotate_to_target2(delta)
 
 
 func _physics_process(delta: float) -> void:
@@ -109,13 +115,53 @@ func set_light_target() -> void:
 	is_rotating = true
 
 
-func rotate_to_target(delta: float) -> void:
+func rotate_to_target2(delta: float) -> void:
+	var light_target_xz: Vector3 = Vector3(light_target.x, 0, light_target.z).normalized()
+	var target_rotation: float = Vector3.FORWARD.signed_angle_to(light_target_xz, Vector3.UP)
+	var current_rotation: float = $LightOffset.rotation.y
+	var angle_diff: float = angle_difference(current_rotation, target_rotation)
+	
+	if abs(angle_diff) > TARGET_THRESHOLD:
+		var max_velocity: float = clamp(abs(angle_diff) * 10.0, 0, MAX_ANGULAR_SPEED)
+		
+		# accelerate up to maximum angular speed
+		#angular_velocity += ANGULAR_ACCELERATION * delta * sign(angle_diff)
+		#angular_velocity = clampf(angular_velocity, -MAX_ANGULAR_SPEED, MAX_ANGULAR_SPEED)
+		
+		# dynamically adjust deceleration as target is approached
+		if abs(angle_diff) < DECELERATION_THRESHOLD:
+			#var weighted_distance: float = 1.0 - abs(angle_diff) / DECELERATION_THRESHOLD
+			#angular_velocity = move_toward(angular_velocity, 0.0, delta * weighted_distance)
+			angular_velocity = move_toward(angular_velocity, sign(angle_diff) * max_velocity, delta * ANGULAR_DECELERATION)
+		else:
+			angular_velocity += ANGULAR_ACCELERATION * delta * sign(angle_diff)
+			angular_velocity = clamp(angular_velocity, -MAX_ANGULAR_SPEED, MAX_ANGULAR_SPEED)
+	else:
+		# decelerate when close enough to the target
+		angular_velocity = move_toward(angular_velocity, 0, delta * ANGULAR_DECELERATION)
+	
+	current_rotation += angular_velocity * delta
+	
+	# stop rotating if close enough to target and slow enough
+	if abs(angle_diff) < TARGET_THRESHOLD and abs(angular_velocity) < TARGET_THRESHOLD:
+		current_rotation = target_rotation
+		angular_velocity = 0
+		is_rotating = false
+	
+	$LightOffset.rotation.y = current_rotation
+	print("target rotation: ", target_rotation)
+	print("current rotation: ", current_rotation)
+	print("angular difference: ", angle_diff)
+	print("angular velocity: ", angular_velocity)
+
+
+func rotate_to_target1(delta: float) -> void:
 	var light_target_xz: Vector3 = Vector3(light_target.x, 0, light_target.z).normalized()
 	var current_rotation: float = $LightOffset.rotation.y
 	var target_rotation: float = Vector3.FORWARD.signed_angle_to(light_target_xz, Vector3.UP)
 	
 	# interpolate the rotation angle from current to target
-	var new_rotation: float = lerp_angle(current_rotation, target_rotation, ROTATION_SPEED * delta)
+	var new_rotation: float = lerp_angle(current_rotation, target_rotation, MAX_ANGULAR_SPEED * delta)
 	$LightOffset.rotation.y = new_rotation
 	
 	# stop rotating when close enough
