@@ -10,9 +10,9 @@ func enter() -> void:
 	SignalBus.emit_signal("player_state_changed", "Dead")
 	
 	# change collision layers out of physical plane into spirit plane
-	parent.collision_layer = Collision.PLAYER + Collision.SPIRIT
-	parent.collision_mask = Collision.WORLD + Collision.SPIRIT
-	parent.get_node("DamageDetector").collision_mask = Collision.SPIRIT
+	parent.collision_layer = CollisionBit.PLAYER + CollisionBit.SPIRIT
+	parent.collision_mask = CollisionBit.WORLD + CollisionBit.SPIRIT
+	parent.get_node("DamageDetector").collision_mask = CollisionBit.SPIRIT
 	
 	# DEBUG: modulate color according to state
 	parent.get_node("RotationOffset/Sprite3D").modulate = Color(0.5, 0.5, 0.5, 0.5)
@@ -21,9 +21,9 @@ func enter() -> void:
 func exit() -> void:
 	super()
 	# change collision layers out of spirit plane into physical plane
-	parent.collision_layer = Collision.PLAYER
-	parent.collision_mask = Collision.WORLD + Collision.PHYSICAL
-	parent.get_node("DamageDetector").collision_mask = Collision.PHYSICAL
+	parent.collision_layer = CollisionBit.PLAYER
+	parent.collision_mask = CollisionBit.WORLD + CollisionBit.PHYSICAL
+	parent.get_node("DamageDetector").collision_mask = CollisionBit.PHYSICAL
 	
 	SignalBus.player_hurt.disconnect(_on_player_hurt)
 	SignalBus.player_entered_shrine.disconnect(_on_player_entered_shrine)

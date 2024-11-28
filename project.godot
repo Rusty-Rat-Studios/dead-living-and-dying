@@ -20,7 +20,7 @@ config/icon="res://icon.svg"
 SignalBus="*res://autoloads/signal_bus.gd"
 PlayerHandler="*res://autoloads/player_handler.gd"
 Focus="*res://autoloads/focus.gd"
-Collision="*res://autoloads/collision.gd"
+CollisionBit="*res://autoloads/collision_bit.gd"
 
 [debug]
 
