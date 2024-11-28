@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dx3xbk4c7uji8"]
+[gd_scene load_steps=19 format=3 uid="uid://dx3xbk4c7uji8"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_77rk7"]
 [ext_resource type="PackedScene" uid="uid://mt6b5vxmupgn" path="res://player/player.tscn" id="1_hu241"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://shrine.gd" id="11_hfytc"]
 [ext_resource type="PackedScene" uid="uid://cexvn2mosncly" path="res://map/wall_with_door.tscn" id="11_odxui"]
 [ext_resource type="PackedScene" uid="uid://bson3umirpot2" path="res://map/wall_without_door.tscn" id="12_5tnol"]
+[ext_resource type="PackedScene" uid="uid://bcep1wbs2caas" path="res://possessable/possessable.tscn" id="13_66ase"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_eitr8"]
 radius = 2.0
@@ -145,6 +146,9 @@ text = "HURTBOX (Physical)
 Come here to 
 get hurt ;_ ;"
 font_size = 64
+
+[node name="Possessable" parent="World/RoomCenter" instance=ExtResource("13_66ase")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.25, 0)
 
 [node name="RoomLeft" type="Node3D" parent="World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -20)
