@@ -3,8 +3,9 @@ extends GhostState
 @onready var player: Player = PlayerHandler.get_player()
 
 func _ready() -> void:
-	SignalBus.player_entered_room.connect(_on_player_entered_room)
-	SignalBus.player_exited_room.connect(_on_player_exited_room)
+	# defer connecting this signal to ensure this function executes
+	# AFTER this signal updates the player_in_room flag in ghost.gd
+	SignalBus.player_exited_room.connect(_on_player_exited_room, CONNECT_DEFERRED)
 
 
 func enter() -> void:
@@ -19,12 +20,6 @@ func process_physics(delta: float) -> State:
 	return null # remain in attacking state
 
 
-func _on_player_entered_room(room: Node3D) -> void:
-	if room == parent.current_room:
-		parent.player_in_room = true
-
-
-func _on_player_exited_room(room: Node3D) -> void:
-	if room == parent.current_room:
-		parent.player_in_room = false
+func _on_player_exited_room(_room: Node3D) -> void:
+	if not parent.player_in_room:
 		parent.state_machine.change_state(state_waiting)

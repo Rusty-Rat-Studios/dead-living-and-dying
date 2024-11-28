@@ -16,6 +16,12 @@ func _ready() -> void:
 	# Initialize state machine
 	# pass reference of the ghost to the states
 	state_machine.init(self)
+	
+	# attach signals for updating player_in_room flag
+	# states listening for same signals are connected with CONNECT_DEFERRED
+	# to ensure this connection always evaluates first when signal emits
+	SignalBus.player_entered_room.connect(_on_player_entered_room)
+	SignalBus.player_exited_room.connect(_on_player_exited_room)
 
 
 func _physics_process(delta: float) -> void:
@@ -38,3 +44,13 @@ func move_to_target(delta: float) -> void:
 	else:
 		velocity = direction * speed
 		move_and_slide()
+
+
+func _on_player_entered_room(room: Node3D) -> void:
+	if room == current_room:
+		player_in_room = true
+
+
+func _on_player_exited_room(room: Node3D) -> void:
+	if room == current_room:
+		player_in_room = false
