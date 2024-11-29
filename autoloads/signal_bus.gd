@@ -14,8 +14,3 @@ signal player_entered_room(room: Node3D)
 signal player_exited_room(room: Node3D)
 
 signal player_entered_shrine
-
-# for communicating between ghosts and possessables
-# used to enable/disable unnecessary collision checks according to possession status
-signal item_possessed(item: RigidBody3D)
-signal item_depossessed(item: RigidBody3D)

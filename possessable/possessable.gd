@@ -16,19 +16,46 @@ COLLISION MASKING SCHEME:
 	to possess it the "late" ghosts can still detect it and perform the "is_possessed" check.
 """
 
+# impulse strength used to throw the object
+const THROW_FORCE: float = 10.0
+# height object is lifted to when possessed
+const FLOAT_HEIGHT: float = 2
+# height object rises/falls to while possessed
+const FLOAT_RANGE: float = 0.2
+# speed at which the object oscillates
+const FLOAT_SPEED: float = 2
+# time over which the object initially lifts
+const FLOAT_FORCE: float = 8
+# for timing float effect oscillation
+@onready var float_time_offset: float = 0.0
+
 # flag for ensuring object is "free" for possession
 @onready var is_possessed: bool = false
 # flag for checking if player is in attack range
 @onready var player_in_range: bool = false
 
+
 func _ready() -> void:
 	# detect when player is in range
 	$AttackRange.body_entered.connect(_on_player_entered_range)
 	$AttackRange.body_exited.connect(_on_player_exited_range)
-	
-	# set is_possessed and update collision areas
-	SignalBus.item_possessed.connect(_on_possession)
-	SignalBus.item_depossessed.connect(_on_depossession)
+
+
+func _physics_process(delta: float) -> void:
+	if is_possessed:
+		float_time_offset += delta * FLOAT_SPEED
+		
+		var target_height: float = FLOAT_HEIGHT + FLOAT_RANGE * sin(float_time_offset)
+		var current_height: float = global_transform.origin.y
+		var height_diff: float = target_height - current_height
+		
+		# ensure no "downward" velocity applies; let gravity do it
+		if height_diff > 0:
+			linear_velocity.y = lerp(linear_velocity.y, height_diff * FLOAT_FORCE, delta)
+
+
+func attack(target: Node3D) -> void:
+	pass
 
 
 func _on_player_entered_range(body: Node3D) -> void:
@@ -43,11 +70,19 @@ func _on_player_exited_range(body: Node3D) -> void:
 		player_in_range = false
 		print("player out of range of possessed item ", name)
 
-func _on_possession(_item: RigidBody3D) -> void:
-	$AttackRange.collision_mask = CollisionBit.PHYSICAL
+
+func possess() -> void:
 	print(name, " possessed")
+	$AttackRange.collision_mask = CollisionBit.PLAYER
+	is_possessed = true
+	# check if player in range
+	if $AttackRange.overlaps_body(PlayerHandler.get_player()):
+		player_in_range = true
+		print("player in range of possessed item ", name)
 
 
-func _on_depossession(_item: RigidBody3D) -> void:
-	$AttackRange.collision_mask = 0
+func depossess() -> void:
 	print(name, " depossessed")
+	$AttackRange.collision_mask = 0
+	is_possessed = false
+	player_in_range = false

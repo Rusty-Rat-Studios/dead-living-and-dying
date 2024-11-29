@@ -18,6 +18,15 @@ func _ready() -> void:
 	# pass reference of the player to the states
 	state_machine.init($Player)
 	SignalBus.player_state_changed.connect(_on_player_state_changed)
+	
+	#########
+	# DEBUG #
+	#########
+	await get_tree().create_timer(3).timeout
+	$World/RoomBottom/Possessable.possess()
+	await get_tree().create_timer(6).timeout
+	$World/RoomBottom/Possessable.depossess()
+
 
 
 func _unhandled_input(event: InputEvent) -> void:
