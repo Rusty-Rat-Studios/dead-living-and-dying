@@ -6,7 +6,7 @@ COLLISION MASKING SCHEME:
 	
 	When it is possessed, it enables the AttackRange PHYSICAL collision mask to detect 
 	player collision within the AttackRange. When the ghost decides to attack using this 
-	item, it disables the AttackRange PHYSICAL collision mask and enables the Hurtbox 
+	item, it disables the AttackRange PLAYER collision mask and enables the Hurtbox 
 	PHYSICAL collision layer so the player can detect it has taken damage on contact.
 	
 	Once the attack is finished, the Hurtbox collision layer is disabled. Similarly,
@@ -17,7 +17,10 @@ COLLISION MASKING SCHEME:
 """
 
 # impulse strength used to throw the object
-const THROW_FORCE: float = 10.0
+const THROW_FORCE: float = 25.0
+# speed threshold for enabling/disabling hurtbox
+const DAMAGE_VELOCITY: float = 2.0
+
 # height object is lifted to when possessed
 const FLOAT_HEIGHT: float = 2
 # height object rises/falls to while possessed
@@ -29,6 +32,8 @@ const FLOAT_FORCE: float = 8
 # for timing float effect oscillation
 @onready var float_time_offset: float = 0.0
 
+# flag for ensuring object is not repossessed too soon after depossession
+@onready var is_possessable: bool = false
 # flag for ensuring object is "free" for possession
 @onready var is_possessed: bool = false
 # flag for checking if player is in attack range
@@ -54,8 +59,19 @@ func _physics_process(delta: float) -> void:
 			linear_velocity.y = lerp(linear_velocity.y, height_diff * FLOAT_FORCE, delta)
 
 
+func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
+	if linear_velocity.length() < DAMAGE_VELOCITY:
+		$AttackRange.collision_mask = CollisionBit.PLAYER
+		$Hurtbox.collision_layer = 0
+		is_possessable = true
+
+
 func attack(target: Node3D) -> void:
-	pass
+	if player_in_range:
+		$AttackRange.collision_mask = 0
+		$Hurtbox.collision_layer = CollisionBit.PHYSICAL
+		is_possessable = false
+		apply_impulse(position.direction_to(target.position) * THROW_FORCE)
 
 
 func _on_player_entered_range(body: Node3D) -> void:

@@ -24,7 +24,8 @@ func _ready() -> void:
 	#########
 	await get_tree().create_timer(3).timeout
 	$World/RoomBottom/Possessable.possess()
-	await get_tree().create_timer(6).timeout
+	await get_tree().create_timer(3).timeout
+	$World/RoomBottom/Possessable.attack($Player)
 	$World/RoomBottom/Possessable.depossess()
 
 
