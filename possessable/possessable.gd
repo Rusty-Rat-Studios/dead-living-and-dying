@@ -66,8 +66,8 @@ func _physics_process(delta: float) -> void:
 			linear_velocity.y = lerp(linear_velocity.y, height_diff * FLOAT_FORCE, delta)
 
 
-func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
-	if linear_velocity.length() < DAMAGE_VELOCITY:
+func _integrate_forces(_state: PhysicsDirectBodyState3D) -> void:
+	if not is_possessable and linear_velocity.length() < DAMAGE_VELOCITY:
 		$AttackRange.collision_mask = CollisionBit.PLAYER
 		$Hurtbox.collision_layer = 0
 		is_possessable = true
