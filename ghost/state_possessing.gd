@@ -1,14 +1,30 @@
 extends GhostState
 
-var target_possessable: Possessable
+# delay between ghost decision
+const DECISION_TIME: float = 3.0
+# used to determine whether ghost attacks
+const ATTACK_CHANCE: float = 0.67
+# used to determine whether ghost depossesses
+const DEPOSSESS_CHANCE: float = 0.33
 
+var target_possessable: Possessable
 # possessable detector
 var detector: Area3D
+
+@onready var decision_timer: Timer = Timer.new()
+
+@onready var is_possessing: bool = false
 
 func _ready() -> void:
 	# child nodes' _ready functions are called before parent nodes, so to initialize
 	# the detector variable we have to wait for the parent _ready function to fire
 	call_deferred("ready_after_parent")
+	
+	# configure decision timer
+	decision_timer.one_shot = true
+	decision_timer.wait_time = DECISION_TIME
+	decision_timer.timeout.connect(_on_decision_timeout)
+	add_child(decision_timer)
 
 
 func ready_after_parent() -> void:
@@ -20,10 +36,27 @@ func enter() -> void:
 	# enable possessable detector
 	detector.collision_mask = CollisionBit.PHYSICAL
 	
+	# reset decision timer
+	decision_timer.wait_time = DECISION_TIME
+	
 	# DEBUG
 	print("ghost ", self, " entered POSSESSING")
 	
 	set_closest_target()
+
+
+func exit() -> void:
+	print("called POSSESSION exit")
+	# disable possessable detector
+	detector.collision_mask = 0
+	
+	is_possessing = false
+	target_possessable = null
+	
+	# clunky, but ensure no connections to possessables remain
+	for p: Possessable in parent.current_room.possessables_available:
+		if p.possessed.is_connected(set_closest_target):
+			p.possessed.disconnect(set_closest_target)
 
 
 func set_closest_target() -> void:
@@ -54,23 +87,53 @@ func set_closest_target() -> void:
 		target_possessable.possessed.connect(set_closest_target, CONNECT_ONE_SHOT)
 
 
-func exit() -> void:
-	# disable possessable detector
-	detector.collision_mask = 0
+func process_physics(delta: float) -> State:
+	# update target position if it moved
+	# case: still moving from last possession interaction
+	# case: player or other object bumps into it
+	if target_possessable:
+		parent.target_pos = target_possessable.global_position
 	
-	# clunky, but ensure no connections to possessables remain
-	for p: Possessable in parent.current_room.possessables_available:
-		if p.possessed.is_connected(set_closest_target):
-			p.possessed.disconnect(set_closest_target)
-
-
-func _process_physics(delta: float) -> void:
-	if abs(parent.global_position - parent.target_pos) < 0.01:
-		# only move if not at target
+	# only move if not at target
+	if parent.global_position.distance_squared_to(parent.target_pos) > 0.01:
 		parent.move_to_target(delta)
+	
+	# remain in same state
+	return null
+
+
+func _on_decision_timeout() -> void:
+	print("called decide_next_action")
+	if is_possessing:
+		# decide to depossess or not
+		var depossess_chance: float = parent.rng.randf()
+		if depossess_chance < DEPOSSESS_CHANCE:
+			print ("ghost decided to depossess ", target_possessable)
+			# depossess object and go to WAITING
+			target_possessable.depossess()
+			parent.state_machine.change_state(state_waiting)
+			return
+		
+		# decide to attack or not
+		# if player not in range, simply depossess
+		var attack_chance: float = parent.rng.randf()
+		if attack_chance < ATTACK_CHANCE:
+			print ("ghost decided to attack!")
+			target_possessable.attack(PlayerHandler.get_player())
+			target_possessable.depossess()
+			parent.state_machine.change_state(state_waiting)
+			return
+		
+	# no action was taken, restart decision timer
+	print("no action taken, restarting timer")
+	decision_timer.wait_time = DECISION_TIME
+	decision_timer.start()
 
 
 func _on_contact_possessable(body: Node3D) -> void:
 	if body == target_possessable:
 		target_possessable.possess()
-		
+		is_possessing = true
+		# delay, then make decision
+		decision_timer.wait_time = DECISION_TIME
+		decision_timer.start()
