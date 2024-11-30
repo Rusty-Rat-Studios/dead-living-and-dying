@@ -91,7 +91,7 @@ func depossess() -> void:
 
 
 func attack(target: Node3D) -> void:
-	if player_in_range:
+	if player_in_range and room.player_in_room:
 		$AttackRange.collision_mask = 0
 		$Hurtbox.collision_layer = CollisionBit.PHYSICAL
 		is_possessable = false
