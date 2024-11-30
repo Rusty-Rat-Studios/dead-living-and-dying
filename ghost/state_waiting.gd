@@ -6,7 +6,6 @@ const PAUSE_DURATION_MIN: float = 1.0
 var room_boundaries: Rect2 # select random points in room to wander to
 
 @onready var is_paused: bool = false
-@onready var rng: RandomNumberGenerator = RandomNumberGenerator.new() # generating wait time and target positions
 
 func _ready() -> void:
 	SignalBus.player_entered_room.connect(_on_player_entered_room)
@@ -53,9 +52,9 @@ func process_physics(delta: float) -> State:
 func set_random_target() -> void:
 	# generate random movement target within room boundaries
 	# offset to avoid setting point within walls
-	var x: float = rng.randf_range(room_boundaries.position.x + 1,
+	var x: float = parent.rng.randf_range(room_boundaries.position.x + 1,
 					room_boundaries.position.x + room_boundaries.size.x - 1)
-	var z: float = rng.randf_range(room_boundaries.position.y + 1,
+	var z: float = parent.rng.randf_range(room_boundaries.position.y + 1,
 					room_boundaries.position.y + room_boundaries.size.y - 1)
 	
 	parent.target_pos = parent.current_room.global_position + Vector3(x, 1.0, z)
@@ -64,9 +63,16 @@ func set_random_target() -> void:
 func pause() -> void:
 	# pause movement behavior until timer expires
 	is_paused = true
-	await get_tree().create_timer(randf_range(PAUSE_DURATION_MIN, PAUSE_DURATION_MAX)).timeout
+	await get_tree().create_timer(parent.rng.randf_range(PAUSE_DURATION_MIN, PAUSE_DURATION_MAX)).timeout
 	is_paused = false
-	set_random_target()
+	
+	# 50/50 chance to continue waiting or possess item
+	var decision: int = parent.rng.randi_range(0, 1)
+	if decision == 1:
+		print("ghost decided to possess")
+		parent.state_machine.change_state(state_possessing_waiting)
+	else:
+		set_random_target()
 
 
 func _on_player_entered_room(room: Node3D) -> void:
