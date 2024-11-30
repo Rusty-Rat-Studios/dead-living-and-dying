@@ -1,3 +1,4 @@
+class_name Possessable
 extends RigidBody3D
 
 """
@@ -11,10 +12,10 @@ COLLISION MASKING SCHEME:
 	
 	Once the attack is finished, the Hurtbox collision layer is disabled. Similarly,
 	once it is depossessed the AttackRange PHYSICAL collision mask is disabled.
-	
-	It leaves the GhostDetector enabled at all times so if multiple ghosts simultaneously decide 
-	to possess it the "late" ghosts can still detect it and perform the "is_possessed" check.
 """
+
+# signal connected when ghost discovers all possessables in the room
+signal possessed
 
 # impulse strength used to throw the object
 const THROW_FORCE: float = 25.0
@@ -32,8 +33,11 @@ const FLOAT_FORCE: float = 8
 # for timing float effect oscillation
 @onready var float_time_offset: float = 0.0
 
+# store room for attaching self to "possessables_available" group that is 
+# checked by ghosts in the same room for available possession targets
+@onready var room: Room = get_parent()
 # flag for ensuring object is not repossessed too soon after depossession
-@onready var is_possessable: bool = false
+@onready var is_possessable: bool = true
 # flag for ensuring object is "free" for possession
 @onready var is_possessed: bool = false
 # flag for checking if player is in attack range
@@ -44,6 +48,9 @@ func _ready() -> void:
 	# detect when player is in range
 	$AttackRange.body_entered.connect(_on_player_entered_range)
 	$AttackRange.body_exited.connect(_on_player_exited_range)
+	
+	# add self to possessables in room
+	room.add_possessable(self)
 
 
 func _physics_process(delta: float) -> void:
@@ -66,6 +73,25 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 		is_possessable = true
 
 
+func possess() -> void:
+	print(name, " possessed")
+	room.remove_possessable(self)
+	$AttackRange.collision_mask = CollisionBit.PLAYER
+	is_possessed = true
+	# check if player in range
+	if $AttackRange.overlaps_body(PlayerHandler.get_player()):
+		player_in_range = true
+		print("player in range of possessed item ", name)
+
+
+func depossess() -> void:
+	print(name, " depossessed")
+	room.add_possessable(self)
+	$AttackRange.collision_mask = 0
+	is_possessed = false
+	player_in_range = false
+
+
 func attack(target: Node3D) -> void:
 	if player_in_range:
 		$AttackRange.collision_mask = 0
@@ -85,20 +111,3 @@ func _on_player_exited_range(body: Node3D) -> void:
 	if body == PlayerHandler.get_player():
 		player_in_range = false
 		print("player out of range of possessed item ", name)
-
-
-func possess() -> void:
-	print(name, " possessed")
-	$AttackRange.collision_mask = CollisionBit.PLAYER
-	is_possessed = true
-	# check if player in range
-	if $AttackRange.overlaps_body(PlayerHandler.get_player()):
-		player_in_range = true
-		print("player in range of possessed item ", name)
-
-
-func depossess() -> void:
-	print(name, " depossessed")
-	$AttackRange.collision_mask = 0
-	is_possessed = false
-	player_in_range = false

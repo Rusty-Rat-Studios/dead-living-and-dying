@@ -72,6 +72,7 @@ state_dying = NodePath(".")
 [node name="World" type="Node3D" parent="."]
 
 [node name="RoomBottom" type="Node3D" parent="World"]
+script = ExtResource("10_uwref")
 
 [node name="Floor" parent="World/RoomBottom" instance=ExtResource("10_44xgk")]
 
