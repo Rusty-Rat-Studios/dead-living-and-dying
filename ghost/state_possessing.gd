@@ -50,7 +50,11 @@ func exit() -> void:
 	# disable possessable detector
 	detector.collision_mask = 0
 	
-	is_possessing = false
+	# depossess any currently possessed item
+	if is_possessing:
+		target_possessable.depossess()
+		is_possessing = false
+	
 	target_possessable = null
 	
 	# clunky, but ensure no connections to possessables remain
