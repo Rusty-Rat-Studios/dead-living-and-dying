@@ -74,7 +74,6 @@ func _integrate_forces(_state: PhysicsDirectBodyState3D) -> void:
 
 
 func possess() -> void:
-	print(name, " possessed")
 	room.remove_possessable(self)
 	$AttackRange.collision_mask = CollisionBit.PLAYER
 	is_possessed = true
@@ -85,7 +84,6 @@ func possess() -> void:
 
 
 func depossess() -> void:
-	print(name, " depossessed")
 	room.add_possessable(self)
 	$AttackRange.collision_mask = 0
 	is_possessed = false
@@ -97,7 +95,7 @@ func attack(target: Node3D) -> void:
 		$AttackRange.collision_mask = 0
 		$Hurtbox.collision_layer = CollisionBit.PHYSICAL
 		is_possessable = false
-		apply_impulse(position.direction_to(target.position) * THROW_FORCE)
+		apply_impulse(global_position.direction_to(target.global_position) * THROW_FORCE)
 
 
 func _on_player_entered_range(body: Node3D) -> void:
