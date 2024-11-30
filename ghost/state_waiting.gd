@@ -69,7 +69,7 @@ func pause() -> void:
 	# 50/50 chance to continue waiting or possess item
 	var decision: int = parent.rng.randi_range(0, 3)
 	if decision != 0:
-		print("ghost decided to possess")
+		print(parent.name, " decided to possess")
 		parent.state_machine.change_state(state_possessing)
 	else:
 		set_random_target()

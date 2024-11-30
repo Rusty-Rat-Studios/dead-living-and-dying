@@ -40,13 +40,13 @@ func enter() -> void:
 	decision_timer.wait_time = DECISION_TIME
 	
 	# DEBUG
-	print("ghost ", self, " entered POSSESSING")
+	print(parent.name, " entered POSSESSING")
 	
 	set_closest_target()
 
 
 func exit() -> void:
-	print("called POSSESSION exit")
+	print(parent.name, " exited POSESSING")
 	# disable possessable detector
 	detector.collision_mask = 0
 	
@@ -112,7 +112,7 @@ func _on_decision_timeout() -> void:
 		# decide to depossess or not
 		var depossess_chance: float = parent.rng.randf()
 		if depossess_chance < DEPOSSESS_CHANCE:
-			print ("ghost decided to depossess ", target_possessable)
+			print (parent.name, " decided to depossess ", target_possessable.name)
 			# depossess object and go to WAITING
 			target_possessable.depossess()
 			parent.state_machine.change_state(state_waiting)
@@ -122,7 +122,7 @@ func _on_decision_timeout() -> void:
 		# if player not in range, simply depossess
 		var attack_chance: float = parent.rng.randf()
 		if attack_chance < ATTACK_CHANCE:
-			print ("ghost decided to attack!")
+			print (parent.name, " decided to attack!")
 			target_possessable.attack(PlayerHandler.get_player())
 			target_possessable.depossess()
 			parent.state_machine.change_state(state_waiting)
