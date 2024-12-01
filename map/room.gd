@@ -21,7 +21,8 @@ func remove_possessable(possessable: Possessable) -> void:
 		# possessable was found in array
 		possessables_available.remove_at(index)
 	else:
-		print(Time.get_time_string_from_system(), ": WARNING: Attempted to remove a possessable that is not in ", name, "'s array")
+		print(Time.get_time_string_from_system(), 
+		": WARNING: Attempted to remove a possessable that is not in ", name, "'s array")
 
 
 func _on_player_entered_room(body: Node3D) -> void:
