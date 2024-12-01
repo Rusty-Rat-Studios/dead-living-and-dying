@@ -80,7 +80,10 @@ func _integrate_forces(_state: PhysicsDirectBodyState3D) -> void:
 
 func possess() -> void:
 	# remove self from room's available possessables
+	# to disallow other ghosts to set it as a target
 	room.remove_possessable(self)
+	# signal to ghosts on the way to target it that it has been taken
+	emit_signal("possessed")
 	# enable player detection
 	$AttackRange.collision_mask = CollisionBit.PLAYER
 	is_possessed = true
