@@ -57,7 +57,7 @@ func _on_player_state_changed(state_name: String) -> void:
 
 # TEMPORARY function to update ghost visibility based on player state
 func update_ghost_visibility(state_name: String) -> void:
-	var ghost: Ghost = get_node("World/RoomCenter/Ghost")
+	var ghost: Ghost = get_node("World/RoomCenter/GhostCenter")
 	var ghost_mesh_instance: MeshInstance3D = ghost.get_node("MeshInstance3D")
 	var ghost_mesh: CapsuleMesh = ghost_mesh_instance.mesh
 	var material: Material = ghost_mesh.material
