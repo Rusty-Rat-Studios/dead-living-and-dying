@@ -34,7 +34,7 @@ func _process(delta: float) -> void:
 
 
 func _on_player_state_changed(state_name: String) -> void:
-	print("State entered: ", state_name)
+	print(Time.get_time_string_from_system(), ": State entered: ", state_name)
 	match state_name:
 		"Living":
 			player.light_omni.visible = true

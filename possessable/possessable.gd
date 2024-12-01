@@ -80,7 +80,6 @@ func possess() -> void:
 	# check if player in range
 	if $AttackRange.overlaps_body(PlayerHandler.get_player()):
 		player_in_range = true
-		print("player in range of possessed item ", name)
 
 
 func depossess() -> void:
@@ -102,10 +101,8 @@ func _on_player_entered_range(body: Node3D) -> void:
 	# should only detect player if in collision layer PHYSICAL
 	if body == PlayerHandler.get_player():
 		player_in_range = true
-		print("player in range of possessed item ", name)
 
 
 func _on_player_exited_range(body: Node3D) -> void:
 	if body == PlayerHandler.get_player():
 		player_in_range = false
-		print("player out of range of possessed item ", name)

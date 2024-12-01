@@ -40,13 +40,13 @@ func enter() -> void:
 	decision_timer.wait_time = DECISION_TIME
 	
 	# DEBUG
-	print(parent.name, " entered POSSESSING")
+	print(Time.get_time_string_from_system(), ": ", parent.name, " entered POSSESSING")
 	
 	set_closest_target()
 
 
 func exit() -> void:
-	print(parent.name, " exited POSESSING")
+	print(Time.get_time_string_from_system(), ": ", parent.name, " exited POSESSING")
 	# disable possessable detector
 	detector.collision_mask = 0
 	
@@ -107,12 +107,11 @@ func process_physics(delta: float) -> State:
 
 
 func _on_decision_timeout() -> void:
-	print("called decide_next_action")
 	if is_possessing:
 		# decide to depossess or not
 		var depossess_chance: float = parent.rng.randf()
 		if depossess_chance < DEPOSSESS_CHANCE:
-			print (parent.name, " decided to depossess ", target_possessable.name)
+			print (Time.get_time_string_from_system(), ": ", parent.name, " decided to depossess ", target_possessable.name)
 			# depossess object and go to WAITING
 			target_possessable.depossess()
 			parent.state_machine.change_state(state_waiting)
@@ -122,20 +121,21 @@ func _on_decision_timeout() -> void:
 		# if player not in range, simply depossess
 		var attack_chance: float = parent.rng.randf()
 		if attack_chance < ATTACK_CHANCE:
-			print (parent.name, " decided to attack!")
+			print (Time.get_time_string_from_system(), ": ", parent.name, " decided to attack!")
 			target_possessable.attack(PlayerHandler.get_player())
 			target_possessable.depossess()
 			parent.state_machine.change_state(state_waiting)
 			return
 		
 	# no action was taken, restart decision timer
-	print("no action taken, restarting timer")
+	print(Time.get_time_string_from_system(), ": ", parent.name, " decided to do nothing")
 	decision_timer.wait_time = DECISION_TIME
 	decision_timer.start()
 
 
 func _on_contact_possessable(body: Node3D) -> void:
 	if body == target_possessable:
+		print(Time.get_time_string_from_system(), ": ", parent.name, " possessed ", target_possessable.name)
 		target_possessable.possess()
 		is_possessing = true
 		# delay, then make decision
