@@ -3,7 +3,6 @@ extends Control
 func _ready() -> void:
 	$VBoxContainer/Resume.pressed.connect(_on_resume_pressed)
 	$VBoxContainer/Quit.pressed.connect(_on_quit_pressed)
-	
 	pause()
 
 
@@ -19,6 +18,7 @@ func _on_quit_pressed() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	print("processing input")
 	if event.is_action_pressed("ui_cancel"):
 		if is_visible():
 			resume()
