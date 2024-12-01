@@ -22,7 +22,6 @@ radius = 1.0
 
 [node name="Ghost" type="CharacterBody3D"]
 collision_layer = 8
-collision_mask = 9
 script = ExtResource("1_vr82v")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
