@@ -66,7 +66,7 @@ func pause() -> void:
 	await get_tree().create_timer(parent.rng.randf_range(PAUSE_DURATION_MIN, PAUSE_DURATION_MAX)).timeout
 	is_paused = false
 	
-	# 50/50 chance to continue waiting or possess item
+	# 25/75 chance to continue waiting or possess item
 	var decision: int = parent.rng.randi_range(0, 3)
 	if decision != 0:
 		print(Time.get_time_string_from_system(), ": ", parent.name, " decided to possess")

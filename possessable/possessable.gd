@@ -55,6 +55,7 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if is_possessed:
+		# animate object to "float" in the air
 		float_time_offset += delta * FLOAT_SPEED
 		
 		var target_height: float = FLOAT_HEIGHT + FLOAT_RANGE * sin(float_time_offset)
@@ -68,22 +69,30 @@ func _physics_process(delta: float) -> void:
 
 func _integrate_forces(_state: PhysicsDirectBodyState3D) -> void:
 	if not is_possessable and linear_velocity.length() < DAMAGE_VELOCITY:
+		# once object has slowed down enough
+		# enable player detection
 		$AttackRange.collision_mask = CollisionBit.PLAYER
+		#disable hurtbox
 		$Hurtbox.collision_layer = 0
+		# set flag to allow possession again
 		is_possessable = true
 
 
 func possess() -> void:
+	# remove self from room's available possessables
 	room.remove_possessable(self)
+	# enable player detection
 	$AttackRange.collision_mask = CollisionBit.PLAYER
 	is_possessed = true
-	# check if player in range
+	# check if player in range on initial possession
 	if $AttackRange.overlaps_body(PlayerHandler.get_player()):
 		player_in_range = true
 
 
 func depossess() -> void:
+	# add self back to room's available possessables
 	room.add_possessable(self)
+	# disable player detection and reset flags
 	$AttackRange.collision_mask = 0
 	is_possessed = false
 	player_in_range = false
@@ -91,14 +100,18 @@ func depossess() -> void:
 
 func attack(target: Node3D) -> void:
 	if player_in_range and room.player_in_room:
+		# disable player detection
 		$AttackRange.collision_mask = 0
+		# enable hurtbox
 		$Hurtbox.collision_layer = CollisionBit.PHYSICAL
+		# disallow re-possession during attack
 		is_possessable = false
+		# VIOLENTLY LAUNCH SELF TOWARDS PLAYER \m/
 		apply_impulse(global_position.direction_to(target.global_position) * THROW_FORCE)
 
 
 func _on_player_entered_range(body: Node3D) -> void:
-	# should only detect player if in collision layer PHYSICAL
+	# should only detect player if in collision layer PHYSICAL (not DEAD state)
 	if body == PlayerHandler.get_player():
 		player_in_range = true
 

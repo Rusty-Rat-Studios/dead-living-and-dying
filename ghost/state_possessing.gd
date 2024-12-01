@@ -28,6 +28,7 @@ func _ready() -> void:
 
 
 func ready_after_parent() -> void:
+	# set and connect detector for possessable objects
 	detector = parent.get_node("PossessableDetector")
 	detector.body_entered.connect(_on_contact_possessable)
 
@@ -35,18 +36,13 @@ func ready_after_parent() -> void:
 func enter() -> void:
 	# enable possessable detector
 	detector.collision_mask = CollisionBit.PHYSICAL
-	
 	# reset decision timer
 	decision_timer.wait_time = DECISION_TIME
-	
-	# DEBUG
-	print(Time.get_time_string_from_system(), ": ", parent.name, " entered POSSESSING")
 	
 	set_closest_target()
 
 
 func exit() -> void:
-	print(Time.get_time_string_from_system(), ": ", parent.name, " exited POSESSING")
 	# disable possessable detector
 	detector.collision_mask = 0
 	
@@ -64,6 +60,7 @@ func exit() -> void:
 
 
 func set_closest_target() -> void:
+	# get all possessable items in the room
 	var possessables: Array = parent.current_room.possessables_available
 	
 	# return to WAITING if no possessables available
@@ -71,8 +68,8 @@ func set_closest_target() -> void:
 		parent.state_machine.change_state(state_waiting)
 		return
 	
+	# find nearest possessable and set it as target
 	var target_distance: float = INF
-	# find nereast possessable and set it as target
 	for p: Possessable in possessables:
 		# use squared distance because it computes fast
 		var distance_sq: float = parent.global_position.distance_squared_to(p.global_position)
@@ -118,7 +115,7 @@ func _on_decision_timeout() -> void:
 			return
 		
 		# decide to attack or not
-		# if player not in range, simply depossess
+		# if player not in range, possessable.attack() simply depossesses
 		var attack_chance: float = parent.rng.randf()
 		if attack_chance < ATTACK_CHANCE:
 			print (Time.get_time_string_from_system(), ": ", parent.name, " decided to attack!")
@@ -134,6 +131,7 @@ func _on_decision_timeout() -> void:
 
 
 func _on_contact_possessable(body: Node3D) -> void:
+	# ensure overlapping body is indeed the target, then possess it
 	if body == target_possessable:
 		print(Time.get_time_string_from_system(), ": ", parent.name, " possessed ", target_possessable.name)
 		target_possessable.possess()
