@@ -12,7 +12,6 @@ var target_possessable: Possessable
 var detector: Area3D
 
 @onready var decision_timer: Timer = Timer.new()
-
 @onready var is_possessing: bool = false
 
 func _ready() -> void:
@@ -51,6 +50,7 @@ func exit() -> void:
 		target_possessable.depossess()
 		is_possessing = false
 	
+	decision_timer.stop()
 	target_possessable = null
 	
 	# clunky, but ensure no connections to possessables remain
@@ -62,7 +62,7 @@ func exit() -> void:
 func set_closest_target() -> void:
 	# get all possessable items in the room
 	var possessables: Array = parent.current_room.possessables_available
-	
+
 	# return to WAITING if no possessables available
 	if possessables.is_empty():
 		parent.state_machine.change_state(state_waiting)
@@ -83,9 +83,11 @@ func set_closest_target() -> void:
 	# check if already overlapping the target possessable and immediately possess
 	if detector.overlaps_body(target_possessable):
 		target_possessable.possess()
+		is_possessing = true
 	else:
 		# connect signal to find a new target if the current one is possessed before we reach it
 		target_possessable.possessed.connect(set_closest_target, CONNECT_ONE_SHOT)
+
 
 
 func process_physics(delta: float) -> State:
@@ -111,6 +113,7 @@ func _on_decision_timeout() -> void:
 			print (Time.get_time_string_from_system(), ": ", parent.name, " decided to depossess ", target_possessable.name)
 			# depossess object and go to WAITING
 			target_possessable.depossess()
+			is_possessing = false
 			parent.state_machine.change_state(state_waiting)
 			return
 		
@@ -121,6 +124,7 @@ func _on_decision_timeout() -> void:
 			print (Time.get_time_string_from_system(), ": ", parent.name, " decided to attack!")
 			target_possessable.attack(PlayerHandler.get_player())
 			target_possessable.depossess()
+			is_possessing = false
 			parent.state_machine.change_state(state_waiting)
 			return
 		
@@ -134,6 +138,10 @@ func _on_contact_possessable(body: Node3D) -> void:
 	# ensure overlapping body is indeed the target, then possess it
 	if body == target_possessable:
 		print(Time.get_time_string_from_system(), ": ", parent.name, " possessed ", target_possessable.name)
+		# disconnect target reset signal before possession so this ghost
+		# does not try to seek another target
+		if target_possessable.possessed.is_connected(set_closest_target):
+			target_possessable.possessed.disconnect(set_closest_target)
 		target_possessable.possess()
 		is_possessing = true
 		# delay, then make decision
