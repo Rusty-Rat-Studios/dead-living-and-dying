@@ -16,7 +16,12 @@ func add_possessable(possessable: Possessable) -> void:
 
 
 func remove_possessable(possessable: Possessable) -> void:
-	possessables_available.remove_at(possessables_available.find(possessable))
+	var index: int = possessables_available.find(possessable)
+	if index != -1:
+		# possessable was found in array
+		possessables_available.remove_at(index)
+	else:
+		print(Time.get_time_string_from_system(), ": WARNING: Attempted to remove a possessable that is not in ", name, "'s array")
 
 
 func _on_player_entered_room(body: Node3D) -> void:
