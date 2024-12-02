@@ -82,8 +82,15 @@ func set_closest_target() -> void:
 	
 	# check if already overlapping the target possessable and immediately possess
 	if detector.overlaps_body(target_possessable):
-		target_possessable.possess()
-		is_possessing = true
+		if target_possessable.is_possessable:
+			target_possessable.possess()
+			is_possessing = true
+		else:
+			# overlaps but is not posessable right now, reset target - it 
+			# will likely follow the same target, but either wait until it 
+			# is posessable again or until it is farther than another target
+			set_closest_target()
+			return
 	else:
 		# connect signal to find a new target if the current one is possessed before we reach it
 		target_possessable.possessed.connect(set_closest_target, CONNECT_ONE_SHOT)
