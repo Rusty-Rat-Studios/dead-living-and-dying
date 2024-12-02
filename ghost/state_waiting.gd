@@ -9,7 +9,9 @@ var room_boundaries: Rect2 # select random points in room to wander to
 @onready var rng: RandomNumberGenerator = RandomNumberGenerator.new() # generating wait time and target positions
 
 func _ready() -> void:
-	SignalBus.player_entered_room.connect(_on_player_entered_room)
+	# defer connecting this signal to ensure this function executes
+	# AFTER this signal updates the player_in_room flag in ghost.gd
+	SignalBus.player_entered_room.connect(_on_player_entered_room, CONNECT_DEFERRED)
 
 
 func enter() -> void:
@@ -69,6 +71,6 @@ func pause() -> void:
 	set_random_target()
 
 
-func _on_player_entered_room(room: Node3D) -> void:
-	if room == parent.current_room and PlayerHandler.get_player_state() == "Dead":
+func _on_player_entered_room(_room: Node3D) -> void:
+	if parent.player_in_room and PlayerHandler.get_player_state() == "Dead":
 		parent.state_machine.change_state(state_attacking)
