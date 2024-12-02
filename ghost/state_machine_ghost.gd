@@ -15,5 +15,3 @@ func _on_player_state_changed(state_name: String) -> void:
 				change_state($Attacking)
 		"Living":
 			change_state($Waiting)
-		"Dying":
-			change_state($Waiting)

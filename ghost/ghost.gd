@@ -4,9 +4,10 @@ extends CharacterBody3D
 var movement_boundaries: Rect2
 
 @onready var state_machine: Node = $StateMachine
+@onready var rng: RandomNumberGenerator = RandomNumberGenerator.new() # generating wait time and target positions
 
 @onready var speed: float = 4.0
-@onready var current_room: Node3D = get_parent()
+@onready var current_room: Room = get_parent()
 @onready var player_in_room: bool = false
 @onready var target_pos: Vector3 = Vector3.ZERO
 @onready var at_target: bool = false

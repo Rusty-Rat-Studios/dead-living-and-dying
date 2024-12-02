@@ -21,8 +21,8 @@ func enter() -> void:
 func exit() -> void:
 	super()
 	# change collision layers out of spirit plane into physical plane
-	parent.collision_layer = CollisionBit.PLAYER
-	parent.collision_mask = CollisionBit.WORLD + CollisionBit.PHYSICAL
+	parent.collision_layer = CollisionBit.PLAYER + CollisionBit.PHYSICAL
+	parent.collision_mask = CollisionBit.WORLD
 	parent.get_node("DamageDetector").collision_mask = CollisionBit.PHYSICAL
 	
 	SignalBus.player_hurt.disconnect(_on_player_hurt)

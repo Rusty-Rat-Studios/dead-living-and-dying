@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cey8vsju0vbgx" path="res://icon.svg" id="2_goh7u"]
 
 [node name="Player" type="CharacterBody3D"]
-collision_layer = 2
+collision_layer = 6
 script = ExtResource("1_ndccg")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
