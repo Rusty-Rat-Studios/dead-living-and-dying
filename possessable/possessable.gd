@@ -36,6 +36,8 @@ const FLOAT_FORCE: float = 8
 # store room for attaching self to "possessables_available" group that is 
 # checked by ghosts in the same room for available possession targets
 @onready var room: Room = get_parent()
+# flag for ensuring object is not repossessed too soon after depossession
+@onready var is_possessable: bool = true
 # flag for ensuring object is "free" for possession
 @onready var is_possessed: bool = false
 # flag for checking if player is in attack range
@@ -66,12 +68,12 @@ func _physics_process(delta: float) -> void:
 
 
 func _integrate_forces(_state: PhysicsDirectBodyState3D) -> void:
-	if not is_possessed and linear_velocity.length() < DAMAGE_VELOCITY:
+	if not is_possessable and linear_velocity.length() < DAMAGE_VELOCITY:
 		# once object has slowed down enough
-		# enable player detection
-		$AttackRange.collision_mask = CollisionBit.PLAYER
 		#disable hurtbox
 		$Hurtbox.collision_layer = 0
+		# set flag to allow possession again
+		is_possessable = true
 
 
 func possess() -> void:
@@ -103,6 +105,8 @@ func attack(target: Node3D) -> void:
 		$AttackRange.collision_mask = 0
 		# enable hurtbox
 		$Hurtbox.collision_layer = CollisionBit.PHYSICAL
+		# disallow re-possession during attack
+		is_possessable = false
 		# VIOLENTLY LAUNCH SELF TOWARDS PLAYER \m/
 		apply_impulse(global_position.direction_to(target.global_position) * THROW_FORCE)
 

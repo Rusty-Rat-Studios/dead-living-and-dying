@@ -136,7 +136,7 @@ func _on_decision_timeout() -> void:
 
 func _on_contact_possessable(body: Node3D) -> void:
 	# ensure overlapping body is indeed the target, then possess it
-	if body == target_possessable:
+	if body == target_possessable and target_possessable.is_possessable:
 		print(Time.get_time_string_from_system(), ": ", parent.name, " possessed ", target_possessable.name)
 		# disconnect target reset signal before possession so this ghost
 		# does not try to seek another target
@@ -147,3 +147,6 @@ func _on_contact_possessable(body: Node3D) -> void:
 		# delay, then make decision
 		decision_timer.wait_time = DECISION_TIME
 		decision_timer.start()
+	else:
+		# set new target if possessable is mid-attack
+		set_closest_target()
