@@ -19,7 +19,7 @@ func _ready() -> void:
 	light_omni.light_color = Color("GOLDENROD")
 	light_spot.light_color = Color("GOLDENROD")
 	
-	$DamageDetector.area_entered.connect(_on_enemy_entered)
+	$DamageDetector.area_entered.connect(_on_enemy_area_entered)
 	$HitCooldown.timeout.connect(_on_hit_cooldown_timeout)
 
 
@@ -103,7 +103,7 @@ func hit() -> void:
 	SignalBus.emit_signal("player_hurt")
 
 
-func _on_enemy_entered(_area: Area3D) -> void:
+func _on_enemy_area_entered(_area: Area3D) -> void:
 	if not hit_cooldown_active:
 		hit()
 	# do nothing if cooldown active

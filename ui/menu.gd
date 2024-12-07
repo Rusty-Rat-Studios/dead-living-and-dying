@@ -1,18 +1,10 @@
 extends Control
 
 func _ready() -> void:
-	$VBoxContainer/Resume.pressed.connect(_on_resume_pressed)
+	$VBoxContainer/Start.pressed.connect(_on_start_pressed)
 	$VBoxContainer/Quit.pressed.connect(_on_quit_pressed)
+	SignalBus.game_over.connect(_on_game_over)
 	pause()
-
-
-func _on_resume_pressed() -> void:
-	resume()
-
-
-func _on_quit_pressed() -> void:
-	# close the application
-	get_tree().quit()
 
 
 func _input(event: InputEvent) -> void:
@@ -25,10 +17,33 @@ func _input(event: InputEvent) -> void:
 
 func resume() -> void:
 	hide()
+	$VBoxContainer/Start.text = "RESUME"
 	get_tree().paused = false
 
 
 func pause() -> void:
 	show()
 	get_tree().paused = true
-	$VBoxContainer/Resume.grab_focus()
+	$VBoxContainer/Start.grab_focus()
+
+
+func _on_start_pressed() -> void:
+	resume()
+
+
+func _on_quit_pressed() -> void:
+	# close the application
+	get_tree().quit()
+
+
+func _on_game_over() -> void:
+	pause()
+	$VBoxContainer.hide()
+	$Message.text = "Game Over"
+	await get_tree().create_timer(2.0).timeout
+	$VBoxContainer.show()
+	$Message.text = ""
+	$VBoxContainer/Start.text = "RESUME"
+	
+	get_tree().get_node("Game").reset()
+	

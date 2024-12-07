@@ -7,6 +7,8 @@ signal player_state_changed(state_name: String)
 # when the player takes damage. caught by player states to cause state change
 signal player_hurt
 
+signal game_over
+
 # signal for communicating player entering and leaving a room
 # passes the room instance which ghosts can match against their
 # current_room variable
