@@ -1,11 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://yihpxsaeuqdi"]
+[gd_scene load_steps=11 format=3 uid="uid://yihpxsaeuqdi"]
 
 [ext_resource type="Script" path="res://ghost/ghost.gd" id="1_vr82v"]
 [ext_resource type="Script" path="res://ghost/state_machine_ghost.gd" id="2_qkh1e"]
 [ext_resource type="Script" path="res://ghost/state_waiting.gd" id="3_gb04i"]
 [ext_resource type="Script" path="res://ghost/state_possessing.gd" id="4_muv24"]
-[ext_resource type="Script" path="res://ghost/state_possessing_waiting.gd" id="5_rk2xf"]
-[ext_resource type="Script" path="res://ghost/state_possessing_attacking.gd" id="6_oelh1"]
 [ext_resource type="Script" path="res://ghost/state_stunned.gd" id="7_yplap"]
 [ext_resource type="Script" path="res://ghost/state_attacking.gd" id="8_a4kr4"]
 
@@ -19,13 +17,11 @@ material = SubResource("StandardMaterial3D_qtcw8")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cokcw"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f72hu"]
-radius = 0.697099
-height = 2.13861
+[sub_resource type="SphereShape3D" id="SphereShape3D_dnpbh"]
+radius = 1.0
 
 [node name="Ghost" type="CharacterBody3D"]
 collision_layer = 8
-collision_mask = 9
 script = ExtResource("1_vr82v")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -38,60 +34,40 @@ shape = SubResource("CapsuleShape3D_cokcw")
 script = ExtResource("2_qkh1e")
 starting_state = NodePath("Waiting")
 
-[node name="Waiting" type="Node" parent="StateMachine" node_paths=PackedStringArray("state_waiting", "state_possessing_waiting", "state_possessing_attacking", "state_stunned", "state_attacking")]
+[node name="Waiting" type="Node" parent="StateMachine" node_paths=PackedStringArray("state_waiting", "state_possessing", "state_stunned", "state_attacking")]
 script = ExtResource("3_gb04i")
 state_waiting = NodePath(".")
-state_possessing_waiting = NodePath("../Possessing/Waiting")
-state_possessing_attacking = NodePath("../Possessing/Attacking")
+state_possessing = NodePath("../Possessing")
 state_stunned = NodePath("../Stunned")
 state_attacking = NodePath("../Attacking")
 
-[node name="Possessing" type="Node" parent="StateMachine" node_paths=PackedStringArray("state_waiting", "state_possessing_waiting", "state_possessing_attacking", "state_stunned", "state_attacking")]
+[node name="Possessing" type="Node" parent="StateMachine" node_paths=PackedStringArray("state_waiting", "state_possessing", "state_stunned", "state_attacking")]
 script = ExtResource("4_muv24")
 state_waiting = NodePath("../Waiting")
-state_possessing_waiting = NodePath("Waiting")
-state_possessing_attacking = NodePath("Attacking")
+state_possessing = NodePath(".")
 state_stunned = NodePath("../Stunned")
 state_attacking = NodePath("../Attacking")
 
-[node name="Waiting" type="Node" parent="StateMachine/Possessing" node_paths=PackedStringArray("state_waiting", "state_possessing_waiting", "state_possessing_attacking", "state_stunned", "state_attacking")]
-script = ExtResource("5_rk2xf")
-state_waiting = NodePath("../../Waiting")
-state_possessing_waiting = NodePath(".")
-state_possessing_attacking = NodePath("../Attacking")
-state_stunned = NodePath("../../Stunned")
-state_attacking = NodePath("../../Attacking")
-
-[node name="Attacking" type="Node" parent="StateMachine/Possessing" node_paths=PackedStringArray("state_waiting", "state_possessing_waiting", "state_possessing_attacking", "state_stunned", "state_attacking")]
-script = ExtResource("6_oelh1")
-state_waiting = NodePath("../../Waiting")
-state_possessing_waiting = NodePath("../Waiting")
-state_possessing_attacking = NodePath(".")
-state_stunned = NodePath("../../Stunned")
-state_attacking = NodePath("../../Attacking")
-
-[node name="Stunned" type="Node" parent="StateMachine" node_paths=PackedStringArray("state_waiting", "state_possessing_waiting", "state_possessing_attacking", "state_stunned", "state_attacking")]
+[node name="Stunned" type="Node" parent="StateMachine" node_paths=PackedStringArray("state_waiting", "state_possessing", "state_stunned", "state_attacking")]
 script = ExtResource("7_yplap")
 state_waiting = NodePath("../Waiting")
-state_possessing_waiting = NodePath("../Possessing/Waiting")
-state_possessing_attacking = NodePath("../Possessing/Attacking")
+state_possessing = NodePath("../Possessing")
 state_stunned = NodePath(".")
 state_attacking = NodePath("../Attacking")
 
-[node name="Attacking" type="Node" parent="StateMachine" node_paths=PackedStringArray("state_waiting", "state_possessing_waiting", "state_possessing_attacking", "state_stunned", "state_attacking")]
+[node name="Attacking" type="Node" parent="StateMachine" node_paths=PackedStringArray("state_waiting", "state_possessing", "state_stunned", "state_attacking")]
 script = ExtResource("8_a4kr4")
 state_waiting = NodePath("../Waiting")
-state_possessing_waiting = NodePath("../Possessing/Waiting")
-state_possessing_attacking = NodePath("../Possessing/Attacking")
+state_possessing = NodePath("../Possessing")
 state_stunned = NodePath("../Stunned")
 state_attacking = NodePath(".")
 
 [node name="StateSelectTimer" type="Timer" parent="."]
 
-[node name="Hurtbox" type="Area3D" parent="."]
-collision_layer = 8
+[node name="PossessableDetector" type="Area3D" parent="."]
+collision_layer = 0
 collision_mask = 0
-monitoring = false
+monitorable = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
-shape = SubResource("CapsuleShape3D_f72hu")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PossessableDetector"]
+shape = SubResource("SphereShape3D_dnpbh")
