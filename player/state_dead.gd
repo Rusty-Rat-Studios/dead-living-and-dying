@@ -38,7 +38,6 @@ func process_input(event: InputEvent) -> State:
 
 
 func _on_player_hurt() -> void:
-	print("on player hurt")
 	SignalBus.emit_signal("game_over")
 
 
