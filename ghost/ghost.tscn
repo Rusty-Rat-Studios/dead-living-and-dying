@@ -20,7 +20,7 @@ material = SubResource("StandardMaterial3D_qtcw8")
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cokcw"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_f72hu"]
-radius = 0.63238
+radius = 0.697099
 height = 2.13861
 
 [node name="Ghost" type="CharacterBody3D"]

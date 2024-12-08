@@ -33,6 +33,24 @@ func _process(delta: float) -> void:
 	state_machine.process_frame(delta)
 
 
+func reset() -> void:
+	# reset all ghosts
+	var ghosts: Array = find_children("Ghost*", "Ghost")
+	for ghost: Ghost in ghosts:
+	#	ghost.depossess()
+		ghost.position = Vector3.UP
+	
+	# reset all possessables
+	#var possessables: Array = find_children("Possessable*", "Possessable")
+	#for possessable: Possessable in possessables:
+		#possessable.depossess()
+		#possessable.position = Vector3.UP
+	
+	# reset player
+	player.position = Vector3.UP
+	state_machine.change_state(state_machine.starting_state)
+
+
 func _on_player_state_changed(state_name: String) -> void:
 	print("State entered: ", state_name)
 	match state_name:
