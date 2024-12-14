@@ -1,10 +1,8 @@
 extends Control
 
-#@onready var scene: PackedScene = PackedScene.new()
 var scene: PackedScene
 
 func _ready() -> void:
-	#scene.pack(get_tree().get_current_scene())
 	scene = preload("res://game.tscn")
 	$VBoxContainer/Start.pressed.connect(_on_start_pressed)
 	$VBoxContainer/Quit.pressed.connect(_on_quit_pressed)
@@ -50,5 +48,4 @@ func _on_game_over() -> void:
 	$Message.text = ""
 	$VBoxContainer/Start.text = "START"
 	
-	#get_tree().change_scene_to_packed(scene)
 	get_node("/root/Game").reset()
