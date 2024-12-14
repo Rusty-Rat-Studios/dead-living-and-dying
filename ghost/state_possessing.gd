@@ -19,6 +19,10 @@ func _ready() -> void:
 	# the detector variable we have to wait for the parent _ready function to fire
 	call_deferred("ready_after_parent")
 	
+	# defer connecting this signal to ensure this function executes
+	# AFTER this signal updates the player_in_room flag in ghost.gd
+	SignalBus.player_entered_room.connect(_on_player_entered_room, CONNECT_DEFERRED)
+	
 	# configure decision timer
 	decision_timer.one_shot = true
 	decision_timer.wait_time = DECISION_TIME
