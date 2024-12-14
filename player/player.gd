@@ -14,6 +14,9 @@ var last_mouse_pos: Vector2
 @onready var light_spot: SpotLight3D = $LightOffset/SpotLight3D
 @onready var camera: Camera3D = $RotationOffset/Camera3D
 
+# store initial position to return to when calling reset()
+@onready var starting_position: Vector3 = position
+
 
 func _ready() -> void:
 	light_omni.light_color = Color("GOLDENROD")
@@ -25,6 +28,12 @@ func _ready() -> void:
 
 func init(state_machine: Node) -> void:
 	self.state_machine = state_machine 
+
+
+func reset() -> void:
+	# return to starting position and state
+	position = starting_position
+	state_machine.change_state(state_machine.starting_state)
 
 
 # gdlint:ignore = unused-argument

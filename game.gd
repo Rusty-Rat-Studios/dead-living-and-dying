@@ -34,21 +34,23 @@ func _process(delta: float) -> void:
 
 
 func reset() -> void:
+	# find_children(pattern: String, type: String = "") returns const Array
+	# of all nodes in the entire scene matching pattern name and type
+		# Note: wildcard '*' used to select any node starting with "Ghost"
+		# e.g. GhostLeft2, GhostRight1, etc
+	
 	# reset all ghosts
 	var ghosts: Array = find_children("Ghost*", "Ghost")
 	for ghost: Ghost in ghosts:
-	#	ghost.depossess()
-		ghost.position = Vector3.UP
+		ghost.reset()
 	
 	# reset all possessables
-	#var possessables: Array = find_children("Possessable*", "Possessable")
-	#for possessable: Possessable in possessables:
-		#possessable.depossess()
-		#possessable.position = Vector3.UP
+	var possessables: Array = find_children("Possessable*", "Possessable")
+	for possessable: Possessable in possessables:
+		possessable.reset()
 	
 	# reset player
-	player.position = Vector3.UP
-	state_machine.change_state(state_machine.starting_state)
+	player.reset()
 
 
 func _on_player_state_changed(state_name: String) -> void:

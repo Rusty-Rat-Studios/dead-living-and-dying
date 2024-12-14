@@ -12,6 +12,9 @@ var movement_boundaries: Rect2
 @onready var target_pos: Vector3 = Vector3.ZERO
 @onready var at_target: bool = false
 
+# store initial position to return to when calling reset()
+@onready var starting_position: Vector3 = position
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Initialize state machine
@@ -28,6 +31,12 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	# handle basic movement before passing to state-specific actions
 	state_machine.process_physics(delta)
+
+
+func reset() -> void:
+	# return to starting position and state
+	position = starting_position
+	state_machine.change_state(state_machine.starting_state)
 
 
 func move_to_target(delta: float) -> void:
