@@ -75,8 +75,3 @@ func pause() -> void:
 		parent.state_machine.change_state(state_possessing)
 	else:
 		set_random_target()
-
-
-func _on_player_entered_room(_room: Node3D) -> void:
-	if parent.player_in_room and PlayerHandler.get_player_state() == "Dead":
-		parent.state_machine.change_state(state_attacking)
