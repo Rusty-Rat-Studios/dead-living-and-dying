@@ -20,6 +20,6 @@ func process_physics(delta: float) -> State:
 	return null # remain in attacking state
 
 
-func _on_player_exited_room(_room: Node3D) -> void:
-	if not parent.player_in_room:
+func _on_player_exited_room(room: Node3D) -> void:
+	if room == parent.current_room and not parent.player_in_room:
 		parent.state_machine.change_state(state_waiting)
