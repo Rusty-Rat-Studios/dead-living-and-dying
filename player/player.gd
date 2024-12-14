@@ -14,17 +14,26 @@ var last_mouse_pos: Vector2
 @onready var light_spot: SpotLight3D = $LightOffset/SpotLight3D
 @onready var camera: Camera3D = $RotationOffset/Camera3D
 
+# store initial position to return to when calling reset()
+@onready var starting_position: Vector3 = position
+
 
 func _ready() -> void:
 	light_omni.light_color = Color("GOLDENROD")
 	light_spot.light_color = Color("GOLDENROD")
 	
-	$DamageDetector.area_entered.connect(_on_enemy_entered)
+	$DamageDetector.area_entered.connect(_on_enemy_area_entered)
 	$HitCooldown.timeout.connect(_on_hit_cooldown_timeout)
 
 
 func init(state_machine: Node) -> void:
 	self.state_machine = state_machine 
+
+
+func reset() -> void:
+	# return to starting position and state
+	position = starting_position
+	state_machine.change_state(state_machine.starting_state)
 
 
 # gdlint:ignore = unused-argument
@@ -103,7 +112,7 @@ func hit() -> void:
 	SignalBus.emit_signal("player_hurt")
 
 
-func _on_enemy_entered(_area: Area3D) -> void:
+func _on_enemy_area_entered(_area: Area3D) -> void:
 	if not hit_cooldown_active:
 		hit()
 	# do nothing if cooldown active

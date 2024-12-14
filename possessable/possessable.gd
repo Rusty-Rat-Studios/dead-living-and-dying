@@ -42,7 +42,8 @@ const FLOAT_FORCE: float = 8
 @onready var is_possessed: bool = false
 # flag for checking if player is in attack range
 @onready var player_in_range: bool = false
-
+# store initial position to return to when calling reset()
+@onready var starting_position: Vector3 = position
 
 func _ready() -> void:
 	# detect when player is in range
@@ -74,6 +75,15 @@ func _integrate_forces(_state: PhysicsDirectBodyState3D) -> void:
 		$Hurtbox.collision_layer = 0
 		# set flag to allow possession again
 		is_possessable = true
+
+
+func reset() -> void:
+	# return to starting position and depossess if necessary
+	position = starting_position
+	# check required because of room add/remove possessable side
+	# effect of calling possess()/depossess()
+	if is_possessed:
+		depossess()
 
 
 func possess() -> void:

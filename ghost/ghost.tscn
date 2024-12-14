@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://yihpxsaeuqdi"]
+[gd_scene load_steps=12 format=3 uid="uid://yihpxsaeuqdi"]
 
 [ext_resource type="Script" path="res://ghost/ghost.gd" id="1_vr82v"]
 [ext_resource type="Script" path="res://ghost/state_machine_ghost.gd" id="2_qkh1e"]
@@ -19,6 +19,9 @@ material = SubResource("StandardMaterial3D_qtcw8")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_dnpbh"]
 radius = 1.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x245q"]
+radius = 0.6
 
 [node name="Ghost" type="CharacterBody3D"]
 collision_layer = 8
@@ -71,3 +74,11 @@ monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PossessableDetector"]
 shape = SubResource("SphereShape3D_dnpbh")
+
+[node name="Hurtbox" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
+shape = SubResource("CapsuleShape3D_x245q")

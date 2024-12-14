@@ -38,8 +38,7 @@ func process_input(event: InputEvent) -> State:
 
 
 func _on_player_hurt() -> void:
-	# TODO: Implement game-over signal
-	pass
+	SignalBus.emit_signal("game_over")
 
 
 func _on_player_entered_shrine() -> void:
