@@ -35,9 +35,10 @@ func _process(delta: float) -> void:
 
 func reset() -> void:
 	# find_children(pattern: String, type: String = "") returns const Array
-	# of all nodes in the entire scene matching pattern name and type
-		# Note: wildcard '*' used to select any node starting with "Ghost"
-		# e.g. GhostLeft2, GhostRight1, etc
+	# of all nodes in the entire scene with name matching pattern string
+	# and type matching type string
+		# Note: wildcard '*' used to select any node starting with "NodeName[xyz]"
+		# e.g. GhostLeft2, GhostRight1, Possessable12, etc
 	
 	# reset all ghosts
 	var ghosts: Array = find_children("Ghost*", "Ghost")
