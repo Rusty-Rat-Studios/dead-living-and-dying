@@ -5,12 +5,17 @@ const PAUSE_DURATION_MIN: float = 1.0
 
 var room_boundaries: Rect2 # select random points in room to wander to
 
+# flag for pausing physics execution
 @onready var is_paused: bool = false
+# timer for pause duration
+@onready var pause_timer: Timer = Timer.new()
 
 func _ready() -> void:
 	# defer connecting this signal to ensure this function executes
 	# AFTER this signal updates the player_in_room flag in ghost.gd
 	SignalBus.player_entered_room.connect(_on_player_entered_room, CONNECT_DEFERRED)
+	add_child(pause_timer)
+	pause_timer.one_shot = true
 
 
 func enter() -> void:
@@ -37,6 +42,7 @@ func enter() -> void:
 
 func exit() -> void:
 	is_paused = false
+	pause_timer.stop()
 
 
 func process_physics(delta: float) -> State:
@@ -65,7 +71,10 @@ func set_random_target() -> void:
 func pause() -> void:
 	# pause movement behavior until timer expires
 	is_paused = true
-	await get_tree().create_timer(parent.rng.randf_range(PAUSE_DURATION_MIN, PAUSE_DURATION_MAX)).timeout
+	# use variable reference to allow disabling the timer on state exit()
+	pause_timer.wait_time = parent.rng.randf_range(PAUSE_DURATION_MIN, PAUSE_DURATION_MAX)
+	pause_timer.start()
+	await pause_timer.timeout
 	is_paused = false
 	
 	# 25/75 chance to continue waiting or possess item
@@ -75,8 +84,3 @@ func pause() -> void:
 		parent.state_machine.change_state(state_possessing)
 	else:
 		set_random_target()
-
-
-func _on_player_entered_room(_room: Node3D) -> void:
-	if parent.player_in_room and PlayerHandler.get_player_state() == "Dead":
-		parent.state_machine.change_state(state_attacking)
