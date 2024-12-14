@@ -12,5 +12,4 @@ func _on_player_entered_room(_room: Node3D) -> void:
 	if (parent.player_in_room 
 	and PlayerHandler.get_player_state() == "Dead"
 	and parent.state_machine.current_state == self):
-		#print(self.name, " detected DEAD player and decided to attack!")
 		parent.state_machine.change_state(state_attacking)
