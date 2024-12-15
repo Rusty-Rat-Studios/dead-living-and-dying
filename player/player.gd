@@ -107,13 +107,10 @@ func set_light_target_controller() -> void:
 		"joy_right_x_left", "joy_right_x_right", "joy_right_y_up", "joy_right_y_down")
 	# from_angle() calculates from x-axis, so must be adjusted
 	var current_rotation: Vector2 = Vector2.from_angle(-$LightOffset.rotation.y - PI/2)
-	
 	# set light_target to slightly beside current rotation so that when
 	# the joystick input ceases, the light target is quickly reached.
 	# --- avoids continuing to rotate after input stops
 	var light_direction: Vector2 = current_rotation.lerp(input_dir, 0.3)
-	# base direction vector target off of player position
-	light_direction += Vector2(position.x, position.z)
 	
 	light_target = Vector3(light_direction.x, 1, light_direction.y)
 	is_rotating = true
