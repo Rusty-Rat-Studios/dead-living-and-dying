@@ -79,7 +79,7 @@ func handle_movement(delta: float) -> void:
 		"joy_left_x_left", "joy_left_x_right", "joy_left_y_up", "joy_left_y_down")
 	if input_dir != Vector2.ZERO:
 		# analog input
-		direction = Vector3(input_dir.x, 0, input_dir.y).normalized()
+		direction = Vector3(input_dir.x, 0, input_dir.y)
 	else: 
 		# digital input
 		input_dir = Focus.input_get_vector("ui_left", "ui_right", "ui_up", "ui_down")
