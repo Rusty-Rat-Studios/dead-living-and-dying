@@ -170,7 +170,7 @@ func _on_joystick_timer_timeout() -> void:
 	if joystick_unused_timeout > 10:
 		joystick_timer.stop()
 		joystick_unused_timeout = 0
-		print("joystick input polling stopped")
+		print(Time.get_time_string_from_system(), ": joystick input polling stopped")
 		return
 	
 	var input_dir: Vector2 = Focus.input_get_vector(
