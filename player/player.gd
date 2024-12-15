@@ -119,31 +119,34 @@ func set_light_target_controller() -> void:
 func rotate_to_target(delta: float) -> void:
 	var light_target_xz: Vector3 = Vector3(light_target.x, 0, light_target.z).normalized()
 	var target_rotation: float = Vector3.FORWARD.signed_angle_to(light_target_xz, Vector3.UP)
-	var current_rotation: float = $LightOffset.rotation.y
-	var angle_diff: float = angle_difference(current_rotation, target_rotation)
+	var angle_diff: float = angle_difference($LightOffset.rotation.y, target_rotation)
 	
+	# check whether we are near the target
 	if abs(angle_diff) > TARGET_THRESHOLD:
+		# cap turning speed at maximum angular velocity
 		var max_velocity: float = clamp(abs(angle_diff) * 10.0, 0, MAX_ANGULAR_SPEED)
-		
-		# dynamically adjust deceleration as target is approached
-		if abs(angle_diff) < DECELERATION_THRESHOLD:
-			angular_velocity = move_toward(angular_velocity, sign(angle_diff) * max_velocity, delta * ANGULAR_DECELERATION)
+		# apply acceleration or deceleration based on distance to target
+		# accelerate if target is far; decelerate if target is close
+		var accel: float
+		if abs(angle_diff) >= DECELERATION_THRESHOLD:
+			accel = ANGULAR_ACCELERATION
 		else:
-			angular_velocity += ANGULAR_ACCELERATION * delta * sign(angle_diff)
-			angular_velocity = clamp(angular_velocity, -MAX_ANGULAR_SPEED, MAX_ANGULAR_SPEED)
+			accel = ANGULAR_DECELERATION
+		# update angular velocity with acceleration/deceleration
+		angular_velocity = move_toward(angular_velocity, sign(angle_diff) * max_velocity, delta * accel)
 	else:
-		# decelerate when close enough to the target
+		# always decelerate when close enough to the target
 		angular_velocity = move_toward(angular_velocity, 0, delta * ANGULAR_DECELERATION)
 	
-	current_rotation += angular_velocity * delta
+	# add calculated speed to spotlight rotation
+	$LightOffset.rotation.y += angular_velocity * delta
 	
 	# stop rotating if close enough to target and slow enough
+	# avoids instantly stop/starting rotation if the target swaps rotation directions
 	if abs(angle_diff) < TARGET_THRESHOLD and abs(angular_velocity) < TARGET_THRESHOLD:
-		current_rotation = target_rotation
+		$LightOffset.rotation.y = target_rotation
 		angular_velocity = 0
 		is_rotating = false
-	
-	$LightOffset.rotation.y = current_rotation
 
 
 func _on_player_hurt() -> void:
