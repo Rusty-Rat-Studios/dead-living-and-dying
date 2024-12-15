@@ -50,13 +50,13 @@ func _physics_process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	# check for mouse or joystick-right input
-	if (event is InputEventMouseMotion or
-		event.is_action_pressed("joy_right_x_left") or
+	if event is InputEventMouseMotion:
+		set_light_target_mouse()
+	elif (event.is_action_pressed("joy_right_x_left") or
 		event.is_action_pressed("joy_right_x_right") or
-		event.is_action_pressed("joy_right_x_up") or
-		event.is_action_pressed("joy_right_x_down")
-		):
-			set_light_target()
+		event.is_action_pressed("joy_right_y_up") or
+		event.is_action_pressed("joy_right_y_down")):
+		set_light_target_controller()
 
 
 func handle_movement(delta: float) -> void:
@@ -68,8 +68,7 @@ func handle_movement(delta: float) -> void:
 	
 	# check for analog input
 	var input_dir: Vector2 = Focus.input_get_vector(
-		"joy_left_x_left", "joy_left_x_right", "joy_left_y_up", "joy_left_y_down"
-	)
+		"joy_left_x_left", "joy_left_x_right", "joy_left_y_up", "joy_left_y_down")
 	if input_dir != Vector2.ZERO:
 		# analog input
 		direction = Vector3(input_dir.x, 0, input_dir.y).normalized()
@@ -85,7 +84,7 @@ func handle_movement(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, speed)
 	move_and_slide()
 
-
+"""
 func set_light_target() -> void:
 	var light_direction: Vector2
 	# check for analog input
@@ -112,6 +111,41 @@ func set_light_target() -> void:
 			return
 	
 	light_target = Vector3(light_direction.x, 1, light_direction.y)
+	is_rotating = true
+"""
+
+func set_light_target_mouse() -> void:
+	var light_direction: Vector2
+	# check for digital input
+	# prevent mouse from regaining control if it hasn't moved
+	var mouse_pos_2d: Vector2 = get_viewport().get_mouse_position()
+	var player_pos_2d: Vector2 = camera.unproject_position(position)
+	light_direction = (mouse_pos_2d - player_pos_2d)
+	
+	light_target = Vector3(light_direction.x, 1, light_direction.y)
+	is_rotating = true
+
+
+func set_light_target_controller() -> void:
+	var a: MeshInstance3D = $MeshInstance3D
+	var light_direction: Vector2
+	var input_dir: Vector2 = Focus.input_get_vector(
+		"joy_right_x_left", "joy_right_x_right", "joy_right_y_up", "joy_right_y_down")
+	# set light_target to edge of field of view
+	#var current_rotation: Vector2 = Vector2.from_angle($LightOffset.rotation.y)
+	var current_rot: float = $LightOffset.rotation.y
+	var current_rotation: Vector2 = Vector2.from_angle(current_rot)
+	a.position = Vector3(current_rotation.x, 1, current_rotation.y).normalized()
+	light_direction = current_rotation.lerp(input_dir, 0.3)
+	# base target off of player position
+	light_direction += Vector2(position.x, position.z)
+	
+	light_target = Vector3(light_direction.x, 1, light_direction.y)
+	print("input dir: ", input_dir)
+	print("current rotation: ", current_rotation)
+	print("light direction: ", light_direction)
+	print("light_target: ", light_target)
+
 	is_rotating = true
 
 
@@ -149,10 +183,6 @@ func rotate_to_target2(delta: float) -> void:
 		is_rotating = false
 	
 	$LightOffset.rotation.y = current_rotation
-	print("target rotation: ", target_rotation)
-	print("current rotation: ", current_rotation)
-	print("angular difference: ", angle_diff)
-	print("angular velocity: ", angular_velocity)
 
 
 func rotate_to_target1(delta: float) -> void:
