@@ -12,8 +12,13 @@ const TARGET_THRESHOLD: float = 0.01
 const DECELERATION_THRESHOLD: float = 10 * TARGET_THRESHOLD
 
 var state_machine: Node
-# used to check whether mouse or controller was last used to look around
-var last_mouse_pos: Vector2
+
+# used to continue processing controller input when the stick is held 
+# in the same direction - Godot's built-in InputEvent only detects changes
+# --- without this, the input is choppy as it only detects 
+# --- an input event when the value changes significantly
+@onready var joystick_timer: Timer = $JoystickTimer
+@onready var joystick_unused_timeout: int = 0
 
 # store the location of the last direction-input (mouse or right-joystick)
 @onready var light_target: Vector3 = Vector3.ZERO
@@ -33,6 +38,7 @@ func _ready() -> void:
 	light_spot.light_color = Color("GOLDENROD")
 	SignalBus.player_hurt.connect(_on_player_hurt)
 	$HitCooldown.timeout.connect(_on_hit_cooldown_timeout)
+	$JoystickTimer.timeout.connect(_on_joystick_timer_timeout)
 
 
 func init(state_machine: Node) -> void:
@@ -42,11 +48,6 @@ func init(state_machine: Node) -> void:
 func _process(delta: float) -> void:
 	if is_rotating:
 		rotate_to_target(delta)
-	
-	var input_dir: Vector2 = Focus.input_get_vector(
-		"joy_right_x_left", "joy_right_x_right", "joy_right_y_up", "joy_right_y_down")
-	if input_dir != Vector2.ZERO:
-		set_light_target_controller()
 
 
 func _physics_process(delta: float) -> void:
@@ -57,6 +58,13 @@ func _input(event: InputEvent) -> void:
 	# check for mouse or joystick-right input
 	if event is InputEventMouseMotion:
 		set_light_target_mouse()
+	elif (event.is_action_pressed("joy_right_x_left")
+	or event.is_action_pressed("joy_right_x_right")
+	or event.is_action_pressed("joy_right_y_up")
+	or event.is_action_pressed("joy_right_y_down")):
+		set_light_target_controller()
+		# enable detection of non-changing controller input
+		joystick_timer.start()
 
 
 func handle_movement(delta: float) -> void:
@@ -83,6 +91,7 @@ func handle_movement(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, speed)
 		velocity.z = move_toward(velocity.z, 0, speed)
 	move_and_slide()
+
 
 func set_light_target_mouse() -> void:
 	var mouse_pos_2d: Vector2 = get_viewport().get_mouse_position()
@@ -156,3 +165,24 @@ func _on_hit_cooldown_timeout() -> void:
 	
 	# reset cooldown
 	$HitCooldown.wait_time = HIT_COOLDOWN
+
+
+func _on_joystick_timer_timeout() -> void:
+	# if the player does not use a controller for a while, 
+	# disable the joystick input timer
+	if joystick_unused_timeout > 10:
+		joystick_timer.stop()
+		joystick_unused_timeout = 0
+		print("joystick input polling stopped")
+		return
+	
+	var input_dir: Vector2 = Focus.input_get_vector(
+		"joy_right_x_left", "joy_right_x_right", "joy_right_y_up", "joy_right_y_down")
+	
+	if input_dir != Vector2.ZERO:
+		set_light_target_controller()
+		# reset count for detecting unused controller input
+		joystick_unused_timeout = 0
+	else:
+		# no controller input - increment unused counter
+		joystick_unused_timeout += 1

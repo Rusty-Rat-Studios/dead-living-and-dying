@@ -39,3 +39,6 @@ spot_range = 250.0
 
 [node name="HitCooldown" type="Timer" parent="."]
 one_shot = true
+
+[node name="JoystickTimer" type="Timer" parent="."]
+wait_time = 0.1
