@@ -178,7 +178,7 @@ func _on_enemy_area_entered(_area: Area3D) -> void:
 func _on_hit_cooldown_timeout() -> void:
 	# deactivate invincibility frames
 	hit_cooldown_active = false
-  if $DamageDetector.has_overlapping_areas():
+	if $DamageDetector.has_overlapping_areas():
 		hit()
 
 
