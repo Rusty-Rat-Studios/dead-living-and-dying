@@ -18,7 +18,6 @@ var state_machine: Node
 # --- without this, the input is choppy as it only detects 
 # --- an input event when the value changes significantly
 @onready var joystick_timer: Timer = $JoystickTimer
-@onready var joystick_unused_timeout: int = 0
 
 # store the location of the last direction-input (mouse or right-joystick)
 @onready var light_target: Vector3 = Vector3.ZERO
@@ -43,7 +42,8 @@ func _ready() -> void:
 	
 	$DamageDetector.area_entered.connect(_on_enemy_area_entered)
 	$HitCooldown.timeout.connect(_on_hit_cooldown_timeout)
-	$JoystickTimer.timeout.connect(_on_joystick_timer_timeout)
+	joystick_timer.timeout.connect(_on_joystick_timer_timeout)
+	
 
 
 func init(state_machine: Node) -> void:
@@ -73,9 +73,9 @@ func _input(event: InputEvent) -> void:
 	or event.is_action_pressed("joy_right_x_right")
 	or event.is_action_pressed("joy_right_y_up")
 	or event.is_action_pressed("joy_right_y_down")):
-		set_light_target_controller()
 		# enable detection of non-changing controller input
-		joystick_timer.start()
+		if joystick_timer.is_stopped():
+			joystick_timer.start()
 
 
 func handle_movement(delta: float) -> void:
@@ -183,21 +183,13 @@ func _on_hit_cooldown_timeout() -> void:
 
 
 func _on_joystick_timer_timeout() -> void:
-	# if the player does not use a controller for a while, 
-	# disable the joystick input timer
-	if joystick_unused_timeout > 10:
-		joystick_timer.stop()
-		joystick_unused_timeout = 0
-		print(Time.get_time_string_from_system(), ": joystick input polling stopped")
-		return
-	
+	# get joystick input
 	var input_dir: Vector2 = Focus.input_get_vector(
 		"joy_right_x_left", "joy_right_x_right", "joy_right_y_up", "joy_right_y_down")
 	
 	if input_dir != Vector2.ZERO:
+		# stick is held down, rotate to target direction
 		set_light_target_controller()
-		# reset count for detecting unused controller input
-		joystick_unused_timeout = 0
 	else:
-		# no controller input - increment unused counter
-		joystick_unused_timeout += 1
+		# if the player releases the joystick, stop polling
+		joystick_timer.stop()
