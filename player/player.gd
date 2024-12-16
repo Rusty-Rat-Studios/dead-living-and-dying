@@ -33,16 +33,27 @@ var state_machine: Node
 @onready var light_spot: SpotLight3D = $LightOffset/SpotLight3D
 @onready var camera: Camera3D = $RotationOffset/Camera3D
 
+# store initial position to return to when calling reset()
+@onready var starting_position: Vector3 = position
+
+
 func _ready() -> void:
 	light_omni.light_color = Color("GOLDENROD")
 	light_spot.light_color = Color("GOLDENROD")
-	SignalBus.player_hurt.connect(_on_player_hurt)
+	
+	$DamageDetector.area_entered.connect(_on_enemy_area_entered)
 	$HitCooldown.timeout.connect(_on_hit_cooldown_timeout)
 	$JoystickTimer.timeout.connect(_on_joystick_timer_timeout)
 
 
 func init(state_machine: Node) -> void:
 	self.state_machine = state_machine 
+
+
+func reset() -> void:
+	# return to starting position and state
+	position = starting_position
+	state_machine.change_state(state_machine.starting_state)
 
 
 func _process(delta: float) -> void:
@@ -149,22 +160,26 @@ func rotate_to_target(delta: float) -> void:
 		is_rotating = false
 
 
-func _on_player_hurt() -> void:
+func hit() -> void:
+	hit_cooldown_active = true
+	# start hit cooldown
+	$HitCooldown.wait_time = HIT_COOLDOWN
+	$HitCooldown.start()
+	# pass signal for state-specific behavior
+	SignalBus.emit_signal("player_hurt")
+
+
+func _on_enemy_area_entered(_area: Area3D) -> void:
 	if not hit_cooldown_active:
-		# hit cooldown is inactive, start cooldown
-		hit_cooldown_active = true
-		SignalBus.emit_signal("player_hurt")
-		$HitCooldown.wait_time = HIT_COOLDOWN
-		$HitCooldown.start()
+		hit()
 	# do nothing if cooldown active
 
 
 func _on_hit_cooldown_timeout() -> void:
 	# deactivate invincibility frames
 	hit_cooldown_active = false
-	
-	# reset cooldown
-	$HitCooldown.wait_time = HIT_COOLDOWN
+  if $DamageDetector.has_overlapping_areas():
+		hit()
 
 
 func _on_joystick_timer_timeout() -> void:

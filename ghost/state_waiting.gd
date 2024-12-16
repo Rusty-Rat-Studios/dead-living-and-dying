@@ -5,11 +5,17 @@ const PAUSE_DURATION_MIN: float = 1.0
 
 var room_boundaries: Rect2 # select random points in room to wander to
 
+# flag for pausing physics execution
 @onready var is_paused: bool = false
-@onready var rng: RandomNumberGenerator = RandomNumberGenerator.new() # generating wait time and target positions
+# timer for pause duration
+@onready var pause_timer: Timer = Timer.new()
 
 func _ready() -> void:
-	SignalBus.player_entered_room.connect(_on_player_entered_room)
+	# defer connecting this signal to ensure this function executes
+	# AFTER this signal updates the player_in_room flag in ghost.gd
+	SignalBus.player_entered_room.connect(_on_player_entered_room, CONNECT_DEFERRED)
+	add_child(pause_timer)
+	pause_timer.one_shot = true
 
 
 func enter() -> void:
@@ -36,6 +42,7 @@ func enter() -> void:
 
 func exit() -> void:
 	is_paused = false
+	pause_timer.stop()
 
 
 func process_physics(delta: float) -> State:
@@ -53,9 +60,9 @@ func process_physics(delta: float) -> State:
 func set_random_target() -> void:
 	# generate random movement target within room boundaries
 	# offset to avoid setting point within walls
-	var x: float = rng.randf_range(room_boundaries.position.x + 1,
+	var x: float = parent.rng.randf_range(room_boundaries.position.x + 1,
 					room_boundaries.position.x + room_boundaries.size.x - 1)
-	var z: float = rng.randf_range(room_boundaries.position.y + 1,
+	var z: float = parent.rng.randf_range(room_boundaries.position.y + 1,
 					room_boundaries.position.y + room_boundaries.size.y - 1)
 	
 	parent.target_pos = parent.current_room.global_position + Vector3(x, 1.0, z)
@@ -64,11 +71,16 @@ func set_random_target() -> void:
 func pause() -> void:
 	# pause movement behavior until timer expires
 	is_paused = true
-	await get_tree().create_timer(randf_range(PAUSE_DURATION_MIN, PAUSE_DURATION_MAX)).timeout
+	# use variable reference to allow disabling the timer on state exit()
+	pause_timer.wait_time = parent.rng.randf_range(PAUSE_DURATION_MIN, PAUSE_DURATION_MAX)
+	pause_timer.start()
+	await pause_timer.timeout
 	is_paused = false
-	set_random_target()
-
-
-func _on_player_entered_room(room: Node3D) -> void:
-	if room == parent.current_room and PlayerHandler.get_player_state() == "Dead":
-		parent.state_machine.change_state(state_attacking)
+	
+	# 25/75 chance to continue waiting or possess item
+	var decision: int = parent.rng.randi_range(0, 3)
+	if decision != 0:
+		print(Time.get_time_string_from_system(), ": ", parent.name, " decided to possess")
+		parent.state_machine.change_state(state_possessing)
+	else:
+		set_random_target()
