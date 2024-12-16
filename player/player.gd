@@ -8,8 +8,10 @@ const HIT_COOLDOWN: float = 2.0
 const MAX_ANGULAR_SPEED: float = 3.0
 const ANGULAR_ACCELERATION: float = 10.0
 const ANGULAR_DECELERATION: float = 40.0
+# used to check if spotlight is rotated close enough to the target
 const TARGET_THRESHOLD: float = 0.01
-const DECELERATION_THRESHOLD: float = 10 * TARGET_THRESHOLD
+# used to begin decelerating rotation when close but not at target
+const DECELERATION_THRESHOLD: float = 5 * TARGET_THRESHOLD
 
 var state_machine: Node
 
