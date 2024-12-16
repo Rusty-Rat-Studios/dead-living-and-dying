@@ -43,7 +43,6 @@ func _ready() -> void:
 	$DamageDetector.area_entered.connect(_on_enemy_area_entered)
 	$HitCooldown.timeout.connect(_on_hit_cooldown_timeout)
 	joystick_timer.timeout.connect(_on_joystick_timer_timeout)
-	
 
 
 func init(state_machine: Node) -> void:
