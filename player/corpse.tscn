@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://umlwhr2u3iej"]
+
+[ext_resource type="Texture2D" uid="uid://cey8vsju0vbgx" path="res://icon.svg" id="1_kvadm"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_5huj5"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2y6rd"]
+albedo_color = Color(0.58, 0.0193333, 0, 1)
+albedo_texture = ExtResource("1_kvadm")
+
+[sub_resource type="SphereMesh" id="SphereMesh_cbh3o"]
+material = SubResource("StandardMaterial3D_2y6rd")
+
+[node name="Corpse" type="Area3D"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_5huj5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+mesh = SubResource("SphereMesh_cbh3o")
