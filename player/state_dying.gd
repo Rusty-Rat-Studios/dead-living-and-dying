@@ -31,4 +31,6 @@ func process_input(event: InputEvent) -> State:
 
 
 func _on_player_hurt() -> void:
+	# activate i-frames without flash
+	parent.take_damage(false)
 	parent.state_machine.change_state(state_dead)

@@ -31,4 +31,5 @@ func process_input(event: InputEvent) -> State:
 
 
 func _on_player_hurt() -> void:
+	parent.take_damage()
 	parent.state_machine.change_state(state_dying)

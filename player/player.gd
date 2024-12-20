@@ -3,16 +3,22 @@ extends CharacterBody3D
 
 # used to set cooldown timer
 const HIT_COOLDOWN: float = 2.0
+# used to flash player sprite while hit cooldown active
+const HIT_FLASH_SPEED: float = 0.3
+const FLASH_OPACITY: float = 0.2
 
 var state_machine: Node
 # used to check whether mouse or controller was last used to look around
 var last_mouse_pos: Vector2
 
 @onready var hit_cooldown_active: bool = false
+# used to toggle opacity while hit cooldown active
+@onready var hit_flash: bool = false
 @onready var speed: float = 6.0
 @onready var light_omni: OmniLight3D = $OmniLight3D
 @onready var light_spot: SpotLight3D = $LightOffset/SpotLight3D
 @onready var camera: Camera3D = $RotationOffset/Camera3D
+@onready var sprite: Sprite3D = $RotationOffset/Sprite3D
 
 # store initial position to return to when calling reset()
 @onready var starting_position: Vector3 = position
@@ -26,8 +32,12 @@ func _ready() -> void:
 	light_omni.light_color = Color("GOLDENROD")
 	light_spot.light_color = Color("GOLDENROD")
 	
-	$DamageDetector.area_entered.connect(_on_enemy_area_entered)
+	$HitCooldown.wait_time = HIT_COOLDOWN
+	$HitFlash.wait_time = HIT_FLASH_SPEED
+	
 	$HitCooldown.timeout.connect(_on_hit_cooldown_timeout)
+	$HitFlash.timeout.connect(_on_hit_flash_timeout)
+	$DamageDetector.area_entered.connect(_on_enemy_area_entered)
 
 
 func init(state_machine: Node) -> void:
@@ -37,6 +47,9 @@ func init(state_machine: Node) -> void:
 func reset() -> void:
 	# return to starting position and state
 	position = starting_position
+	hit_cooldown_active = false
+	$HitCooldown.stop()
+	$HitFlash.stop()
 	state_machine.change_state(state_machine.starting_state)
 
 
@@ -108,12 +121,21 @@ func point_spotlight() -> void:
 
 
 func hit() -> void:
-	hit_cooldown_active = true
-	# start hit cooldown
-	$HitCooldown.wait_time = HIT_COOLDOWN
-	$HitCooldown.start()
 	# pass signal for state-specific behavior
 	SignalBus.emit_signal("player_hurt")
+
+
+# utility function for activating i-frames, can be called separately
+# from hit signal
+# e.g. for respawning, to ensure player can't immediately take damage
+# optional "flash" argument to disable the flashing animation
+func take_damage(flash: bool = true) -> void:
+	hit_cooldown_active = true
+	# start hit cooldown
+	$HitCooldown.start()
+	if flash:
+		hit_flash = true
+		$HitFlash.start()
 
 
 func _on_enemy_area_entered(_area: Area3D) -> void:
@@ -125,5 +147,17 @@ func _on_enemy_area_entered(_area: Area3D) -> void:
 func _on_hit_cooldown_timeout() -> void:
 	# deactivate invincibility frames
 	hit_cooldown_active = false
+	# stop flashing animation
+	$HitFlash.stop()
 	if $DamageDetector.has_overlapping_areas():
 		hit()
+
+
+func _on_hit_flash_timeout() -> void:
+	print("hit flash timeout, hit flash: ", hit_flash)
+	var current_color: Color = sprite.get_modulate()
+	if hit_flash:
+		sprite.modulate = Color(current_color, FLASH_OPACITY)
+	else:
+		sprite.modulate = Color(current_color, 1)
+	hit_flash = not hit_flash

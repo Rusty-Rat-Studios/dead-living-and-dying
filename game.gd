@@ -57,6 +57,8 @@ func reset() -> void:
 	
 	# reset player
 	player.reset()
+	# reset corpse
+	corpse.reset()
 
 
 func _on_player_state_changed(state_name: String) -> void:
@@ -67,6 +69,7 @@ func _on_player_state_changed(state_name: String) -> void:
 			player.light_spot.visible = true
 			light_directional.visible = false
 			$World/RoomCenter/Hurtbox/Label3D.text = "HURTBOX\n\nCome here to\nget hurt ;_ ;"
+			corpse.reset()
 		"Dying":
 			player.light_omni.visible = true
 			player.light_spot.visible = true

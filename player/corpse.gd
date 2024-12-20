@@ -2,6 +2,10 @@ extends Area3D
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
+	reset()
+
+
+func reset() -> void:
 	visible = false
 	deactivate_collision()
 
@@ -18,6 +22,5 @@ func deactivate_collision() -> void:
 
 func _on_body_entered(body: Node3D) -> void:
 	if body == PlayerHandler.get_player():
-		visible = false
-		deactivate_collision()
+		reset()
 		SignalBus.emit_signal("player_revived", global_position)
