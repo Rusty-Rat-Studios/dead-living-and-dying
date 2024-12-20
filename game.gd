@@ -78,12 +78,11 @@ func _on_player_state_changed(state_name: String) -> void:
 			$World/RoomCenter/Hurtbox/Label3D.text = "HURTBOX\n\nDon't worry little ghost,\n\nHurtbox can't hurt you."
 			# move corpse to death location
 			corpse.global_position = player.global_position
-			# move player to respawn shrine in dead state
-			player.position = player.respawn_position
-			# activate corpse to be visible/collidable
-			# without the micro-timer, it instantly revives the player on the spot
-			await get_tree().create_timer(0.2).timeout
-			corpse.activate()
+			corpse.visible = true
+			# delay activation to ensure player doesn't immediately revive
+			# since they are briefly overlapping
+			await get_tree().create_timer(2).timeout
+			corpse.activate_collision()
 	
 	# TEMPORARY
 	update_ghost_visibility(state_name)

@@ -12,10 +12,16 @@ func enter() -> void:
 	# change collision layers out of physical plane into spirit plane
 	parent.collision_layer = CollisionBit.PLAYER + CollisionBit.SPIRIT
 	parent.collision_mask = CollisionBit.WORLD + CollisionBit.SPIRIT
-	parent.get_node("DamageDetector").collision_mask = CollisionBit.SPIRIT
 	
 	# DEBUG: modulate color according to state
 	parent.get_node("RotationOffset/Sprite3D").modulate = Color(0.5, 0.5, 0.5, 0.5)
+	
+	# move player to active shrine
+	var tween: Tween = get_tree().create_tween()
+	tween.tween_property(parent, "global_position", parent.respawn_position, 2).set_trans(Tween.TRANS_CUBIC)
+	# activate damage detector AFTER they reach the respawn position
+	# to avoid accidental game over while tweening to respawn position
+	parent.get_node("DamageDetector").collision_mask = CollisionBit.SPIRIT
 
 
 func exit() -> void:
