@@ -160,6 +160,3 @@ func _on_contact_possessable(body: Node3D) -> void:
 		# delay, then make decision
 		decision_timer.wait_time = DECISION_TIME
 		decision_timer.start()
-	else:
-		# set new target if possessable is mid-attack
-		set_closest_target()
