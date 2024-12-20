@@ -6,6 +6,7 @@ extends Node3D
 @onready var state_machine: Node = $StateMachine
 @onready var player: Player = $Player
 @onready var light_directional: DirectionalLight3D = $DirectionalLight3D
+@onready var corpse: Area3D = preload("res://player/corpse.tscn").instantiate()
 
 
 # Called when the node enters the scene tree for the first time.
@@ -18,6 +19,10 @@ func _ready() -> void:
 	# pass reference of the player to the states
 	state_machine.init($Player)
 	SignalBus.player_state_changed.connect(_on_player_state_changed)
+	
+	# add corpse to scene
+	# corpse deactivates on initialization - invisible with no collision
+	add_child(corpse)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -71,6 +76,14 @@ func _on_player_state_changed(state_name: String) -> void:
 			player.light_spot.visible = false
 			light_directional.visible = true
 			$World/RoomCenter/Hurtbox/Label3D.text = "HURTBOX\n\nDon't worry little ghost,\n\nHurtbox can't hurt you."
+			# move corpse to death location
+			corpse.global_position = player.global_position
+			# move player to respawn shrine in dead state
+			player.position = player.respawn_position
+			# activate corpse to be visible/collidable
+			# without the micro-timer, it instantly revives the player on the spot
+			await get_tree().create_timer(0.2).timeout
+			corpse.activate()
 	
 	# TEMPORARY
 	update_ghost_visibility(state_name)

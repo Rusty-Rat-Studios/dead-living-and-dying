@@ -15,4 +15,5 @@ signal game_over
 signal player_entered_room(room: Node3D)
 signal player_exited_room(room: Node3D)
 
-signal player_entered_shrine
+# emitted when player contacts their corpse in DEAD state
+signal player_revived(corpse_position: Vector3)

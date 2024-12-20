@@ -6,7 +6,7 @@ func enter() -> void:
 	parent.speed = 10.0
 	
 	SignalBus.player_hurt.connect(_on_player_hurt)
-	SignalBus.player_entered_shrine.connect(_on_player_entered_shrine)
+	SignalBus.player_revived.connect(_on_player_revived)
 	SignalBus.emit_signal("player_state_changed", "Dead")
 	
 	# change collision layers out of physical plane into spirit plane
@@ -26,7 +26,7 @@ func exit() -> void:
 	parent.get_node("DamageDetector").collision_mask = CollisionBit.PHYSICAL
 	
 	SignalBus.player_hurt.disconnect(_on_player_hurt)
-	SignalBus.player_entered_shrine.disconnect(_on_player_entered_shrine)
+	SignalBus.player_revived.disconnect(_on_player_revived)
 
 
 func process_input(event: InputEvent) -> State:
@@ -41,5 +41,6 @@ func _on_player_hurt() -> void:
 	SignalBus.emit_signal("game_over")
 
 
-func _on_player_entered_shrine() -> void:
+func _on_player_revived(corpse_global_position: Vector3) -> void:
+	parent.global_position = corpse_global_position
 	parent.state_machine.change_state(state_living)

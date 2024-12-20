@@ -16,6 +16,10 @@ var last_mouse_pos: Vector2
 
 # store initial position to return to when calling reset()
 @onready var starting_position: Vector3 = position
+# store position to respawn at when entering DEAD state.
+# can be updated when visiting a new shrine but is start 
+# position by default
+@onready var respawn_position: Vector3 = starting_position
 
 
 func _ready() -> void:
