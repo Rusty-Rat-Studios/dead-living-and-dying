@@ -12,4 +12,7 @@ func _on_player_entered_room(_room: Node3D) -> void:
 	if (parent.player_in_room 
 	and PlayerHandler.get_player_state() == "Dead"
 	and parent.state_machine.current_state == self):
+		# add delay to player entering room to allow player
+		# breathing room if running from other ghosts
+		await get_tree().create_timer(0.5).timeout
 		parent.state_machine.change_state(state_attacking)

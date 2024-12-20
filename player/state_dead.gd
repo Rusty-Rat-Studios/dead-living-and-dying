@@ -49,6 +49,6 @@ func _on_player_hurt() -> void:
 
 func _on_player_revived(corpse_global_position: Vector3) -> void:
 	parent.global_position = corpse_global_position
-	# provide i-frames on revive
-	parent.activate_hit_cooldown(false)
+	# provide i-frames on revive, no flashing
+	parent.take_damage(false)
 	parent.state_machine.change_state(state_living)

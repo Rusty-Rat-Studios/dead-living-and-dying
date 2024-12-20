@@ -10,7 +10,7 @@ func _ready() -> void:
 
 func enter() -> void:
 	super()
-	parent.speed = 8.0
+	parent.speed = 7.0
 
 
 func process_physics(delta: float) -> State:
