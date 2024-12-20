@@ -21,6 +21,7 @@ func enter() -> void:
 	tween.tween_property(parent, "global_position", parent.respawn_position, 2).set_trans(Tween.TRANS_CUBIC)
 	# activate damage detector AFTER they reach the respawn position
 	# to avoid accidental game over while tweening to respawn position
+	await get_tree().create_timer(2).timeout
 	parent.get_node("DamageDetector").collision_mask = CollisionBit.SPIRIT
 
 
