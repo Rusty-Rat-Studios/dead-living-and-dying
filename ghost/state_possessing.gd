@@ -46,6 +46,7 @@ func enter() -> void:
 
 
 func exit() -> void:
+	super()
 	# disable possessable detector
 	detector.collision_mask = 0
 	
@@ -90,9 +91,11 @@ func set_closest_target() -> void:
 			target_possessable.possess()
 			is_possessing = true
 		else:
-			# overlaps but is not posessable right now, reset target - it 
+			# overlaps but is not possessable right now, reset target - it 
 			# will likely follow the same target, but either wait until it 
-			# is posessable again or until it is farther than another target
+			# is possessable again or until it is farther than another target
+			# -- use slight delay to minimize repeated checks on closest target
+			await get_tree().create_timer(0.1).timeout
 			set_closest_target()
 			return
 	else:

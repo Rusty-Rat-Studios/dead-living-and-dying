@@ -41,6 +41,7 @@ func enter() -> void:
 
 
 func exit() -> void:
+	super()
 	is_paused = false
 	pause_timer.stop()
 
