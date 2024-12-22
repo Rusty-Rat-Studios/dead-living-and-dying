@@ -7,7 +7,12 @@ const HIT_COOLDOWN: float = 2.0
 const HIT_FLASH_SPEED: float = 0.3
 const FLASH_OPACITY: float = 0.2
 
+# set in player init() called by game.gd
 var state_machine: Node
+var default_shrine: Shrine
+# used to track previously visited, non-consumed shrines (including default)
+# default shrine should never be removed from this array
+var active_shrines: Array
 # used to check whether mouse or controller was last used to look around
 var last_mouse_pos: Vector2
 
@@ -22,10 +27,6 @@ var last_mouse_pos: Vector2
 
 # store initial position to return to when calling reset()
 @onready var starting_position: Vector3 = position
-# store position to respawn at when entering DEAD state.
-# can be updated when visiting a new shrine but is start 
-# position by default
-@onready var respawn_position: Vector3 = starting_position
 
 
 func _ready() -> void:
@@ -38,10 +39,16 @@ func _ready() -> void:
 	$HitCooldown.timeout.connect(_on_hit_cooldown_timeout)
 	$HitFlash.timeout.connect(_on_hit_flash_timeout)
 	$DamageDetector.area_entered.connect(_on_enemy_area_entered)
+	
+	SignalBus.activated_shrine.connect(_on_activated_shrine)
+	SignalBus.consumed_shrine.connect(_on_consumed_shrine)
 
 
-func init(state_machine: Node) -> void:
-	self.state_machine = state_machine 
+func init(state_machine: Node, shrine: Shrine) -> void:
+	self.state_machine = state_machine
+	# set respawn to default shrine
+	default_shrine = shrine
+	active_shrines.append(default_shrine)
 
 
 func reset() -> void:
@@ -50,6 +57,8 @@ func reset() -> void:
 	hit_cooldown_active = false
 	$HitCooldown.stop()
 	$HitFlash.stop()
+	active_shrines.clear()
+	active_shrines.append(default_shrine)
 	state_machine.change_state(state_machine.starting_state)
 
 
@@ -161,3 +170,11 @@ func _on_hit_flash_timeout() -> void:
 	else:
 		sprite.modulate = Color(current_color, 1)
 	hit_flash = not hit_flash
+
+
+func _on_activated_shrine(shrine: Shrine) -> void:
+	active_shrines.append(shrine)
+
+
+func _on_consumed_shrine(shrine: Shrine) -> void:
+	active_shrines.remove_at(active_shrines.find(shrine))

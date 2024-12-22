@@ -16,12 +16,26 @@ func enter() -> void:
 	# DEBUG: modulate color according to state
 	parent.get_node("RotationOffset/Sprite3D").modulate = Color(0.5, 0.5, 0.5, 0.5)
 	
-	# move player to active shrine
+	# find closest active shrine
+	var target_shrine: Shrine = parent.default_shrine
+	for shrine: Shrine in parent.active_shrines:
+		# use squared distance because it computes fast
+		var distance_sq: float = parent.global_position.distance_squared_to(shrine.global_position)
+		if distance_sq < parent.global_position.distance_squared_to(target_shrine.global_position):
+			target_shrine = shrine
+	
+	# temporarily deactivate player hurtbox
+	# reactivated after reaching shrine
+	parent.get_node("DamageDetector").collision_mask = 0
+	
+	# move player to closes active shrine
 	var tween: Tween = get_tree().create_tween()
-	tween.tween_property(parent, "global_position", parent.respawn_position, 2).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(parent, "global_position", target_shrine.global_position, 2).set_trans(Tween.TRANS_CUBIC)
 	# activate damage detector AFTER they reach the respawn position
 	# to avoid accidental game over while tweening to respawn position
 	await get_tree().create_timer(2).timeout
+	# consume shrine (note: does not consume default shrine)
+	target_shrine.consume()
 	parent.get_node("DamageDetector").collision_mask = CollisionBit.SPIRIT
 
 

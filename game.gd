@@ -7,14 +7,17 @@ extends Node3D
 @onready var player: Player = $Player
 @onready var light_directional: DirectionalLight3D = $DirectionalLight3D
 @onready var corpse: Area3D = preload("res://player/corpse.tscn").instantiate()
+@onready var default_shrine: Shrine = $World/RoomBottom/Shrine
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Initialize player
-	# pass reference of state machine to the player
-	player.init($StateMachine)
-	
+	# pass reference of state machine and default shrine to the player
+	player.init($StateMachine, default_shrine)
+	default_shrine.default = true
+	default_shrine.activate()
+
 	# Initialize state machine
 	# pass reference of the player to the states
 	state_machine.init($Player)
