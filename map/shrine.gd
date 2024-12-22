@@ -1,5 +1,5 @@
-extends Area3D
 class_name Shrine
+extends Area3D
 
 # tracks if shrine has been reached and activated
 @onready var activated: bool = false
@@ -21,8 +21,6 @@ class_name Shrine
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 	
-
-	
 	# apply material to shrine
 	$MeshInstance3D.set_surface_override_material(0, material)
 	reset()
@@ -33,19 +31,13 @@ func reset() -> void:
 	consumed = false
 	default = false
 	material.albedo_color = color_inactive
-	$Label3D.text = "SHRINE\r
-				---inactive---\n
-				Enter the shrine\r
-				to activate it"
+	$Label3D.text = "SHRINE\r---inactive---\nEnter the shrine\rto activate it"
 
 
 func activate() -> void:
 	activated = true
 	material.albedo_color = color_active
-	$Label3D.text = "SHRINE\r
-					---ACTIVE---\n
-					You will revive here if this\r
-					is the closest shrine"
+	$Label3D.text = "SHRINE\r---ACTIVE---\nYou will revive here if this\ris the closest shrine"
 	SignalBus.emit_signal("activated_shrine", self)
 
 
@@ -53,14 +45,11 @@ func consume() -> void:
 	if not default:
 		consumed = true
 		material.albedo_color = color_consumed
-		$Label3D.text = "SHRINE\r
-						---CONSUMED---\n
-						This shrine cannot\r
-						be used anymore"
+		$Label3D.text = "SHRINE\r---CONSUMED---\nThis shrine cannot\rbe used anymore"
 		SignalBus.emit_signal("consumed_shrine", self)
 
 
-func _on_body_entered(body: Node3D) -> void:
+func _on_body_entered(_body: Node3D) -> void:
 	# type-checking for player is unneeded as shrine collides on layer PLAYER
 	if not consumed and not activated and PlayerHandler.get_player_state() != "Dead":
 		activate()

@@ -17,6 +17,7 @@ top_radius = 2.0
 bottom_radius = 2.0
 
 [node name="Shrine" type="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_fbitt")
