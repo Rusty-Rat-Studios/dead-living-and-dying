@@ -163,7 +163,6 @@ func _on_hit_cooldown_timeout() -> void:
 
 
 func _on_hit_flash_timeout() -> void:
-	print("hit flash timeout, hit flash: ", hit_flash)
 	var current_color: Color = sprite.get_modulate()
 	if hit_flash:
 		sprite.modulate = Color(current_color, FLASH_OPACITY)
