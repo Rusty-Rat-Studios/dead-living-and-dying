@@ -58,6 +58,11 @@ func reset() -> void:
 	for possessable: Possessable in possessables:
 		possessable.reset()
 	
+	# reset all shrines
+	var shrines: Array = find_children("Shrine*", "Shrine")
+	for shrine: Shrine in shrines:
+		shrine.reset()
+	
 	# reset player
 	player.reset()
 	# reset corpse

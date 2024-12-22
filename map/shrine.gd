@@ -29,7 +29,6 @@ func _ready() -> void:
 func reset() -> void:
 	activated = false
 	consumed = false
-	default = false
 	material.albedo_color = color_inactive
 	$Label3D.text = "SHRINE\r---inactive---\nEnter the shrine\rto activate it"
 
