@@ -5,11 +5,11 @@ func enter() -> void:
 	super()
 	parent.speed = 4.0
 	
-	SignalBus.player_hurt.connect(_on_player_hurt)
-	SignalBus.emit_signal("player_state_changed", "Dying")
-	
 	# DEBUG: modulate color according to state
 	parent.get_node("RotationOffset/Sprite3D").modulate = Color(1, 0.5, 0.5)
+	
+	SignalBus.player_hurt.connect(_on_player_hurt)
+	SignalBus.emit_signal("player_state_changed", "Dying")
 	
 	# adjust light strength
 	parent.light_omni.omni_range = 4

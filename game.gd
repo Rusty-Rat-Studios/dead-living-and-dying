@@ -13,19 +13,19 @@ extends Node3D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Initialize player
-	# pass reference of state machine and default shrine to the player
-	player.init($StateMachine, default_shrine)
+	# pass reference of state machine, default shrine, and corpse
+	# to be controlled by player
+	player.init($StateMachine, default_shrine, corpse)
 	default_shrine.default = true
 	default_shrine.activate()
-
+	# add corpse to scene as sibling of player
+	# corpse deactivates on initialization - invisible with no collision
+	add_child(corpse)
+	
 	# Initialize state machine
 	# pass reference of the player to the states
 	state_machine.init($Player)
 	SignalBus.player_state_changed.connect(_on_player_state_changed)
-	
-	# add corpse to scene
-	# corpse deactivates on initialization - invisible with no collision
-	add_child(corpse)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -86,13 +86,6 @@ func _on_player_state_changed(state_name: String) -> void:
 			player.light_spot.visible = false
 			light_directional.visible = true
 			$World/RoomCenter/Hurtbox/Label3D.text = "HURTBOX\n\nDon't worry little ghost,\n\nHurtbox can't hurt you."
-			# move corpse to death location
-			corpse.global_position = player.global_position
-			corpse.visible = true
-			# delay activation to ensure player doesn't immediately revive
-			# since they are briefly overlapping
-			await get_tree().create_timer(2).timeout
-			corpse.activate_collision()
 	
 	# TEMPORARY
 	update_ghost_visibility(state_name)

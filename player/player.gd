@@ -7,12 +7,13 @@ const HIT_COOLDOWN: float = 2.0
 const HIT_FLASH_SPEED: float = 0.3
 const FLASH_OPACITY: float = 0.2
 
-# set in player init() called by game.gd
+# player state machine, sibling node under Game node
 var state_machine: Node
-var default_shrine: Shrine
 # used to track previously visited, non-consumed shrines (including default)
-# default shrine should never be removed from this array
+# default shrine should be element 0 and never be removed from this array
 var active_shrines: Array
+# used to track player corpse - handled by states
+var corpse: Corpse
 # used to check whether mouse or controller was last used to look around
 var last_mouse_pos: Vector2
 
@@ -44,11 +45,12 @@ func _ready() -> void:
 	SignalBus.consumed_shrine.connect(_on_consumed_shrine)
 
 
-func init(state_machine: Node, shrine: Shrine) -> void:
+func init(state_machine: Node, shrine: Shrine, corpse: Corpse) -> void:
 	self.state_machine = state_machine
-	# set respawn to default shrine
-	default_shrine = shrine
-	active_shrines.append(default_shrine)
+	# add default shrine to active shrines
+	active_shrines.append(shrine)
+	# set reference to player corpse
+	self.corpse = corpse
 
 
 func reset() -> void:
@@ -57,7 +59,10 @@ func reset() -> void:
 	hit_cooldown_active = false
 	$HitCooldown.stop()
 	$HitFlash.stop()
+	# store reference to default shrine before clearing list
+	var default_shrine: Shrine = active_shrines[0]
 	active_shrines.clear()
+	# restore default shrine as only element
 	active_shrines.append(default_shrine)
 	state_machine.change_state(state_machine.starting_state)
 
