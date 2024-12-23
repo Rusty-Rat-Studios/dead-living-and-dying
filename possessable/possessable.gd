@@ -22,14 +22,16 @@ const THROW_FORCE: float = 25.0
 # speed threshold for enabling/disabling hurtbox
 const DAMAGE_VELOCITY: float = 2.0
 
-# height object is lifted to when possessed
-const FLOAT_HEIGHT: float = 2
 # height object rises/falls to while possessed
 const FLOAT_RANGE: float = 0.2
 # speed at which the object oscillates
 const FLOAT_SPEED: float = 2
 # time over which the object initially lifts
 const FLOAT_FORCE: float = 8
+# maximum float height for larger objects
+const MAX_FLOAT_HEIGHT: float = 2
+# height object is lifted to when possessed, based on object height
+var float_height: float
 # for timing float effect oscillation
 @onready var float_time_offset: float = 0.0
 
@@ -50,6 +52,12 @@ func _ready() -> void:
 	$AttackRange.body_entered.connect(_on_player_entered_range)
 	$AttackRange.body_exited.connect(_on_player_exited_range)
 	
+	# set float height according to first MeshInstance3D child
+	var mesh_instance: MeshInstance3D = find_children("Mesh*", "MeshInstance3D")[0]
+	var object_height: float = mesh_instance.get_aabb().size.y
+	float_height = object_height * 4
+	clamp(float_height, object_height + FLOAT_RANGE, MAX_FLOAT_HEIGHT)
+	
 	# add self to possessables in room
 	room.add_possessable(self)
 
@@ -59,7 +67,7 @@ func _physics_process(delta: float) -> void:
 		# animate object to "float" in the air
 		float_time_offset += delta * FLOAT_SPEED
 		
-		var target_height: float = FLOAT_HEIGHT + FLOAT_RANGE * sin(float_time_offset)
+		var target_height: float = float_height + FLOAT_RANGE * sin(float_time_offset)
 		var current_height: float = global_transform.origin.y
 		var height_diff: float = target_height - current_height
 		
