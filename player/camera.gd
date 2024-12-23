@@ -12,9 +12,9 @@ from the Player node. Lerping in the opposite direction simulates the
 
 
 # speed camera follows the player at
-const LAG_STRENGTH: float = 8.0
+const LAG_STRENGTH: float = 4
 # max distance camera can lag behind
-const MAX_LAG_DISTANCE: float = 0.6
+const MAX_LAG_DISTANCE: float = 1
 
 @onready var player: CharacterBody3D = PlayerHandler.get_player()
 # rotation value of the parent RotationOffset (Marker3D) node
