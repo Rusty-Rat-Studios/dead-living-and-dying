@@ -71,9 +71,9 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		set_light_target_mouse()
 	elif (event.is_action_pressed("joy_right_x_left")
-	or event.is_action_pressed("joy_right_x_right")
-	or event.is_action_pressed("joy_right_y_up")
-	or event.is_action_pressed("joy_right_y_down")):
+		or event.is_action_pressed("joy_right_x_right")
+		or event.is_action_pressed("joy_right_y_up")
+		or event.is_action_pressed("joy_right_y_down")):
 		# enable detection of non-changing controller input
 		if joystick_timer.is_stopped():
 			joystick_timer.start()
