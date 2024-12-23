@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://mt6b5vxmupgn"]
+[gd_scene load_steps=6 format=3 uid="uid://mt6b5vxmupgn"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_ndccg"]
 [ext_resource type="Shape3D" uid="uid://d140c2qk5hbt2" path="res://player/player_collision_shape.tres" id="2_a56u6"]
 [ext_resource type="Texture2D" uid="uid://cey8vsju0vbgx" path="res://icon.svg" id="2_goh7u"]
+[ext_resource type="Script" path="res://player/camera.gd" id="4_mmf56"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3bb63"]
 radius = 0.804186
@@ -22,7 +23,8 @@ transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0)
 texture = ExtResource("2_goh7u")
 
 [node name="Camera3D" type="Camera3D" parent="RotationOffset"]
-transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, 2.98023e-08, 1, 0, 0, 10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.76837e-07, 10)
+script = ExtResource("4_mmf56")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
