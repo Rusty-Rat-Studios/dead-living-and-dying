@@ -1,10 +1,11 @@
-[gd_scene load_steps=21 format=3 uid="uid://dx3xbk4c7uji8"]
+[gd_scene load_steps=23 format=3 uid="uid://dx3xbk4c7uji8"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_77rk7"]
 [ext_resource type="PackedScene" uid="uid://mt6b5vxmupgn" path="res://player/player.tscn" id="1_hu241"]
 [ext_resource type="Script" path="res://base_classes/state_machine.gd" id="3_fg5sk"]
 [ext_resource type="Script" path="res://player/state_dead.gd" id="6_bheuf"]
 [ext_resource type="Script" path="res://player/state_living.gd" id="7_unc66"]
+[ext_resource type="Script" path="res://map/world_grid.gd" id="7_x3g7l"]
 [ext_resource type="Script" path="res://player/state_dying.gd" id="8_isvo6"]
 [ext_resource type="PackedScene" uid="uid://yihpxsaeuqdi" path="res://ghost/ghost.tscn" id="9_t4a6d"]
 [ext_resource type="PackedScene" uid="uid://b3nn5u3a5o85j" path="res://map/floor.tscn" id="10_44xgk"]
@@ -17,6 +18,8 @@
 [ext_resource type="PackedScene" uid="uid://bcep1wbs2caas" path="res://possessable/possessable.tscn" id="13_66ase"]
 [ext_resource type="PackedScene" uid="uid://dic5onsop66y4" path="res://ui/game_menu.tscn" id="13_owhbc"]
 [ext_resource type="PackedScene" uid="uid://bwmbngtw81o3y" path="res://ui/debug_console.tscn" id="15_rbtf5"]
+[ext_resource type="PackedScene" uid="uid://dh8q75xrlxeaa" path="res://map/basic_room.tscn" id="14_oubp1"]
+[ext_resource type="Script" path="res://map/basic_room.gd" id="16_d2f4o"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_eitr8"]
 radius = 2.0
@@ -69,6 +72,7 @@ state_living = NodePath("../Living")
 state_dying = NodePath(".")
 
 [node name="WorldGrid" type="Node3D" parent="."]
+script = ExtResource("7_x3g7l")
 
 [node name="RoomBottom" type="Node3D" parent="WorldGrid"]
 script = ExtResource("10_uwref")
@@ -252,22 +256,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, -4)
 [node name="Possessable" parent="WorldGrid/RoomRight" instance=ExtResource("13_66ase")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 
-[node name="RoomTop" type="Node3D" parent="WorldGrid"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -40)
-
-[node name="Floor" parent="WorldGrid/RoomTop" instance=ExtResource("10_44xgk")]
-
-[node name="WallWithDoor" parent="WorldGrid/RoomTop" instance=ExtResource("11_odxui")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9.95)
-
-[node name="WallWithoutDoor" parent="WorldGrid/RoomTop" instance=ExtResource("12_5tnol")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.95)
-
-[node name="WallWithoutDoor2" parent="WorldGrid/RoomTop" instance=ExtResource("12_5tnol")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.95, 0, 0)
-
-[node name="WallWithoutDoor3" parent="WorldGrid/RoomTop" instance=ExtResource("12_5tnol")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 9.95, 0, 0)
+[node name="RoomTop" parent="WorldGrid" instance=ExtResource("14_oubp1")]
+script = ExtResource("16_d2f4o")
+possible_door_locations = Array[Vector2]([Vector2(1, 0), Vector2(0, 1), Vector2(-1, 0), Vector2(0, -1)])
+room_shape = Array[Vector2]([Vector2(0, 0)])
 
 [node name="Shrine" parent="WorldGrid/RoomTop" instance=ExtResource("11_6msjq")]
 

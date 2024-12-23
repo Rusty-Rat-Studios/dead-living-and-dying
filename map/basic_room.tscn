@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dh8q75xrlxeaa"]
+
+[ext_resource type="PackedScene" uid="uid://b3nn5u3a5o85j" path="res://map/floor.tscn" id="2_8oby5"]
+
+[node name="BasicRoom" type="Node3D"]
+
+[node name="Floor" parent="." instance=ExtResource("2_8oby5")]
