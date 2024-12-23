@@ -1,8 +1,8 @@
 class_name BasicRoom
 extends Room
 
-const wall_without_door: Resource = preload("res://map/wall_without_door.tscn")
-const wall_with_door: Resource = preload("res://map/wall_with_door.tscn")
+const WALL_WITHOUT_DOOR: Resource = preload("res://map/wall_without_door.tscn")
+const WALL_WITH_DOOR: Resource = preload("res://map/wall_with_door.tscn")
 
 
 func _ready() -> void:
@@ -12,7 +12,6 @@ func _ready() -> void:
 func generate_walls_and_doors() -> void:
 	var grid_locations: Dictionary = world_grid.get_grid_dict()
 	var translated_possible_door_locations: Array[Vector2] = get_translated_possible_door_locations()
-	print(grid_locations)
 	for loc: Vector2 in translated_possible_door_locations:
 		var is_door_location: bool = grid_locations.has(loc)
 		var untranslated_location: Vector2 = loc - grid_location
@@ -25,9 +24,9 @@ func generate_walls_and_doors() -> void:
 func generate_horizontal_wall_or_door(loc: Vector2, is_door_location: bool) -> void:
 	var obj: Node3D
 	if is_door_location:
-		obj = wall_with_door.instantiate()
+		obj = WALL_WITH_DOOR.instantiate()
 	else:
-		obj = wall_without_door.instantiate()
+		obj = WALL_WITHOUT_DOOR.instantiate()
 	obj.translate_object_local(Vector3(0, 0, loc.y) * 9.95)
 	add_child(obj)
 
@@ -35,9 +34,9 @@ func generate_horizontal_wall_or_door(loc: Vector2, is_door_location: bool) -> v
 func generate_vertical_wall_or_door(loc: Vector2, is_door_location: bool) -> void:
 	var obj: Node3D
 	if is_door_location:
-		obj = wall_with_door.instantiate()
+		obj = WALL_WITH_DOOR.instantiate()
 	else:
-		obj = wall_without_door.instantiate()
+		obj = WALL_WITHOUT_DOOR.instantiate()
 	obj.translate_object_local(Vector3(loc.x, 0, 0) * 9.95)
 	obj.rotate_y(deg_to_rad(90))
 	add_child(obj)
