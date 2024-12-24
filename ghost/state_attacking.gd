@@ -9,8 +9,16 @@ func _ready() -> void:
 
 
 func enter() -> void:
+	# guard to ensure player is in room and DEAD when entering attack state
+	if not (parent.player_in_room and PlayerHandler.get_player_state() == "Dead"):
+		parent.state_machine.change_state(state_waiting)
+		return
 	super()
-	parent.speed = 8.0
+	parent.speed = 7.0
+
+
+func exit() -> void:
+	super()
 
 
 func process_physics(delta: float) -> State:
