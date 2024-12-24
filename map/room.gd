@@ -1,9 +1,9 @@
 class_name Room
 extends Node3D
 
-# Set through the editor
-@export var possible_door_locations: Array[Vector2] = []
+# Set via editor
 @export var room_shape: Array[Vector2] = []
+@export var possible_door_locations: Array[Vector2] = []
 
 var grid_location: Vector2
 var possessables_available: Array
@@ -18,12 +18,12 @@ func _ready() -> void:
 	$Floor/PlayerDetector.body_exited.connect(_on_player_exited_room)
 	
 	
-func init(grid_location: Vector2) -> void:
+func init(grid_location: Vector2, grid_scale: float) -> void:
 	self.grid_location = grid_location
-	var grid_scale: float = world_grid.get_grid_scale()
 	var room_location: Vector3 = Vector3(grid_location.x * grid_scale, 0, 
-										grid_location.y * grid_scale)
+		grid_location.y * grid_scale)
 	global_translate(room_location)
+	generate_walls_and_doors()
 
 
 func add_possessable(possessable: Possessable) -> void:

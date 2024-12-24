@@ -1,7 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://dh8q75xrlxeaa"]
+[gd_scene load_steps=3 format=3 uid="uid://dh8q75xrlxeaa"]
 
+[ext_resource type="Script" path="res://map/basic_room.gd" id="1_xo7g0"]
 [ext_resource type="PackedScene" uid="uid://b3nn5u3a5o85j" path="res://map/floor.tscn" id="2_8oby5"]
 
 [node name="BasicRoom" type="Node3D"]
+script = ExtResource("1_xo7g0")
+room_shape = Array[Vector2]([Vector2(0, 0)])
+possible_door_locations = Array[Vector2]([Vector2(1, 0), Vector2(0, 1), Vector2(-1, 0), Vector2(0, -1)])
 
 [node name="Floor" parent="." instance=ExtResource("2_8oby5")]
