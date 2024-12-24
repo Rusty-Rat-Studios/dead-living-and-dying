@@ -1,8 +1,8 @@
 class_name BasicRoom
 extends Room
 
-const WALL_WITHOUT_DOOR: Resource = preload("res://map/wall_without_door.tscn")
-const WALL_WITH_DOOR: Resource = preload("res://map/wall_with_door.tscn")
+const WALL_WITHOUT_DOOR: Resource = preload("res://map/basic_room/wall_without_door.tscn")
+const WALL_WITH_DOOR: Resource = preload("res://map/basic_room/wall_with_door.tscn")
 
 
 func generate_walls_and_doors() -> void:

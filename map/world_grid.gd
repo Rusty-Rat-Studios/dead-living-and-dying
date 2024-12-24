@@ -1,7 +1,8 @@
 extends Node3D
 
 const GRID_SCALE: float = 20 # Size of each grid square in editor units
-const BASIC_ROOM: Resource = preload("res://map/basic_room.tscn")
+
+var basic_room: RoomInformation = Rooms.get_basic_room_information()
 
 @onready var grid: Dictionary = {}
 
@@ -12,11 +13,11 @@ func _ready() -> void:
 
 func generate_grid() -> void:
 	# Currently hardcoded to generate the default 5 rooms
-	add_room(BASIC_ROOM.instantiate(), Vector2(0, 0))
-	add_room(BASIC_ROOM.instantiate(), Vector2(0, -1))
-	add_room(BASIC_ROOM.instantiate(), Vector2(0, -2))
-	add_room(BASIC_ROOM.instantiate(), Vector2(-1, -1))
-	add_room(BASIC_ROOM.instantiate(), Vector2(1, -1))
+	add_room(basic_room.resource.instantiate(), Vector2(0, 0))
+	add_room(basic_room.resource.instantiate(), Vector2(0, -1))
+	add_room(basic_room.resource.instantiate(), Vector2(0, -2))
+	add_room(basic_room.resource.instantiate(), Vector2(-1, -1))
+	add_room(basic_room.resource.instantiate(), Vector2(1, -1))
 	init_all_rooms()
 
 
