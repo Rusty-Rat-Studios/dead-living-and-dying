@@ -6,13 +6,21 @@ extends Node3D
 @onready var state_machine: Node = $StateMachine
 @onready var player: Player = $Player
 @onready var light_directional: DirectionalLight3D = $DirectionalLight3D
+@onready var corpse: Area3D = preload("res://player/corpse.tscn").instantiate()
+@onready var default_shrine: Shrine = $World/RoomBottom/Shrine
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Initialize player
-	# pass reference of state machine to the player
-	player.init($StateMachine)
+	# pass reference of state machine, default shrine, and corpse
+	# to be controlled by player
+	player.init($StateMachine, default_shrine, corpse)
+	default_shrine.default = true
+	default_shrine.activate()
+	# add corpse to scene as sibling of player
+	# corpse deactivates on initialization - invisible with no collision
+	add_child(corpse)
 	
 	# Initialize state machine
 	# pass reference of the player to the states
@@ -50,8 +58,15 @@ func reset() -> void:
 	for possessable: Possessable in possessables:
 		possessable.reset()
 	
+	# reset all shrines
+	var shrines: Array = find_children("Shrine*", "Shrine")
+	for shrine: Shrine in shrines:
+		shrine.reset()
+	
 	# reset player
 	player.reset()
+	# reset corpse
+	corpse.reset()
 
 
 func _on_player_state_changed(state_name: String) -> void:
