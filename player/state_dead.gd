@@ -58,9 +58,8 @@ func move_to_shrine() -> void:
 	
 	var tween: Tween = get_tree().create_tween()
 	# move corpse towards shrine over RESPAWN_TIME duration
-	tween.tween_property(parent, "global_position", target_shrine.global_position, RESPAWN_TIME)
-	# set movement pattern to cubic - accelerate and decelerate and start/finish
-	tween.set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(parent, "global_position", target_shrine.global_position, 
+		RESPAWN_TIME).set_trans(Tween.TRANS_CUBIC)
 	# wait for tween to finish before reactivating collision layers
 	await get_tree().create_timer(RESPAWN_TIME).timeout
 	# consume shrine (note: does not consume default shrine)
