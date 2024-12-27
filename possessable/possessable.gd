@@ -105,6 +105,8 @@ func possess() -> void:
 	# check if player in range on initial possession
 	if $AttackRange.overlaps_body(PlayerHandler.get_player()):
 		player_in_range = true
+	
+	$GPUParticles3D.emitting = true
 
 
 func depossess() -> void:
@@ -114,6 +116,8 @@ func depossess() -> void:
 	$AttackRange.collision_mask = 0
 	is_possessed = false
 	player_in_range = false
+	
+	$GPUParticles3D.emitting = false
 
 
 func attack(target: Node3D) -> void:

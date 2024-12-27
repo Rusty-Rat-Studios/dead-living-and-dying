@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://dx3xbk4c7uji8"]
+[gd_scene load_steps=30 format=3 uid="uid://dx3xbk4c7uji8"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_77rk7"]
 [ext_resource type="PackedScene" uid="uid://mt6b5vxmupgn" path="res://player/player.tscn" id="1_hu241"]
@@ -43,6 +43,23 @@ radius = 8.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_58kmd"]
 size = Vector3(4.2, 4.2, 4.2)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k0ubd"]
+emission_shape = 3
+emission_box_extents = Vector3(0.25, 0.25, 0.25)
+direction = Vector3(0, -1, 0)
+spread = 180.0
+initial_velocity_max = 0.5
+gravity = Vector3(0, 0.5, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vf7g7"]
+transparency = 1
+albedo_color = Color(0.513726, 0, 0.662745, 0.352941)
+
+[sub_resource type="SphereMesh" id="SphereMesh_oprga"]
+material = SubResource("StandardMaterial3D_vf7g7")
+radius = 0.05
+height = 0.1
 
 [sub_resource type="BoxMesh" id="BoxMesh_lk3ck"]
 material = SubResource("StandardMaterial3D_kvr7m")
@@ -278,6 +295,11 @@ collision_mask = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/RoomRight/Possessable/Hurtbox"]
 shape = SubResource("BoxShape3D_58kmd")
 
+[node name="GPUParticles3D" type="GPUParticles3D" parent="World/RoomRight/Possessable"]
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_k0ubd")
+draw_pass_1 = SubResource("SphereMesh_oprga")
+
 [node name="Possessable2" type="RigidBody3D" parent="World/RoomRight"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 3)
 collision_layer = 4
@@ -304,6 +326,11 @@ collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/RoomRight/Possessable2/Hurtbox"]
 shape = SubResource("BoxShape3D_f8crx")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="World/RoomRight/Possessable2"]
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_k0ubd")
+draw_pass_1 = SubResource("SphereMesh_oprga")
 
 [node name="GhostRight1" parent="World/RoomRight" instance=ExtResource("9_t4a6d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 0)
