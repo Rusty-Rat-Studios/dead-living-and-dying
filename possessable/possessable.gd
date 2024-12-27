@@ -22,16 +22,14 @@ const THROW_FORCE: float = 25.0
 # speed threshold for enabling/disabling hurtbox
 const DAMAGE_VELOCITY: float = 2.0
 
-# height object rises/falls to while possessed
+# RANGE object rises/falls while possessed
 const FLOAT_RANGE: float = 0.2
 # speed at which the object oscillates
 const FLOAT_SPEED: float = 2
-# time over which the object initially lifts
-const FLOAT_FORCE: float = 8
-# maximum float height for larger objects
-const MAX_FLOAT_HEIGHT: float = 2
-# height object is lifted to when possessed, based on object height
-var float_height: float
+# scalar for speed that the object is lifted
+const FLOAT_FORCE: float = 4
+# target height for possessed objects to float to
+const FLOAT_HEIGHT: float = 3
 # for timing float effect oscillation
 @onready var float_time_offset: float = 0.0
 
@@ -52,34 +50,35 @@ func _ready() -> void:
 	$AttackRange.body_entered.connect(_on_player_entered_range)
 	$AttackRange.body_exited.connect(_on_player_exited_range)
 	
-	# set float height according to first MeshInstance3D child
-	var mesh_instance: MeshInstance3D = find_children("Mesh*", "MeshInstance3D")[0]
-	var object_height: float = mesh_instance.get_aabb().size.y
-	float_height = object_height * 4
-	clamp(float_height, object_height + FLOAT_RANGE, MAX_FLOAT_HEIGHT)
-	
 	# add self to possessables in room
 	room.add_possessable(self)
 
 
 func _physics_process(delta: float) -> void:
+	# animate object to "float" in the air
 	if is_possessed:
-		# animate object to "float" in the air
+		# record time difference of how far the object should have floated
+		# up-and-down (FLOAT_RANGE) at it's peak height (float_height)
 		float_time_offset += delta * FLOAT_SPEED
 		
-		var target_height: float = float_height + FLOAT_RANGE * sin(float_time_offset)
-		var current_height: float = global_transform.origin.y
+		# add default on-the-floor height to floating height and add an
+		# oscillating sine component to float above/below target height
+		var target_height: float = starting_position.y + FLOAT_HEIGHT + FLOAT_RANGE * sin(float_time_offset)
+		var current_height: float = position.y
 		var height_diff: float = target_height - current_height
 		
 		# ensure no "downward" velocity applies; let gravity do it
 		if height_diff > 0:
+			# increase velocity exponentially proportional to the target/current height difference
+			# --- higher increase if far from target, smaller increase if close to target
 			linear_velocity.y = lerp(linear_velocity.y, height_diff * FLOAT_FORCE, delta)
 
 
 func _integrate_forces(_state: PhysicsDirectBodyState3D) -> void:
+	# if object has been thrown, thus depossessed, it should not be possessable
+	# again until object has slowed down enough
 	if not is_possessable and linear_velocity.length() < DAMAGE_VELOCITY:
-		# once object has slowed down enough
-		#disable hurtbox
+		# disable hurtbox when slow enough
 		$Hurtbox.collision_layer = 0
 		# set flag to allow possession again
 		is_possessable = true
@@ -88,8 +87,8 @@ func _integrate_forces(_state: PhysicsDirectBodyState3D) -> void:
 func reset() -> void:
 	# return to starting position and depossess if necessary
 	position = starting_position
-	# check required because of room add/remove possessable side
-	# effect of calling possess()/depossess()
+	# is_possessed check required because a side effect of calling possess()/depossess()
+	# adds or removes the possessable from the room's array of available possessables
 	if is_possessed:
 		depossess()
 
