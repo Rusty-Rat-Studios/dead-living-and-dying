@@ -27,7 +27,7 @@ const FLOAT_RANGE: float = 0.2
 # speed at which the object oscillates
 const FLOAT_SPEED: float = 2
 # scalar for speed that the object is lifted
-const FLOAT_FORCE: float = 4
+const FLOAT_FORCE: float = 1.8
 # target height for possessed objects to float to
 const FLOAT_HEIGHT: float = 3
 # for timing float effect oscillation
@@ -54,12 +54,20 @@ func _ready() -> void:
 	room.add_possessable(self)
 
 
-func _physics_process(delta: float) -> void:
+func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
+	# if object has been thrown, thus depossessed, it should not be possessable
+	# again until object has slowed down enough
+	if not is_possessable and linear_velocity.length() < DAMAGE_VELOCITY:
+		# disable hurtbox when slow enough
+		$Hurtbox.collision_layer = 0
+		# set flag to allow possession again
+		is_possessable = true
+	
 	# animate object to "float" in the air
 	if is_possessed:
 		# record time difference of how far the object should have floated
 		# up-and-down (FLOAT_RANGE) at it's peak height (float_height)
-		float_time_offset += delta * FLOAT_SPEED
+		float_time_offset += state.step * FLOAT_SPEED
 		
 		# add default on-the-floor height to floating height and add an
 		# oscillating sine component to float above/below target height
@@ -71,17 +79,7 @@ func _physics_process(delta: float) -> void:
 		if height_diff > 0:
 			# increase velocity exponentially proportional to the target/current height difference
 			# --- higher increase if far from target, smaller increase if close to target
-			linear_velocity.y = lerp(linear_velocity.y, height_diff * FLOAT_FORCE, delta)
-
-
-func _integrate_forces(_state: PhysicsDirectBodyState3D) -> void:
-	# if object has been thrown, thus depossessed, it should not be possessable
-	# again until object has slowed down enough
-	if not is_possessable and linear_velocity.length() < DAMAGE_VELOCITY:
-		# disable hurtbox when slow enough
-		$Hurtbox.collision_layer = 0
-		# set flag to allow possession again
-		is_possessable = true
+			state.linear_velocity.y = lerp(state.linear_velocity.y, height_diff**2 * FLOAT_FORCE, state.step)
 
 
 func reset() -> void:
@@ -107,6 +105,9 @@ func possess() -> void:
 		player_in_range = true
 	
 	$GPUParticles3D.emitting = true
+	
+	#"bump" object to bring integrate_forces() out of sleep
+	apply_central_impulse(Vector3.ZERO)
 
 
 func depossess() -> void:
