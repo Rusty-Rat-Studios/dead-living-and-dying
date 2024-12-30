@@ -50,6 +50,10 @@ func _process(delta: float) -> void:
 	global_position = global_position.lerp(lag_target, LAG_STRENGTH * delta)
 
 
+func reset() -> void:
+	position = initial_position
+
+
 func enable() -> void:
 	# enable _process() function
 	set_process(true)
