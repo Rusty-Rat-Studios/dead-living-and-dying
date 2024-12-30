@@ -98,7 +98,7 @@ func possess() -> void:
 	# to disallow other ghosts to set it as a target
 	room.remove_possessable(self)
 	# signal to ghosts on the way to target it that it has been taken
-	emit_signal("possessed")
+	possessed.emit()
 	# enable player detection
 	$AttackRange.collision_mask = CollisionBit.PLAYER
 	is_possessed = true

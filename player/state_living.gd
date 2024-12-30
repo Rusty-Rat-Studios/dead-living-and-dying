@@ -9,7 +9,7 @@ func enter() -> void:
 	parent.get_node("RotationOffset/Sprite3D").modulate = Color(0.5, 1, 0.5)
 	
 	SignalBus.player_hurt.connect(_on_player_hurt)
-	SignalBus.emit_signal("player_state_changed", "Living")
+	SignalBus.player_state_changed.emit("Living")
 	
 	# adjust light strength
 	parent.light_omni.omni_range = 6

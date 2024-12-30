@@ -196,7 +196,7 @@ func rotate_to_target(delta: float) -> void:
 
 func hit() -> void:
 	# pass signal for state-specific behavior
-	SignalBus.emit_signal("player_hurt")
+	SignalBus.player_hurt.emit()
 
 
 # utility function for activating i-frames, can be called separately

@@ -25,4 +25,4 @@ func deactivate() -> void:
 func _on_body_entered(body: Node3D) -> void:
 	if body == PlayerHandler.get_player():
 		deactivate()
-		SignalBus.emit_signal("player_revived", global_position)
+		SignalBus.player_revived.emit(global_position)
