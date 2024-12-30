@@ -51,12 +51,12 @@ func _process(delta: float) -> void:
 
 
 func enable() -> void:
-	# enable process function
+	# enable _process() function
 	set_process(true)
 
 
 func disable() -> void:
 	# tween to position centered on character
 	get_tree().create_tween().tween_property(self, "position", initial_position, RESET_TIME)
-	# disable _process function
+	# disable _process() function
 	set_process(false)
