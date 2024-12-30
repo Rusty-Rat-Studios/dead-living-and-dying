@@ -67,12 +67,13 @@ func _ready() -> void:
 	joystick_timer.timeout.connect(_on_joystick_timer_timeout)
 
 
-func init(state_machine: Node, shrine: Shrine, corpse: Corpse) -> void:
-	self.state_machine = state_machine
+# 'p_' prefix used to avoid "shadowing" warnings about matching variable names 
+func init(p_state_machine: Node, shrine: Shrine, p_corpse: Corpse) -> void:
+	self.state_machine = p_state_machine
 	# add default shrine to active shrines
 	active_shrines.append(shrine)
 	# set reference to player corpse
-	self.corpse = corpse
+	self.corpse = p_corpse
 
 
 func reset() -> void:
