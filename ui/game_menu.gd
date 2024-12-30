@@ -1,5 +1,8 @@
 extends Control
 
+# time that the game waits before continuing on game over
+const GAME_OVER_DELAY: float = 2.0
+
 var scene: PackedScene
 
 func _ready() -> void:
@@ -43,7 +46,7 @@ func _on_game_over() -> void:
 	pause()
 	$VBoxContainer.hide()
 	$Message.text = "Game Over"
-	await get_tree().create_timer(2.0).timeout
+	await Utility.delay(GAME_OVER_DELAY)
 	$VBoxContainer.show()
 	$Message.text = ""
 	$VBoxContainer/Start.text = "START"
