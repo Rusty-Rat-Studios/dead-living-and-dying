@@ -74,13 +74,7 @@ func set_closest_target() -> void:
 		return
 	
 	# find nearest possessable and set it as target
-	var target_distance: float = INF
-	for p: Possessable in possessables:
-		# use squared distance because it computes fast
-		var distance_sq: float = parent.global_position.distance_squared_to(p.global_position)
-		if distance_sq < target_distance:
-			target_possessable = p
-			target_distance = distance_sq
+	target_possessable = Utility.find_closest(possessables, parent.global_position)
 	
 	# set ghost target to closest possessable position
 	parent.target_pos = target_possessable.global_position

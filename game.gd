@@ -46,23 +46,12 @@ func reset() -> void:
 	# of all nodes in the entire scene with name matching pattern string
 	# and type matching type string
 		# Note: wildcard '*' used to select any node starting with "NodeName[xyz]"
-		# e.g. GhostLeft2, GhostRight1, Possessable12, etc
+		# e.g. Ghost* gets GhostLeft1, GhostLeft2, GhostRight1, etc
 	
-	# reset all ghosts
-	var ghosts: Array = find_children("Ghost*", "Ghost")
-	for ghost: Ghost in ghosts:
-		ghost.reset()
-	
-	# reset all possessables
-	var possessables: Array = find_children("Possessable*", "Possessable")
-	for possessable: Possessable in possessables:
-		possessable.reset()
-	
-	# reset all shrines
-	var shrines: Array = find_children("Shrine*", "Shrine")
-	for shrine: Shrine in shrines:
-		shrine.reset()
-	
+	# reset all ghosts, possessables, shrines
+	Utility.call_for_each(find_children("Ghost*", "Ghost"), "reset")
+	Utility.call_for_each(find_children("Possessable*", "Possessable"), "reset")
+	Utility.call_for_each(find_children("Shrine*", "Shrine"), "reset")
 	# reset player
 	player.reset()
 	# reset corpse

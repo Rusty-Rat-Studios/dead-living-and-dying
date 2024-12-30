@@ -50,18 +50,14 @@ func move_to_shrine() -> void:
 	
 	# find and move player to closest active shrine
 	var target_shrine: Shrine = parent.active_shrines[0]
-	for shrine: Shrine in parent.active_shrines:
-		# use squared distance because it computes fast
-		var distance_sq: float = parent.global_position.distance_squared_to(shrine.global_position)
-		if distance_sq < parent.global_position.distance_squared_to(target_shrine.global_position):
-			target_shrine = shrine
+	target_shrine = Utility.find_closest(parent.active_shrines, parent.global_position)
 	
 	var tween: Tween = get_tree().create_tween()
 	# move corpse towards shrine over RESPAWN_TIME duration
 	tween.tween_property(parent, "global_position", target_shrine.global_position, 
 		RESPAWN_TIME).set_trans(Tween.TRANS_CUBIC)
 	# wait for tween to finish before reactivating collision layers
-	await get_tree().create_timer(RESPAWN_TIME).timeout
+	await Utility.delay(RESPAWN_TIME)
 	# consume shrine (note: does not consume default shrine)
 	target_shrine.consume()
 	
