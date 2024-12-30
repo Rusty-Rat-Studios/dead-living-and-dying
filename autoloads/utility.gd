@@ -1,8 +1,8 @@
 extends Node
 
 
-func delay(time: float) -> void:
-	await get_tree().create_timer(time)
+func delay(time: float) -> Signal:
+	return get_tree().create_timer(time).timeout
 
 
 func find_closest(list: Array, global_pos: Vector3) -> Node:
@@ -16,6 +16,10 @@ func find_closest(list: Array, global_pos: Vector3) -> Node:
 	return closest
 
 
-func call_for_each(list: Array, function: Callable) -> void:
+func call_for_each(list: Array, function: String) -> void:
 	for item: Node in list:
-		function.call(item)
+		if item.has_method(function):
+			item.call(function)
+		else:
+			print(Time.get_time_string_from_system(), ": ERROR: ", self.script.get_path(),
+			" non-existant function ", function, " called for Node ", item)
