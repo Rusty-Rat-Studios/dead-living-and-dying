@@ -21,6 +21,9 @@ signal possessed
 const THROW_FORCE: float = 25.0
 # speed threshold for enabling/disabling hurtbox
 const DAMAGE_VELOCITY: float = 2.0
+# speed threshold for slowing down possessable when bumped while possessed
+# used to avoid "floating away"
+const SPEED_THRESHOLD: float = 1
 
 # RANGE object rises/falls while possessed
 const FLOAT_RANGE: float = 0.2
@@ -80,6 +83,13 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 			# increase velocity exponentially proportional to the target/current height difference
 			# --- higher increase if far from target, smaller increase if close to target
 			state.linear_velocity.y = lerp(state.linear_velocity.y, height_diff**2 * FLOAT_FORCE, state.step)
+		
+		# get magnitude of xz-plane velocity
+		var speed: float = Vector3(state.linear_velocity.x, 0, state.linear_velocity.z).length()
+		# slow down possessed object if it is travelling above a given speed
+		if speed > SPEED_THRESHOLD:
+			state.linear_velocity.x = lerp(state.linear_velocity.x, 0.0, state.step)
+			state.linear_velocity.z = lerp(state.linear_velocity.z, 0.0, state.step)
 
 
 func reset() -> void:
