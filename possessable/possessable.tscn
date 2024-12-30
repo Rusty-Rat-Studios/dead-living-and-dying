@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bcep1wbs2caas"]
+[gd_scene load_steps=10 format=3 uid="uid://bcep1wbs2caas"]
 
 [ext_resource type="Script" path="res://possessable/possessable.gd" id="1_4ebmk"]
 
@@ -17,6 +17,24 @@ radius = 8.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_iv7gq"]
 size = Vector3(0.6, 0.6, 0.6)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rvnlq"]
+emission_shape = 3
+emission_box_extents = Vector3(0.25, 0.25, 0.25)
+direction = Vector3(0, -1, 0)
+spread = 180.0
+initial_velocity_min = 0.2
+initial_velocity_max = 0.5
+gravity = Vector3(0, 0.5, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mep00"]
+transparency = 1
+albedo_color = Color(0.513726, 0, 0.662745, 0.352941)
+
+[sub_resource type="SphereMesh" id="SphereMesh_218we"]
+material = SubResource("StandardMaterial3D_mep00")
+radius = 0.05
+height = 0.1
 
 [node name="Possessable" type="RigidBody3D"]
 collision_layer = 4
@@ -43,3 +61,9 @@ collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
 shape = SubResource("BoxShape3D_iv7gq")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_rvnlq")
+draw_pass_1 = SubResource("SphereMesh_218we")
