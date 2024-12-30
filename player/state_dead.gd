@@ -56,12 +56,17 @@ func move_to_shrine() -> void:
 		if distance_sq < parent.global_position.distance_squared_to(target_shrine.global_position):
 			target_shrine = shrine
 	
+	
+	# disable camera lagging for duration of motion
+	parent.camera.disable()
 	var tween: Tween = get_tree().create_tween()
 	# move corpse towards shrine over RESPAWN_TIME duration
 	tween.tween_property(parent, "global_position", target_shrine.global_position, 
 		RESPAWN_TIME).set_trans(Tween.TRANS_CUBIC)
 	# wait for tween to finish before reactivating collision layers
 	await get_tree().create_timer(RESPAWN_TIME).timeout
+	
+	parent.camera.enable()
 	# consume shrine (note: does not consume default shrine)
 	target_shrine.consume()
 	

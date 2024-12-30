@@ -15,8 +15,11 @@ from the Player node. Lerping in the opposite direction simulates the
 const LAG_STRENGTH: float = 4
 # max distance camera can lag behind
 const MAX_LAG_DISTANCE: float = 1
+# time it takes to reset camera to center when disabled
+const RESET_TIME: float = 0.2
 
 @onready var player: CharacterBody3D = PlayerHandler.get_player()
+@onready var initial_position: Vector3 = position
 # rotation value of the parent RotationOffset (Marker3D) node
 @onready var rotation_offset: float = get_parent().rotation.x
 # global-space camera position offset from player position
@@ -45,3 +48,15 @@ func _process(delta: float) -> void:
 
 	# lerp camera position towards the lag target
 	global_position = global_position.lerp(lag_target, LAG_STRENGTH * delta)
+
+
+func enable() -> void:
+	# enable process function
+	set_process(true)
+
+
+func disable() -> void:
+	# tween to position centered on character
+	get_tree().create_tween().tween_property(self, "position", initial_position, RESET_TIME)
+	# disable _process function
+	set_process(false)
