@@ -28,10 +28,10 @@ func remove_possessable(possessable: Possessable) -> void:
 func _on_player_entered_room(body: Node3D) -> void:
 	if body == PlayerHandler.get_player():
 		player_in_room = true
-		SignalBus.emit_signal("player_entered_room", self)
+		SignalBus.player_entered_room.emit(self)
 
 
 func _on_player_exited_room(body: Node3D) -> void:
 	if body == PlayerHandler.get_player():
 		player_in_room = false
-		SignalBus.emit_signal("player_exited_room", self)
+		SignalBus.player_exited_room.emit(self)

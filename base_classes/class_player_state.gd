@@ -7,16 +7,12 @@ extends State
 
 @export var speed: float = 6.0
 
-#@export var animation_name: String
-
 # reference to player passed into states to allow state-based control
 var parent: Player
 
 func enter() -> void:
-	#parent.animations.play(animation_name)
 	pass
 
 
-# gdlint:ignore = unused-argument
-func process_input(event: InputEvent) -> State:
+func process_input(_event: InputEvent) -> State:
 	return null

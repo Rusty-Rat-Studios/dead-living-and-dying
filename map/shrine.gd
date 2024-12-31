@@ -37,7 +37,7 @@ func activate() -> void:
 	activated = true
 	material.albedo_color = color_active
 	$Label3D.text = "SHRINE\r---ACTIVE---\nYou will revive here if this\ris the closest shrine"
-	SignalBus.emit_signal("activated_shrine", self)
+	SignalBus.activated_shrine.emit(self)
 
 
 func consume() -> void:
@@ -45,7 +45,7 @@ func consume() -> void:
 		consumed = true
 		material.albedo_color = color_consumed
 		$Label3D.text = "SHRINE\r---CONSUMED---\nThis shrine cannot\rbe used anymore"
-		SignalBus.emit_signal("consumed_shrine", self)
+		SignalBus.consumed_shrine.emit(self)
 
 
 func _on_body_entered(_body: Node3D) -> void:

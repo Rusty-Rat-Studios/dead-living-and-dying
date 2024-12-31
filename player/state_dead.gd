@@ -11,7 +11,7 @@ func enter() -> void:
 	
 	SignalBus.player_hurt.connect(_on_player_hurt)
 	SignalBus.player_revived.connect(_on_player_revived)
-	SignalBus.emit_signal("player_state_changed", "Dead")
+	SignalBus.player_state_changed.emit("Dead")
 	
 	move_to_shrine()
 
@@ -74,7 +74,7 @@ func move_to_shrine() -> void:
 
 
 func _on_player_hurt() -> void:
-	SignalBus.emit_signal("game_over")
+	SignalBus.game_over.emit()
 
 
 func _on_player_revived(corpse_global_position: Vector3) -> void:

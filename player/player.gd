@@ -68,10 +68,12 @@ func _ready() -> void:
 
 
 func init(state_machine: Node, shrine: Shrine, corpse: Corpse) -> void:
+	@warning_ignore("shadowed_variable")
 	self.state_machine = state_machine
 	# add default shrine to active shrines
 	active_shrines.append(shrine)
 	# set reference to player corpse
+	@warning_ignore("shadowed_variable")
 	self.corpse = corpse
 
 
@@ -199,7 +201,7 @@ func rotate_to_target(delta: float) -> void:
 
 func hit() -> void:
 	# pass signal for state-specific behavior
-	SignalBus.emit_signal("player_hurt")
+	SignalBus.player_hurt.emit()
 
 
 # utility function for activating i-frames, can be called separately

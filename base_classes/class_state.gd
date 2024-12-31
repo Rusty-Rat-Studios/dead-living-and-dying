@@ -10,10 +10,9 @@ func exit() -> void:
 	pass
 
 
-# gdlint:ignore = unused-argument
-func process_frame(delta: float) -> State:
+func process_frame(_delta: float) -> State:
 	return null
 
-# gdlint:ignore = unused-argument
-func process_physics(delta: float) -> State:
+
+func process_physics(_delta: float) -> State:
 	return null
