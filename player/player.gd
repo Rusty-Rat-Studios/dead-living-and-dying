@@ -67,7 +67,7 @@ func _ready() -> void:
 	joystick_timer.timeout.connect(_on_joystick_timer_timeout)
 
 
-func init(p_state_machine: Node, shrine: Shrine, corpse: Corpse) -> void:
+func init(state_machine: Node, shrine: Shrine, corpse: Corpse) -> void:
 	@warning_ignore("shadowed_variable")
 	self.state_machine = state_machine
 	# add default shrine to active shrines
