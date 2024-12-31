@@ -6,6 +6,8 @@ const DECISION_TIME: float = 3.0
 const ATTACK_CHANCE: float = 0.67
 # used to determine whether ghost depossesses
 const DEPOSSESS_CHANCE: float = 0.33
+# short delay for the ghost to wait when failing to possess an object
+const TARGET_RESET_DELAY: float = 0.1
 
 var target_possessable: Possessable
 # possessable detector
@@ -74,13 +76,7 @@ func set_closest_target() -> void:
 		return
 	
 	# find nearest possessable and set it as target
-	var target_distance: float = INF
-	for p: Possessable in possessables:
-		# use squared distance because it computes fast
-		var distance_sq: float = parent.global_position.distance_squared_to(p.global_position)
-		if distance_sq < target_distance:
-			target_possessable = p
-			target_distance = distance_sq
+	target_possessable = Utility.find_closest(possessables, parent.global_position)
 	
 	# set ghost target to closest possessable position
 	parent.target_pos = target_possessable.global_position
@@ -95,7 +91,7 @@ func set_closest_target() -> void:
 			# will likely follow the same target, but either wait until it 
 			# is possessable again or until it is farther than another target
 			# -- use slight delay to minimize repeated checks on closest target
-			await get_tree().create_timer(0.1).timeout
+			await Utility.delay(TARGET_RESET_DELAY)
 			set_closest_target()
 			return
 	else:

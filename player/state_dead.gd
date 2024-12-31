@@ -50,11 +50,7 @@ func move_to_shrine() -> void:
 	
 	# find and move player to closest active shrine
 	var target_shrine: Shrine = parent.active_shrines[0]
-	for shrine: Shrine in parent.active_shrines:
-		# use squared distance because it computes fast
-		var distance_sq: float = parent.global_position.distance_squared_to(shrine.global_position)
-		if distance_sq < parent.global_position.distance_squared_to(target_shrine.global_position):
-			target_shrine = shrine
+	target_shrine = Utility.find_closest(parent.active_shrines, parent.global_position)
 	
 	# disable camera lagging for duration of motion
 	parent.camera.disable()
@@ -62,12 +58,13 @@ func move_to_shrine() -> void:
 	# move corpse towards shrine over RESPAWN_TIME duration
 	tween.tween_property(parent, "global_position", target_shrine.global_position, 
 		RESPAWN_TIME).set_trans(Tween.TRANS_CUBIC)
-	# wait for tween to finish before reactivating collision layers and camera
-	await get_tree().create_timer(RESPAWN_TIME).timeout
-	
+
+  # wait for tween to finish before reactivating collision layers and camera
+	await Utility.delay(RESPAWN_TIME)
+
 	# re-enable camera lagging
 	parent.camera.enable()
-	# consume shrine (note: does not consume default shrine)
+  # consume shrine (note: does not consume default shrine)
 	target_shrine.consume()
 	
 	# enable collision layers for spirit plane
