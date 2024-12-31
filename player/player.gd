@@ -67,13 +67,14 @@ func _ready() -> void:
 	joystick_timer.timeout.connect(_on_joystick_timer_timeout)
 
 
-# 'p_' prefix used to avoid "shadowing" warnings about matching variable names 
-func init(p_state_machine: Node, shrine: Shrine, p_corpse: Corpse) -> void:
-	self.state_machine = p_state_machine
+func init(p_state_machine: Node, shrine: Shrine, corpse: Corpse) -> void:
+	@warning_ignore("shadowed_variable")
+	self.state_machine = state_machine
 	# add default shrine to active shrines
 	active_shrines.append(shrine)
 	# set reference to player corpse
-	self.corpse = p_corpse
+	@warning_ignore("shadowed_variable")
+	self.corpse = corpse
 
 
 func reset() -> void:
