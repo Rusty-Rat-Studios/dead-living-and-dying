@@ -81,12 +81,16 @@ func reset() -> void:
 	hit_cooldown_active = false
 	$HitCooldown.stop()
 	$HitFlash.stop()
+	
 	# store reference to default shrine before clearing list
 	var default_shrine: Shrine = active_shrines[0]
 	active_shrines.clear()
 	# restore default shrine as only element
 	active_shrines.append(default_shrine)
 	state_machine.change_state(state_machine.starting_state)
+	
+	camera.reset()
+	corpse.reset()
 
 
 func _process(delta: float) -> void:

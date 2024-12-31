@@ -65,8 +65,6 @@ func reset() -> void:
 	
 	# reset player
 	player.reset()
-	# reset corpse
-	corpse.reset()
 
 
 func _on_player_state_changed(state_name: String) -> void:
