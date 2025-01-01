@@ -32,7 +32,6 @@ mesh = SubResource("CylinderMesh_fvtqe")
 
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1, 0)
-visible = false
 font_size = 64
 
 [node name="Interactable" parent="." instance=ExtResource("2_6wln3")]
