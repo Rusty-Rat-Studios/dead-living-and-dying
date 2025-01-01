@@ -7,6 +7,8 @@ script = ExtResource("1_x07wr")
 
 [node name="Label3D" type="Label3D" parent="."]
 billboard = 1
+no_depth_test = true
+render_priority = 1
 text = "UNITIALIZED
 INTERACTABLE"
 font_size = 64
