@@ -6,7 +6,7 @@
 script = ExtResource("1_x07wr")
 
 [node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, -7.35137e-08, 0, 7.35137e-08, 1, 0, 0, 0)
+billboard = 1
 text = "UNITIALIZED
 INTERACTABLE"
 font_size = 64
