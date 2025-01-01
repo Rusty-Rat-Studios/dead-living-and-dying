@@ -78,22 +78,12 @@ func _on_body_entered(_body: Node3D) -> void:
 		$Interactable.display_message(TEXT_INTERACTABLE)
 		#$Label3D.text = TEXT_INTERACTABLE
 		interactable = true
-		
-		# activate outline visibility
-		print("Layer mask after entering:", $MeshInstance3D.get_layer_mask_value(2))  # Debug print
-		$MeshInstance3D.set_layer_mask_value(2, true)
-		print("Layer mask after entering:", $MeshInstance3D.get_layer_mask_value(2))  # Debug print
 
 
 func _on_body_exited(_body: Node3D) -> void:
 	# no guard check -> should always be non-interactable when player leaves
 	# regardless of shrine and player states
 	interactable = false
-	
-	# deactivate outline visibility
-	print("Layer mask after exiting:", $MeshInstance3D.get_layer_mask_value(2))  # Debug print
-	$MeshInstance3D.set_layer_mask_value(2, false)
-	print("Layer mask after exiting:", $MeshInstance3D.get_layer_mask_value(2))  # Debug print
 	
 	if activated:
 		$Interactable.display_message(TEXT_ACTIVE)
