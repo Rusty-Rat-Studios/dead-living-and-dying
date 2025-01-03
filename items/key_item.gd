@@ -12,9 +12,7 @@ const DEBUFF_MODIFIER: float = 0.25
 # reparents the key item to its inventory when picked up
 @onready var starting_room: Room = get_parent()
 
-var picked_up: bool = false
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$PlayerDetector.body_entered.connect(_on_body_entered)
 	$PlayerDetector.body_exited.connect(_on_body_exited)
@@ -35,7 +33,6 @@ func reset() -> void:
 	$Interactable.hide_message()
 	$Interactable.enabled = false
 	global_position = starting_position
-	picked_up = false
 	visible = true
 	if get_parent() != starting_room:
 		self.reparent(starting_room)
@@ -46,7 +43,6 @@ func pick_up() -> void:
 	# this node to its $Inventory node
 	SignalBus.item_picked_up.emit(self)
 	$Interactable.enabled = false
-	picked_up = true
 	visible = false
 
 
