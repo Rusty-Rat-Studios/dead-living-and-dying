@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://mt6b5vxmupgn"]
+[gd_scene load_steps=7 format=3 uid="uid://mt6b5vxmupgn"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_ndccg"]
 [ext_resource type="Shape3D" uid="uid://d140c2qk5hbt2" path="res://player/player_collision_shape.tres" id="2_a56u6"]
 [ext_resource type="Texture2D" uid="uid://cey8vsju0vbgx" path="res://icon.svg" id="2_goh7u"]
 [ext_resource type="Script" path="res://player/camera.gd" id="4_mmf56"]
-[ext_resource type="Script" path="res://player/inventory.gd" id="5_qc2k4"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3bb63"]
 radius = 0.804186
@@ -61,7 +60,6 @@ monitorable = false
 shape = SubResource("CapsuleShape3D_3bb63")
 
 [node name="Inventory" type="Node" parent="."]
-script = ExtResource("5_qc2k4")
 
 [node name="ItemDetector" type="Area3D" parent="."]
 collision_layer = 0
