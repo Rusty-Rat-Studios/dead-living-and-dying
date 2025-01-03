@@ -17,6 +17,7 @@ var picked_up: bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$PlayerDetector.body_entered.connect(_on_body_entered)
+	$PlayerDetector.body_exited.connect(_on_body_exited)
 	$Interactable.input_detected.connect(_on_interaction)
 	
 	reset()
