@@ -42,9 +42,10 @@ func reset() -> void:
 
 
 func pick_up() -> void:
-	# adds itself as a child to the parent node
-	# to be called by the player, passing its inventory 
+	# emits a signal caught by the player who then reparents
+	# this node to its $Inventory node
 	SignalBus.item_picked_up.emit(self)
+	$Interactable.enabled = false
 	picked_up = true
 	visible = false
 
