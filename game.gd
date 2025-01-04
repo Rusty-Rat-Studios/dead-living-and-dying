@@ -49,12 +49,14 @@ func reset() -> void:
 		# Note: wildcard '*' used to select any node starting with "NodeName[xyz]"
 		# e.g. Ghost* gets GhostLeft1, GhostLeft2, GhostRight1, etc
 	
-	# reset all ghosts, possessables, shrines
+	# reset all ghosts, possessables, shrines, and items
 	Utility.call_for_each(find_children("Ghost*", "Ghost"), "reset")
 	Utility.call_for_each(find_children("Possessable*", "Possessable"), "reset")
 	Utility.call_for_each(find_children("Shrine*", "Shrine"), "reset")
+	Utility.call_for_each(find_children("Item*", "Item"), "reset")
 	# reset player
 	player.reset()
+	# reset key item
 	key_item.reset()
 
 

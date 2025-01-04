@@ -251,7 +251,7 @@ func _on_consumed_shrine(shrine: Shrine) -> void:
 	active_shrines.remove_at(active_shrines.find(shrine))
 
 
-func _on_item_picked_up(item: Node3D) -> void:
+func _on_item_picked_up(item: Item) -> void:
 	# reparent node as a child to player inventory
 	item.reparent($Inventory)
 	# ensure item position is directly on player
