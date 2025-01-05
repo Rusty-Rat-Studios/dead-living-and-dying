@@ -8,6 +8,7 @@ extends Node3D
 @onready var light_directional: DirectionalLight3D = $DirectionalLight3D
 @onready var corpse: Area3D = preload("res://player/corpse.tscn").instantiate()
 @onready var default_shrine: Shrine = $World/RoomBottom/Shrine
+@onready var key_item: Node3D = $World/RoomBottom/KeyItem
 
 
 # Called when the node enters the scene tree for the first time.
@@ -54,6 +55,7 @@ func reset() -> void:
 	Utility.call_for_each(find_children("Shrine*", "Shrine"), "reset")
 	# reset player
 	player.reset()
+	key_item.reset()
 
 
 func _on_player_state_changed(state_name: String) -> void:

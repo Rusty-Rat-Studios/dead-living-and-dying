@@ -55,3 +55,5 @@ monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DamageDetector"]
 shape = SubResource("CapsuleShape3D_3bb63")
+
+[node name="Inventory" type="Node" parent="."]
