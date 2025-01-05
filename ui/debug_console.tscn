@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://bwmbngtw81o3y"]
+[gd_scene load_steps=2 format=3 uid="uid://bwmbngtw81o3y"]
+
+[ext_resource type="Script" path="res://ui/debug_console.gd" id="1_n82hb"]
 
 [node name="DebugConsole" type="Control"]
 layout_mode = 3
@@ -8,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
+script = ExtResource("1_n82hb")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -28,6 +31,7 @@ anchor_bottom = 1.0
 offset_top = -31.0
 grow_horizontal = 2
 grow_vertical = 0
+caret_blink = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
 layout_mode = 1
@@ -35,7 +39,8 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 153.0
 grow_horizontal = 2
-focus_mode = 2
+scroll_following = true
+shortcut_keys_enabled = false
 selection_enabled = true
 deselect_on_focus_loss_enabled = false
 drag_and_drop_selection_enabled = false
