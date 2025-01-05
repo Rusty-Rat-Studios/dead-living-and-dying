@@ -19,7 +19,7 @@ static func _process_command(tokens: PackedStringArray) -> String:
 				matching_def = command_definition
 				break
 	if matching_def == "":
-		return Commands.unknown_cmd()
+		return "Error: Unknown Command"
 	var def_tokens: PackedStringArray = _tokenize_command(matching_def)
 	var args: PackedStringArray = _get_args(tokens, def_tokens)
 	return Commands.command_map.get(matching_def).call(args)

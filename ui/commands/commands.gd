@@ -3,18 +3,13 @@ class_name Commands extends Node
 
 # Map a command definition to a Callable
 static var command_map: Dictionary = {
-	"help": help,
-	"help %s": help,
-	"mode %s": mode
+	"help": _help,
+	"help %s": _help,
+	"mode %s": _mode
 }
 
-static func unknown_cmd() -> String:
-	return "Error: Unknown Command"
 
-# Put command callables below this line
-
-
-static func help(args: PackedStringArray) -> String:
+static func _help(args: PackedStringArray) -> String:
 	if args.size() == 0:
 		return "Available commands: help, mode"
 	if args[0] == "help":
@@ -24,9 +19,7 @@ static func help(args: PackedStringArray) -> String:
 	return "Usage: help [cmd] - gives usage information on a specific command"
 
 
-static func mode(args: PackedStringArray) -> String:
-	if args.size() != 1:
-		return "Usage: mode [main | debug] - changes the game mode"
+static func _mode(args: PackedStringArray) -> String:
 	if not (args[0] == "main" || args[0] == "debug"):
 		return "Usage: mode [main | debug] - changes the game mode"
 	return "Game mode updated"
