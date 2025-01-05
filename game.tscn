@@ -35,10 +35,14 @@ script = ExtResource("1_77rk7")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.873288, 0.0729331, 0.481714, -0.403253, -0.446664, 0.798673, 0.273414, -0.891724, -0.360656, 0, 10, 0)
+transform = Transform3D(-0.830566, 0.486173, -0.271654, -0.492404, -0.413176, 0.766044, 0.260189, 0.770014, 0.582563, 0, 10, 0)
+visible = false
+light_color = Color(0.294118, 0.294118, 0.356863, 1)
+
+[node name="DebugLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.830566, 0.486173, -0.271654, -0.492404, -0.413176, 0.766044, 0.260189, 0.770014, 0.582563, 0, 10, 0)
 visible = false
 light_color = Color(0.29219, 0.29219, 0.29219, 1)
-shadow_enabled = true
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
 script = ExtResource("3_fg5sk")
