@@ -41,6 +41,3 @@ offset_bottom = 153.0
 grow_horizontal = 2
 scroll_following = true
 shortcut_keys_enabled = false
-selection_enabled = true
-deselect_on_focus_loss_enabled = false
-drag_and_drop_selection_enabled = false

@@ -17,10 +17,12 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_released("console"):
 		if is_visible():
 			$Panel/LineEdit.grab_focus()
+			get_tree().paused = true
 
 
 func _on_focus_exited() -> void:
 	hide()
+	get_tree().paused = false
 
 
 func _handle_command(text: String) -> void:
