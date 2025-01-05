@@ -24,5 +24,13 @@ func _on_focus_exited() -> void:
 
 
 func _handle_command(text: String) -> void:
-	print(text)
+	append_text(">"+text)
 	$Panel/LineEdit.clear()
+	var response: String = CommandParser.handle_command(text)
+	if not response.is_empty():
+		append_text(response)
+
+
+func append_text(text: String) -> void:
+	$Panel/RichTextLabel.append_text(text)
+	$Panel/RichTextLabel.newline()
