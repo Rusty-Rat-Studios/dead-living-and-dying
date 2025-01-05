@@ -1,36 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://lul6upy54h2m"]
+[gd_scene load_steps=5 format=3 uid="uid://bwfxerrhc458i"]
 
-[ext_resource type="Script" path="res://items/key_item.gd" id="1_p2mkc"]
-[ext_resource type="PackedScene" uid="uid://cnbim08e5mqrn" path="res://ui/interactable.tscn" id="2_coemn"]
+[ext_resource type="PackedScene" uid="uid://c75eretp0162f" path="res://items/item.tscn" id="1_74e80"]
+[ext_resource type="Script" path="res://items/key_item.gd" id="2_knh6c"]
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_hhsiw"]
+[sub_resource type="CylinderMesh" id="CylinderMesh_jmy8l"]
 top_radius = 0.25
 bottom_radius = 0.25
 height = 1.0
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_ntm00"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_vhyqu"]
 height = 1.0
 radius = 0.25
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_rjr4u"]
-radius = 1.0
+[node name="KeyItem" instance=ExtResource("1_74e80")]
+script = ExtResource("2_knh6c")
 
-[node name="KeyItem" type="Area3D"]
-collision_layer = 16
-collision_mask = 0
-script = ExtResource("1_p2mkc")
+[node name="MeshInstance3D" parent="." index="0"]
+mesh = SubResource("CylinderMesh_jmy8l")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("CylinderMesh_hhsiw")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CylinderShape3D_ntm00")
-
-[node name="Interactable" parent="." instance=ExtResource("2_coemn")]
-
-[node name="PlayerDetector" type="Area3D" parent="."]
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetector"]
-shape = SubResource("SphereShape3D_rjr4u")
+[node name="CollisionShape3D" parent="." index="1"]
+shape = SubResource("CylinderShape3D_vhyqu")
