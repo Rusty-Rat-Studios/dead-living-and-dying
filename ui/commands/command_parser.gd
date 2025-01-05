@@ -1,6 +1,7 @@
 class_name CommandParser extends Node
 
 
+# Takes a command string, tokenizes it, processes it, runs it, and returns a response
 static func handle_command(text: String) -> String:
 	var tokens: PackedStringArray = _tokenize_command(text)
 	return _process_command(tokens)
@@ -10,6 +11,7 @@ static func _tokenize_command(text: String) -> PackedStringArray:
 	return text.split(" ", false)
 
 
+# Finds a command definition that matches the tokens supplied and runs the command
 static func _process_command(tokens: PackedStringArray) -> String:
 	var matching_def: String = ""
 	for command_definition: String in Commands.command_map:
