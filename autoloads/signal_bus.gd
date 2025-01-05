@@ -20,3 +20,6 @@ extends Node
 @warning_ignore("unused_signal") signal consumed_shrine(shrine: Shrine)
 # emitted when player contacts their corpse in DEAD state
 @warning_ignore("unused_signal") signal player_revived(corpse_position: Vector3)
+
+# emitted by item when the player interacts to pick it up
+@warning_ignore("unused_signal") signal item_picked_up(item: Area3D)
