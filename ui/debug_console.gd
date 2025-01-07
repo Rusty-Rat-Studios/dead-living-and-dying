@@ -12,12 +12,13 @@ func _input(event: InputEvent) -> void:
 		if not is_visible():
 			$Panel/LineEdit.clear()
 			show()
+			get_tree().paused = true
 		else:
 			hide()
 	if event.is_action_released("console"):
 		if is_visible():
+			# Grab focus after releasing 'console' as to not type 'console'
 			$Panel/LineEdit.grab_focus()
-			get_tree().paused = true
 
 
 func _on_focus_exited() -> void:
