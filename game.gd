@@ -7,8 +7,8 @@ extends Node3D
 @onready var player: Player = $Player
 @onready var light_directional: DirectionalLight3D = $DirectionalLight3D
 @onready var corpse: Area3D = preload("res://player/corpse.tscn").instantiate()
-@onready var default_shrine: Shrine = $World/RoomBottom/Shrine
-@onready var key_item: Node3D = $World/RoomBottom/KeyItem
+@onready var default_shrine: Shrine = $WorldGrid/RoomBottom/Shrine
+@onready var key_item: Node3D = $WorldGrid/RoomBottom/KeyItem
 
 
 # Called when the node enters the scene tree for the first time.
@@ -67,7 +67,7 @@ func _on_player_state_changed(state_name: String) -> void:
 			player.light_omni.visible = true
 			player.light_spot.visible = true
 			light_directional.visible = false
-			$World/RoomCenter/Hurtbox/Label3D.text = "HURTBOX\n\nCome here to\nget hurt ;_ ;"
+			$WorldGrid/RoomCenter/Hurtbox/Label3D.text = "HURTBOX\n\nCome here to\nget hurt ;_ ;"
 		"Dying":
 			player.light_omni.visible = true
 			player.light_spot.visible = true
@@ -76,7 +76,7 @@ func _on_player_state_changed(state_name: String) -> void:
 			player.light_omni.visible = false
 			player.light_spot.visible = false
 			light_directional.visible = true
-			$World/RoomCenter/Hurtbox/Label3D.text = "HURTBOX\n\nDon't worry little ghost,\n\nHurtbox can't hurt you."
+			$WorldGrid/RoomCenter/Hurtbox/Label3D.text = "HURTBOX\n\nDon't worry little ghost,\n\nHurtbox can't hurt you."
 	
 	# TEMPORARY
 	update_ghost_visibility(state_name)
@@ -84,7 +84,7 @@ func _on_player_state_changed(state_name: String) -> void:
 
 # TEMPORARY function to update ghost visibility based on player state
 func update_ghost_visibility(state_name: String) -> void:
-	var ghost: Ghost = get_node("World/RoomCenter/GhostCenter")
+	var ghost: Ghost = get_node("WorldGrid/RoomCenter/GhostCenter")
 	var ghost_mesh_instance: MeshInstance3D = ghost.get_node("MeshInstance3D")
 	var ghost_mesh: CapsuleMesh = ghost_mesh_instance.mesh
 	var material: Material = ghost_mesh.material
