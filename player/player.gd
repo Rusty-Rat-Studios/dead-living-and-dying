@@ -49,6 +49,8 @@ var corpse: Corpse
 @onready var light_spot: SpotLight3D = $LightOffset/SpotLight3D
 @onready var camera: Camera3D = $RotationOffset/Camera3D
 @onready var sprite: AnimatedSprite3D = $RotationOffset/AnimatedSprite3D
+# used to disable skew effect if needed (e.g. in DEAD state)
+@onready var skew_enabled: bool = true
 
 # store initial position to return to when calling reset()
 @onready var starting_position: Vector3 = position
@@ -104,7 +106,8 @@ func reset() -> void:
 func _process(delta: float) -> void:
 	if is_rotating:
 		rotate_to_target(delta)
-		skew_sprite()
+		if skew_enabled:
+			skew_sprite()
 
 
 func _physics_process(delta: float) -> void:
@@ -228,6 +231,19 @@ func skew_sprite() -> void:
 		else:
 			sprite.rotation.y = clampf($LightOffset.rotation.y, -PI, SKEW_ROTATION - PI)
 
+
+func enable_skew() -> void:
+	skew_enabled = true
+	# set skew immediately after enabling
+	skew_sprite()
+
+
+func disable_skew() -> void:
+	skew_enabled = false
+	# reset sprite skew
+	sprite.rotation.y = 0
+	sprite.scale.x = 1
+	sprite.animation = "front"
 
 
 func hit() -> void:
