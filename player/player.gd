@@ -16,6 +16,10 @@ const TARGET_THRESHOLD: float = 0.01
 # used to begin decelerating rotation when close but not at target
 const DECELERATION_THRESHOLD: float = 5 * TARGET_THRESHOLD
 
+# used to skew sprite to emulate "looking" towards spotlight
+const SKEW_SCALE: float = 0.9 # smaller value = more skew
+const SKEW_ROTATION: float = PI / 7 # smaller denominator = more skew
+
 # player state machine, sibling node under Game node
 var state_machine: Node
 # used to track previously visited, non-consumed shrines (including default)
@@ -100,6 +104,7 @@ func reset() -> void:
 func _process(delta: float) -> void:
 	if is_rotating:
 		rotate_to_target(delta)
+		skew_sprite()
 
 
 func _physics_process(delta: float) -> void:
@@ -199,26 +204,30 @@ func rotate_to_target(delta: float) -> void:
 		$LightOffset.rotation.y = target_rotation
 		angular_velocity = 0
 		is_rotating = false
-	
+
+
+func skew_sprite() -> void:
 	# clamp light offset rotation between -PI and PI
+	var current_rotation: float = $LightOffset.rotation.y
 	if $LightOffset.rotation.y >= PI:
 		$LightOffset.rotation.y = -PI
 	elif $LightOffset.rotation.y <= -PI:
 		$LightOffset.rotation.y = PI
 	# skew sprite to make it appear as though it is "looking" in the target direction
-	sprite.scale.x = clamp(abs(cos($LightOffset.rotation.y)), 0.9, 1)
+	sprite.scale.x = clamp(abs(cos($LightOffset.rotation.y)), SKEW_SCALE, 1)
 	
 	# flip animation based on rotation amount
 	if $LightOffset.rotation.y > -PI/2 and $LightOffset.rotation.y <= PI/2:
 		sprite.animation = "back"
-		sprite.rotation.y = clampf($LightOffset.rotation.y, -PI/8, PI/8)
+		sprite.rotation.y = clampf($LightOffset.rotation.y, -SKEW_ROTATION, SKEW_ROTATION)
 	else:
 		sprite.animation = "front"
 		
 		if $LightOffset.rotation.y > 0:
-			sprite.rotation.y = clampf($LightOffset.rotation.y, PI - PI/8, PI)
+			sprite.rotation.y = clampf($LightOffset.rotation.y, PI - SKEW_ROTATION, PI)
 		else:
-			sprite.rotation.y = clampf($LightOffset.rotation.y, -PI, PI/8 - PI)
+			sprite.rotation.y = clampf($LightOffset.rotation.y, -PI, SKEW_ROTATION - PI)
+
 
 
 func hit() -> void:
