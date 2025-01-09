@@ -44,7 +44,7 @@ var corpse: Corpse
 @onready var light_omni: OmniLight3D = $OmniLight3D
 @onready var light_spot: SpotLight3D = $LightOffset/SpotLight3D
 @onready var camera: Camera3D = $RotationOffset/Camera3D
-@onready var sprite: Sprite3D = $RotationOffset/Sprite3D
+@onready var sprite: AnimatedSprite3D = $RotationOffset/AnimatedSprite3D
 
 # store initial position to return to when calling reset()
 @onready var starting_position: Vector3 = position
@@ -199,6 +199,22 @@ func rotate_to_target(delta: float) -> void:
 		$LightOffset.rotation.y = target_rotation
 		angular_velocity = 0
 		is_rotating = false
+	
+	# clamp light offset rotation between -PI and PI
+	if $LightOffset.rotation.y >= PI:
+		$LightOffset.rotation.y = -PI
+	elif $LightOffset.rotation.y <= -PI:
+		$LightOffset.rotation.y = PI
+	# skew sprite to make it appear as though it is "looking" in the target direction
+	# rotation.y -90 is right, +90 is left
+	sprite.scale.x = clamp(abs(cos($LightOffset.rotation.y)), 0.7, 1)
+	sprite.rotation.y = clamp($LightOffset.rotation.y, -PI/8, PI/8)
+	
+	# flip animation based on rotation amount
+	if $LightOffset.rotation.y > -PI/2 and $LightOffset.rotation.y <= PI/2:
+		sprite.animation = "back"
+	else:
+		sprite.animation = "front"
 
 
 func hit() -> void:
