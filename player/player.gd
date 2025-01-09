@@ -206,15 +206,19 @@ func rotate_to_target(delta: float) -> void:
 	elif $LightOffset.rotation.y <= -PI:
 		$LightOffset.rotation.y = PI
 	# skew sprite to make it appear as though it is "looking" in the target direction
-	# rotation.y -90 is right, +90 is left
-	sprite.scale.x = clamp(abs(cos($LightOffset.rotation.y)), 0.7, 1)
-	sprite.rotation.y = clamp($LightOffset.rotation.y, -PI/8, PI/8)
+	sprite.scale.x = clamp(abs(cos($LightOffset.rotation.y)), 0.9, 1)
 	
 	# flip animation based on rotation amount
 	if $LightOffset.rotation.y > -PI/2 and $LightOffset.rotation.y <= PI/2:
 		sprite.animation = "back"
+		sprite.rotation.y = clampf($LightOffset.rotation.y, -PI/8, PI/8)
 	else:
 		sprite.animation = "front"
+		
+		if $LightOffset.rotation.y > 0:
+			sprite.rotation.y = clampf($LightOffset.rotation.y, PI - PI/8, PI)
+		else:
+			sprite.rotation.y = clampf($LightOffset.rotation.y, -PI, PI/8 - PI)
 
 
 func hit() -> void:
