@@ -7,8 +7,8 @@ extends Node3D
 @onready var player: Player = $Player
 @onready var light_directional: DirectionalLight3D = $DirectionalLight3D
 @onready var corpse: Area3D = preload("res://player/corpse.tscn").instantiate()
-@onready var default_shrine: Shrine = $World/RoomBottom/Shrine
-@onready var key_item: Node3D = $World/RoomBottom/KeyItem
+@onready var default_shrine: Shrine = $WorldGrid/RoomBottom/Shrine
+@onready var key_item: Node3D = $WorldGrid/RoomBottom/KeyItem
 
 
 # Called when the node enters the scene tree for the first time.
