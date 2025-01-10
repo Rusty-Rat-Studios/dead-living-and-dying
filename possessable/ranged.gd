@@ -3,7 +3,7 @@ extends Possessable
 # duration over which an attack happens
 const ATTACK_TIME: float = 0.8
 
-@onready var projectile_scene: PackedScene = preload("res://possessable/ranged_projectile.tscn")
+@onready var projectile_scene: PackedScene = preload("res://possessable/projectile.tscn")
 
 func attack(target: Node3D) -> void:
 	if player_in_range and room.player_in_room:

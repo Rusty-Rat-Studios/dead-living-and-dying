@@ -16,11 +16,6 @@ signal input_detected(event: InputEvent)
 @onready var enabled: bool = false
 
 
-func _ready() -> void:
-	# match text rotation with camera rotation
-	global_rotation = PlayerHandler.get_player().camera.global_rotation
-
-
 func _input(event: InputEvent) -> void:
 	if not inputs.is_empty() and enabled:
 		# check if event matches any input we are listening for

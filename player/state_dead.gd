@@ -13,6 +13,11 @@ func enter() -> void:
 	SignalBus.player_revived.connect(_on_player_revived)
 	SignalBus.player_state_changed.emit("Dead")
 	
+	# drop key item if player is carrying it
+	var key_item: Node3D = parent.get_node_or_null("Inventory/KeyItem")
+	if key_item:
+		key_item.drop()
+	
 	move_to_shrine()
 
 

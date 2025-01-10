@@ -63,7 +63,9 @@ func _ready() -> void:
 	
 	SignalBus.activated_shrine.connect(_on_activated_shrine)
 	SignalBus.consumed_shrine.connect(_on_consumed_shrine)
-
+	
+	SignalBus.item_picked_up.connect(_on_item_picked_up)
+	
 	joystick_timer.timeout.connect(_on_joystick_timer_timeout)
 
 
@@ -247,6 +249,13 @@ func _on_activated_shrine(shrine: Shrine) -> void:
 
 func _on_consumed_shrine(shrine: Shrine) -> void:
 	active_shrines.remove_at(active_shrines.find(shrine))
+
+
+func _on_item_picked_up(item: Item) -> void:
+	# reparent node as a child to player inventory
+	item.reparent($Inventory)
+	# ensure item position is directly on player
+	item.position = Vector3.ZERO
 
 
 func _on_joystick_timer_timeout() -> void:
