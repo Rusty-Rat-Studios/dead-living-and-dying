@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dx3xbk4c7uji8"]
+[gd_scene load_steps=20 format=3 uid="uid://dx3xbk4c7uji8"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_77rk7"]
 [ext_resource type="PackedScene" uid="uid://mt6b5vxmupgn" path="res://player/player.tscn" id="1_hu241"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://bcep1wbs2caas" path="res://possessable/possessable.tscn" id="13_66ase"]
 [ext_resource type="PackedScene" uid="uid://dic5onsop66y4" path="res://ui/game_menu.tscn" id="13_owhbc"]
 [ext_resource type="PackedScene" uid="uid://c1hur2s8mgagv" path="res://possessable/throwable.tscn" id="14_23qy6"]
+[ext_resource type="PackedScene" uid="uid://bfmkrask6gxl3" path="res://possessable/ranged.tscn" id="15_lv48w"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_eitr8"]
 radius = 2.0
@@ -125,6 +126,9 @@ text = "HURTBOX (Physical)
 Come here to 
 get hurt ;_ ;"
 font_size = 64
+
+[node name="Ranged" parent="World/RoomCenter" instance=ExtResource("15_lv48w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 5)
 
 [node name="Possessable" parent="World/RoomCenter" instance=ExtResource("13_66ase")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.25, 4)
