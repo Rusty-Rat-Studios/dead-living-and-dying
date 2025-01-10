@@ -74,7 +74,7 @@ func depossess() -> void:
 	$GPUParticles3D.emitting = false
 
 
-func attack(target: Node3D) -> void:
+func attack(_target: Node3D) -> void:
 	print(Time.get_time_string_from_system(), ": WARNING - attack() function called from base possessable ", self)
 
 
