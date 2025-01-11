@@ -1,4 +1,4 @@
-extends Possessable_Attack
+extends PossessableAttack
 
 # impulse strength used to throw the object
 const THROW_FORCE: float = 25.0

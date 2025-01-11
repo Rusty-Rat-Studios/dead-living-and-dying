@@ -1,4 +1,4 @@
-class_name Possessable_Attack
+class_name PossessableAttack
 extends Possessable
 '''
 This is a base class for possessables able to attack the player.
