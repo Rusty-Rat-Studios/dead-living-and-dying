@@ -1,11 +1,5 @@
 class_name PossessableAttack
 extends Possessable
-'''
-This is a base class for possessables able to attack the player.
-
-Possessables that inherit from this class MUST have an $AttackRange
-Area3D child node with a CollisionShape3D child.
-'''
 
 func _ready() -> void:
 	super()

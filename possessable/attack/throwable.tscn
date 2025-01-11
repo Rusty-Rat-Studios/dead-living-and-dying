@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c1hur2s8mgagv"]
+[gd_scene load_steps=6 format=3 uid="uid://c1hur2s8mgagv"]
 
 [ext_resource type="PackedScene" uid="uid://custksxq8jvgd" path="res://possessable/attack/possessable_attack.tscn" id="1_5pall"]
 [ext_resource type="Script" path="res://possessable/attack/throwable.gd" id="2_fk2mr"]
@@ -10,9 +10,6 @@ albedo_color = Color(0.301961, 0.72549, 0.788235, 1)
 material = SubResource("StandardMaterial3D_vxkbk")
 size = Vector3(0.5, 0.5, 0.5)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_reobb"]
-radius = 6.0
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_rqoep"]
 size = Vector3(0.6, 0.6, 0.6)
 
@@ -22,15 +19,7 @@ script = ExtResource("2_fk2mr")
 [node name="MeshInstance3D" parent="." index="0"]
 mesh = SubResource("BoxMesh_smd12")
 
-[node name="AttackRange" type="Area3D" parent="." index="3"]
-collision_layer = 0
-collision_mask = 0
-monitorable = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackRange" index="0"]
-shape = SubResource("SphereShape3D_reobb")
-
-[node name="Hurtbox" type="Area3D" parent="." index="4"]
+[node name="Hurtbox" type="Area3D" parent="." index="3"]
 collision_layer = 0
 collision_mask = 0
 
