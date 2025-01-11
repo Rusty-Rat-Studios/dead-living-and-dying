@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://custksxq8jvgd"]
+
+[ext_resource type="PackedScene" uid="uid://bcep1wbs2caas" path="res://possessable/possessable.tscn" id="1_qmrf1"]
+[ext_resource type="Script" path="res://possessable/attack/possessable_attack.gd" id="2_v5ro8"]
+
+[node name="PossessableAttack" instance=ExtResource("1_qmrf1")]
+script = ExtResource("2_v5ro8")

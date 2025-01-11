@@ -30,10 +30,6 @@ signal possessed
 @onready var starting_position: Vector3 = position
 
 func _ready() -> void:
-	# detect when player is in range
-	$AttackRange.body_entered.connect(_on_player_entered_range)
-	$AttackRange.body_exited.connect(_on_player_exited_range)
-	
 	# add self to possessables in room
 	room.add_possessable(self)
 
@@ -53,12 +49,6 @@ func possess() -> void:
 	room.remove_possessable(self)
 	# signal to ghosts on the way to target it that it has been taken
 	possessed.emit()
-	# enable player detection
-	$AttackRange.collision_mask = CollisionBit.PLAYER
-	is_possessed = true
-	# check if player in range on initial possession
-	if $AttackRange.overlaps_body(PlayerHandler.get_player()):
-		player_in_range = true
 	
 	$GPUParticles3D.emitting = true
 
@@ -66,8 +56,7 @@ func possess() -> void:
 func depossess() -> void:
 	# add self back to room's available possessables
 	room.add_possessable(self)
-	# disable player detection and reset flags
-	$AttackRange.collision_mask = 0
+	# reset flags
 	is_possessed = false
 	player_in_range = false
 	

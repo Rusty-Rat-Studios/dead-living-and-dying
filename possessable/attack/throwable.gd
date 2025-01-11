@@ -1,6 +1,4 @@
-class_name Throwable
-extends Possessable
-
+extends Possessable_Attack
 
 # impulse strength used to throw the object
 const THROW_FORCE: float = 25.0
@@ -20,7 +18,6 @@ const FLOAT_FORCE: float = 1.8
 const FLOAT_HEIGHT: float = 3
 # for timing float effect oscillation
 @onready var float_time_offset: float = 0.0
-
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	# if object has been thrown, thus depossessed, it should not be possessable
@@ -59,8 +56,9 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 
 func possess() -> void:
 	super()
-	#"bump" object to bring _integrate_forces() out of sleep
-	apply_central_impulse(Vector3.ZERO)
+	# apply small, random spin when possessed
+	# side effect: brings _integrate_forces() out of sleep
+	apply_torque_impulse(Vector3(randf_range(0.1, 0.2), randf_range(0.1, 0.2), randf_range(0.1, 0.2)))
 
 
 func attack(target: Node3D) -> void:

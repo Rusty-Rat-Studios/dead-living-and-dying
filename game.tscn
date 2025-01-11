@@ -16,8 +16,8 @@
 [ext_resource type="PackedScene" uid="uid://c75eretp0162f" path="res://items/item.tscn" id="13_7hjh7"]
 [ext_resource type="PackedScene" uid="uid://bcep1wbs2caas" path="res://possessable/possessable.tscn" id="13_66ase"]
 [ext_resource type="PackedScene" uid="uid://dic5onsop66y4" path="res://ui/game_menu.tscn" id="13_owhbc"]
-[ext_resource type="PackedScene" uid="uid://c1hur2s8mgagv" path="res://possessable/throwable.tscn" id="14_23qy6"]
-[ext_resource type="PackedScene" uid="uid://bfmkrask6gxl3" path="res://possessable/ranged.tscn" id="15_lv48w"]
+[ext_resource type="PackedScene" uid="uid://c1hur2s8mgagv" path="res://possessable/attack/throwable.tscn" id="14_23qy6"]
+[ext_resource type="PackedScene" uid="uid://bfmkrask6gxl3" path="res://possessable/attack/ranged.tscn" id="15_lv48w"]
 [ext_resource type="PackedScene" uid="uid://bwmbngtw81o3y" path="res://ui/debug_console.tscn" id="15_rbtf5"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_eitr8"]
