@@ -65,14 +65,3 @@ func depossess() -> void:
 
 func attack(_target: Node3D) -> void:
 	print(Time.get_time_string_from_system(), ": WARNING - attack() function called from base possessable ", self)
-
-
-func _on_player_entered_range(body: Node3D) -> void:
-	# should only detect player if in collision layer PHYSICAL (not DEAD state)
-	if body == PlayerHandler.get_player():
-		player_in_range = true
-
-
-func _on_player_exited_range(body: Node3D) -> void:
-	if body == PlayerHandler.get_player():
-		player_in_range = false

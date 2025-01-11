@@ -22,3 +22,14 @@ func depossess() -> void:
 	super()
 	# disable player detection
 	$AttackRange.collision_mask = 0
+
+
+func _on_player_entered_range(body: Node3D) -> void:
+	# should only detect player if in collision layer PHYSICAL (not DEAD state)
+	if body == PlayerHandler.get_player():
+		player_in_range = true
+
+
+func _on_player_exited_range(body: Node3D) -> void:
+	if body == PlayerHandler.get_player():
+		player_in_range = false
