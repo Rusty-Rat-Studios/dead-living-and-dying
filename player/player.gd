@@ -211,12 +211,13 @@ func hit() -> void:
 # e.g. for respawning, to ensure player can't immediately take damage
 # optional "flash" argument to disable the flashing animation
 func take_damage(flash: bool = true) -> void:
-	hit_cooldown_active = true
-	# start hit cooldown
-	$HitCooldown.start()
-	if flash:
-		hit_flash = true
-		$HitFlash.start()
+	if not hit_cooldown_active:
+		hit_cooldown_active = true
+		# start hit cooldown
+		$HitCooldown.start()
+		if flash:
+			hit_flash = true
+			$HitFlash.start()
 
 
 func _on_enemy_area_entered(_area: Area3D) -> void:
