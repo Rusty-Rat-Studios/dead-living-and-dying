@@ -2,6 +2,9 @@ extends PossessableAttack
 
 # impulse strength used to throw the object
 const THROW_FORCE: float = 25.0
+# impulse strength used to spin the object when picked up
+const SPIN_FORCE_MIN: float = -0.2
+const SPIN_FORCE_MAX: float = 0.2
 # speed threshold for enabling/disabling hurtbox
 const DAMAGE_VELOCITY: float = 2.0
 # speed threshold for slowing down possessable when bumped while possessed
@@ -58,7 +61,9 @@ func possess() -> void:
 	super()
 	# apply small, random spin when possessed
 	# side effect: brings _integrate_forces() out of sleep
-	apply_torque_impulse(Vector3(randf_range(0.1, 0.2), randf_range(0.1, 0.2), randf_range(0.1, 0.2)))
+	apply_torque_impulse(Vector3(randf_range(SPIN_FORCE_MIN, SPIN_FORCE_MAX), 
+		randf_range(SPIN_FORCE_MIN, SPIN_FORCE_MAX), 
+		randf_range(SPIN_FORCE_MIN, SPIN_FORCE_MAX)))
 
 
 func attack(target: Node3D) -> void:
