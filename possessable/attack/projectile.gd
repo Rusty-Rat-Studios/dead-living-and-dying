@@ -10,8 +10,14 @@ func _ready() -> void:
 
 
 func shoot(target: Vector3) -> void:
+	# ensure projectile is at the same height as the player
+	global_position.y = PlayerHandler.get_player().global_position.y
 	# shoot projectile level with the floor towards the target
 	linear_velocity = global_position.direction_to(Vector3(target.x, global_position.y, target.z)) * SPEED
+	# delay to allow it to travel past nearby collidable objects, e.g. walls
+	# before enabling collision
+	await Utility.delay(0.1)
+	collision_mask = CollisionBit.WORLD + CollisionBit.PLAYER + CollisionBit.PHYSICAL
 
 
 func _on_body_entered(body: Node3D) -> void:
