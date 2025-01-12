@@ -42,7 +42,6 @@ func _ready() -> void:
 	SignalBus.consumed_shrine.connect(_on_consumed_shrine)
 	
 	SignalBus.item_picked_up.connect(_on_item_picked_up)
-	
 
 
 func init(state_machine: Node, shrine: Shrine, corpse: Corpse) -> void:
@@ -103,11 +102,6 @@ func handle_movement(delta: float) -> void:
 	move_and_slide()
 
 
-func hit() -> void:
-	# pass signal for state-specific behavior
-	SignalBus.player_hurt.emit()
-
-
 # utility function for activating i-frames, can be called separately
 # from hit signal
 # e.g. for respawning, to ensure player can't immediately take damage
@@ -123,7 +117,8 @@ func take_damage(flash: bool = true) -> void:
 
 func _on_enemy_area_entered(_area: Area3D) -> void:
 	if not hit_cooldown_active:
-		hit()
+		# pass signal for state-specific behavior
+		SignalBus.player_hurt.emit()
 	# do nothing if cooldown active
 
 
@@ -133,7 +128,8 @@ func _on_hit_cooldown_timeout() -> void:
 	# stop flashing animation
 	$HitFlash.stop()
 	if $DamageDetector.has_overlapping_areas():
-		hit()
+		# pass signal for state-specific behavior
+		SignalBus.player_hurt.emit()
 
 
 func _on_hit_flash_timeout() -> void:
