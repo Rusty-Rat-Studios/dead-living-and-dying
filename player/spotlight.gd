@@ -63,7 +63,7 @@ func set_light_target_controller() -> void:
 	# set light_target to slightly beside current rotation so that when
 	# the joystick input ceases, the light target is quickly reached.
 	# --- avoids continuing to rotate after input stops
-	var light_direction: Vector2 = current_rotation.lerp(input_dir, 0.3)
+	var light_direction: Vector2 = current_rotation.slerp(input_dir, 0.3)
 	
 	light_target = Vector3(light_direction.x, 0, light_direction.y)
 	is_rotating = true
@@ -97,7 +97,6 @@ func rotate_to_target(delta: float) -> void:
 	# stop rotating if close enough to target and slow enough
 	# avoids instantly stop/starting rotation if the target swaps rotation directions
 	if abs(angle_diff) < TARGET_THRESHOLD and abs(angular_velocity) < TARGET_THRESHOLD:
-		rotation.y = target_rotation
 		angular_velocity = 0
 		is_rotating = false
 
