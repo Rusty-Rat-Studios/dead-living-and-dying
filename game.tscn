@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dx3xbk4c7uji8"]
+[gd_scene load_steps=18 format=3 uid="uid://dx3xbk4c7uji8"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_77rk7"]
 [ext_resource type="PackedScene" uid="uid://mt6b5vxmupgn" path="res://player/player.tscn" id="1_hu241"]
@@ -17,18 +17,6 @@
 [ext_resource type="PackedScene" uid="uid://bcep1wbs2caas" path="res://possessable/possessable.tscn" id="13_66ase"]
 [ext_resource type="PackedScene" uid="uid://dic5onsop66y4" path="res://ui/game_menu.tscn" id="13_owhbc"]
 [ext_resource type="PackedScene" uid="uid://bwmbngtw81o3y" path="res://ui/debug_console.tscn" id="15_rbtf5"]
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_eitr8"]
-radius = 2.0
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j7r0k"]
-transparency = 1
-albedo_color = Color(0.909081, 0, 0.138258, 0.396078)
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_ml2oq"]
-material = SubResource("StandardMaterial3D_j7r0k")
-top_radius = 2.0
-bottom_radius = 2.0
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_77rk7")
@@ -118,25 +106,6 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 9.95, 
 
 [node name="GhostCenter" parent="WorldGrid/RoomCenter" instance=ExtResource("9_t4a6d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-
-[node name="Hurtbox" type="Area3D" parent="WorldGrid/RoomCenter"]
-collision_layer = 4
-collision_mask = 0
-monitoring = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WorldGrid/RoomCenter/Hurtbox"]
-shape = SubResource("CylinderShape3D_eitr8")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="WorldGrid/RoomCenter/Hurtbox"]
-mesh = SubResource("CylinderMesh_ml2oq")
-
-[node name="Label3D" type="Label3D" parent="WorldGrid/RoomCenter/Hurtbox"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1, 0)
-text = "HURTBOX (Physical)
-
-Come here to 
-get hurt ;_ ;"
-font_size = 64
 
 [node name="Possessable" parent="WorldGrid/RoomCenter" instance=ExtResource("13_66ase")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.25, 0)
