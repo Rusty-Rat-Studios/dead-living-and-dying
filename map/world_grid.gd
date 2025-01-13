@@ -1,10 +1,9 @@
 extends Node3D
+class_name WorldGrid
 
 const GRID_SCALE: float = 20 # Size of each grid square in editor units
 
-var basic_room: RoomInformation = Rooms.get_basic_room_information()
-
-@onready var grid: Dictionary = {}
+var basic_room: RoomInformation = preload("res://map/basic_room/basic_room.tres")
 
 
 func _ready() -> void:
@@ -13,28 +12,25 @@ func _ready() -> void:
 
 func generate_grid() -> void:
 	# Currently hardcoded to generate the default 5 rooms
-	add_room(basic_room.resource.instantiate(), Vector2(0, 0))
-	add_room(basic_room.resource.instantiate(), Vector2(0, -1))
-	add_room(basic_room.resource.instantiate(), Vector2(0, -2))
-	add_room(basic_room.resource.instantiate(), Vector2(-1, -1))
-	add_room(basic_room.resource.instantiate(), Vector2(1, -1))
+	add_room(basic_room, Vector2(0, 0))
+	add_room(basic_room, Vector2(0, -1))
+	add_room(basic_room, Vector2(0, -2))
+	add_room(basic_room, Vector2(-1, -1))
+	add_room(basic_room, Vector2(1, -1))
 	init_all_rooms()
 
 
-func add_room(room: Room, grid_location: Vector2) -> void:
+func add_room(room_info: RoomInformation, grid_location: Vector2) -> void:
+	var room: Room = room_info.resource.instantiate()
+	room.grid_location = grid_location
+	room.room_information = room_info
 	add_child(room)
-	grid[grid_location] = room # Todo: Doesn't work for rooms bigger than 1 sq
 
 
 func init_all_rooms() -> void:
-	for grid_location: Vector2 in grid.keys():
-		var room: Room = grid.get(grid_location)
-		room.init(grid_location, GRID_SCALE)
+	for room: Room in self.get_children():
+		room.init()
 
 
-func clear_grid() -> void:
-	grid.clear()
-
-
-func get_grid_dict() -> Dictionary:
-	return grid
+func is_door_connected(door_location: DoorLocation) -> bool:
+	return false

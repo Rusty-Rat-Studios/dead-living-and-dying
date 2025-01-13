@@ -5,7 +5,5 @@
 
 [node name="BasicRoom" type="Node3D"]
 script = ExtResource("1_xo7g0")
-room_shape = Array[Vector2]([Vector2(0, 0)])
-possible_door_locations = Array[Vector2]([Vector2(1, 0), Vector2(0, 1), Vector2(-1, 0), Vector2(0, -1)])
 
 [node name="Floor" parent="." instance=ExtResource("2_8oby5")]
