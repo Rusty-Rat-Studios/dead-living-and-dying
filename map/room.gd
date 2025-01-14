@@ -2,6 +2,7 @@ class_name Room
 extends Node3D
 
 var room_information: RoomInformation
+var door_locations: Array[DoorLocation]
 var grid_location: Vector2
 var possessables_available: Array
 

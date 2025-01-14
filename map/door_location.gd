@@ -30,3 +30,17 @@ func hash() -> PackedByteArray:
 
 func equals(other: DoorLocation) -> bool:
 	return self.hash() == other.hash()
+
+
+# Takes the current door location and returns the door location needed for the connecting door
+func invert() -> DoorLocation:
+	if direction == Direction.NORTH:
+		return DoorLocation.new(Vector2(location.x, location.y - 1), Direction.SOUTH)
+	if direction == Direction.EAST:
+		return DoorLocation.new(Vector2(location.x + 1, location.y), Direction.WEST)
+	if direction == Direction.SOUTH:
+		return DoorLocation.new(Vector2(location.x, location.y + 1), Direction.NORTH)
+	if direction == Direction.WEST:
+		return DoorLocation.new(Vector2(location.x - 1, location.y), Direction.EAST)
+	push_error("DoorLocation.invert lost its sense of direction")
+	return null
