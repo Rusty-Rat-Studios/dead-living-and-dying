@@ -19,6 +19,8 @@ const DECELERATION_THRESHOLD: float = 5 * TARGET_THRESHOLD
 # used to skew sprite to emulate "looking" towards spotlight
 const SKEW_SCALE: float = 0.9 # smaller value = more skew
 const SKEW_ROTATION: float = PI / 7 # smaller denominator = more skew
+const SPRITE_ANIMATION_FRONT: String = "front"
+const SPRITE_ANIMATION_BACK: String = "back"
 
 # player state machine, sibling node under Game node
 var state_machine: Node
@@ -221,10 +223,10 @@ func skew_sprite() -> void:
 	
 	# flip animation based on rotation amount
 	if $LightOffset.rotation.y > -PI/2 and $LightOffset.rotation.y <= PI/2:
-		sprite.animation = "back"
+		sprite.animation = SPRITE_ANIMATION_BACK
 		sprite.rotation.y = clampf($LightOffset.rotation.y, -SKEW_ROTATION, SKEW_ROTATION)
 	else:
-		sprite.animation = "front"
+		sprite.animation = SPRITE_ANIMATION_FRONT
 		
 		if $LightOffset.rotation.y > 0:
 			sprite.rotation.y = clampf($LightOffset.rotation.y, PI - SKEW_ROTATION, PI)
@@ -243,7 +245,7 @@ func disable_skew() -> void:
 	# reset sprite skew
 	sprite.rotation.y = 0
 	sprite.scale.x = 1
-	sprite.animation = "front"
+	sprite.animation = SPRITE_ANIMATION_FRONT
 
 
 func hit() -> void:
