@@ -1,5 +1,5 @@
-extends Resource
 class_name DoorLocation
+extends Resource
 
 enum Direction {
 	NORTH = 0,

@@ -1,5 +1,5 @@
-extends Node3D
 class_name WorldGrid
+extends Node3D
 
 const GRID_SCALE: float = 20 # Size of each grid square in editor units
 

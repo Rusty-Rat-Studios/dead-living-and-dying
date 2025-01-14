@@ -1,5 +1,5 @@
-extends Resource
 class_name RoomInformation
+extends Resource
 
 @export var resource: Resource
 @export var room_shape: Array[Vector2]
