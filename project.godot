@@ -24,6 +24,7 @@ CollisionBit="*res://autoloads/collision_bit.gd"
 Utility="*res://autoloads/utility.gd"
 Commands="*res://autoloads/commands/commands.gd"
 CommandParser="*res://autoloads/commands/command_parser.gd"
+ShrineManager="*res://autoloads/shrine_manager.gd"
 
 [debug]
 
