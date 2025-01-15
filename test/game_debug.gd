@@ -7,8 +7,7 @@ extends Node3D
 @onready var player: Player = $Player
 @onready var light_directional: DirectionalLight3D = $DirectionalLight3D
 @onready var corpse: Area3D = preload("res://player/corpse.tscn").instantiate()
-@onready var default_shrine: Shrine = $WorldGrid/RoomBottom/Shrine
-@onready var key_item: Node3D = $WorldGrid/RoomBottom/KeyItem
+@onready var default_shrine: Shrine = $DebugRoom/Shrine
 
 
 # Called when the node enters the scene tree for the first time.
@@ -56,8 +55,6 @@ func reset() -> void:
 	Utility.call_for_each(find_children("Item*", "Item"), "reset")
 	# reset player
 	player.reset()
-	# reset key item
-	key_item.reset()
 
 
 func _on_player_state_changed(state_name: String) -> void:
@@ -66,34 +63,9 @@ func _on_player_state_changed(state_name: String) -> void:
 		"Living":
 			player.light_omni.visible = true
 			player.light_spot.visible = true
-			light_directional.visible = false
 		"Dying":
 			player.light_omni.visible = true
 			player.light_spot.visible = true
-			light_directional.visible = false
 		"Dead":
 			player.light_omni.visible = false
 			player.light_spot.visible = false
-			light_directional.visible = true
-	
-	# TEMPORARY
-	update_ghost_visibility(state_name)
-
-
-# TEMPORARY function to update ghost visibility based on player state
-func update_ghost_visibility(state_name: String) -> void:
-	var ghost: Ghost = get_node("WorldGrid/RoomCenter/GhostCenter")
-	var ghost_mesh_instance: MeshInstance3D = ghost.get_node("MeshInstance3D")
-	var ghost_mesh: CapsuleMesh = ghost_mesh_instance.mesh
-	var material: Material = ghost_mesh.material
-	
-	var opacity: float
-	match state_name:
-		"Living":
-			opacity = 0
-		"Dying":
-			opacity = 0.2
-		"Dead":
-			opacity = 0.8
-	
-	material.albedo_color.a = opacity

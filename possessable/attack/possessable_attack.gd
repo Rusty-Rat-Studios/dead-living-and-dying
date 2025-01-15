@@ -24,12 +24,11 @@ func depossess() -> void:
 	$AttackRange.collision_mask = 0
 
 
-func _on_player_entered_range(body: Node3D) -> void:
-	# should only detect player if in collision layer PHYSICAL (not DEAD state)
-	if body == PlayerHandler.get_player():
-		player_in_range = true
+func _on_player_entered_range(_player: Player) -> void:
+	# technically can trigger when player is in DEAD state, but any ghost
+	# will immediately move to ATTACKING if the player enters the room
+	player_in_range = true
 
 
-func _on_player_exited_range(body: Node3D) -> void:
-	if body == PlayerHandler.get_player():
-		player_in_range = false
+func _on_player_exited_range(_player: Player) -> void:
+	player_in_range = false

@@ -7,7 +7,9 @@ func enter() -> void:
 	parent.speed = 10.0
 	
 	# DEBUG: modulate color according to state
-	parent.get_node("RotationOffset/Sprite3D").modulate = Color(0.5, 0.5, 0.5, 0.5)
+	parent.get_node("RotationOffset/AnimatedSprite3D").modulate = Color(0.5, 0.5, 0.5, 0.5)
+	
+	parent.disable_skew()
 	
 	SignalBus.player_hurt.connect(_on_player_hurt)
 	SignalBus.player_revived.connect(_on_player_revived)
@@ -27,6 +29,8 @@ func exit() -> void:
 	parent.collision_layer = CollisionBit.PLAYER + CollisionBit.PHYSICAL
 	parent.collision_mask = CollisionBit.WORLD
 	parent.get_node("DamageDetector").collision_mask = CollisionBit.PHYSICAL
+	
+	parent.enable_skew()
 	
 	SignalBus.player_hurt.disconnect(_on_player_hurt)
 	SignalBus.player_revived.disconnect(_on_player_revived)

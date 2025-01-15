@@ -16,6 +16,12 @@ const TARGET_THRESHOLD: float = 0.01
 # used to begin decelerating rotation when close but not at target
 const DECELERATION_THRESHOLD: float = 5 * TARGET_THRESHOLD
 
+# used to skew sprite to emulate "looking" towards spotlight
+const SKEW_SCALE: float = 0.9 # smaller value = more skew
+const SKEW_ROTATION: float = PI / 7 # smaller denominator = more skew
+const SPRITE_ANIMATION_FRONT: String = "front"
+const SPRITE_ANIMATION_BACK: String = "back"
+
 # player state machine, sibling node under Game node
 var state_machine: Node
 # used to track previously visited, non-consumed shrines (including default)
@@ -44,7 +50,9 @@ var corpse: Corpse
 @onready var light_omni: OmniLight3D = $OmniLight3D
 @onready var light_spot: SpotLight3D = $LightOffset/SpotLight3D
 @onready var camera: Camera3D = $RotationOffset/Camera3D
-@onready var sprite: Sprite3D = $RotationOffset/Sprite3D
+@onready var sprite: AnimatedSprite3D = $RotationOffset/AnimatedSprite3D
+# used to disable skew effect if needed (e.g. in DEAD state)
+@onready var skew_enabled: bool = true
 
 # store initial position to return to when calling reset()
 @onready var starting_position: Vector3 = position
@@ -100,6 +108,8 @@ func reset() -> void:
 func _process(delta: float) -> void:
 	if is_rotating:
 		rotate_to_target(delta)
+		if skew_enabled:
+			skew_sprite()
 
 
 func _physics_process(delta: float) -> void:
@@ -199,6 +209,43 @@ func rotate_to_target(delta: float) -> void:
 		$LightOffset.rotation.y = target_rotation
 		angular_velocity = 0
 		is_rotating = false
+
+
+func skew_sprite() -> void:
+	# clamp light offset rotation between -PI and PI
+	var current_rotation: float = $LightOffset.rotation.y
+	if $LightOffset.rotation.y >= PI:
+		$LightOffset.rotation.y = -PI
+	elif $LightOffset.rotation.y <= -PI:
+		$LightOffset.rotation.y = PI
+	# skew sprite to make it appear as though it is "looking" in the target direction
+	sprite.scale.x = clamp(abs(cos($LightOffset.rotation.y)), SKEW_SCALE, 1)
+	
+	# flip animation based on rotation amount
+	if $LightOffset.rotation.y > -PI/2 and $LightOffset.rotation.y <= PI/2:
+		sprite.animation = SPRITE_ANIMATION_BACK
+		sprite.rotation.y = clampf($LightOffset.rotation.y, -SKEW_ROTATION, SKEW_ROTATION)
+	else:
+		sprite.animation = SPRITE_ANIMATION_FRONT
+		
+		if $LightOffset.rotation.y > 0:
+			sprite.rotation.y = clampf($LightOffset.rotation.y, PI - SKEW_ROTATION, PI)
+		else:
+			sprite.rotation.y = clampf($LightOffset.rotation.y, -PI, SKEW_ROTATION - PI)
+
+
+func enable_skew() -> void:
+	skew_enabled = true
+	# set skew immediately after enabling
+	skew_sprite()
+
+
+func disable_skew() -> void:
+	skew_enabled = false
+	# reset sprite skew
+	sprite.rotation.y = 0
+	sprite.scale.x = 1
+	sprite.animation = SPRITE_ANIMATION_FRONT
 
 
 func hit() -> void:
