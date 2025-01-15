@@ -67,7 +67,6 @@ func _on_player_state_changed(state_name: String) -> void:
 			player.light_omni.visible = true
 			player.light_spot.visible = true
 			light_directional.visible = false
-			$WorldGrid/RoomCenter/Hurtbox/Label3D.text = "HURTBOX\n\nCome here to\nget hurt ;_ ;"
 		"Dying":
 			player.light_omni.visible = true
 			player.light_spot.visible = true
@@ -76,7 +75,6 @@ func _on_player_state_changed(state_name: String) -> void:
 			player.light_omni.visible = false
 			player.light_spot.visible = false
 			light_directional.visible = true
-			$WorldGrid/RoomCenter/Hurtbox/Label3D.text = "HURTBOX\n\nDon't worry little ghost,\n\nHurtbox can't hurt you."
 	
 	# TEMPORARY
 	update_ghost_visibility(state_name)
