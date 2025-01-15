@@ -1,27 +1,6 @@
 class_name Player
 extends CharacterBody3D
 
-# used to set cooldown timer
-const HIT_COOLDOWN: float = 2.0
-# used to flash player sprite while hit cooldown active
-const HIT_FLASH_SPEED: float = 0.3
-const FLASH_OPACITY: float = 0.2
-
-# for controlling player rotation in a momentum-like fashion
-const MAX_ANGULAR_SPEED: float = 3.0
-const ANGULAR_ACCELERATION: float = 10.0
-const ANGULAR_DECELERATION: float = 40.0
-# used to check if spotlight is rotated close enough to the target
-const TARGET_THRESHOLD: float = 0.01
-# used to begin decelerating rotation when close but not at target
-const DECELERATION_THRESHOLD: float = 5 * TARGET_THRESHOLD
-
-# used to skew sprite to emulate "looking" towards spotlight
-const SKEW_SCALE: float = 0.9 # smaller value = more skew
-const SKEW_ROTATION: float = PI / 7 # smaller denominator = more skew
-const SPRITE_ANIMATION_FRONT: String = "front"
-const SPRITE_ANIMATION_BACK: String = "back"
-
 # player state machine, sibling node under Game node
 var state_machine: Node
 # used to track previously visited, non-consumed shrines (including default)
@@ -30,51 +9,22 @@ var active_shrines: Array
 # used to track player corpse - handled by states
 var corpse: Corpse
 
-# used to continue processing controller input when the stick is held 
-# in the same direction - Godot's built-in InputEvent only detects changes
-# --- without this, the input is choppy as it only detects 
-# --- an input event when the value changes significantly
-@onready var joystick_timer: Timer = $JoystickTimer
-
-# store the location of the last direction-input (mouse or right-joystick)
-@onready var light_target: Vector3 = Vector3.ZERO
-# track whether spotlight is currently rotating or not
-@onready var is_rotating: bool = false
-# used when rotating field of view
-@onready var angular_velocity: float = 0.0
-
-@onready var hit_cooldown_active: bool = false
-# used to toggle opacity while hit cooldown active
-@onready var hit_flash: bool = false
 @onready var speed: float = 6.0
+# light variables used by state machine to adjust light strength based on state
 @onready var light_omni: OmniLight3D = $OmniLight3D
-@onready var light_spot: SpotLight3D = $LightOffset/SpotLight3D
+@onready var light_spot: SpotLight3D = $SpotLight3D
 @onready var camera: Camera3D = $RotationOffset/Camera3D
-@onready var sprite: AnimatedSprite3D = $RotationOffset/AnimatedSprite3D
-# used to disable skew effect if needed (e.g. in DEAD state)
-@onready var skew_enabled: bool = true
 
 # store initial position to return to when calling reset()
 @onready var starting_position: Vector3 = position
 
-
 func _ready() -> void:
 	light_omni.light_color = Color("GOLDENROD")
-	light_spot.light_color = Color("GOLDENROD")
-	
-	$HitCooldown.wait_time = HIT_COOLDOWN
-	$HitFlash.wait_time = HIT_FLASH_SPEED
-	
-	$HitCooldown.timeout.connect(_on_hit_cooldown_timeout)
-	$HitFlash.timeout.connect(_on_hit_flash_timeout)
-	$DamageDetector.area_entered.connect(_on_enemy_area_entered)
 	
 	SignalBus.activated_shrine.connect(_on_activated_shrine)
 	SignalBus.consumed_shrine.connect(_on_consumed_shrine)
 	
 	SignalBus.item_picked_up.connect(_on_item_picked_up)
-	
-	joystick_timer.timeout.connect(_on_joystick_timer_timeout)
 
 
 func init(state_machine: Node, shrine: Shrine, corpse: Corpse) -> void:
@@ -90,9 +40,7 @@ func init(state_machine: Node, shrine: Shrine, corpse: Corpse) -> void:
 func reset() -> void:
 	# return to starting position and state
 	position = starting_position
-	hit_cooldown_active = false
-	$HitCooldown.stop()
-	$HitFlash.stop()
+	$DamageDetector.reset()
 	
 	# store reference to default shrine before clearing list
 	var default_shrine: Shrine = active_shrines[0]
@@ -105,28 +53,8 @@ func reset() -> void:
 	corpse.reset()
 
 
-func _process(delta: float) -> void:
-	if is_rotating:
-		rotate_to_target(delta)
-		if skew_enabled:
-			skew_sprite()
-
-
 func _physics_process(delta: float) -> void:
 	handle_movement(delta) 
-
-
-func _input(event: InputEvent) -> void:
-	# check for mouse or joystick-right input
-	if event is InputEventMouseMotion:
-		set_light_target_mouse()
-	elif (event.is_action_pressed("joy_right_x_left")
-		or event.is_action_pressed("joy_right_x_right")
-		or event.is_action_pressed("joy_right_y_up")
-		or event.is_action_pressed("joy_right_y_down")):
-		# enable detection of non-changing controller input
-		if joystick_timer.is_stopped():
-			joystick_timer.start()
 
 
 func handle_movement(delta: float) -> void:
@@ -155,139 +83,8 @@ func handle_movement(delta: float) -> void:
 	move_and_slide()
 
 
-func set_light_target_mouse() -> void:
-	var mouse_pos_2d: Vector2 = get_viewport().get_mouse_position()
-	var player_pos_2d: Vector2 = camera.unproject_position(position)
-	var light_direction: Vector2 = (mouse_pos_2d - player_pos_2d)
-	
-	light_target = Vector3(light_direction.x, 1, light_direction.y)
-	is_rotating = true
-
-
-func set_light_target_controller() -> void:
-	var input_dir: Vector2 = Focus.input_get_vector(
-		"joy_right_x_left", "joy_right_x_right", "joy_right_y_up", "joy_right_y_down")
-	# from_angle() calculates from x-axis, so must be adjusted
-	var current_rotation: Vector2 = Vector2.from_angle(-$LightOffset.rotation.y - PI/2)
-	# set light_target to slightly beside current rotation so that when
-	# the joystick input ceases, the light target is quickly reached.
-	# --- avoids continuing to rotate after input stops
-	var light_direction: Vector2 = current_rotation.lerp(input_dir, 0.3)
-	
-	light_target = Vector3(light_direction.x, 1, light_direction.y)
-	is_rotating = true
-
-
-func rotate_to_target(delta: float) -> void:
-	var light_target_xz: Vector3 = Vector3(light_target.x, 0, light_target.z).normalized()
-	var target_rotation: float = Vector3.FORWARD.signed_angle_to(light_target_xz, Vector3.UP)
-	var angle_diff: float = angle_difference($LightOffset.rotation.y, target_rotation)
-	
-	# check whether we are near the target
-	if abs(angle_diff) > TARGET_THRESHOLD:
-		# cap turning speed at maximum angular velocity
-		var max_velocity: float = clamp(abs(angle_diff) * 10.0, 0, MAX_ANGULAR_SPEED)
-		# apply acceleration or deceleration based on distance to target
-		# accelerate if target is far; decelerate if target is close
-		var accel: float
-		if abs(angle_diff) >= DECELERATION_THRESHOLD:
-			accel = ANGULAR_ACCELERATION
-		else:
-			accel = ANGULAR_DECELERATION
-		# update angular velocity with acceleration/deceleration
-		angular_velocity = move_toward(angular_velocity, sign(angle_diff) * max_velocity, delta * accel)
-	else:
-		# always decelerate when close enough to the target
-		angular_velocity = move_toward(angular_velocity, 0, delta * ANGULAR_DECELERATION)
-	
-	# add calculated speed to spotlight rotation
-	$LightOffset.rotation.y += angular_velocity * delta
-	
-	# stop rotating if close enough to target and slow enough
-	# avoids instantly stop/starting rotation if the target swaps rotation directions
-	if abs(angle_diff) < TARGET_THRESHOLD and abs(angular_velocity) < TARGET_THRESHOLD:
-		$LightOffset.rotation.y = target_rotation
-		angular_velocity = 0
-		is_rotating = false
-
-
-func skew_sprite() -> void:
-	# clamp light offset rotation between -PI and PI
-	var current_rotation: float = $LightOffset.rotation.y
-	if $LightOffset.rotation.y >= PI:
-		$LightOffset.rotation.y = -PI
-	elif $LightOffset.rotation.y <= -PI:
-		$LightOffset.rotation.y = PI
-	# skew sprite to make it appear as though it is "looking" in the target direction
-	sprite.scale.x = clamp(abs(cos($LightOffset.rotation.y)), SKEW_SCALE, 1)
-	
-	# flip animation based on rotation amount
-	if $LightOffset.rotation.y > -PI/2 and $LightOffset.rotation.y <= PI/2:
-		sprite.animation = SPRITE_ANIMATION_BACK
-		sprite.rotation.y = clampf($LightOffset.rotation.y, -SKEW_ROTATION, SKEW_ROTATION)
-	else:
-		sprite.animation = SPRITE_ANIMATION_FRONT
-		
-		if $LightOffset.rotation.y > 0:
-			sprite.rotation.y = clampf($LightOffset.rotation.y, PI - SKEW_ROTATION, PI)
-		else:
-			sprite.rotation.y = clampf($LightOffset.rotation.y, -PI, SKEW_ROTATION - PI)
-
-
-func enable_skew() -> void:
-	skew_enabled = true
-	# set skew immediately after enabling
-	skew_sprite()
-
-
-func disable_skew() -> void:
-	skew_enabled = false
-	# reset sprite skew
-	sprite.rotation.y = 0
-	sprite.scale.x = 1
-	sprite.animation = SPRITE_ANIMATION_FRONT
-
-
-func hit() -> void:
-	# pass signal for state-specific behavior
-	SignalBus.player_hurt.emit()
-
-
-# utility function for activating i-frames, can be called separately
-# from hit signal
-# e.g. for respawning, to ensure player can't immediately take damage
-# optional "flash" argument to disable the flashing animation
 func take_damage(flash: bool = true) -> void:
-	hit_cooldown_active = true
-	# start hit cooldown
-	$HitCooldown.start()
-	if flash:
-		hit_flash = true
-		$HitFlash.start()
-
-
-func _on_enemy_area_entered(_area: Area3D) -> void:
-	if not hit_cooldown_active:
-		hit()
-	# do nothing if cooldown active
-
-
-func _on_hit_cooldown_timeout() -> void:
-	# deactivate invincibility frames
-	hit_cooldown_active = false
-	# stop flashing animation
-	$HitFlash.stop()
-	if $DamageDetector.has_overlapping_areas():
-		hit()
-
-
-func _on_hit_flash_timeout() -> void:
-	var current_color: Color = sprite.get_modulate()
-	if hit_flash:
-		sprite.modulate = Color(current_color, FLASH_OPACITY)
-	else:
-		sprite.modulate = Color(current_color, 1)
-	hit_flash = not hit_flash
+	$DamageDetector.activate_hit_cooldown(flash)
 
 
 func _on_activated_shrine(shrine: Shrine) -> void:
@@ -303,16 +100,3 @@ func _on_item_picked_up(item: Item) -> void:
 	item.reparent($Inventory)
 	# ensure item position is directly on player
 	item.position = Vector3.ZERO
-
-
-func _on_joystick_timer_timeout() -> void:
-	# get joystick input
-	var input_dir: Vector2 = Focus.input_get_vector(
-		"joy_right_x_left", "joy_right_x_right", "joy_right_y_up", "joy_right_y_down")
-	
-	if input_dir != Vector2.ZERO:
-		# stick is held down, rotate to target direction
-		set_light_target_controller()
-	else:
-		# if the player releases the joystick, stop polling
-		joystick_timer.stop()

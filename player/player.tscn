@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://mt6b5vxmupgn"]
+[gd_scene load_steps=10 format=3 uid="uid://mt6b5vxmupgn"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_ndccg"]
 [ext_resource type="Shape3D" uid="uid://d140c2qk5hbt2" path="res://player/player_collision_shape.tres" id="2_a56u6"]
-[ext_resource type="Texture2D" uid="uid://cw32ued20uj7r" path="res://icon_back.png" id="3_syjgo"]
-[ext_resource type="Texture2D" uid="uid://cecm7qkppnbxb" path="res://icon.svg" id="4_5bmh1"]
+[ext_resource type="Texture2D" uid="uid://s8o3w3qwl6uv" path="res://icon_back.png" id="3_syjgo"]
+[ext_resource type="Texture2D" uid="uid://cvadlfyuhhlsa" path="res://icon.svg" id="4_5bmh1"]
 [ext_resource type="Script" path="res://player/camera.gd" id="4_mmf56"]
+[ext_resource type="Script" path="res://player/spotlight.gd" id="5_nwynq"]
+[ext_resource type="Script" path="res://player/damage_detector.gd" id="6_ltudm"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bh504"]
 animations = [{
@@ -53,28 +55,28 @@ shadow_enabled = true
 omni_range = 6.335
 omni_attenuation = 1.5
 
-[node name="LightOffset" type="Marker3D" parent="."]
-
-[node name="SpotLight3D" type="SpotLight3D" parent="LightOffset"]
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.1)
 light_size = 0.4
 shadow_enabled = true
 spot_range = 250.0
+script = ExtResource("5_nwynq")
 
-[node name="HitCooldown" type="Timer" parent="."]
-one_shot = true
-
-[node name="HitFlash" type="Timer" parent="."]
-
-[node name="JoystickTimer" type="Timer" parent="."]
+[node name="JoystickTimer" type="Timer" parent="SpotLight3D"]
 wait_time = 0.05
 
 [node name="DamageDetector" type="Area3D" parent="."]
 collision_layer = 0
 collision_mask = 4
 monitorable = false
+script = ExtResource("6_ltudm")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DamageDetector"]
 shape = SubResource("CapsuleShape3D_3bb63")
+
+[node name="HitCooldown" type="Timer" parent="DamageDetector"]
+one_shot = true
+
+[node name="HitFlash" type="Timer" parent="DamageDetector"]
 
 [node name="Inventory" type="Node" parent="."]

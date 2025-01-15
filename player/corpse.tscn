@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://umlwhr2u3iej"]
 
 [ext_resource type="Script" path="res://player/corpse.gd" id="1_ejgu4"]
-[ext_resource type="Texture2D" uid="uid://cey8vsju0vbgx" path="res://icon.svg" id="1_kvadm"]
+[ext_resource type="Texture2D" uid="uid://cvadlfyuhhlsa" path="res://icon.svg" id="1_kvadm"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_5huj5"]
 
