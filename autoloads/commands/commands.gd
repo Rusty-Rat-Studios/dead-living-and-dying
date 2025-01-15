@@ -5,7 +5,8 @@ extends Node
 var command_map: Dictionary = {
 	"help": _help,
 	"help %s": _help,
-	"mode %s": _mode
+	"mode %s": _mode,
+	"reset": _reset
 }
 
 
@@ -27,3 +28,8 @@ func _mode(args: PackedStringArray) -> String:
 	elif args[0] == "debug":
 		(get_node("/root/Game/DebugLight") as DirectionalLight3D).visible = true
 	return "Game mode updated"
+
+
+func _reset(args: PackedStringArray) -> String:
+	get_node("/root/Game").reset()
+	return "Game Reset"
