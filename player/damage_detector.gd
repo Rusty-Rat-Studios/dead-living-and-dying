@@ -19,7 +19,6 @@ func _ready() -> void:
 	$HitCooldown.timeout.connect(_on_hit_cooldown_timeout)
 	$HitFlash.timeout.connect(_on_hit_flash_timeout)
 	area_entered.connect(_on_enemy_area_entered)
-	print("damage detector ready")
 
 
 func reset() -> void:
@@ -34,20 +33,19 @@ func reset() -> void:
 # e.g. for respawning, to ensure player can't immediately take damage
 # optional "flash" argument to disable the flashing animation
 func activate_hit_cooldown(flash: bool = true) -> void:
-	if not hit_cooldown_active:
-		hit_cooldown_active = true
-		# start hit cooldown
-		$HitCooldown.start()
-		if flash:
-			hit_flash = true
-			$HitFlash.start()
+	if hit_cooldown_active:
+		return
+	hit_cooldown_active = true
+	$HitCooldown.start()
+	if flash:
+		hit_flash = true
+		$HitFlash.start()
 
 
 func _on_enemy_area_entered(_area: Area3D) -> void:
 	if not hit_cooldown_active:
 		# pass signal for state-specific behavior
 		SignalBus.player_hurt.emit()
-	# do nothing if cooldown active
 
 
 func _on_hit_cooldown_timeout() -> void:
