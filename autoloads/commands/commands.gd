@@ -12,11 +12,13 @@ var command_map: Dictionary = {
 
 func _help(args: PackedStringArray) -> String:
 	if args.size() == 0:
-		return "Available commands: help, mode"
+		return "Available commands: help, mode, reset"
 	if args[0] == "help":
 		return "Usage: help [cmd] - gives usage information on a specific command"
 	if args[0] == "mode":
 		return "Usage: mode [main | debug] - changes the game mode"
+	if args[0] == "reset":
+		return "Usage: reset - Resets the game by calling Game.reset()"
 	return "Usage: help [cmd] - gives usage information on a specific command"
 
 
