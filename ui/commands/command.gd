@@ -1,7 +1,7 @@
 class_name Command
 extends Node
 
-const COMMAND_DEF: String = ""
+var command_def: String = ""
 
 
 func help() -> String:
