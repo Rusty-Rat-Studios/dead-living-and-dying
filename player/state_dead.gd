@@ -58,8 +58,8 @@ func move_to_shrine() -> void:
 	parent.corpse.activate()
 	
 	# find and move player to closest active shrine
-	var target_shrine: Shrine = parent.active_shrines[0]
-	target_shrine = Utility.find_closest(parent.active_shrines, parent.global_position)
+	var active_shrines: Array[Shrine] = ShrineManager.get_active_shrines()
+	var target_shrine: Shrine = Utility.find_closest(active_shrines, parent.global_position)
 	
 	# disable camera lagging for duration of motion
 	parent.camera.disable()

@@ -7,7 +7,6 @@ extends Node3D
 @onready var player: Player = $Player
 @onready var light_directional: DirectionalLight3D = $DirectionalLight3D
 @onready var corpse: Area3D = preload("res://player/corpse.tscn").instantiate()
-@onready var default_shrine: Shrine = $WorldGrid/RoomBottom/Shrine
 @onready var key_item: Node3D = $WorldGrid/RoomBottom/KeyItem
 
 
@@ -16,9 +15,7 @@ func _ready() -> void:
 	# Initialize player
 	# pass reference of state machine, default shrine, and corpse
 	# to be controlled by player
-	player.init($StateMachine, default_shrine, corpse)
-	default_shrine.default = true
-	default_shrine.activate()
+	player.init($StateMachine, corpse)
 	# add corpse to scene as sibling of player
 	# corpse deactivates on initialization - invisible with no collision
 	add_child(corpse)

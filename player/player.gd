@@ -24,9 +24,6 @@ const SPRITE_ANIMATION_BACK: String = "back"
 
 # player state machine, sibling node under Game node
 var state_machine: Node
-# used to track previously visited, non-consumed shrines (including default)
-# default shrine should be element 0 and never be removed from this array
-var active_shrines: Array
 # used to track player corpse - handled by states
 var corpse: Corpse
 
@@ -69,22 +66,15 @@ func _ready() -> void:
 	$HitFlash.timeout.connect(_on_hit_flash_timeout)
 	$DamageDetector.area_entered.connect(_on_enemy_area_entered)
 	
-	SignalBus.activated_shrine.connect(_on_activated_shrine)
-	SignalBus.consumed_shrine.connect(_on_consumed_shrine)
-	
 	SignalBus.item_picked_up.connect(_on_item_picked_up)
 	
 	joystick_timer.timeout.connect(_on_joystick_timer_timeout)
 
 
-func init(state_machine: Node, shrine: Shrine, corpse: Corpse) -> void:
-	@warning_ignore("shadowed_variable")
-	self.state_machine = state_machine
-	# add default shrine to active shrines
-	active_shrines.append(shrine)
+func init(_state_machine: Node, _corpse: Corpse) -> void:
+	self.state_machine = _state_machine
 	# set reference to player corpse
-	@warning_ignore("shadowed_variable")
-	self.corpse = corpse
+	self.corpse = _corpse
 
 
 func reset() -> void:
@@ -94,11 +84,6 @@ func reset() -> void:
 	$HitCooldown.stop()
 	$HitFlash.stop()
 	
-	# store reference to default shrine before clearing list
-	var default_shrine: Shrine = active_shrines[0]
-	active_shrines.clear()
-	# restore default shrine as only element
-	active_shrines.append(default_shrine)
 	state_machine.change_state(state_machine.starting_state)
 	
 	camera.reset()
@@ -288,14 +273,6 @@ func _on_hit_flash_timeout() -> void:
 	else:
 		sprite.modulate = Color(current_color, 1)
 	hit_flash = not hit_flash
-
-
-func _on_activated_shrine(shrine: Shrine) -> void:
-	active_shrines.append(shrine)
-
-
-func _on_consumed_shrine(shrine: Shrine) -> void:
-	active_shrines.remove_at(active_shrines.find(shrine))
 
 
 func _on_item_picked_up(item: Item) -> void:
