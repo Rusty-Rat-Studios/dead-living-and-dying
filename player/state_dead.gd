@@ -59,6 +59,10 @@ func move_to_shrine() -> void:
 	
 	# find and move player to closest active shrine
 	var active_shrines: Array[Shrine] = ShrineManager.get_active_shrines()
+	# failsafe if no shrines exist in WorldGrid (should not happen during prod)
+	if active_shrines.size() == 0:
+		SignalBus.game_over.emit()
+		return
 	var target_shrine: Shrine = Utility.find_closest(active_shrines, parent.global_position)
 	
 	# disable camera lagging for duration of motion
