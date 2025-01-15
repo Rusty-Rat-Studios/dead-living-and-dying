@@ -1,0 +1,77 @@
+[gd_scene load_steps=5 format=3 uid="uid://d4i04sjiyy40s"]
+
+[ext_resource type="PackedScene" uid="uid://d4cxt6unhu3c6" path="res://test/room_debug.tscn" id="1_1h3l0"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_coeri"]
+radius = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_05xp5"]
+transparency = 1
+albedo_color = Color(0.909081, 0, 0.138258, 0.396078)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_5h2ej"]
+material = SubResource("StandardMaterial3D_05xp5")
+top_radius = 2.0
+bottom_radius = 2.0
+
+[node name="Game" instance=ExtResource("1_1h3l0")]
+
+[node name="Hurtbox" type="Area3D" parent="DebugRoom" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DebugRoom/Hurtbox" index="0"]
+shape = SubResource("CylinderShape3D_coeri")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DebugRoom/Hurtbox" index="1"]
+mesh = SubResource("CylinderMesh_5h2ej")
+
+[node name="Label3D" type="Label3D" parent="DebugRoom/Hurtbox" index="2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1, 0)
+text = "HURTBOX (Physical)
+
+Come here to 
+get hurt ;_ ;"
+font_size = 64
+
+[node name="Hurtbox2" type="Area3D" parent="DebugRoom" index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DebugRoom/Hurtbox2" index="0"]
+shape = SubResource("CylinderShape3D_coeri")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DebugRoom/Hurtbox2" index="1"]
+mesh = SubResource("CylinderMesh_5h2ej")
+
+[node name="Label3D" type="Label3D" parent="DebugRoom/Hurtbox2" index="2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1, 0)
+text = "HURTBOX (Physical)
+
+Come here to 
+get hurt ;_ ;"
+font_size = 64
+
+[node name="Hurtbox3" type="Area3D" parent="DebugRoom" index="7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DebugRoom/Hurtbox3" index="0"]
+shape = SubResource("CylinderShape3D_coeri")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DebugRoom/Hurtbox3" index="1"]
+mesh = SubResource("CylinderMesh_5h2ej")
+
+[node name="Label3D" type="Label3D" parent="DebugRoom/Hurtbox3" index="2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1, 0)
+text = "HURTBOX (Physical)
+
+Come here to 
+get hurt ;_ ;"
+font_size = 64

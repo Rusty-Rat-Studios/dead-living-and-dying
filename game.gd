@@ -1,3 +1,4 @@
+class_name Game
 extends Node3D
 
 # state machine node-based design partially sourced from:
@@ -7,18 +8,14 @@ extends Node3D
 @onready var player: Player = $Player
 @onready var light_directional: DirectionalLight3D = $DirectionalLight3D
 @onready var corpse: Area3D = preload("res://player/corpse.tscn").instantiate()
-@onready var default_shrine: Shrine = $WorldGrid/RoomBottom/Shrine
-@onready var key_item: Node3D = $WorldGrid/RoomBottom/KeyItem
+@onready var ghost_resource: Resource = preload("res://ghost/ghost.tscn")
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Initialize player
-	# pass reference of state machine, default shrine, and corpse
-	# to be controlled by player
-	player.init($StateMachine, default_shrine, corpse)
-	default_shrine.default = true
-	default_shrine.activate()
+	# pass reference of state machine and corpse to be controlled by player
+	player.init($StateMachine, corpse)
 	# add corpse to scene as sibling of player
 	# corpse deactivates on initialization - invisible with no collision
 	add_child(corpse)
@@ -52,12 +49,10 @@ func reset() -> void:
 	# reset all ghosts, possessables, shrines, and items
 	Utility.call_for_each(find_children("Ghost*", "Ghost"), "reset")
 	Utility.call_for_each(find_children("Possessable*", "Possessable"), "reset")
-	Utility.call_for_each(find_children("Shrine*", "Shrine"), "reset")
-	Utility.call_for_each(find_children("Item*", "Item"), "reset")
+	ShrineManager.reset_shrines()
+	Utility.call_for_each(find_children("*Item*", "Item"), "reset")
 	# reset player
 	player.reset()
-	# reset key item
-	key_item.reset()
 
 
 func _on_player_state_changed(state_name: String) -> void:
@@ -67,7 +62,6 @@ func _on_player_state_changed(state_name: String) -> void:
 			player.light_omni.visible = true
 			player.light_spot.visible = true
 			light_directional.visible = false
-			$WorldGrid/RoomCenter/Hurtbox/Label3D.text = "HURTBOX\n\nCome here to\nget hurt ;_ ;"
 		"Dying":
 			player.light_omni.visible = true
 			player.light_spot.visible = true
@@ -76,7 +70,6 @@ func _on_player_state_changed(state_name: String) -> void:
 			player.light_omni.visible = false
 			player.light_spot.visible = false
 			light_directional.visible = true
-			$WorldGrid/RoomCenter/Hurtbox/Label3D.text = "HURTBOX\n\nDon't worry little ghost,\n\nHurtbox can't hurt you."
 	
 	# TEMPORARY
 	update_ghost_visibility(state_name)
@@ -84,7 +77,9 @@ func _on_player_state_changed(state_name: String) -> void:
 
 # TEMPORARY function to update ghost visibility based on player state
 func update_ghost_visibility(state_name: String) -> void:
-	var ghost: Ghost = get_node("WorldGrid/RoomCenter/GhostCenter")
+	# for some reason the ghost_mesh_instance is shared among all the ghosts so
+	# changing it for this changes it for all
+	var ghost: Ghost = ghost_resource.instantiate()
 	var ghost_mesh_instance: MeshInstance3D = ghost.get_node("MeshInstance3D")
 	var ghost_mesh: CapsuleMesh = ghost_mesh_instance.mesh
 	var material: Material = ghost_mesh.material
@@ -99,3 +94,4 @@ func update_ghost_visibility(state_name: String) -> void:
 			opacity = 0.8
 	
 	material.albedo_color.a = opacity
+	ghost.queue_free() # delete temp Ghost

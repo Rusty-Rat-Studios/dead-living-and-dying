@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://coj6qdyyipcvi"]
+
+[ext_resource type="Script" path="res://possessable/attack/projectile.gd" id="1_is2ed"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2ag17"]
+radius = 0.1
+
+[sub_resource type="SphereMesh" id="SphereMesh_yqbus"]
+radius = 0.1
+height = 0.2
+
+[node name="Projectile" type="RigidBody3D"]
+collision_layer = 4
+collision_mask = 7
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_is2ed")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_2ag17")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_yqbus")

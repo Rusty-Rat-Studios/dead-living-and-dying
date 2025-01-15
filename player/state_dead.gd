@@ -7,7 +7,7 @@ func enter() -> void:
 	parent.speed = 10.0
 	
 	# DEBUG: modulate color according to state
-	parent.get_node("RotationOffset/Sprite3D").modulate = Color(0.5, 0.5, 0.5, 0.5)
+	parent.get_node("RotationOffset/AnimatedSprite3D").modulate = Color(0.5, 0.5, 0.5, 0.5)
 	
 	SignalBus.player_hurt.connect(_on_player_hurt)
 	SignalBus.player_revived.connect(_on_player_revived)
@@ -54,8 +54,13 @@ func move_to_shrine() -> void:
 	parent.corpse.activate()
 	
 	# find and move player to closest active shrine
-	var target_shrine: Shrine = parent.active_shrines[0]
-	target_shrine = Utility.find_closest(parent.active_shrines, parent.global_position)
+	var active_shrines: Array[Shrine] = ShrineManager.get_active_shrines()
+	# failsafe if no shrines exist in WorldGrid (should not happen during prod)
+	if active_shrines.size() == 0:
+		push_error("No active shrine in game. There should always be a default shrine that is permanently active.")
+		SignalBus.game_over.emit()
+		return
+	var target_shrine: Shrine = Utility.find_closest(active_shrines, parent.global_position)
 	
 	# disable camera lagging for duration of motion
 	parent.camera.disable()

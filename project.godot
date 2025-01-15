@@ -22,8 +22,8 @@ PlayerHandler="*res://autoloads/player_handler.gd"
 Focus="*res://autoloads/focus.gd"
 CollisionBit="*res://autoloads/collision_bit.gd"
 Utility="*res://autoloads/utility.gd"
-Commands="*res://autoloads/commands/commands.gd"
-CommandParser="*res://autoloads/commands/command_parser.gd"
+CommandParser="*res://autoloads/command_parser.gd"
+ShrineManager="*res://autoloads/shrine_manager.gd"
 
 [debug]
 

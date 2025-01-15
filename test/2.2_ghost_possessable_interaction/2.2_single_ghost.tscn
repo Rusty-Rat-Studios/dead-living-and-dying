@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://ckw7j5rp5ou8t"]
+
+[ext_resource type="PackedScene" uid="uid://d4cxt6unhu3c6" path="res://test/room_debug.tscn" id="1_oa6jy"]
+[ext_resource type="PackedScene" uid="uid://yihpxsaeuqdi" path="res://ghost/ghost.tscn" id="2_dtqoj"]
+[ext_resource type="PackedScene" uid="uid://bcep1wbs2caas" path="res://possessable/possessable.tscn" id="3_18nsg"]
+
+[node name="Game" instance=ExtResource("1_oa6jy")]
+
+[node name="Ghost" parent="DebugRoom" index="5" instance=ExtResource("2_dtqoj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Possessable" parent="DebugRoom" index="6" instance=ExtResource("3_18nsg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

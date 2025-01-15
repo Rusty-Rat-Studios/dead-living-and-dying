@@ -3,6 +3,8 @@ extends Control
 # time that the game waits before continuing on game over
 const GAME_OVER_DELAY: float = 2.0
 
+@export var disable_start_menu: bool = false
+
 var scene: PackedScene
 
 func _ready() -> void:
@@ -10,7 +12,8 @@ func _ready() -> void:
 	$VBoxContainer/Start.pressed.connect(_on_start_pressed)
 	$VBoxContainer/Quit.pressed.connect(_on_quit_pressed)
 	SignalBus.game_over.connect(_on_game_over)
-	pause()
+	if not disable_start_menu:
+		pause()
 
 
 func _input(event: InputEvent) -> void:
