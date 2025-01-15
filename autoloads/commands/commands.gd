@@ -30,6 +30,6 @@ func _mode(args: PackedStringArray) -> String:
 	return "Game mode updated"
 
 
-func _reset(args: PackedStringArray) -> String:
+func _reset(_args: PackedStringArray) -> String:
 	get_node("/root/Game").reset()
 	return "Game Reset"
