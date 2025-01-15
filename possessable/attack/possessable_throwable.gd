@@ -1,3 +1,4 @@
+class_name PossessableThrowable
 extends PossessableAttack
 
 # impulse strength used to throw the object
