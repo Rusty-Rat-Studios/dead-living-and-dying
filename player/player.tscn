@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_ndccg"]
 [ext_resource type="Shape3D" uid="uid://d140c2qk5hbt2" path="res://player/player_collision_shape.tres" id="2_a56u6"]
-[ext_resource type="Texture2D" uid="uid://cw32ued20uj7r" path="res://icon_back.png" id="3_syjgo"]
-[ext_resource type="Texture2D" uid="uid://cecm7qkppnbxb" path="res://icon.svg" id="4_5bmh1"]
+[ext_resource type="Texture2D" uid="uid://s8o3w3qwl6uv" path="res://icon_back.png" id="3_syjgo"]
+[ext_resource type="Texture2D" uid="uid://cvadlfyuhhlsa" path="res://icon.svg" id="4_5bmh1"]
 [ext_resource type="Script" path="res://player/camera.gd" id="4_mmf56"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bh504"]
