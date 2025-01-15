@@ -8,7 +8,7 @@ extends Node3D
 @onready var player: Player = $Player
 @onready var light_directional: DirectionalLight3D = $DirectionalLight3D
 @onready var corpse: Area3D = preload("res://player/corpse.tscn").instantiate()
-@onready var ghost_resourse: Resource = preload("res://ghost/ghost.tscn")
+@onready var ghost_resource: Resource = preload("res://ghost/ghost.tscn")
 
 
 # Called when the node enters the scene tree for the first time.
@@ -79,7 +79,7 @@ func _on_player_state_changed(state_name: String) -> void:
 func update_ghost_visibility(state_name: String) -> void:
 	# for some reason the ghost_mesh_instance is shared among all the ghosts so
 	# changing it for this changes it for all
-	var ghost: Ghost = ghost_resourse.instantiate()
+	var ghost: Ghost = ghost_resource.instantiate()
 	var ghost_mesh_instance: MeshInstance3D = ghost.get_node("MeshInstance3D")
 	var ghost_mesh: CapsuleMesh = ghost_mesh_instance.mesh
 	var material: Material = ghost_mesh.material
