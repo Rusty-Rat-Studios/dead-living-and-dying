@@ -6,7 +6,7 @@ const TEXT_ACTIVE: String = "SHRINE\r---ACTIVE---\nYou will revive here if this\
 const TEXT_CONSUMED: String = "SHRINE\r---CONSUMED---\nThis shrine cannot\rbe used anymore"
 const TEXT_INTERACTABLE: String = "[E] Activate"
 
-@export var default: bool
+@export var default: bool = false
 
 # tracks if shrine has been reached and activated
 @onready var activated: bool = false
