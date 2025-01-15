@@ -1,5 +1,10 @@
 extends Node
 
+# Map a command definition to a Callable
+var commands: Array[Command] = [
+	
+]
+
 
 # Takes a command string, tokenizes it, processes it, runs it, and returns a response
 func handle_command(text: String) -> String:
@@ -13,18 +18,18 @@ func _tokenize_command(text: String) -> PackedStringArray:
 
 # Finds a command definition that matches the tokens supplied and runs the command
 func _process_command(tokens: PackedStringArray) -> String:
-	var matching_def: String = ""
-	for command_definition: String in Commands.command_map:
-		var def_tokens: PackedStringArray = _tokenize_command(command_definition)
+	var matching_command: Command = null
+	for command: Command in commands:
+		var def_tokens: PackedStringArray = _tokenize_command(command.COMMAND_DEF)
 		if def_tokens.size() == tokens.size():
 			if _do_tokens_match(tokens, def_tokens):
-				matching_def = command_definition
+				matching_command = command
 				break
-	if matching_def == "":
+	if matching_command == null:
 		return "Error: Unknown Command"
-	var def_tokens: PackedStringArray = _tokenize_command(matching_def)
+	var def_tokens: PackedStringArray = _tokenize_command(matching_command.COMMAND_DEF)
 	var args: PackedStringArray = _get_args(tokens, def_tokens)
-	return Commands.command_map.get(matching_def).call(args)
+	return matching_command.execute(args)
 
 
 # Precondition: PackedStringArrays are the same size
