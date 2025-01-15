@@ -16,5 +16,4 @@ func execute(args: PackedStringArray) -> String:
 	var command: Command = CommandParser.find_command(args)
 	if command:
 		return command.help()
-	else:
-		return help()
+	return help()
