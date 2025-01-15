@@ -1,8 +1,5 @@
 extends Command
 
-func _ready() -> void:
-	command_def = "help"
-
 
 func help() -> String:
 	return "Usage: help [cmd] - gives usage information on a specific command"

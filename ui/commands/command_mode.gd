@@ -1,8 +1,5 @@
 extends Command
 
-func _ready() -> void:
-	command_def = "mode"
-
 
 func help() -> String:
 	return "Usage: mode [main | debug] - changes the game mode"

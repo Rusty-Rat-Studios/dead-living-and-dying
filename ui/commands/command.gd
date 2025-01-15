@@ -1,8 +1,6 @@
 class_name Command
 extends Node
 
-var command_def: String = ""
-
 
 func help() -> String:
 	push_error("AbstractMethodError: abstract function Command.help() called")
