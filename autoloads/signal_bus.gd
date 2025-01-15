@@ -14,10 +14,6 @@ extends Node
 @warning_ignore("unused_signal") signal player_entered_room(room: Node3D)
 @warning_ignore("unused_signal") signal player_exited_room(room: Node3D)
 
-# used when player activates shrine
-@warning_ignore("unused_signal") signal activated_shrine(shrine: Shrine)
-# used when player revives at a shrine
-@warning_ignore("unused_signal") signal consumed_shrine(shrine: Shrine)
 # emitted when player contacts their corpse in DEAD state
 @warning_ignore("unused_signal") signal player_revived(corpse_position: Vector3)
 

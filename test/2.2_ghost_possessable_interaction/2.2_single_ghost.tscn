@@ -6,8 +6,8 @@
 
 [node name="Game" instance=ExtResource("1_oa6jy")]
 
-[node name="Ghost" parent="DebugRoom" index="6" instance=ExtResource("2_dtqoj")]
+[node name="Ghost" parent="DebugRoom" index="5" instance=ExtResource("2_dtqoj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
-[node name="Possessable" parent="DebugRoom" index="7" instance=ExtResource("3_18nsg")]
+[node name="Possessable" parent="DebugRoom" index="6" instance=ExtResource("3_18nsg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

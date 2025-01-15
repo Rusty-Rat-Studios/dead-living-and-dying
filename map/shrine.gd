@@ -6,13 +6,13 @@ const TEXT_ACTIVE: String = "SHRINE\r---ACTIVE---\nYou will revive here if this\
 const TEXT_CONSUMED: String = "SHRINE\r---CONSUMED---\nThis shrine cannot\rbe used anymore"
 const TEXT_INTERACTABLE: String = "[E] Activate"
 
+@export var default: bool = false
+
 # tracks if shrine has been reached and activated
 @onready var activated: bool = false
 # tracks if player has revived at this shrine
 # for disallowing further revivals at this shrine
 @onready var consumed: bool = false
-# set only for beginning shrine
-@onready var default: bool = false
 # material duplicate for individually modifying material of each shrine
 @onready var material: Material = $MeshInstance3D.get_active_material(0).duplicate()
 # medium green
@@ -32,6 +32,10 @@ func _ready() -> void:
 	
 	# apply material to shrine
 	$MeshInstance3D.set_surface_override_material(0, material)
+	
+	# register the shrine with ShrineManager
+	ShrineManager.register_shrine(self)
+	
 	reset()
 
 
@@ -39,6 +43,7 @@ func reset() -> void:
 	consumed = false
 	if default:
 		$Label3D.text = TEXT_ACTIVE
+		activated = true
 		material.albedo_color = color_active
 	else:
 		$Label3D.text = TEXT_INACTIVE
@@ -55,7 +60,6 @@ func activate() -> void:
 	material.albedo_color = color_active
 	$Label3D.text = TEXT_ACTIVE
 	$Label3D.visible = true
-	SignalBus.activated_shrine.emit(self)
 	# remove input detection for interactable and hide message
 	$Interactable.inputs.clear()
 	$Interactable.hide_message()
@@ -67,7 +71,6 @@ func consume() -> void:
 		activated = false
 		material.albedo_color = color_consumed
 		$Label3D.text = TEXT_CONSUMED
-		SignalBus.consumed_shrine.emit(self)
 
 
 func _on_body_entered(_body: Node3D) -> void:
