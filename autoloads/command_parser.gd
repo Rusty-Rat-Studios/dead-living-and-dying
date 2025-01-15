@@ -1,9 +1,19 @@
 extends Node
 
 # Map a command definition to a Callable
-var commands: Array[Command] = [
-	
+@onready var commands: Array[Command] = [
+	preload("res://ui/commands/command_help.gd").new(),
+	preload("res://ui/commands/command_mode.gd").new(),
+	preload("res://ui/commands/command_reset.gd").new()
 ]
+
+
+func get_command_defs() -> PackedStringArray:
+	return []
+
+
+func find_command(tokens: PackedStringArray) -> Command:
+	return null
 
 
 # Takes a command string, tokenizes it, processes it, runs it, and returns a response
@@ -18,17 +28,10 @@ func _tokenize_command(text: String) -> PackedStringArray:
 
 # Finds a command definition that matches the tokens supplied and runs the command
 func _process_command(tokens: PackedStringArray) -> String:
-	var matching_command: Command = null
-	for command: Command in commands:
-		var def_tokens: PackedStringArray = _tokenize_command(command.COMMAND_DEF)
-		if def_tokens.size() == tokens.size():
-			if _do_tokens_match(tokens, def_tokens):
-				matching_command = command
-				break
+	var matching_command: Command = find_command(tokens)
 	if matching_command == null:
 		return "Error: Unknown Command"
-	var def_tokens: PackedStringArray = _tokenize_command(matching_command.COMMAND_DEF)
-	var args: PackedStringArray = _get_args(tokens, def_tokens)
+	var args: PackedStringArray = _extract_args(tokens, matching_command)
 	return matching_command.execute(args)
 
 
