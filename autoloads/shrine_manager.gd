@@ -4,12 +4,17 @@ extends Node
 
 
 func register_shrine(shrine: Shrine) -> void:
-	pass
+	shrines.append(shrine)
 
 
 func get_active_shrines() -> Array[Shrine]:
-	return []
+	return shrines.filter(func(shrine: Shrine) -> bool: return shrine.activated)
 
 
-func reset() -> void:
-	pass
+func reset_shrines() -> void:
+	for shrine: Shrine in shrines:
+		shrine.reset()
+
+
+func clear_shrines_list() -> void:
+	shrines.clear()
