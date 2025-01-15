@@ -11,13 +11,10 @@ var corpse: Corpse
 
 @onready var speed: float = 6.0
 @onready var light_omni: OmniLight3D = $OmniLight3D
-@onready var light_spot: SpotLight3D = $SpotLight3D
 @onready var camera: Camera3D = $RotationOffset/Camera3D
-@onready var sprite: Sprite3D = $RotationOffset/Sprite3D
 
 # store initial position to return to when calling reset()
 @onready var starting_position: Vector3 = position
-
 
 func _ready() -> void:
 	light_omni.light_color = Color("GOLDENROD")

@@ -9,6 +9,12 @@ const TARGET_THRESHOLD: float = 0.1
 # used to begin decelerating rotation when close but not at target
 const DECELERATION_THRESHOLD: float = 2 * TARGET_THRESHOLD
 
+# used to skew sprite to emulate "looking" towards spotlight
+const SKEW_SCALE: float = 0.9 # smaller value = more skew
+const SKEW_ROTATION: float = PI / 7 # smaller denominator = more skew
+const SPRITE_ANIMATION_FRONT: String = "front"
+const SPRITE_ANIMATION_BACK: String = "back"
+
 # used to continue processing controller input when the stick is held 
 # in the same direction - Godot's built-in InputEvent only detects changes
 # --- without this, the input is choppy as it only detects 
@@ -21,6 +27,9 @@ const DECELERATION_THRESHOLD: float = 2 * TARGET_THRESHOLD
 @onready var is_rotating: bool = false
 # used when rotating field of view
 @onready var angular_velocity: float = 0.0
+@onready var sprite: AnimatedSprite3D = PlayerHandler.get_player().get_node("RotationOffset/AnimatedSprite3D")
+# used to disable skew effect if needed (e.g. in DEAD state)
+@onready var skew_enabled: bool = true
 
 func _ready() -> void:
 	light_color = Color("GOLDENROD")
@@ -31,6 +40,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if is_rotating:
 		rotate_to_target(delta)
+		if skew_enabled:
+			skew_sprite()
 
 
 func _input(event: InputEvent) -> void:
@@ -99,6 +110,42 @@ func rotate_to_target(delta: float) -> void:
 	if abs(angle_diff) < TARGET_THRESHOLD and abs(angular_velocity) < TARGET_THRESHOLD:
 		angular_velocity = 0
 		is_rotating = false
+
+
+func skew_sprite() -> void:
+	# clamp light offset rotation between -PI and PI
+	if rotation.y >= PI:
+		rotation.y = -PI
+	elif rotation.y <= -PI:
+		rotation.y = PI
+	# skew sprite to make it appear as though it is "looking" in the target direction
+	sprite.scale.x = clamp(abs(cos(rotation.y)), SKEW_SCALE, 1)
+	
+	# flip animation based on rotation amount
+	if rotation.y > -PI/2 and rotation.y <= PI/2:
+		sprite.animation = SPRITE_ANIMATION_BACK
+		sprite.rotation.y = clampf(rotation.y, -SKEW_ROTATION, SKEW_ROTATION)
+	else:
+		sprite.animation = SPRITE_ANIMATION_FRONT
+		
+		if rotation.y > 0:
+			sprite.rotation.y = clampf(rotation.y, PI - SKEW_ROTATION, PI)
+		else:
+			sprite.rotation.y = clampf(rotation.y, -PI, SKEW_ROTATION - PI)
+
+
+func enable_skew() -> void:
+	skew_enabled = true
+	# set skew immediately after enabling
+	skew_sprite()
+
+
+func disable_skew() -> void:
+	skew_enabled = false
+	# reset sprite skew
+	sprite.rotation.y = 0
+	sprite.scale.x = 1
+	sprite.animation = SPRITE_ANIMATION_FRONT
 
 
 func _on_joystick_timer_timeout() -> void:

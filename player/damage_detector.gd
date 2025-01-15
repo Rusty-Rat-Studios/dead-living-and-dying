@@ -10,7 +10,7 @@ const FLASH_OPACITY: float = 0.2
 @onready var hit_cooldown_active: bool = false
 # used to toggle opacity while hit cooldown active
 @onready var hit_flash: bool = false
-@onready var sprite: Sprite3D = PlayerHandler.get_player().get_node("RotationOffset/Sprite3D")
+@onready var sprite: AnimatedSprite3D = PlayerHandler.get_player().get_node("RotationOffset/AnimatedSprite3D")
 
 func _ready() -> void:
 	$HitCooldown.wait_time = HIT_COOLDOWN
