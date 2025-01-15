@@ -51,7 +51,7 @@ func reset() -> void:
 	
 	# reset all ghosts, possessables, shrines, and items
 	Utility.call_for_each(find_children("Ghost*", "Ghost"), "reset")
-	Utility.call_for_each(find_children("Possessable*", "Possessable"), "reset")
+	Utility.call_for_each(find_children("*", "Possessable"), "reset")
 	Utility.call_for_each(find_children("Shrine*", "Shrine"), "reset")
 	Utility.call_for_each(find_children("Item*", "Item"), "reset")
 	# reset player

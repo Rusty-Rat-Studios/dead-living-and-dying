@@ -27,7 +27,7 @@ signal possessed
 # flag for checking if player is in attack range
 @onready var player_in_range: bool = false
 # store initial position to return to when calling reset()
-@onready var starting_position: Vector3 = position
+@onready var starting_transform: Transform3D = transform
 
 func _ready() -> void:
 	# add self to possessables in room
@@ -36,7 +36,7 @@ func _ready() -> void:
 
 func reset() -> void:
 	# return to starting position and depossess if necessary
-	position = starting_position
+	transform = starting_transform
 	# is_possessed check required because a side effect of calling possess()/depossess()
 	# adds or removes the possessable from the room's array of available possessables
 	if is_possessed:
