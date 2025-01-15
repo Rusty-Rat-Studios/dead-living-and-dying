@@ -10,7 +10,9 @@ var active_shrines: Array
 var corpse: Corpse
 
 @onready var speed: float = 6.0
+# light variables used by state machine to adjust light strength based on state
 @onready var light_omni: OmniLight3D = $OmniLight3D
+@onready var light_spot: SpotLight3D = $SpotLight3D
 @onready var camera: Camera3D = $RotationOffset/Camera3D
 
 # store initial position to return to when calling reset()

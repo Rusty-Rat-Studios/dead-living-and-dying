@@ -34,6 +34,7 @@ const SPRITE_ANIMATION_BACK: String = "back"
 func _ready() -> void:
 	light_color = Color("GOLDENROD")
 	
+	SignalBus.player_state_changed.connect(_on_player_state_changed)
 	joystick_timer.timeout.connect(_on_joystick_timer_timeout)
 
 
@@ -146,6 +147,13 @@ func disable_skew() -> void:
 	sprite.rotation.y = 0
 	sprite.scale.x = 1
 	sprite.animation = SPRITE_ANIMATION_FRONT
+
+
+func _on_player_state_changed(state: String) -> void:
+	if state == "Dead":
+		disable_skew()
+	else:
+		enable_skew()
 
 
 func _on_joystick_timer_timeout() -> void:
