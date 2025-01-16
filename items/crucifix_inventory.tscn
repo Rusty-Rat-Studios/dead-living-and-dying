@@ -20,15 +20,17 @@ radius = 2.0
 script = ExtResource("2_8ft1u")
 
 [node name="Hitbox" type="Area3D" parent="." index="0"]
+visible = false
 collision_layer = 0
-collision_mask = 0
-monitoring = false
+collision_mask = 8
+monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Hitbox" index="0"]
 mesh = SubResource("TorusMesh_4x5sf")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="1"]
 shape = SubResource("CylinderShape3D_xw4mg")
+disabled = true
 
 [node name="CooldownTimer" type="Timer" parent="." index="1"]
 one_shot = true

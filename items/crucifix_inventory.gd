@@ -1,5 +1,7 @@
 extends DefenseItemInventory
 
+signal ghost_hit(ghost: Ghost)
+
 @onready var cooldown_duration: float = 4
 @onready var active_duration: float = 2
 @onready var cooldown_active: bool = false 
@@ -11,15 +13,12 @@ func _ready() -> void:
 	$ActiveTimer.timeout.connect(_on_active_timer_timeout)
 	$CooldownTimer.timeout.connect(_on_cooldown_timer_timeout)
 	
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+	$Hitbox.body_entered.connect(_on_body_entered)
 
 
 func _input(event: InputEvent) -> void:
-	super(event) 
+	if PlayerHandler.get_player_state() == "Dead":
+		return
 	if event.is_action_pressed("use_defense_item"):
 		use()
 
@@ -27,15 +26,22 @@ func _input(event: InputEvent) -> void:
 func use() -> void:
 	if cooldown_active:
 		return
-	$Hitbox.collision_mask = CollisionBit.SPIRIT
+	$Hitbox/CollisionShape3D.disabled = false
+	$Hitbox.visible = true
 	$ActiveTimer.start()
 	cooldown_active = true
 
 
 func _on_active_timer_timeout() -> void:
-	$Hitbox.collision_mask = 0
+	$Hitbox/CollisionShape3D.disabled = true
+	$Hitbox.visible = false
 	$CooldownTimer.start()
 
 
 func _on_cooldown_timer_timeout() -> void:
 	cooldown_active = false
+
+
+func _on_body_entered(body: Node3D) -> void:
+	if body is Ghost:
+		body.hit.emit()
