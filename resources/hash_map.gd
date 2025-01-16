@@ -59,11 +59,11 @@ func contains_hash(hash: PackedByteArray) -> bool:
 
 
 # Returns a list of the keys (hashed)
-func keys() -> Array[PackedByteArray]:
+func keys() -> Array:
 	return _hash_map.keys()
 
 
-func values() -> Array[Variant]:
+func values() -> Array:
 	return _hash_map.values()
 
 
@@ -76,4 +76,4 @@ func dict() -> Dictionary:
 
 
 func _is_hashable(item: Object) -> bool:
-	return item.has_function("hash")
+	return item.has_method("hash")
