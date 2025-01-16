@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dx3xbk4c7uji8"]
+[gd_scene load_steps=21 format=3 uid="uid://dx3xbk4c7uji8"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_77rk7"]
 [ext_resource type="PackedScene" uid="uid://mt6b5vxmupgn" path="res://player/player.tscn" id="1_hu241"]
@@ -16,8 +16,9 @@
 [ext_resource type="PackedScene" uid="uid://c75eretp0162f" path="res://items/item.tscn" id="13_7hjh7"]
 [ext_resource type="PackedScene" uid="uid://bcep1wbs2caas" path="res://possessable/possessable.tscn" id="13_66ase"]
 [ext_resource type="PackedScene" uid="uid://dic5onsop66y4" path="res://ui/game_menu.tscn" id="13_owhbc"]
-[ext_resource type="PackedScene" uid="uid://c1hur2s8mgagv" path="res://possessable/attack/throwable.tscn" id="14_23qy6"]
-[ext_resource type="PackedScene" uid="uid://bfmkrask6gxl3" path="res://possessable/attack/ranged.tscn" id="15_lv48w"]
+[ext_resource type="PackedScene" uid="uid://kqqw3rvpgis6" path="res://possessable/attack/wall_painting/wall_painting.tscn" id="14_4x2p3"]
+[ext_resource type="PackedScene" uid="uid://c1hur2s8mgagv" path="res://possessable/attack/possesssable_throwable.tscn" id="14_23qy6"]
+[ext_resource type="PackedScene" uid="uid://bfmkrask6gxl3" path="res://possessable/attack/possessable_ranged.tscn" id="15_lv48w"]
 [ext_resource type="PackedScene" uid="uid://bwmbngtw81o3y" path="res://ui/debug_console.tscn" id="15_rbtf5"]
 
 [node name="Game" type="Node3D"]
@@ -88,6 +89,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0.5, 0)
 
 [node name="Item" parent="WorldGrid/RoomBottom" instance=ExtResource("13_7hjh7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.5, -2)
+
+[node name="WallPainting" parent="WorldGrid/RoomBottom" instance=ExtResource("14_4x2p3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.5, -9.85)
+
+[node name="WallPainting2" parent="WorldGrid/RoomBottom" instance=ExtResource("14_4x2p3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.5, -9.85)
 
 [node name="RoomCenter" type="Node3D" parent="WorldGrid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20)
@@ -211,6 +218,33 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, -4)
 
 [node name="Throwable" parent="WorldGrid/RoomRight" instance=ExtResource("14_23qy6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+
+[node name="WallPainting" parent="WorldGrid/RoomRight" instance=ExtResource("14_4x2p3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1.5, -9.85)
+
+[node name="WallPainting2" parent="WorldGrid/RoomRight" instance=ExtResource("14_4x2p3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1.5, -9.85)
+
+[node name="WallPainting3" parent="WorldGrid/RoomRight" instance=ExtResource("14_4x2p3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1.5, -9.85)
+
+[node name="WallPainting4" parent="WorldGrid/RoomRight" instance=ExtResource("14_4x2p3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.5, -9.85)
+
+[node name="WallPainting5" parent="WorldGrid/RoomRight" instance=ExtResource("14_4x2p3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.5, -9.85)
+
+[node name="WallPainting6" parent="WorldGrid/RoomRight" instance=ExtResource("14_4x2p3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -9.85)
+
+[node name="WallPainting7" parent="WorldGrid/RoomRight" instance=ExtResource("14_4x2p3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1.5, -9.85)
+
+[node name="WallPainting8" parent="WorldGrid/RoomRight" instance=ExtResource("14_4x2p3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1.5, -9.85)
+
+[node name="WallPainting9" parent="WorldGrid/RoomRight" instance=ExtResource("14_4x2p3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1.5, -9.85)
 
 [node name="RoomTop" type="Node3D" parent="WorldGrid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -40)
