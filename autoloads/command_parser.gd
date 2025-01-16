@@ -3,7 +3,8 @@ extends Node
 # Map a command definition to a Callable
 @onready var commands: Dictionary = {
 	"help": preload("res://ui/commands/command_help.gd").new(),
-	"mode": preload("res://ui/commands/command_mode.gd").new(),
+	"debuglight": preload("res://ui/commands/command_debuglight.gd").new(),
+	"ghostopacity": preload("res://ui/commands/command_ghostopacity.gd").new(),
 	"reset": preload("res://ui/commands/command_reset.gd").new(),
 }
 
@@ -36,6 +37,6 @@ func find_command(tokens: PackedStringArray) -> Command:
 	if tokens.size() == 0:
 		return null
 	for command_def: String in commands.keys():
-		if tokens[0] == command_def:
+		if tokens[0].to_lower() == command_def:
 			return commands.get(command_def)
 	return null
