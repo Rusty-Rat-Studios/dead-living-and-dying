@@ -1,3 +1,4 @@
+class_name PossessableRanged
 extends PossessableAttack
 
 @onready var projectile_scene: PackedScene = preload("res://possessable/attack/projectile.tscn")

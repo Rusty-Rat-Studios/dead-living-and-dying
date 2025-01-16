@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bfmkrask6gxl3"]
 
 [ext_resource type="PackedScene" uid="uid://custksxq8jvgd" path="res://possessable/attack/possessable_attack.tscn" id="1_hp16e"]
-[ext_resource type="Script" path="res://possessable/attack/ranged.gd" id="2_c086f"]
+[ext_resource type="Script" path="res://possessable/attack/possessable_ranged.gd" id="2_c086f"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8avfd"]
 albedo_color = Color(0.458824, 0, 0.509804, 1)
@@ -13,7 +13,7 @@ size = Vector3(0.5, 0.5, 0.5)
 [sub_resource type="SphereShape3D" id="SphereShape3D_jxkqj"]
 radius = 8.0
 
-[node name="Ranged" instance=ExtResource("1_hp16e")]
+[node name="PossessableRanged" instance=ExtResource("1_hp16e")]
 script = ExtResource("2_c086f")
 
 [node name="MeshInstance3D" parent="." index="0"]

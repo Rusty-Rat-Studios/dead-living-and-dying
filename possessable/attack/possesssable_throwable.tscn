@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://c1hur2s8mgagv"]
 
 [ext_resource type="PackedScene" uid="uid://custksxq8jvgd" path="res://possessable/attack/possessable_attack.tscn" id="1_5pall"]
-[ext_resource type="Script" path="res://possessable/attack/throwable.gd" id="2_fk2mr"]
+[ext_resource type="Script" path="res://possessable/attack/possessable_throwable.gd" id="2_fk2mr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vxkbk"]
 albedo_color = Color(0.301961, 0.72549, 0.788235, 1)

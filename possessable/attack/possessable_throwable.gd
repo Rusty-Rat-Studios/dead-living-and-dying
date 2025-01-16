@@ -1,3 +1,4 @@
+class_name PossessableThrowable
 extends PossessableAttack
 
 # impulse strength used to throw the object
@@ -39,7 +40,7 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 		
 		# add default on-the-floor height to floating height and add an
 		# oscillating sine component to float above/below target height
-		var target_height: float = starting_position.y + FLOAT_HEIGHT + FLOAT_RANGE * sin(float_time_offset)
+		var target_height: float = starting_transform.origin.y + FLOAT_HEIGHT + FLOAT_RANGE * sin(float_time_offset)
 		var current_height: float = position.y
 		var height_diff: float = target_height - current_height
 		
