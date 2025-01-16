@@ -55,3 +55,6 @@ func _on_game_over() -> void:
 	$VBoxContainer/Start.text = "START"
 	
 	get_node("/root/Game").reset()
+	
+	if disable_start_menu:
+		resume()
