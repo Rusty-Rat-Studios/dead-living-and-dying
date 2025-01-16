@@ -3,7 +3,7 @@ extends Node
 # Map a command definition to a Callable
 @onready var commands: Dictionary = {
 	"help": preload("res://ui/commands/command_help.gd").new(),
-	"mode": preload("res://ui/commands/command_mode.gd").new(),
+	"debuglight": preload("res://ui/commands/command_debuglight.gd").new(),
 	"reset": preload("res://ui/commands/command_reset.gd").new(),
 }
 
