@@ -4,7 +4,7 @@ extends Resource
 var _hash_map: Dictionary = {}
 
 
-func add(key: Object, value: Variant) -> bool:
+func add(key: Variant, value: Variant) -> bool:
 	if not _is_hashable(key):
 		push_error("Error: key is not hashable")
 		return false
@@ -18,7 +18,7 @@ func add_with_hash(hash: PackedByteArray, value: Variant) -> bool:
 	return true
 
 
-func remove(key: Object) -> bool:
+func remove(key: Variant) -> bool:
 	if not _is_hashable(key):
 		push_error("Error: key is not hashable")
 		return false
@@ -30,7 +30,7 @@ func remove_with_hash(hash: PackedByteArray) -> bool:
 	return _hash_map.erase(hash)
 
 
-func retrieve(key: Object) -> Variant:
+func retrieve(key: Variant) -> Variant:
 	if not _is_hashable(key):
 		push_error("Error: key is not hashable")
 		return null
@@ -46,7 +46,7 @@ func clear() -> void:
 	_hash_map.clear()
 
 
-func contains_key(key: Object) -> bool:
+func contains_key(key: Variant) -> bool:
 	if not _is_hashable(key):
 		push_error("Error: key is not hashable")
 		return false
@@ -75,5 +75,5 @@ func dict() -> Dictionary:
 	return _hash_map
 
 
-func _is_hashable(item: Object) -> bool:
+func _is_hashable(item: Variant) -> bool:
 	return item.has_method("hash")
