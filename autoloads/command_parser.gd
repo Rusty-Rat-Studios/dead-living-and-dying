@@ -37,6 +37,6 @@ func find_command(tokens: PackedStringArray) -> Command:
 	if tokens.size() == 0:
 		return null
 	for command_def: String in commands.keys():
-		if tokens[0] == command_def:
+		if tokens[0].to_lower() == command_def:
 			return commands.get(command_def)
 	return null
