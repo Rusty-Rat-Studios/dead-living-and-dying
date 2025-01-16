@@ -4,6 +4,7 @@ extends Node
 @onready var commands: Dictionary = {
 	"help": preload("res://ui/commands/command_help.gd").new(),
 	"debuglight": preload("res://ui/commands/command_debuglight.gd").new(),
+	"ghostopacity": preload("res://ui/commands/command_ghostopacity.gd").new(),
 	"reset": preload("res://ui/commands/command_reset.gd").new(),
 }
 
