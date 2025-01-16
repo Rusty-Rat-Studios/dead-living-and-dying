@@ -3,8 +3,7 @@ extends Node3D
 
 const GRID_SCALE: float = 20 # Size of each grid square in editor units
 
-var basic_room: RoomInformation = preload("res://map/basic_room/basic_room.tres")
-
+@onready var basic_room: RoomInformation = preload("res://map/basic_room/basic_room.tres")
 
 func _ready() -> void:
 	generate_grid()
