@@ -1,60 +1,4 @@
-extends Node3D
-
-# state machine node-based design partially sourced from:
-# "Starter state machines in Godot 4" by "The Shaggy Dev"
-# https://www.youtube.com/watch?v=oqFbZoA2lnU
-@onready var state_machine: Node = $StateMachine
-@onready var player: Player = $Player
-@onready var light_directional: DirectionalLight3D = $DirectionalLight3D
-@onready var corpse: Area3D = preload("res://player/corpse.tscn").instantiate()
-@onready var default_shrine: Shrine = $DebugRoom/Shrine
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	# Initialize player
-	# pass reference of state machine, default shrine, and corpse
-	# to be controlled by player
-	player.init($StateMachine, default_shrine, corpse)
-	default_shrine.default = true
-	default_shrine.activate()
-	# add corpse to scene as sibling of player
-	# corpse deactivates on initialization - invisible with no collision
-	add_child(corpse)
-	
-	# Initialize state machine
-	# pass reference of the player to the states
-	state_machine.init($Player)
-	SignalBus.player_state_changed.connect(_on_player_state_changed)
-
-
-func _unhandled_input(event: InputEvent) -> void:
-	state_machine.process_input(event)
-
-
-func _physics_process(delta: float) -> void:
-	# handle basic movement before passing to state-specific actions
-	state_machine.process_physics(delta)
-
-
-func _process(delta: float) -> void:
-	state_machine.process_frame(delta)
-
-
-func reset() -> void:
-	# find_children(pattern: String, type: String = "") returns const Array
-	# of all nodes in the entire scene with name matching pattern string
-	# and type matching type string
-		# Note: wildcard '*' used to select any node starting with "NodeName[xyz]"
-		# e.g. Ghost* gets GhostLeft1, GhostLeft2, GhostRight1, etc
-	
-	# reset all ghosts, possessables, shrines, and items
-	Utility.call_for_each(find_children("Ghost*", "Ghost"), "reset")
-	Utility.call_for_each(find_children("Possessable*", "Possessable"), "reset")
-	Utility.call_for_each(find_children("Shrine*", "Shrine"), "reset")
-	Utility.call_for_each(find_children("Item*", "Item"), "reset")
-	# reset player
-	player.reset()
+extends Game
 
 
 func _on_player_state_changed(state_name: String) -> void:
@@ -69,3 +13,6 @@ func _on_player_state_changed(state_name: String) -> void:
 		"Dead":
 			player.light_omni.visible = false
 			player.light_spot.visible = false
+	
+	# TEMPORARY
+	update_ghost_visibility(state_name)
