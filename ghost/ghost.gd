@@ -71,4 +71,4 @@ func _on_player_exited_room(room: Node3D) -> void:
 
 
 func _on_hit() -> void:
-	state_machine.change_state(state_machine.state_stunned)
+	state_machine.change_state(state_machine.current_state.state_stunned)
