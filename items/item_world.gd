@@ -17,10 +17,13 @@ func _ready() -> void:
 	$Interactable.enabled = false
 	global_position = starting_position
 	visible = true
+	
+	pick_up()
 
 
 func pick_up() -> void:
 	if inventory_resource == null:
+		#gdlint:ignore=max-line-length
 		push_error("AbstractMethodError: ItemWorld base class function pick_up() called without initializing variable 'inventory_resource'")
 		return
 	
