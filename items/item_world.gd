@@ -17,8 +17,6 @@ func _ready() -> void:
 	$Interactable.enabled = false
 	global_position = starting_position
 	visible = true
-	
-	pick_up()
 
 
 func pick_up() -> void:

@@ -18,4 +18,4 @@ extends Node
 @warning_ignore("unused_signal") signal player_revived(corpse_position: Vector3)
 
 # emitted by item when the player interacts to pick it up
-@warning_ignore("unused_signal") signal item_picked_up(item: Node3D)
+@warning_ignore("unused_signal") signal item_picked_up(item: ItemInventory)

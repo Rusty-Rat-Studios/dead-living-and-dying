@@ -72,7 +72,7 @@ func take_damage(flash: bool = true) -> void:
 	$DamageDetector.activate_hit_cooldown(flash)
 
 
-func _on_item_picked_up(item: Node3D) -> void:
+func _on_item_picked_up(item: ItemInventory) -> void:
 	$Inventory.add_child(item)
 	# ensure item position is directly on player
 	item.position = Vector3.ZERO
