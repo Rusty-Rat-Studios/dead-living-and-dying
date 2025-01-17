@@ -4,6 +4,7 @@ extends Node3D
 const GRID_SCALE: float = 20 # Size of each grid square in editor units
 
 @onready var basic_room: RoomInformation = preload("res://map/basic_room/basic_room.tres")
+@onready var room_map: HashMap = HashMap.new()
 
 func _ready() -> void:
 	generate_grid()
@@ -32,10 +33,30 @@ func add_room(room_info: RoomInformation, grid_location: Vector2, door_locations
 	room.grid_location = grid_location
 	room.room_information = room_info
 	room.door_locations = door_locations
+	# Adds each grid square that the room takes up to the HashMap
+	for room_portion: Vector2 in room_info.room_shape:
+		var translated_room_portion: Vector2 = room_portion + grid_location
+		room_map.add_with_hash(_hash_vector2(translated_room_portion), room)
 	add_child(room)
+
+
+# If grid_location exists in the HashMap return room, otherwise returns null
+func get_room_at_location(grid_location: Vector2) -> Room:
+	return room_map.retrieve_with_hash(_hash_vector2(grid_location))
+
+
+func clear() -> void:
+	for room: Node in get_children():
+		room.queue_free()
+	room_map.clear()
 
 
 func init_all_rooms() -> void:
 	for node: Node in self.get_children():
 		if node is Room:
 			node.init()
+
+
+func _hash_vector2(vector: Vector2) -> PackedByteArray:
+	var hash_string: String = "Vector2|%s" % [str(vector)]
+	return hash_string.sha256_buffer()
