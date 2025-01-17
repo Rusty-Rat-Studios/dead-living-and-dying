@@ -35,11 +35,11 @@ func retrieve(key: Variant) -> Variant:
 		push_error("Error: key is not hashable")
 		return null
 	var hash: PackedByteArray = key.hash()
-	return _hash_map.erase(hash)
+	return _hash_map.get(hash)
 
 
-func retrieve_with_hash(hash: PackedByteArray) -> bool:
-	return _hash_map.erase(hash)
+func retrieve_with_hash(hash: PackedByteArray) -> Variant:
+	return _hash_map.get(hash)
 
 
 func clear() -> void:
