@@ -1,6 +1,8 @@
 class_name DoorLocation
 extends Resource
 
+# Stores a door location with a x,y grid location and a direction.
+
 enum Direction {
 	NORTH = 0,
 	EAST = 1,
@@ -32,7 +34,7 @@ func equals(other: DoorLocation) -> bool:
 	return self.hash() == other.hash()
 
 
-# Takes the current door location and returns the door location needed for the connecting door
+# Returns the door location needed for the door connecting to this door.
 func invert() -> DoorLocation:
 	if direction == Direction.NORTH:
 		return DoorLocation.new(Vector2(location.x, location.y - 1), Direction.SOUTH)

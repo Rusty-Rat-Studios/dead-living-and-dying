@@ -1,6 +1,13 @@
 class_name HashMap
 extends Resource
 
+# HashMap is a simple key value dictionary where the key is always a hash.
+# If the key being hashed is hashable (contains a hash() function) then use the
+# add, remove, retrieve, and contains_key functions. If the key is not hashable
+# then hash it manually and use the functions add_with_hash, remove_with_hash, 
+# retrieve_with_hash, and contains_hash. Other than the key being a hash, the 
+# dictionary is like any other (except maybe a little faster).
+
 var _hash_map: Dictionary = {}
 
 

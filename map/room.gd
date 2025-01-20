@@ -1,6 +1,11 @@
 class_name Room
 extends Node3D
 
+# The base class for all rooms. Stores information about the room, the door 
+# locations, the position on the world grid, and the possessables in the room.
+# On init the room moves to its specified grid location and runs 
+# generate_walls_and_doors()
+
 var room_information: RoomInformation
 var door_locations: Array[DoorLocation]
 var grid_location: Vector2

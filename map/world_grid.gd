@@ -1,10 +1,15 @@
 class_name WorldGrid
 extends Node3D
 
+# This class is the authority on everything room related. It handles instantiation, 
+# initialization, and storing the location of the rooms. Other classes call this
+# class to ask about the state of the WorldGrid.
+
 const GRID_SCALE: float = 20 # Size of each grid square in editor units
 
 @onready var basic_room: RoomInformation = preload("res://map/basic_room/basic_room.tres")
 @onready var room_map: HashMap = HashMap.new()
+
 
 func _ready() -> void:
 	generate_grid()
