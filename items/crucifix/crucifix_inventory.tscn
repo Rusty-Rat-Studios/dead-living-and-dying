@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://cdibgy57rubh6"]
 
-[ext_resource type="PackedScene" uid="uid://bu35p53xfck5l" path="res://items/defense_item_inventory.tscn" id="1_x5nou"]
+[ext_resource type="PackedScene" uid="uid://bpkp2ej6u0kax" path="res://items/defense_item_inventory.tscn" id="1_x5nou"]
 [ext_resource type="Script" path="res://items/crucifix/crucifix_inventory.gd" id="2_8ft1u"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1v5j2"]
