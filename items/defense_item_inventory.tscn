@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bu35p53xfck5l"]
+[gd_scene load_steps=3 format=3 uid="uid://bpkp2ej6u0kax"]
 
-[ext_resource type="PackedScene" uid="uid://emms6seth0ys" path="res://items/item_inventory.tscn" id="1_oor43"]
+[ext_resource type="PackedScene" path="res://items/item_inventory.tscn" id="1_oor43"]
 [ext_resource type="Script" path="res://items/defense_item_inventory.gd" id="2_rqwx3"]
 
 [node name="DefenseItemInventory" instance=ExtResource("1_oor43")]

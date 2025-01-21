@@ -2,7 +2,7 @@ class_name ItemWorld
 extends Node3D
 
 # to be set by inheritors as a reference to their in-world partner version
-@onready var inventory_resource: Resource = null
+@export var inventory_resource: Resource
 # save starting position to reset to on game over
 @onready var starting_position: Vector3 = global_position
 
