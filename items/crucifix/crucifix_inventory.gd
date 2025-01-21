@@ -1,7 +1,5 @@
 extends DefenseItemInventory
 
-signal ghost_hit(ghost: Ghost)
-
 @onready var cooldown_duration: float = 4
 @onready var active_duration: float = 2
 @onready var cooldown_active: bool = false 
