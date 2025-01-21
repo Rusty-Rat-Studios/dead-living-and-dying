@@ -79,9 +79,13 @@ func pause() -> void:
 	is_paused = false
 	
 	# 25/75 chance to continue waiting or possess item
-	var decision: int = parent.rng.get_rng().randi_range(0, 3)
-	if decision != 0:
-		print(Time.get_time_string_from_system(), ": ", parent.name, " decided to possess")
-		parent.state_machine.change_state(state_possessing)
-	else:
-		set_random_target()
+	var choices: Dictionary = {
+		_possess: .75,
+		set_random_target: .25
+	}
+	parent.rng.call_weighted_random(choices)
+
+
+func _possess() -> void:
+	print(Time.get_time_string_from_system(), ": ", parent.name, " decided to possess")
+	parent.state_machine.change_state(state_possessing)
