@@ -32,3 +32,13 @@ func weighted_random(choices: Dictionary) -> Variant:
 	var items: Array = choices.keys()
 	var weighted_index: int = _rng.rand_weighted(weights)
 	return items[weighted_index]
+
+
+# call the output of random_from_list()
+func call_random_from_list(list: Array[Callable]) -> Variant:
+	return random_from_list(list).call()
+
+
+# call the output of weighted_random()
+func call_weighted_random(choices: Dictionary) -> Variant:
+	return weighted_random(choices).call()
