@@ -117,7 +117,7 @@ func process_physics(delta: float) -> State:
 func _on_decision_timeout() -> void:
 	if is_possessing:
 		# decide to depossess or not
-		var depossess_chance: float = parent.rng.randf()
+		var depossess_chance: float = parent.rng.get_rng().randf()
 		if depossess_chance < DEPOSSESS_CHANCE:
 			print(Time.get_time_string_from_system(), ": ", parent.name, " decided to depossess ", target_possessable.name)
 			# depossess object and go to WAITING
@@ -128,7 +128,7 @@ func _on_decision_timeout() -> void:
 		
 		# decide to attack or not
 		# if player not in range, possessable.attack() simply depossesses
-		var attack_chance: float = parent.rng.randf()
+		var attack_chance: float = parent.rng.get_rng().randf()
 		if attack_chance < ATTACK_CHANCE:
 			print(Time.get_time_string_from_system(), ": ", parent.name, " decided to attack!")
 			target_possessable.attack(PlayerHandler.get_player())
