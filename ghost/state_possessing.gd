@@ -3,9 +3,11 @@ extends GhostState
 # delay between ghost decision
 const DECISION_TIME: float = 3.0
 # used to determine whether ghost attacks
-const ATTACK_CHANCE: float = 0.67
+const ATTACK_CHANCE: float = 0.5
 # used to determine whether ghost depossesses
-const DEPOSSESS_CHANCE: float = 0.33
+const DEPOSSESS_CHANCE: float = 0.15
+# used to determine whether ghost waits
+const WAIT_CHANCE: float = 0.35
 # short delay for the ghost to wait when failing to possess an object
 const TARGET_RESET_DELAY: float = 0.1
 
@@ -116,27 +118,32 @@ func process_physics(delta: float) -> State:
 
 func _on_decision_timeout() -> void:
 	if is_possessing:
-		# decide to depossess or not
-		var depossess_chance: float = parent.rng.get_rng().randf()
-		if depossess_chance < DEPOSSESS_CHANCE:
-			print(Time.get_time_string_from_system(), ": ", parent.name, " decided to depossess ", target_possessable.name)
-			# depossess object and go to WAITING
-			target_possessable.depossess()
-			is_possessing = false
-			parent.state_machine.change_state(state_waiting)
-			return
-		
-		# decide to attack or not
-		# if player not in range, possessable.attack() simply depossesses
-		var attack_chance: float = parent.rng.get_rng().randf()
-		if attack_chance < ATTACK_CHANCE:
-			print(Time.get_time_string_from_system(), ": ", parent.name, " decided to attack!")
-			target_possessable.attack(PlayerHandler.get_player())
-			target_possessable.depossess()
-			is_possessing = false
-			parent.state_machine.change_state(state_waiting)
-			return
-		
+		var choices: Dictionary = {
+			_depossess: DEPOSSESS_CHANCE,
+			_attack: ATTACK_CHANCE,
+			_wait: WAIT_CHANCE
+		}
+		parent.rng.weighted_random(choices).call()
+
+
+func _depossess() -> void:
+	print(Time.get_time_string_from_system(), ": ", parent.name, " decided to depossess ", target_possessable.name)
+	# depossess object and go to WAITING
+	target_possessable.depossess()
+	is_possessing = false
+	parent.state_machine.change_state(state_waiting)
+
+
+func _attack() -> void:
+	print(Time.get_time_string_from_system(), ": ", parent.name, " decided to attack!")
+	# if player not in range, possessable.attack() simply depossesses
+	target_possessable.attack(PlayerHandler.get_player())
+	target_possessable.depossess()
+	is_possessing = false
+	parent.state_machine.change_state(state_waiting)
+
+
+func _wait() -> void:
 	# no action was taken, restart decision timer
 	print(Time.get_time_string_from_system(), ": ", parent.name, " decided to do nothing")
 	decision_timer.wait_time = DECISION_TIME
