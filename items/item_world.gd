@@ -22,7 +22,7 @@ func _ready() -> void:
 func pick_up() -> void:
 	if inventory_resource == null:
 		#gdlint:ignore=max-line-length
-		push_error("AbstractMethodError: ItemWorld base class function pick_up() called without initializing variable 'inventory_resource'")
+		push_error("AbstractVariableError: ItemWorld base class function pick_up() called without initializing variable 'inventory_resource'")
 		return
 	
 	# emits a signal caught by the player who then adds a child
