@@ -22,13 +22,14 @@ const FLOAT_FORCE: float = 1.8
 const FLOAT_HEIGHT: float = 3
 # for timing float effect oscillation
 @onready var float_time_offset: float = 0.0
+@onready var hitbox: Area3D = $Hitbox
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	# if object has been thrown, thus depossessed, it should not be possessable
 	# again until object has slowed down enough
 	if not is_possessable and linear_velocity.length() < DAMAGE_VELOCITY:
 		# disable hurtbox when slow enough
-		$Hurtbox.collision_layer = 0
+		hitbox.collision_layer = 0
 		# set flag to allow possession again
 		is_possessable = true
 	
@@ -72,7 +73,7 @@ func attack(target: Node3D) -> void:
 		# disable player detection
 		$AttackRange.collision_mask = 0
 		# enable hurtbox
-		$Hurtbox.collision_layer = CollisionBit.PHYSICAL
+		hitbox.collision_layer = CollisionBit.PHYSICAL
 		# disallow re-possession during attack
 		is_possessable = false
 		# VIOLENTLY LAUNCH SELF TOWARDS PLAYER \m/

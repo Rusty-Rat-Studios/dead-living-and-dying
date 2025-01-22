@@ -19,9 +19,9 @@ script = ExtResource("2_fk2mr")
 [node name="MeshInstance3D" parent="." index="0"]
 mesh = SubResource("BoxMesh_smd12")
 
-[node name="Hurtbox" type="Area3D" parent="." index="3"]
+[node name="Hitbox" type="Area3D" parent="." index="3"]
 collision_layer = 0
 collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox" index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="0"]
 shape = SubResource("BoxShape3D_rqoep")
