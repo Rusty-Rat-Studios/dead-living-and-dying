@@ -1,19 +1,14 @@
 extends Node
 
-@onready var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
-
-
-# Returns the basic rng object so that basic random functions can be called
-func get_rng() -> RandomNumberGenerator:
-	return _rng
+@onready var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 
 func set_seed(seed: int) -> void:
-	_rng.seed = seed
+	rng.seed = seed
 
 
 func get_seed() -> int:
-	return _rng.seed
+	return rng.seed
 
 
 # Given a list of items, pick one at random (equally weighted)
@@ -30,7 +25,7 @@ func random_from_list(list: Array) -> Variant:
 func weighted_random(choices: Dictionary) -> Variant:
 	var weights: PackedFloat32Array = PackedFloat32Array(choices.values())
 	var items: Array = choices.keys()
-	var weighted_index: int = _rng.rand_weighted(weights)
+	var weighted_index: int = rng.rand_weighted(weights)
 	return items[weighted_index]
 
 
@@ -39,6 +34,6 @@ func call_random_from_list(list: Array[Callable]) -> Variant:
 	return random_from_list(list).call()
 
 
-# call the output of weighted_random()
+# call the output of weighted_random() (Dict keys should be Callable)
 func call_weighted_random(choices: Dictionary) -> Variant:
 	return weighted_random(choices).call()
