@@ -14,7 +14,6 @@ func reset() -> void:
 
 func activate() -> void:
 	visible = true
-	# set_deferred() required because disabling collision involves the physics engine
 	collision_shape.set_deferred("disabled", false)
 
 
