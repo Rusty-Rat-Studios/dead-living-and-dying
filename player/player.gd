@@ -11,6 +11,7 @@ var corpse: Corpse
 @onready var light_omni: OmniLight3D = $OmniLight3D
 @onready var light_spot: SpotLight3D = $SpotLight3D
 @onready var camera: Camera3D = $RotationOffset/Camera3D
+# updated by state machine when changing states
 @onready var hurtbox: Area3D = $Hurtbox
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
 
