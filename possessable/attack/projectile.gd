@@ -1,6 +1,8 @@
 class_name Projectile
 extends RigidBody3D
 
+@onready var collision_shape: CollisionShape3D = $CollisionShape3D
+
 const SPEED: float = 12
 # used to delay enabling collision in case ranged possessable is next to some 
 # collision object (e.g. wall for wall-painting)
@@ -19,7 +21,7 @@ func shoot(target: Vector3) -> void:
 	linear_velocity = global_position.direction_to(Vector3(target.x, global_position.y, target.z)) * SPEED
 	# delay to allow it to travel past nearby collidable objects, e.g. walls
 	await Utility.delay(COLLISION_DELAY)
-	collision_mask = CollisionBit.WORLD + CollisionBit.PLAYER + CollisionBit.PHYSICAL
+	collision_shape.disabled = false
 
 
 func _on_body_entered(body: Node3D) -> void:

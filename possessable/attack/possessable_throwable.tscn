@@ -20,8 +20,9 @@ script = ExtResource("2_fk2mr")
 mesh = SubResource("BoxMesh_smd12")
 
 [node name="Hitbox" type="Area3D" parent="." index="3"]
-collision_layer = 0
+collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="0"]
 shape = SubResource("BoxShape3D_rqoep")
+disabled = true

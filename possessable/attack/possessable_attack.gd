@@ -1,6 +1,8 @@
 class_name PossessableAttack
 extends Possessable
 
+@onready var range_collision_shape: CollisionShape3D = $AttackRange/CollisionShape3D
+
 func _ready() -> void:
 	super()
 	# detect when player is in range
@@ -11,7 +13,7 @@ func _ready() -> void:
 func possess() -> void:
 	super()
 	# enable player detection
-	$AttackRange.collision_mask = CollisionBit.PLAYER
+	range_collision_shape.set_deferred("disabled", false)
 	is_possessed = true
 	# check if player in range on initial possession
 	if $AttackRange.overlaps_body(PlayerHandler.get_player()):
@@ -21,7 +23,7 @@ func possess() -> void:
 func depossess() -> void:
 	super()
 	# disable player detection
-	$AttackRange.collision_mask = 0
+	range_collision_shape.disabled = true
 
 
 func _on_player_entered_range(_player: Player) -> void:
