@@ -2,6 +2,8 @@ extends GhostState
 
 const PAUSE_DURATION_MAX: float = 3.0
 const PAUSE_DURATION_MIN: float = 1.0
+const POSSESS_CHANCE: float = .75
+const WAIT_CHANCE: float = .25
 
 var room_boundaries: Rect2 # select random points in room to wander to
 
@@ -80,8 +82,8 @@ func pause() -> void:
 	
 	# 25/75 chance to continue waiting or possess item
 	var choices: Dictionary = {
-		_possess: .75,
-		set_random_target: .25
+		_possess: POSSESS_CHANCE,
+		set_random_target: WAIT_CHANCE
 	}
 	RNG.call_weighted_random(choices)
 
