@@ -1,6 +1,8 @@
 class_name Ghost
 extends CharacterBody3D
 
+signal hit
+
 var movement_boundaries: Rect2
 
 @onready var state_machine: Node = $StateMachine
@@ -26,6 +28,8 @@ func _ready() -> void:
 	# to ensure this connection always evaluates first when signal emits
 	SignalBus.player_entered_room.connect(_on_player_entered_room)
 	SignalBus.player_exited_room.connect(_on_player_exited_room)
+	
+	hit.connect(_on_hit)
 
 
 func _physics_process(delta: float) -> void:
@@ -64,3 +68,7 @@ func _on_player_entered_room(room: Node3D) -> void:
 func _on_player_exited_room(room: Node3D) -> void:
 	if room == current_room:
 		player_in_room = false
+
+
+func _on_hit() -> void:
+	state_machine.change_state(state_machine.current_state.state_stunned)
