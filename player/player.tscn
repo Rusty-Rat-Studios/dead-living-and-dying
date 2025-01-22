@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cvadlfyuhhlsa" path="res://icon.svg" id="4_5bmh1"]
 [ext_resource type="Script" path="res://player/camera.gd" id="4_mmf56"]
 [ext_resource type="Script" path="res://player/spotlight.gd" id="5_nwynq"]
-[ext_resource type="Script" path="res://player/damage_detector.gd" id="6_ltudm"]
+[ext_resource type="Script" path="res://player/hurtbox.gd" id="6_ltudm"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bh504"]
 animations = [{
@@ -65,18 +65,18 @@ script = ExtResource("5_nwynq")
 [node name="JoystickTimer" type="Timer" parent="SpotLight3D"]
 wait_time = 0.05
 
-[node name="DamageDetector" type="Area3D" parent="."]
+[node name="Hurtbox" type="Area3D" parent="."]
 collision_layer = 0
 collision_mask = 4
 monitorable = false
 script = ExtResource("6_ltudm")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DamageDetector"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
 shape = SubResource("CapsuleShape3D_3bb63")
 
-[node name="HitCooldown" type="Timer" parent="DamageDetector"]
+[node name="HitCooldown" type="Timer" parent="Hurtbox"]
 one_shot = true
 
-[node name="HitFlash" type="Timer" parent="DamageDetector"]
+[node name="HitFlash" type="Timer" parent="Hurtbox"]
 
 [node name="Inventory" type="Node" parent="."]

@@ -11,6 +11,8 @@ var corpse: Corpse
 @onready var light_omni: OmniLight3D = $OmniLight3D
 @onready var light_spot: SpotLight3D = $SpotLight3D
 @onready var camera: Camera3D = $RotationOffset/Camera3D
+@onready var hurtbox: Area3D = $Hurtbox
+@onready var collision_shape: CollisionShape3D = $CollisionShape3D
 
 # store initial position to return to when calling reset()
 @onready var starting_position: Vector3 = position
@@ -30,7 +32,7 @@ func init(_state_machine: Node, _corpse: Corpse) -> void:
 func reset() -> void:
 	# return to starting position and state
 	position = starting_position
-	$DamageDetector.reset()
+	hurtbox.reset()
 	
 	state_machine.change_state(state_machine.starting_state)
 	
@@ -69,7 +71,7 @@ func handle_movement(delta: float) -> void:
 
 
 func take_damage(flash: bool = true) -> void:
-	$DamageDetector.activate_hit_cooldown(flash)
+	hurtbox.activate_hit_cooldown(flash)
 
 
 func _on_item_picked_up(item: Item) -> void:
