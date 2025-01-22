@@ -1,12 +1,12 @@
 class_name Projectile
 extends RigidBody3D
 
-@onready var collision_shape: CollisionShape3D = $CollisionShape3D
-
 const SPEED: float = 12
 # used to delay enabling collision in case ranged possessable is next to some 
 # collision object (e.g. wall for wall-painting)
 const COLLISION_DELAY: float = 0.1
+
+@onready var collision_shape: CollisionShape3D = $CollisionShape3D
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
