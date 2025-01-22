@@ -9,6 +9,11 @@ func enter() -> void:
 	# DEBUG: modulate color according to state
 	parent.get_node("RotationOffset/AnimatedSprite3D").modulate = Color(0.5, 0.5, 0.5, 0.5)
 	
+	# change collision layers out of physical plane into spirit plane
+	parent.collision_layer = CollisionBit.PLAYER + CollisionBit.SPIRIT
+	parent.collision_mask = CollisionBit.WORLD + CollisionBit.SPIRIT
+	parent.hurtbox.collision_mask = CollisionBit.SPIRIT
+	
 	SignalBus.player_hurt.connect(_on_player_hurt)
 	SignalBus.player_revived.connect(_on_player_revived)
 	SignalBus.player_state_changed.emit("Dead")
@@ -17,10 +22,6 @@ func enter() -> void:
 	var key_item: Node3D = parent.get_node_or_null("Inventory/KeyItem")
 	if key_item:
 		key_item.drop()
-	
-	parent.collision_layer = CollisionBit.PLAYER + CollisionBit.SPIRIT
-	parent.collision_mask = CollisionBit.WORLD + CollisionBit.SPIRIT
-	parent.hurtbox.collision_mask = CollisionBit.SPIRIT
 	
 	move_to_shrine()
 
