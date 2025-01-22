@@ -123,7 +123,7 @@ func _on_decision_timeout() -> void:
 			_attack: ATTACK_CHANCE,
 			_wait: WAIT_CHANCE
 		}
-		parent.rng.call_weighted_random(choices)
+		RNG.call_weighted_random(choices)
 
 
 func _depossess() -> void:

@@ -61,9 +61,9 @@ func process_physics(delta: float) -> State:
 func set_random_target() -> void:
 	# generate random movement target within room boundaries
 	# offset to avoid setting point within walls
-	var x: float = parent.rng.get_rng().randf_range(room_boundaries.position.x + 1,
+	var x: float = RNG.rng.randf_range(room_boundaries.position.x + 1,
 					room_boundaries.position.x + room_boundaries.size.x - 1)
-	var z: float = parent.rng.get_rng().randf_range(room_boundaries.position.y + 1,
+	var z: float = RNG.rng.randf_range(room_boundaries.position.y + 1,
 					room_boundaries.position.y + room_boundaries.size.y - 1)
 	
 	parent.target_pos = parent.current_room.global_position + Vector3(x, 1.0, z)
@@ -73,7 +73,7 @@ func pause() -> void:
 	# pause movement behavior until timer expires
 	is_paused = true
 	# use variable reference to allow disabling the timer on state exit()
-	pause_timer.wait_time = parent.rng.get_rng().randf_range(PAUSE_DURATION_MIN, PAUSE_DURATION_MAX)
+	pause_timer.wait_time = RNG.rng.randf_range(PAUSE_DURATION_MIN, PAUSE_DURATION_MAX)
 	pause_timer.start()
 	await pause_timer.timeout
 	is_paused = false
@@ -83,7 +83,7 @@ func pause() -> void:
 		_possess: .75,
 		set_random_target: .25
 	}
-	parent.rng.call_weighted_random(choices)
+	RNG.call_weighted_random(choices)
 
 
 func _possess() -> void:
