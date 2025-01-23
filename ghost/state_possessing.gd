@@ -42,7 +42,7 @@ func ready_after_parent() -> void:
 
 func enter() -> void:
 	# enable possessable detector
-	detector_collision_shape.disabled = false
+	detector_collision_shape.set_deferred("disabled", false)
 	# reset decision timer
 	decision_timer.wait_time = DECISION_TIME
 	
@@ -52,7 +52,7 @@ func enter() -> void:
 func exit() -> void:
 	super()
 	# disable possessable detector
-	detector_collision_shape.disabled = true
+	detector_collision_shape.set_deferred("disabled", true)
 	
 	# depossess any currently possessed item
 	if is_possessing:

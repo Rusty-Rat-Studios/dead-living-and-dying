@@ -23,7 +23,7 @@ func possess() -> void:
 func depossess() -> void:
 	super()
 	# disable player detection
-	range_collision_shape.disabled = true
+	range_collision_shape.set_deferred("disabled", true)
 
 
 func _on_player_entered_range(_player: Player) -> void:

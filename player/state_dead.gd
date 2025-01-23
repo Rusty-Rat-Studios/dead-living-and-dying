@@ -49,8 +49,8 @@ func move_to_shrine() -> void:
 	# temporarily deactivate player collision and hurtbox to ensure they
 	# don't interact with anything while tweening to shrine
 	# --- reactivate after reaching shrine
-	parent.hurtbox.collision_shape.disabled = true
-	parent.collision_shape.disabled = true
+	parent.hurtbox.collision_shape.set_deferred("disabled", true)
+	parent.collision_shape.set_deferred("disabled", true)
 	
 	# spawn player corpse at death location
 	parent.corpse.global_position = parent.global_position
@@ -82,8 +82,8 @@ func move_to_shrine() -> void:
 	target_shrine.consume()
 	
 	# enable collision layers for spirit plane
-	parent.hurtbox.collision_shape.disabled = false
-	parent.collision_shape.disabled = false
+	parent.hurtbox.collision_shape.set_deferred("disabled", false)
+	parent.collision_shape.set_deferred("disabled", false)
 
 
 func _on_player_hurt() -> void:
