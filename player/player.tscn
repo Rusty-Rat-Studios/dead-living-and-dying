@@ -79,4 +79,4 @@ one_shot = true
 
 [node name="HitFlash" type="Timer" parent="Hurtbox"]
 
-[node name="Inventory" type="Node" parent="."]
+[node name="Inventory" type="Node3D" parent="."]

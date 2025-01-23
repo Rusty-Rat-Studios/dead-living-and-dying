@@ -2,6 +2,8 @@ extends GhostState
 
 const PAUSE_DURATION_MAX: float = 3.0
 const PAUSE_DURATION_MIN: float = 1.0
+const POSSESS_CHANCE: float = .75
+const WAIT_CHANCE: float = .25
 
 var room_boundaries: Rect2 # select random points in room to wander to
 
@@ -61,9 +63,9 @@ func process_physics(delta: float) -> State:
 func set_random_target() -> void:
 	# generate random movement target within room boundaries
 	# offset to avoid setting point within walls
-	var x: float = parent.rng.randf_range(room_boundaries.position.x + 1,
+	var x: float = RNG.rng.randf_range(room_boundaries.position.x + 1,
 					room_boundaries.position.x + room_boundaries.size.x - 1)
-	var z: float = parent.rng.randf_range(room_boundaries.position.y + 1,
+	var z: float = RNG.rng.randf_range(room_boundaries.position.y + 1,
 					room_boundaries.position.y + room_boundaries.size.y - 1)
 	
 	parent.target_pos = parent.current_room.global_position + Vector3(x, 1.0, z)
@@ -73,15 +75,19 @@ func pause() -> void:
 	# pause movement behavior until timer expires
 	is_paused = true
 	# use variable reference to allow disabling the timer on state exit()
-	pause_timer.wait_time = parent.rng.randf_range(PAUSE_DURATION_MIN, PAUSE_DURATION_MAX)
+	pause_timer.wait_time = RNG.rng.randf_range(PAUSE_DURATION_MIN, PAUSE_DURATION_MAX)
 	pause_timer.start()
 	await pause_timer.timeout
 	is_paused = false
 	
 	# 25/75 chance to continue waiting or possess item
-	var decision: int = parent.rng.randi_range(0, 3)
-	if decision != 0:
-		print(Time.get_time_string_from_system(), ": ", parent.name, " decided to possess")
-		parent.state_machine.change_state(state_possessing)
-	else:
-		set_random_target()
+	var choices: Dictionary = {
+		_possess: POSSESS_CHANCE,
+		set_random_target: WAIT_CHANCE
+	}
+	RNG.call_weighted_random(choices)
+
+
+func _possess() -> void:
+	print(Time.get_time_string_from_system(), ": ", parent.name, " decided to possess")
+	parent.state_machine.change_state(state_possessing)

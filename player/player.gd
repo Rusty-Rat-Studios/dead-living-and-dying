@@ -75,8 +75,7 @@ func take_damage(flash: bool = true) -> void:
 	hurtbox.activate_hit_cooldown(flash)
 
 
-func _on_item_picked_up(item: Item) -> void:
-	# reparent node as a child to player inventory
-	item.reparent($Inventory)
+func _on_item_picked_up(item: ItemInventory) -> void:
+	$Inventory.add_child(item)
 	# ensure item position is directly on player
 	item.position = Vector3.ZERO
