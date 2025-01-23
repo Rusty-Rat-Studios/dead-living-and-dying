@@ -1,6 +1,8 @@
 class_name Corpse
 extends Area3D
 
+@onready var collision_shape: CollisionShape3D = $CollisionShape3D
+
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 	deactivate()
@@ -12,14 +14,12 @@ func reset() -> void:
 
 func activate() -> void:
 	visible = true
-	collision_layer = CollisionBit.PLAYER
-	collision_mask = CollisionBit.PLAYER
+	collision_shape.set_deferred("disabled", false)
 
 
 func deactivate() -> void:
 	visible = false
-	collision_layer = 0
-	collision_mask = 0
+	collision_shape.set_deferred("disabled", true)
 
 
 func _on_body_entered(body: Node3D) -> void:

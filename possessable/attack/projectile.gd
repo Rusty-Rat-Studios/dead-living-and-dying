@@ -6,6 +6,8 @@ const SPEED: float = 12
 # collision object (e.g. wall for wall-painting)
 const COLLISION_DELAY: float = 0.1
 
+@onready var collision_shape: CollisionShape3D = $CollisionShape3D
+
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 	# ensure projectile cannot collide with its parent
@@ -19,7 +21,7 @@ func shoot(target: Vector3) -> void:
 	linear_velocity = global_position.direction_to(Vector3(target.x, global_position.y, target.z)) * SPEED
 	# delay to allow it to travel past nearby collidable objects, e.g. walls
 	await Utility.delay(COLLISION_DELAY)
-	collision_mask = CollisionBit.WORLD + CollisionBit.PLAYER + CollisionBit.PHYSICAL
+	collision_shape.disabled = false
 
 
 func _on_body_entered(body: Node3D) -> void:

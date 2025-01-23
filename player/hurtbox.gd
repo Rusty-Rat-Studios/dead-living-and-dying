@@ -10,6 +10,8 @@ const FLASH_OPACITY: float = 0.2
 @onready var hit_cooldown_active: bool = false
 # used to toggle opacity while hit cooldown active
 @onready var hit_flash: bool = false
+# used by state machine when updating states
+@onready var collision_shape: CollisionShape3D = $CollisionShape3D
 @onready var sprite: AnimatedSprite3D = PlayerHandler.get_player().get_node("RotationOffset/AnimatedSprite3D")
 
 func _ready() -> void:

@@ -9,6 +9,11 @@ func enter() -> void:
 	# DEBUG: modulate color according to state
 	parent.get_node("RotationOffset/AnimatedSprite3D").modulate = Color(0.5, 0.5, 0.5, 0.5)
 	
+	# change collision layers out of physical plane into spirit plane
+	parent.collision_layer = CollisionBit.PLAYER + CollisionBit.SPIRIT
+	parent.collision_mask = CollisionBit.WORLD + CollisionBit.SPIRIT
+	parent.hurtbox.collision_mask = CollisionBit.SPIRIT
+	
 	SignalBus.player_hurt.connect(_on_player_hurt)
 	SignalBus.player_revived.connect(_on_player_revived)
 	SignalBus.player_state_changed.emit("Dead")
@@ -26,7 +31,7 @@ func exit() -> void:
 	# change collision layers out of spirit plane into physical plane
 	parent.collision_layer = CollisionBit.PLAYER + CollisionBit.PHYSICAL
 	parent.collision_mask = CollisionBit.WORLD
-	parent.get_node("DamageDetector").collision_mask = CollisionBit.PHYSICAL
+	parent.hurtbox.collision_mask = CollisionBit.PHYSICAL
 	
 	SignalBus.player_hurt.disconnect(_on_player_hurt)
 	SignalBus.player_revived.disconnect(_on_player_revived)
@@ -44,9 +49,8 @@ func move_to_shrine() -> void:
 	# temporarily deactivate player collision and hurtbox to ensure they
 	# don't interact with anything while tweening to shrine
 	# --- reactivate after reaching shrine
-	parent.get_node("DamageDetector").collision_mask = 0
-	parent.collision_layer = 0
-	parent.collision_mask = 0
+	parent.hurtbox.collision_shape.set_deferred("disabled", true)
+	parent.collision_shape.set_deferred("disabled", true)
 	
 	# spawn player corpse at death location
 	parent.corpse.global_position = parent.global_position
@@ -68,19 +72,18 @@ func move_to_shrine() -> void:
 	# move corpse towards shrine over RESPAWN_TIME duration
 	tween.tween_property(parent, "global_position", target_shrine.global_position, 
 		RESPAWN_TIME).set_trans(Tween.TRANS_CUBIC)
-
-  # wait for tween to finish before reactivating collision layers and camera
+	
+	# wait for tween to finish before reactivating collision layers and camera
 	await Utility.delay(RESPAWN_TIME)
-
+	
 	# re-enable camera lagging
 	parent.camera.enable()
-  # consume shrine (note: does not consume default shrine)
+	# consume shrine (note: does not consume default shrine)
 	target_shrine.consume()
 	
 	# enable collision layers for spirit plane
-	parent.get_node("DamageDetector").collision_mask = CollisionBit.SPIRIT
-	parent.collision_layer = CollisionBit.PLAYER + CollisionBit.SPIRIT
-	parent.collision_mask = CollisionBit.WORLD + CollisionBit.SPIRIT
+	parent.hurtbox.collision_shape.set_deferred("disabled", false)
+	parent.collision_shape.set_deferred("disabled", false)
 
 
 func _on_player_hurt() -> void:

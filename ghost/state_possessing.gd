@@ -14,6 +14,7 @@ const TARGET_RESET_DELAY: float = 0.1
 var target_possessable: Possessable
 # possessable detector
 var detector: Area3D
+var detector_collision_shape: CollisionShape3D
 
 @onready var decision_timer: Timer = Timer.new()
 @onready var is_possessing: bool = false
@@ -38,11 +39,12 @@ func ready_after_parent() -> void:
 	# set and connect detector for possessable objects
 	detector = parent.get_node("PossessableDetector")
 	detector.body_entered.connect(_on_contact_possessable)
+	detector_collision_shape = detector.get_node("CollisionShape3D")
 
 
 func enter() -> void:
 	# enable possessable detector
-	detector.collision_mask = CollisionBit.PHYSICAL
+	detector_collision_shape.set_deferred("disabled", false)
 	# reset decision timer
 	decision_timer.wait_time = DECISION_TIME
 	
@@ -52,7 +54,7 @@ func enter() -> void:
 func exit() -> void:
 	super()
 	# disable possessable detector
-	detector.collision_mask = 0
+	detector_collision_shape.set_deferred("disabled", true)
 	
 	# depossess any currently possessed item
 	if is_possessing:
