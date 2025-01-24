@@ -28,7 +28,9 @@ func _ready() -> void:
 	SignalBus.player_entered_room.connect(_on_player_entered_room)
 	SignalBus.player_exited_room.connect(_on_player_exited_room)
 	
-	hit.connect(_on_hit)
+	# defer connection to ensure any parallel action happens to other entities
+	# before the ghost changes state - i.e. depossession burst effect
+	hit.connect(_on_hit, CONNECT_DEFERRED)
 
 
 func _physics_process(delta: float) -> void:

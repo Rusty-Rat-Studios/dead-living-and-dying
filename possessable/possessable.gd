@@ -16,6 +16,8 @@ COLLISION MASKING SCHEME:
 
 # signal connected when ghost discovers all possessables in the room
 signal possessed
+# used when depossessed by being hit by a defense item
+signal hit
 
 # store room for attaching self to "possessables_available" group that is 
 # checked by ghosts in the same room for available possession targets
@@ -32,6 +34,7 @@ signal possessed
 func _ready() -> void:
 	# add self to possessables in room
 	room.add_possessable(self)
+	hit.connect(_on_hit)
 
 
 func reset() -> void:
@@ -49,6 +52,7 @@ func possess() -> void:
 	room.remove_possessable(self)
 	# signal to ghosts on the way to target it that it has been taken
 	possessed.emit()
+	is_possessed = true
 	
 	$GPUParticles3D.emitting = true
 
@@ -65,3 +69,8 @@ func depossess() -> void:
 
 func attack(_target: Node3D) -> void:
 	print(Time.get_time_string_from_system(), ": WARNING - attack() function called from base possessable ", self)
+
+
+func _on_hit() -> void:
+	if is_possessed:
+		$ParticleBurst.restart()

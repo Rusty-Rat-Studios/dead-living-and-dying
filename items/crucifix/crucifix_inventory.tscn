@@ -22,7 +22,7 @@ script = ExtResource("2_8ft1u")
 [node name="Hitbox" type="Area3D" parent="." index="0"]
 visible = false
 collision_layer = 0
-collision_mask = 8
+collision_mask = 12
 monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Hitbox" index="0"]
