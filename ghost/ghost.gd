@@ -70,7 +70,7 @@ func _on_player_entered_room(room: Node3D) -> void:
 	if player_in_room and PlayerHandler.get_player_state() == "Dead":
 		# add delay to allow player breathing room when entering the room
 		await Utility.delay(ATTACK_DELAY)
-		state_machine.change_state(state_machine.states["Attacking"])
+		state_machine.change_state_enum(state_machine.States.ATTACKING)
 
 
 func _on_player_exited_room(room: Node3D) -> void:

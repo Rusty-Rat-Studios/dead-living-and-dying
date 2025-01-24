@@ -1,22 +1,23 @@
 extends Node
 
-@export var states: Dictionary = {}
+enum States {WAITING, POSSESSING, STUNNED, ATTACKING}
 @export var starting_state: Node
 var current_state: Node
 var parent: Ghost
 
+@onready var state_waiting: Node = $Waiting
+@onready var state_possessing: Node = $Possessing
+@onready var state_stunned: Node = $Stunned
+@onready var state_attacking: Node = $Attacking
 
 func init(_parent: Node3D) -> void:
-	# initialize states dynamically according to state machine child nodes
-	for state: Node in get_children():
-		states[state.name] = state
-	
 	# give each child (state) a reference to parent it belongs to
 	# and enter default starting_state
 	for child: Node in get_children():
 		child.parent = _parent
 		child.state_machine = self
-
+	parent = _parent
+	
 	change_state(starting_state)
 	
 	# listen for player state change
@@ -29,7 +30,23 @@ func change_state(new_state: Node) -> void:
 		current_state.exit()
 	
 	current_state = new_state
-	states[current_state.name].enter()
+	current_state.enter()
+
+
+func change_state_enum(new_state: int) -> void:
+	if current_state:
+		current_state.exit()
+	match new_state:
+		States.WAITING:
+			current_state = state_waiting
+		States.POSSESSING:
+			current_state = state_possessing
+		States.STUNNED:
+			current_state = state_stunned
+		States.ATTACKING:
+			current_state = state_attacking
+	
+	current_state.enter()
 
 
 func process_physics(delta: float) -> void:
@@ -40,7 +57,7 @@ func process_physics(delta: float) -> void:
 func _on_player_state_changed(state_name: String) -> void:
 	match state_name:
 		"Dead":
-			if get_parent().player_in_room:
-				change_state($Attacking)
+			if parent.player_in_room:
+				change_state_enum(States.ATTACKING)
 		"Living":
-			change_state($Waiting)
+			change_state_enum(States.WAITING)

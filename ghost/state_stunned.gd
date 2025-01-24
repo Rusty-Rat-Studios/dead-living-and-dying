@@ -16,5 +16,9 @@ func enter() -> void:
 	stun_timer.start()
 
 
+func process_physics(delta: float) -> void:
+	pass
+
+
 func _on_stun_timer_timeout() -> void:
 	parent.state_machine.change_state(state_waiting)
