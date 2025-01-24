@@ -13,15 +13,11 @@ var room_boundaries: Rect2 # select random points in room to wander to
 @onready var pause_timer: Timer = Timer.new()
 
 func _ready() -> void:
-	# defer connecting this signal to ensure this function executes
-	# AFTER this signal updates the player_in_room flag in ghost.gd
-	SignalBus.player_entered_room.connect(_on_player_entered_room, CONNECT_DEFERRED)
 	add_child(pause_timer)
 	pause_timer.one_shot = true
 
 
 func enter() -> void:
-	super()
 	parent.speed = 3.0
 	
 	# dynamically generate bounding box based on floor size of ghost's current room

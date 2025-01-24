@@ -3,6 +3,9 @@ extends CharacterBody3D
 
 signal hit
 
+# time to wait before attacking when player enters room
+const ATTACK_DELAY: float = 0.3
+
 var movement_boundaries: Rect2
 
 @onready var state_machine: Node = $StateMachine
@@ -62,6 +65,12 @@ func move_to_target(delta: float) -> void:
 func _on_player_entered_room(room: Node3D) -> void:
 	if room == current_room:
 		player_in_room = true
+	
+	# regardless of state, attack the player if they enter the room in DEAD state
+	if player_in_room and PlayerHandler.get_player_state() == "Dead":
+		# add delay to allow player breathing room when entering the room
+		await Utility.delay(ATTACK_DELAY)
+		state_machine.change_state(state_machine.states["Attacking"])
 
 
 func _on_player_exited_room(room: Node3D) -> void:

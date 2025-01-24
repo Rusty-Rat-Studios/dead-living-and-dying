@@ -13,12 +13,7 @@ func enter() -> void:
 	if not (parent.player_in_room and PlayerHandler.get_player_state() == "Dead"):
 		parent.state_machine.change_state(state_waiting)
 		return
-	super()
 	parent.speed = 7.0
-
-
-func exit() -> void:
-	super()
 
 
 func process_physics(delta: float) -> State:
