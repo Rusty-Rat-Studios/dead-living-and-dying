@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://yihpxsaeuqdi"]
+[gd_scene load_steps=15 format=3 uid="uid://yihpxsaeuqdi"]
 
 [ext_resource type="Script" path="res://ghost/ghost.gd" id="1_vr82v"]
 [ext_resource type="Script" path="res://ghost/state_machine_ghost.gd" id="2_qkh1e"]
@@ -22,6 +22,26 @@ radius = 1.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x245q"]
 radius = 0.6
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vmkbj"]
+emission_shape = 3
+emission_box_extents = Vector3(0.25, 0.25, 0.25)
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 3.0
+initial_velocity_max = 3.0
+gravity = Vector3(0, 0.5, 0)
+linear_accel_min = -6.0
+linear_accel_max = -6.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wf6jr"]
+transparency = 1
+albedo_color = Color(0.513726, 0, 0.662745, 0.67451)
+
+[sub_resource type="SphereMesh" id="SphereMesh_ruvcv"]
+material = SubResource("StandardMaterial3D_wf6jr")
+radius = 0.05
+height = 0.1
 
 [node name="Ghost" type="CharacterBody3D"]
 collision_layer = 8
@@ -83,3 +103,12 @@ monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
 shape = SubResource("CapsuleShape3D_x245q")
+
+[node name="ParticleBurst" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 64
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_vmkbj")
+draw_pass_1 = SubResource("SphereMesh_ruvcv")

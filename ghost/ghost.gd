@@ -28,9 +28,7 @@ func _ready() -> void:
 	SignalBus.player_entered_room.connect(_on_player_entered_room)
 	SignalBus.player_exited_room.connect(_on_player_exited_room)
 	
-	# defer connection to ensure any parallel action happens to other entities
-	# before the ghost changes state - i.e. depossession burst effect
-	hit.connect(_on_hit, CONNECT_DEFERRED)
+	hit.connect(_on_hit)
 
 
 func _physics_process(delta: float) -> void:
@@ -72,4 +70,6 @@ func _on_player_exited_room(room: Node3D) -> void:
 
 
 func _on_hit() -> void:
-	state_machine.change_state(state_machine.current_state.state_stunned)
+	if state_machine.current_state != state_machine.current_state.state_stunned:
+		state_machine.change_state(state_machine.current_state.state_stunned)
+		$ParticleBurst.emitting = true

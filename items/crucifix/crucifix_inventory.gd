@@ -45,5 +45,3 @@ func _on_cooldown_timer_timeout() -> void:
 func _on_body_entered(body: Node3D) -> void:
 	if body is Ghost:
 		body.hit.emit()
-	if body is Possessable:
-		body.hit.emit()
