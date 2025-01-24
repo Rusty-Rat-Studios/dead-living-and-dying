@@ -30,16 +30,16 @@ direction = Vector3(0, 0, 0)
 spread = 180.0
 initial_velocity_min = 3.0
 initial_velocity_max = 3.0
-gravity = Vector3(0, 0.5, 0)
+gravity = Vector3(0, 1, 0)
 linear_accel_min = -6.0
 linear_accel_max = -6.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wf6jr"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cvd0x"]
 transparency = 1
-albedo_color = Color(0.513726, 0, 0.662745, 0.67451)
+albedo_color = Color(0.513726, 0, 0.662745, 0.352941)
 
-[sub_resource type="SphereMesh" id="SphereMesh_ruvcv"]
-material = SubResource("StandardMaterial3D_wf6jr")
+[sub_resource type="SphereMesh" id="SphereMesh_wv6vs"]
+material = SubResource("StandardMaterial3D_cvd0x")
 radius = 0.05
 height = 0.1
 
@@ -107,8 +107,8 @@ shape = SubResource("CapsuleShape3D_x245q")
 [node name="ParticleBurst" type="GPUParticles3D" parent="."]
 emitting = false
 amount = 64
-lifetime = 0.5
+lifetime = 0.6
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_vmkbj")
-draw_pass_1 = SubResource("SphereMesh_ruvcv")
+draw_pass_1 = SubResource("SphereMesh_wv6vs")
