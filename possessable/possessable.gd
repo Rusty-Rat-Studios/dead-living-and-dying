@@ -73,4 +73,4 @@ func attack(_target: Node3D) -> void:
 
 func _on_hit() -> void:
 	if is_possessed:
-		$ParticleBurst.restart()
+		$ParticleBurst.emitting = true
