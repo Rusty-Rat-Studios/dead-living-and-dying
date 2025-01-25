@@ -99,7 +99,7 @@ func set_closest_target() -> void:
 		target_possessable.possessed.connect(set_closest_target, CONNECT_ONE_SHOT)
 
 
-func process_physics(delta: float) -> State:
+func process_physics(delta: float) -> void:
 	# update target position if it moved
 	# case: still moving from last possession interaction
 	# case: player or other object bumps into it
@@ -109,9 +109,6 @@ func process_physics(delta: float) -> State:
 	# only move if not at target
 	if parent.global_position.distance_squared_to(parent.target_pos) > 0.01:
 		parent.move_to_target(delta)
-	
-	# remain in same state
-	return null
 
 
 func _on_decision_timeout() -> void:

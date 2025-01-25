@@ -17,7 +17,7 @@ func enter() -> void:
 
 
 func process_physics(delta: float) -> void:
-	pass
+	return
 
 
 func _on_stun_timer_timeout() -> void:

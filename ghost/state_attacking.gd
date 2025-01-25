@@ -16,11 +16,9 @@ func enter() -> void:
 	parent.speed = 7.0
 
 
-func process_physics(delta: float) -> State:
+func process_physics(delta: float) -> void:
 	parent.target_pos = player.global_position
 	parent.move_to_target(delta)
-	
-	return null # remain in attacking state
 
 
 func _on_player_exited_room(room: Node3D) -> void:

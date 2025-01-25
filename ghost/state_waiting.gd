@@ -44,16 +44,15 @@ func exit() -> void:
 	pause_timer.stop()
 
 
-func process_physics(delta: float) -> State:
+func process_physics(delta: float) -> void:
 	if is_paused:
-		return null # stay in waiting state
+		return
 	
 	if parent.global_position != parent.target_pos:
 		# only move if not at target
 		parent.move_to_target(delta)
 	else:
 		pause()
-	return null # stay in waiting state
 
 
 func set_random_target() -> void:
