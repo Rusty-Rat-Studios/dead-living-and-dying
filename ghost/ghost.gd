@@ -37,6 +37,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	# handle basic movement before passing to state-specific actions
 	state_machine.process_physics(delta)
+	move_to_target(delta)
 
 
 func reset() -> void:
@@ -53,15 +54,14 @@ func move_to_target(delta: float) -> void:
 	var direction: Vector3 = target_pos - global_position
 	var distance_to_target: float = global_position.distance_to(target_pos)
 	
-	if distance_to_target > 0.1:
-		direction = direction.normalized()
-	
 	if distance_to_target < speed * delta:
 		# set target to ghost position if close enough
+		at_target = true
 		velocity = Vector3.ZERO
 		target_pos = global_position
-		at_target = true
 	else:
+		at_target = false
+		direction = direction.normalized()
 		velocity = direction * speed
 		move_and_slide()
 

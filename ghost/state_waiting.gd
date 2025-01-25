@@ -48,10 +48,7 @@ func process_physics(delta: float) -> void:
 	if is_paused:
 		return
 	
-	if parent.global_position != parent.target_pos:
-		# only move if not at target
-		parent.move_to_target(delta)
-	else:
+	if parent.at_target:
 		pause()
 
 

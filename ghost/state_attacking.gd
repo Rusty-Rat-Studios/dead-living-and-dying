@@ -18,7 +18,6 @@ func enter() -> void:
 
 func process_physics(delta: float) -> void:
 	parent.target_pos = player.global_position
-	parent.move_to_target(delta)
 
 
 func _on_player_exited_room(room: Node3D) -> void:

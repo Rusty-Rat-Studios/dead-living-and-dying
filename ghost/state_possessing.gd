@@ -105,10 +105,6 @@ func process_physics(delta: float) -> void:
 	# case: player or other object bumps into it
 	if target_possessable:
 		parent.target_pos = target_possessable.global_position
-	
-	# only move if not at target
-	if parent.global_position.distance_squared_to(parent.target_pos) > 0.01:
-		parent.move_to_target(delta)
 
 
 func _on_decision_timeout() -> void:
