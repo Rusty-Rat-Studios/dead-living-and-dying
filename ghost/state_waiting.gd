@@ -86,4 +86,4 @@ func pause() -> void:
 
 func _possess() -> void:
 	print(Time.get_time_string_from_system(), ": ", parent.name, " decided to possess")
-	parent.state_machine.change_state(state_possessing)
+	change_state(state_machine.States.POSSESSING)

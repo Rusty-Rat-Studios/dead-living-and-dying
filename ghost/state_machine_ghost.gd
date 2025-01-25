@@ -1,7 +1,6 @@
 extends Node
 
 enum States {WAITING, POSSESSING, STUNNED, ATTACKING}
-@export var starting_state: Node
 var current_state: Node
 var parent: Ghost
 
@@ -9,19 +8,37 @@ var parent: Ghost
 @onready var state_possessing: Node = $Possessing
 @onready var state_stunned: Node = $Stunned
 @onready var state_attacking: Node = $Attacking
+@onready var starting_state: Node = state_waiting
+@onready var starting_state_enum: int = States.WAITING
 
-func init(_parent: Node3D) -> void:
-	# give each child (state) a reference to parent it belongs to
-	# and enter default starting_state
-	for child: Node in get_children():
-		child.parent = _parent
-		child.state_machine = self
-	parent = _parent
+func init(parent: Node3D) -> void:
+	for state: Node in get_children():
+		state.init(parent, self)
 	
-	change_state(starting_state)
+	change_state_enum(starting_state_enum)
+	self.parent = parent
 	
 	# listen for player state change
 	SignalBus.player_state_changed.connect(_on_player_state_changed)
+
+
+func reset() -> void:
+	change_state_enum(starting_state_enum)
+
+
+func get_state_node(state: int) -> Node:
+	match state:
+		States.WAITING:
+			return state_waiting
+		States.POSSESSING:
+			return state_possessing
+		States.STUNNED:
+			return state_stunned
+		States.ATTACKING:
+			return state_attacking
+	
+	push_error("Attempting to access invalid state: " + str(state))
+	return null
 
 
 # allow each state to execute any exit logic before changing state
@@ -36,16 +53,8 @@ func change_state(new_state: Node) -> void:
 func change_state_enum(new_state: int) -> void:
 	if current_state:
 		current_state.exit()
-	match new_state:
-		States.WAITING:
-			current_state = state_waiting
-		States.POSSESSING:
-			current_state = state_possessing
-		States.STUNNED:
-			current_state = state_stunned
-		States.ATTACKING:
-			current_state = state_attacking
 	
+	current_state = get_state_node(new_state)
 	current_state.enter()
 
 

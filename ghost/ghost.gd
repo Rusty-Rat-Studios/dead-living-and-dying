@@ -42,7 +42,11 @@ func _physics_process(delta: float) -> void:
 func reset() -> void:
 	# return to starting position and state
 	position = starting_position
-	state_machine.change_state(state_machine.starting_state)
+	state_machine.reset()
+
+
+func change_state(new_state: int) -> void:
+	state_machine.change_state_enum(new_state)
 
 
 func move_to_target(delta: float) -> void:
@@ -79,6 +83,6 @@ func _on_player_exited_room(room: Node3D) -> void:
 
 
 func _on_hit() -> void:
-	if state_machine.current_state != state_machine.current_state.state_stunned:
-		state_machine.change_state(state_machine.current_state.state_stunned)
+	if state_machine.current_state != state_machine.state_stunned:
+		state_machine.change_state_enum(state_machine.States.STUNNED)
 		$ParticleBurst.emitting = true
