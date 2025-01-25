@@ -17,9 +17,6 @@ func init(parent: Node3D) -> void:
 	
 	change_state_enum(starting_state_enum)
 	self.parent = parent
-	
-	# listen for player state change
-	SignalBus.player_state_changed.connect(_on_player_state_changed)
 
 
 func reset() -> void:
@@ -61,12 +58,3 @@ func change_state_enum(new_state: int) -> void:
 func process_physics(delta: float) -> void:
 	# only perform actions for the current state
 	current_state.process_physics(delta)
-
-
-func _on_player_state_changed(state_name: String) -> void:
-	match state_name:
-		"Dead":
-			if parent.player_in_room:
-				change_state_enum(States.ATTACKING)
-		"Living":
-			change_state_enum(States.WAITING)
