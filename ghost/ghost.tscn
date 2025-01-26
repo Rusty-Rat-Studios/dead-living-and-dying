@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://yihpxsaeuqdi"]
 
 [ext_resource type="Script" path="res://ghost/ghost.gd" id="1_vr82v"]
-[ext_resource type="Script" path="res://ghost/state_machine_ghost.gd" id="2_qkh1e"]
+[ext_resource type="Script" path="res://ghost/ghost_state_machine.gd" id="2_qkh1e"]
 [ext_resource type="Script" path="res://ghost/state_waiting.gd" id="3_gb04i"]
 [ext_resource type="Script" path="res://ghost/state_possessing.gd" id="4_muv24"]
 [ext_resource type="Script" path="res://ghost/state_stunned.gd" id="7_yplap"]
