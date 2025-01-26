@@ -17,7 +17,7 @@ func enter() -> void:
 	parent.speed = 7.0
 
 
-func process_physics(_delta: float) -> void:
+func process_state() -> void:
 	parent.target_pos = player.global_position
 
 
