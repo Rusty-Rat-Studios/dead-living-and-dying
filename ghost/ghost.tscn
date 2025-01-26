@@ -56,33 +56,17 @@ shape = SubResource("CapsuleShape3D_cokcw")
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("2_qkh1e")
 
-[node name="Waiting" type="Node" parent="StateMachine" node_paths=PackedStringArray("state_waiting", "state_possessing", "state_stunned", "state_attacking")]
+[node name="Waiting" type="Node" parent="StateMachine"]
 script = ExtResource("3_gb04i")
-state_waiting = NodePath(".")
-state_possessing = NodePath("../Possessing")
-state_stunned = NodePath("../Stunned")
-state_attacking = NodePath("../Attacking")
 
-[node name="Possessing" type="Node" parent="StateMachine" node_paths=PackedStringArray("state_waiting", "state_possessing", "state_stunned", "state_attacking")]
+[node name="Possessing" type="Node" parent="StateMachine"]
 script = ExtResource("4_muv24")
-state_waiting = NodePath("../Waiting")
-state_possessing = NodePath(".")
-state_stunned = NodePath("../Stunned")
-state_attacking = NodePath("../Attacking")
 
-[node name="Stunned" type="Node" parent="StateMachine" node_paths=PackedStringArray("state_waiting", "state_possessing", "state_stunned", "state_attacking")]
+[node name="Stunned" type="Node" parent="StateMachine"]
 script = ExtResource("7_yplap")
-state_waiting = NodePath("../Waiting")
-state_possessing = NodePath("../Possessing")
-state_stunned = NodePath(".")
-state_attacking = NodePath("../Attacking")
 
-[node name="Attacking" type="Node" parent="StateMachine" node_paths=PackedStringArray("state_waiting", "state_possessing", "state_stunned", "state_attacking")]
+[node name="Attacking" type="Node" parent="StateMachine"]
 script = ExtResource("8_a4kr4")
-state_waiting = NodePath("../Waiting")
-state_possessing = NodePath("../Possessing")
-state_stunned = NodePath("../Stunned")
-state_attacking = NodePath(".")
 
 [node name="StateSelectTimer" type="Timer" parent="."]
 

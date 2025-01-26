@@ -21,4 +21,4 @@ func process_physics(delta: float) -> void:
 
 
 func _on_stun_timer_timeout() -> void:
-	parent.state_machine.change_state(state_waiting)
+	change_state(States.WAITING)

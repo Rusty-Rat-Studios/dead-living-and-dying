@@ -46,10 +46,6 @@ func reset() -> void:
 	state_machine.reset()
 
 
-func change_state(new_state: int) -> void:
-	state_machine.change_state_enum(new_state)
-
-
 func move_to_target(delta: float) -> void:
 	var direction: Vector3 = target_pos - global_position
 	var distance_to_target: float = global_position.distance_to(target_pos)
@@ -74,7 +70,7 @@ func _on_player_entered_room(room: Node3D) -> void:
 	if player_in_room and PlayerHandler.get_player_state() == "Dead":
 		# add delay to allow player breathing room when entering the room
 		await Utility.delay(ATTACK_DELAY)
-		state_machine.change_state_enum(state_machine.States.ATTACKING)
+		state_machine.change_state(state_machine.States.ATTACKING)
 
 
 func _on_player_exited_room(room: Node3D) -> void:
@@ -83,6 +79,6 @@ func _on_player_exited_room(room: Node3D) -> void:
 
 
 func _on_hit() -> void:
-	if state_machine.current_state != state_machine.state_stunned:
-		state_machine.change_state_enum(state_machine.States.STUNNED)
+	if state_machine.current_state != state_machine.States.STUNNED:
+		state_machine.change_state(state_machine.States.STUNNED)
 		$ParticleBurst.emitting = true
