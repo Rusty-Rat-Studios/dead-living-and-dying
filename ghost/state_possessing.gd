@@ -19,20 +19,15 @@ var detector_collision_shape: CollisionShape3D
 @onready var decision_timer: Timer = Timer.new()
 @onready var is_possessing: bool = false
 
-func _ready() -> void:
-	# child nodes' _ready functions are called before parent nodes, so to initialize
-	# the detector variable we have to wait for the parent _ready function to fire
-	call_deferred("ready_after_parent")
-	
-	# configure decision timer
+
+func init(parent: Ghost, state_machine: Node) -> void:
+	# use init() instead of _ready() because we need access to parent variables
+	# which are initialized after child variables (i.e. this state)
+	super(parent, state_machine)
 	decision_timer.one_shot = true
 	decision_timer.wait_time = DECISION_TIME
 	decision_timer.timeout.connect(_on_decision_timeout)
 	add_child(decision_timer)
-
-
-func ready_after_parent() -> void:
-	# set and connect detector for possessable objects
 	detector = _parent.get_node("PossessableDetector")
 	detector.body_entered.connect(_on_contact_possessable)
 	detector_collision_shape = detector.get_node("CollisionShape3D")
