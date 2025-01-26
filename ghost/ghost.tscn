@@ -68,8 +68,6 @@ script = ExtResource("7_yplap")
 [node name="Attacking" type="Node" parent="StateMachine"]
 script = ExtResource("8_a4kr4")
 
-[node name="StateSelectTimer" type="Timer" parent="."]
-
 [node name="PossessableDetector" type="Area3D" parent="."]
 collision_layer = 0
 collision_mask = 4
