@@ -44,7 +44,7 @@ func exit() -> void:
 	pause_timer.stop()
 
 
-func process_physics(delta: float) -> void:
+func process_physics(_delta: float) -> void:
 	if is_paused:
 		return
 	

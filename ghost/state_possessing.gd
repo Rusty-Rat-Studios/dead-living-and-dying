@@ -99,7 +99,7 @@ func set_closest_target() -> void:
 		target_possessable.possessed.connect(set_closest_target, CONNECT_ONE_SHOT)
 
 
-func process_physics(delta: float) -> void:
+func process_physics(_delta: float) -> void:
 	# update target position if it moved
 	# case: still moving from last possession interaction
 	# case: player or other object bumps into it

@@ -16,7 +16,7 @@ func enter() -> void:
 	stun_timer.start()
 
 
-func process_physics(delta: float) -> void:
+func process_physics(_delta: float) -> void:
 	return
 
 
