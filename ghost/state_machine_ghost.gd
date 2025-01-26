@@ -6,10 +6,6 @@ var current_state: int
 var current_state_node: Node
 var parent: Ghost
 
-@onready var state_waiting: Node = $Waiting
-@onready var state_possessing: Node = $Possessing
-@onready var state_stunned: Node = $Stunned
-@onready var state_attacking: Node = $Attacking
 @onready var starting_state: int = States.WAITING
 
 func init(parent: Node3D) -> void:
@@ -27,13 +23,13 @@ func reset() -> void:
 func get_state_node(state: int) -> Node:
 	match state:
 		States.WAITING:
-			return state_waiting
+			return $Waiting
 		States.POSSESSING:
-			return state_possessing
+			return $Possessing
 		States.STUNNED:
-			return state_stunned
+			return $Stunned
 		States.ATTACKING:
-			return state_attacking
+			return $Attacking
 	
 	push_error("Attempting to access invalid state: " + str(state))
 	return null
