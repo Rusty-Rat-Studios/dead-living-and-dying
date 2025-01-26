@@ -113,7 +113,6 @@ func _on_decision_timeout() -> void:
 
 
 func _depossess() -> void:
-	print(Time.get_time_string_from_system(), ": ", _parent.name, " decided to depossess ", target_possessable.name)
 	# depossess object and go to WAITING
 	target_possessable.depossess()
 	is_possessing = false
@@ -121,7 +120,6 @@ func _depossess() -> void:
 
 
 func _attack() -> void:
-	print(Time.get_time_string_from_system(), ": ", _parent.name, " decided to attack!")
 	# if player not in range, possessable.attack() simply depossesses
 	target_possessable.attack(PlayerHandler.get_player())
 	target_possessable.depossess()
@@ -131,7 +129,6 @@ func _attack() -> void:
 
 func _wait() -> void:
 	# no action was taken, restart decision timer
-	print(Time.get_time_string_from_system(), ": ", _parent.name, " decided to do nothing")
 	decision_timer.wait_time = DECISION_TIME
 	decision_timer.start()
 
@@ -139,7 +136,6 @@ func _wait() -> void:
 func _on_contact_possessable(body: Node3D) -> void:
 	# ensure overlapping body is indeed the target, then possess it
 	if body == target_possessable and target_possessable.is_possessable:
-		print(Time.get_time_string_from_system(), ": ", _parent.name, " possessed ", target_possessable.name)
 		# disconnect target reset signal before possession so this ghost
 		# does not try to seek another target
 		if target_possessable.possessed.is_connected(set_closest_target):
