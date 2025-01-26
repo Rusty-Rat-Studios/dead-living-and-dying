@@ -14,22 +14,20 @@ _process_physics() functions.
 enum States {WAITING, POSSESSING, STUNNED, ATTACKING}
 var current_state: int
 # track node for calling functions of child state nodes
-var current_state_node: Node
-var parent: Ghost
+var _current_state_node: Node
 
-@onready var starting_state: int = States.WAITING
+@onready var _starting_state: int = States.WAITING
 
 func init(parent: Node3D) -> void:
 	# initialize all child states with reference to parent and state machine
 	for state: Node in get_children():
 		state.init(parent, self)
 	
-	change_state(starting_state)
-	self.parent = parent
+	change_state(_starting_state)
 
 
 func reset() -> void:
-	change_state(starting_state)
+	change_state(_starting_state)
 
 
 func get_state_node(state: int) -> Node:
@@ -49,14 +47,14 @@ func get_state_node(state: int) -> Node:
 
 func change_state(new_state: int) -> void:
 	# allow each state to execute any exit logic before changing state
-	if current_state_node:
-		current_state_node.exit()
+	if _current_state_node:
+		_current_state_node.exit()
 	
 	current_state = new_state
-	current_state_node = get_state_node(new_state)
-	current_state_node.enter()
+	_current_state_node = get_state_node(new_state)
+	_current_state_node.enter()
 
 
 func process_state() -> void:
 	# only perform actions for the current state
-	current_state_node.process_state()
+	_current_state_node.process_state()

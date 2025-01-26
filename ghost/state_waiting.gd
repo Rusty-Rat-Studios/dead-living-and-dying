@@ -18,10 +18,10 @@ func _ready() -> void:
 
 
 func enter() -> void:
-	parent.speed = 3.0
+	_parent.speed = 3.0
 	
 	# dynamically generate bounding box based on floor size of ghost's current room
-	var floor_mesh_instance: MeshInstance3D = parent.current_room.get_node("Floor/MeshInstance3D")
+	var floor_mesh_instance: MeshInstance3D = _parent.current_room.get_node("Floor/MeshInstance3D")
 	var floor_mesh: PlaneMesh = floor_mesh_instance.mesh
 	var floor_width: float = floor_mesh.size.x - 2 # add padding from wall to avoid collision
 	var floor_depth: float = floor_mesh.size.y - 2 # add padding from wall to avoid collision
@@ -32,7 +32,7 @@ func enter() -> void:
 								Vector2(floor_width, floor_depth))
 	
 	# update parent movement boundaries
-	parent.movement_boundaries = room_boundaries
+	_parent.movement_boundaries = room_boundaries
 	
 	is_paused = false
 	set_random_target()
@@ -48,7 +48,7 @@ func process_state() -> void:
 	if is_paused:
 		return
 	
-	if parent.at_target:
+	if _parent.at_target:
 		pause()
 
 
@@ -60,7 +60,7 @@ func set_random_target() -> void:
 	var z: float = RNG.rng.randf_range(room_boundaries.position.y + 1,
 					room_boundaries.position.y + room_boundaries.size.y - 1)
 	
-	parent.target_pos = parent.current_room.global_position + Vector3(x, 1.0, z)
+	_parent.target_pos = _parent.current_room.global_position + Vector3(x, 1.0, z)
 
 
 func pause() -> void:
@@ -81,5 +81,5 @@ func pause() -> void:
 
 
 func _possess() -> void:
-	print(Time.get_time_string_from_system(), ": ", parent.name, " decided to possess")
+	print(Time.get_time_string_from_system(), ": ", _parent.name, " decided to possess")
 	change_state(States.POSSESSING)

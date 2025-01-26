@@ -33,7 +33,7 @@ func _ready() -> void:
 
 func ready_after_parent() -> void:
 	# set and connect detector for possessable objects
-	detector = parent.get_node("PossessableDetector")
+	detector = _parent.get_node("PossessableDetector")
 	detector.body_entered.connect(_on_contact_possessable)
 	detector_collision_shape = detector.get_node("CollisionShape3D")
 
@@ -61,14 +61,14 @@ func exit() -> void:
 	target_possessable = null
 	
 	# clunky, but ensure no connections to possessables remain
-	for p: Possessable in parent.current_room.possessables_available:
+	for p: Possessable in _parent.current_room.possessables_available:
 		if p.possessed.is_connected(set_closest_target):
 			p.possessed.disconnect(set_closest_target)
 
 
 func set_closest_target() -> void:
 	# get all possessable items in the room
-	var possessables: Array = parent.current_room.possessables_available
+	var possessables: Array = _parent.current_room.possessables_available
 
 	# return to WAITING if no possessables available
 	if possessables.is_empty():
@@ -76,10 +76,10 @@ func set_closest_target() -> void:
 		return
 	
 	# find nearest possessable and set it as target
-	target_possessable = Utility.find_closest(possessables, parent.global_position)
+	target_possessable = Utility.find_closest(possessables, _parent.global_position)
 	
 	# set ghost target to closest possessable position
-	parent.target_pos = target_possessable.global_position
+	_parent.target_pos = target_possessable.global_position
 	
 	# check if already overlapping the target possessable and immediately possess
 	if detector.overlaps_body(target_possessable):
@@ -104,7 +104,7 @@ func process_state() -> void:
 	# case: still moving from last possession interaction
 	# case: player or other object bumps into it
 	if target_possessable:
-		parent.target_pos = target_possessable.global_position
+		_parent.target_pos = target_possessable.global_position
 
 
 func _on_decision_timeout() -> void:
@@ -118,7 +118,7 @@ func _on_decision_timeout() -> void:
 
 
 func _depossess() -> void:
-	print(Time.get_time_string_from_system(), ": ", parent.name, " decided to depossess ", target_possessable.name)
+	print(Time.get_time_string_from_system(), ": ", _parent.name, " decided to depossess ", target_possessable.name)
 	# depossess object and go to WAITING
 	target_possessable.depossess()
 	is_possessing = false
@@ -126,7 +126,7 @@ func _depossess() -> void:
 
 
 func _attack() -> void:
-	print(Time.get_time_string_from_system(), ": ", parent.name, " decided to attack!")
+	print(Time.get_time_string_from_system(), ": ", _parent.name, " decided to attack!")
 	# if player not in range, possessable.attack() simply depossesses
 	target_possessable.attack(PlayerHandler.get_player())
 	target_possessable.depossess()
@@ -136,7 +136,7 @@ func _attack() -> void:
 
 func _wait() -> void:
 	# no action was taken, restart decision timer
-	print(Time.get_time_string_from_system(), ": ", parent.name, " decided to do nothing")
+	print(Time.get_time_string_from_system(), ": ", _parent.name, " decided to do nothing")
 	decision_timer.wait_time = DECISION_TIME
 	decision_timer.start()
 
@@ -144,7 +144,7 @@ func _wait() -> void:
 func _on_contact_possessable(body: Node3D) -> void:
 	# ensure overlapping body is indeed the target, then possess it
 	if body == target_possessable and target_possessable.is_possessable:
-		print(Time.get_time_string_from_system(), ": ", parent.name, " possessed ", target_possessable.name)
+		print(Time.get_time_string_from_system(), ": ", _parent.name, " possessed ", target_possessable.name)
 		# disconnect target reset signal before possession so this ghost
 		# does not try to seek another target
 		if target_possessable.possessed.is_connected(set_closest_target):
