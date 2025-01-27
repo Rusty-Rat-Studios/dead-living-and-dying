@@ -14,6 +14,7 @@ const GRID_SCALE: float = 20 # Size of each grid square in editor units
 
 func _ready() -> void:
 	generate_grid()
+	# TODO: Run for each type of spawner using a specific EntityTable
 	SpawnerManager.spawn(Spawner.SpawnerType.ENEMY, entity_table)
 
 
