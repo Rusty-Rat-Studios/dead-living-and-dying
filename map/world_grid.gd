@@ -8,6 +8,7 @@ extends Node3D
 const GRID_SCALE: float = 20 # Size of each grid square in editor units
 
 @onready var basic_room: RoomInformation = preload("res://map/basic_room/basic_room.tres")
+# For some reason preload will not work here
 @onready var entity_table: EntityTable = load("res://map/test_entity_table.tres")
 @onready var room_map: HashMap = HashMap.new()
 
