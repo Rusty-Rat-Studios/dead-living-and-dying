@@ -3,7 +3,7 @@ extends Node
 This state machine has several child states, each with a reference to the
 parent Ghost node the state machine belongs to. Each state has an enter() 
 and exit() functions which are called when a state changes to allow for
-state-specific readying and cleaup (e.g. enabling or disabling timers).
+state-specific readying and cleanup (e.g. enabling or disabling timers).
 
 The state machine operates frame-by-frame by having a single active state 
 operating through the process_state() function called by the parent (Ghost)
