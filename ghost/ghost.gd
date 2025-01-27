@@ -3,11 +3,15 @@ extends CharacterBody3D
 
 signal hit
 
+const BASE_SPEED: float = 4.0
+# time to wait before attacking when player enters room
+const ATTACK_DELAY: float = 0.3
+
 var movement_boundaries: Rect2
 
 @onready var state_machine: Node = $StateMachine
 
-@onready var speed: float = 4.0
+@onready var speed: float = BASE_SPEED
 @onready var current_room: Room = get_parent()
 @onready var player_in_room: bool = false
 @onready var target_pos: Vector3 = Vector3.ZERO
@@ -32,29 +36,30 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	# handle basic movement before passing to state-specific actions
-	state_machine.process_physics(delta)
+	# handle state-specific actions (i.e. updating movement target)
+	# before handling movement
+	state_machine.process_current_state()
+	move_to_target(delta)
 
 
 func reset() -> void:
 	# return to starting position and state
 	position = starting_position
-	state_machine.change_state(state_machine.starting_state)
+	state_machine.reset()
 
 
 func move_to_target(delta: float) -> void:
 	var direction: Vector3 = target_pos - global_position
 	var distance_to_target: float = global_position.distance_to(target_pos)
 	
-	if distance_to_target > 0.1:
-		direction = direction.normalized()
-	
 	if distance_to_target < speed * delta:
 		# set target to ghost position if close enough
+		at_target = true
 		velocity = Vector3.ZERO
 		target_pos = global_position
-		at_target = true
 	else:
+		at_target = false
+		direction = direction.normalized()
 		velocity = direction * speed
 		move_and_slide()
 
@@ -62,6 +67,12 @@ func move_to_target(delta: float) -> void:
 func _on_player_entered_room(room: Node3D) -> void:
 	if room == current_room:
 		player_in_room = true
+	
+	# regardless of state, attack the player if they enter the room in DEAD state
+	if player_in_room and PlayerHandler.get_player_state() == "Dead":
+		# add delay to allow player breathing room when entering the room
+		await Utility.delay(ATTACK_DELAY)
+		state_machine.change_state(state_machine.States.ATTACKING)
 
 
 func _on_player_exited_room(room: Node3D) -> void:
@@ -70,6 +81,6 @@ func _on_player_exited_room(room: Node3D) -> void:
 
 
 func _on_hit() -> void:
-	if state_machine.current_state != state_machine.current_state.state_stunned:
-		state_machine.change_state(state_machine.current_state.state_stunned)
+	if state_machine.current_state != state_machine.States.STUNNED:
+		state_machine.change_state(state_machine.States.STUNNED)
 		$ParticleBurst.emitting = true

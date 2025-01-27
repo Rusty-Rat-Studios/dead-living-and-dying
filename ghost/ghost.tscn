@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://yihpxsaeuqdi"]
 
 [ext_resource type="Script" path="res://ghost/ghost.gd" id="1_vr82v"]
-[ext_resource type="Script" path="res://ghost/state_machine_ghost.gd" id="2_qkh1e"]
+[ext_resource type="Script" path="res://ghost/ghost_state_machine.gd" id="2_qkh1e"]
 [ext_resource type="Script" path="res://ghost/state_waiting.gd" id="3_gb04i"]
 [ext_resource type="Script" path="res://ghost/state_possessing.gd" id="4_muv24"]
 [ext_resource type="Script" path="res://ghost/state_stunned.gd" id="7_yplap"]
@@ -53,39 +53,20 @@ mesh = SubResource("CapsuleMesh_6tbxm")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_cokcw")
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+[node name="StateMachine" type="Node" parent="."]
 script = ExtResource("2_qkh1e")
-starting_state = NodePath("Waiting")
 
-[node name="Waiting" type="Node" parent="StateMachine" node_paths=PackedStringArray("state_waiting", "state_possessing", "state_stunned", "state_attacking")]
+[node name="Waiting" type="Node" parent="StateMachine"]
 script = ExtResource("3_gb04i")
-state_waiting = NodePath(".")
-state_possessing = NodePath("../Possessing")
-state_stunned = NodePath("../Stunned")
-state_attacking = NodePath("../Attacking")
 
-[node name="Possessing" type="Node" parent="StateMachine" node_paths=PackedStringArray("state_waiting", "state_possessing", "state_stunned", "state_attacking")]
+[node name="Possessing" type="Node" parent="StateMachine"]
 script = ExtResource("4_muv24")
-state_waiting = NodePath("../Waiting")
-state_possessing = NodePath(".")
-state_stunned = NodePath("../Stunned")
-state_attacking = NodePath("../Attacking")
 
-[node name="Stunned" type="Node" parent="StateMachine" node_paths=PackedStringArray("state_waiting", "state_possessing", "state_stunned", "state_attacking")]
+[node name="Stunned" type="Node" parent="StateMachine"]
 script = ExtResource("7_yplap")
-state_waiting = NodePath("../Waiting")
-state_possessing = NodePath("../Possessing")
-state_stunned = NodePath(".")
-state_attacking = NodePath("../Attacking")
 
-[node name="Attacking" type="Node" parent="StateMachine" node_paths=PackedStringArray("state_waiting", "state_possessing", "state_stunned", "state_attacking")]
+[node name="Attacking" type="Node" parent="StateMachine"]
 script = ExtResource("8_a4kr4")
-state_waiting = NodePath("../Waiting")
-state_possessing = NodePath("../Possessing")
-state_stunned = NodePath("../Stunned")
-state_attacking = NodePath(".")
-
-[node name="StateSelectTimer" type="Timer" parent="."]
 
 [node name="PossessableDetector" type="Area3D" parent="."]
 collision_layer = 0

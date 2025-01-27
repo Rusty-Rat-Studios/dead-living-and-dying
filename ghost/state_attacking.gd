@@ -1,33 +1,38 @@
 extends GhostState
 
+const ATTACK_SPEED: float = 7.0
+
 @onready var player: Player = PlayerHandler.get_player()
 
 func _ready() -> void:
 	# defer connecting this signal to ensure this function executes
 	# AFTER this signal updates the player_in_room flag in ghost.gd
 	SignalBus.player_exited_room.connect(_on_player_exited_room, CONNECT_DEFERRED)
+	SignalBus.player_state_changed.connect(_on_player_state_changed)
 
 
 func enter() -> void:
 	# guard to ensure player is in room and DEAD when entering attack state
-	if not (parent.player_in_room and PlayerHandler.get_player_state() == "Dead"):
-		parent.state_machine.change_state(state_waiting)
+	if not (_parent.player_in_room and PlayerHandler.get_player_state() == "Dead"):
+		change_state(States.WAITING)
 		return
-	super()
-	parent.speed = 7.0
+	_parent.speed = ATTACK_SPEED
 
 
 func exit() -> void:
 	super()
+	_parent.speed = _parent.BASE_SPEED
 
 
-func process_physics(delta: float) -> State:
-	parent.target_pos = player.global_position
-	parent.move_to_target(delta)
-	
-	return null # remain in attacking state
+func process_state() -> void:
+	_parent.target_pos = player.global_position
 
 
 func _on_player_exited_room(room: Node3D) -> void:
-	if room == parent.current_room and not parent.player_in_room:
-		parent.state_machine.change_state(state_waiting)
+	if room == _parent.current_room and not _parent.player_in_room:
+		change_state(States.WAITING)
+
+
+func _on_player_state_changed(state_name: String) -> void:
+	if _state_machine.current_state == States.ATTACKING and state_name == "Living":
+		change_state(States.WAITING)
