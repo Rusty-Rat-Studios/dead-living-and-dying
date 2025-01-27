@@ -6,8 +6,9 @@ and exit() functions which are called when a state changes to allow for
 state-specific readying and cleanup (e.g. enabling or disabling timers).
 
 The state machine operates frame-by-frame by having a single active state 
-operating through the process_state() function called by the parent (Ghost)
-_process_physics() functions.
+operating through the parent (Ghost) _process_physics() function calling
+the state machine's process_current_state() function, which in turns calls
+the current state's process_state() function.
 - This technically means ALL state actions happen during the physics step.
 """
 
