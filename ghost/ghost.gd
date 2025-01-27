@@ -38,7 +38,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	# handle state-specific actions (i.e. updating movement target)
 	# before handling movement
-	state_machine.process_state()
+	state_machine.process_current_state()
 	move_to_target(delta)
 
 

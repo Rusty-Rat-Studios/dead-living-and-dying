@@ -55,6 +55,5 @@ func change_state(new_state: int) -> void:
 	_current_state_node.enter()
 
 
-func process_state() -> void:
-	# only perform actions for the current state
+func process_current_state() -> void:
 	_current_state_node.process_state()
