@@ -20,5 +20,5 @@ func _get_choices_dictionary_from_entities() -> Dictionary:
 func are_constraints_met() -> bool:
 	return entities.filter(
 		func(entry: EntityTableEntry) -> bool: 
-			return entry.current >= entry.min and entry.current <= entry.max
-	).size() > 0
+			return entry.current < entry.min or entry.current > entry.max
+	).size() == 0
