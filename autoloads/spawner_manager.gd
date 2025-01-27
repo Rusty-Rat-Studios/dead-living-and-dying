@@ -5,10 +5,10 @@ extends Node
 
 # Called in a Spawners _ready function
 func register_spawner(spawner: Spawner) -> void:
-	var spawnerType: Spawner.SpawnerType = spawner.spawnerType
-	if not _spawners.has(spawnerType):
-		_spawners[spawnerType] = []
-	_spawners[spawnerType].append(spawner)
+	var spawner_type: Spawner.SpawnerType = spawner.spawner_type
+	if not _spawners.has(spawner_type):
+		_spawners[spawner_type] = []
+	_spawners[spawner_type].append(spawner)
 
 
 # Returns an array of all the spawners registered of a given type

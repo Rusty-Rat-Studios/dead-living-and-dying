@@ -3,7 +3,7 @@ extends Node
 
 enum SpawnerType { ENEMY, ITEM, KEY_ITEM, ENTITY_FLOOR, ENTITY_WALL, BOSS }
 
-@export var spawnerType: SpawnerType
+@export var spawner_type: SpawnerType
 
 
 func _ready() -> void:
