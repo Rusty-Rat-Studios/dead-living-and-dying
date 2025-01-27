@@ -27,27 +27,17 @@ transform = Transform3D(-0.830566, 0.486173, -0.271654, -0.492404, -0.413176, 0.
 visible = false
 light_color = Color(0.29219, 0.29219, 0.29219, 1)
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+[node name="StateMachine" type="Node" parent="."]
 script = ExtResource("3_3ig3n")
-starting_state = NodePath("Living")
 
-[node name="Dead" type="Node" parent="StateMachine" node_paths=PackedStringArray("state_dead", "state_living", "state_dying")]
+[node name="Dead" type="Node" parent="StateMachine"]
 script = ExtResource("4_r4nk8")
-state_dead = NodePath(".")
-state_living = NodePath("../Living")
-state_dying = NodePath("../Dying")
 
-[node name="Living" type="Node" parent="StateMachine" node_paths=PackedStringArray("state_dead", "state_living", "state_dying")]
+[node name="Living" type="Node" parent="StateMachine"]
 script = ExtResource("5_7fl8v")
-state_dead = NodePath("../Dead")
-state_living = NodePath(".")
-state_dying = NodePath("../Dying")
 
-[node name="Dying" type="Node" parent="StateMachine" node_paths=PackedStringArray("state_dead", "state_living", "state_dying")]
+[node name="Dying" type="Node" parent="StateMachine"]
 script = ExtResource("6_xupbb")
-state_dead = NodePath("../Dead")
-state_living = NodePath("../Living")
-state_dying = NodePath(".")
 
 [node name="WorldGrid" type="Node3D" parent="."]
 script = ExtResource("7_24rg8")

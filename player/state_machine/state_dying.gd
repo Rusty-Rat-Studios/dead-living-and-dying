@@ -1,36 +1,37 @@
 extends PlayerState
 
+const DYING_SPEED: float = 4.0
 
 func enter() -> void:
-	super()
-	parent.speed = 4.0
+	_parent.speed = DYING_SPEED
+	
 	
 	# DEBUG: modulate color according to state
-	parent.get_node("RotationOffset/AnimatedSprite3D").modulate = Color(1, 0.5, 0.5)
+	_parent.get_node("RotationOffset/AnimatedSprite3D").modulate = Color(1, 0.5, 0.5)
 	
 	SignalBus.player_hurt.connect(_on_player_hurt)
 	SignalBus.player_state_changed.emit("Dying")
 	
 	# adjust light strength
-	parent.light_omni.omni_range = 4
-	parent.light_omni.light_energy = 0.4
-	parent.light_spot.spot_range = 6
-	parent.light_spot.light_energy = 0.4
+	_parent.light_omni.omni_range = 4
+	_parent.light_omni.light_energy = 0.4
+	_parent.light_spot.spot_range = 6
+	_parent.light_spot.light_energy = 0.4
 
 
 func exit() -> void:
 	SignalBus.player_hurt.disconnect(_on_player_hurt)
 
 
-func process_input(event: InputEvent) -> State:
-	# DEBUG: press tab to cycle state
-	if event is InputEventKey and event.pressed:
-		if event.keycode == KEY_TAB:
-			return state_dead
-	return null
+#func process_input(event: InputEvent) -> State:
+	## DEBUG: press tab to cycle state
+	#if event is InputEventKey and event.pressed:
+		#if event.keycode == KEY_TAB:
+			#return state_dead
+	#return null
 
 
 func _on_player_hurt() -> void:
 	# activate i-frames without flash
-	parent.take_damage(false)
-	parent.state_machine.change_state(state_dead)
+	_parent.take_damage(false)
+	_state_machine.change_state(States.DEAD)

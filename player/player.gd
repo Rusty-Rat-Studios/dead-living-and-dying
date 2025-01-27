@@ -1,12 +1,14 @@
 class_name Player
 extends CharacterBody3D
 
-# player state machine, sibling node under Game node
-var state_machine: Node
-# used to track player corpse - handled by states
-var corpse: Corpse
+const BASE_SPEED: float = 6.0
 
-@onready var speed: float = 6.0
+# player state machine, sibling node under Game node
+var _state_machine: Node
+# used to track player corpse - handled by states
+var _corpse: Corpse
+
+@onready var speed: float = BASE_SPEED
 # light variables used by state machine to adjust light strength based on state
 @onready var light_omni: OmniLight3D = $OmniLight3D
 @onready var light_spot: SpotLight3D = $SpotLight3D
@@ -24,10 +26,11 @@ func _ready() -> void:
 	SignalBus.item_picked_up.connect(_on_item_picked_up)
 
 
-func init(_state_machine: Node, _corpse: Corpse) -> void:
-	self.state_machine = _state_machine
+func init(state_machine: Node, corpse: Corpse) -> void:
+	print("player init")
+	_state_machine = state_machine
 	# set reference to player corpse
-	self.corpse = _corpse
+	_corpse = corpse
 
 
 func reset() -> void:
@@ -35,10 +38,10 @@ func reset() -> void:
 	position = starting_position
 	hurtbox.reset()
 	
-	state_machine.change_state(state_machine.starting_state)
+	_state_machine.change_state(_state_machine.starting_state)
 	
 	camera.reset()
-	corpse.reset()
+	_corpse.reset()
 
 
 func _physics_process(delta: float) -> void:

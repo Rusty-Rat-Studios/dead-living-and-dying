@@ -10,4 +10,14 @@ func get_player() -> Player:
 
 # globally access player state
 func get_player_state() -> String:
-	return get_node("/root/Game/StateMachine").current_state.name
+	var sm: Node = player._state_machine
+	match sm.current_state:
+		sm.States.LIVING:
+			return "Living"
+		sm.States.DYING:
+			return "Dying"
+		sm.States.DEAD:
+			return "Dead"
+	
+	push_error("Attempting to access invalid state: " + str(sm.current_state))
+	return ""

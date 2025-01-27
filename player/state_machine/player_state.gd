@@ -1,18 +1,15 @@
 class_name PlayerState
-extends State
+extends Node
 
-@export var state_dead: State
-@export var state_living: State
-@export var state_dying: State
+enum States {LIVING, DYING, DEAD}
 
-@export var speed: float = 6.0
+var _parent: Player
+var _state_machine: Node
 
-# reference to player passed into states to allow state-based control
-var parent: Player
-
-func enter() -> void:
-	pass
+func init(parent: Player, state_machine: Node) -> void:
+	_parent = parent
+	_state_machine = state_machine
 
 
-func process_input(_event: InputEvent) -> State:
-	return null
+func change_state(new_state: int) -> void:
+	_state_machine.change_state(new_state)

@@ -26,17 +26,8 @@ func _ready() -> void:
 	SignalBus.player_state_changed.connect(_on_player_state_changed)
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	state_machine.process_input(event)
-
-
-func _physics_process(delta: float) -> void:
-	# handle basic movement before passing to state-specific actions
-	state_machine.process_physics(delta)
-
-
-func _process(delta: float) -> void:
-	state_machine.process_frame(delta)
+#func _unhandled_input(event: InputEvent) -> void:
+	#state_machine.process_input(event)
 
 
 func reset() -> void:
