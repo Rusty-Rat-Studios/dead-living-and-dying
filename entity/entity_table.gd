@@ -12,13 +12,5 @@ func get_random_entity() -> Resource:
 func _get_choices_dictionary_from_entities() -> Dictionary:
 	var choices: Dictionary = {}
 	for entry: EntityTableEntry in entities:
-		if entry.current < entry.max:
-			choices[entry] = entry.base_chance
+		choices[entry] = entry.base_chance
 	return choices
-
-
-func are_constraints_met() -> bool:
-	return entities.all(
-		func(entry: EntityTableEntry) -> bool: 
-			return entry.current >= entry.min and entry.current <= entry.max
-	)

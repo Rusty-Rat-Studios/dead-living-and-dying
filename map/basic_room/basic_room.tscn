@@ -1,9 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://dh8q75xrlxeaa"]
+[gd_scene load_steps=4 format=3 uid="uid://dh8q75xrlxeaa"]
 
 [ext_resource type="Script" path="res://map/basic_room/basic_room.gd" id="1_xo7g0"]
 [ext_resource type="PackedScene" uid="uid://b3nn5u3a5o85j" path="res://map/floor.tscn" id="2_8oby5"]
+[ext_resource type="PackedScene" uid="uid://bmevu5yvsxttw" path="res://entity/spawner.tscn" id="3_sanko"]
 
 [node name="BasicRoom" type="Node3D"]
 script = ExtResource("1_xo7g0")
 
 [node name="Floor" parent="." instance=ExtResource("2_8oby5")]
+
+[node name="Spawner" parent="." instance=ExtResource("3_sanko")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.842, 0.5, -6.104)
+
+[node name="Spawner2" parent="." instance=ExtResource("3_sanko")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.842, 0.5, -6.104)
+
+[node name="Spawner3" parent="." instance=ExtResource("3_sanko")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.842, 0.5, 3.099)
+
+[node name="Spawner4" parent="." instance=ExtResource("3_sanko")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.899, 0.5, 3.289)
