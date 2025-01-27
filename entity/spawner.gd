@@ -7,10 +7,11 @@ enum SpawnerType { ENEMY, ITEM, KEY_ITEM, ENTITY_FLOOR, ENTITY_WALL, BOSS }
 
 
 func _ready() -> void:
-	self.visible = false
+	self.visible = false # Only visible in the editor for debug purposes
 	SpawnerManager.register_spawner(self)
 
 
+# Spawns the given entity resource as a sibling at the spawners location
 func spawn(entity: Resource) -> void:
 	if entity != null:
 		var node: Node = entity.instantiate()
