@@ -1,5 +1,6 @@
 extends GhostState
 
+const WAITING_SPEED: float = 3.0
 const PAUSE_DURATION_MAX: float = 3.0
 const PAUSE_DURATION_MIN: float = 1.0
 const POSSESS_CHANCE: float = .75
@@ -18,7 +19,7 @@ func _ready() -> void:
 
 
 func enter() -> void:
-	_parent.speed = 3.0
+	_parent.speed = WAITING_SPEED
 	
 	# dynamically generate bounding box based on floor size of ghost's current room
 	var floor_mesh_instance: MeshInstance3D = _parent.current_room.get_node("Floor/MeshInstance3D")
@@ -40,6 +41,7 @@ func enter() -> void:
 
 func exit() -> void:
 	super()
+	_parent.speed = _parent.BASE_SPEED
 	is_paused = false
 	pause_timer.stop()
 

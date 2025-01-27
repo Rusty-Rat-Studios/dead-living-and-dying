@@ -3,6 +3,7 @@ extends CharacterBody3D
 
 signal hit
 
+const BASE_SPEED: float = 4.0
 # time to wait before attacking when player enters room
 const ATTACK_DELAY: float = 0.3
 
@@ -10,7 +11,7 @@ var movement_boundaries: Rect2
 
 @onready var state_machine: Node = $StateMachine
 
-@onready var speed: float = 4.0
+@onready var speed: float = BASE_SPEED
 @onready var current_room: Room = get_parent()
 @onready var player_in_room: bool = false
 @onready var target_pos: Vector3 = Vector3.ZERO

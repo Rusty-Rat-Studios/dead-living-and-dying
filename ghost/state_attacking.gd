@@ -1,5 +1,7 @@
 extends GhostState
 
+const ATTACK_SPEED: float = 7.0
+
 @onready var player: Player = PlayerHandler.get_player()
 
 func _ready() -> void:
@@ -14,7 +16,12 @@ func enter() -> void:
 	if not (_parent.player_in_room and PlayerHandler.get_player_state() == "Dead"):
 		change_state(States.WAITING)
 		return
-	_parent.speed = 7.0
+	_parent.speed = ATTACK_SPEED
+
+
+func exit() -> void:
+	super()
+	_parent.speed = _parent.BASE_SPEED
 
 
 func process_state() -> void:

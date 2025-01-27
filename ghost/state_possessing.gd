@@ -34,6 +34,7 @@ func init(parent: Ghost, state_machine: Node) -> void:
 
 
 func enter() -> void:
+	_parent.speed = _parent.BASE_SPEED
 	# enable possessable detector
 	detector_collision_shape.set_deferred("disabled", false)
 	# reset decision timer
