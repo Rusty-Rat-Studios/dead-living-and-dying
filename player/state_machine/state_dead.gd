@@ -37,14 +37,6 @@ func exit() -> void:
 	SignalBus.player_revived.disconnect(_on_player_revived)
 
 
-#func process_input(event: InputEvent) -> State:
-	## DEBUG: press tab to cycle state
-	#if event is InputEventKey and event.pressed:
-		#if event.keycode == KEY_TAB:
-			#return state_living
-	#return null
-
-
 func move_to_shrine() -> void:
 	# temporarily deactivate player collision and hurtbox to ensure they
 	# don't interact with anything while tweening to shrine

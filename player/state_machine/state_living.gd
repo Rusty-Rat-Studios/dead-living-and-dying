@@ -20,14 +20,6 @@ func exit() -> void:
 	SignalBus.player_hurt.disconnect(_on_player_hurt)
 
 
-#func process_input(event: InputEvent) -> State:
-	## DEBUG: press tab to cycle state
-	#if event is InputEventKey and event.pressed:
-		#if event.keycode == KEY_TAB:
-			#return state_dying
-	#return null
-
-
 func _on_player_hurt() -> void:
 	_parent.take_damage()
 	_state_machine.change_state(States.DYING)
