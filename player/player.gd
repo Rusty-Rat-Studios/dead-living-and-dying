@@ -31,7 +31,7 @@ func _ready() -> void:
 	SignalBus.item_picked_up.connect(_on_item_picked_up)
 
 
-func init(state_machine: Node, corpse: Corpse) -> void:
+func init(state_machine: StateMachine, corpse: Corpse) -> void:
 	_state_machine = state_machine
 	# set reference to player corpse
 	_corpse = corpse

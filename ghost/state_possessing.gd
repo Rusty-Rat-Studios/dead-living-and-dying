@@ -20,7 +20,7 @@ var detector_collision_shape: CollisionShape3D
 @onready var is_possessing: bool = false
 
 
-func init(parent: CharacterBody3D, state_machine: Node) -> void:
+func init(parent: CharacterBody3D, state_machine: StateMachine) -> void:
 	# use init() instead of _ready() because we need access to parent variables
 	# which are initialized after child variables (i.e. this state)
 	super(parent, state_machine)
