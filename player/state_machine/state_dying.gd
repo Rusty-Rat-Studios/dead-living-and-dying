@@ -3,14 +3,13 @@ extends PlayerState
 const DYING_SPEED: float = 4.0
 
 func enter() -> void:
+	super()
 	_parent.speed = DYING_SPEED
-	
 	
 	# DEBUG: modulate color according to state
 	_parent.get_node("RotationOffset/AnimatedSprite3D").modulate = Color(1, 0.5, 0.5)
 	
 	SignalBus.player_hurt.connect(_on_player_hurt)
-	SignalBus.player_state_changed.emit("Dying")
 	
 	# adjust light strength
 	_parent.light_omni.omni_range = 4

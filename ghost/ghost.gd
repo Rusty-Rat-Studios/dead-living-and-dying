@@ -9,7 +9,7 @@ const ATTACK_DELAY: float = 0.3
 
 var movement_boundaries: Rect2
 
-@onready var state_machine: Node = $StateMachine
+@onready var state_machine: StateMachine = $StateMachine
 
 @onready var speed: float = BASE_SPEED
 @onready var current_room: Room = get_parent()

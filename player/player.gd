@@ -27,7 +27,6 @@ func _ready() -> void:
 
 
 func init(state_machine: Node, corpse: Corpse) -> void:
-	print("player init")
 	_state_machine = state_machine
 	# set reference to player corpse
 	_corpse = corpse
@@ -37,9 +36,7 @@ func reset() -> void:
 	# return to starting position and state
 	position = starting_position
 	hurtbox.reset()
-	
-	_state_machine.change_state(_state_machine.starting_state)
-	
+	_state_machine.reset()
 	camera.reset()
 	_corpse.reset()
 

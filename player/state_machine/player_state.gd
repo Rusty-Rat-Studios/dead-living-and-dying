@@ -1,15 +1,8 @@
 class_name PlayerState
-extends Node
+extends State
 
-enum States {LIVING, DYING, DEAD}
-
-var _parent: Player
-var _state_machine: Node
-
-func init(parent: Player, state_machine: Node) -> void:
-	_parent = parent
-	_state_machine = state_machine
+enum States { LIVING, DYING, DEAD }
 
 
-func change_state(new_state: int) -> void:
-	_state_machine.change_state(new_state)
+func enter() -> void:
+	SignalBus.player_state_changed.emit(name)

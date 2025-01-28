@@ -5,6 +5,7 @@ const DEAD_SPEED: float = 10.0
 const RESPAWN_TIME: float = 2
 
 func enter() -> void:
+	super()
 	_parent.speed = DEAD_SPEED
 	
 	# DEBUG: modulate color according to state
@@ -17,7 +18,6 @@ func enter() -> void:
 	
 	SignalBus.player_hurt.connect(_on_player_hurt)
 	SignalBus.player_revived.connect(_on_player_revived)
-	SignalBus.player_state_changed.emit("Dead")
 	
 	# drop key item if player is carrying it
 	var key_item: Node3D = _parent.get_node_or_null("Inventory/KeyItem")

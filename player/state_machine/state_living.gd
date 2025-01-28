@@ -1,13 +1,13 @@
 extends PlayerState
 
 func enter() -> void:
+	super()
 	_parent.speed = _parent.BASE_SPEED
 	
 	# DEBUG: modulate color according to state
 	_parent.get_node("RotationOffset/AnimatedSprite3D").modulate = Color(0.5, 1, 0.5)
 	
 	SignalBus.player_hurt.connect(_on_player_hurt)
-	SignalBus.player_state_changed.emit("Living")
 	
 	# adjust light strength
 	_parent.light_omni.omni_range = 6

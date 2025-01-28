@@ -4,7 +4,7 @@ extends Node3D
 # state machine node-based design partially sourced from:
 # "Starter state machines in Godot 4" by "The Shaggy Dev"
 # https://www.youtube.com/watch?v=oqFbZoA2lnU
-@onready var state_machine: Node = $StateMachine
+@onready var state_machine: StateMachine = $StateMachine
 @onready var player: Player = $Player
 @onready var light_directional: DirectionalLight3D = $DirectionalLight3D
 @onready var corpse: Area3D = preload("res://player/corpse.tscn").instantiate()
@@ -15,7 +15,7 @@ extends Node3D
 func _ready() -> void:
 	# Initialize player
 	# pass reference of state machine and corpse to be controlled by player
-	player.init($StateMachine, corpse)
+	player.init(state_machine, corpse)
 	# add corpse to scene as sibling of player
 	# corpse deactivates on initialization - invisible with no collision
 	add_child(corpse)
