@@ -1,6 +1,8 @@
 class_name Player
 extends CharacterBody3D
 
+signal speedChange
+
 # player state machine, sibling node under Game node
 var state_machine: Node
 # used to track player corpse - handled by states
@@ -20,6 +22,7 @@ var corpse: Corpse
 
 func _ready() -> void:
 	light_omni.light_color = Color("GOLDENROD")
+	speedChange.connect(_on_speedChange)
 	
 	SignalBus.item_picked_up.connect(_on_item_picked_up)
 
@@ -79,3 +82,6 @@ func _on_item_picked_up(item: ItemInventory) -> void:
 	$Inventory.add_child(item)
 	# ensure item position is directly on player
 	item.position = Vector3.ZERO
+
+func _on_speedChange(speed_modifier: float) -> void:
+	speed += speed_modifier

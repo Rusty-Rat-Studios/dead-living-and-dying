@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dx3xbk4c7uji8"]
+[gd_scene load_steps=23 format=3 uid="uid://dx3xbk4c7uji8"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_77rk7"]
 [ext_resource type="PackedScene" uid="uid://mt6b5vxmupgn" path="res://player/player.tscn" id="1_hu241"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://8tfld0cdj22d" path="res://items/crucifix/crucifix_world.tscn" id="15_h8yld"]
 [ext_resource type="PackedScene" uid="uid://bfmkrask6gxl3" path="res://possessable/attack/possessable_ranged.tscn" id="15_lv48w"]
 [ext_resource type="PackedScene" uid="uid://bwmbngtw81o3y" path="res://ui/debug_console.tscn" id="15_rbtf5"]
+[ext_resource type="PackedScene" uid="uid://d3uaapt6yn0ed" path="res://items/tea/tea_world.tscn" id="22_oc1qw"]
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_77rk7")
@@ -278,3 +279,6 @@ visible = false
 [node name="DebugConsole" parent="UI" instance=ExtResource("15_rbtf5")]
 process_mode = 3
 visible = false
+
+[node name="ItemWorld" parent="." instance=ExtResource("22_oc1qw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1, -8)
