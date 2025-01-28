@@ -7,6 +7,10 @@ const BASE_SPEED: float = 4.0
 # time to wait before attacking when player enters room
 const ATTACK_DELAY: float = 0.3
 
+# opacity values set according to player state
+const OPACITY_DYING: float = 0.2
+const OPACITY_DEAD: float = 0.8
+
 var movement_boundaries: Rect2
 
 @onready var state_machine: StateMachine = $StateMachine
@@ -96,8 +100,8 @@ func _on_player_state_changed(state_name: String) -> void:
 		"Living":
 			opacity = 0
 		"Dying":
-			opacity = 0.2
+			opacity = OPACITY_DYING
 		"Dead":
-			opacity = 0.8
+			opacity = OPACITY_DEAD
 	
 	material.albedo_color.a = opacity
