@@ -28,7 +28,7 @@ var _starting_state: int
 
 func init(parent: Node3D) -> void:
 	# initialize all child states with reference to parent and state machine
-	for state: Node in get_children():
+	for state: State in get_children():
 		state.init(parent, self)
 	
 	change_state(_starting_state)
@@ -39,6 +39,7 @@ func reset() -> void:
 
 
 # abstract function to return a reference to the node representing the current state
+# when given an enum representing a state (e.g. States.LIVING for player)
 func get_state_node(_state: int) -> State:
 	push_error("Uninitialized state machine attempting to access child state node")
 	return null

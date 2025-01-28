@@ -26,10 +26,6 @@ func _ready() -> void:
 	SignalBus.player_state_changed.connect(_on_player_state_changed)
 
 
-#func _unhandled_input(event: InputEvent) -> void:
-	#state_machine.process_input(event)
-
-
 func reset() -> void:
 	# find_children(pattern: String, type: String = "") returns const Array
 	# of all nodes in the entire scene with name matching pattern string
