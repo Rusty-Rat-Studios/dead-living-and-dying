@@ -20,8 +20,3 @@ func get_state_node(state: int) -> State:
 	
 	push_error("Attempting to access invalid state: " + str(state))
 	return null
-
-
-# process frame-by-frame behavior for the currently active state
-func process_current_state() -> void:
-	_current_state_node.process_state()

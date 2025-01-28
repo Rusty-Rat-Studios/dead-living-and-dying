@@ -13,6 +13,10 @@ operating through calls from the parent _process_physics() function, which
 calls the state machine's process_current_state() function, which in turn
 calls the current state's process_state() function.
 - This technically means ALL state actions happen during the physics step.
+
+_parent.process_physics()
+-> _state_machine.process_current_state()
+-> -> current_state.process_state()
 """
 
 var current_state: int
@@ -38,6 +42,13 @@ func reset() -> void:
 func get_state_node(_state: int) -> State:
 	push_error("Uninitialized state machine attempting to access child state node")
 	return null
+
+
+# called by state machine during parent process_physics() step to execute 
+# frame-by-frame behavior according to currently active state 
+# - e.g. ghost updating target
+func process_current_state() -> void:
+	_current_state_node.process_state()
 
 
 func change_state(new_state: int) -> void:
