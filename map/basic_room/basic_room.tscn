@@ -10,7 +10,7 @@ script = ExtResource("1_xo7g0")
 [node name="Floor" parent="." instance=ExtResource("2_8oby5")]
 
 [node name="Spawner" parent="." instance=ExtResource("3_sanko")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.842, 0.5, -6.104)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.842, 0.5, -6.104)
 
 [node name="Spawner2" parent="." instance=ExtResource("3_sanko")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.842, 0.5, -6.104)
@@ -19,4 +19,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.842, 0.5, -6.104)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.842, 0.5, 3.099)
 
 [node name="Spawner4" parent="." instance=ExtResource("3_sanko")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.899, 0.5, 3.289)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.899, 0.5, 3.289)
