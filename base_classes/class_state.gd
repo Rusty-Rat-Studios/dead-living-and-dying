@@ -22,6 +22,21 @@ func init(parent: CharacterBody3D, state_machine: StateMachine) -> void:
 	_state_machine = state_machine
 
 
+# abstract function to execute state "initialization" behavior 
+# when it becomes the current state
+# - called during the state machine's change_state() function
+func enter() -> void:
+	push_error("Uninitialized state attempting to execute 'enter()' function")
+
+
+# abstract function to execute state "cleanup" behavior when
+# it stops being the current state
+# - called during the state machine's change_state() function
+func exit() -> void:
+	push_error("Uninitialized state attempting to execute 'exit()' function")
+
+
+# wrapper function to allow states to directly call the change_state() function
 func change_state(new_state: int) -> void:
 	_state_machine.change_state(new_state)
 
