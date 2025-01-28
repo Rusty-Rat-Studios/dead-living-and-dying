@@ -26,12 +26,7 @@ var _corpse: Corpse
 @onready var starting_position: Vector3 = position
 
 func _ready() -> void:
-	# set initial light values. Reduced by DYING enter(); restored by LIVING enter()
 	light_omni.light_color = Color("GOLDENROD")
-	light_omni.omni_range = LIGHT_OMNI_RANGE
-	light_omni.light_energy = LIGHT_ENERGY
-	light_spot.spot_range = LIGHT_SPOT_RANGE
-	light_spot.light_energy = LIGHT_ENERGY
 	
 	SignalBus.item_picked_up.connect(_on_item_picked_up)
 
