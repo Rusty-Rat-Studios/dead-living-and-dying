@@ -19,6 +19,6 @@ func spawn(entity: Resource) -> void:
 		node.position = self.position
 		node.rotation = self.rotation
 		add_sibling(node)
-		print(Time.get_time_string_from_system(), ": Spawner spawned ", node.name)
+		print(Time.get_time_string_from_system(), ": ", self.name, "(", get_parent().name, ") spawned ", node.name)
 	else:
-		print(Time.get_time_string_from_system(), ": Spawner didn't spawn ")
+		print(Time.get_time_string_from_system(), ": ", self.name, "(", get_parent().name, ") didn't spawn ")
