@@ -9,6 +9,5 @@ func get_player() -> Player:
 
 
 # globally access player state
-func get_player_state() -> String:
-	var sm: Node = player._state_machine
-	return sm._current_state_node.name
+func get_player_state() -> PlayerState.States:
+	return player._state_machine.current_state
