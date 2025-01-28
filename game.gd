@@ -48,18 +48,11 @@ func reset() -> void:
 
 func _on_player_state_changed(state_name: String) -> void:
 	print(Time.get_time_string_from_system(), ": State entered: ", state_name)
+	# enable or disable directional light according to player DEAD state
 	match state_name:
 		"Living":
-			player.light_omni.visible = true
-			player.light_spot.visible = true
-			light_directional.visible = false
-		"Dying":
-			player.light_omni.visible = true
-			player.light_spot.visible = true
 			light_directional.visible = false
 		"Dead":
-			player.light_omni.visible = false
-			player.light_spot.visible = false
 			light_directional.visible = true
 	
 	# TEMPORARY
