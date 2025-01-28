@@ -24,7 +24,6 @@ shadow_enabled = true
 
 [node name="DebugLight" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.830566, 0.486173, -0.271654, -0.492404, -0.413176, 0.766044, 0.260189, 0.770014, 0.582564, 0, 10, 0)
-visible = false
 light_color = Color(0.29219, 0.29219, 0.29219, 1)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
