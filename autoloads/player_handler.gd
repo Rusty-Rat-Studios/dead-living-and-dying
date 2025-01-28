@@ -11,13 +11,4 @@ func get_player() -> Player:
 # globally access player state
 func get_player_state() -> String:
 	var sm: Node = player._state_machine
-	match sm.current_state:
-		sm.States.LIVING:
-			return "Living"
-		sm.States.DYING:
-			return "Dying"
-		sm.States.DEAD:
-			return "Dead"
-	
-	push_error("Attempting to access invalid state: " + str(sm.current_state))
-	return ""
+	return sm._current_state_node.name
