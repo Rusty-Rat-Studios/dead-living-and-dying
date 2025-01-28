@@ -54,28 +54,3 @@ func _on_player_state_changed(state_name: String) -> void:
 			light_directional.visible = false
 		"Dead":
 			light_directional.visible = true
-	
-	# TEMPORARY
-	update_ghost_visibility(state_name)
-
-
-# TEMPORARY function to update ghost visibility based on player state
-func update_ghost_visibility(state_name: String) -> void:
-	# for some reason the ghost_mesh_instance is shared among all the ghosts so
-	# changing it for this changes it for all
-	var ghost: Ghost = ghost_resource.instantiate()
-	var ghost_mesh_instance: MeshInstance3D = ghost.get_node("MeshInstance3D")
-	var ghost_mesh: CapsuleMesh = ghost_mesh_instance.mesh
-	var material: Material = ghost_mesh.material
-	
-	var opacity: float
-	match state_name:
-		"Living":
-			opacity = 0
-		"Dying":
-			opacity = 0.2
-		"Dead":
-			opacity = 0.8
-	
-	material.albedo_color.a = opacity
-	ghost.queue_free() # delete temp Ghost

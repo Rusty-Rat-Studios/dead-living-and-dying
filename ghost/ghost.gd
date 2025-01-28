@@ -31,6 +31,8 @@ func _ready() -> void:
 	# to ensure this connection always evaluates first when signal emits
 	SignalBus.player_entered_room.connect(_on_player_entered_room)
 	SignalBus.player_exited_room.connect(_on_player_exited_room)
+	# attach signal to update ghost visibility based on player state
+	SignalBus.player_state_changed.connect(_on_player_state_changed)
 	
 	hit.connect(_on_hit)
 
@@ -84,3 +86,18 @@ func _on_hit() -> void:
 	if state_machine.current_state != state_machine.States.STUNNED:
 		state_machine.change_state(state_machine.States.STUNNED)
 		$ParticleBurst.emitting = true
+
+
+func _on_player_state_changed(state_name: String) -> void:
+	var material: Material = $MeshInstance3D.mesh.material
+	
+	var opacity: float
+	match state_name:
+		"Living":
+			opacity = 0
+		"Dying":
+			opacity = 0.2
+		"Dead":
+			opacity = 0.8
+	
+	material.albedo_color.a = opacity
