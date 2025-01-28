@@ -1,6 +1,7 @@
 extends PlayerState
 
 const DYING_SPEED: float = 4.0
+const LIGHT_REDUCTION : float = 0.7
 
 func enter() -> void:
 	super()
@@ -11,11 +12,11 @@ func enter() -> void:
 	
 	SignalBus.player_hurt.connect(_on_player_hurt)
 	
-	# adjust light strength
-	_parent.light_omni.omni_range = 4
-	_parent.light_omni.light_energy = 0.4
-	_parent.light_spot.spot_range = 6
-	_parent.light_spot.light_energy = 0.4
+	# reduce light strength
+	_parent.light_omni.omni_range *= LIGHT_REDUCTION
+	_parent.light_omni.light_energy *= LIGHT_REDUCTION
+	_parent.light_spot.spot_range *= LIGHT_REDUCTION
+	_parent.light_spot.light_energy *= LIGHT_REDUCTION
 
 
 func exit() -> void:

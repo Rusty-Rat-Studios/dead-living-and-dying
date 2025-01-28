@@ -1,5 +1,6 @@
 extends PlayerState
 
+
 func enter() -> void:
 	super()
 	_parent.speed = _parent.BASE_SPEED
@@ -9,11 +10,11 @@ func enter() -> void:
 	
 	SignalBus.player_hurt.connect(_on_player_hurt)
 	
-	# adjust light strength
-	_parent.light_omni.omni_range = 6
-	_parent.light_omni.light_energy = 1
-	_parent.light_spot.spot_range = 10
-	_parent.light_spot.light_energy = 1
+	# set light strength to default
+	_parent.light_omni.omni_range = _parent.LIGHT_OMNI_RANGE
+	_parent.light_omni.light_energy = _parent.LIGHT_ENERGY
+	_parent.light_spot.spot_range = _parent.LIGHT_SPOT_RANGE
+	_parent.light_spot.light_energy = _parent.LIGHT_ENERGY
 
 
 func exit() -> void:
