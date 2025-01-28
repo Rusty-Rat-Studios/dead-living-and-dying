@@ -35,7 +35,7 @@ func reset() -> void:
 
 
 # abstract function to return a reference to the node representing the current state
-func get_state_node(state: int) -> State:
+func get_state_node(_state: int) -> State:
 	push_error("Uninitialized state machine attempting to access child state node")
 	return null
 
