@@ -1,7 +1,6 @@
 class_name Player
 extends CharacterBody3D
 
-signal speed_change
 
 # player state machine, sibling node under Game node
 var state_machine: Node
@@ -22,7 +21,6 @@ var corpse: Corpse
 
 func _ready() -> void:
 	light_omni.light_color = Color("GOLDENROD")
-	speed_change.connect(_on_speed_change)
 	
 	SignalBus.item_picked_up.connect(_on_item_picked_up)
 
@@ -84,5 +82,5 @@ func _on_item_picked_up(item: ItemInventory) -> void:
 	item.position = Vector3.ZERO
 
 
-func _on_speed_change(speed_modifier: float) -> void:
+func speed_change(speed_modifier: float) -> void:
 	speed += speed_modifier
