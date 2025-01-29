@@ -7,18 +7,14 @@ extends Node3D
 @onready var state_machine: Node = $StateMachine
 @onready var player: Player = $Player
 @onready var light_directional: DirectionalLight3D = $DirectionalLight3D
-@onready var corpse: Area3D = preload("res://player/corpse.tscn").instantiate()
 @onready var ghost_resource: Resource = preload("res://ghost/ghost.tscn")
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Initialize player
-	# pass reference of state machine and corpse to be controlled by player
-	player.init($StateMachine, corpse)
-	# add corpse to scene as sibling of player
-	# corpse deactivates on initialization - invisible with no collision
-	add_child(corpse)
+	# pass reference of state machine to be controlled by player
+	player.init(state_machine)
 	
 	# Initialize state machine
 	# pass reference of the player to the states

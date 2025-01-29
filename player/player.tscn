@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://mt6b5vxmupgn"]
+[gd_scene load_steps=11 format=3 uid="uid://mt6b5vxmupgn"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_ndccg"]
 [ext_resource type="Shape3D" uid="uid://d140c2qk5hbt2" path="res://player/player_collision_shape.tres" id="2_a56u6"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://player/camera.gd" id="4_mmf56"]
 [ext_resource type="Script" path="res://player/spotlight.gd" id="5_nwynq"]
 [ext_resource type="Script" path="res://player/damage_detector.gd" id="6_ltudm"]
+[ext_resource type="PackedScene" uid="uid://umlwhr2u3iej" path="res://player/corpse.tscn" id="8_865w7"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bh504"]
 animations = [{
@@ -80,3 +81,7 @@ one_shot = true
 [node name="HitFlash" type="Timer" parent="DamageDetector"]
 
 [node name="Inventory" type="Node" parent="."]
+
+[node name="CorpsePosition" type="Node" parent="."]
+
+[node name="Corpse" parent="CorpsePosition" instance=ExtResource("8_865w7")]

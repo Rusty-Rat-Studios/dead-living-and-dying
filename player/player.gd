@@ -3,14 +3,15 @@ extends CharacterBody3D
 
 # player state machine, sibling node under Game node
 var state_machine: Node
-# used to track player corpse - handled by states
-var corpse: Corpse
 
 @onready var speed: float = 6.0
 # light variables used by state machine to adjust light strength based on state
 @onready var light_omni: OmniLight3D = $OmniLight3D
 @onready var light_spot: SpotLight3D = $SpotLight3D
 @onready var camera: Camera3D = $RotationOffset/Camera3D
+# used to track player corpse - handled by states
+# corpse set as child of Node to intentionally not inherit parent position
+@onready var _corpse: Corpse = $CorpsePosition/Corpse
 
 # store initial position to return to when calling reset()
 @onready var starting_position: Vector3 = position
@@ -21,10 +22,8 @@ func _ready() -> void:
 	SignalBus.item_picked_up.connect(_on_item_picked_up)
 
 
-func init(_state_machine: Node, _corpse: Corpse) -> void:
+func init(_state_machine: Node) -> void:
 	self.state_machine = _state_machine
-	# set reference to player corpse
-	self.corpse = _corpse
 
 
 func reset() -> void:
@@ -35,7 +34,7 @@ func reset() -> void:
 	state_machine.change_state(state_machine.starting_state)
 	
 	camera.reset()
-	corpse.reset()
+	_corpse.reset()
 
 
 func _physics_process(delta: float) -> void:

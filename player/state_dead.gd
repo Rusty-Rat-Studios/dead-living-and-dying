@@ -49,9 +49,9 @@ func move_to_shrine() -> void:
 	parent.collision_mask = 0
 	
 	# spawn player corpse at death location
-	parent.corpse.global_position = parent.global_position
+	parent._corpse.global_position = parent.global_position
 	# corpse collision is ignored because player collision is temporarily disabled
-	parent.corpse.activate()
+	parent._corpse.activate()
 	
 	# find and move player to closest active shrine
 	var active_shrines: Array[Shrine] = ShrineManager.get_active_shrines()
