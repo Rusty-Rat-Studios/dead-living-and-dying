@@ -1,13 +1,14 @@
+class_name GhostStateMachine
 extends StateMachine
 
-enum States {WAITING, POSSESSING, STUNNED, ATTACKING}
+enum States { WAITING, POSSESSING, STUNNED, ATTACKING }
 
 
 func _ready() -> void:
 	_starting_state = States.WAITING
 
 
-func get_state_node(state: int) -> State:
+func get_state_node(state: GhostStateMachine.States) -> GhostState:
 	match state:
 		States.WAITING:
 			return $Waiting

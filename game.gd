@@ -4,11 +4,10 @@ extends Node3D
 # state machine node-based design partially sourced from:
 # "Starter state machines in Godot 4" by "The Shaggy Dev"
 # https://www.youtube.com/watch?v=oqFbZoA2lnU
-@onready var state_machine: StateMachine = $StateMachine
+@onready var state_machine: PlayerStateMachine = $StateMachine
 @onready var player: Player = $Player
 @onready var light_directional: DirectionalLight3D = $DirectionalLight3D
 @onready var corpse: Area3D = preload("res://player/corpse.tscn").instantiate()
-@onready var ghost_resource: Resource = preload("res://ghost/ghost.tscn")
 
 
 # Called when the node enters the scene tree for the first time.
@@ -22,7 +21,7 @@ func _ready() -> void:
 	
 	# Initialize state machine
 	# pass reference of the player to the states
-	state_machine.init($Player)
+	state_machine.init(player)
 	SignalBus.player_state_changed.connect(_on_player_state_changed)
 
 

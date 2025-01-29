@@ -10,4 +10,5 @@ func get_player() -> Player:
 
 # globally access player state
 func get_player_state() -> PlayerState.States:
-	return player._state_machine.current_state
+	# gdscript gives a warning for implicitly casting an int to an enum
+	return player._state_machine.current_state as PlayerState.States

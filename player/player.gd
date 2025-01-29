@@ -9,7 +9,7 @@ const LIGHT_SPOT_RANGE: float = 10
 const LIGHT_ENERGY: float = 1
 
 # player state machine, sibling node under Game node
-var _state_machine: Node
+var _state_machine: PlayerStateMachine
 # used to track player corpse - handled by states
 var _corpse: Corpse
 
@@ -31,7 +31,7 @@ func _ready() -> void:
 	SignalBus.item_picked_up.connect(_on_item_picked_up)
 
 
-func init(state_machine: StateMachine, corpse: Corpse) -> void:
+func init(state_machine: PlayerStateMachine, corpse: Corpse) -> void:
 	_state_machine = state_machine
 	# set reference to player corpse
 	_corpse = corpse

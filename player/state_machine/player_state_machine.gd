@@ -1,3 +1,4 @@
+class_name PlayerStateMachine
 extends StateMachine
 
 enum States { LIVING, DYING, DEAD }
@@ -20,7 +21,7 @@ func _input(event: InputEvent) -> void:
 					change_state(States.LIVING)
 
 
-func get_state_node(state: int) -> State:
+func get_state_node(state: PlayerStateMachine.States) -> PlayerState:
 	match state:
 		States.LIVING:
 			return $Living
