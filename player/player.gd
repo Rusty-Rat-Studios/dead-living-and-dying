@@ -9,12 +9,12 @@ var state_machine: Node
 @onready var light_omni: OmniLight3D = $OmniLight3D
 @onready var light_spot: SpotLight3D = $SpotLight3D
 @onready var camera: Camera3D = $RotationOffset/Camera3D
+# store initial position to return to when calling reset()
+@onready var starting_position: Vector3 = position
 # used to track player corpse - handled by states
 # corpse set as child of Node to intentionally not inherit parent position
 @onready var _corpse: Corpse = $CorpsePosition/Corpse
 
-# store initial position to return to when calling reset()
-@onready var starting_position: Vector3 = position
 
 func _ready() -> void:
 	light_omni.light_color = Color("GOLDENROD")
