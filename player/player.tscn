@@ -82,6 +82,6 @@ one_shot = true
 
 [node name="Inventory" type="Node" parent="."]
 
-[node name="CorpsePosition" type="Node" parent="."]
+[node name="CorpseContainer" type="Node" parent="."]
 
-[node name="Corpse" parent="CorpsePosition" instance=ExtResource("8_865w7")]
+[node name="Corpse" parent="CorpseContainer" instance=ExtResource("8_865w7")]
