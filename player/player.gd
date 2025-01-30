@@ -1,12 +1,6 @@
 class_name Player
 extends CharacterBody3D
 
-
-# player state machine, sibling node under Game node
-var state_machine: Node
-# used to track player corpse - handled by states
-var corpse: Corpse
-
 enum Stats {
 	STAT_SPEED = 0
 }
@@ -14,6 +8,10 @@ enum Stats {
 var stat_dict: Dictionary = {
 	Stats.STAT_SPEED : 6.0
 }
+# player state machine, sibling node under Game node
+var state_machine: Node
+# used to track player corpse - handled by states
+var corpse: Corpse
 
 @onready var speeed: float = 6.0
 # light variables used by state machine to adjust light strength based on state
