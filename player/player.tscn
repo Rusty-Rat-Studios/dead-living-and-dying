@@ -6,9 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://cvadlfyuhhlsa" path="res://icon.svg" id="4_5bmh1"]
 [ext_resource type="Script" path="res://player/camera.gd" id="4_mmf56"]
 [ext_resource type="Script" path="res://player/spotlight.gd" id="5_nwynq"]
-[ext_resource type="Script" path="res://player/damage_detector.gd" id="6_ltudm"]
-[ext_resource type="PackedScene" uid="uid://umlwhr2u3iej" path="res://player/corpse.tscn" id="8_865w7"]
 [ext_resource type="Script" path="res://player/hurtbox.gd" id="6_ltudm"]
+[ext_resource type="PackedScene" uid="uid://umlwhr2u3iej" path="res://player/corpse.tscn" id="8_865w7"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bh504"]
 animations = [{

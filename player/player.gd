@@ -1,8 +1,6 @@
 class_name Player
 extends CharacterBody3D
 
-# player state machine, sibling node under Game node
-var state_machine: Node
 const BASE_SPEED: float = 6.0
 
 # base values used for light range and strength
@@ -12,8 +10,6 @@ const LIGHT_ENERGY: float = 1
 
 # player state machine, sibling node under Game node
 var _state_machine: PlayerStateMachine
-# used to track player corpse - handled by states
-var _corpse: Corpse
 
 @onready var speed: float = BASE_SPEED
 # light variables used by state machine to adjust light strength based on state
@@ -28,7 +24,7 @@ var _corpse: Corpse
 @onready var starting_position: Vector3 = position
 # used to track player corpse - handled by states
 # corpse set as child of Node to intentionally not inherit parent position
-@onready var _corpse: Corpse = $CorpsePosition/Corpse
+@onready var _corpse: Corpse = $CorpseContainer/Corpse
 
 
 func _ready() -> void:
@@ -37,8 +33,8 @@ func _ready() -> void:
 	SignalBus.item_picked_up.connect(_on_item_picked_up)
 
 
-func init(_state_machine: Node) -> void:
-	self.state_machine = _state_machine
+func init(state_machine: Node) -> void:
+	_state_machine = state_machine
 
 
 func reset() -> void:
