@@ -23,4 +23,4 @@ func exit() -> void:
 
 func _on_player_hurt() -> void:
 	_parent.take_damage()
-	_state_machine.change_state(States.DYING)
+	_state_machine.change_state(PlayerStateMachine.States.DYING)

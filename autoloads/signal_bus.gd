@@ -2,7 +2,7 @@ extends Node
 
 # signal for communicating player state to all interested nodes
 # e.g. Game node making universal changes (e.g. lighting) based on player state 
-@warning_ignore("unused_signal") signal player_state_changed(state: PlayerState.States)
+@warning_ignore("unused_signal") signal player_state_changed(state: PlayerStateMachine.States)
 
 # when the player takes damage. caught by player states to cause state change
 @warning_ignore("unused_signal") signal player_hurt

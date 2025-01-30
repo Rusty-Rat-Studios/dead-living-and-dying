@@ -68,7 +68,7 @@ func set_closest_target() -> void:
 
 	# return to WAITING if no possessables available
 	if possessables.is_empty():
-		change_state(States.WAITING)
+		change_state(GhostStateMachine.States.WAITING)
 		return
 	
 	# find nearest possessable and set it as target
@@ -117,7 +117,7 @@ func _depossess() -> void:
 	# depossess object and go to WAITING
 	target_possessable.depossess()
 	is_possessing = false
-	change_state(States.WAITING)
+	change_state(GhostStateMachine.States.WAITING)
 
 
 func _attack() -> void:
@@ -125,7 +125,7 @@ func _attack() -> void:
 	target_possessable.attack(PlayerHandler.get_player())
 	target_possessable.depossess()
 	is_possessing = false
-	change_state(States.WAITING)
+	change_state(GhostStateMachine.States.WAITING)
 
 
 func _wait() -> void:

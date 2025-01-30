@@ -83,4 +83,4 @@ func pause() -> void:
 
 
 func _possess() -> void:
-	change_state(States.POSSESSING)
+	change_state(GhostStateMachine.States.POSSESSING)

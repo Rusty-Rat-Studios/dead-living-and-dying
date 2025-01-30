@@ -149,8 +149,8 @@ func disable_skew() -> void:
 	sprite.animation = SPRITE_ANIMATION_FRONT
 
 
-func _on_player_state_changed(state: PlayerState.States) -> void:
-	if state == PlayerState.States.DEAD:
+func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
+	if state == PlayerStateMachine.States.DEAD:
 		disable_skew()
 	else:
 		enable_skew()

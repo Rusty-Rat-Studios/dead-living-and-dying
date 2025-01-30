@@ -17,7 +17,7 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if PlayerHandler.get_player_state() == PlayerState.States.DEAD:
+	if PlayerHandler.get_player_state() == PlayerStateMachine.States.DEAD:
 		return
 	if event.is_action_pressed("use_defense_item"):
 		use()

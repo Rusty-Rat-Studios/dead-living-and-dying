@@ -75,7 +75,7 @@ func _on_player_entered_room(room: Node3D) -> void:
 		player_in_room = true
 	
 	# regardless of state, attack the player if they enter the room in DEAD state
-	if player_in_room and PlayerHandler.get_player_state() == PlayerState.States.DEAD:
+	if player_in_room and PlayerHandler.get_player_state() == PlayerStateMachine.States.DEAD:
 		# add delay to allow player breathing room when entering the room
 		await Utility.delay(ATTACK_DELAY)
 		state_machine.change_state(state_machine.States.ATTACKING)
@@ -92,16 +92,16 @@ func _on_hit() -> void:
 		$ParticleBurst.emitting = true
 
 
-func _on_player_state_changed(state: PlayerState.States) -> void:
+func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
 	var material: Material = $MeshInstance3D.mesh.material
 	
 	var opacity: float
 	match state:
-		PlayerState.States.LIVING:
+		PlayerStateMachine.States.LIVING:
 			opacity = 0
-		PlayerState.States.DYING:
+		PlayerStateMachine.States.DYING:
 			opacity = OPACITY_DYING
-		PlayerState.States.DEAD:
+		PlayerStateMachine.States.DEAD:
 			opacity = OPACITY_DEAD
 	
 	material.albedo_color.a = opacity

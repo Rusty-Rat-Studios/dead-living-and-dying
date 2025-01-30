@@ -26,4 +26,4 @@ func exit() -> void:
 func _on_player_hurt() -> void:
 	# activate i-frames without flash
 	_parent.take_damage(false)
-	_state_machine.change_state(States.DEAD)
+	_state_machine.change_state(PlayerStateMachine.States.DEAD)

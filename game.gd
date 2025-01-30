@@ -41,11 +41,11 @@ func reset() -> void:
 	player.reset()
 
 
-func _on_player_state_changed(state: PlayerState.States) -> void:
-	print(Time.get_time_string_from_system(), ": State entered: ", PlayerState.States.keys()[state])
+func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
+	print(Time.get_time_string_from_system(), ": State entered: ", PlayerStateMachine.States.keys()[state])
 	# enable or disable directional light according to player DEAD state
 	match state:
-		PlayerState.States.LIVING:
+		PlayerStateMachine.States.LIVING:
 			light_directional.visible = false
-		PlayerState.States.DEAD:
+		PlayerStateMachine.States.DEAD:
 			light_directional.visible = true

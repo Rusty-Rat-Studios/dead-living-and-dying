@@ -77,7 +77,7 @@ func _on_body_entered(_body: Node3D) -> void:
 	# type-checking for player is unneeded as shrine collides on layer PLAYER
 	if (not consumed 
 		and not activated 
-		and PlayerHandler.get_player_state() != PlayerState.States.DEAD):
+		and PlayerHandler.get_player_state() != PlayerStateMachine.States.DEAD):
 		$Label3D.visible = false
 		# display interaction text
 		$Interactable.display_message(TEXT_INTERACTABLE)
