@@ -20,7 +20,7 @@ var detector_collision_shape: CollisionShape3D
 @onready var is_possessing: bool = false
 
 
-func init(parent: Ghost, state_machine: Node) -> void:
+func init(parent: CharacterBody3D, state_machine: StateMachine) -> void:
 	# use init() instead of _ready() because we need access to parent variables
 	# which are initialized after child variables (i.e. this state)
 	super(parent, state_machine)
@@ -68,7 +68,7 @@ func set_closest_target() -> void:
 
 	# return to WAITING if no possessables available
 	if possessables.is_empty():
-		change_state(States.WAITING)
+		change_state(GhostStateMachine.States.WAITING)
 		return
 	
 	# find nearest possessable and set it as target
@@ -117,7 +117,7 @@ func _depossess() -> void:
 	# depossess object and go to WAITING
 	target_possessable.depossess()
 	is_possessing = false
-	change_state(States.WAITING)
+	change_state(GhostStateMachine.States.WAITING)
 
 
 func _attack() -> void:
@@ -125,7 +125,7 @@ func _attack() -> void:
 	target_possessable.attack(PlayerHandler.get_player())
 	target_possessable.depossess()
 	is_possessing = false
-	change_state(States.WAITING)
+	change_state(GhostStateMachine.States.WAITING)
 
 
 func _wait() -> void:

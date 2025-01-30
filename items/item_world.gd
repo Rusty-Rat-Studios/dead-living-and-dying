@@ -34,7 +34,7 @@ func pick_up() -> void:
 
 func _on_body_entered(_body: Node3D) -> void:
 	# no node check required as collision mask is layer PLAYER
-	if PlayerHandler.get_player_state() != "Dead":
+	if PlayerHandler.get_player_state() != PlayerStateMachine.States.DEAD:
 		$Interactable.display_message("[E] Pick Up")
 		$Interactable.enabled = true
 

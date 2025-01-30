@@ -1,19 +1,10 @@
 class_name GhostState
-extends Node
+extends State
 
-enum States {WAITING, POSSESSING, STUNNED, ATTACKING}
-
-var _parent: Ghost
-var _state_machine: Node
-
-func init(parent: Ghost, state_machine: Node) -> void:
+func init(parent: CharacterBody3D, state_machine: StateMachine) -> void:
 	_parent = parent
 	_state_machine = state_machine
 
-
+# reset the ghost target position when changing states
 func exit() -> void:
 	_parent.target_pos = _parent.global_position
-
-
-func change_state(new_state: int) -> void:
-	_state_machine.change_state(new_state)

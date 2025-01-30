@@ -13,8 +13,8 @@ func _ready() -> void:
 
 func enter() -> void:
 	# guard to ensure player is in room and DEAD when entering attack state
-	if not (_parent.player_in_room and PlayerHandler.get_player_state() == "Dead"):
-		change_state(States.WAITING)
+	if not (_parent.player_in_room and PlayerHandler.get_player_state() == PlayerStateMachine.States.DEAD):
+		change_state(GhostStateMachine.States.WAITING)
 		return
 	_parent.speed = ATTACK_SPEED
 
@@ -30,9 +30,10 @@ func process_state() -> void:
 
 func _on_player_exited_room(room: Node3D) -> void:
 	if room == _parent.current_room and not _parent.player_in_room:
-		change_state(States.WAITING)
+		change_state(GhostStateMachine.States.WAITING)
 
 
-func _on_player_state_changed(state_name: String) -> void:
-	if _state_machine.current_state == States.ATTACKING and state_name == "Living":
-		change_state(States.WAITING)
+func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
+	if (_state_machine.current_state == GhostStateMachine.States.ATTACKING 
+		and state == PlayerStateMachine.States.LIVING):
+		change_state(GhostStateMachine.States.WAITING)

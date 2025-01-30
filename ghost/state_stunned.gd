@@ -21,4 +21,4 @@ func process_state() -> void:
 
 
 func _on_stun_timer_timeout() -> void:
-	change_state(States.WAITING)
+	change_state(GhostStateMachine.States.WAITING)

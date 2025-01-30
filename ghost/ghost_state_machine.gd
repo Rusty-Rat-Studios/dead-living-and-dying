@@ -1,37 +1,14 @@
-extends Node
-"""
-This state machine has several child states, each with a reference to the
-parent Ghost node the state machine belongs to. Each state has an enter() 
-and exit() functions which are called when a state changes to allow for
-state-specific readying and cleanup (e.g. enabling or disabling timers).
+class_name GhostStateMachine
+extends StateMachine
 
-The state machine operates frame-by-frame by having a single active state 
-operating through the parent (Ghost) _process_physics() function calling
-the state machine's process_current_state() function, which in turns calls
-the current state's process_state() function.
-- This technically means ALL state actions happen during the physics step.
-"""
-
-enum States {WAITING, POSSESSING, STUNNED, ATTACKING}
-var current_state: int
-# track node for calling functions of child state nodes
-var _current_state_node: Node
-
-@onready var _starting_state: int = States.WAITING
-
-func init(parent: Node3D) -> void:
-	# initialize all child states with reference to parent and state machine
-	for state: Node in get_children():
-		state.init(parent, self)
-	
-	change_state(_starting_state)
+enum States { WAITING, POSSESSING, STUNNED, ATTACKING }
 
 
-func reset() -> void:
-	change_state(_starting_state)
+func _ready() -> void:
+	_starting_state = States.WAITING
 
 
-func get_state_node(state: int) -> Node:
+func get_state_node(state: GhostStateMachine.States) -> GhostState:
 	match state:
 		States.WAITING:
 			return $Waiting
@@ -44,17 +21,3 @@ func get_state_node(state: int) -> Node:
 	
 	push_error("Attempting to access invalid state: " + str(state))
 	return null
-
-
-func change_state(new_state: int) -> void:
-	# allow each state to execute any exit logic before changing state
-	if _current_state_node:
-		_current_state_node.exit()
-	
-	current_state = new_state
-	_current_state_node = get_state_node(new_state)
-	_current_state_node.enter()
-
-
-func process_current_state() -> void:
-	_current_state_node.process_state()
