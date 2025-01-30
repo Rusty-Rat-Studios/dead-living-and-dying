@@ -7,12 +7,12 @@ var state_machine: Node
 # used to track player corpse - handled by states
 var corpse: Corpse
 
-enum stats {
+enum Stats {
 	STAT_SPEED = 0
 }
 
 var stat_dict: Dictionary = {
-	stats.STAT_SPEED : 6.0
+	Stats.STAT_SPEED : 6.0
 }
 
 @onready var speeed: float = 6.0
