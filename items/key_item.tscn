@@ -1,22 +1,5 @@
-[gd_scene load_steps=5 format=3 uid="uid://bwfxerrhc458i"]
+[gd_scene load_steps=2 format=3 uid="uid://bwfkis8dga70e"]
 
-[ext_resource type="PackedScene" uid="uid://c75eretp0162f" path="res://items/item.tscn" id="1_74e80"]
-[ext_resource type="Script" path="res://items/key_item.gd" id="2_knh6c"]
+[ext_resource type="PackedScene" uid="uid://bslonn3bn1m6s" path="res://items/item_world.tscn" id="1_sw4je"]
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_jmy8l"]
-top_radius = 0.25
-bottom_radius = 0.25
-height = 1.0
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_vhyqu"]
-height = 1.0
-radius = 0.25
-
-[node name="KeyItem" instance=ExtResource("1_74e80")]
-script = ExtResource("2_knh6c")
-
-[node name="MeshInstance3D" parent="." index="0"]
-mesh = SubResource("CylinderMesh_jmy8l")
-
-[node name="CollisionShape3D" parent="." index="1"]
-shape = SubResource("CylinderShape3D_vhyqu")
+[node name="KeyItem" instance=ExtResource("1_sw4je")]
