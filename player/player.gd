@@ -7,7 +7,15 @@ var state_machine: Node
 # used to track player corpse - handled by states
 var corpse: Corpse
 
-@onready var speed: float = 6.0
+enum stats {
+	speed = 0
+}
+
+var stat_dict: Dictionary = {
+	stats.speed : 6.0
+}
+
+@onready var speeed: float = 6.0
 # light variables used by state machine to adjust light strength based on state
 @onready var light_omni: OmniLight3D = $OmniLight3D
 @onready var light_spot: SpotLight3D = $SpotLight3D
@@ -64,11 +72,11 @@ func handle_movement(delta: float) -> void:
 		input_dir = Focus.input_get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 		direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
-		velocity.x = direction.x * speed
-		velocity.z = direction.z * speed
+		velocity.x = direction.x * stat_dict[0]
+		velocity.z = direction.z * stat_dict[0]
 	else:
-		velocity.x = move_toward(velocity.x, 0, speed)
-		velocity.z = move_toward(velocity.z, 0, speed)
+		velocity.x = move_toward(velocity.x, 0, stat_dict[0])
+		velocity.z = move_toward(velocity.z, 0, stat_dict[0])
 	move_and_slide()
 
 
@@ -82,5 +90,6 @@ func _on_item_picked_up(item: ItemInventory) -> void:
 	item.position = Vector3.ZERO
 
 
-func speed_change(speed_modifier: float) -> void:
-	speed += speed_modifier
+func stat_update(stat_modifier: float, stat: int) -> void:
+	if stat_dict.has(stat):
+		stat_dict[stat] += stat_modifier
