@@ -8,11 +8,11 @@ var state_machine: Node
 var corpse: Corpse
 
 enum stats {
-	speed = 0
+	STAT_SPEED = 0
 }
 
 var stat_dict: Dictionary = {
-	stats.speed : 6.0
+	stats.STAT_SPEED : 6.0
 }
 
 @onready var speeed: float = 6.0
