@@ -10,8 +10,6 @@ const LIGHT_ENERGY: float = 1
 
 # player state machine, sibling node under Game node
 var _state_machine: PlayerStateMachine
-# used to track player corpse - handled by states
-var _corpse: Corpse
 
 @onready var speed: float = BASE_SPEED
 # light variables used by state machine to adjust light strength based on state
@@ -24,6 +22,10 @@ var _corpse: Corpse
 
 # store initial position to return to when calling reset()
 @onready var starting_position: Vector3 = position
+# used to track player corpse - handled by states
+# corpse set as child of Node to intentionally not inherit parent position
+@onready var _corpse: Corpse = $CorpseContainer/Corpse
+
 
 func _ready() -> void:
 	light_omni.light_color = Color("GOLDENROD")
@@ -31,10 +33,8 @@ func _ready() -> void:
 	SignalBus.item_picked_up.connect(_on_item_picked_up)
 
 
-func init(state_machine: PlayerStateMachine, corpse: Corpse) -> void:
+func init(state_machine: Node) -> void:
 	_state_machine = state_machine
-	# set reference to player corpse
-	_corpse = corpse
 
 
 func reset() -> void:
