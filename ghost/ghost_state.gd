@@ -1,0 +1,10 @@
+class_name GhostState
+extends State
+
+func init(parent: CharacterBody3D, state_machine: StateMachine) -> void:
+	_parent = parent
+	_state_machine = state_machine
+
+# reset the ghost target position when changing states
+func exit() -> void:
+	_parent.target_pos = _parent.global_position

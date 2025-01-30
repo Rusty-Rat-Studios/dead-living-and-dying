@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://game.gd" id="1_xwopn"]
 [ext_resource type="PackedScene" uid="uid://mt6b5vxmupgn" path="res://player/player.tscn" id="2_xkdfq"]
-[ext_resource type="Script" path="res://base_classes/state_machine.gd" id="3_3ig3n"]
-[ext_resource type="Script" path="res://player/state_dead.gd" id="4_r4nk8"]
-[ext_resource type="Script" path="res://player/state_living.gd" id="5_7fl8v"]
-[ext_resource type="Script" path="res://player/state_dying.gd" id="6_xupbb"]
+[ext_resource type="Script" path="res://player/state_machine/player_state_machine.gd" id="3_3ig3n"]
+[ext_resource type="Script" path="res://player/state_machine/state_dead.gd" id="4_r4nk8"]
+[ext_resource type="Script" path="res://player/state_machine/state_living.gd" id="5_7fl8v"]
+[ext_resource type="Script" path="res://player/state_machine/state_dying.gd" id="6_xupbb"]
 [ext_resource type="Script" path="res://map/world_grid.gd" id="7_24rg8"]
 [ext_resource type="PackedScene" uid="uid://dic5onsop66y4" path="res://ui/game_menu.tscn" id="8_ah51h"]
 [ext_resource type="PackedScene" uid="uid://bwmbngtw81o3y" path="res://ui/debug_console.tscn" id="8_en8lj"]
@@ -24,30 +24,19 @@ shadow_enabled = true
 
 [node name="DebugLight" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.830566, 0.486173, -0.271654, -0.492404, -0.413176, 0.766044, 0.260189, 0.770014, 0.582564, 0, 10, 0)
-visible = false
 light_color = Color(0.29219, 0.29219, 0.29219, 1)
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+[node name="StateMachine" type="Node" parent="."]
 script = ExtResource("3_3ig3n")
-starting_state = NodePath("Living")
 
-[node name="Dead" type="Node" parent="StateMachine" node_paths=PackedStringArray("state_dead", "state_living", "state_dying")]
+[node name="Dead" type="Node" parent="StateMachine"]
 script = ExtResource("4_r4nk8")
-state_dead = NodePath(".")
-state_living = NodePath("../Living")
-state_dying = NodePath("../Dying")
 
-[node name="Living" type="Node" parent="StateMachine" node_paths=PackedStringArray("state_dead", "state_living", "state_dying")]
+[node name="Living" type="Node" parent="StateMachine"]
 script = ExtResource("5_7fl8v")
-state_dead = NodePath("../Dead")
-state_living = NodePath(".")
-state_dying = NodePath("../Dying")
 
-[node name="Dying" type="Node" parent="StateMachine" node_paths=PackedStringArray("state_dead", "state_living", "state_dying")]
+[node name="Dying" type="Node" parent="StateMachine"]
 script = ExtResource("6_xupbb")
-state_dead = NodePath("../Dead")
-state_living = NodePath("../Living")
-state_dying = NodePath(".")
 
 [node name="WorldGrid" type="Node3D" parent="."]
 script = ExtResource("7_24rg8")

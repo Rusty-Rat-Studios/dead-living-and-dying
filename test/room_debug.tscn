@@ -1,44 +1,34 @@
 [gd_scene load_steps=12 format=3 uid="uid://d4cxt6unhu3c6"]
 
-[ext_resource type="Script" path="res://test/game_debug.gd" id="1_5rn61"]
+[ext_resource type="Script" path="res://game.gd" id="1_qruwo"]
 [ext_resource type="PackedScene" uid="uid://mt6b5vxmupgn" path="res://player/player.tscn" id="2_ahfm4"]
-[ext_resource type="Script" path="res://base_classes/state_machine.gd" id="3_im3l8"]
-[ext_resource type="Script" path="res://player/state_dead.gd" id="4_6a0g5"]
-[ext_resource type="Script" path="res://player/state_living.gd" id="5_dobku"]
-[ext_resource type="Script" path="res://player/state_dying.gd" id="6_imvu0"]
+[ext_resource type="Script" path="res://player/state_machine/player_state_machine.gd" id="3_im3l8"]
+[ext_resource type="Script" path="res://player/state_machine/state_dead.gd" id="4_6a0g5"]
+[ext_resource type="Script" path="res://player/state_machine/state_living.gd" id="5_dobku"]
+[ext_resource type="Script" path="res://player/state_machine/state_dying.gd" id="6_imvu0"]
 [ext_resource type="Script" path="res://map/room.gd" id="7_01ym3"]
 [ext_resource type="PackedScene" uid="uid://b3nn5u3a5o85j" path="res://map/floor.tscn" id="8_0ag1w"]
-[ext_resource type="PackedScene" uid="uid://bson3umirpot2" path="res://map/wall_without_door.tscn" id="9_exyhi"]
+[ext_resource type="PackedScene" uid="uid://bson3umirpot2" path="res://map/basic_room/wall_without_door.tscn" id="9_exyhi"]
 [ext_resource type="PackedScene" uid="uid://dic5onsop66y4" path="res://ui/game_menu.tscn" id="10_14pjr"]
 [ext_resource type="PackedScene" uid="uid://bwmbngtw81o3y" path="res://ui/debug_console.tscn" id="11_prqow"]
 
 [node name="Game" type="Node3D"]
-script = ExtResource("1_5rn61")
+script = ExtResource("1_qruwo")
 
 [node name="Player" parent="." instance=ExtResource("2_ahfm4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 4)
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+[node name="StateMachine" type="Node" parent="."]
 script = ExtResource("3_im3l8")
-starting_state = NodePath("Living")
 
-[node name="Dead" type="Node" parent="StateMachine" node_paths=PackedStringArray("state_dead", "state_living", "state_dying")]
+[node name="Dead" type="Node" parent="StateMachine"]
 script = ExtResource("4_6a0g5")
-state_dead = NodePath(".")
-state_living = NodePath("../Living")
-state_dying = NodePath("../Dying")
 
-[node name="Living" type="Node" parent="StateMachine" node_paths=PackedStringArray("state_dead", "state_living", "state_dying")]
+[node name="Living" type="Node" parent="StateMachine"]
 script = ExtResource("5_dobku")
-state_dead = NodePath("../Dead")
-state_living = NodePath(".")
-state_dying = NodePath("../Dying")
 
-[node name="Dying" type="Node" parent="StateMachine" node_paths=PackedStringArray("state_dead", "state_living", "state_dying")]
+[node name="Dying" type="Node" parent="StateMachine"]
 script = ExtResource("6_imvu0")
-state_dead = NodePath("../Dead")
-state_living = NodePath("../Living")
-state_dying = NodePath(".")
 
 [node name="DebugRoom" type="Node3D" parent="."]
 script = ExtResource("7_01ym3")

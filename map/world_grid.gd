@@ -8,11 +8,15 @@ extends Node3D
 const GRID_SCALE: float = 20 # Size of each grid square in editor units
 
 @onready var basic_room: RoomInformation = preload("res://map/basic_room/basic_room.tres")
+# For some reason preload will not work here
+@onready var entity_table: EntityTable = load("res://map/test_entity_table.tres")
 @onready var room_map: HashMap = HashMap.new()
 
 
 func _ready() -> void:
 	generate_grid()
+	# TODO: Run for each type of spawner using a specific EntityTable
+	SpawnerManager.spawn(Spawner.SpawnerType.ENEMY, entity_table)
 
 
 func generate_grid() -> void:

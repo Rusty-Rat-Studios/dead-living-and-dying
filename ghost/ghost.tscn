@@ -1,7 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://yihpxsaeuqdi"]
+[gd_scene load_steps=15 format=3 uid="uid://yihpxsaeuqdi"]
 
 [ext_resource type="Script" path="res://ghost/ghost.gd" id="1_vr82v"]
-[ext_resource type="Script" path="res://ghost/state_machine_ghost.gd" id="2_qkh1e"]
+[ext_resource type="Script" path="res://ghost/ghost_state_machine.gd" id="2_qkh1e"]
 [ext_resource type="Script" path="res://ghost/state_waiting.gd" id="3_gb04i"]
 [ext_resource type="Script" path="res://ghost/state_possessing.gd" id="4_muv24"]
 [ext_resource type="Script" path="res://ghost/state_stunned.gd" id="7_yplap"]
@@ -13,6 +13,7 @@ transparency = 1
 albedo_color = Color(0.635, 0.733, 0.973, 0)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_6tbxm"]
+resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_qtcw8")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cokcw"]
@@ -22,6 +23,26 @@ radius = 1.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x245q"]
 radius = 0.6
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vmkbj"]
+emission_shape = 3
+emission_box_extents = Vector3(0.25, 0.25, 0.25)
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 3.0
+initial_velocity_max = 3.0
+gravity = Vector3(0, 1, 0)
+linear_accel_min = -6.0
+linear_accel_max = -6.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cvd0x"]
+transparency = 1
+albedo_color = Color(0.513726, 0, 0.662745, 0.352941)
+
+[sub_resource type="SphereMesh" id="SphereMesh_wv6vs"]
+material = SubResource("StandardMaterial3D_cvd0x")
+radius = 0.05
+height = 0.1
 
 [node name="Ghost" type="CharacterBody3D"]
 collision_layer = 8
@@ -33,52 +54,43 @@ mesh = SubResource("CapsuleMesh_6tbxm")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_cokcw")
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("starting_state")]
+[node name="StateMachine" type="Node" parent="."]
 script = ExtResource("2_qkh1e")
-starting_state = NodePath("Waiting")
 
-[node name="Waiting" type="Node" parent="StateMachine" node_paths=PackedStringArray("state_waiting", "state_possessing", "state_stunned", "state_attacking")]
+[node name="Waiting" type="Node" parent="StateMachine"]
 script = ExtResource("3_gb04i")
-state_waiting = NodePath(".")
-state_possessing = NodePath("../Possessing")
-state_stunned = NodePath("../Stunned")
-state_attacking = NodePath("../Attacking")
 
-[node name="Possessing" type="Node" parent="StateMachine" node_paths=PackedStringArray("state_waiting", "state_possessing", "state_stunned", "state_attacking")]
+[node name="Possessing" type="Node" parent="StateMachine"]
 script = ExtResource("4_muv24")
-state_waiting = NodePath("../Waiting")
-state_possessing = NodePath(".")
-state_stunned = NodePath("../Stunned")
-state_attacking = NodePath("../Attacking")
 
-[node name="Stunned" type="Node" parent="StateMachine" node_paths=PackedStringArray("state_waiting", "state_possessing", "state_stunned", "state_attacking")]
+[node name="Stunned" type="Node" parent="StateMachine"]
 script = ExtResource("7_yplap")
-state_waiting = NodePath("../Waiting")
-state_possessing = NodePath("../Possessing")
-state_stunned = NodePath(".")
-state_attacking = NodePath("../Attacking")
 
-[node name="Attacking" type="Node" parent="StateMachine" node_paths=PackedStringArray("state_waiting", "state_possessing", "state_stunned", "state_attacking")]
+[node name="Attacking" type="Node" parent="StateMachine"]
 script = ExtResource("8_a4kr4")
-state_waiting = NodePath("../Waiting")
-state_possessing = NodePath("../Possessing")
-state_stunned = NodePath("../Stunned")
-state_attacking = NodePath(".")
-
-[node name="StateSelectTimer" type="Timer" parent="."]
 
 [node name="PossessableDetector" type="Area3D" parent="."]
 collision_layer = 0
-collision_mask = 0
+collision_mask = 4
 monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PossessableDetector"]
 shape = SubResource("SphereShape3D_dnpbh")
+disabled = true
 
-[node name="Hurtbox" type="Area3D" parent="."]
+[node name="Hitbox" type="Area3D" parent="."]
 collision_layer = 8
 collision_mask = 0
 monitoring = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hurtbox"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
 shape = SubResource("CapsuleShape3D_x245q")
+
+[node name="ParticleBurst" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 64
+lifetime = 0.6
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_vmkbj")
+draw_pass_1 = SubResource("SphereMesh_wv6vs")

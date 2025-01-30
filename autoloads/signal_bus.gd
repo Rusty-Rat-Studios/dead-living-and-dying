@@ -2,7 +2,7 @@ extends Node
 
 # signal for communicating player state to all interested nodes
 # e.g. Game node making universal changes (e.g. lighting) based on player state 
-@warning_ignore("unused_signal") signal player_state_changed(state_name: String)
+@warning_ignore("unused_signal") signal player_state_changed(state: PlayerStateMachine.States)
 
 # when the player takes damage. caught by player states to cause state change
 @warning_ignore("unused_signal") signal player_hurt
@@ -18,4 +18,4 @@ extends Node
 @warning_ignore("unused_signal") signal player_revived(corpse_position: Vector3)
 
 # emitted by item when the player interacts to pick it up
-@warning_ignore("unused_signal") signal item_picked_up(item: Area3D)
+@warning_ignore("unused_signal") signal item_picked_up(item: ItemInventory)

@@ -49,6 +49,7 @@ func possess() -> void:
 	room.remove_possessable(self)
 	# signal to ghosts on the way to target it that it has been taken
 	possessed.emit()
+	is_possessed = true
 	
 	$GPUParticles3D.emitting = true
 

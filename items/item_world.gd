@@ -1,37 +1,35 @@
-class_name Item
+class_name ItemWorld
 extends Node3D
 
+# to be set by inheritors as a reference to their in-world partner version
+@export var inventory_resource: Resource
 # save starting position to reset to on game over
 @onready var starting_position: Vector3 = global_position
 
-# TODO: Later move this to only key_item.gd - only needed here for reset()
-# on game-over while maps and items are not dynamically generated
-@onready var starting_room: Room = get_parent()
 
 func _ready() -> void:
 	$PlayerDetector.body_entered.connect(_on_body_entered)
 	$PlayerDetector.body_exited.connect(_on_body_exited)
 	$Interactable.input_detected.connect(_on_interaction)
-	reset()
-
-
-func reset() -> void:
+	
 	$Interactable.inputs = ["interact"]
 	$Interactable.hide_message()
 	$Interactable.enabled = false
 	global_position = starting_position
 	visible = true
-	# TODO: Later move this to only key_item.gd
-	if get_parent() != starting_room:
-		reparent(starting_room)
 
 
 func pick_up() -> void:
-	# emits a signal caught by the player who then reparents
-	# this node to its $Inventory node
-	SignalBus.item_picked_up.emit(self)
-	$Interactable.enabled = false
-	visible = false
+	if inventory_resource == null:
+		#gdlint:ignore=max-line-length
+		push_error("AbstractVariableError: ItemWorld base class function pick_up() called without initializing variable 'inventory_resource'")
+		return
+	
+	# emits a signal caught by the player who then adds a child
+	# of the inventory resource version to its $Inventory node
+	var item_inventory: ItemInventory = inventory_resource.instantiate()
+	SignalBus.item_picked_up.emit(item_inventory)
+	queue_free()
 
 
 func _on_body_entered(_body: Node3D) -> void:

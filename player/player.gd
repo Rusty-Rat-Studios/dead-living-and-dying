@@ -3,12 +3,27 @@ extends CharacterBody3D
 
 # player state machine, sibling node under Game node
 var state_machine: Node
+const BASE_SPEED: float = 6.0
 
-@onready var speed: float = 6.0
+# base values used for light range and strength
+const LIGHT_OMNI_RANGE: float = 6
+const LIGHT_SPOT_RANGE: float = 10
+const LIGHT_ENERGY: float = 1
+
+# player state machine, sibling node under Game node
+var _state_machine: PlayerStateMachine
+# used to track player corpse - handled by states
+var _corpse: Corpse
+
+@onready var speed: float = BASE_SPEED
 # light variables used by state machine to adjust light strength based on state
 @onready var light_omni: OmniLight3D = $OmniLight3D
 @onready var light_spot: SpotLight3D = $SpotLight3D
 @onready var camera: Camera3D = $RotationOffset/Camera3D
+# updated by state machine when changing states
+@onready var hurtbox: Area3D = $Hurtbox
+@onready var collision_shape: CollisionShape3D = $CollisionShape3D
+
 # store initial position to return to when calling reset()
 @onready var starting_position: Vector3 = position
 # used to track player corpse - handled by states
@@ -29,10 +44,8 @@ func init(_state_machine: Node) -> void:
 func reset() -> void:
 	# return to starting position and state
 	position = starting_position
-	$DamageDetector.reset()
-	
-	state_machine.change_state(state_machine.starting_state)
-	
+	hurtbox.reset()
+	_state_machine.reset()
 	camera.reset()
 	_corpse.reset()
 
@@ -68,11 +81,10 @@ func handle_movement(delta: float) -> void:
 
 
 func take_damage(flash: bool = true) -> void:
-	$DamageDetector.activate_hit_cooldown(flash)
+	hurtbox.activate_hit_cooldown(flash)
 
 
-func _on_item_picked_up(item: Item) -> void:
-	# reparent node as a child to player inventory
-	item.reparent($Inventory)
+func _on_item_picked_up(item: ItemInventory) -> void:
+	$Inventory.add_child(item)
 	# ensure item position is directly on player
 	item.position = Vector3.ZERO
