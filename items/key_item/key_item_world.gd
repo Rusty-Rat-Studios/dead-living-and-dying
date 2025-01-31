@@ -1,12 +1,6 @@
 extends ItemWorld
 
 
-# TODO: update and apply to relevant value
-# could be ghost aggression
-# could be player light range
-const DEBUFF_MODIFIER: float = 0.25
- 
-
 func _ready() -> void:
 	# initialize game.gd value to track key starting position when it is
 	# re-created when dropped by the player
