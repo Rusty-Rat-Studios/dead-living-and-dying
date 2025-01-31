@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwfkis8dga70e"]
+
+[ext_resource type="PackedScene" uid="uid://bslonn3bn1m6s" path="res://items/item_world.tscn" id="1_sw4je"]
+[ext_resource type="Script" path="res://items/key_item/key_item.gd" id="2_knh6c"]
+
+[node name="KeyItemWorld" instance=ExtResource("1_sw4je")]
+script = ExtResource("2_knh6c")

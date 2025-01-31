@@ -1,4 +1,4 @@
-extends Item
+extends ItemWorld
 
 
 # TODO: update and apply to relevant value
@@ -11,10 +11,6 @@ const DEBUFF_MODIFIER: float = 0.25
 # TODO: Later move the following code from base Item class
 # to here -> only required for key item
 #@onready var starting_room: Room = get_parent()
-
-
-func _ready() -> void:
-	super()
 
 
 func _process(_delta: float) -> void:
