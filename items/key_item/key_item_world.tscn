@@ -1,7 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwfkis8dga70e"]
+[gd_scene load_steps=5 format=3 uid="uid://bwfkis8dga70e"]
 
 [ext_resource type="PackedScene" uid="uid://bslonn3bn1m6s" path="res://items/item_world.tscn" id="1_sw4je"]
-[ext_resource type="Script" path="res://items/key_item/key_item.gd" id="2_knh6c"]
+[ext_resource type="Script" path="res://items/key_item/key_item_world.gd" id="2_knh6c"]
+[ext_resource type="PackedScene" uid="uid://cheip1i5rwy8k" path="res://items/key_item/key_item_inventory.tscn" id="3_7wb5m"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_3r3bo"]
 
 [node name="KeyItemWorld" instance=ExtResource("1_sw4je")]
 script = ExtResource("2_knh6c")
+inventory_resource = ExtResource("3_7wb5m")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="2"]
+mesh = SubResource("CylinderMesh_3r3bo")

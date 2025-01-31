@@ -5,12 +5,16 @@ extends ItemWorld
 # could be ghost aggression
 # could be player light range
 const DEBUFF_MODIFIER: float = 0.25
+ 
 
-# save starting room for item reset because the player
-# reparents the key item to its inventory when picked up
-# TODO: Later move the following code from base Item class
-# to here -> only required for key item
-#@onready var starting_room: Room = get_parent()
+func _ready() -> void:
+	# initialize game.gd value to track key starting position when it is
+	# re-created when dropped by the player
+	if get_node("/root/Game").key_item_starting_position == Vector3.ZERO:
+		get_node("/root/Game").key_item_starting_position = starting_position
+	else:
+		starting_position = get_node("/root/Game").key_item_starting_position
+	super()
 
 
 func _process(_delta: float) -> void:
@@ -23,13 +27,9 @@ func _process(_delta: float) -> void:
 func reset() -> void:
 	super()
 	$Interactable.display_message("KEY ITEM")
-	# TODO: Later move the following code from base Item class
-	# to here -> only required for key item
-	#if get_parent() != starting_room:
-	#	reparent(starting_room)
 
 
-func drop() -> void:
-	# TODO: replace with enabling _process to "creep"
-	# the key item back towards its starting location
-	reset()
+func _on_body_exited(_body: Node3D) -> void:
+	# override function to display "key item" message again instead of hiding message
+	$Interactable.display_message("KEY ITEM")
+	$Interactable.enabled = false
