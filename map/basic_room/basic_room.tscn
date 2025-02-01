@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dh8q75xrlxeaa"]
+[gd_scene load_steps=5 format=3 uid="uid://dh8q75xrlxeaa"]
 
 [ext_resource type="Script" path="res://map/basic_room/basic_room.gd" id="1_xo7g0"]
 [ext_resource type="PackedScene" uid="uid://b3nn5u3a5o85j" path="res://map/floor.tscn" id="2_8oby5"]
 [ext_resource type="PackedScene" uid="uid://bmevu5yvsxttw" path="res://entity/spawner.tscn" id="3_sanko"]
+[ext_resource type="PackedScene" uid="uid://cexvn2mosncly" path="res://map/basic_room/wall_with_door.tscn" id="4_13fof"]
 
 [node name="BasicRoom" type="Node3D"]
 script = ExtResource("1_xo7g0")
@@ -20,3 +21,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.842, 0.5, 3.099)
 
 [node name="Spawner4" parent="." instance=ExtResource("3_sanko")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.899, 0.5, 3.289)
+
+[node name="WallWithDoor" parent="." instance=ExtResource("4_13fof")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.95)
+
+[node name="WallWithDoor2" parent="." instance=ExtResource("4_13fof")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 9.95)
+
+[node name="WallWithDoor3" parent="." instance=ExtResource("4_13fof")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.95, 0, 0)
+
+[node name="WallWithDoor4" parent="." instance=ExtResource("4_13fof")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 9.95, 0, 0)

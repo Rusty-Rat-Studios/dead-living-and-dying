@@ -4,7 +4,7 @@ extends Node3D
 # The base class for all rooms. Stores information about the room, the door 
 # locations, the position on the world grid, and the possessables in the room.
 # On init the room moves to its specified grid location and runs 
-# generate_walls_and_doors()
+# init_doors()
 
 var room_information: RoomInformation
 var door_locations: Array[DoorLocation]
@@ -26,7 +26,8 @@ func init() -> void:
 	var room_location: Vector3 = Vector3(grid_location.x * grid_scale, 0, 
 		grid_location.y * grid_scale)
 	global_translate(room_location)
-	generate_walls_and_doors()
+	init_doors()
+	print(Time.get_time_string_from_system(), ": Room ", grid_location , " initialized")
 
 
 func add_possessable(possessable: Possessable) -> void:
@@ -44,8 +45,8 @@ func remove_possessable(possessable: Possessable) -> void:
 
 
 # Godot doesn't support abstract classes/methods so simulate by throwing an error
-func generate_walls_and_doors() -> void:
-	push_error("ABSTRACT METHOD ERROR: room_gd.generate_walls_and_doors()")
+func init_doors() -> void:
+	push_error("ABSTRACT METHOD ERROR: room_gd.init_doors()")
 
 
 func _on_player_entered_room(body: Node3D) -> void:
