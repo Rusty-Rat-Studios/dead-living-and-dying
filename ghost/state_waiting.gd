@@ -56,6 +56,10 @@ func process_state() -> void:
 
 
 func set_random_target() -> void:
+	# ensure at_target flag is unset to avoid race condition with process_state()
+	# checking _parent.at_target before target is actually set
+	_parent.at_target = false
+	
 	# generate random movement target within room boundaries
 	# offset to avoid setting point within walls
 	var x: float = RNG.rng.randf_range(room_boundaries.position.x + 1,
