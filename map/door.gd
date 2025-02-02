@@ -30,6 +30,7 @@ func init(room_grid_location: Vector2) -> void:
 
 
 func _convert_to_wall() -> void:
+	(get_parent() as Room).deregister_door(self)
 	var wall: Node3D = WALL.instantiate()
 	wall.position = self.position
 	wall.rotation = self.rotation
@@ -41,10 +42,10 @@ func _on_body_entered(body: Node3D) -> void:
 	if body is Player:
 		if linked_door == null:
 			return push_error("ERROR: Door.linked_door is null")
+		print(Time.get_time_string_from_system(), ": Player entered door ", self.door_location)
 		linked_door.player_recieved.emit(body as Player)
 
 
 func _on_player_recieved(player: Player) -> void:
-	$Area3D.monitoring = false # TODO: REMOVE THIS
-	player.position.x = self.position.x
-	player.position.z = self.position.z
+	player.position.x = self.global_position.x
+	player.position.z = self.global_position.z

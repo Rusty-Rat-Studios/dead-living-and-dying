@@ -9,7 +9,7 @@ size = Vector3(9, 5, 0.1)
 size = Vector3(2, 2.5, 0.1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xm1qk"]
-size = Vector3(2, 2.5, 0.2)
+size = Vector3(2, 2.5, 0.5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_03pyr"]
 albedo_color = Color(0.288541, 0.146007, 9.62615e-08, 1)
@@ -37,9 +37,11 @@ mesh = SubResource("BoxMesh_dc7b3")
 polygon = PackedVector2Array(-10, 0, -1, 0, -1, 2.5, 1, 2.5, 1, 0, 10, 0, 10, 5, -10, 5)
 
 [node name="Area3D" type="Area3D" parent="."]
+collision_mask = 2
+monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0.05)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0.25)
 shape = SubResource("BoxShape3D_xm1qk")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]

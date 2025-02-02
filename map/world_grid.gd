@@ -10,7 +10,8 @@ const GRID_SCALE: float = 20 # Size of each grid square in editor units
 @onready var basic_room: RoomInformation = preload("res://map/basic_room/basic_room.tres")
 # For some reason preload will not work here
 @onready var entity_table: EntityTable = load("res://map/test_entity_table.tres")
-@onready var room_map: HashMap = HashMap.new()
+
+var room_map: HashMap = HashMap.new()
 
 
 func _ready() -> void:
@@ -21,27 +22,18 @@ func _ready() -> void:
 
 func generate_grid() -> void:
 	# Currently hardcoded to generate the default 5 rooms
-	add_room(basic_room, Vector2(0, 0), [
-		DoorLocation.new(Vector2(0, 0), DoorLocation.Direction.NORTH)])
-	add_room(basic_room, Vector2(0, -1), [
-		DoorLocation.new(Vector2(0, 0), DoorLocation.Direction.NORTH),
-		DoorLocation.new(Vector2(0, 0), DoorLocation.Direction.EAST),
-		DoorLocation.new(Vector2(0, 0), DoorLocation.Direction.SOUTH),
-		DoorLocation.new(Vector2(0, 0), DoorLocation.Direction.WEST)])
-	add_room(basic_room, Vector2(0, -2), [
-		DoorLocation.new(Vector2(0, 0), DoorLocation.Direction.SOUTH)])
-	add_room(basic_room, Vector2(-1, -1), [
-		DoorLocation.new(Vector2(0, 0), DoorLocation.Direction.EAST)])
-	add_room(basic_room, Vector2(1, -1), [
-		DoorLocation.new(Vector2(0, 0), DoorLocation.Direction.WEST)])
+	add_room(basic_room, Vector2(0, 0))
+	add_room(basic_room, Vector2(0, -1))
+	add_room(basic_room, Vector2(0, -2))
+	add_room(basic_room, Vector2(-1, -1))
+	add_room(basic_room, Vector2(1, -1))
 	init_all_rooms()
 
 
-func add_room(room_info: RoomInformation, grid_location: Vector2, door_locations: Array[DoorLocation]) -> void:
+func add_room(room_info: RoomInformation, grid_location: Vector2) -> void:
 	var room: Room = room_info.resource.instantiate()
 	room.grid_location = grid_location
 	room.room_information = room_info
-	room.door_locations = door_locations
 	# Adds each grid square that the room takes up to the HashMap
 	for room_portion: Vector2 in room_info.room_shape:
 		var translated_room_portion: Vector2 = room_portion + grid_location
