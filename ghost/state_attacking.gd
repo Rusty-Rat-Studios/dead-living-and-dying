@@ -12,8 +12,8 @@ func _ready() -> void:
 
 
 func enter() -> void:
-	# guard to ensure player is in room and DEAD when entering attack state
-	if not (_parent.player_in_room and PlayerHandler.get_player_state() == PlayerStateMachine.States.DEAD):
+	# guard to ensure player is in room and DYING or DEAD when entering attack state
+	if not (_parent.player_in_room and not PlayerHandler.get_player_state() == PlayerStateMachine.States.LIVING):
 		change_state(GhostStateMachine.States.WAITING)
 		return
 	_parent.speed = ATTACK_SPEED

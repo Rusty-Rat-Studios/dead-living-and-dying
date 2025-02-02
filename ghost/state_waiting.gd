@@ -3,8 +3,9 @@ extends GhostState
 const WAITING_SPEED: float = 3.0
 const PAUSE_DURATION_MAX: float = 3.0
 const PAUSE_DURATION_MIN: float = 1.0
-const POSSESS_CHANCE: float = .75
-const WAIT_CHANCE: float = .25
+const POSSESS_CHANCE: float = 0.5
+const ATTACK_CHANCE: float = 0.25
+const WAIT_CHANCE: float = 0.25
 
 var room_boundaries: Rect2 # select random points in room to wander to
 
@@ -68,15 +69,18 @@ func set_random_target() -> void:
 func pause() -> void:
 	# pause movement behavior until timer expires
 	is_paused = true
+	print("ghost pause")
 	# use variable reference to allow disabling the timer on state exit()
 	pause_timer.wait_time = RNG.rng.randf_range(PAUSE_DURATION_MIN, PAUSE_DURATION_MAX)
 	pause_timer.start()
 	await pause_timer.timeout
 	is_paused = false
+	print("ghost pause finish")
 	
-	# 25/75 chance to continue waiting or possess item
+	# weighted chances for choosing next action
 	var choices: Dictionary = {
 		_possess: POSSESS_CHANCE,
+		_attack: ATTACK_CHANCE,
 		set_random_target: WAIT_CHANCE
 	}
 	RNG.call_weighted_random(choices)
@@ -84,3 +88,10 @@ func pause() -> void:
 
 func _possess() -> void:
 	change_state(GhostStateMachine.States.POSSESSING)
+
+
+func _attack() -> void:
+	print("ghost attak")
+	# attack state will check if player is in DYING state
+	# if player is living, return to WAITING which defaults to set_random_target()
+	change_state(GhostStateMachine.States.ATTACKING)
