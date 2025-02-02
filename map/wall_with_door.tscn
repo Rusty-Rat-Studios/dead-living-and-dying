@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cexvn2mosncly"]
+[gd_scene load_steps=4 format=3 uid="uid://cexvn2mosncly"]
+
+[ext_resource type="PackedScene" uid="uid://b3hbnoasq2sgh" path="res://map/door.tscn" id="1_tej4x"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_n8nej"]
 size = Vector3(9, 5, 0.1)
@@ -22,3 +24,5 @@ mesh = SubResource("BoxMesh_dc7b3")
 
 [node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="."]
 polygon = PackedVector2Array(-10, 0, -1, 0, -1, 2.5, 1, 2.5, 1, 0, 10, 0, 10, 5, -10, 5)
+
+[node name="Door" parent="." instance=ExtResource("1_tej4x")]
