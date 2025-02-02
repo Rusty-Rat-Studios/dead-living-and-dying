@@ -1,4 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://b3hbnoasq2sgh"]
+[gd_scene load_steps=7 format=3 uid="uid://cexvn2mosncly"]
+
+[ext_resource type="Script" path="res://map/door.gd" id="1_6px5k"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_n8nej"]
+size = Vector3(9, 5, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dc7b3"]
+size = Vector3(2, 2.5, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xm1qk"]
+size = Vector3(2, 2.5, 0.2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_03pyr"]
 albedo_color = Color(0.288541, 0.146007, 9.62615e-08, 1)
@@ -7,16 +18,31 @@ albedo_color = Color(0.288541, 0.146007, 9.62615e-08, 1)
 material = SubResource("StandardMaterial3D_03pyr")
 size = Vector3(2, 2.5, 0.1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_xm1qk"]
-size = Vector3(2, 2.5, 1)
-
 [node name="Door" type="StaticBody3D"]
+script = ExtResource("1_6px5k")
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 2.5, 0)
+mesh = SubResource("BoxMesh_n8nej")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 2.5, 0)
+mesh = SubResource("BoxMesh_n8nej")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.75, 0)
+mesh = SubResource("BoxMesh_dc7b3")
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="."]
+polygon = PackedVector2Array(-10, 0, -1, 0, -1, 2.5, 1, 2.5, 1, 0, 10, 0, 10, 5, -10, 5)
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0.05)
+shape = SubResource("BoxShape3D_xm1qk")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
 mesh = SubResource("BoxMesh_ab5g1")
 skeleton = NodePath("")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
-shape = SubResource("BoxShape3D_xm1qk")
