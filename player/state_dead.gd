@@ -4,7 +4,7 @@ const RESPAWN_TIME: float = 2
 
 func enter() -> void:
 	super()
-	parent.speed = 10.0
+	parent.stat_dict[0]
 	
 	# DEBUG: modulate color according to state
 	parent.get_node("RotationOffset/AnimatedSprite3D").modulate = Color(0.5, 0.5, 0.5, 0.5)
