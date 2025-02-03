@@ -10,7 +10,6 @@ var grid_location: Vector2
 var possessables_available: Array
 var doors: HashMap = HashMap.new()
 
-@onready var world_grid: WorldGrid = get_node("/root/Game/WorldGrid")
 @onready var player_in_room: bool = false
 
 
