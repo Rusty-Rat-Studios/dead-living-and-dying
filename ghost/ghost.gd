@@ -56,7 +56,10 @@ func reset() -> void:
 
 func move_to_target(delta: float) -> void:
 	var direction: Vector3 = target_pos - global_position
-	var distance_to_target: float = global_position.distance_to(target_pos)
+	# force target_pos onto y=1 plane to ensure ghost can "reach" targets
+	# at different heights - i.e. player which is at a lower height
+	target_pos = Vector3(target_pos.x, 1, target_pos.z)
+	var distance_to_target: float = global_position.distance_squared_to(target_pos)
 	
 	if distance_to_target < speed * delta:
 		# set target to ghost position if close enough
