@@ -96,3 +96,5 @@ script = ExtResource("9_25lto")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Stunbox"]
 shape = SubResource("CapsuleShape3D_3bb63")
 disabled = true
+
+[node name="StunTimer" type="Timer" parent="Stunbox"]
