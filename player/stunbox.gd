@@ -1,8 +1,8 @@
 extends Area3D
 
 const SPEED_MODIFIER: float = 0.8
-const LIGHT_MODIFIER: float = 0.6
-const STUN_DURATION: float = 1.0
+const LIGHT_MODIFIER: float = 0.7
+const STUN_DURATION: float = 3.0
 const RESTORE_DURATION: float = 2.0
 
 # store pre-stun player attributes
