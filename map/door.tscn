@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cexvn2mosncly"]
+[gd_scene load_steps=8 format=3 uid="uid://cexvn2mosncly"]
 
 [ext_resource type="Script" path="res://map/door.gd" id="1_6px5k"]
 
@@ -9,7 +9,7 @@ size = Vector3(9, 5, 0.1)
 size = Vector3(2, 2.5, 0.1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xm1qk"]
-size = Vector3(2, 2.5, 0.5)
+size = Vector3(2, 2.5, 0.25)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_03pyr"]
 albedo_color = Color(0.288541, 0.146007, 9.62615e-08, 1)
@@ -17,6 +17,8 @@ albedo_color = Color(0.288541, 0.146007, 9.62615e-08, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_ab5g1"]
 material = SubResource("StandardMaterial3D_03pyr")
 size = Vector3(2, 2.5, 0.1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_fts1y"]
 
 [node name="Door" type="StaticBody3D"]
 script = ExtResource("1_6px5k")
@@ -41,10 +43,16 @@ collision_mask = 2
 monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0.25)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0.075)
 shape = SubResource("BoxShape3D_xm1qk")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
 mesh = SubResource("BoxMesh_ab5g1")
 skeleton = NodePath("")
+
+[node name="Spawn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Spawn"]
+mesh = SubResource("SphereMesh_fts1y")

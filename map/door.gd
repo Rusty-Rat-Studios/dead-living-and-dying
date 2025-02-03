@@ -13,6 +13,7 @@ var linked_door: Door = null
 
 
 func _ready() -> void:
+	$Spawn.visible = false # Make debug mesh invisible
 	$Area3D.body_entered.connect(_on_body_entered)
 	player_recieved.connect(_on_player_recieved)
 	(get_parent() as Room).register_door(self)
@@ -42,10 +43,10 @@ func _on_body_entered(body: Node3D) -> void:
 	if body is Player:
 		if linked_door == null:
 			return push_error("ERROR: Door.linked_door is null")
-		print(Time.get_time_string_from_system(), ": Player entered door ", self.door_location)
+		print(Time.get_time_string_from_system(), ": ", body.name, " entered door ", self.door_location.string())
 		linked_door.player_recieved.emit(body as Player)
 
 
 func _on_player_recieved(player: Player) -> void:
-	player.position.x = self.global_position.x
-	player.position.z = self.global_position.z
+	player.position.x = $Spawn.global_position.x
+	player.position.z = $Spawn.global_position.z
