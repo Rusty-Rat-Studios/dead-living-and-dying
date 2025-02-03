@@ -1,7 +1,7 @@
 class_name Door
 extends StaticBody3D
 
-signal player_recieved(player: Player)
+signal player_received(player: Player)
 
 const WALL: Resource = preload("res://map/room/wall.tscn")
 
@@ -15,7 +15,7 @@ var linked_door: Door = null
 func _ready() -> void:
 	$Spawn.visible = false # Make debug mesh invisible
 	$Area3D.body_entered.connect(_on_body_entered)
-	player_recieved.connect(_on_player_recieved)
+	player_received.connect(_on_player_received)
 	(get_parent() as Room).register_door(self)
 
 
@@ -44,9 +44,9 @@ func _on_body_entered(body: Node3D) -> void:
 		if linked_door == null:
 			return push_error("ERROR: Door.linked_door is null")
 		print(Time.get_time_string_from_system(), ": ", body.name, " entered door ", self.door_location.string())
-		linked_door.player_recieved.emit(body as Player)
+		linked_door.player_received.emit(body as Player)
 
 
-func _on_player_recieved(player: Player) -> void:
+func _on_player_received(player: Player) -> void:
 	player.position.x = $Spawn.global_position.x
 	player.position.z = $Spawn.global_position.z
