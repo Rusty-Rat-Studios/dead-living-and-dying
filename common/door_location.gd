@@ -3,12 +3,7 @@ extends Resource
 
 # Stores a door location with a x,y grid location and a direction.
 
-enum Direction {
-	NORTH = 0,
-	EAST = 1,
-	SOUTH = 2,
-	WEST = 3
-}
+enum Direction { NORTH, EAST, SOUTH, WEST }
 
 @export var location: Vector2
 @export var direction: Direction
@@ -46,3 +41,7 @@ func invert() -> DoorLocation:
 		return DoorLocation.new(Vector2(location.x - 1, location.y), Direction.EAST)
 	push_error("DoorLocation.invert lost its sense of direction")
 	return null
+
+
+func string() -> String:
+	return "%s $%s" % [location, Direction.keys()[direction]]
