@@ -47,8 +47,9 @@ func get_room_at_location(grid_location: Vector2) -> Room:
 
 
 func clear() -> void:
-	for room: Node in get_children():
-		room.queue_free()
+	for node: Node in get_children():
+		if node is Room:
+			node.queue_free()
 	room_map.clear()
 
 
