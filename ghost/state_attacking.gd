@@ -4,6 +4,7 @@ const ATTACK_SPEED: float = 7.0
 
 @onready var player: Player = PlayerHandler.get_player()
 
+
 func _ready() -> void:
 	# defer connecting this signal to ensure this function executes
 	# AFTER this signal updates the player_in_room flag in ghost.gd
@@ -17,6 +18,9 @@ func enter() -> void:
 		change_state(GhostStateMachine.States.WAITING)
 		return
 	_parent.speed = ATTACK_SPEED
+	# reset at_target flag to handle case where previous state reached target
+	# since this flag is used to detect when to exit ATTACKING state
+	_parent.at_target = false
 
 
 func exit() -> void:
@@ -26,6 +30,8 @@ func exit() -> void:
 
 func process_state() -> void:
 	_parent.target_pos = player.global_position
+	if _parent.at_target:
+		change_state(GhostStateMachine.States.WAITING)
 
 
 func _on_player_exited_room(room: Node3D) -> void:
