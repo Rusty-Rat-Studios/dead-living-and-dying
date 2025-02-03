@@ -13,7 +13,6 @@ var state_machine: Node
 # used to track player corpse - handled by states
 var corpse: Corpse
 
-@onready var speeed: float = 6.0
 # light variables used by state machine to adjust light strength based on state
 @onready var light_omni: OmniLight3D = $OmniLight3D
 @onready var light_spot: SpotLight3D = $SpotLight3D
@@ -91,3 +90,7 @@ func _on_item_picked_up(item: ItemInventory) -> void:
 func stat_update(stat_modifier: float, stat: int) -> void:
 	if stat_dict.has(stat):
 		stat_dict[stat] += stat_modifier
+
+
+func inventory_update() -> void:
+	$Inventory.update_all()

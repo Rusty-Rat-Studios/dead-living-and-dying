@@ -16,6 +16,7 @@ func enter() -> void:
 	parent.light_omni.light_energy = 0.4
 	parent.light_spot.spot_range = 6
 	parent.light_spot.light_energy = 0.4
+	parent.inventory_update()
 
 
 func exit() -> void:
