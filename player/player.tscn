@@ -98,3 +98,4 @@ shape = SubResource("CapsuleShape3D_3bb63")
 disabled = true
 
 [node name="StunTimer" type="Timer" parent="Stunbox"]
+one_shot = true

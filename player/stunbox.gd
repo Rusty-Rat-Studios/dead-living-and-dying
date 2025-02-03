@@ -50,7 +50,8 @@ func stun() -> void:
 
 
 func restore() -> void:
-	_restore_tween = create_tween().set_parallel()
+	# use set_parallel to have all properties tween simultaneously
+	_restore_tween = create_tween().set_parallel().set_ease(Tween.EASE_OUT)
 	_restore_tween.tween_property(_player, "speed", base_speed, RESTORE_DURATION)
 	_restore_tween.tween_property(_player, "light_omni:omni_range", base_light_omni_range, RESTORE_DURATION)
 	_restore_tween.tween_property(_player.light_omni, "light_energy", base_light_energy, RESTORE_DURATION)
@@ -77,4 +78,8 @@ func _on_enemy_area_entered(_body: Node3D) -> void:
 
 
 func _on_stun_timer_timeout() -> void:
-	restore()
+	# check if player still in contact with ghosts
+	if has_overlapping_bodies():
+		stun()
+	else:
+		restore()
