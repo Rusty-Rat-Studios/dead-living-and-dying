@@ -24,7 +24,7 @@ func enter() -> void:
 	SignalBus.player_revived.connect(_on_player_revived)
 	
 	# drop key item if player is carrying it
-	var key_item: Node3D = _parent.get_node_or_null("Inventory/KeyItem")
+	var key_item: KeyItemInventory = _parent.get_node_or_null("Inventory/KeyItemInventory")
 	if key_item:
 		key_item.drop()
 	

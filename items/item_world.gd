@@ -11,12 +11,14 @@ func _ready() -> void:
 	$PlayerDetector.body_entered.connect(_on_body_entered)
 	$PlayerDetector.body_exited.connect(_on_body_exited)
 	$Interactable.input_detected.connect(_on_interaction)
-	
+	reset()
+
+
+func reset() -> void:
 	$Interactable.inputs = ["interact"]
 	$Interactable.hide_message()
 	$Interactable.enabled = false
 	global_position = starting_position
-	visible = true
 
 
 func pick_up() -> void:

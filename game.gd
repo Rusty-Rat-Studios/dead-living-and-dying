@@ -1,6 +1,8 @@
 class_name Game
 extends Node3D
 
+@export var key_item_starting_position: Vector3
+
 # state machine node-based design partially sourced from:
 # "Starter state machines in Godot 4" by "The Shaggy Dev"
 # https://www.youtube.com/watch?v=oqFbZoA2lnU
