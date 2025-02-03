@@ -1,6 +1,6 @@
 extends GhostState
 
-const ATTACK_SPEED: float = 7.0
+const ATTACK_SPEED: float = 6.0
 
 @onready var player: Player = PlayerHandler.get_player()
 
