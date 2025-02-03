@@ -3,7 +3,7 @@ extends StaticBody3D
 
 signal player_recieved(player: Player)
 
-const WALL: Resource = preload("res://map/wall.tscn")
+const WALL: Resource = preload("res://map/room/wall.tscn")
 
 @export var door_location: DoorLocation
 
