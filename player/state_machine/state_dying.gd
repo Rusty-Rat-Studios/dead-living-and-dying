@@ -3,6 +3,7 @@ extends PlayerState
 const DYING_SPEED: float = 4.0
 const LIGHT_REDUCTION : float = 0.7
 
+
 func enter() -> void:
 	super()
 	_parent.speed = DYING_SPEED
@@ -17,10 +18,16 @@ func enter() -> void:
 	_parent.light_omni.light_energy *= LIGHT_REDUCTION
 	_parent.light_spot.spot_range *= LIGHT_REDUCTION
 	_parent.light_spot.light_energy *= LIGHT_REDUCTION
+	
+	_parent.stunbox.collision_shape.set_deferred("disabled", false)
+
 
 
 func exit() -> void:
 	SignalBus.player_hurt.disconnect(_on_player_hurt)
+	
+	_parent.stunbox.collision_shape.set_deferred("disabled", true)
+
 
 
 func _on_player_hurt() -> void:
