@@ -14,6 +14,7 @@ const OPACITY_DEAD: float = 0.8
 var movement_boundaries: Rect2
 
 @onready var state_machine: GhostStateMachine = $StateMachine
+@onready var hitbox: Area3D = $Hitbox
 
 @onready var speed: float = BASE_SPEED
 @onready var current_room: Room = get_parent()
