@@ -7,9 +7,9 @@ const WALL: Resource = preload("res://map/wall.tscn")
 
 @export var door_location: DoorLocation
 
-@onready var world_grid: WorldGrid = get_node("/root/Game/WorldGrid")
-
 var linked_door: Door = null
+
+@onready var world_grid: WorldGrid = get_node("/root/Game/WorldGrid")
 
 
 func _ready() -> void:
