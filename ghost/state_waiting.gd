@@ -73,13 +73,11 @@ func set_random_target() -> void:
 func pause() -> void:
 	# pause movement behavior until timer expires
 	is_paused = true
-	print("ghost pause")
 	# use variable reference to allow disabling the timer on state exit()
 	pause_timer.wait_time = RNG.rng.randf_range(PAUSE_DURATION_MIN, PAUSE_DURATION_MAX)
 	pause_timer.start()
 	await pause_timer.timeout
 	is_paused = false
-	print("ghost pause finish")
 	
 	# weighted chances for choosing next action
 	var choices: Dictionary = {
@@ -95,7 +93,6 @@ func _possess() -> void:
 
 
 func _attack() -> void:
-	print("ghost attak")
 	# attack state will check if player is in DYING state
 	# if player is living, return to WAITING which defaults to set_random_target()
 	change_state(GhostStateMachine.States.ATTACKING)
