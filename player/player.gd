@@ -19,6 +19,7 @@ var _state_machine: PlayerStateMachine
 # updated by state machine when changing states
 @onready var hurtbox: Area3D = $Hurtbox
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
+# enabled/disabled by state DYING to allow ghost stun-attacks to hit
 @onready var stunbox: Area3D = $Stunbox
 
 # store initial position to return to when calling reset()

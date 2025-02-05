@@ -13,14 +13,23 @@ func _ready() -> void:
 
 
 func enter() -> void:
-	# guard to ensure player is in room and DYING or DEAD when entering attack state
-	if not (_parent.player_in_room and not PlayerHandler.get_player_state() == PlayerStateMachine.States.LIVING):
+	# ensure player is in a place/state to be attacked
+	if not is_player_attackable():
 		change_state(GhostStateMachine.States.WAITING)
 		return
 	_parent.speed = ATTACK_SPEED
 	# reset at_target flag to handle case where previous state reached target
 	# since this flag is used to detect when to exit ATTACKING state
 	_parent.at_target = false
+
+
+func is_player_attackable() -> bool:
+	# check if player is in room and DYING or DEAD when entering attack state
+	if (_parent.player_in_room
+		and (PlayerHandler.get_player_state() == PlayerStateMachine.States.DEAD
+			or PlayerHandler.get_player_state() == PlayerStateMachine.States.DYING)):
+		return true
+	return false
 
 
 func exit() -> void:
