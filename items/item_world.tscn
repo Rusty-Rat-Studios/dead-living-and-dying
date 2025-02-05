@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" path="res://items/item_world.gd" id="1_12ywg"]
 [ext_resource type="PackedScene" uid="uid://cnbim08e5mqrn" path="res://ui/interactable.tscn" id="2_nvmey"]
-[ext_resource type="Texture2D" uid="uid://diwxrno5px4g5" path="res://items/based.png" id="3_3gif5"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fj23q"]
+load_path = "res://.godot/imported/based.png-b2b87d870a01b4dad6e3f3b470b77de0.s3tc.ctex"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_usb8p"]
 radius = 1.0
@@ -14,7 +16,7 @@ script = ExtResource("1_12ywg")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 billboard = 1
-texture = ExtResource("3_3gif5")
+texture = SubResource("CompressedTexture2D_fj23q")
 
 [node name="PlayerDetector" type="Area3D" parent="."]
 collision_layer = 0

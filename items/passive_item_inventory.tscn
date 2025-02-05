@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ckb133rsl0ptw"]
+
+[ext_resource type="Script" path="res://items/passive_item_inventory.gd" id="1_l16bf"]
+
+[node name="PassiveItemInventory" type="Node3D"]
+script = ExtResource("1_l16bf")

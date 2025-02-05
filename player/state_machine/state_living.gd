@@ -3,7 +3,7 @@ extends PlayerState
 
 func enter() -> void:
 	super()
-	_parent.speed = _parent.BASE_SPEED
+	_parent.stat_dict[Player.Stats.SPEED] = Player.BASE_SPEED
 	
 	# DEBUG: modulate color according to state
 	_parent.get_node("RotationOffset/AnimatedSprite3D").modulate = Color(0.5, 1, 0.5)
@@ -15,6 +15,7 @@ func enter() -> void:
 	_parent.light_omni.light_energy = _parent.LIGHT_ENERGY
 	_parent.light_spot.spot_range = _parent.LIGHT_SPOT_RANGE
 	_parent.light_spot.light_energy = _parent.LIGHT_ENERGY
+	_parent.inventory_update()
 
 
 func exit() -> void:

@@ -6,7 +6,10 @@ const RESPAWN_TIME: float = 2
 
 func enter() -> void:
 	super()
-	_parent.speed = DEAD_SPEED
+
+	_parent.stat_dict[Player.Stats.SPEED] = DEAD_SPEED
+
+
 	
 	# disable player light
 	_parent.light_omni.visible = false

@@ -16,10 +16,10 @@ Dead, Living, and Dying is a 2.5D horror roguelike game about defending yourself
 ## Credits
 
 - **Game Development**: 
-    - Jacob Meyer
-    - Quinn Maloney
-    - Cameron Oehler
+	- Jacob Meyer
+	- Quinn Maloney
+	- Cameron Oehler
 - **Artwork**:
-    - [ADD ARTISTS AND THEIR CONTRIBUTIONS HERE]
+	- [ADD ARTISTS AND THEIR CONTRIBUTIONS HERE]
 - **Sound and Music**:
-    - [ADD ARTISTS AND THEIR CONTRIBUTIONS HERE]
+	- [ADD ARTISTS AND THEIR CONTRIBUTIONS HERE]

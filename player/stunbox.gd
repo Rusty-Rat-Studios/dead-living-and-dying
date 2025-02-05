@@ -40,7 +40,7 @@ func stun() -> void:
 		_restore_tween.kill()
 	
 	# reduce player attributes
-	_player.speed = base_speed * SPEED_MODIFIER
+	_player.stat_dict[Player.Stats.SPEED] = base_speed * SPEED_MODIFIER
 	_player.light_omni.omni_range = base_light_omni_range * LIGHT_MODIFIER
 	_player.light_omni.light_energy = base_light_energy * LIGHT_MODIFIER
 	_player.light_spot.spot_range = base_light_spot_range * LIGHT_MODIFIER
@@ -64,7 +64,7 @@ func restore_instantly() -> void:
 	# before moving to the next state
 	if _restore_tween:
 		_restore_tween.kill()
-	_player.speed = base_speed
+	_player.stat_dict[Player.Stats.SPEED] = base_speed
 	_player.light_omni.omni_range = base_light_omni_range
 	_player.light_omni.light_energy = base_light_energy 
 	_player.light_spot.spot_range = base_light_spot_range
