@@ -6,6 +6,13 @@ enum Stats {
 	SPEED
 }
 
+const BASE_SPEED: float = 6.0
+
+# base values used for light range and strength
+const LIGHT_OMNI_RANGE: float = 6
+const LIGHT_SPOT_RANGE: float = 10
+const LIGHT_ENERGY: float = 1
+
 var stat_dict: Dictionary = {
 	Stats.SPEED : 6.0
 }
@@ -14,13 +21,6 @@ var state_machine: Node
 # used to track player corpse - handled by states
 var corpse: Corpse
 
-
-const BASE_SPEED: float = 6.0
-
-# base values used for light range and strength
-const LIGHT_OMNI_RANGE: float = 6
-const LIGHT_SPOT_RANGE: float = 10
-const LIGHT_ENERGY: float = 1
 
 # player state machine, sibling node under Game node
 var _state_machine: PlayerStateMachine
