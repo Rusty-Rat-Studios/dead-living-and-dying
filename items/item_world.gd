@@ -11,12 +11,14 @@ func _ready() -> void:
 	$PlayerDetector.body_entered.connect(_on_body_entered)
 	$PlayerDetector.body_exited.connect(_on_body_exited)
 	$Interactable.input_detected.connect(_on_interaction)
-	
+	reset()
+
+
+func reset() -> void:
 	$Interactable.inputs = ["interact"]
 	$Interactable.hide_message()
 	$Interactable.enabled = false
 	global_position = starting_position
-	visible = true
 
 
 func pick_up() -> void:
@@ -34,7 +36,7 @@ func pick_up() -> void:
 
 func _on_body_entered(_body: Node3D) -> void:
 	# no node check required as collision mask is layer PLAYER
-	if PlayerHandler.get_player_state() != "Dead":
+	if PlayerHandler.get_player_state() != PlayerStateMachine.States.DEAD:
 		$Interactable.display_message("[E] Pick Up")
 		$Interactable.enabled = true
 

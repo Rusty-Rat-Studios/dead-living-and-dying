@@ -25,6 +25,7 @@ Utility="*res://autoloads/utility.gd"
 CommandParser="*res://autoloads/command_parser.gd"
 ShrineManager="*res://autoloads/shrine_manager.gd"
 RNG="*res://autoloads/rng.gd"
+SpawnerManager="*res://autoloads/spawner_manager.gd"
 
 [debug]
 

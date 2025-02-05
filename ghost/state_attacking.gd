@@ -1,8 +1,9 @@
 extends GhostState
 
-const ATTACK_SPEED: float = 7.0
+const ATTACK_SPEED: float = 6.0
 
 @onready var player: Player = PlayerHandler.get_player()
+
 
 func _ready() -> void:
 	# defer connecting this signal to ensure this function executes
@@ -12,11 +13,23 @@ func _ready() -> void:
 
 
 func enter() -> void:
-	# guard to ensure player is in room and DEAD when entering attack state
-	if not (_parent.player_in_room and PlayerHandler.get_player_state() == "Dead"):
-		change_state(States.WAITING)
+	# ensure player is in a place/state to be attacked
+	if not is_player_attackable():
+		change_state(GhostStateMachine.States.WAITING)
 		return
 	_parent.speed = ATTACK_SPEED
+	# reset at_target flag to handle case where previous state reached target
+	# since this flag is used to detect when to exit ATTACKING state
+	_parent.at_target = false
+
+
+func is_player_attackable() -> bool:
+	# check if player is in room and DYING or DEAD when entering attack state
+	if (_parent.player_in_room
+		and (PlayerHandler.get_player_state() == PlayerStateMachine.States.DEAD
+			or PlayerHandler.get_player_state() == PlayerStateMachine.States.DYING)):
+		return true
+	return false
 
 
 func exit() -> void:
@@ -26,13 +39,16 @@ func exit() -> void:
 
 func process_state() -> void:
 	_parent.target_pos = player.global_position
+	if _parent.at_target:
+		change_state(GhostStateMachine.States.WAITING)
 
 
 func _on_player_exited_room(room: Node3D) -> void:
 	if room == _parent.current_room and not _parent.player_in_room:
-		change_state(States.WAITING)
+		change_state(GhostStateMachine.States.WAITING)
 
 
-func _on_player_state_changed(state_name: String) -> void:
-	if _state_machine.current_state == States.ATTACKING and state_name == "Living":
-		change_state(States.WAITING)
+func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
+	if (_state_machine.current_state == GhostStateMachine.States.ATTACKING 
+		and state == PlayerStateMachine.States.LIVING):
+		change_state(GhostStateMachine.States.WAITING)

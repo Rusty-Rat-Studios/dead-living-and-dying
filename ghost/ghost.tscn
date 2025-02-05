@@ -13,6 +13,7 @@ transparency = 1
 albedo_color = Color(0.635, 0.733, 0.973, 0)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_6tbxm"]
+resource_local_to_scene = true
 material = SubResource("StandardMaterial3D_qtcw8")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cokcw"]

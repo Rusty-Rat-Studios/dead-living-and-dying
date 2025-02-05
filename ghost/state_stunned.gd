@@ -2,6 +2,8 @@ extends GhostState
 
 const STUN_DURATION: float = 3
 
+var collision_shape: CollisionShape3D
+
 @onready var stun_timer: Timer = Timer.new()
 
 # Called when the node enters the scene tree for the first time.
@@ -12,8 +14,18 @@ func _ready() -> void:
 	add_child(stun_timer)
 
 
+func init(parent: CharacterBody3D, state_machine: StateMachine) -> void:
+	super(parent, state_machine)
+	collision_shape = _parent.hitbox.get_node("CollisionShape3D")
+
+
 func enter() -> void:
 	stun_timer.start()
+	collision_shape.set_deferred("disabled", true)
+
+
+func exit() -> void:
+	collision_shape.set_deferred("disabled", false)
 
 
 func process_state() -> void:
@@ -21,4 +33,4 @@ func process_state() -> void:
 
 
 func _on_stun_timer_timeout() -> void:
-	change_state(States.WAITING)
+	change_state(GhostStateMachine.States.WAITING)

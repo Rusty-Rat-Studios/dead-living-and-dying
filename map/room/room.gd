@@ -1,17 +1,15 @@
 class_name Room
 extends Node3D
 
-# The base class for all rooms. Stores information about the room, the door 
-# locations, the position on the world grid, and the possessables in the room.
-# On init the room moves to its specified grid location and runs 
-# generate_walls_and_doors()
+# The base class for all rooms. Stores information about the room, 
+# the position on the world grid, and the possessables in the room.
+# On init the room moves to its specified grid location and runs init_doors()
 
 var room_information: RoomInformation
-var door_locations: Array[DoorLocation]
 var grid_location: Vector2
 var possessables_available: Array
+var doors: HashMap = HashMap.new()
 
-@onready var world_grid: Node3D = get_node("/root/Game/WorldGrid")
 @onready var player_in_room: bool = false
 
 
@@ -26,7 +24,8 @@ func init() -> void:
 	var room_location: Vector3 = Vector3(grid_location.x * grid_scale, 0, 
 		grid_location.y * grid_scale)
 	global_translate(room_location)
-	generate_walls_and_doors()
+	init_doors()
+	print(Time.get_time_string_from_system(), ": Room ", grid_location , " initialized")
 
 
 func add_possessable(possessable: Possessable) -> void:
@@ -43,9 +42,24 @@ func remove_possessable(possessable: Possessable) -> void:
 		": WARNING: Attempted to remove a possessable that is not in ", name, "'s array")
 
 
-# Godot doesn't support abstract classes/methods so simulate by throwing an error
-func generate_walls_and_doors() -> void:
-	push_error("ABSTRACT METHOD ERROR: room_gd.generate_walls_and_doors()")
+func register_door(door: Door) -> void:
+	doors.add(door.door_location, door)
+
+
+func deregister_door(door: Door) -> void:
+	var success: bool = doors.remove(door.door_location)
+	if not success:
+		push_error("ERROR: Room.deregister_door failed")
+
+
+func get_door_at_location(grid_door_location: DoorLocation) -> Door:
+	var door_location: DoorLocation = grid_door_location.translate(-grid_location)
+	return doors.retrieve(door_location)
+
+
+func init_doors() -> void:
+	for door: Door in doors.values():
+		door.init(grid_location)
 
 
 func _on_player_entered_room(body: Node3D) -> void:

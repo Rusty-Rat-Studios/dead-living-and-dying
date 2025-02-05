@@ -1,25 +1,33 @@
 extends PlayerState
 
+const DEAD_SPEED: float = 10.0
+
 const RESPAWN_TIME: float = 2
 
 func enter() -> void:
 	super()
-	parent.stat_dict[Player.Stats.SPEED] = 10.0
+
+	_parent.stat_dict[Player.Stats.SPEED] = DEAD_SPEED
+
+
+	
+	# disable player light
+	_parent.light_omni.visible = false
+	_parent.light_spot.visible = false
 	
 	# DEBUG: modulate color according to state
-	parent.get_node("RotationOffset/AnimatedSprite3D").modulate = Color(0.5, 0.5, 0.5, 0.5)
+	_parent.get_node("RotationOffset/AnimatedSprite3D").modulate = Color(0.5, 0.5, 0.5, 0.5)
 	
 	# change collision layers out of physical plane into spirit plane
-	parent.collision_layer = CollisionBit.PLAYER + CollisionBit.SPIRIT
-	parent.collision_mask = CollisionBit.WORLD + CollisionBit.SPIRIT
-	parent.hurtbox.collision_mask = CollisionBit.SPIRIT
+	_parent.collision_layer = CollisionBit.PLAYER + CollisionBit.SPIRIT
+	_parent.collision_mask = CollisionBit.WORLD + CollisionBit.SPIRIT
+	_parent.hurtbox.collision_mask = CollisionBit.SPIRIT
 	
 	SignalBus.player_hurt.connect(_on_player_hurt)
 	SignalBus.player_revived.connect(_on_player_revived)
-	SignalBus.player_state_changed.emit("Dead")
 	
 	# drop key item if player is carrying it
-	var key_item: Node3D = parent.get_node_or_null("Inventory/KeyItem")
+	var key_item: KeyItemInventory = _parent.get_node_or_null("Inventory/KeyItemInventory")
 	if key_item:
 		key_item.drop()
 	
@@ -27,35 +35,30 @@ func enter() -> void:
 
 
 func exit() -> void:
-	super()
+	# enable player light
+	_parent.light_omni.visible = true
+	_parent.light_spot.visible = true
+	
 	# change collision layers out of spirit plane into physical plane
-	parent.collision_layer = CollisionBit.PLAYER + CollisionBit.PHYSICAL
-	parent.collision_mask = CollisionBit.WORLD
-	parent.hurtbox.collision_mask = CollisionBit.PHYSICAL
+	_parent.collision_layer = CollisionBit.PLAYER + CollisionBit.PHYSICAL
+	_parent.collision_mask = CollisionBit.WORLD
+	_parent.hurtbox.collision_mask = CollisionBit.PHYSICAL
 	
 	SignalBus.player_hurt.disconnect(_on_player_hurt)
 	SignalBus.player_revived.disconnect(_on_player_revived)
-
-
-func process_input(event: InputEvent) -> State:
-	# DEBUG: press tab to cycle state
-	if event is InputEventKey and event.pressed:
-		if event.keycode == KEY_TAB:
-			return state_living
-	return null
 
 
 func move_to_shrine() -> void:
 	# temporarily deactivate player collision and hurtbox to ensure they
 	# don't interact with anything while tweening to shrine
 	# --- reactivate after reaching shrine
-	parent.hurtbox.collision_shape.set_deferred("disabled", true)
-	parent.collision_shape.set_deferred("disabled", true)
+	_parent.hurtbox.collision_shape.set_deferred("disabled", true)
+	_parent.collision_shape.set_deferred("disabled", true)
 	
 	# spawn player corpse at death location
-	parent.corpse.global_position = parent.global_position
+	_parent._corpse.global_position = _parent.global_position
 	# corpse collision is ignored because player collision is temporarily disabled
-	parent.corpse.activate()
+	_parent._corpse.activate()
 	
 	# find and move player to closest active shrine
 	var active_shrines: Array[Shrine] = ShrineManager.get_active_shrines()
@@ -64,26 +67,26 @@ func move_to_shrine() -> void:
 		push_error("No active shrine in game. There should always be a default shrine that is permanently active.")
 		SignalBus.game_over.emit()
 		return
-	var target_shrine: Shrine = Utility.find_closest(active_shrines, parent.global_position)
+	var target_shrine: Shrine = Utility.find_closest(active_shrines, _parent.global_position)
 	
 	# disable camera lagging for duration of motion
-	parent.camera.disable()
+	_parent.camera.disable()
 	var tween: Tween = get_tree().create_tween()
 	# move corpse towards shrine over RESPAWN_TIME duration
-	tween.tween_property(parent, "global_position", target_shrine.global_position, 
+	tween.tween_property(_parent, "global_position", target_shrine.global_position, 
 		RESPAWN_TIME).set_trans(Tween.TRANS_CUBIC)
 	
 	# wait for tween to finish before reactivating collision layers and camera
 	await Utility.delay(RESPAWN_TIME)
 	
 	# re-enable camera lagging
-	parent.camera.enable()
+	_parent.camera.enable()
 	# consume shrine (note: does not consume default shrine)
 	target_shrine.consume()
 	
 	# enable collision layers for spirit plane
-	parent.hurtbox.collision_shape.set_deferred("disabled", false)
-	parent.collision_shape.set_deferred("disabled", false)
+	_parent.hurtbox.collision_shape.set_deferred("disabled", false)
+	_parent.collision_shape.set_deferred("disabled", false)
 
 
 func _on_player_hurt() -> void:
@@ -91,7 +94,7 @@ func _on_player_hurt() -> void:
 
 
 func _on_player_revived(corpse_global_position: Vector3) -> void:
-	parent.global_position = corpse_global_position
+	_parent.global_position = corpse_global_position
 	# provide i-frames on revive, no flashing
-	parent.take_damage(false)
-	parent.state_machine.change_state(state_living)
+	_parent.take_damage(false)
+	_state_machine.change_state(PlayerStateMachine.States.LIVING)

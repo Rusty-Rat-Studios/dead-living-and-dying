@@ -1,6 +1,7 @@
 class_name Player
 extends CharacterBody3D
 
+
 enum Stats {
 	SPEED
 }
@@ -13,6 +14,19 @@ var state_machine: Node
 # used to track player corpse - handled by states
 var corpse: Corpse
 
+
+const BASE_SPEED: float = 6.0
+
+# base values used for light range and strength
+const LIGHT_OMNI_RANGE: float = 6
+const LIGHT_SPOT_RANGE: float = 10
+const LIGHT_ENERGY: float = 1
+
+# player state machine, sibling node under Game node
+var _state_machine: PlayerStateMachine
+
+
+
 # light variables used by state machine to adjust light strength based on state
 @onready var light_omni: OmniLight3D = $OmniLight3D
 @onready var light_spot: SpotLight3D = $SpotLight3D
@@ -20,9 +34,15 @@ var corpse: Corpse
 # updated by state machine when changing states
 @onready var hurtbox: Area3D = $Hurtbox
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
+# enabled/disabled by state DYING to allow ghost stun-attacks to hit
+@onready var stunbox: Area3D = $Stunbox
 
 # store initial position to return to when calling reset()
 @onready var starting_position: Vector3 = position
+# used to track player corpse - handled by states
+# corpse set as child of Node to intentionally not inherit parent position
+@onready var _corpse: Corpse = $CorpseContainer/Corpse
+
 
 func _ready() -> void:
 	light_omni.light_color = Color("GOLDENROD")
@@ -30,21 +50,17 @@ func _ready() -> void:
 	SignalBus.item_picked_up.connect(_on_item_picked_up)
 
 
-func init(_state_machine: Node, _corpse: Corpse) -> void:
-	self.state_machine = _state_machine
-	# set reference to player corpse
-	self.corpse = _corpse
+func init(state_machine: Node) -> void:
+	_state_machine = state_machine
 
 
 func reset() -> void:
 	# return to starting position and state
 	position = starting_position
 	hurtbox.reset()
-	
-	state_machine.change_state(state_machine.starting_state)
-	
+	_state_machine.reset()
 	camera.reset()
-	corpse.reset()
+	_corpse.reset()
 
 
 func _physics_process(delta: float) -> void:

@@ -7,9 +7,14 @@ const BASE_SPEED: float = 4.0
 # time to wait before attacking when player enters room
 const ATTACK_DELAY: float = 0.3
 
+# opacity values set according to player state
+const OPACITY_DYING: float = 0.2
+const OPACITY_DEAD: float = 0.8
+
 var movement_boundaries: Rect2
 
-@onready var state_machine: Node = $StateMachine
+@onready var state_machine: GhostStateMachine = $StateMachine
+@onready var hitbox: Area3D = $Hitbox
 
 @onready var speed: float = BASE_SPEED
 @onready var current_room: Room = get_parent()
@@ -31,6 +36,8 @@ func _ready() -> void:
 	# to ensure this connection always evaluates first when signal emits
 	SignalBus.player_entered_room.connect(_on_player_entered_room)
 	SignalBus.player_exited_room.connect(_on_player_exited_room)
+	# attach signal to update ghost visibility based on player state
+	SignalBus.player_state_changed.connect(_on_player_state_changed)
 	
 	hit.connect(_on_hit)
 
@@ -50,7 +57,10 @@ func reset() -> void:
 
 func move_to_target(delta: float) -> void:
 	var direction: Vector3 = target_pos - global_position
-	var distance_to_target: float = global_position.distance_to(target_pos)
+	# force target_pos onto y=1 plane to ensure ghost can "reach" targets
+	# at different heights - i.e. player which is at a lower height
+	target_pos = Vector3(target_pos.x, 1, target_pos.z)
+	var distance_to_target: float = global_position.distance_squared_to(target_pos)
 	
 	if distance_to_target < speed * delta:
 		# set target to ghost position if close enough
@@ -69,7 +79,7 @@ func _on_player_entered_room(room: Node3D) -> void:
 		player_in_room = true
 	
 	# regardless of state, attack the player if they enter the room in DEAD state
-	if player_in_room and PlayerHandler.get_player_state() == "Dead":
+	if player_in_room and PlayerHandler.get_player_state() == PlayerStateMachine.States.DEAD:
 		# add delay to allow player breathing room when entering the room
 		await Utility.delay(ATTACK_DELAY)
 		state_machine.change_state(state_machine.States.ATTACKING)
@@ -84,3 +94,18 @@ func _on_hit() -> void:
 	if state_machine.current_state != state_machine.States.STUNNED:
 		state_machine.change_state(state_machine.States.STUNNED)
 		$ParticleBurst.emitting = true
+
+
+func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
+	var material: Material = $MeshInstance3D.mesh.material
+	
+	var opacity: float
+	match state:
+		PlayerStateMachine.States.LIVING:
+			opacity = 0
+		PlayerStateMachine.States.DYING:
+			opacity = OPACITY_DYING
+		PlayerStateMachine.States.DEAD:
+			opacity = OPACITY_DEAD
+	
+	material.albedo_color.a = opacity

@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://bslonn3bn1m6s"]
+[gd_scene load_steps=5 format=3 uid="uid://bslonn3bn1m6s"]
 
 [ext_resource type="Script" path="res://items/item_world.gd" id="1_12ywg"]
 [ext_resource type="PackedScene" uid="uid://cnbim08e5mqrn" path="res://ui/interactable.tscn" id="2_nvmey"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fj23q"]
+load_path = "res://.godot/imported/based.png-b2b87d870a01b4dad6e3f3b470b77de0.s3tc.ctex"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_usb8p"]
 radius = 1.0
@@ -10,6 +13,10 @@ radius = 1.0
 script = ExtResource("1_12ywg")
 
 [node name="Interactable" parent="." instance=ExtResource("2_nvmey")]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+billboard = 1
+texture = SubResource("CompressedTexture2D_fj23q")
 
 [node name="PlayerDetector" type="Area3D" parent="."]
 collision_layer = 0
