@@ -2,11 +2,11 @@ class_name Player
 extends CharacterBody3D
 
 enum Stats {
-	STAT_SPEED = 0
+	SPEED
 }
 
 var stat_dict: Dictionary = {
-	Stats.STAT_SPEED : 6.0
+	Stats.SPEED : 6.0
 }
 # player state machine, sibling node under Game node
 var state_machine: Node
@@ -72,8 +72,8 @@ func handle_movement(delta: float) -> void:
 		velocity.x = direction.x * stat_dict[0]
 		velocity.z = direction.z * stat_dict[0]
 	else:
-		velocity.x = move_toward(velocity.x, 0, stat_dict[0])
-		velocity.z = move_toward(velocity.z, 0, stat_dict[0])
+		velocity.x = move_toward(velocity.x, 0, stat_dict[Stats.SPEED])
+		velocity.z = move_toward(velocity.z, 0, stat_dict[Stats.SPEED])
 	move_and_slide()
 
 
@@ -87,7 +87,7 @@ func _on_item_picked_up(item: ItemInventory) -> void:
 	item.position = Vector3.ZERO
 
 
-func stat_update(stat_modifier: float, stat: int) -> void:
+func stat_update( stat: Stats, stat_modifier: float) -> void:
 	if stat_dict.has(stat):
 		stat_dict[stat] += stat_modifier
 

@@ -3,7 +3,7 @@ extends PlayerState
 
 func enter() -> void:
 	super()
-	parent.stat_dict[0] = 4.0
+	parent.stat_dict[parent.Stats.SPEED] = 4.0
 	
 	# DEBUG: modulate color according to state
 	parent.get_node("RotationOffset/AnimatedSprite3D").modulate = Color(1, 0.5, 0.5)
