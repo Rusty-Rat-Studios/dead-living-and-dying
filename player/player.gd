@@ -69,8 +69,8 @@ func handle_movement(delta: float) -> void:
 		input_dir = Focus.input_get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 		direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
-		velocity.x = direction.x * stat_dict[0]
-		velocity.z = direction.z * stat_dict[0]
+		velocity.x = direction.x * stat_dict[Stats.SPEED]
+		velocity.z = direction.z * stat_dict[Stats.SPEED]
 	else:
 		velocity.x = move_toward(velocity.x, 0, stat_dict[Stats.SPEED])
 		velocity.z = move_toward(velocity.z, 0, stat_dict[Stats.SPEED])
