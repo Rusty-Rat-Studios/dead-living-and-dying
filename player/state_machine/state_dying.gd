@@ -10,6 +10,7 @@ const DYING_LIGHT_ENERGY: float = 1
 func enter() -> void:
 	super()
 	_parent.stat_dict[Player.Stats.SPEED] = DYING_SPEED
+	_parent.inventory_update()
 	
 	# DEBUG: modulate color according to state
 	_parent.get_node("RotationOffset/AnimatedSprite3D").modulate = Color(1, 0.5, 0.5)
@@ -24,9 +25,8 @@ func enter() -> void:
 	
 	# enable and configure stunbox values
 	_parent.stunbox.collision_shape.set_deferred("disabled", false)
-	_parent.stunbox.set_values(DYING_SPEED, DYING_LIGHT_OMNI_RANGE,
+	_parent.stunbox.set_values(_parent.stat_dict[Player.Stats.SPEED], DYING_LIGHT_OMNI_RANGE,
 		DYING_LIGHT_SPOT_RANGE, DYING_LIGHT_ENERGY)
-	_parent.inventory_update()
 	
 
 func exit() -> void:
