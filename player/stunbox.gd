@@ -52,8 +52,8 @@ func stun() -> void:
 func restore() -> void:
 	# use set_parallel to have all properties tween simultaneously
 	_restore_tween = create_tween().set_parallel().set_ease(Tween.EASE_OUT)
-	_restore_tween.tween_property(_player, "speed", base_speed, RESTORE_DURATION)
-	_restore_tween.tween_property(_player, "light_omni:omni_range", base_light_omni_range, RESTORE_DURATION)
+	_restore_tween.tween_property(_player, "stat_dict:Player.Stats.SPEED", base_speed, RESTORE_DURATION)
+	_restore_tween.tween_property(_player.light_omni, "omni_range", base_light_omni_range, RESTORE_DURATION)
 	_restore_tween.tween_property(_player.light_omni, "light_energy", base_light_energy, RESTORE_DURATION)
 	_restore_tween.tween_property(_player.light_spot, "spot_range", base_light_spot_range, RESTORE_DURATION)
 	_restore_tween.tween_property(_player.light_spot, "light_energy", base_light_energy, RESTORE_DURATION)

@@ -1,7 +1,6 @@
 class_name Player
 extends CharacterBody3D
 
-
 enum Stats {
 	SPEED
 }
@@ -20,12 +19,8 @@ var stat_dict: Dictionary = {
 var state_machine: Node
 # used to track player corpse - handled by states
 var corpse: Corpse
-
-
 # player state machine, sibling node under Game node
 var _state_machine: PlayerStateMachine
-
-
 
 # light variables used by state machine to adjust light strength based on state
 @onready var light_omni: OmniLight3D = $OmniLight3D
