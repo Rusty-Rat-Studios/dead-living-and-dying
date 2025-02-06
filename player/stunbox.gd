@@ -62,7 +62,6 @@ func restore() -> void:
 func restore_instantly() -> void:
 	# called by state_dying.gd/exit() to immediately restore any values
 	# before moving to the next state
-	$StunTimer.stop()
 	if _restore_tween:
 		_restore_tween.kill()
 	_player.stat_dict[Player.Stats.SPEED] = base_speed
