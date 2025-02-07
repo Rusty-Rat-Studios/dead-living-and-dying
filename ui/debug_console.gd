@@ -24,7 +24,7 @@ func _input(event: InputEvent) -> void:
 		if is_visible():
 			# Grab focus after releasing 'console_open' as to not type 'console_open'
 			$Panel/LineEdit.grab_focus()
-	if event.is_action_pressed("ui_up"):
+	if event.is_action_pressed("ui_text_caret_up"):
 		if is_visible():
 			_fill_from_history()
 
