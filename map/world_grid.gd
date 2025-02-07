@@ -7,56 +7,58 @@ extends Node3D
 
 const GRID_SCALE: float = 20 # Size of each grid square in editor units
 
-var room_map: HashMap = HashMap.new()
+const BASIC_ROOM: RoomInformation = preload("res://map/rooms/basic_room/basic_room.tres")
 
-@onready var basic_room: RoomInformation = preload("res://map/rooms/basic_room/basic_room.tres")
-# For some reason preload will not work here
-@onready var entity_table: EntityTable = load("res://entity/entity_tables/test_entity_table.tres")
+var room_map: HashMap = HashMap.new()
+var occupied_grid: Array[Vector2] = []
+var door_grid: Array[DoorLocation] = []
 
 
 func _ready() -> void:
-	generate_grid()
-	# TODO: Run for each type of spawner using a specific EntityTable
-	SpawnerManager.spawn(Spawner.SpawnerType.ENEMY, entity_table)
+	_add_room(BASIC_ROOM, Vector2(0,0)) # Hardcoded to a basic room for now
+	_generate_grid()
+	_init_all_rooms()
+	_spawn_entities()
 
 
-func generate_grid() -> void:
-	# Currently hardcoded to generate the default 5 rooms
-	add_room(basic_room, Vector2(0, 0))
-	add_room(basic_room, Vector2(0, -1))
-	add_room(basic_room, Vector2(0, -2))
-	add_room(basic_room, Vector2(-1, -1))
-	add_room(basic_room, Vector2(1, -1))
-	init_all_rooms()
-
-
-func add_room(room_info: RoomInformation, grid_location: Vector2) -> void:
-	var room: Room = room_info.resource.instantiate()
-	room.grid_location = grid_location
-	room.room_information = room_info
-	# Adds each grid square that the room takes up to the HashMap
-	for room_portion: Vector2 in room_info.room_shape:
-		var translated_room_portion: Vector2 = room_portion + grid_location
-		room_map.add_with_hash(_hash_vector2(translated_room_portion), room)
-	add_child(room)
-
-
-# If grid_location exists in the HashMap return room, otherwise returns null
-func get_room_at_location(grid_location: Vector2) -> Room:
-	return room_map.retrieve_with_hash(_hash_vector2(grid_location))
-
-
-func clear() -> void:
+func _clear() -> void:
+	occupied_grid = []
+	door_grid = []
 	for node: Node in get_children():
 		if node is Room:
 			node.queue_free()
 	room_map.clear()
 
 
-func init_all_rooms() -> void:
+func _generate_grid() -> void:
+	pass
+
+
+func _add_room(room_info: RoomInformation, grid_location: Vector2) -> void:
+	var room: Room = room_info.resource.instantiate() 
+	room.grid_location = grid_location
+	room.room_information = room_info
+	# Adds each grid square that the room takes up to the HashMap & occupied_grid
+	for room_portion: Vector2 in room_info.room_shape:
+		var translated_room_portion: Vector2 = room_portion + grid_location
+		room_map.add_with_hash(_hash_vector2(translated_room_portion), room)
+		occupied_grid.append(translated_room_portion)
+	add_child(room)
+
+
+func _init_all_rooms() -> void:
 	for node: Node in self.get_children():
 		if node is Room:
 			node.init()
+
+
+func _spawn_entities() -> void:
+	pass
+
+
+# If grid_location exists in the HashMap return room, otherwise returns null
+func get_room_at_location(grid_location: Vector2) -> Room:
+	return room_map.retrieve_with_hash(_hash_vector2(grid_location))
 
 
 func _hash_vector2(vector: Vector2) -> PackedByteArray:
