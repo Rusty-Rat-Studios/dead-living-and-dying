@@ -8,16 +8,16 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("console"):
+	if event.is_action_pressed("ui_cancel"):
+		hide()
+	if event.is_action_pressed("console_open"):
 		if not is_visible():
 			$Panel/LineEdit.clear()
 			show()
 			get_tree().paused = true
-		else:
-			hide()
-	if event.is_action_released("console"):
+	if event.is_action_released("console_open"):
 		if is_visible():
-			# Grab focus after releasing 'console' as to not type 'console'
+			# Grab focus after releasing 'console_open' as to not type 'console_open'
 			$Panel/LineEdit.grab_focus()
 
 
