@@ -9,7 +9,9 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
-		hide()
+		if is_visible():
+			hide()
+			accept_event() # Prevents event from being grabbed by 'game_menu'
 	if event.is_action_pressed("console_open"):
 		if not is_visible():
 			$Panel/LineEdit.clear()
