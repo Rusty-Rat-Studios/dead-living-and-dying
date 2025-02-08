@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://c5cubqbp0xl4e"]
+[gd_scene load_steps=5 format=3 uid="uid://c5cubqbp0xl4e"]
 
-[ext_resource type="Texture2D" uid="uid://curlcs6otrt6g" path="res://ui/title.png" id="1_6lwwj"]
-[ext_resource type="Script" path="res://ui/main_menu/main_menu.gd" id="1_85sq6"]
-[ext_resource type="Texture2D" uid="uid://yg1f6tea1m18" path="res://ui/main_menu/main_menu_border.png" id="1_qverk"]
+[ext_resource type="Texture2D" uid="uid://curlcs6otrt6g" path="res://ui/resources/title.png" id="1_6lwwj"]
+[ext_resource type="Script" path="res://ui/main_menu.gd" id="1_85sq6"]
+[ext_resource type="Texture2D" uid="uid://yg1f6tea1m18" path="res://ui/resources/main_menu_border.png" id="1_qverk"]
+[ext_resource type="Theme" uid="uid://casdoijkjemc2" path="res://ui/resources/menu_theme.tres" id="4_31m45"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -73,6 +74,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 focus_neighbor_top = NodePath("../ButtonQuit")
 focus_neighbor_bottom = NodePath("../ButtonOptions")
+theme = ExtResource("4_31m45")
 theme_override_font_sizes/font_size = 48
 text = "Start"
 
