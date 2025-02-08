@@ -2,8 +2,6 @@ extends GhostState
 
 const ATTACK_SPEED: float = 6.0
 
-@onready var player: Player = PlayerHandler.get_player()
-
 
 func _ready() -> void:
 	# defer connecting this signal to ensure this function executes
@@ -38,7 +36,7 @@ func exit() -> void:
 
 
 func process_state() -> void:
-	_parent.target_pos = player.global_position
+	_parent.target_pos = PlayerHandler.get_player().global_position
 	if _parent.at_target:
 		change_state(GhostStateMachine.States.WAITING)
 
