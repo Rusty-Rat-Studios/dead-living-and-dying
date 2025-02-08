@@ -93,6 +93,8 @@ func take_damage(flash: bool = true) -> void:
 
 
 func _on_item_picked_up(item: ItemInventory) -> void:
+	if item is KeyItemInventory:
+		SignalBus.key_item_picked_up.emit()
 	$Inventory.add_child(item)
 	# ensure item position is directly on player
 	item.position = Vector3.ZERO

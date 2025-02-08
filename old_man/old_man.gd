@@ -19,11 +19,12 @@ func reset() -> void:
 
 
 func _on_player_entered(player: Player) -> void:
-	if player_has_key_item:
-		$Interactable.display_message("[E] Give [KEY_ITEM]")
-		$Interactable.enabled = true
-	else:
-		$Interactable.display_message("Bring me the [KEY ITEM]")
+	if PlayerHandler.get_player_state() != PlayerStateMachine.States.DEAD:
+		if player_has_key_item:
+			$Interactable.display_message("[E] Give [KEY_ITEM]")
+			$Interactable.enabled = true
+		else:
+			$Interactable.display_message("Bring me the [KEY ITEM]")
 
 
 func _on_player_exited(player: Player) -> void:
