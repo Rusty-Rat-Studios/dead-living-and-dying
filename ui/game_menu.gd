@@ -12,8 +12,6 @@ func _ready() -> void:
 	$VBoxContainer/Start.pressed.connect(_on_start_pressed)
 	$VBoxContainer/Quit.pressed.connect(_on_quit_pressed)
 	SignalBus.game_over.connect(_on_game_over)
-	if not disable_start_menu:
-		pause()
 
 
 func _input(event: InputEvent) -> void:
@@ -46,15 +44,15 @@ func _on_quit_pressed() -> void:
 
 
 func _on_game_over() -> void:
-	pause()
-	$VBoxContainer.hide()
-	$Message.text = "Game Over"
-	await Utility.delay(GAME_OVER_DELAY)
-	$VBoxContainer.show()
-	$Message.text = ""
-	$VBoxContainer/Start.text = "START"
+	if not disable_start_menu:
+		pause()
+		$VBoxContainer.hide()
+		$Message.text = "Game Over"
+		await Utility.delay(GAME_OVER_DELAY)
+		$VBoxContainer.show()
+		$Message.text = ""
+		$VBoxContainer/Start.text = "START"
+		resume()
 	
 	get_node("/root/Game").reset()
 	
-	if disable_start_menu:
-		resume()
