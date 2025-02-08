@@ -1,0 +1,44 @@
+extends StaticBody3D
+
+var player_has_key_item: bool = false
+
+func _ready() -> void:
+	$PlayerDetector.body_entered.connect(_on_player_entered)
+	$PlayerDetector.body_exited.connect(_on_player_exited)
+	$Interactable.input_detected.connect(_on_interaction)
+	SignalBus.key_item_picked_up.connect(_on_key_item_picked_up)
+	SignalBus.key_item_dropped.connect(_on_key_item_dropped)
+	
+	$Interactable.inputs = ["interact"]
+	reset()
+
+
+func reset() -> void:
+	$Interactable.hide_message()
+	$Interactable.enabled = false
+
+
+func _on_player_entered(player: Player) -> void:
+	if player_has_key_item:
+		$Interactable.display_message("[E] Give [KEY_ITEM]")
+		$Interactable.enabled = true
+	else:
+		$Interactable.display_message("Bring me the [KEY ITEM]")
+
+
+func _on_player_exited(player: Player) -> void:
+	$Interactable.hide_message()
+	$Interactable.enabled = false
+
+
+func _on_interaction() -> void:
+	if player_has_key_item:
+		SignalBus.level_complete.emit()
+
+
+func _on_key_item_picked_up() -> void:
+	player_has_key_item = true
+
+
+func _on_key_item_dropped() -> void:
+	player_has_key_item = true
