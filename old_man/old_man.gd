@@ -19,7 +19,7 @@ func reset() -> void:
 	$Interactable.enabled = false
 
 
-func _on_player_entered(player: Player) -> void:
+func _on_player_entered(_player: Player) -> void:
 	if PlayerHandler.get_player_state() != PlayerStateMachine.States.DEAD:
 		if player_has_key_item:
 			$Interactable.display_message("[E] Give [KEY_ITEM]")
@@ -28,7 +28,7 @@ func _on_player_entered(player: Player) -> void:
 			$Interactable.display_message("Bring me the [KEY ITEM]")
 
 
-func _on_player_exited(player: Player) -> void:
+func _on_player_exited(_player: Player) -> void:
 	$Interactable.hide_message()
 	$Interactable.enabled = false
 
