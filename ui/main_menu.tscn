@@ -85,6 +85,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 focus_neighbor_top = NodePath("../ButtonStart")
 focus_neighbor_bottom = NodePath("../ButtonHow")
+theme = ExtResource("4_31m45")
 theme_override_font_sizes/font_size = 28
 text = "Options"
 
@@ -95,6 +96,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 focus_neighbor_top = NodePath("../ButtonOptions")
 focus_neighbor_bottom = NodePath("../ButtonQuit")
+theme = ExtResource("4_31m45")
 theme_override_font_sizes/font_size = 28
 text = "How To Play"
 
@@ -105,5 +107,6 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 focus_neighbor_top = NodePath("../ButtonHow")
 focus_neighbor_bottom = NodePath("../ButtonStart")
+theme = ExtResource("4_31m45")
 theme_override_font_sizes/font_size = 28
 text = "Quit"
