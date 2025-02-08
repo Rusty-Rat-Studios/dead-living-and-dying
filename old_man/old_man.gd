@@ -1,3 +1,4 @@
+class_name OldMan
 extends StaticBody3D
 
 var player_has_key_item: bool = false
@@ -32,8 +33,8 @@ func _on_player_exited(player: Player) -> void:
 	$Interactable.enabled = false
 
 
-func _on_interaction() -> void:
-	if player_has_key_item:
+func _on_interaction(input_name: String) -> void:
+	if input_name == "interact" and player_has_key_item:
 		SignalBus.level_complete.emit()
 
 
