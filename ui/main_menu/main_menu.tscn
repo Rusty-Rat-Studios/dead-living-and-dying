@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://c5cubqbp0xl4e"]
+[gd_scene load_steps=4 format=3 uid="uid://c5cubqbp0xl4e"]
 
 [ext_resource type="Texture2D" uid="uid://curlcs6otrt6g" path="res://ui/title.png" id="1_6lwwj"]
-[ext_resource type="Texture2D" uid="uid://yg1f6tea1m18" path="res://ui/main_menu_border.png" id="1_qverk"]
+[ext_resource type="Script" path="res://ui/main_menu/main_menu.gd" id="1_85sq6"]
+[ext_resource type="Texture2D" uid="uid://yg1f6tea1m18" path="res://ui/main_menu/main_menu_border.png" id="1_qverk"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -10,6 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_85sq6")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -69,6 +71,8 @@ custom_minimum_size = Vector2(220, 60)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+focus_neighbor_top = NodePath("../ButtonQuit")
+focus_neighbor_bottom = NodePath("../ButtonOptions")
 theme_override_font_sizes/font_size = 48
 text = "Start"
 
@@ -77,6 +81,8 @@ custom_minimum_size = Vector2(180, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+focus_neighbor_top = NodePath("../ButtonStart")
+focus_neighbor_bottom = NodePath("../ButtonHow")
 theme_override_font_sizes/font_size = 28
 text = "Options"
 
@@ -85,6 +91,8 @@ custom_minimum_size = Vector2(180, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+focus_neighbor_top = NodePath("../ButtonOptions")
+focus_neighbor_bottom = NodePath("../ButtonQuit")
 theme_override_font_sizes/font_size = 28
 text = "How To Play"
 
@@ -93,5 +101,7 @@ custom_minimum_size = Vector2(180, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+focus_neighbor_top = NodePath("../ButtonHow")
+focus_neighbor_bottom = NodePath("../ButtonStart")
 theme_override_font_sizes/font_size = 28
 text = "Quit"
