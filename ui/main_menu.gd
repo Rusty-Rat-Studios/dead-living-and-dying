@@ -6,6 +6,10 @@ extends Control
 @onready var buttons: VBoxContainer = $MarginContainer/MarginContainer/VBoxContainer/VBoxButtons
 
 func _ready() -> void:
+	# main menu border clips if squished too small left-right
+	# disallow resizing window under a given limit
+	DisplayServer.window_set_min_size(Vector2i(800, 600))
+	
 	if skip_to_game:
 		start_game()
 	

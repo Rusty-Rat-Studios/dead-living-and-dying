@@ -32,6 +32,11 @@ SpawnerManager="*res://autoloads/spawner_manager.gd"
 gdscript/warnings/untyped_declaration=2
 gdscript/warnings/inferred_declaration=2
 
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
 [input]
 
 ui_accept={

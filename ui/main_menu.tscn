@@ -64,7 +64,7 @@ stretch_mode = 5
 [node name="VBoxButtons" type="VBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 2
+size_flags_vertical = 0
 theme_override_constants/separation = 16
 
 [node name="ButtonStart" type="Button" parent="MarginContainer/MarginContainer/VBoxContainer/VBoxButtons"]
