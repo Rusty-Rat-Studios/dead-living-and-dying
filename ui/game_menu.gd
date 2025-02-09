@@ -7,10 +7,13 @@ const GAME_OVER_DELAY: float = 2.0
 
 var scene: PackedScene
 
+@onready var buttons: VBoxContainer = $PanelContainer/MarginContainer/VBoxContainer/VBoxButtons
+@onready var message: Label = $PanelContainer/MarginContainer/VBoxContainer/Message
+
 func _ready() -> void:
 	scene = preload("res://game.tscn")
-	$VBoxContainer/Start.pressed.connect(_on_start_pressed)
-	$VBoxContainer/Quit.pressed.connect(_on_quit_pressed)
+	buttons.get_node("ButtonContinue").pressed.connect(_on_continue_pressed)
+	buttons.get_node("ButtonQuit").pressed.connect(_on_quit_pressed)
 	SignalBus.game_over.connect(_on_game_over)
 
 
@@ -24,17 +27,16 @@ func _input(event: InputEvent) -> void:
 
 func resume() -> void:
 	hide()
-	$VBoxContainer/Start.text = "RESUME"
 	get_tree().paused = false
 
 
 func pause() -> void:
 	show()
 	get_tree().paused = true
-	$VBoxContainer/Start.grab_focus()
+	buttons.get_node("ButtonContinue").grab_focus()
 
 
-func _on_start_pressed() -> void:
+func _on_continue_pressed() -> void:
 	resume()
 
 
@@ -46,12 +48,13 @@ func _on_quit_pressed() -> void:
 func _on_game_over() -> void:
 	if not disable_start_menu:
 		pause()
-		$VBoxContainer.hide()
-		$Message.text = "Game Over"
+		buttons.hide()
+		message.show()
+		message.text = "Game Over"
 		await Utility.delay(GAME_OVER_DELAY)
-		$VBoxContainer.show()
-		$Message.text = ""
-		$VBoxContainer/Start.text = "START"
+		buttons.show()
+		message.hide()
+		message.text = ""
 		resume()
 	
 	get_node("/root/Game").reset()
