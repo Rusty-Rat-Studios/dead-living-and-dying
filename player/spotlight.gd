@@ -29,7 +29,8 @@ const SPRITE_ANIMATION_BACK: String = "back"
 @onready var angular_velocity: float = 0.0
 @onready var sprite: AnimatedSprite3D = PlayerHandler.get_player().get_node("RotationOffset/AnimatedSprite3D")
 # used to disable skew effect if needed (e.g. in DEAD state)
-@onready var skew_enabled: bool = true
+@onready var skew_enabled: bool = false
+@onready var skew_scale_base: float = sprite.scale.x
 
 func _ready() -> void:
 	light_color = Color("GOLDENROD")
@@ -120,7 +121,7 @@ func skew_sprite() -> void:
 	elif rotation.y <= -PI:
 		rotation.y = PI
 	# skew sprite to make it appear as though it is "looking" in the target direction
-	sprite.scale.x = clamp(abs(cos(rotation.y)), SKEW_SCALE, 1)
+	sprite.scale.x = clamp(abs(cos(rotation.y)), SKEW_SCALE * skew_scale_base, skew_scale_base)
 	
 	# flip animation based on rotation amount
 	if rotation.y > -PI/2 and rotation.y <= PI/2:
@@ -145,7 +146,7 @@ func disable_skew() -> void:
 	skew_enabled = false
 	# reset sprite skew
 	sprite.rotation.y = 0
-	sprite.scale.x = 1
+	sprite.scale.x = skew_scale_base
 	sprite.animation = SPRITE_ANIMATION_FRONT
 
 
@@ -153,7 +154,8 @@ func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
 	if state == PlayerStateMachine.States.DEAD:
 		disable_skew()
 	else:
-		enable_skew()
+		#enable_skew()
+		pass
 
 
 func _on_joystick_timer_timeout() -> void:
