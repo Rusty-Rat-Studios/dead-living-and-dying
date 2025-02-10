@@ -61,6 +61,13 @@ func reset() -> void:
 	state_machine.reset()
 
 
+func set_target(target_global: Vector3) -> void:
+	# set the target_pos value
+	# and flip sprite horizontally according to direction of target
+	target_pos = target_global
+	sprite.flip_h = target_global.x > global_position.x
+
+
 func move_to_target(delta: float) -> void:
 	var direction: Vector3 = target_pos - global_position
 	# force target_pos onto y=1 plane to ensure ghost can "reach" targets

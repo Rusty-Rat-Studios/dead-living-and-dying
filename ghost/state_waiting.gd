@@ -22,6 +22,8 @@ func _ready() -> void:
 func enter() -> void:
 	_parent.speed = WAITING_SPEED
 	
+	_parent.sprite.animation = "idle"
+	
 	# dynamically generate bounding box based on floor size of ghost's current room
 	var floor_mesh_instance: MeshInstance3D = _parent.current_room.get_node("Floor/MeshInstance3D")
 	var floor_mesh: PlaneMesh = floor_mesh_instance.mesh
@@ -67,7 +69,7 @@ func set_random_target() -> void:
 	var z: float = RNG.rng.randf_range(room_boundaries.position.y + 1,
 					room_boundaries.position.y + room_boundaries.size.y - 1)
 	
-	_parent.target_pos = _parent.current_room.global_position + Vector3(x, 1.0, z)
+	_parent.set_target(_parent.current_room.global_position + Vector3(x, 1.0, z))
 
 
 func pause() -> void:

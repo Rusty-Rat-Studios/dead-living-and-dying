@@ -18,6 +18,7 @@ func enter() -> void:
 		change_state(GhostStateMachine.States.WAITING)
 		return
 	_parent.speed = ATTACK_SPEED
+	_parent.sprite.animation = "active"
 	# reset at_target flag to handle case where previous state reached target
 	# since this flag is used to detect when to exit ATTACKING state
 	_parent.at_target = false
@@ -38,7 +39,7 @@ func exit() -> void:
 
 
 func process_state() -> void:
-	_parent.target_pos = player.global_position
+	_parent.set_target(player.global_position)
 	if _parent.at_target:
 		change_state(GhostStateMachine.States.WAITING)
 
