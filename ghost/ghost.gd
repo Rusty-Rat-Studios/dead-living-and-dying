@@ -37,6 +37,9 @@ func _ready() -> void:
 	sprite.modulate.a = 0
 	$OmniLight3D.visible = false
 	
+	# add self to group "ghosts"
+	add_to_group("ghosts")
+	
 	# attach signals for updating player_in_room flag
 	# states listening for same signals are connected with CONNECT_DEFERRED
 	# to ensure this connection always evaluates first when signal emits
@@ -63,9 +66,11 @@ func reset() -> void:
 
 func set_target(target_global: Vector3) -> void:
 	# set the target_pos value
-	# and flip sprite horizontally according to direction of target
 	target_pos = target_global
-	sprite.flip_h = target_global.x > global_position.x
+	# flip sprite horizontally according to direction of target
+	# with a deadzone margin to prevent oscillating back and forth
+	if abs(target_global.x - global_position.x) > 0.5:
+		sprite.flip_h = target_global.x > global_position.x
 
 
 func move_to_target(delta: float) -> void:
