@@ -15,6 +15,7 @@ var movement_boundaries: Rect2
 
 @onready var state_machine: GhostStateMachine = $StateMachine
 @onready var hitbox: Area3D = $Hitbox
+@onready var sprite: AnimatedSprite3D = $AnimatedSprite3D
 
 @onready var speed: float = BASE_SPEED
 @onready var current_room: Room = get_parent()
@@ -30,6 +31,11 @@ func _ready() -> void:
 	# Initialize state machine
 	# pass reference of the ghost to the states
 	state_machine.init(self)
+	
+	# set opacity to 0 and disable self-light
+	# left visible in editor for debugging purposes
+	sprite.modulate.a = 0
+	$OmniLight3D.visible = false
 	
 	# attach signals for updating player_in_room flag
 	# states listening for same signals are connected with CONNECT_DEFERRED
@@ -97,15 +103,12 @@ func _on_hit() -> void:
 
 
 func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
-	var material: Material = $MeshInstance3D.mesh.material
-	
-	var opacity: float
 	match state:
 		PlayerStateMachine.States.LIVING:
-			opacity = 0
+			sprite.modulate.a = 0
 		PlayerStateMachine.States.DYING:
-			opacity = OPACITY_DYING
+			sprite.modulate.a = OPACITY_DYING
+			$OmniLight3D.visible = true
 		PlayerStateMachine.States.DEAD:
-			opacity = OPACITY_DEAD
-	
-	material.albedo_color.a = opacity
+			sprite.modulate.a = OPACITY_DEAD
+			$OmniLight3D.visible = false
