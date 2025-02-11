@@ -3,18 +3,18 @@ extends Control
 # time that the game waits before continuing on game over
 const GAME_OVER_DELAY: float = 2.0
 
-@export var disable_start_menu: bool = false
+@export var disable_popup: bool = false
 
-var scene: PackedScene
+@onready var scene: PackedScene = preload("res://game.tscn")
+
+@onready var buttons: VBoxContainer = $PanelContainer/MarginContainer/VBoxContainer/VBoxButtons
+@onready var message: Label = $PanelContainer/MarginContainer/VBoxContainer/Message
 
 func _ready() -> void:
-	scene = preload("res://game.tscn")
-	$VBoxContainer/Start.pressed.connect(_on_start_pressed)
-	$VBoxContainer/Quit.pressed.connect(_on_quit_pressed)
+	buttons.get_node("ButtonContinue").pressed.connect(_on_continue_pressed)
+	buttons.get_node("ButtonQuit").pressed.connect(_on_quit_pressed)
 	SignalBus.game_over.connect(_on_game_over)
 	SignalBus.level_complete.connect(_on_level_complete)
-	if not disable_start_menu:
-		pause()
 
 
 func _input(event: InputEvent) -> void:
@@ -27,17 +27,16 @@ func _input(event: InputEvent) -> void:
 
 func resume() -> void:
 	hide()
-	$VBoxContainer/Start.text = "RESUME"
 	get_tree().paused = false
 
 
 func pause() -> void:
 	show()
 	get_tree().paused = true
-	$VBoxContainer/Start.grab_focus()
+	buttons.get_node("ButtonContinue").grab_focus()
 
 
-func _on_start_pressed() -> void:
+func _on_continue_pressed() -> void:
 	resume()
 
 
@@ -47,30 +46,30 @@ func _on_quit_pressed() -> void:
 
 
 func _on_game_over() -> void:
-	pause()
-	$VBoxContainer.hide()
-	$Message.text = "Game Over"
-	await Utility.delay(GAME_OVER_DELAY)
-	$VBoxContainer.show()
-	$Message.text = ""
-	$VBoxContainer/Start.text = "START"
+	if not disable_popup:
+		pause()
+		buttons.hide()
+		message.text = "Game Over"
+		message.show()
+		await Utility.delay(GAME_OVER_DELAY)
+		message.hide()
+		message.text = ""
+		buttons.show()
+		resume()
 	
 	get_node("/root/Game").reset()
-	
-	if disable_start_menu:
-		resume()
 
 
 func _on_level_complete() -> void:
-	pause()
-	$VBoxContainer.hide()
-	$Message.text = "Level Complete!"
-	await Utility.delay(GAME_OVER_DELAY)
-	$VBoxContainer.show()
-	$Message.text = ""
-	$VBoxContainer/Start.text = "START"
+	if not disable_popup:
+		pause()
+		buttons.hide()
+		message.text = "Level Complete!"
+		message.show()
+		await Utility.delay(GAME_OVER_DELAY)
+		message.hide()
+		message.text = ""
+		buttons.show()
+		resume()
 	
 	get_node("/root/Game").reset()
-	
-	if disable_start_menu:
-		resume()

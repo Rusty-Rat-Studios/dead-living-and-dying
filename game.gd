@@ -14,6 +14,8 @@ extends Node3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	PlayerHandler.register_player(player)
+	
 	# Initialize player
 	# pass reference of state machine to be controlled by player
 	player.init(state_machine)
