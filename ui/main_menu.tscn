@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://c5cubqbp0xl4e"]
+[gd_scene load_steps=5 format=3 uid="uid://d1lsqw58va6up"]
 
 [ext_resource type="Texture2D" uid="uid://curlcs6otrt6g" path="res://ui/resources/title.png" id="1_6lwwj"]
 [ext_resource type="Script" path="res://ui/main_menu.gd" id="1_85sq6"]
@@ -58,11 +58,27 @@ theme_override_constants/margin_left = 64
 theme_override_constants/margin_right = 64
 theme_override_constants/margin_bottom = 64
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
+alignment = 1
+
+[node name="TitleBufferLeft" type="Control" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[node name="Title" type="TextureRect" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 6.0
 texture = ExtResource("1_6lwwj")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="TitleBufferRight" type="Control" parent="MarginContainer/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
 
 [node name="VBoxButtons" type="VBoxContainer" parent="MarginContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
