@@ -65,12 +65,11 @@ func _on_level_complete() -> void:
 		pause()
 		buttons.hide()
 		message.text = "Level Complete!"
-    message.show()
+		message.show()
 		await Utility.delay(GAME_OVER_DELAY)
 		message.hide()
 		message.text = ""
-    buttons.show()
-    resume()
+		buttons.show()
+		resume()
 	
 	get_node("/root/Game").reset()
-	
