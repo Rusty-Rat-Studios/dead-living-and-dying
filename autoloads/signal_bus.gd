@@ -7,6 +7,8 @@ extends Node
 # when the player takes damage. caught by player states to cause state change
 @warning_ignore("unused_signal") signal player_hurt
 @warning_ignore("unused_signal") signal game_over
+@warning_ignore("unused_signal") signal level_complete
+
 
 # signal for communicating player entering and leaving a room
 # passes the room instance which ghosts can match against their
@@ -19,3 +21,6 @@ extends Node
 
 # emitted by item when the player interacts to pick it up
 @warning_ignore("unused_signal") signal item_picked_up(item: ItemInventory)
+
+@warning_ignore("unused_signal") signal key_item_picked_up()
+@warning_ignore("unused_signal") signal key_item_dropped()

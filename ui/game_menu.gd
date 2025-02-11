@@ -14,6 +14,7 @@ func _ready() -> void:
 	buttons.get_node("ButtonContinue").pressed.connect(_on_continue_pressed)
 	buttons.get_node("ButtonQuit").pressed.connect(_on_quit_pressed)
 	SignalBus.game_over.connect(_on_game_over)
+	SignalBus.level_complete.connect(_on_level_complete)
 
 
 func _input(event: InputEvent) -> void:
@@ -48,13 +49,28 @@ func _on_game_over() -> void:
 	if not disable_popup:
 		pause()
 		buttons.hide()
-		message.show()
 		message.text = "Game Over"
+		message.show()
 		await Utility.delay(GAME_OVER_DELAY)
-		buttons.show()
 		message.hide()
 		message.text = ""
+		buttons.show()
 		resume()
+	
+	get_node("/root/Game").reset()
+
+
+func _on_level_complete() -> void:
+	if not disable_popup:
+		pause()
+		buttons.hide()
+		message.text = "Level Complete!"
+    message.show()
+		await Utility.delay(GAME_OVER_DELAY)
+		message.hide()
+		message.text = ""
+    buttons.show()
+    resume()
 	
 	get_node("/root/Game").reset()
 	
