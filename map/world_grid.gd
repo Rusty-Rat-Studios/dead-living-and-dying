@@ -37,7 +37,7 @@ func _clear() -> void:
 
 
 func _generate_grid() -> void:
-	var room_table: EntityTable = preload("res://entity/entity_tables/test_room_table.tres")
+	var room_table: EntityTable = load("res://entity/entity_tables/test_room_table.tres")
 	var fails: int = 0
 	
 	while(fails < GENERATOR_ATTEMPTS):
