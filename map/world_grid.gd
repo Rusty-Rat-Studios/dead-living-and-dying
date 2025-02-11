@@ -128,13 +128,13 @@ func _get_valid_room_placement_at_doors(room_information: RoomInformation, room_
 # is added to the grid.
 func _add_to_door_grid_removing_matches(room_door_grid: Array[DoorLocation]) -> void:
 	for door_location: DoorLocation in room_door_grid:
-		var matched_door: DoorLocation = door_grid.filter(
+		var matches: Array[DoorLocation] = door_grid.filter(
 			func(value: DoorLocation) -> bool: 
 				return value.equals(door_location.invert())
-		).front()
+		)
 		
-		if matched_door:
-			door_grid.erase(matched_door)
+		if matches.size() > 0:
+			door_grid.erase(matches.front())
 		else:
 			door_grid.append(door_location)
 
