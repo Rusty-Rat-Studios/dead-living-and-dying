@@ -29,7 +29,7 @@ func enter() -> void:
 	var floor_mesh: PlaneMesh = floor_mesh_instance.mesh
 	var floor_width: float = floor_mesh.size.x - 2 # add padding from wall to avoid collision
 	var floor_depth: float = floor_mesh.size.y - 2 # add padding from wall to avoid collision
-		
+	
 	# create movement boundary, Rect2(Vector2 position, Vector2 size)
 	# Rect2 position starts in top-left corner; x-extends right and y-extends down
 	room_boundaries = Rect2(Vector2(-floor_width / 2, -floor_depth / 2), 

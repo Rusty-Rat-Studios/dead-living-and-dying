@@ -2,7 +2,7 @@ class_name PossessableThrowable
 extends PossessableAttack
 
 # impulse strength used to throw the object
-const THROW_FORCE: float = 25.0
+const THROW_FORCE: float = 15.0
 # impulse strength used to spin the object when picked up
 const SPIN_FORCE_MIN: float = -0.2
 const SPIN_FORCE_MAX: float = 0.2
