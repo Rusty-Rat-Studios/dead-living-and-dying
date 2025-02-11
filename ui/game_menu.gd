@@ -3,15 +3,14 @@ extends Control
 # time that the game waits before continuing on game over
 const GAME_OVER_DELAY: float = 2.0
 
-@export var disable_start_menu: bool = false
+@export var disable_popup: bool = false
 
-var scene: PackedScene
+@onready var scene: PackedScene = preload("res://game.tscn")
 
 @onready var buttons: VBoxContainer = $PanelContainer/MarginContainer/VBoxContainer/VBoxButtons
 @onready var message: Label = $PanelContainer/MarginContainer/VBoxContainer/Message
 
 func _ready() -> void:
-	scene = preload("res://game.tscn")
 	buttons.get_node("ButtonContinue").pressed.connect(_on_continue_pressed)
 	buttons.get_node("ButtonQuit").pressed.connect(_on_quit_pressed)
 	SignalBus.game_over.connect(_on_game_over)
@@ -46,7 +45,7 @@ func _on_quit_pressed() -> void:
 
 
 func _on_game_over() -> void:
-	if not disable_start_menu:
+	if not disable_popup:
 		pause()
 		buttons.hide()
 		message.show()
