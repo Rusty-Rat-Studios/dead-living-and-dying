@@ -1,7 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://bson3umirpot2"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_8s1fr"]
-size = Vector3(20, 5, 0.1)
+size = Vector3(15, 5, 0.1)
 
 [node name="Wall" type="StaticBody3D"]
 
@@ -10,4 +10,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
 mesh = SubResource("BoxMesh_8s1fr")
 
 [node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="."]
-polygon = PackedVector2Array(-10, 0, -10, 5, 10, 5, 10, 0)
+polygon = PackedVector2Array(-7.5, 0, -7.5, 5, 7.5, 5, 7.5, 0)

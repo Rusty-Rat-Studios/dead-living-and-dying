@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://bq2dwqp4q6dn1"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_xwopn"]
-[ext_resource type="PackedScene" uid="uid://mt6b5vxmupgn" path="res://player/player.tscn" id="2_xkdfq"]
+[ext_resource type="PackedScene" uid="uid://bbow7knip3g6g" path="res://player/player.tscn" id="2_xkdfq"]
 [ext_resource type="Script" path="res://player/state_machine/player_state_machine.gd" id="3_3ig3n"]
 [ext_resource type="Script" path="res://player/state_machine/state_dead.gd" id="4_r4nk8"]
 [ext_resource type="Script" path="res://player/state_machine/state_living.gd" id="5_7fl8v"]
@@ -45,7 +45,6 @@ script = ExtResource("7_24rg8")
 
 [node name="MainMenu" parent="UI" instance=ExtResource("8_ah51h")]
 visible = false
-disable_start_menu = true
 
 [node name="DebugConsole" parent="UI" instance=ExtResource("8_en8lj")]
 process_mode = 3
