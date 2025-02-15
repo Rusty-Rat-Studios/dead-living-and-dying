@@ -36,16 +36,16 @@ script = ExtResource("7_01ym3")
 [node name="Floor" parent="DebugRoom" instance=ExtResource("8_0ag1w")]
 
 [node name="WallWithoutDoor" parent="DebugRoom" instance=ExtResource("9_exyhi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.95)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.05)
 
 [node name="WallWithoutDoor2" parent="DebugRoom" instance=ExtResource("9_exyhi")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.95, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.05, 0, 0)
 
 [node name="WallWithoutDoor3" parent="DebugRoom" instance=ExtResource("9_exyhi")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7.95, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8.05, 0, 0)
 
 [node name="WallWithoutDoor4" parent="DebugRoom" instance=ExtResource("9_exyhi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.95)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.05)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
