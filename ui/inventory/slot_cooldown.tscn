@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://xmk4uynyor1t"]
+
+[ext_resource type="PackedScene" uid="uid://bi3maar4f7ltv" path="res://ui/inventory/inventory_slot.tscn" id="1_jxo5l"]
+[ext_resource type="Script" path="res://ui/inventory/slot_cooldown.gd" id="2_gg45m"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u5cnd"]
+bg_color = Color(0.219608, 0.219608, 0.219608, 0.501961)
+anti_aliasing = false
+
+[node name="SlotCooldown" instance=ExtResource("1_jxo5l")]
+script = ExtResource("2_gg45m")
+
+[node name="ProgressBar" type="ProgressBar" parent="." index="2"]
+layout_mode = 2
+size_flags_vertical = 1
+mouse_filter = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_u5cnd")
+fill_mode = 2
+show_percentage = false

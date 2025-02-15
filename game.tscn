@@ -22,7 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://bfmkrask6gxl3" path="res://possessable/attack/possessable_ranged.tscn" id="15_lv48w"]
 [ext_resource type="PackedScene" uid="uid://bwmbngtw81o3y" path="res://ui/debug_console.tscn" id="15_rbtf5"]
 [ext_resource type="PackedScene" uid="uid://d3uaapt6yn0ed" path="res://items/tea/tea_world.tscn" id="21_lgjc2"]
-[ext_resource type="PackedScene" uid="uid://bi3maar4f7ltv" path="res://ui/inventory/slot_defense.tscn" id="23_u7k8x"]
+[ext_resource type="PackedScene" uid="uid://xmk4uynyor1t" path="res://ui/inventory/slot_cooldown.tscn" id="23_bytgl"]
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_77rk7")
@@ -284,5 +284,5 @@ theme_override_constants/margin_bottom = 16
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/InventoryContainer"]
 layout_mode = 2
 
-[node name="SlotDefense" parent="UI/InventoryContainer/HBoxContainer" instance=ExtResource("23_u7k8x")]
+[node name="SlotCooldown" parent="UI/InventoryContainer/HBoxContainer" instance=ExtResource("23_bytgl")]
 layout_mode = 2

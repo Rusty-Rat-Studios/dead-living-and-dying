@@ -1,13 +1,10 @@
-extends PanelContainer
+extends InventorySlot
 
-var _item_inventory: ItemInventory
 var _timer: Timer
 
-@onready var texture_rect: TextureRect = $TextureRect
-
+# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# emitted by ItemWorld when player picks up an item
-	SignalBus.item_picked_up.connect(_on_item_picked_up)
+	super()
 	
 	# process is enabled for tracking cooldown timer progress
 	set_process(false)
@@ -18,9 +15,7 @@ func _process(_delta: float) -> void:
 
 
 func _on_item_picked_up(item_inventory: ItemInventory) -> void:
-	_item_inventory = item_inventory
-	# update UI image to match item
-	texture_rect.texture = _item_inventory.texture
+	super(item_inventory)
 	
 	_item_inventory.item_used.connect(_on_item_used)
 
@@ -28,7 +23,9 @@ func _on_item_picked_up(item_inventory: ItemInventory) -> void:
 func _on_item_used(timer: Timer) -> void:
 	_timer = timer
 	$ProgressBar.max_value = _timer.wait_time
-	_timer.timeout.connect(_on_cooldown_timer_timeout)
+	
+	if not _timer.timeout.is_connected(_on_cooldown_timer_timeout):
+		_timer.timeout.connect(_on_cooldown_timer_timeout)
 	set_process(true)
 
 
