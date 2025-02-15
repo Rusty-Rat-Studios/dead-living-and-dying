@@ -30,6 +30,7 @@ func pick_up() -> void:
 	# emits a signal caught by the player who then adds a child
 	# of the inventory resource version to its $Inventory node
 	var item_inventory: ItemInventory = inventory_resource.instantiate()
+	item_inventory.texture = $Sprite3D.texture
 	SignalBus.item_picked_up.emit(item_inventory)
 	queue_free()
 

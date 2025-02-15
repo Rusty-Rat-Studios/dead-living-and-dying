@@ -5,6 +5,7 @@ extends Node3D
 var world_resource: Resource
 var display_name: String
 var description: String
+var texture: Texture2D
 
 func drop() -> void:
 	pass
