@@ -23,26 +23,26 @@ script = ExtResource("1_6px5k")
 
 [node name="WallWithDoor" parent="." instance=ExtResource("2_tobwv")]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="WallWithDoor"]
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="WallWithDoor/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
 mesh = SubResource("BoxMesh_ab5g1")
 skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WallWithDoor/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("BoxShape3D_r0x2q")
 
-[node name="Area3D" type="Area3D" parent="WallWithDoor"]
+[node name="Area3D" type="Area3D" parent="."]
 collision_mask = 2
 monitorable = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="WallWithDoor/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0.075)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0.175)
 shape = SubResource("BoxShape3D_xm1qk")
 
-[node name="Spawn" type="Node3D" parent="WallWithDoor"]
+[node name="Spawn" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="WallWithDoor/Spawn"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Spawn"]
 mesh = SubResource("SphereMesh_fts1y")
