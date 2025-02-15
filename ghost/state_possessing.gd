@@ -35,6 +35,7 @@ func init(parent: CharacterBody3D, state_machine: StateMachine) -> void:
 
 func enter() -> void:
 	_parent.speed = _parent.BASE_SPEED
+	_parent.sprite.animation = "active"
 	# enable possessable detector
 	detector_collision_shape.set_deferred("disabled", false)
 	# reset decision timer
@@ -75,7 +76,7 @@ func set_closest_target() -> void:
 	target_possessable = Utility.find_closest(possessables, _parent.global_position)
 	
 	# set ghost target to closest possessable position
-	_parent.target_pos = target_possessable.global_position
+	_parent.set_target(target_possessable.global_position)
 	
 	# check if already overlapping the target possessable and immediately possess
 	if detector.overlaps_body(target_possessable):
@@ -100,7 +101,7 @@ func process_state() -> void:
 	# case: still moving from last possession interaction
 	# case: player or other object bumps into it
 	if target_possessable:
-		_parent.target_pos = target_possessable.global_position
+		_parent.set_target(target_possessable.global_position)
 
 
 func _on_decision_timeout() -> void:
