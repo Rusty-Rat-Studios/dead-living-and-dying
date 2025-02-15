@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://bi3maar4f7ltv"]
+
+[ext_resource type="Script" path="res://ui/inventory/slot_defense.gd" id="1_aiprx"]
+[ext_resource type="Texture2D" uid="uid://eeobrjxbuowc" path="res://ui/resources/button-bg.png" id="2_pongt"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_l443k"]
+texture = ExtResource("2_pongt")
+expand_margin_left = 12.0
+expand_margin_top = 12.0
+expand_margin_right = 12.0
+expand_margin_bottom = 12.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u47l5"]
+bg_color = Color(0.219608, 0.219608, 0.219608, 0.501961)
+anti_aliasing = false
+
+[node name="SlotDefense" type="PanelContainer"]
+theme_override_styles/panel = SubResource("StyleBoxTexture_l443k")
+script = ExtResource("1_aiprx")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_pongt")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 2
+size_flags_vertical = 1
+mouse_filter = 2
+theme_override_styles/fill = SubResource("StyleBoxFlat_u47l5")
+fill_mode = 2
+show_percentage = false

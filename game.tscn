@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://jlav0m1ndqde"]
+[gd_scene load_steps=24 format=3 uid="uid://jlav0m1ndqde"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_77rk7"]
 [ext_resource type="PackedScene" uid="uid://bbow7knip3g6g" path="res://player/player.tscn" id="1_hu241"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://bfmkrask6gxl3" path="res://possessable/attack/possessable_ranged.tscn" id="15_lv48w"]
 [ext_resource type="PackedScene" uid="uid://bwmbngtw81o3y" path="res://ui/debug_console.tscn" id="15_rbtf5"]
 [ext_resource type="PackedScene" uid="uid://d3uaapt6yn0ed" path="res://items/tea/tea_world.tscn" id="21_lgjc2"]
+[ext_resource type="PackedScene" uid="uid://bi3maar4f7ltv" path="res://ui/inventory/slot_defense.tscn" id="23_u7k8x"]
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_77rk7")
@@ -122,7 +123,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.25, 4)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.25, 4)
 
 [node name="CrucifixWorld" parent="WorldGrid/RoomCenter" instance=ExtResource("15_h8yld")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 20)
 
 [node name="RoomLeft" type="Node3D" parent="WorldGrid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -20)
@@ -269,3 +270,19 @@ visible = false
 [node name="DebugConsole" parent="UI" instance=ExtResource("15_rbtf5")]
 process_mode = 3
 visible = false
+
+[node name="InventoryContainer" type="MarginContainer" parent="UI"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/InventoryContainer"]
+layout_mode = 2
+
+[node name="SlotDefense" parent="UI/InventoryContainer/HBoxContainer" instance=ExtResource("23_u7k8x")]
+layout_mode = 2
