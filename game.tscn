@@ -96,9 +96,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 0)
 [node name="TeaWorld" parent="WorldGrid/RoomBottom" instance=ExtResource("21_lgjc2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5913, 0.587763, -6.3731)
 
-[node name="TeaWorld2" parent="WorldGrid/RoomBottom" instance=ExtResource("21_lgjc2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5913, 0.587763, -6.3731)
-
 [node name="OldMan" parent="WorldGrid/RoomBottom" instance=ExtResource("15_3quv5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, -5)
 
@@ -133,7 +130,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.25, 4)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.25, 4)
 
 [node name="CrucifixWorld" parent="WorldGrid/RoomCenter" instance=ExtResource("15_h8yld")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 20)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 9)
 
 [node name="RoomLeft" type="Node3D" parent="WorldGrid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, -20)
