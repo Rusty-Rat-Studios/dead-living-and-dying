@@ -7,4 +7,4 @@ func _ready() -> void:
 	pass
 
 func _on_item_picked_up(_item_inventory: ItemInventory) -> void:
-	pass
+	pass 

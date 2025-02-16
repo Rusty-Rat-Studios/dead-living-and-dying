@@ -13,6 +13,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_85sq6")
+skip_to_game = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
