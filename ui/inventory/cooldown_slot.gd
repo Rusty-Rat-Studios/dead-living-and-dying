@@ -1,3 +1,4 @@
+class_name CooldownSlot
 extends InventorySlot
 
 var _timer: Timer
