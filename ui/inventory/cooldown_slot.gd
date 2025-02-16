@@ -15,12 +15,6 @@ func _process(_delta: float) -> void:
 	$ProgressBar.value = _timer.time_left
 
 
-func _on_item_picked_up(item_inventory: ItemInventory) -> void:
-	super(item_inventory)
-	
-	_item_inventory.item_used.connect(_on_item_used)
-
-
 func _on_item_used(timer: Timer) -> void:
 	_timer = timer
 	$ProgressBar.max_value = _timer.wait_time
