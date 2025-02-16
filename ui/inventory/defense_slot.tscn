@@ -5,3 +5,7 @@
 
 [node name="CooldownSlot" instance=ExtResource("1_i51n3")]
 script = ExtResource("2_usb56")
+
+[node name="TextureRect" parent="." index="1"]
+expand_mode = 2
+stretch_mode = 4

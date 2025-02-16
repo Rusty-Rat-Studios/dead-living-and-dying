@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://jlav0m1ndqde"]
+[gd_scene load_steps=27 format=3 uid="uid://jlav0m1ndqde"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_77rk7"]
 [ext_resource type="PackedScene" uid="uid://bbow7knip3g6g" path="res://player/player.tscn" id="1_hu241"]
@@ -22,7 +22,10 @@
 [ext_resource type="PackedScene" uid="uid://bfmkrask6gxl3" path="res://possessable/attack/possessable_ranged.tscn" id="15_lv48w"]
 [ext_resource type="PackedScene" uid="uid://bwmbngtw81o3y" path="res://ui/debug_console.tscn" id="15_rbtf5"]
 [ext_resource type="PackedScene" uid="uid://d3uaapt6yn0ed" path="res://items/tea/tea_world.tscn" id="21_lgjc2"]
+[ext_resource type="PackedScene" uid="uid://xmk4uynyor1t" path="res://ui/inventory/cooldown_slot.tscn" id="23_bytgl"]
 [ext_resource type="PackedScene" uid="uid://cpxwnex1yaj45" path="res://ui/inventory/defense_slot.tscn" id="23_fbmpp"]
+[ext_resource type="PackedScene" uid="uid://bi3maar4f7ltv" path="res://ui/inventory/inventory_slot.tscn" id="23_u7k8x"]
+[ext_resource type="PackedScene" uid="uid://dd6e1m2nlvph4" path="res://ui/inventory/passive_slot.tscn" id="26_w7duu"]
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_77rk7")
@@ -281,8 +284,33 @@ grow_vertical = 0
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI/InventoryContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/InventoryContainer"]
 layout_mode = 2
 
-[node name="CooldownSlot" parent="UI/InventoryContainer/HBoxContainer" instance=ExtResource("23_fbmpp")]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/InventoryContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="DefenseSlot" parent="UI/InventoryContainer/VBoxContainer/HBoxContainer" instance=ExtResource("23_fbmpp")]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/InventoryContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/InventoryContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="CooldownSlot" parent="UI/InventoryContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource("23_bytgl")]
+layout_mode = 2
+
+[node name="InventorySlot" parent="UI/InventoryContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource("23_u7k8x")]
+layout_mode = 2
+
+[node name="PassiveItems" type="HBoxContainer" parent="UI/InventoryContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="PassiveSlot" parent="UI/InventoryContainer/VBoxContainer/HBoxContainer/VBoxContainer/PassiveItems" instance=ExtResource("26_w7duu")]
 layout_mode = 2
