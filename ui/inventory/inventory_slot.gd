@@ -10,7 +10,7 @@ func _ready() -> void:
 	SignalBus.item_picked_up.connect(_on_item_picked_up)
 
 
+# implemented by final inheritors including type-checking for
+# what kind of item was picked up - replace particular slots
 func _on_item_picked_up(item_inventory: ItemInventory) -> void:
-	_item_inventory = item_inventory
-	# update UI image to match item
-	texture_rect.texture = _item_inventory.texture
+	push_error("AbstractMethodError: function _on_item_picked_up called from base class")

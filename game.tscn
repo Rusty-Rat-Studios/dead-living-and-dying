@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://jlav0m1ndqde"]
+[gd_scene load_steps=29 format=3 uid="uid://jlav0m1ndqde"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_77rk7"]
 [ext_resource type="PackedScene" uid="uid://bbow7knip3g6g" path="res://player/player.tscn" id="1_hu241"]
@@ -25,7 +25,11 @@
 [ext_resource type="PackedScene" uid="uid://xmk4uynyor1t" path="res://ui/inventory/cooldown_slot.tscn" id="23_bytgl"]
 [ext_resource type="PackedScene" uid="uid://cpxwnex1yaj45" path="res://ui/inventory/defense_slot.tscn" id="23_fbmpp"]
 [ext_resource type="PackedScene" uid="uid://bi3maar4f7ltv" path="res://ui/inventory/inventory_slot.tscn" id="23_u7k8x"]
-[ext_resource type="PackedScene" uid="uid://dd6e1m2nlvph4" path="res://ui/inventory/passive_slot.tscn" id="26_w7duu"]
+[ext_resource type="Texture2D" uid="uid://eeobrjxbuowc" path="res://ui/resources/button-bg.png" id="26_3mr14"]
+[ext_resource type="Script" path="res://ui/inventory/passive_slot_container.gd" id="26_5v60y"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_a1yg3"]
+texture = ExtResource("26_3mr14")
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_77rk7")
@@ -289,18 +293,18 @@ layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/InventoryContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 40
+theme_override_constants/separation = 20
 
 [node name="DefenseSlot" parent="UI/InventoryContainer/VBoxContainer/HBoxContainer" instance=ExtResource("23_fbmpp")]
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/InventoryContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 40
+theme_override_constants/separation = 20
 
 [node name="HBoxContainer" type="HBoxContainer" parent="UI/InventoryContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 40
+theme_override_constants/separation = 20
 
 [node name="CooldownSlot" parent="UI/InventoryContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource("23_bytgl")]
 layout_mode = 2
@@ -308,9 +312,13 @@ layout_mode = 2
 [node name="InventorySlot" parent="UI/InventoryContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource("23_u7k8x")]
 layout_mode = 2
 
-[node name="PassiveItems" type="HBoxContainer" parent="UI/InventoryContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="UI/InventoryContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-theme_override_constants/separation = 40
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_a1yg3")
 
-[node name="PassiveSlot" parent="UI/InventoryContainer/VBoxContainer/HBoxContainer/VBoxContainer/PassiveItems" instance=ExtResource("26_w7duu")]
+[node name="PassiveSlotContainer" type="HBoxContainer" parent="UI/InventoryContainer/VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer"]
 layout_mode = 2
+theme_override_constants/separation = 10
+script = ExtResource("26_5v60y")

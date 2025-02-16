@@ -1,12 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://dd6e1m2nlvph4"]
+[gd_scene load_steps=3 format=3 uid="uid://dd6e1m2nlvph4"]
 
 [ext_resource type="PackedScene" uid="uid://bi3maar4f7ltv" path="res://ui/inventory/inventory_slot.tscn" id="1_q4hk2"]
+[ext_resource type="Script" path="res://ui/inventory/passive_slot.gd" id="2_5g3y2"]
 
 [node name="PassiveSlot" instance=ExtResource("1_q4hk2")]
-custom_minimum_size = Vector2(50, 50)
+custom_minimum_size = Vector2(40, 40)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_5g3y2")
 
 [node name="TextureRect" parent="." index="1"]
+custom_minimum_size = Vector2(50, 50)
 size_flags_horizontal = 4
 size_flags_vertical = 4
-expand_mode = 1
+expand_mode = 2
 stretch_mode = 4
