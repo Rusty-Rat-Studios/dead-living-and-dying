@@ -1,9 +1,9 @@
 extends DefenseItemInventory
 
+signal item_used(cooldown_timer: Timer)
+
 const BASE_COOLDOWN_DURATION: float = 5
 const BASE_ACTIVE_DURATION: float = 2
-
-signal item_used(cooldown_timer: Timer)
 
 @onready var cooldown_duration_modifier: float = 0
 @onready var active_duration_modifier: float = 0
