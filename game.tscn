@@ -22,11 +22,11 @@
 [ext_resource type="PackedScene" uid="uid://bfmkrask6gxl3" path="res://possessable/attack/possessable_ranged.tscn" id="15_lv48w"]
 [ext_resource type="PackedScene" uid="uid://bwmbngtw81o3y" path="res://ui/debug_console.tscn" id="15_rbtf5"]
 [ext_resource type="PackedScene" uid="uid://d3uaapt6yn0ed" path="res://items/tea/tea_world.tscn" id="21_lgjc2"]
-[ext_resource type="PackedScene" uid="uid://xmk4uynyor1t" path="res://ui/inventory/cooldown_slot.tscn" id="23_bytgl"]
 [ext_resource type="PackedScene" uid="uid://cpxwnex1yaj45" path="res://ui/inventory/defense_slot.tscn" id="23_fbmpp"]
-[ext_resource type="PackedScene" uid="uid://bi3maar4f7ltv" path="res://ui/inventory/inventory_slot.tscn" id="23_u7k8x"]
 [ext_resource type="Texture2D" uid="uid://eeobrjxbuowc" path="res://ui/resources/button-bg.png" id="26_3mr14"]
+[ext_resource type="PackedScene" uid="uid://b4k5m1br05eiv" path="res://ui/inventory/active_slot.tscn" id="26_5g0ep"]
 [ext_resource type="Script" path="res://ui/inventory/passive_slot_container.gd" id="26_5v60y"]
+[ext_resource type="PackedScene" uid="uid://m60x4oieeliy" path="res://ui/inventory/consumable_slot.tscn" id="27_6625y"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_a1yg3"]
 texture = ExtResource("26_3mr14")
@@ -306,10 +306,10 @@ theme_override_constants/separation = 20
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="CooldownSlot" parent="UI/InventoryContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource("23_bytgl")]
+[node name="ActiveSlot" parent="UI/InventoryContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource("26_5g0ep")]
 layout_mode = 2
 
-[node name="InventorySlot" parent="UI/InventoryContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource("23_u7k8x")]
+[node name="ConsumableSlot" parent="UI/InventoryContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource("27_6625y")]
 layout_mode = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="UI/InventoryContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
