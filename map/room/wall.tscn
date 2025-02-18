@@ -3,8 +3,8 @@
 [ext_resource type="Material" uid="uid://dfx01t1blqt3y" path="res://map/room/transparent_wall_material.tres" id="1_ph348"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_8s1fr"]
-size = Vector3(16, 5, 0.1)
 material = ExtResource("1_ph348")
+size = Vector3(16, 5, 0.1)
 
 [node name="Wall" type="StaticBody3D"]
 
