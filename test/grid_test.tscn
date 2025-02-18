@@ -43,9 +43,8 @@ script = ExtResource("7_24rg8")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="MainMenu" parent="UI" instance=ExtResource("8_ah51h")]
+[node name="GameMenu" parent="UI" instance=ExtResource("8_ah51h")]
 visible = false
-disable_start_menu = true
 
 [node name="DebugConsole" parent="UI" instance=ExtResource("8_en8lj")]
 process_mode = 3

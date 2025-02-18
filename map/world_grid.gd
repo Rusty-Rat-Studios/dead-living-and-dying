@@ -5,7 +5,7 @@ extends Node3D
 # initialization, and storing the location of the rooms. Other classes call this
 # class to ask about the state of the WorldGrid.
 
-const GRID_SCALE: float = 20 # Size of each grid square in editor units
+const GRID_SCALE: float = 16 # Size of each grid square in editor units
 const BASIC_ROOM: RoomInformation = preload("res://map/rooms/basic_room/basic_room.tres")
 
 var room_map: HashMap = HashMap.new()

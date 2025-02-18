@@ -1,5 +1,5 @@
 class_name Door
-extends StaticBody3D
+extends Node3D
 
 signal player_received(player: Player)
 
