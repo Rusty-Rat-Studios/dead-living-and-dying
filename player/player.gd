@@ -37,7 +37,6 @@ var _state_machine: PlayerStateMachine
 # used to track player corpse - handled by states
 # corpse set as child of Node to intentionally not inherit parent position
 @onready var _corpse: Corpse = $CorpseContainer/Corpse
-@onready var wall_material: ShaderMaterial = preload("res://map/room/wall_material.tres")
 
 
 func _ready() -> void:
@@ -61,7 +60,8 @@ func reset() -> void:
 
 func _physics_process(delta: float) -> void:
 	handle_movement(delta) 
-	wall_material.set_shader_parameter("Player", self.global_position)
+	# Set Player position for shaders
+	RenderingServer.global_shader_parameter_set("Player", self.global_position)
 
 
 func handle_movement(delta: float) -> void:

@@ -1,25 +1,23 @@
+// Adapted from https://www.youtube.com/watch?v=krpd7sHrTXw
+
 shader_type spatial;
 
-uniform vec3 Player = vec3(300,300,0);
-uniform float Radius = 200.0;
-uniform float Blur = 0.9;
+uniform float sphere_radius = 5.5;
+uniform vec4 _color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
 
-void fragment() 
+global uniform vec3 Player;
+
+varying vec3 world_vertex;
+
+void vertex()
 {
-	vec4 player_world = vec4(Player, 1.);
-	vec4 player_screen = player_world * VIEW_MATRIX;
-    float dist = distance( player_screen.xy, FRAGCOORD.xy );
-    // compute signal based on circle radius
-    float signal = 1.0 - smoothstep( Radius, Radius*(1.0-Blur), dist );
-    ALBEDO = vec3(0.7);
-	// now modify the alpha by the circle
-    ALPHA *= signal;
+	world_vertex = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
 }
 
-//void fragment()
-//{
-	//
-	//vec4 view_position = VIEW_MATRIX * world_position;
-	//vec4 clip_position = PROJECTION_MATRIX * view_position;
-	//vec2 normalized_device_coordinate_position = (clip_position.xy / clip_position.w); // Range -1.0 - 1.0, can covert to screen space by adding *0.5+0.5	
-//}
+void fragment()
+{
+	ALBEDO = _color.rgb;
+
+	float min_dist = min(length(Player - world_vertex), sphere_radius);
+	ALPHA = 1.0 - clamp(sphere_radius - min_dist, 0.0, 1.0);
+}

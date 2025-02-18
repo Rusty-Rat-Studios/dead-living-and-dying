@@ -1,10 +1,5 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c3fksd3an7fa6"]
-
-[ext_resource type="Shader" path="res://map/room/transparent_wall_shader.gdshader" id="1_jlkkh"]
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bjpn3uixmhwm8"]
 
 [resource]
-render_priority = 0
-shader = ExtResource("1_jlkkh")
-shader_parameter/Player = Vector3(0, 0, 0)
-shader_parameter/Radius = 200.0
-shader_parameter/Blur = 0.9
+render_priority = 1
+distance_fade_mode = 1
