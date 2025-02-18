@@ -14,7 +14,7 @@ var normal_tween: Tween
 
 
 func _ready() -> void:
-	if fmod(rotation.y, 180) == 0:
+	if fmod(global_rotation_degrees.y, 180) == 0:
 		horizontal_wall = true
 
 
