@@ -3,7 +3,7 @@
 [ext_resource type="Shader" path="res://map/room/transparent_wall_shader.gdshader" id="1_cvlsw"]
 
 [resource]
-render_priority = -1
+render_priority = 1
 shader = ExtResource("1_cvlsw")
 shader_parameter/sphere_radius = 5.5
 shader_parameter/_color = Color(1, 1, 1, 1)
