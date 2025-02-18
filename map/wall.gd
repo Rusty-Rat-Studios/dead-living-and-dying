@@ -6,8 +6,8 @@ const TRANSPARENT_WALL_MATERIAL: ShaderMaterial = preload("res://map/room/transp
 
 const TWEEN_DURATION: float = 1.0
 
-var horizontal_wall: bool = false
-var transparent: bool = false
+var is_horizontal_wall: bool = false
+var is_transparent: bool = false
 var intensity: float = 0.0
 var transparent_tween: Tween
 var normal_tween: Tween
@@ -15,23 +15,24 @@ var normal_tween: Tween
 
 func _ready() -> void:
 	if fmod(global_rotation_degrees.y, 180) == 0:
-		horizontal_wall = true
+		is_horizontal_wall = true
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if $WallMesh.get_active_material(0) == TRANSPARENT_WALL_MATERIAL:
 		($WallMesh.get_active_material(0) as ShaderMaterial).set_shader_parameter("intensity", intensity)
-	if horizontal_wall:
+	if is_horizontal_wall:
 		if (PlayerHandler.get_player().global_position.z < global_position.z 
-			and is_visible_in_tree()) and not transparent:
+			and is_visible_in_tree()) and not is_transparent:
 			_apply_material_transparent()
 		elif (PlayerHandler.get_player().global_position.z > global_position.z 
-			or not is_visible_in_tree()) and transparent:
+			or not is_visible_in_tree()) and is_transparent:
 			_apply_material_normal()
 
 
+# Changes material to transparent then tweens transparency intensity to 1
 func _apply_material_transparent() -> void:
-	transparent = true
+	is_transparent = true
 	if normal_tween:
 		normal_tween.kill()
 	$WallMesh.set_surface_override_material(0, TRANSPARENT_WALL_MATERIAL) 
@@ -39,8 +40,9 @@ func _apply_material_transparent() -> void:
 	transparent_tween.tween_property(self, "intensity", 1.0, TWEEN_DURATION)
 
 
+# Tweens transparency intensity to 0 then changes material to normal
 func _apply_material_normal() -> void:
-	transparent = false
+	is_transparent = false
 	if transparent_tween:
 		transparent_tween.kill()
 	normal_tween = create_tween().set_parallel()
