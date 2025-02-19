@@ -16,7 +16,7 @@ func enter() -> void:
 	_parent.light_spot.visible = false
 	
 	# DEBUG: modulate color according to state
-	_parent.get_node("RotationOffset/AnimatedSprite3D").modulate = Color(0.5, 0.5, 0.5, 0.5)
+	_parent.get_node("SpriteRotationOffset/AnimatedSprite3D").modulate = Color(0.5, 0.5, 0.5, 0.5)
 	
 	# change collision layers out of physical plane into spirit plane
 	_parent.collision_layer = CollisionBit.PLAYER + CollisionBit.SPIRIT

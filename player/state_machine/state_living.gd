@@ -13,7 +13,7 @@ func enter() -> void:
 	_parent.inventory_update()
 	
 	# DEBUG: modulate color according to state
-	_parent.get_node("RotationOffset/AnimatedSprite3D").modulate = Color(0.5, 1, 0.5)
+	_parent.get_node("SpriteRotationOffset/AnimatedSprite3D").modulate = Color(0.5, 1, 0.5)
 	
 	SignalBus.player_hurt.connect(_on_player_hurt)
 
