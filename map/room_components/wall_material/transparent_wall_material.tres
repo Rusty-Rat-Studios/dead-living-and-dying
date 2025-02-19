@@ -1,10 +1,14 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dfx01t1blqt3y"]
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dfx01t1blqt3y"]
 
 [ext_resource type="Shader" path="res://map/room_components/wall_material/transparent_wall_shader.gdshader" id="1_cvlsw"]
+[ext_resource type="Texture2D" uid="uid://cl6xsrbxawyoy" path="res://map/room_components/wall_material/wall_material_albedo.png" id="2_on2ku"]
 
 [resource]
 render_priority = 1
 shader = ExtResource("1_cvlsw")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/uv1_scale = Vector3(16, 16, 16)
+shader_parameter/uv1_offset = null
 shader_parameter/sphere_radius = 5.5
-shader_parameter/_color = Color(1, 1, 1, 1)
 shader_parameter/intensity = 0.0
+shader_parameter/texture_albedo = ExtResource("2_on2ku")
