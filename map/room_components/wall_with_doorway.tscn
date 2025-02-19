@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=4 uid="uid://fpivfcuv6s1r"]
 
-[ext_resource type="Script" path="res://map/wall.gd" id="1_8vby8"]
+[ext_resource type="Script" path="res://map/room_components/wall.gd" id="1_8vby8"]
 [ext_resource type="Material" uid="uid://bfwg23cigr44q" path="res://map/room_components/wall_material/wall_material.tres" id="2_k0dv1"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_yqa6q"]
