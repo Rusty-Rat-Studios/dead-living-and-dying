@@ -1,4 +1,20 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://bjpn3uixmhwm8"]
+[gd_resource type="StandardMaterial3D" load_steps=5 format=3 uid="uid://bfwg23cigr44q"]
+
+[ext_resource type="Texture2D" uid="uid://cl6xsrbxawyoy" path="res://map/room_components/wall_material/wall_material_albedo.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://c50qwvf7dyg3x" path="res://map/room_components/wall_material/wall_material_orm.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://dwbasp732605g" path="res://map/room_components/wall_material/wall_material_normal.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://icc4bth5js35" path="res://map/room_components/wall_material/wall_material_heightmap.png" id="4"]
 
 [resource]
-render_priority = 1
+albedo_texture = ExtResource("1")
+roughness_texture = ExtResource("2")
+roughness_texture_channel = 1
+normal_enabled = true
+normal_texture = ExtResource("3")
+heightmap_enabled = true
+heightmap_scale = 1.25
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+heightmap_texture = ExtResource("4")
+uv1_scale = Vector3(16, 16, 16)
