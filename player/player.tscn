@@ -41,14 +41,18 @@ script = ExtResource("1_ndccg")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = ExtResource("2_a56u6")
 
-[node name="RotationOffset" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0)
+[node name="SpriteRotationOffset" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 0, 0, 0)
 
-[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="RotationOffset"]
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="SpriteRotationOffset"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 sprite_frames = SubResource("SpriteFrames_bh504")
 animation = &"front"
 
-[node name="Camera3D" type="Camera3D" parent="RotationOffset"]
+[node name="CameraRotationOffset" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CameraRotationOffset"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
 script = ExtResource("4_mmf56")
 
