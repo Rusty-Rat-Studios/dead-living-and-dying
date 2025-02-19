@@ -16,7 +16,6 @@ script = ExtResource("1_12ywg")
 [node name="Interactable" parent="." instance=ExtResource("2_nvmey")]
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-layers = 2
 billboard = 1
 texture = SubResource("CompressedTexture2D_fj23q")
 

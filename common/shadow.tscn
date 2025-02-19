@@ -5,4 +5,4 @@
 [node name="Shadow" type="Decal"]
 size = Vector3(1.75, 1.75, 1.752)
 texture_albedo = ExtResource("1_djdwx")
-cull_mask = 1047553
+cull_mask = 1047554
