@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3nn5u3a5o85j"]
+
+[ext_resource type="Material" uid="uid://c5hv1ga1ii1ls" path="res://map/room_components/floor_material/floor_material.tres" id="1_puig0"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_o8kxe"]
+size = Vector2(16, 16)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_1bktg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2yroe"]
+size = Vector3(16, 5, 16)
+
+[node name="Floor" type="StaticBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = ExtResource("1_puig0")
+mesh = SubResource("PlaneMesh_o8kxe")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("WorldBoundaryShape3D_1bktg")
+
+[node name="PlayerDetector" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetector"]
+shape = SubResource("BoxShape3D_2yroe")
