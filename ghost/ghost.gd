@@ -103,9 +103,12 @@ func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
 	match state:
 		PlayerStateMachine.States.LIVING:
 			opacity = 0
+			visible = false
 		PlayerStateMachine.States.DYING:
 			opacity = OPACITY_DYING
+			visible = true
 		PlayerStateMachine.States.DEAD:
 			opacity = OPACITY_DEAD
+			visible = true
 	
 	material.albedo_color.a = opacity

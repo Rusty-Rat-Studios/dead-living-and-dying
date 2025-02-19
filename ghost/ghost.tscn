@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://yihpxsaeuqdi"]
+[gd_scene load_steps=16 format=3 uid="uid://yihpxsaeuqdi"]
 
 [ext_resource type="Script" path="res://ghost/ghost.gd" id="1_vr82v"]
 [ext_resource type="Script" path="res://ghost/ghost_state_machine.gd" id="2_qkh1e"]
 [ext_resource type="Script" path="res://ghost/state_waiting.gd" id="3_gb04i"]
 [ext_resource type="Script" path="res://ghost/state_possessing.gd" id="4_muv24"]
+[ext_resource type="PackedScene" uid="uid://bp0ydphecs3iv" path="res://common/shadow.tscn" id="7_0liqe"]
 [ext_resource type="Script" path="res://ghost/state_stunned.gd" id="7_yplap"]
 [ext_resource type="Script" path="res://ghost/state_attacking.gd" id="8_a4kr4"]
 
@@ -94,3 +95,6 @@ one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_vmkbj")
 draw_pass_1 = SubResource("SphereMesh_wv6vs")
+
+[node name="Shadow" parent="." instance=ExtResource("7_0liqe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.621386, 0)
