@@ -24,6 +24,7 @@ shape = SubResource("SphereShape3D_tlkjy")
 
 [node name="Sprite3D" type="Sprite3D" parent="SpriteRotationOffset"]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
+alpha_cut = 1
 texture = ExtResource("2_0gwcu")
 
 [node name="PlayerDetector" type="Area3D" parent="."]

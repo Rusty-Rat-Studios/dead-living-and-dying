@@ -18,7 +18,7 @@ script = ExtResource("1_12ywg")
 [node name="SpriteRotationOffset" parent="." instance=ExtResource("3_rm1pd")]
 
 [node name="Sprite3D" type="Sprite3D" parent="SpriteRotationOffset"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+alpha_cut = 1
 texture = SubResource("CompressedTexture2D_fj23q")
 
 [node name="PlayerDetector" type="Area3D" parent="."]
