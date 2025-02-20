@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://di1b65wqvwai1"]
+
+[node name="SpriteRotationOffset" type="Marker3D"]
+transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 0, 0)

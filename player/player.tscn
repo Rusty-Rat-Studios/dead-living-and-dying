@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://bbow7knip3g6g"]
+[gd_scene load_steps=14 format=3 uid="uid://bbow7knip3g6g"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_ndccg"]
 [ext_resource type="Shape3D" uid="uid://d140c2qk5hbt2" path="res://player/player_collision_shape.tres" id="2_a56u6"]
+[ext_resource type="PackedScene" uid="uid://di1b65wqvwai1" path="res://common/sprite_rotation_offset.tscn" id="3_mj63o"]
 [ext_resource type="Texture2D" uid="uid://s8o3w3qwl6uv" path="res://icon_back.png" id="3_syjgo"]
 [ext_resource type="Texture2D" uid="uid://cvadlfyuhhlsa" path="res://icon.svg" id="4_5bmh1"]
 [ext_resource type="Script" path="res://player/camera.gd" id="4_mmf56"]
@@ -41,11 +42,10 @@ script = ExtResource("1_ndccg")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = ExtResource("2_a56u6")
 
-[node name="SpriteRotationOffset" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642788, 0, -0.642788, 0.766044, 0, 0, 0)
+[node name="SpriteRotationOffset" parent="." instance=ExtResource("3_mj63o")]
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="SpriteRotationOffset"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 3.27826e-07, 0, -3.27826e-07, 1, 0, 0, 0)
 sprite_frames = SubResource("SpriteFrames_bh504")
 animation = &"front"
 
