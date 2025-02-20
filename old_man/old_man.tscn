@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://c176v8gdlci8v"]
+[gd_scene load_steps=7 format=3 uid="uid://c176v8gdlci8v"]
 
 [ext_resource type="PackedScene" uid="uid://cnbim08e5mqrn" path="res://ui/interactable.tscn" id="1_k23bc"]
 [ext_resource type="Script" path="res://old_man/old_man.gd" id="1_kf68j"]
 [ext_resource type="Texture2D" uid="uid://bi0a78c3xwowg" path="res://old_man/old_man.png" id="2_0gwcu"]
+[ext_resource type="PackedScene" uid="uid://di1b65wqvwai1" path="res://common/sprite_rotation_offset.tscn" id="3_g1t5e"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_tlkjy"]
 radius = 0.91197
@@ -19,9 +20,10 @@ shape = SubResource("SphereShape3D_tlkjy")
 
 [node name="Interactable" parent="." instance=ExtResource("1_k23bc")]
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
+[node name="SpriteRotationOffset" parent="." instance=ExtResource("3_g1t5e")]
+
+[node name="Sprite3D" type="Sprite3D" parent="SpriteRotationOffset"]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
-billboard = 1
 texture = ExtResource("2_0gwcu")
 
 [node name="PlayerDetector" type="Area3D" parent="."]
