@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bslonn3bn1m6s"]
+[gd_scene load_steps=6 format=3 uid="uid://bslonn3bn1m6s"]
 
 [ext_resource type="Script" path="res://items/item_world.gd" id="1_12ywg"]
 [ext_resource type="PackedScene" uid="uid://cnbim08e5mqrn" path="res://ui/interactable.tscn" id="2_nvmey"]
+[ext_resource type="PackedScene" uid="uid://di1b65wqvwai1" path="res://common/sprite_rotation_offset.tscn" id="3_rm1pd"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fj23q"]
 load_path = "res://.godot/imported/based.png-b2b87d870a01b4dad6e3f3b470b77de0.s3tc.ctex"
@@ -14,8 +15,10 @@ script = ExtResource("1_12ywg")
 
 [node name="Interactable" parent="." instance=ExtResource("2_nvmey")]
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
-billboard = 1
+[node name="SpriteRotationOffset" parent="." instance=ExtResource("3_rm1pd")]
+
+[node name="Sprite3D" type="Sprite3D" parent="SpriteRotationOffset"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 texture = SubResource("CompressedTexture2D_fj23q")
 
 [node name="PlayerDetector" type="Area3D" parent="."]

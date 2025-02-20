@@ -7,5 +7,5 @@
 [node name="CrucifixWorld" instance=ExtResource("1_20v5o")]
 inventory_resource = ExtResource("3_e25lq")
 
-[node name="Sprite3D" parent="." index="1"]
+[node name="Sprite3D" parent="SpriteRotationOffset" index="0"]
 texture = ExtResource("3_lw6l4")

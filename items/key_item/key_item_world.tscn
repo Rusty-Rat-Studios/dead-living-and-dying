@@ -9,5 +9,5 @@
 script = ExtResource("2_knh6c")
 inventory_resource = ExtResource("3_7wb5m")
 
-[node name="Sprite3D" parent="." index="1"]
+[node name="Sprite3D" parent="SpriteRotationOffset" index="0"]
 texture = ExtResource("4_87jnh")
