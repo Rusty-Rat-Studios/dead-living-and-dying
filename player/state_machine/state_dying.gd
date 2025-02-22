@@ -25,7 +25,7 @@ func enter() -> void:
 	
 	# enable and configure stunbox values
 	_parent.stunbox.collision_shape.set_deferred("disabled", false)
-	_parent.stunbox.set_values(_parent.current_stats.speed, DYING_LIGHT_OMNI_RANGE,
+	_parent.stunbox.set_values(_parent.current_stats.speed, _parent.current_stats.light_omni_range,
 		DYING_LIGHT_SPOT_RANGE, DYING_LIGHT_ENERGY)
 	
 

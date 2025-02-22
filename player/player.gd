@@ -8,14 +8,15 @@ enum Stats {
 const BASE_SPEED: float = 6.0
 
 # base values used for light range and strength
-const LIGHT_OMNI_RANGE: float = 6
+const BASE_LIGHT_OMNI_RANGE: float = 6
 const LIGHT_SPOT_RANGE: float = 10
 const LIGHT_ENERGY: float = 1
 
 
 class PlayerStats:
 	var speed: float = 6.0
-	
+	var light_omni_range: float = 6.0
+
 var current_stats: PlayerStats = PlayerStats.new()
 
 # player state machine, sibling node under Game node
