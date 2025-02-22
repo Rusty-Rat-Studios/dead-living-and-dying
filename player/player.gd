@@ -1,6 +1,7 @@
 class_name Player
 extends CharacterBody3D
 
+#used when calling stat_update
 enum Stats {
 	SPEED,
 	LIGHT_OMNI_RANGE,
@@ -11,6 +12,7 @@ enum Stats {
 	AREA_SIZE
 }
 
+#player base stats
 const BASE_SPEED: float = 6.0
 const BASE_COOLDOWN_REDUCTION: float = 1.0
 const BASE_DURATION: float = 1.0
@@ -21,7 +23,7 @@ const BASE_LIGHT_OMNI_RANGE: float = 6.0
 const BASE_LIGHT_SPOT_RANGE: float = 10.0
 const BASE_LIGHT_ENERGY: float = 1.0
 
-
+#implementation of class to hold players stats
 class PlayerStats:
 	var speed: float = BASE_SPEED
 	var light_omni_range: float = BASE_LIGHT_OMNI_RANGE
@@ -31,6 +33,7 @@ class PlayerStats:
 	var duration: float = BASE_DURATION
 	var area_size: float = BASE_AREA_SIZE
 
+#declaration of the object that holds all of the players current stats
 var current_stats: PlayerStats = PlayerStats.new()
 
 # player state machine, sibling node under Game node
