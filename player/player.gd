@@ -13,10 +13,10 @@ const LIGHT_SPOT_RANGE: float = 10
 const LIGHT_ENERGY: float = 1
 
 
-class player_stats:
+class playerStats:
 	var speed: float = 6.0
 	
-var current_stats: player_stats = player_stats.new()
+var current_stats: playerStats = playerStats.new()
 
 # player state machine, sibling node under Game node
 var state_machine: Node
