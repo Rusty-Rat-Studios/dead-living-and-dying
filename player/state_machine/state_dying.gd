@@ -12,9 +12,8 @@ func enter() -> void:
 	# update player stats
 	_parent.current_stats.speed = DYING_SPEED
 	_parent.current_stats.light_omni_range = DYING_LIGHT_OMNI_RANGE
-	_parent.light_omni.light_energy = DYING_LIGHT_ENERGY
+	_parent.current_stats.light_energy = DYING_LIGHT_ENERGY
 	_parent.current_stats.light_spot_range = DYING_LIGHT_SPOT_RANGE
-	_parent.light_spot.light_energy = DYING_LIGHT_ENERGY
 	# apply inventory buffs to modified stats
 	_parent.inventory_update()
 	
@@ -26,7 +25,7 @@ func enter() -> void:
 	# enable and configure stunbox values
 	_parent.stunbox.collision_shape.set_deferred("disabled", false)
 	_parent.stunbox.set_values(_parent.current_stats.speed, _parent.current_stats.light_omni_range,
-		_parent.current_stats.light_spot_range, DYING_LIGHT_ENERGY)
+		_parent.current_stats.light_spot_range, _parent.current_stats.light_energy)
 	
 
 func exit() -> void:

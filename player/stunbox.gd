@@ -42,9 +42,8 @@ func stun() -> void:
 	# reduce player attributes
 	_player.current_stats.speed = base_speed * SPEED_MODIFIER
 	_player.current_stats.light_omni_range = base_light_omni_range * LIGHT_MODIFIER
-	_player.light_omni.light_energy = base_light_energy * LIGHT_MODIFIER
+	_player.current_stats.light_energy = base_light_energy * LIGHT_MODIFIER
 	_player.current_stats.light_spot_range = base_light_spot_range * LIGHT_MODIFIER
-	_player.light_spot.light_energy = base_light_energy * LIGHT_MODIFIER
 	
 	$StunTimer.start()
 
@@ -54,9 +53,8 @@ func restore() -> void:
 	_restore_tween = create_tween().set_parallel().set_ease(Tween.EASE_OUT)
 	_restore_tween.tween_property(_player.current_stats, "speed", base_speed, RESTORE_DURATION)
 	_restore_tween.tween_property(_player.current_stats, "light_omni_range", base_light_omni_range, RESTORE_DURATION)
-	_restore_tween.tween_property(_player.light_omni, "light_energy", base_light_energy, RESTORE_DURATION)
+	_restore_tween.tween_property(_player.current_stats, "light_energy", base_light_energy, RESTORE_DURATION)
 	_restore_tween.tween_property(_player.current_stats, "light_spot_range", base_light_spot_range, RESTORE_DURATION)
-	_restore_tween.tween_property(_player.light_spot, "light_energy", base_light_energy, RESTORE_DURATION)
 
 
 func restore_instantly() -> void:
@@ -66,9 +64,8 @@ func restore_instantly() -> void:
 		_restore_tween.kill()
 	_player.current_stats.speed = base_speed
 	_player.current_stats.light_omni_range = base_light_omni_range
-	_player.light_omni.light_energy = base_light_energy 
+	_player.current_stats.light_energy = base_light_energy 
 	_player.current_stats.light_spot_range = base_light_spot_range
-	_player.light_spot.light_energy = base_light_energy
 	
 	$StunTimer.stop()
 

@@ -6,9 +6,8 @@ func enter() -> void:
 	# update player stats
 	_parent.current_stats.speed = Player.BASE_SPEED
 	_parent.current_stats.light_omni_range = _parent.BASE_LIGHT_OMNI_RANGE
-	_parent.light_omni.light_energy = _parent.LIGHT_ENERGY
+	_parent.current_stats.light_energy = _parent.BASE_LIGHT_ENERGY
 	_parent.current_stats.light_spot_range = _parent.BASE_LIGHT_SPOT_RANGE
-	_parent.light_spot.light_energy = _parent.LIGHT_ENERGY
 	# apply inventory buffs to modified stats
 	_parent.inventory_update()
 	
