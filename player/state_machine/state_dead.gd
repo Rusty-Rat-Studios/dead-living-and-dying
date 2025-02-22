@@ -7,7 +7,7 @@ const RESPAWN_TIME: float = 2
 func enter() -> void:
 	super()
 
-	_parent.stat_dict[Player.Stats.SPEED] = DEAD_SPEED
+	_parent.current_stats.speed = DEAD_SPEED
 
 
 	

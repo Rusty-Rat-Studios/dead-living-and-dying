@@ -12,9 +12,12 @@ const LIGHT_OMNI_RANGE: float = 6
 const LIGHT_SPOT_RANGE: float = 10
 const LIGHT_ENERGY: float = 1
 
-var stat_dict: Dictionary = {
-	Stats.SPEED : 6.0
-}
+
+class player_stats:
+	var speed: float = 6.0
+	
+var current_stats: player_stats = player_stats.new()
+
 # player state machine, sibling node under Game node
 var state_machine: Node
 # used to track player corpse - handled by states
@@ -80,11 +83,11 @@ func handle_movement(delta: float) -> void:
 		input_dir = Focus.input_get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 		direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
-		velocity.x = direction.x * stat_dict[Stats.SPEED]
-		velocity.z = direction.z * stat_dict[Stats.SPEED]
+		velocity.x = direction.x * current_stats.speed
+		velocity.z = direction.z * current_stats.speed
 	else:
-		velocity.x = move_toward(velocity.x, 0, stat_dict[Stats.SPEED])
-		velocity.z = move_toward(velocity.z, 0, stat_dict[Stats.SPEED])
+		velocity.x = move_toward(velocity.x, 0, current_stats.speed)
+		velocity.z = move_toward(velocity.z, 0, current_stats.speed)
 	move_and_slide()
 
 
@@ -101,8 +104,8 @@ func _on_item_picked_up(item: ItemInventory) -> void:
 
 
 func stat_update( stat: Stats, stat_modifier: float) -> void:
-	if stat_dict.has(stat):
-		stat_dict[stat] += stat_modifier
+	if stat == Stats.SPEED:
+		current_stats.speed += stat_modifier
 
 
 func inventory_update() -> void:

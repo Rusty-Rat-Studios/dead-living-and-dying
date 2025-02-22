@@ -4,7 +4,7 @@ extends PlayerState
 func enter() -> void:
 	super()
 	# update player stats
-	_parent.stat_dict[Player.Stats.SPEED] = Player.BASE_SPEED
+	_parent.current_stats.speed = Player.BASE_SPEED
 	_parent.light_omni.omni_range = _parent.LIGHT_OMNI_RANGE
 	_parent.light_omni.light_energy = _parent.LIGHT_ENERGY
 	_parent.light_spot.spot_range = _parent.LIGHT_SPOT_RANGE

@@ -10,7 +10,7 @@ const DYING_LIGHT_ENERGY: float = 1
 func enter() -> void:
 	super()
 	# update player stats
-	_parent.stat_dict[Player.Stats.SPEED] = DYING_SPEED
+	_parent.current_stats.speed = DYING_SPEED
 	_parent.light_omni.omni_range = DYING_LIGHT_OMNI_RANGE
 	_parent.light_omni.light_energy = DYING_LIGHT_ENERGY
 	_parent.light_spot.spot_range = DYING_LIGHT_SPOT_RANGE
@@ -25,7 +25,7 @@ func enter() -> void:
 	
 	# enable and configure stunbox values
 	_parent.stunbox.collision_shape.set_deferred("disabled", false)
-	_parent.stunbox.set_values(_parent.stat_dict[Player.Stats.SPEED], DYING_LIGHT_OMNI_RANGE,
+	_parent.stunbox.set_values(_parent.current_stats.speed, DYING_LIGHT_OMNI_RANGE,
 		DYING_LIGHT_SPOT_RANGE, DYING_LIGHT_ENERGY)
 	
 
