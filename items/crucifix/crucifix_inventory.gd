@@ -3,7 +3,6 @@ extends DefenseItemInventory
 const BASE_COOLDOWN_DURATION: float = 4
 const BASE_ACTIVE_DURATION: float = 2
 var player: Node = PlayerHandler.get_player()
-@onready var active_duration_modifier: float = 0
 @onready var cooldown_active: bool = false
 
 # Called when the node enters the scene tree for the first time.
@@ -28,6 +27,7 @@ func use() -> void:
 		return
 	$Hitbox/CollisionShape3D.disabled = false
 	$Hitbox.visible = true
+	$ActiveTimer.wait_time = BASE_ACTIVE_DURATION * player.current_stats.duration
 	$ActiveTimer.start()
 	cooldown_active = true
 
