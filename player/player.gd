@@ -3,20 +3,23 @@ extends CharacterBody3D
 
 enum Stats {
 	SPEED,
-	LIGHT_OMNI_RANGE
+	LIGHT_OMNI_RANGE,
+	LIGHT_SPOT_RANGE
 }
 
 const BASE_SPEED: float = 6.0
 
 # base values used for light range and strength
 const BASE_LIGHT_OMNI_RANGE: float = 6
-const LIGHT_SPOT_RANGE: float = 10
+const BASE_LIGHT_SPOT_RANGE: float = 10
 const LIGHT_ENERGY: float = 1
 
 
 class PlayerStats:
-	var speed: float = 6.0
-	var light_omni_range: float = 6.0
+	var speed: float = BASE_SPEED
+	var light_omni_range: float = BASE_LIGHT_OMNI_RANGE
+	var light_spot_range:float = BASE_LIGHT_SPOT_RANGE
+	
 
 var current_stats: PlayerStats = PlayerStats.new()
 
@@ -48,6 +51,11 @@ func _ready() -> void:
 	light_omni.light_color = Color("GOLDENROD")
 	
 	SignalBus.item_picked_up.connect(_on_item_picked_up)
+
+
+func _process(delta: float) -> void:
+	light_omni.omni_range = current_stats.light_omni_range
+	light_spot.spot_range = current_stats.light_spot_range
 
 
 func init(state_machine: Node) -> void:
@@ -110,7 +118,8 @@ func stat_update( stat: Stats, stat_modifier: float) -> void:
 		current_stats.speed += stat_modifier
 	elif stat == Stats.LIGHT_OMNI_RANGE:
 		current_stats.light_omni_range += stat_modifier
-		light_omni.omni_range = current_stats.light_omni_range
+	elif stat == Stats.LIGHT_SPOT_RANGE:
+		current_stats.light_spot_range += stat_modifier
 
 
 func inventory_update() -> void:
