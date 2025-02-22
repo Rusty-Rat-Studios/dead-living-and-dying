@@ -59,6 +59,7 @@ func _process(delta: float) -> void:
 	light_omni.light_energy = current_stats.light_energy
 	light_spot.spot_range = current_stats.light_spot_range
 	light_spot.light_energy = current_stats.light_energy
+	delta = delta
 
 
 func init(state_machine: Node) -> void:
