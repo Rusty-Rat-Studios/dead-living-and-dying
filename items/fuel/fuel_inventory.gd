@@ -5,9 +5,9 @@ const BASE_ACTIVE_DURATION: float = 4
 const OMNI_RANGE_MODIFIER: float = 3
 const SPOT_RANGE_MODIFIER: float = 3
 const ENERGY_MODIFIER: float = 1
-@onready var cooldown_duration_modifier: float = 0
 @onready var active_duration_modifier: float = 0
 @onready var cooldown_active: bool = false 
+var player: Node = PlayerHandler.get_player()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -35,6 +35,7 @@ func use() -> void:
 
 func _on_active_timer_timeout() -> void:
 	temp_stat_update(-OMNI_RANGE_MODIFIER, -SPOT_RANGE_MODIFIER, -ENERGY_MODIFIER)
+	$CooldownTimer.wait_time = BASE_COOLDOWN_DURATION / player.current_stats.cooldown_reduction
 	$CooldownTimer.start()
 
 
