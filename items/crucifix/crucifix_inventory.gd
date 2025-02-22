@@ -2,6 +2,7 @@ extends DefenseItemInventory
 
 const BASE_COOLDOWN_DURATION: float = 4
 const BASE_ACTIVE_DURATION: float = 2
+const BASE_AREA: float = 2
 var player: Node = PlayerHandler.get_player()
 @onready var cooldown_active: bool = false
 
@@ -25,6 +26,9 @@ func _input(event: InputEvent) -> void:
 func use() -> void:
 	if cooldown_active:
 		return
+	$Hitbox/CollisionShape3D.shape.radius = BASE_AREA * player.current_stats.area_size
+	$Hitbox/MeshInstance3D.mesh.outer_radius = BASE_AREA * player.current_stats.area_size
+	$Hitbox/MeshInstance3D.mesh.inner_radius = $Hitbox/MeshInstance3D.mesh.outer_radius - 0.2
 	$Hitbox/CollisionShape3D.disabled = false
 	$Hitbox.visible = true
 	$ActiveTimer.wait_time = BASE_ACTIVE_DURATION * player.current_stats.duration

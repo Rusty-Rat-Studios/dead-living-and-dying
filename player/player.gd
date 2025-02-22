@@ -7,12 +7,14 @@ enum Stats {
 	LIGHT_SPOT_RANGE,
 	LIGHT_ENERGY,
 	COOLDOWN_REDUCTION,
-	DURATION
+	DURATION,
+	AREA_SIZE
 }
 
 const BASE_SPEED: float = 6.0
 const BASE_COOLDOWN_REDUCTION: float = 1.0
 const BASE_DURATION: float = 1.0
+const BASE_AREA_SIZE: float = 1.0
 
 # base values used for light range and strength
 const BASE_LIGHT_OMNI_RANGE: float = 6.0
@@ -27,6 +29,7 @@ class PlayerStats:
 	var light_energy: float = BASE_LIGHT_ENERGY
 	var cooldown_reduction: float = BASE_COOLDOWN_REDUCTION
 	var duration: float = BASE_DURATION
+	var area_size: float = BASE_AREA_SIZE
 
 var current_stats: PlayerStats = PlayerStats.new()
 
@@ -136,6 +139,8 @@ func stat_update( stat: Stats, stat_modifier: float) -> void:
 		current_stats.cooldown_reduction += stat_modifier
 	elif stat == Stats.DURATION:
 		current_stats.duration += stat_modifier
+	elif stat == Stats.AREA_SIZE:
+		current_stats.area_size += stat_modifier
 
 
 func inventory_update() -> void:
