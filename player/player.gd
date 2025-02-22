@@ -2,7 +2,8 @@ class_name Player
 extends CharacterBody3D
 
 enum Stats {
-	SPEED
+	SPEED,
+	LIGHT_OMNI_RANGE
 }
 
 const BASE_SPEED: float = 6.0
@@ -107,6 +108,9 @@ func _on_item_picked_up(item: ItemInventory) -> void:
 func stat_update( stat: Stats, stat_modifier: float) -> void:
 	if stat == Stats.SPEED:
 		current_stats.speed += stat_modifier
+	elif stat == Stats.LIGHT_OMNI_RANGE:
+		current_stats.light_omni_range += stat_modifier
+		light_omni.omni_range = current_stats.light_omni_range
 
 
 func inventory_update() -> void:

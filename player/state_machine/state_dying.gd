@@ -11,7 +11,8 @@ func enter() -> void:
 	super()
 	# update player stats
 	_parent.current_stats.speed = DYING_SPEED
-	_parent.light_omni.omni_range = DYING_LIGHT_OMNI_RANGE
+	_parent.current_stats.light_omni_range = DYING_LIGHT_OMNI_RANGE
+	_parent.light_omni.omni_range = _parent.current_stats.light_omni_range
 	_parent.light_omni.light_energy = DYING_LIGHT_ENERGY
 	_parent.light_spot.spot_range = DYING_LIGHT_SPOT_RANGE
 	_parent.light_spot.light_energy = DYING_LIGHT_ENERGY
