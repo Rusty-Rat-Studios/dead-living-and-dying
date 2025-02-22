@@ -2,9 +2,9 @@ extends DefenseItemInventory
 
 const BASE_COOLDOWN_DURATION: float = 4
 const BASE_ACTIVE_DURATION: float = 2
+var player: Node = PlayerHandler.get_player()
 @onready var active_duration_modifier: float = 0
 @onready var cooldown_active: bool = false
-var player: Node = PlayerHandler.get_player()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
