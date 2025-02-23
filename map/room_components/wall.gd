@@ -55,4 +55,10 @@ func _on_visibility_changed() -> void:
 	if is_visible_in_tree():
 		set_process(true)
 	else:
+		# Change material to normal and reset intensity without the tween
+		is_transparent = false
+		if transparent_tween:
+			transparent_tween.kill()
+		intensity = 0.0
+		$WallMesh.set_surface_override_material(0, WALL_MATERIAL)
 		set_process(false)
