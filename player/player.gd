@@ -60,6 +60,8 @@ func reset() -> void:
 
 func _physics_process(delta: float) -> void:
 	handle_movement(delta) 
+	# Set Player position for shaders
+	RenderingServer.global_shader_parameter_set("Player", self.global_position)
 
 
 func handle_movement(delta: float) -> void:

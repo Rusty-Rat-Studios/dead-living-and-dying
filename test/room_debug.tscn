@@ -6,11 +6,12 @@
 [ext_resource type="Script" path="res://player/state_machine/state_dead.gd" id="4_6a0g5"]
 [ext_resource type="Script" path="res://player/state_machine/state_living.gd" id="5_dobku"]
 [ext_resource type="Script" path="res://player/state_machine/state_dying.gd" id="6_imvu0"]
-[ext_resource type="Script" path="res://map/room/room.gd" id="7_01ym3"]
-[ext_resource type="PackedScene" uid="uid://b3nn5u3a5o85j" path="res://map/room/floor.tscn" id="8_0ag1w"]
-[ext_resource type="PackedScene" uid="uid://bson3umirpot2" path="res://map/room/wall.tscn" id="9_exyhi"]
+[ext_resource type="Script" path="res://map/room_components/room.gd" id="7_01ym3"]
+[ext_resource type="PackedScene" uid="uid://b3nn5u3a5o85j" path="res://map/room_components/floor.tscn" id="8_0ag1w"]
+[ext_resource type="PackedScene" uid="uid://bson3umirpot2" path="res://map/room_components/wall.tscn" id="9_exyhi"]
 [ext_resource type="PackedScene" uid="uid://dic5onsop66y4" path="res://ui/game_menu.tscn" id="10_14pjr"]
 [ext_resource type="PackedScene" uid="uid://bwmbngtw81o3y" path="res://ui/debug_console.tscn" id="11_prqow"]
+
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_qruwo")
