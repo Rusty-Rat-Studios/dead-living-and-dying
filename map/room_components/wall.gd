@@ -1,8 +1,8 @@
 class_name Wall
 extends Node3D
 
-const WALL_MATERIAL: StandardMaterial3D = preload("res://map/room/wall_material.tres")
-const TRANSPARENT_WALL_MATERIAL: ShaderMaterial = preload("res://map/room/transparent_wall_material.tres")
+const WALL_MATERIAL: StandardMaterial3D = preload("res://map/room_components/wall_material.tres")
+const TRANSPARENT_WALL_MATERIAL: ShaderMaterial = preload("res://map/room_components/transparent_wall_material.tres")
 
 const TWEEN_DURATION: float = 1.0
 

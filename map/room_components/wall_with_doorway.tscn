@@ -1,7 +1,8 @@
 [gd_scene load_steps=6 format=4 uid="uid://fpivfcuv6s1r"]
 
-[ext_resource type="Script" path="res://map/wall.gd" id="1_8vby8"]
-[ext_resource type="Material" uid="uid://bjpn3uixmhwm8" path="res://map/room/wall_material.tres" id="2_k0dv1"]
+[ext_resource type="Script" path="res://map/room_components/wall.gd" id="1_8vby8"]
+[ext_resource type="Material" uid="uid://bjpn3uixmhwm8" path="res://map/room_components/wall_material.tres" id="2_k0dv1"]
+
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nv0kj"]
 resource_name = "Material"
