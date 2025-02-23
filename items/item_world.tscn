@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bslonn3bn1m6s"]
+[gd_scene load_steps=6 format=3 uid="uid://bslonn3bn1m6s"]
 
 [ext_resource type="Script" path="res://items/item_world.gd" id="1_12ywg"]
 [ext_resource type="PackedScene" uid="uid://cnbim08e5mqrn" path="res://ui/interactable.tscn" id="2_nvmey"]
+[ext_resource type="PackedScene" uid="uid://bp0ydphecs3iv" path="res://common/shadow.tscn" id="3_116lv"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fj23q"]
 load_path = "res://.godot/imported/based.png-b2b87d870a01b4dad6e3f3b470b77de0.s3tc.ctex"
@@ -24,3 +25,6 @@ collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetector"]
 shape = SubResource("SphereShape3D_usb8p")
+
+[node name="Shadow" parent="." instance=ExtResource("3_116lv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.384744, 0)
