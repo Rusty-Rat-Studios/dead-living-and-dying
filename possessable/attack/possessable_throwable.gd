@@ -17,9 +17,9 @@ const FLOAT_RANGE: float = 0.2
 # speed at which the object oscillates
 const FLOAT_SPEED: float = 2
 # scalar for speed that the object is lifted
-const FLOAT_FORCE: float = 1.8
+const FLOAT_FORCE: float = 1.4
 # target height for possessed objects to float to
-const FLOAT_HEIGHT: float = 3
+const FLOAT_HEIGHT: float = 4
 # for timing float effect oscillation
 @onready var float_time_offset: float = 0.0
 @onready var hitbox: Area3D = $Hitbox
