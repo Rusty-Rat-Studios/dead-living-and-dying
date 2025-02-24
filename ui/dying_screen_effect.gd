@@ -18,30 +18,27 @@ func _ready() -> void:
 
 
 func enable() -> void:
-	# begin with a strong effect and fade to normal in/out fading
+	# begin with an extra strong effect and transition to normal "max strength" effect
 	modulate.a = 0.5
-	fade_in()
+	fade_to(MAX_OPACITY)
+	# ensure on timeout that next step is to fade out
+	fading_in = false
 	fade_timer.start()
 
 
 func disable() -> void:
 	fade_timer.stop()
-	fade_out()
+	fade_to(0)
 
 
-func fade_in() -> void:
+func fade_to(target_opacity: float) -> void:
 	fade_tween = create_tween().set_ease(Tween.EASE_OUT_IN)
-	fade_tween.tween_property(self, "modulate:a", MAX_OPACITY, FADE_DURATION)
-
-
-func fade_out() -> void:
-	fade_tween = create_tween().set_ease(Tween.EASE_OUT_IN)
-	fade_tween.tween_property(self, "modulate:a", MIN_OPACITY, FADE_DURATION)
+	fade_tween.tween_property(self, "modulate:a", target_opacity, FADE_DURATION)
 
 
 func _on_fade_timer_timeout() -> void:
 	if fading_in: 
-		fade_out()
+		fade_to(MAX_OPACITY)
 	else:
-		fade_in()
+		fade_to(MIN_OPACITY)
 	fading_in = !fading_in
