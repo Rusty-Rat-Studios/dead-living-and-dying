@@ -6,6 +6,8 @@ const DYING_LIGHT_OMNI_RANGE: float = 4.5
 const DYING_LIGHT_SPOT_RANGE: float = 7
 const DYING_LIGHT_ENERGY: float = 1
 
+@onready var screen_effect: TextureRect = get_node("/root/Game/UI/DyingScreenEffect")
+
 
 func enter() -> void:
 	super()
@@ -25,6 +27,9 @@ func enter() -> void:
 	_parent.stunbox.set_values(_parent.stat_dict[Player.Stats.SPEED], DYING_LIGHT_OMNI_RANGE,
 		DYING_LIGHT_SPOT_RANGE, DYING_LIGHT_ENERGY)
 	
+	# enable "dying" screen effect
+	screen_effect.enable()
+
 
 func exit() -> void:
 	SignalBus.player_hurt.disconnect(_on_player_hurt)
@@ -32,6 +37,8 @@ func exit() -> void:
 	_parent.stunbox.collision_shape.set_deferred("disabled", true)
 	# invalidate any stun effects
 	_parent.stunbox.restore_instantly()
+	
+	screen_effect.disable()
 
 
 func _on_player_hurt() -> void:
