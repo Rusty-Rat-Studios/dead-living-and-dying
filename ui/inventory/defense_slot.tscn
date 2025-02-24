@@ -7,5 +7,5 @@
 script = ExtResource("2_usb56")
 
 [node name="TextureRect" parent="." index="1"]
+custom_minimum_size = Vector2(0, 0)
 expand_mode = 2
-stretch_mode = 4

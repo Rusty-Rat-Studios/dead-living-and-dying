@@ -18,5 +18,8 @@ script = ExtResource("1_aiprx")
 layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture = ExtResource("2_pongt")
+expand_mode = 1
+stretch_mode = 4
