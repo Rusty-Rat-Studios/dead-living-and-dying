@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://bcep1wbs2caas"]
 
 [ext_resource type="Script" path="res://possessable/possessable.gd" id="1_4ebmk"]
-[ext_resource type="Texture2D" uid="uid://bfqefkt34y11h" path="res://possessable/placeholder.png" id="2_pital"]
+[ext_resource type="Texture2D" uid="uid://d1vlfcehjxisy" path="res://possessable/crate.png" id="2_6rla4"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ulvk5"]
 height = 1.5
@@ -44,4 +44,4 @@ draw_pass_1 = SubResource("SphereMesh_218we")
 [node name="Sprite3D" type="Sprite3D" parent="."]
 billboard = 2
 shaded = true
-texture = ExtResource("2_pital")
+texture = ExtResource("2_6rla4")
