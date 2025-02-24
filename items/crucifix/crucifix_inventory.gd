@@ -1,13 +1,18 @@
 extends DefenseItemInventory
 
-const BASE_COOLDOWN_DURATION: float = 4
+signal item_used(cooldown_timer: Timer)
+
+const BASE_COOLDOWN_DURATION: float = 5
 const BASE_ACTIVE_DURATION: float = 2
+
 @onready var cooldown_duration_modifier: float = 0
 @onready var active_duration_modifier: float = 0
-@onready var cooldown_active: bool = false 
+@onready var cooldown_active: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	world_resource = preload("res://items/crucifix/crucifix_inventory.tscn")
+	
 	$ActiveTimer.wait_time = BASE_ACTIVE_DURATION
 	$CooldownTimer.wait_time = BASE_COOLDOWN_DURATION
 	$ActiveTimer.timeout.connect(_on_active_timer_timeout)
@@ -29,13 +34,16 @@ func use() -> void:
 	$Hitbox/CollisionShape3D.disabled = false
 	$Hitbox.visible = true
 	$ActiveTimer.start()
+	
 	cooldown_active = true
+	$CooldownTimer.start()
+	
+	item_used.emit($CooldownTimer)
 
 
 func _on_active_timer_timeout() -> void:
 	$Hitbox/CollisionShape3D.disabled = true
 	$Hitbox.visible = false
-	$CooldownTimer.start()
 
 
 func _on_cooldown_timer_timeout() -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://jlav0m1ndqde"]
+[gd_scene load_steps=24 format=3 uid="uid://jlav0m1ndqde"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_77rk7"]
 [ext_resource type="PackedScene" uid="uid://bbow7knip3g6g" path="res://player/player.tscn" id="1_hu241"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://bfmkrask6gxl3" path="res://possessable/attack/possessable_ranged.tscn" id="15_lv48w"]
 [ext_resource type="PackedScene" uid="uid://bwmbngtw81o3y" path="res://ui/debug_console.tscn" id="15_rbtf5"]
 [ext_resource type="PackedScene" uid="uid://d3uaapt6yn0ed" path="res://items/tea/tea_world.tscn" id="21_lgjc2"]
+[ext_resource type="PackedScene" uid="uid://bh1qwbhfylkio" path="res://ui/inventory/inventory_container.tscn" id="23_q3mfq"]
 
 
 [node name="Game" type="Node3D"]
@@ -258,3 +259,5 @@ visible = false
 [node name="DebugConsole" parent="UI" instance=ExtResource("15_rbtf5")]
 process_mode = 3
 visible = false
+
+[node name="InventoryContainer" parent="UI" instance=ExtResource("23_q3mfq")]
