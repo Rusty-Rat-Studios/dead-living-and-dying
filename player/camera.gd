@@ -18,7 +18,7 @@ const MAX_LAG_DISTANCE: float = 1
 # time it takes to reset camera to center when disabled
 const RESET_TIME: float = 0.2
 
-@onready var player: CharacterBody3D = PlayerHandler.get_player()
+@onready var player: Player = get_parent().get_parent()
 @onready var initial_position: Vector3 = position
 # rotation value of the parent RotationOffset (Marker3D) node
 @onready var rotation_offset: float = get_parent().rotation.x

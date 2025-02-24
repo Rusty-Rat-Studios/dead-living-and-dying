@@ -61,6 +61,8 @@ func reset() -> void:
 
 func _physics_process(delta: float) -> void:
 	handle_movement(delta) 
+	# Set Player position for shaders
+	RenderingServer.global_shader_parameter_set("Player", self.global_position)
 
 
 func handle_movement(delta: float) -> void:
@@ -97,6 +99,8 @@ func take_damage(flash: bool = true) -> void:
 
 
 func _on_item_picked_up(item: ItemInventory) -> void:
+	if item is KeyItemInventory:
+		SignalBus.key_item_picked_up.emit()
 	$Inventory.add_child(item)
 	# ensure item position is directly on player
 	item.position = Vector3.ZERO

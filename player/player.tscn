@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bbow7knip3g6g"]
+[gd_scene load_steps=14 format=3 uid="uid://bbow7knip3g6g"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_ndccg"]
 [ext_resource type="Texture2D" uid="uid://cdu1sybc4l0vp" path="res://player/caretaker_idle.png" id="3_b0ygv"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://umlwhr2u3iej" path="res://player/corpse.tscn" id="8_865w7"]
 [ext_resource type="Script" path="res://player/stunbox.gd" id="9_25lto"]
 [ext_resource type="Script" path="res://player/inventory.gd" id="9_qaadw"]
+[ext_resource type="PackedScene" uid="uid://bp0ydphecs3iv" path="res://common/shadow.tscn" id="11_7sgie"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uy1l0"]
 radius = 0.4
@@ -105,3 +106,5 @@ disabled = true
 
 [node name="StunTimer" type="Timer" parent="Stunbox"]
 one_shot = true
+
+[node name="Shadow" parent="." instance=ExtResource("11_7sgie")]

@@ -17,6 +17,7 @@ var doors: HashMap = HashMap.new()
 func _ready() -> void:
 	$Floor/PlayerDetector.body_entered.connect(_on_player_entered_room)
 	$Floor/PlayerDetector.body_exited.connect(_on_player_exited_room)
+	visible = false
 
 
 func init() -> void:
@@ -65,10 +66,12 @@ func init_doors() -> void:
 func _on_player_entered_room(body: Node3D) -> void:
 	if body == PlayerHandler.get_player():
 		player_in_room = true
+		visible = true
 		SignalBus.player_entered_room.emit(self)
 
 
 func _on_player_exited_room(body: Node3D) -> void:
 	if body == PlayerHandler.get_player():
 		player_in_room = false
+		visible = false
 		SignalBus.player_exited_room.emit(self)

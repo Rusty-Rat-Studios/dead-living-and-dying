@@ -27,7 +27,7 @@ const SPRITE_ANIMATION_BACK: String = "back"
 @onready var is_rotating: bool = false
 # used when rotating field of view
 @onready var angular_velocity: float = 0.0
-@onready var sprite: AnimatedSprite3D = PlayerHandler.get_player().get_node("RotationOffset/AnimatedSprite3D")
+@onready var sprite: AnimatedSprite3D = get_parent().get_node("RotationOffset/AnimatedSprite3D")
 # used to disable skew effect if needed (e.g. in DEAD state)
 @onready var skew_enabled: bool = false
 @onready var skew_scale_base: float = sprite.scale.x

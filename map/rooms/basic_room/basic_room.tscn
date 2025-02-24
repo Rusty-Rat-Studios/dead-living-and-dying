@@ -1,9 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://dh8q75xrlxeaa"]
 
-[ext_resource type="Script" path="res://map/room/room.gd" id="1_jw127"]
-[ext_resource type="PackedScene" uid="uid://b3nn5u3a5o85j" path="res://map/room/floor.tscn" id="2_8oby5"]
+[ext_resource type="Script" path="res://map/room_components/room.gd" id="1_jw127"]
+[ext_resource type="PackedScene" uid="uid://b3nn5u3a5o85j" path="res://map/room_components/floor.tscn" id="2_8oby5"]
 [ext_resource type="PackedScene" uid="uid://bmevu5yvsxttw" path="res://entity/spawner.tscn" id="3_sanko"]
-[ext_resource type="PackedScene" uid="uid://cexvn2mosncly" path="res://map/room/door.tscn" id="4_13fof"]
+[ext_resource type="PackedScene" uid="uid://cexvn2mosncly" path="res://map/room_components/door.tscn" id="4_13fof"]
 [ext_resource type="Script" path="res://common/door_location.gd" id="5_pj3oa"]
 
 
@@ -45,17 +45,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.842, 0.5, 3.099)
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.899, 0.5, 3.289)
 
 [node name="WallWithDoor" parent="." instance=ExtResource("4_13fof")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.95)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.05)
 door_location = SubResource("Resource_crghr")
 
 [node name="WallWithDoor2" parent="." instance=ExtResource("4_13fof")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 9.95)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 8.05)
 door_location = SubResource("Resource_0m4ka")
 
 [node name="WallWithDoor3" parent="." instance=ExtResource("4_13fof")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.95, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.05, 0, 0)
 door_location = SubResource("Resource_dpo3u")
 
 [node name="WallWithDoor4" parent="." instance=ExtResource("4_13fof")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 9.95, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.05, 0, 0)
 door_location = SubResource("Resource_ygnvg")

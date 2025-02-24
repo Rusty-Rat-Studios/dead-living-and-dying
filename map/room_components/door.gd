@@ -1,9 +1,9 @@
 class_name Door
-extends StaticBody3D
+extends Node3D
 
 signal player_received(player: Player)
 
-const WALL: Resource = preload("res://map/room/wall.tscn")
+const WALL: Resource = preload("res://map/room_components/wall.tscn")
 
 @export var door_location: DoorLocation
 

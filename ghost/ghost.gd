@@ -117,10 +117,13 @@ func _on_hit() -> void:
 func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
 	match state:
 		PlayerStateMachine.States.LIVING:
-			sprite.modulate.a = 0
+			opacity = 0
+			$Shadow.visible = false
 		PlayerStateMachine.States.DYING:
-			sprite.modulate.a = OPACITY_DYING
-			$OmniLight3D.visible = true
+			opacity = OPACITY_DYING
+			$Shadow.visible = true
 		PlayerStateMachine.States.DEAD:
-			sprite.modulate.a = OPACITY_DEAD
-			$OmniLight3D.visible = false
+			opacity = OPACITY_DEAD
+			$Shadow.visible = true
+	
+	material.albedo_color.a = opacity

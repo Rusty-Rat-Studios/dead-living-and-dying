@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bson3umirpot2"]
+
+[ext_resource type="Script" path="res://map/room_components/wall.gd" id="1_cmcax"]
+[ext_resource type="Material" uid="uid://bjpn3uixmhwm8" path="res://map/room_components/wall_material.tres" id="2_fyiye"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_8s1fr"]
+material = ExtResource("2_fyiye")
+size = Vector3(16, 5, 0.1)
+
+[node name="Wall" type="StaticBody3D"]
+script = ExtResource("1_cmcax")
+
+[node name="WallMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+mesh = SubResource("BoxMesh_8s1fr")
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="."]
+polygon = PackedVector2Array(-8, 0, -8, 5, 8, 5, 8, 0)

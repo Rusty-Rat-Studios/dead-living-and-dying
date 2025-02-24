@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://yihpxsaeuqdi"]
+[gd_scene load_steps=17 format=3 uid="uid://yihpxsaeuqdi"]
 
 [ext_resource type="Script" path="res://ghost/ghost.gd" id="1_vr82v"]
 [ext_resource type="Texture2D" uid="uid://cjyk53bm811ec" path="res://ghost/ghost_active.png" id="2_mfm4n"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://885rtol40jd5" path="res://ghost/ghost_idle.png" id="3_dvhg2"]
 [ext_resource type="Script" path="res://ghost/state_waiting.gd" id="3_gb04i"]
 [ext_resource type="Script" path="res://ghost/state_possessing.gd" id="4_muv24"]
+[ext_resource type="PackedScene" uid="uid://bp0ydphecs3iv" path="res://common/shadow.tscn" id="7_0liqe"]
 [ext_resource type="Script" path="res://ghost/state_stunned.gd" id="7_yplap"]
 [ext_resource type="Script" path="res://ghost/state_attacking.gd" id="8_a4kr4"]
 
@@ -117,3 +118,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.128161, 0.0763355)
 light_color = Color(0.854902, 0.647059, 0.12549, 1)
 light_energy = 0.01
 omni_range = 0.5
+
+[node name="Shadow" parent="." instance=ExtResource("7_0liqe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.621386, 0)

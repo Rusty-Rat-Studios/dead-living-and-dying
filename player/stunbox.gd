@@ -15,7 +15,7 @@ var _restore_tween: Tween
 
 # accessed by state_dying.gd to enable/disable stunbox detection
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
-@onready var _player: Player = PlayerHandler.get_player()
+@onready var _player: Player = get_parent()
 
 
 func _ready() -> void:

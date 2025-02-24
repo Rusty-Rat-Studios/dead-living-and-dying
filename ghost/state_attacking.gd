@@ -2,8 +2,6 @@ extends GhostState
 
 const ATTACK_SPEED: float = 6.0
 
-@onready var player: Player = PlayerHandler.get_player()
-
 
 func _ready() -> void:
 	# defer connecting this signal to ensure this function executes
