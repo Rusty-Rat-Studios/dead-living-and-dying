@@ -27,6 +27,8 @@ func enter() -> void:
 	_parent.stunbox.set_values(_parent.stat_dict[Player.Stats.SPEED], DYING_LIGHT_OMNI_RANGE,
 		DYING_LIGHT_SPOT_RANGE, DYING_LIGHT_ENERGY)
 	
+	# stun the player when they are hit
+	_parent.stunbox.stun()
 	# enable "dying" screen effect
 	screen_effect.enable()
 
