@@ -37,7 +37,7 @@ func exit() -> void:
 
 
 func process_state() -> void:
-	_parent.set_target(player.global_position)
+	_parent.set_target(PlayerHandler.get_player().global_position)
 	if _parent.at_target:
 		change_state(GhostStateMachine.States.WAITING)
 
