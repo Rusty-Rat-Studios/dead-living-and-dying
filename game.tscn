@@ -22,8 +22,13 @@
 [ext_resource type="PackedScene" uid="uid://bfmkrask6gxl3" path="res://possessable/attack/possessable_ranged.tscn" id="15_lv48w"]
 [ext_resource type="PackedScene" uid="uid://bwmbngtw81o3y" path="res://ui/debug_console.tscn" id="15_rbtf5"]
 [ext_resource type="PackedScene" uid="uid://d3uaapt6yn0ed" path="res://items/tea/tea_world.tscn" id="21_lgjc2"]
+<<<<<<< HEAD
 [ext_resource type="Script" path="res://ui/dying_screen_effect.gd" id="21_sxhuq"]
 [ext_resource type="Texture2D" uid="uid://chry31axu0hdv" path="res://player/dying.png" id="22_4eox8"]
+=======
+[ext_resource type="PackedScene" uid="uid://bh1qwbhfylkio" path="res://ui/inventory/inventory_container.tscn" id="23_q3mfq"]
+
+>>>>>>> main
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_77rk7")
@@ -271,3 +276,5 @@ visible = false
 [node name="DebugConsole" parent="UI" instance=ExtResource("15_rbtf5")]
 process_mode = 3
 visible = false
+
+[node name="InventoryContainer" parent="UI" instance=ExtResource("23_q3mfq")]
