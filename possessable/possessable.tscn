@@ -3,8 +3,9 @@
 [ext_resource type="Script" path="res://possessable/possessable.gd" id="1_4ebmk"]
 [ext_resource type="Texture2D" uid="uid://bfqefkt34y11h" path="res://possessable/placeholder.png" id="2_pital"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_42qqj"]
-size = Vector3(1.4, 1.4, 0.5)
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ulvk5"]
+height = 1.5
+radius = 0.6
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rvnlq"]
 emission_shape = 3
@@ -27,11 +28,12 @@ height = 0.1
 [node name="Possessable" type="RigidBody3D"]
 collision_layer = 4
 collision_mask = 5
+angular_damp = 5.0
 script = ExtResource("1_4ebmk")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0618164, 0)
-shape = SubResource("BoxShape3D_42qqj")
+shape = SubResource("CylinderShape3D_ulvk5")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 emitting = false

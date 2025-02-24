@@ -22,6 +22,7 @@ const FLOAT_HEIGHT: float = 4
 @onready var hitbox_collision_shape: CollisionShape3D = $Hitbox/CollisionShape3D
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
+	super(state)
 	# if object has been thrown, thus depossessed, it should not be possessable
 	# again until object has slowed down enough
 	if not is_possessable and linear_velocity.length() < DAMAGE_VELOCITY:
