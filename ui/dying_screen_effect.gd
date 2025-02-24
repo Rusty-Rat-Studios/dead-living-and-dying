@@ -18,6 +18,8 @@ func _ready() -> void:
 
 
 func enable() -> void:
+	# begin with a strong effect and fade to normal in/out fading
+	modulate.a = 0.5
 	fade_in()
 	fade_timer.start()
 
