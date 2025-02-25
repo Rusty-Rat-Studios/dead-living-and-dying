@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=4 uid="uid://fpivfcuv6s1r"]
+[gd_scene load_steps=7 format=4 uid="uid://fpivfcuv6s1r"]
 
-[ext_resource type="Script" path="res://map/room_components/wall_with_doorway.gd" id="1_7sxs2"]
+[ext_resource type="Script" path="res://map/room_components/wall.gd" id="1_qq7eh"]
+[ext_resource type="Material" uid="uid://hnvx3t8awqp1" path="res://map/room_components/transparent_wall_with_doorway_material.tres" id="2_akohn"]
 [ext_resource type="Material" uid="uid://ca6og85us0udr" path="res://map/room_components/wall_with_doorway_material.tres" id="2_nyej4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nv0kj"]
@@ -42,7 +43,9 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_yqa6q")
 
 [node name="WallWithDoorway" type="StaticBody3D"]
-script = ExtResource("1_7sxs2")
+script = ExtResource("1_qq7eh")
+transparent_wall_material = ExtResource("2_akohn")
+wall_material = ExtResource("2_nyej4")
 
 [node name="WallMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(16, 0, 0, 0, 0, -5, 0, 0.1, 0, 0, 2.5, 0)
