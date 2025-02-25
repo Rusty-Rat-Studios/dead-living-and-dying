@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://jlav0m1ndqde"]
+[gd_scene load_steps=26 format=3 uid="uid://jlav0m1ndqde"]
 
 [ext_resource type="Script" path="res://game.gd" id="1_77rk7"]
 [ext_resource type="PackedScene" uid="uid://bbow7knip3g6g" path="res://player/player.tscn" id="1_hu241"]
