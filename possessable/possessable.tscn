@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bcep1wbs2caas"]
+[gd_scene load_steps=9 format=3 uid="uid://bcep1wbs2caas"]
 
 [ext_resource type="Script" path="res://possessable/possessable.gd" id="1_4ebmk"]
 [ext_resource type="Texture2D" uid="uid://d1vlfcehjxisy" path="res://possessable/crate.png" id="2_6rla4"]
+[ext_resource type="Script" path="res://common/sprite_backlight.gd" id="3_m3x6l"]
 [ext_resource type="PackedScene" uid="uid://bp0ydphecs3iv" path="res://common/shadow.tscn" id="3_ni4lu"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ulvk5"]
@@ -47,5 +48,6 @@ draw_pass_1 = SubResource("SphereMesh_218we")
 billboard = 2
 shaded = true
 texture = ExtResource("2_6rla4")
+script = ExtResource("3_m3x6l")
 
 [node name="Shadow" parent="." instance=ExtResource("3_ni4lu")]

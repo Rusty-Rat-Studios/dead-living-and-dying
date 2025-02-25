@@ -13,7 +13,7 @@ script = ExtResource("2_fk2mr")
 [node name="CollisionShape3D" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="Hitbox" type="Area3D" parent="." index="2"]
+[node name="Hitbox" type="Area3D" parent="." index="5"]
 collision_layer = 4
 collision_mask = 0
 
