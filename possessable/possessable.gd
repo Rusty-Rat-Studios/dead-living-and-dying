@@ -17,9 +17,6 @@ COLLISION MASKING SCHEME:
 # signal connected when ghost discovers all possessables in the room
 signal possessed
 
-# force used to keep possessable upright
-const UPRIGHT_STRENGTH: float = 10000
-
 # store room for attaching self to "possessables_available" group that is 
 # checked by ghosts in the same room for available possession targets
 @onready var room: Room = get_parent()
@@ -36,19 +33,6 @@ const UPRIGHT_STRENGTH: float = 10000
 func _ready() -> void:
 	# add self to possessables in room
 	room.add_possessable(self)
-
-
-func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
-	# force objects to remain upright
-	var target_up: Vector3 = Vector3.UP # Or another desired up vector
-	var current_up: Vector3 = state.transform.basis.y
-	
-	# cross product to get rotation axis
-	var rotation_axis: Vector3 = current_up.cross(target_up)
-	var rotation_angle: float = current_up.angle_to(target_up)
-	
-	var correction_torque: Vector3 = rotation_axis * rotation_angle * UPRIGHT_STRENGTH
-	state.apply_torque(correction_torque)
 
 
 func reset() -> void:
