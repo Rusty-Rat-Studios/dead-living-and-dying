@@ -43,7 +43,6 @@ func enter() -> void:
 	
 	# connect/disconnect in enter/exit to ensure function only fires while state is active
 	SignalBus.player_state_changed.connect(_on_player_state_changed)
-	SignalBus.player_entered_room.connect(_on_player_entered_room)
 	
 	set_closest_target()
 
@@ -67,7 +66,6 @@ func exit() -> void:
 			p.possessed.disconnect(set_closest_target)
 	
 	SignalBus.player_state_changed.disconnect(_on_player_state_changed)
-	SignalBus.player_entered_room.disconnect(_on_player_entered_room)
 
 
 func set_closest_target() -> void:
@@ -161,9 +159,3 @@ func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
 	# back into WAITING to ensure the player has some breathing room
 	if state == PlayerStateMachine.States.DYING:
 		change_state(GhostStateMachine.States.WAITING)
-
-
-func _on_player_entered_room() -> void:
-	# prevent ghost from immediately attack the player when entering room
-	if is_possessing:
-		await Utility.delay(DECISION_TIME)

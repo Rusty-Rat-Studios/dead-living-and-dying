@@ -3,6 +3,13 @@ extends GhostState
 const ATTACK_SPEED: float = 6.0
 
 
+func _ready() -> void:
+	# defer connecting this signal to ensure this function executes
+	# AFTER this signal updates the player_in_room flag in ghost.gd
+	SignalBus.player_exited_room.connect(_on_player_exited_room, CONNECT_DEFERRED)
+	SignalBus.player_state_changed.connect(_on_player_state_changed)
+
+
 func enter() -> void:
 	# ensure player is in a place/state to be attacked
 	if not is_player_attackable():
@@ -13,11 +20,6 @@ func enter() -> void:
 	# reset at_target flag to handle case where previous state reached target
 	# since this flag is used to detect when to exit ATTACKING state
 	_parent.at_target = false
-	
-	# defer connecting this signal to ensure this function executes
-	# AFTER this signal updates the player_in_room flag in ghost.gd
-	SignalBus.player_exited_room.connect(_on_player_exited_room, CONNECT_DEFERRED)
-	SignalBus.player_state_changed.connect(_on_player_state_changed)
 
 
 func is_player_attackable() -> bool:
@@ -32,9 +34,6 @@ func is_player_attackable() -> bool:
 func exit() -> void:
 	super()
 	_parent.speed = _parent.BASE_SPEED
-	
-	SignalBus.player_exited_room.disconnect(_on_player_exited_room)
-	SignalBus.player_state_changed.disconnect(_on_player_state_changed)
 
 
 func process_state() -> void:
