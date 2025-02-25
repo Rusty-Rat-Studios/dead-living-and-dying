@@ -8,7 +8,8 @@ uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, repeat_en
 uniform vec3 uv1_scale;
 uniform vec3 uv1_offset;
 
-uniform float sphere_radius = 5.5;
+uniform vec3 player_offset = vec3(0, 3, 0);
+uniform float sphere_radius = 6.5;
 uniform float intensity = 0.0;
 
 global uniform vec3 Player;
@@ -26,6 +27,6 @@ void fragment()
 	vec4 albedo_tex = texture(texture_albedo, UV);
 	ALBEDO = albedo.rgb * albedo_tex.rgb;
 
-	float min_dist = min(length(Player - world_vertex), sphere_radius);
+	float min_dist = min(length((Player + player_offset) - world_vertex), sphere_radius);
 	ALPHA = 1.0 - (intensity * clamp(sphere_radius - min_dist, 0.0, 1.0));
 }
