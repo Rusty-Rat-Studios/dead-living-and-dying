@@ -37,9 +37,6 @@ func _ready() -> void:
 	sprite.modulate.a = 0
 	$OmniLight3D.visible = false
 	
-	# add self to group "ghosts"
-	add_to_group("ghosts")
-	
 	# attach signals for updating player_in_room flag
 	# states listening for same signals are connected with CONNECT_DEFERRED
 	# to ensure this connection always evaluates first when signal emits
