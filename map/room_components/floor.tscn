@@ -2,13 +2,12 @@
 
 [ext_resource type="Texture2D" uid="uid://54om7nxf8xh6" path="res://map/tileset-dhassa/floor1.png" id="1_o4kxu"]
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_o8kxe"]
+size = Vector2(16, 16)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7ulll"]
 albedo_texture = ExtResource("1_o4kxu")
 uv1_scale = Vector3(12, 6, 12)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_o8kxe"]
-material = SubResource("StandardMaterial3D_7ulll")
-size = Vector2(16, 16)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_1bktg"]
 
@@ -20,6 +19,7 @@ size = Vector3(16, 5, 16)
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 layers = 2
 mesh = SubResource("PlaneMesh_o8kxe")
+surface_material_override/0 = SubResource("StandardMaterial3D_7ulll")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("WorldBoundaryShape3D_1bktg")

@@ -9,6 +9,7 @@ shader = ExtResource("1_xq5p1")
 shader_parameter/albedo = Color(1, 1, 1, 1)
 shader_parameter/uv1_scale = Vector3(15, 2, 2)
 shader_parameter/uv1_offset = null
+shader_parameter/player_offset = Vector3(0, 3, 0)
 shader_parameter/sphere_radius = 5.5
 shader_parameter/intensity = 0.0
 shader_parameter/texture_albedo = ExtResource("2_mwxyv")
