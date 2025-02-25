@@ -185,7 +185,7 @@ func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
 
 func _on_player_entered_room(room: Node3D) -> void:
 	# prevent ghost from immediately attack the player when entering room
-	if room == _parent.current_room:
+	if is_possessing and room == _parent.current_room:
 		print("delaying attack")
 		# begin delay time before attacking
 		attack_delay_increment_timer.start()
