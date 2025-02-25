@@ -6,16 +6,23 @@ signal hit
 const BASE_SPEED: float = 4.0
 # time to wait before attacking when player enters room
 const ATTACK_DELAY: float = 0.3
+# time to tween light visibility when ghost starts/stops moving
+const LIGHT_FADE_DURATION: float = 0.3
+const LIGHT_ENERGY: float = 0.1
 
 # opacity values set according to player state
 const OPACITY_DYING: float = 0.2
 const OPACITY_DEAD: float = 0.8
 
 var movement_boundaries: Rect2
+var light_tween: Tween
+var light_enabled: bool = false
 
 @onready var state_machine: GhostStateMachine = $StateMachine
 @onready var hitbox: Area3D = $Hitbox
+
 @onready var sprite: AnimatedSprite3D = $AnimatedSprite3D
+@onready var light: OmniLight3D = $OmniLight3D
 
 @onready var speed: float = BASE_SPEED
 @onready var current_room: Room = get_parent()
@@ -35,7 +42,7 @@ func _ready() -> void:
 	# set opacity to 0 and disable self-light
 	# left visible in editor for debugging purposes
 	sprite.modulate.a = 0
-	$OmniLight3D.visible = false
+	light.light_energy = 0
 	
 	# attach signals for updating player_in_room flag
 	# states listening for same signals are connected with CONNECT_DEFERRED
@@ -68,6 +75,11 @@ func set_target(target_global: Vector3) -> void:
 	# with a deadzone margin to prevent oscillating back and forth
 	if abs(target_global.x - global_position.x) > 0.5:
 		sprite.flip_h = target_global.x > global_position.x
+	
+	if light_enabled:
+		# make light visible
+		light_tween = create_tween()
+		light_tween.tween_property(light, "light_energy", LIGHT_ENERGY, LIGHT_FADE_DURATION)
 
 
 func move_to_target(delta: float) -> void:
@@ -82,6 +94,13 @@ func move_to_target(delta: float) -> void:
 		at_target = true
 		velocity = Vector3.ZERO
 		target_pos = global_position
+		
+		if light_enabled:
+			# make light invisible
+			if light_tween:
+				light_tween.kill()
+			light_tween = create_tween()
+			light_tween.tween_property(light, "light_energy", 0, LIGHT_FADE_DURATION)
 	else:
 		at_target = false
 		direction = direction.normalized()
@@ -117,14 +136,14 @@ func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
 		PlayerStateMachine.States.LIVING:
 			opacity = 0
 			$Shadow.visible = false
-			$OmniLight3D.visible = false
+			light_enabled = false
 		PlayerStateMachine.States.DYING:
 			opacity = OPACITY_DYING
 			$Shadow.visible = true
-			$OmniLight3D.visible = true
+			light_enabled = true
 		PlayerStateMachine.States.DEAD:
 			opacity = OPACITY_DEAD
 			$Shadow.visible = true
-			$OmniLight3D.visible = false
+			light_enabled = false
 	
 	sprite.modulate.a = opacity
