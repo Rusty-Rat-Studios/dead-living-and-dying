@@ -28,13 +28,12 @@ radius = 0.05
 height = 0.1
 
 [node name="Possessable" type="RigidBody3D"]
-collision_layer = 4
+collision_layer = 36
 collision_mask = 5
 angular_damp = 5.0
 script = ExtResource("1_4ebmk")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0618164, 0)
 shape = SubResource("CylinderShape3D_ulvk5")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
