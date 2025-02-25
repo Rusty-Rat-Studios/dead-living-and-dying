@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bslonn3bn1m6s"]
+[gd_scene load_steps=7 format=3 uid="uid://bslonn3bn1m6s"]
 
 [ext_resource type="Script" path="res://items/item_world.gd" id="1_12ywg"]
 [ext_resource type="PackedScene" uid="uid://cnbim08e5mqrn" path="res://ui/interactable.tscn" id="2_nvmey"]
 [ext_resource type="PackedScene" uid="uid://bp0ydphecs3iv" path="res://common/shadow.tscn" id="3_116lv"]
+[ext_resource type="Script" path="res://common/sprite_backlight.gd" id="3_e25w4"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fj23q"]
 load_path = "res://.godot/imported/based.png-b2b87d870a01b4dad6e3f3b470b77de0.s3tc.ctex"
@@ -17,7 +18,9 @@ script = ExtResource("1_12ywg")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 billboard = 2
+shaded = true
 texture = SubResource("CompressedTexture2D_fj23q")
+script = ExtResource("3_e25w4")
 
 [node name="PlayerDetector" type="Area3D" parent="."]
 collision_layer = 0
