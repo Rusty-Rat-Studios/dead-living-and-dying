@@ -45,6 +45,6 @@ func _apply_material_normal() -> void:
 	is_transparent = false
 	if transparent_tween:
 		transparent_tween.kill()
+	$WallMesh.set_surface_override_material(0, wall_material)
 	normal_tween = create_tween().set_parallel()
 	normal_tween.tween_property(self, "intensity", 0.0, TWEEN_DURATION)
-	normal_tween.connect("finished", func() -> void: $WallMesh.set_surface_override_material(0, wall_material))
