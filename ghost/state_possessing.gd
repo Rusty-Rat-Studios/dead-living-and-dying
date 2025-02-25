@@ -17,6 +17,11 @@ var detector: Area3D
 var detector_collision_shape: CollisionShape3D
 
 @onready var decision_timer: Timer = Timer.new()
+# used to delay attacking if player has just entered the room
+@onready var attack_delay_timer: Timer = Timer.new()
+# used to prevent player from cheesing the attack delay mechanic by restoring 
+# the attack delay timer wait time over time instead of restarting
+@onready var attack_delay_reset_timer: Timer = Timer.new()
 @onready var is_possessing: bool = false
 
 
@@ -156,13 +161,16 @@ func _on_contact_possessable(body: Node3D) -> void:
 
 
 func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
+	print("state change")
 	# when the player is hurt, change all currently possessing ghosts
 	# back into WAITING to ensure the player has some breathing room
 	if state == PlayerStateMachine.States.DYING:
 		change_state(GhostStateMachine.States.WAITING)
 
 
-func _on_player_entered_room() -> void:
+func _on_player_entered_room(room: Node3D) -> void:
+	print("player enter room")
 	# prevent ghost from immediately attack the player when entering room
-	if is_possessing:
+	if is_possessing and room == _parent.current_room:
+		print("delaying attack")
 		await Utility.delay(DECISION_TIME)

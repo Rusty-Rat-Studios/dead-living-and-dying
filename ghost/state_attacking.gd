@@ -19,6 +19,22 @@ func enter() -> void:
 	SignalBus.player_state_changed.connect(_on_player_state_changed)
 
 
+func exit() -> void:
+	super()
+	_parent.speed = _parent.BASE_SPEED
+	
+	if SignalBus.player_exited_room.is_connected(_on_player_exited_room):
+		SignalBus.player_exited_room.disconnect(_on_player_exited_room)
+	if SignalBus.player_state_changed.is_connected(_on_player_state_changed):
+		SignalBus.player_state_changed.disconnect(_on_player_state_changed)
+
+
+func process_state() -> void:
+	_parent.set_target(PlayerHandler.get_player().global_position)
+	if _parent.at_target:
+		change_state(GhostStateMachine.States.WAITING)
+
+
 func is_player_attackable() -> bool:
 	# check if player is in room and DYING or DEAD when entering attack state
 	if (_parent.player_in_room
