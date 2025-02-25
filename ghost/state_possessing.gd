@@ -157,5 +157,5 @@ func _on_contact_possessable(body: Node3D) -> void:
 func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
 	# when the player is hurt, change all currently possessing ghosts
 	# back into WAITING to ensure the player has some breathing room
-	if state == PlayerStateMachine.States.DYING:
+	if state == PlayerStateMachine.States.DYING and _parent.player_in_room:
 		change_state(GhostStateMachine.States.WAITING)
