@@ -266,11 +266,13 @@ texture = ExtResource("22_4eox8")
 expand_mode = 1
 script = ExtResource("21_sxhuq")
 
+[node name="InventoryContainer" parent="UI" instance=ExtResource("23_q3mfq")]
+offset_top = -142.0
+offset_right = 282.0
+
 [node name="GameMenu" parent="UI" instance=ExtResource("13_owhbc")]
 visible = false
 
 [node name="DebugConsole" parent="UI" instance=ExtResource("15_rbtf5")]
 process_mode = 3
 visible = false
-
-[node name="InventoryContainer" parent="UI" instance=ExtResource("23_q3mfq")]
