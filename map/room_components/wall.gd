@@ -14,7 +14,6 @@ var normal_tween: Tween
 
 
 func _ready() -> void:
-	# visibility_changed.connect(_on_visibility_changed)
 	if fmod(global_rotation_degrees.y, 180) == 0:
 		is_horizontal_wall = true
 
@@ -49,16 +48,3 @@ func _apply_material_normal() -> void:
 	normal_tween = create_tween().set_parallel()
 	normal_tween.tween_property(self, "intensity", 0.0, TWEEN_DURATION)
 	normal_tween.connect("finished", func() -> void: $WallMesh.set_surface_override_material(0, wall_material))
-
-
-#func _on_visibility_changed() -> void:
-	#if is_visible_in_tree():
-		#set_process(true)
-	#else:
-		## Change material to normal and reset intensity without the tween
-		#is_transparent = false
-		#if transparent_tween:
-			#transparent_tween.kill()
-		#intensity = 0.0
-		#$WallMesh.set_surface_override_material(0, wall_material)
-		#set_process(false)
