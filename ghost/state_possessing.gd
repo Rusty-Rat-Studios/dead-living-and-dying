@@ -212,6 +212,5 @@ func _on_attack_delay_increment_timer_timeout() -> void:
 	
 	if attack_delay <= 0 or attack_delay >= DECISION_TIME:
 		attack_delay_increment_timer.stop()
-		
-		if attack_delay <= 0:
-			can_attack = true
+	if attack_delay <= 0:
+		can_attack = true

@@ -40,7 +40,7 @@ func is_player_attackable() -> bool:
 	# check if player is in room and DYING or DEAD when entering attack state
 	if (_parent.player_in_room
 		and (PlayerHandler.get_player_state() == PlayerStateMachine.States.DEAD
-			or PlayerHandler.get_player_state() == PlayerStateMachine.States.DYING)):
+		or PlayerHandler.get_player_state() == PlayerStateMachine.States.DYING)):
 		return true
 	return false
 
