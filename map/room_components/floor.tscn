@@ -1,6 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://b3nn5u3a5o85j"]
+[gd_scene load_steps=6 format=3 uid="uid://b3nn5u3a5o85j"]
+
+[ext_resource type="Texture2D" uid="uid://54om7nxf8xh6" path="res://map/tileset-dhassa/floor1.png" id="1_o4kxu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7ulll"]
+albedo_texture = ExtResource("1_o4kxu")
+uv1_scale = Vector3(12, 6, 12)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_o8kxe"]
+material = SubResource("StandardMaterial3D_7ulll")
 size = Vector2(16, 16)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_1bktg"]

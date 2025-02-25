@@ -1,8 +1,7 @@
 [gd_scene load_steps=6 format=4 uid="uid://fpivfcuv6s1r"]
 
-[ext_resource type="Script" path="res://map/room_components/wall.gd" id="1_8vby8"]
-[ext_resource type="Material" uid="uid://bjpn3uixmhwm8" path="res://map/room_components/wall_material.tres" id="2_k0dv1"]
-
+[ext_resource type="Script" path="res://map/room_components/wall_with_doorway.gd" id="1_7sxs2"]
+[ext_resource type="Material" uid="uid://ca6og85us0udr" path="res://map/room_components/wall_with_doorway_material.tres" id="2_nyej4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nv0kj"]
 resource_name = "Material"
@@ -43,13 +42,13 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_yqa6q")
 
 [node name="WallWithDoorway" type="StaticBody3D"]
-script = ExtResource("1_8vby8")
+script = ExtResource("1_7sxs2")
 
 [node name="WallMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(16, 0, 0, 0, 0, -5, 0, 0.1, 0, 0, 2.5, 0)
 mesh = SubResource("ArrayMesh_38klx")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("2_k0dv1")
+surface_material_override/0 = ExtResource("2_nyej4")
 
 [node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="."]
 polygon = PackedVector2Array(-8, 0, -1, 0, -1, 2.5, 1, 2.5, 1, 0, 8, 0, 8, 5, -8, 5)

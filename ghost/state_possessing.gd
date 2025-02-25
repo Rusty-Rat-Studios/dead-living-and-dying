@@ -35,10 +35,14 @@ func init(parent: CharacterBody3D, state_machine: StateMachine) -> void:
 
 func enter() -> void:
 	_parent.speed = _parent.BASE_SPEED
+	_parent.sprite.animation = "active"
 	# enable possessable detector
 	detector_collision_shape.set_deferred("disabled", false)
 	# reset decision timer
 	decision_timer.wait_time = DECISION_TIME
+	
+	# connect/disconnect in enter/exit to ensure function only fires while state is active
+	SignalBus.player_state_changed.connect(_on_player_state_changed)
 	
 	set_closest_target()
 
@@ -60,6 +64,8 @@ func exit() -> void:
 	for p: Possessable in _parent.current_room.possessables_available:
 		if p.possessed.is_connected(set_closest_target):
 			p.possessed.disconnect(set_closest_target)
+	
+	SignalBus.player_state_changed.disconnect(_on_player_state_changed)
 
 
 func set_closest_target() -> void:
@@ -75,7 +81,7 @@ func set_closest_target() -> void:
 	target_possessable = Utility.find_closest(possessables, _parent.global_position)
 	
 	# set ghost target to closest possessable position
-	_parent.target_pos = target_possessable.global_position
+	_parent.set_target(target_possessable.global_position)
 	
 	# check if already overlapping the target possessable and immediately possess
 	if detector.overlaps_body(target_possessable):
@@ -100,7 +106,7 @@ func process_state() -> void:
 	# case: still moving from last possession interaction
 	# case: player or other object bumps into it
 	if target_possessable:
-		_parent.target_pos = target_possessable.global_position
+		_parent.set_target(target_possessable.global_position)
 
 
 func _on_decision_timeout() -> void:
@@ -146,3 +152,10 @@ func _on_contact_possessable(body: Node3D) -> void:
 		# delay, then make decision
 		decision_timer.wait_time = DECISION_TIME
 		decision_timer.start()
+
+
+func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
+	# when the player is hurt, change all currently possessing ghosts
+	# back into WAITING to ensure the player has some breathing room
+	if state == PlayerStateMachine.States.DYING and _parent.player_in_room:
+		change_state(GhostStateMachine.States.WAITING)

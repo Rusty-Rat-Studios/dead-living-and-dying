@@ -2,11 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://cnbim08e5mqrn" path="res://ui/interactable.tscn" id="1_k23bc"]
 [ext_resource type="Script" path="res://old_man/old_man.gd" id="1_kf68j"]
-[ext_resource type="Texture2D" uid="uid://bi0a78c3xwowg" path="res://old_man/old_man.png" id="2_0gwcu"]
+[ext_resource type="Texture2D" uid="uid://xw1x8sgcrylx" path="res://old_man/old_man.png" id="3_jfj5u"]
 [ext_resource type="PackedScene" uid="uid://bp0ydphecs3iv" path="res://common/shadow.tscn" id="4_8mfuk"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_tlkjy"]
-radius = 0.91197
+radius = 0.6
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_i62q5"]
 radius = 2.2
@@ -22,8 +22,9 @@ shape = SubResource("SphereShape3D_tlkjy")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
-billboard = 1
-texture = ExtResource("2_0gwcu")
+billboard = 2
+shaded = true
+texture = ExtResource("3_jfj5u")
 
 [node name="PlayerDetector" type="Area3D" parent="."]
 collision_layer = 0
@@ -35,3 +36,10 @@ shape = SubResource("SphereShape3D_i62q5")
 
 [node name="Shadow" parent="." instance=ExtResource("4_8mfuk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.257671, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, 0.5)
+light_color = Color(0.854902, 0.745098, 0.184314, 1)
+light_energy = 0.2
+shadow_enabled = true
+omni_range = 10.0

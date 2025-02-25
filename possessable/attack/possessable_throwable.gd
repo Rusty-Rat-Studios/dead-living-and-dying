@@ -2,30 +2,27 @@ class_name PossessableThrowable
 extends PossessableAttack
 
 # impulse strength used to throw the object
-const THROW_FORCE: float = 25.0
-# impulse strength used to spin the object when picked up
-const SPIN_FORCE_MIN: float = -0.2
-const SPIN_FORCE_MAX: float = 0.2
+const THROW_FORCE: float = 15.0
 # speed threshold for enabling/disabling hurtbox
 const DAMAGE_VELOCITY: float = 2.0
 # speed threshold for slowing down possessable when bumped while possessed
 # used to avoid "floating away"
 const SPEED_THRESHOLD: float = 1
-
 # RANGE object rises/falls while possessed
 const FLOAT_RANGE: float = 0.2
 # speed at which the object oscillates
 const FLOAT_SPEED: float = 2
 # scalar for speed that the object is lifted
-const FLOAT_FORCE: float = 1.8
+const FLOAT_FORCE: float = 1.4
 # target height for possessed objects to float to
-const FLOAT_HEIGHT: float = 3
+const FLOAT_HEIGHT: float = 4
 # for timing float effect oscillation
 @onready var float_time_offset: float = 0.0
 @onready var hitbox: Area3D = $Hitbox
 @onready var hitbox_collision_shape: CollisionShape3D = $Hitbox/CollisionShape3D
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
+	super(state)
 	# if object has been thrown, thus depossessed, it should not be possessable
 	# again until object has slowed down enough
 	if not is_possessable and linear_velocity.length() < DAMAGE_VELOCITY:
@@ -62,11 +59,8 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 
 func possess() -> void:
 	super()
-	# apply small, random spin when possessed
-	# side effect: brings _integrate_forces() out of sleep
-	apply_torque_impulse(Vector3(randf_range(SPIN_FORCE_MIN, SPIN_FORCE_MAX), 
-		randf_range(SPIN_FORCE_MIN, SPIN_FORCE_MAX), 
-		randf_range(SPIN_FORCE_MIN, SPIN_FORCE_MAX)))
+	# apply impulse to bring _integrate_forces() out of sleep
+	apply_impulse(Vector3.ZERO)
 
 
 func attack(target: Node3D) -> void:
