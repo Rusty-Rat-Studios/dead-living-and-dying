@@ -21,7 +21,7 @@ var is_possessing: bool = false
 # possessable detector
 var detector: Area3D
 var detector_collision_shape: CollisionShape3D
-# unset by player entering room and set afterward once attack delay timer expires
+# unset by player entering room and set after the attack delay timer expires
 var can_attack: bool = false
 var attack_delay: float = DECISION_TIME
 
@@ -32,7 +32,6 @@ var attack_delay: float = DECISION_TIME
 
 func _ready() -> void:
 	attack_delay_increment_timer.wait_time = ATTACK_DELAY_INCREMENT_DURATION
-	attack_delay_increment_timer.one_shot = false
 	add_child(attack_delay_increment_timer)
 	attack_delay_increment_timer.timeout.connect(_on_attack_delay_increment_timer_timeout)
 
