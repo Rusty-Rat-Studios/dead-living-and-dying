@@ -3,13 +3,6 @@ extends GhostState
 const ATTACK_SPEED: float = 6.0
 
 
-func _ready() -> void:
-	# defer connecting this signal to ensure this function executes
-	# AFTER this signal updates the player_in_room flag in ghost.gd
-	SignalBus.player_exited_room.connect(_on_player_exited_room, CONNECT_DEFERRED)
-	SignalBus.player_state_changed.connect(_on_player_state_changed)
-
-
 func enter() -> void:
 	# ensure player is in a place/state to be attacked
 	if not is_player_attackable():
@@ -20,26 +13,36 @@ func enter() -> void:
 	# reset at_target flag to handle case where previous state reached target
 	# since this flag is used to detect when to exit ATTACKING state
 	_parent.at_target = false
-
-
-func is_player_attackable() -> bool:
-	# check if player is in room and DYING or DEAD when entering attack state
-	if (_parent.player_in_room
-		and (PlayerHandler.get_player_state() == PlayerStateMachine.States.DEAD
-			or PlayerHandler.get_player_state() == PlayerStateMachine.States.DYING)):
-		return true
-	return false
+	
+	# defer connecting this signal to ensure this function executes
+	# AFTER this signal updates the player_in_room flag in ghost.gd
+	SignalBus.player_exited_room.connect(_on_player_exited_room, CONNECT_DEFERRED)
+	SignalBus.player_state_changed.connect(_on_player_state_changed)
 
 
 func exit() -> void:
 	super()
 	_parent.speed = _parent.BASE_SPEED
+	
+	if SignalBus.player_exited_room.is_connected(_on_player_exited_room):
+		SignalBus.player_exited_room.disconnect(_on_player_exited_room)
+	if SignalBus.player_state_changed.is_connected(_on_player_state_changed):
+		SignalBus.player_state_changed.disconnect(_on_player_state_changed)
 
 
 func process_state() -> void:
 	_parent.set_target(PlayerHandler.get_player().global_position)
 	if _parent.at_target:
 		change_state(GhostStateMachine.States.WAITING)
+
+
+func is_player_attackable() -> bool:
+	# check if player is in room and DYING or DEAD when entering attack state
+	if (_parent.player_in_room
+		and (PlayerHandler.get_player_state() == PlayerStateMachine.States.DEAD
+		or PlayerHandler.get_player_state() == PlayerStateMachine.States.DYING)):
+		return true
+	return false
 
 
 func _on_player_exited_room(room: Node3D) -> void:

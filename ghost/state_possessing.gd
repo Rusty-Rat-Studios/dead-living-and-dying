@@ -10,14 +10,30 @@ const DEPOSSESS_CHANCE: float = 0.15
 const WAIT_CHANCE: float = 0.35
 # short delay for the ghost to wait when failing to possess an object
 const TARGET_RESET_DELAY: float = 0.1
+# used by attack delay timer to increment/decrement attack delay counter
+# based on whether player is in the room or not to avoid door-cheesing
+const ATTACK_DELAY_INCREMENT: float = 0.05
+const ATTACK_DELAY_DECREMENT: float = 0.1
+const ATTACK_DELAY_INCREMENT_DURATION: float = 0.1
 
 var target_possessable: Possessable
+var is_possessing: bool = false
 # possessable detector
 var detector: Area3D
 var detector_collision_shape: CollisionShape3D
+# unset by player entering room and set after the attack delay timer expires
+var can_attack: bool = false
+var attack_delay: float = DECISION_TIME
 
 @onready var decision_timer: Timer = Timer.new()
-@onready var is_possessing: bool = false
+# used to delay attacking if player has just entered the room
+@onready var attack_delay_increment_timer: Timer = Timer.new()
+
+
+func _ready() -> void:
+	attack_delay_increment_timer.wait_time = ATTACK_DELAY_INCREMENT_DURATION
+	add_child(attack_delay_increment_timer)
+	attack_delay_increment_timer.timeout.connect(_on_attack_delay_increment_timer_timeout)
 
 
 func init(parent: CharacterBody3D, state_machine: StateMachine) -> void:
@@ -43,6 +59,8 @@ func enter() -> void:
 	
 	# connect/disconnect in enter/exit to ensure function only fires while state is active
 	SignalBus.player_state_changed.connect(_on_player_state_changed)
+	SignalBus.player_entered_room.connect(_on_player_entered_room)
+	SignalBus.player_exited_room.connect(_on_player_exited_room)
 	
 	set_closest_target()
 
@@ -59,6 +77,8 @@ func exit() -> void:
 	
 	decision_timer.stop()
 	target_possessable = null
+	# restore attack delay to maximum value
+	attack_delay = DECISION_TIME
 	
 	# clunky, but ensure no connections to possessables remain
 	for p: Possessable in _parent.current_room.possessables_available:
@@ -66,6 +86,8 @@ func exit() -> void:
 			p.possessed.disconnect(set_closest_target)
 	
 	SignalBus.player_state_changed.disconnect(_on_player_state_changed)
+	SignalBus.player_entered_room.disconnect(_on_player_entered_room)
+	SignalBus.player_exited_room.disconnect(_on_player_exited_room)
 
 
 func set_closest_target() -> void:
@@ -109,16 +131,6 @@ func process_state() -> void:
 		_parent.set_target(target_possessable.global_position)
 
 
-func _on_decision_timeout() -> void:
-	if is_possessing:
-		var choices: Dictionary = {
-			_depossess: DEPOSSESS_CHANCE,
-			_attack: ATTACK_CHANCE,
-			_wait: WAIT_CHANCE
-		}
-		RNG.call_weighted_random(choices)
-
-
 func _depossess() -> void:
 	# depossess object and go to WAITING
 	target_possessable.depossess()
@@ -140,6 +152,18 @@ func _wait() -> void:
 	decision_timer.start()
 
 
+func _on_decision_timeout() -> void:
+	if is_possessing:
+		var choices: Dictionary = {
+			_depossess: DEPOSSESS_CHANCE,
+			_wait: WAIT_CHANCE
+		}
+		# add option to attack only if attack delay has expired
+		if can_attack:
+			choices[_attack] = ATTACK_CHANCE
+		RNG.call_weighted_random(choices)
+
+
 func _on_contact_possessable(body: Node3D) -> void:
 	# ensure overlapping body is indeed the target, then possess it
 	if body == target_possessable and target_possessable.is_possessable:
@@ -159,3 +183,34 @@ func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
 	# back into WAITING to ensure the player has some breathing room
 	if state == PlayerStateMachine.States.DYING and _parent.player_in_room:
 		change_state(GhostStateMachine.States.WAITING)
+
+
+func _on_player_entered_room(room: Node3D) -> void:
+	# prevent ghost from immediately attack the player when entering room
+	if is_possessing and room == _parent.current_room:
+		# begin delay time before attacking
+		if attack_delay_increment_timer.is_stopped():
+			attack_delay_increment_timer.start()
+			can_attack = false
+
+
+func _on_player_exited_room(room: Node3D) -> void:
+	if (room == _parent.current_room 
+		and attack_delay_increment_timer.is_stopped()):
+		attack_delay_increment_timer.start()
+
+
+func _on_attack_delay_increment_timer_timeout() -> void:
+	# attack delay decrements while player is in the room until it reaches zero,
+	# enabling the ghost to attack. If the player is outside the room, it increments
+	# (twice as slowly as it decrements) until the attack delay is restored to
+	# its base value of DECISION_TIME
+	if _parent.player_in_room:
+		attack_delay -= ATTACK_DELAY_DECREMENT
+	elif not _parent.player_in_room and attack_delay <= DECISION_TIME:
+		attack_delay += ATTACK_DELAY_INCREMENT
+	
+	if attack_delay <= 0 or attack_delay >= DECISION_TIME:
+		attack_delay_increment_timer.stop()
+	if attack_delay <= 0:
+		can_attack = true
