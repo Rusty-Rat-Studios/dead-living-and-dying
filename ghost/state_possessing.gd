@@ -61,7 +61,7 @@ func enter() -> void:
 	# connect/disconnect in enter/exit to ensure function only fires while state is active
 	SignalBus.player_state_changed.connect(_on_player_state_changed)
 	SignalBus.player_entered_room.connect(_on_player_entered_room)
-	#SignalBus.player_exited_room.connect(_on_player_exited_room)
+	SignalBus.player_exited_room.connect(_on_player_exited_room)
 	
 	set_closest_target()
 
@@ -78,6 +78,8 @@ func exit() -> void:
 	
 	decision_timer.stop()
 	target_possessable = null
+	# restore attack delay to maximum value
+	attack_delay = DECISION_TIME
 	
 	# clunky, but ensure no connections to possessables remain
 	for p: Possessable in _parent.current_room.possessables_available:
@@ -86,6 +88,7 @@ func exit() -> void:
 	
 	SignalBus.player_state_changed.disconnect(_on_player_state_changed)
 	SignalBus.player_entered_room.disconnect(_on_player_entered_room)
+	SignalBus.player_exited_room.disconnect(_on_player_exited_room)
 
 
 func set_closest_target() -> void:
@@ -177,7 +180,6 @@ func _on_contact_possessable(body: Node3D) -> void:
 
 
 func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
-	print("state change")
 	# when the player is hurt, change all currently possessing ghosts
 	# back into WAITING to ensure the player has some breathing room
 	if state == PlayerStateMachine.States.DYING and _parent.player_in_room:
@@ -187,14 +189,15 @@ func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
 func _on_player_entered_room(room: Node3D) -> void:
 	# prevent ghost from immediately attack the player when entering room
 	if is_possessing and room == _parent.current_room:
-		print("delaying attack")
 		# begin delay time before attacking
-		attack_delay_increment_timer.start()
-		can_attack = false
+		if attack_delay_increment_timer.is_stopped():
+			attack_delay_increment_timer.start()
+			can_attack = false
 
 
 func _on_player_exited_room(room: Node3D) -> void:
-	if room == _parent.current_room:
+	if (room == _parent.current_room 
+		and attack_delay_increment_timer.is_stopped()):
 		attack_delay_increment_timer.start()
 
 
@@ -208,10 +211,8 @@ func _on_attack_delay_increment_timer_timeout() -> void:
 	elif not _parent.player_in_room and attack_delay <= DECISION_TIME:
 		attack_delay += ATTACK_DELAY_INCREMENT
 	
-	if attack_delay <= 0:
-		can_attack = true
-		print("attack delay expired")
 	if attack_delay <= 0 or attack_delay >= DECISION_TIME:
 		attack_delay_increment_timer.stop()
-	if attack_delay >= DECISION_TIME:
-		print("attack delay back to base")
+		
+		if attack_delay <= 0:
+			can_attack = true
