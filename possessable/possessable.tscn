@@ -1,20 +1,16 @@
 [gd_scene load_steps=8 format=3 uid="uid://bcep1wbs2caas"]
 
 [ext_resource type="Script" path="res://possessable/possessable.gd" id="1_4ebmk"]
+[ext_resource type="Texture2D" uid="uid://d1vlfcehjxisy" path="res://possessable/crate.png" id="2_6rla4"]
+[ext_resource type="PackedScene" uid="uid://bp0ydphecs3iv" path="res://common/shadow.tscn" id="3_ni4lu"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kvr7m"]
-albedo_color = Color(1, 0.933333, 0, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_60awo"]
-material = SubResource("StandardMaterial3D_kvr7m")
-size = Vector3(0.5, 0.5, 0.5)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_42qqj"]
-size = Vector3(0.5, 0.5, 0.5)
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ulvk5"]
+height = 1.5
+radius = 0.6
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rvnlq"]
 emission_shape = 3
-emission_box_extents = Vector3(0.25, 0.25, 0.25)
+emission_box_extents = Vector3(0.5, 0.5, 0.5)
 direction = Vector3(0, -1, 0)
 spread = 180.0
 initial_velocity_min = 0.2
@@ -22,6 +18,7 @@ initial_velocity_max = 0.5
 gravity = Vector3(0, 0.5, 0)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cvd0x"]
+render_priority = 1
 transparency = 1
 albedo_color = Color(0.513726, 0, 0.662745, 0.352941)
 
@@ -33,16 +30,22 @@ height = 0.1
 [node name="Possessable" type="RigidBody3D"]
 collision_layer = 4
 collision_mask = 5
+angular_damp = 5.0
 script = ExtResource("1_4ebmk")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_60awo")
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("BoxShape3D_42qqj")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0618164, 0)
+shape = SubResource("CylinderShape3D_ulvk5")
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 emitting = false
 amount = 32
 process_material = SubResource("ParticleProcessMaterial_rvnlq")
 draw_pass_1 = SubResource("SphereMesh_218we")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+billboard = 2
+shaded = true
+texture = ExtResource("2_6rla4")
+
+[node name="Shadow" parent="." instance=ExtResource("3_ni4lu")]

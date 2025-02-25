@@ -20,6 +20,7 @@ func init(parent: CharacterBody3D, state_machine: StateMachine) -> void:
 
 
 func enter() -> void:
+	_parent.sprite.animation = "idle"
 	stun_timer.start()
 	collision_shape.set_deferred("disabled", true)
 

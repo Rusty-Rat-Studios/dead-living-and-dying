@@ -26,6 +26,7 @@ var _state_machine: PlayerStateMachine
 @onready var light_omni: OmniLight3D = $OmniLight3D
 @onready var light_spot: SpotLight3D = $SpotLight3D
 @onready var camera: Camera3D = $RotationOffset/Camera3D
+@onready var sprite: AnimatedSprite3D = $RotationOffset/AnimatedSprite3D
 # updated by state machine when changing states
 @onready var hurtbox: Area3D = $Hurtbox
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
@@ -87,6 +88,9 @@ func handle_movement(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, stat_dict[Stats.SPEED])
 		velocity.z = move_toward(velocity.z, 0, stat_dict[Stats.SPEED])
+	
+	if abs(velocity.x) > 0.01:
+		sprite.flip_h = direction.x < 0
 	move_and_slide()
 
 

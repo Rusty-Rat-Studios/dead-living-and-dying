@@ -52,6 +52,7 @@ func init(parent: CharacterBody3D, state_machine: StateMachine) -> void:
 
 func enter() -> void:
 	_parent.speed = _parent.BASE_SPEED
+	_parent.sprite.animation = "active"
 	# enable possessable detector
 	detector_collision_shape.set_deferred("disabled", false)
 	# reset decision timer
@@ -100,7 +101,7 @@ func set_closest_target() -> void:
 	target_possessable = Utility.find_closest(possessables, _parent.global_position)
 	
 	# set ghost target to closest possessable position
-	_parent.target_pos = target_possessable.global_position
+	_parent.set_target(target_possessable.global_position)
 	
 	# check if already overlapping the target possessable and immediately possess
 	if detector.overlaps_body(target_possessable):
@@ -125,7 +126,7 @@ func process_state() -> void:
 	# case: still moving from last possession interaction
 	# case: player or other object bumps into it
 	if target_possessable:
-		_parent.target_pos = target_possessable.global_position
+		_parent.set_target(target_possessable.global_position)
 
 
 func _depossess() -> void:
@@ -179,7 +180,7 @@ func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
 	print("state change")
 	# when the player is hurt, change all currently possessing ghosts
 	# back into WAITING to ensure the player has some breathing room
-	if state == PlayerStateMachine.States.DYING:
+	if state == PlayerStateMachine.States.DYING and _parent.player_in_room:
 		change_state(GhostStateMachine.States.WAITING)
 
 
@@ -214,4 +215,3 @@ func _on_attack_delay_increment_timer_timeout() -> void:
 		attack_delay_increment_timer.stop()
 	if attack_delay >= DECISION_TIME:
 		print("attack delay back to base")
-	

@@ -1,10 +1,12 @@
 class_name Wall
 extends Node3D
 
-const WALL_MATERIAL: StandardMaterial3D = preload("res://map/room_components/wall_material.tres")
+#const WALL_MATERIAL: StandardMaterial3D = preload("res://map/room_components/wall_material.tres")
 const TRANSPARENT_WALL_MATERIAL: ShaderMaterial = preload("res://map/room_components/transparent_wall_material.tres")
 
 const TWEEN_DURATION: float = 1.0
+
+var wall_material: StandardMaterial3D = preload("res://map/room_components/wall_material.tres")
 
 var is_horizontal_wall: bool = false
 var is_transparent: bool = false
@@ -48,7 +50,7 @@ func _apply_material_normal() -> void:
 		transparent_tween.kill()
 	normal_tween = create_tween().set_parallel()
 	normal_tween.tween_property(self, "intensity", 0.0, TWEEN_DURATION)
-	normal_tween.connect("finished", func() -> void: $WallMesh.set_surface_override_material(0, WALL_MATERIAL))
+	normal_tween.connect("finished", func() -> void: $WallMesh.set_surface_override_material(0, wall_material))
 
 
 func _on_visibility_changed() -> void:
@@ -60,5 +62,5 @@ func _on_visibility_changed() -> void:
 		if transparent_tween:
 			transparent_tween.kill()
 		intensity = 0.0
-		$WallMesh.set_surface_override_material(0, WALL_MATERIAL)
+		$WallMesh.set_surface_override_material(0, wall_material)
 		set_process(false)
