@@ -24,7 +24,6 @@
 [ext_resource type="PackedScene" uid="uid://d3uaapt6yn0ed" path="res://items/tea/tea_world.tscn" id="21_lgjc2"]
 [ext_resource type="PackedScene" uid="uid://bh1qwbhfylkio" path="res://ui/inventory/inventory_container.tscn" id="23_q3mfq"]
 
-
 [node name="Game" type="Node3D"]
 script = ExtResource("1_77rk7")
 

@@ -30,7 +30,7 @@ func exit() -> void:
 
 
 func process_state() -> void:
-	_parent.set_target(PlayerHandler.get_player().global_position)
+	_parent.target_pos = PlayerHandler.get_player().global_position
 	if _parent.at_target:
 		change_state(GhostStateMachine.States.WAITING)
 
@@ -42,20 +42,6 @@ func is_player_attackable() -> bool:
 			or PlayerHandler.get_player_state() == PlayerStateMachine.States.DYING)):
 		return true
 	return false
-
-
-func exit() -> void:
-	super()
-	_parent.speed = _parent.BASE_SPEED
-	
-	SignalBus.player_exited_room.disconnect(_on_player_exited_room)
-	SignalBus.player_state_changed.disconnect(_on_player_state_changed)
-
-
-func process_state() -> void:
-	_parent.target_pos = PlayerHandler.get_player().global_position
-	if _parent.at_target:
-		change_state(GhostStateMachine.States.WAITING)
 
 
 func _on_player_exited_room(room: Node3D) -> void:
