@@ -1,13 +1,13 @@
 class_name Shrine
 extends StaticBody3D
 
-const TEXT_INACTIVE: String = "SHRINE\r---inactive---\nEnter the shrine\rto activate it"
-const TEXT_ACTIVE: String = "SHRINE\r---ACTIVE---\nYou will revive here if this\ris the closest shrine"
-const TEXT_CONSUMED: String = "SHRINE\r---CONSUMED---\nThis shrine cannot\rbe used anymore"
 const TEXT_INTERACTABLE: String = "[E] Activate"
 
 const TEXTURE: Texture2D = preload("res://map/rooms/shrine/shrine.png")
 const TEXTURE_CONSUMED: Texture2D = preload("res://map/rooms/shrine/shrine_consumed.png")
+
+const LIGHT_ENERGY: float = 2
+const TWEEN_DURATION: float = 1
 
 @export var default: bool = false
 
@@ -16,8 +16,6 @@ const TEXTURE_CONSUMED: Texture2D = preload("res://map/rooms/shrine/shrine_consu
 # tracks if player has revived at this shrine
 # for disallowing further revivals at this shrine
 @onready var consumed: bool = false
-# material duplicate for individually modifying material of each shrine
-@onready var sprite_texture: Texture2D = $Sprite3D.texture
 @onready var detector: Area3D = $PlayerDetector
 
 
@@ -34,23 +32,46 @@ func _ready() -> void:
 	reset()
 
 
+# TEMPORARY - to be removed once map generation complete
 func reset() -> void:
 	consumed = false
+	
 	if default:
 		activated = true
-		#material.albedo_color = color_active
+		enable_effects()
 	else:
 		activated = false
-		#material.albedo_color = color_inactive
+		disable_effects()
 	
 	$Interactable.inputs = ["interact"]
 	$Interactable.hide_message()
 
 
+func enable_effects() -> void:
+	print("enabling fx")
+	$FountainParticles.emitting = true
+	$FireParticles.emitting = true
+	$FireParticles2.emitting = true
+	
+	var light_tween: Tween = create_tween().set_parallel()
+	light_tween.tween_property($FireParticles/SpotLight3D, "light_energy", LIGHT_ENERGY, TWEEN_DURATION)
+	light_tween.tween_property($FireParticles2/SpotLight3D, "light_energy", LIGHT_ENERGY, TWEEN_DURATION)
+
+
+func disable_effects() -> void:
+	$FountainParticles.emitting = false
+	$FireParticles.emitting = false
+	$FireParticles2.emitting = false
+	
+	var light_tween: Tween = create_tween().set_parallel()
+	light_tween.tween_property($FireParticles/SpotLight3D, "light_energy", 0, TWEEN_DURATION)
+	light_tween.tween_property($FireParticles2/SpotLight3D, "light_energy", 0, TWEEN_DURATION)
+
+
 func activate() -> void:
 	activated = true
 	# change color and text to show it is activated
-	#material.albedo_color = color_active
+	enable_effects()
 	# remove input detection for interactable and hide message
 	$Interactable.inputs.clear()
 	$Interactable.hide_message()
@@ -60,7 +81,8 @@ func consume() -> void:
 	if not default:
 		consumed = true
 		activated = false
-		#material.albedo_color = color_consumed
+		disable_effects()
+		$Sprite3D.replace_texture(TEXTURE_CONSUMED)
 
 
 func _on_body_entered(_body: Node3D) -> void:

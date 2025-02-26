@@ -129,6 +129,7 @@ shape = SubResource("CylinderShape3D_eitr8")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 0)
 amount = 64
 lifetime = 0.9
+local_coords = true
 trail_enabled = true
 process_material = SubResource("ParticleProcessMaterial_wwn3s")
 draw_pass_1 = SubResource("RibbonTrailMesh_2vsw4")
@@ -146,6 +147,7 @@ draw_pass_1 = SubResource("QuadMesh_05f35")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.0116541, 0.665597, 0)
 light_color = Color(0.823529, 0.309804, 0.152941, 1)
 light_energy = 2.0
+spot_range = 10.0
 spot_angle = 60.0
 
 [node name="FireParticles2" type="GPUParticles3D" parent="."]
@@ -161,4 +163,5 @@ draw_pass_1 = SubResource("QuadMesh_05f35")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -0.0116541, 0.665597, 0)
 light_color = Color(0.825061, 0.311682, 0.151324, 1)
 light_energy = 2.0
+spot_range = 10.0
 spot_angle = 60.0
