@@ -7,6 +7,8 @@
 size = Vector3(0.5, 0.5, 0.5)
 
 [node name="WallPainting" instance=ExtResource("1_y53pr")]
+collision_layer = 32
+collision_mask = 1
 gravity_scale = 0.0
 
 [node name="CollisionShape3D" parent="." index="0"]
@@ -14,5 +16,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.25)
 shape = SubResource("BoxShape3D_w35e6")
 
 [node name="Sprite3D" parent="." index="2"]
-transform = Transform3D(1, 0, 0, 0, 1.4, 0, 0, 0, 1, 0, 0, 0)
 texture = ExtResource("2_qflqu")
