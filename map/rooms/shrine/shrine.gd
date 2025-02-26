@@ -48,7 +48,6 @@ func reset() -> void:
 
 
 func enable_effects() -> void:
-	print("enabling fx")
 	$FountainParticles.emitting = true
 	$FireParticles.emitting = true
 	$FireParticles2.emitting = true
