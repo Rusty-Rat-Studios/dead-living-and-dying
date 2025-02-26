@@ -64,14 +64,10 @@ func consume() -> void:
 
 
 func _on_body_entered(_body: Node3D) -> void:
-	print("entered")
-	print("consumed: ", consumed)
-	print("activated: ", activated)
 	# type-checking for player is unneeded as shrine collides on layer PLAYER
 	if (not consumed 
 		and not activated 
 		and PlayerHandler.get_player_state() != PlayerStateMachine.States.DEAD):
-		print("player can interact!")
 		# display interaction text
 		$Interactable.display_message(TEXT_INTERACTABLE)
 		$Interactable.enabled = true

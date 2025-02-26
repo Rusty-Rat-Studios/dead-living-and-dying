@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://web8bdry114l"]
+[gd_scene load_steps=11 format=3 uid="uid://web8bdry114l"]
 
 [ext_resource type="Script" path="res://map/rooms/shrine/shrine.gd" id="1_fbitt"]
 [ext_resource type="PackedScene" uid="uid://cnbim08e5mqrn" path="res://ui/interactable.tscn" id="2_6wln3"]
@@ -9,6 +9,35 @@ size = Vector3(5.5, 4, 2)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_eitr8"]
 radius = 4.5
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wwn3s"]
+particle_flag_align_y = true
+direction = Vector3(0, 1, 0)
+spread = 30.0
+initial_velocity_min = 2.0
+initial_velocity_max = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lcpdb"]
+transparency = 1
+specular_mode = 2
+albedo_color = Color(0.0470588, 0.25098, 0.407843, 0.588235)
+emission_enabled = true
+emission = Color(0.0470588, 0.25098, 0.407843, 1)
+emission_energy_multiplier = 0.5
+backlight_enabled = true
+backlight = Color(1, 1, 1, 1)
+use_particle_trails = true
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_2vsw4"]
+material = SubResource("StandardMaterial3D_lcpdb")
+size = 0.08
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fv6ck"]
+direction = Vector3(0, 0, 0)
+gravity = Vector3(0, 1, 0)
+
+[sub_resource type="QuadMesh" id="QuadMesh_qs0lc"]
+size = Vector2(0.1, 0.1)
 
 [node name="Shrine" type="StaticBody3D"]
 script = ExtResource("1_fbitt")
@@ -33,3 +62,16 @@ monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetector"]
 shape = SubResource("CylinderShape3D_eitr8")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 0)
+amount = 32
+lifetime = 0.8
+trail_enabled = true
+process_material = SubResource("ParticleProcessMaterial_wwn3s")
+draw_pass_1 = SubResource("RibbonTrailMesh_2vsw4")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.12697, 2.8197, 0)
+process_material = SubResource("ParticleProcessMaterial_fv6ck")
+draw_pass_1 = SubResource("QuadMesh_qs0lc")
