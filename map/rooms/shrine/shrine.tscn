@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://web8bdry114l"]
 
-[ext_resource type="Script" path="res://map/shrine.gd" id="1_fbitt"]
+[ext_resource type="Script" path="res://map/rooms/shrine/shrine.gd" id="1_fbitt"]
 [ext_resource type="PackedScene" uid="uid://cnbim08e5mqrn" path="res://ui/interactable.tscn" id="2_6wln3"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_eitr8"]
