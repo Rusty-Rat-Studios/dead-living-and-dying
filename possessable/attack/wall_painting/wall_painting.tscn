@@ -7,6 +7,8 @@
 size = Vector3(0.5, 0.5, 0.5)
 
 [node name="WallPainting" instance=ExtResource("1_y53pr")]
+collision_layer = 32
+collision_mask = 1
 gravity_scale = 0.0
 
 [node name="CollisionShape3D" parent="." index="0"]
