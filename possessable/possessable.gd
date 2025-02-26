@@ -32,6 +32,7 @@ const UPRIGHT_STRENGTH: float = 10000
 # store initial position to return to when calling reset()
 @onready var starting_transform: Transform3D = transform
 
+
 func _ready() -> void:
 	# add self to possessables in room
 	room.add_possessable(self)
