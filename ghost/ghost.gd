@@ -20,6 +20,8 @@ var light_enabled: bool = false
 
 @onready var state_machine: GhostStateMachine = $StateMachine
 @onready var hitbox: Area3D = $Hitbox
+# used by state ATTACKING to detect if player in range of stun attack
+@onready var attack_range: Area3D = $AttackRange
 
 @onready var sprite: AnimatedSprite3D = $AnimatedSprite3D
 @onready var light: OmniLight3D = $OmniLight3D

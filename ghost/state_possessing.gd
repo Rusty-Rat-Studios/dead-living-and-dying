@@ -145,20 +145,24 @@ func process_state() -> void:
 
 func _depossess() -> void:
 	# depossess object and go to WAITING
-	target_possessable.depossess()
-	is_possessing = false
-	change_state(GhostStateMachine.States.WAITING)
+	# check if ghost has already been forced into WAITING by player state change
+	if target_possessable:
+		target_possessable.depossess()
+		is_possessing = false
+		change_state(GhostStateMachine.States.WAITING)
 
 
 func _attack() -> void:
-	sprite_shaker.animate(target_possessable.parent.get_node("Sprite3D"), ATTACK_WINDUP, Vector2(1, 0.5))
-	await Utility.delay(2)
+	sprite_shaker.animate(target_possessable.parent.get_node("Sprite3D"), ATTACK_WINDUP, ATTACK_SHAKE_MAGNITUDE)
+	await Utility.delay(ATTACK_WINDUP)
 	
 	# if player not in range, possessable.attack() simply depossesses
-	target_possessable.attack(PlayerHandler.get_player())
-	target_possessable.depossess()
-	is_possessing = false
-	change_state(GhostStateMachine.States.WAITING)
+	# check if ghost has already been forced into WAITING by player state change
+	if target_possessable:
+		target_possessable.attack(PlayerHandler.get_player())
+		target_possessable.depossess()
+		is_possessing = false
+		change_state(GhostStateMachine.States.WAITING)
 
 
 func _wait() -> void:
