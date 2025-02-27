@@ -108,7 +108,6 @@ func attack(target: Node3D) -> void:
 		
 		# display "wind-up" to attack
 		await sprite_shaker.animate(parent.get_node("Sprite3D"), ATTACK_WINDUP, ATTACK_SHAKE_MAGNITUDE)
-		#await Utility.delay(ATTACK_WINDUP)
 		
 		# check again that object wasn't depossessed mid-attack
 		if is_possessed:

@@ -1,7 +1,7 @@
 extends GhostState
 
 const PRE_ATTACK_SPEED: float = 7.0
-const ATTACK_SPEED: float = 10.0
+const ATTACK_SPEED: float = 9.5
 
 # how long the shake animation is displayed before attacking
 const ATTACK_WINDUP: float = 1
@@ -94,7 +94,7 @@ func is_player_attackable() -> bool:
 	return false
 
 
-func attack(target: Node3D) -> void:
+func attack() -> void:
 	# checked in process_state() to pause movement
 	winding_up = true
 	# disable collision area to avoid re-triggering attack if player moved out of area
@@ -123,4 +123,4 @@ func _on_player_entered_attack_range(body: Node3D) -> void:
 	if body == PlayerHandler.get_player():
 		# set to halt ghost following player
 		_parent.at_target = true
-		attack(body)
+		attack()
