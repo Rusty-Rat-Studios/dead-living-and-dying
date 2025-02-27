@@ -91,6 +91,12 @@ func possess() -> void:
 	set_physics_process(true)
 
 
+func depossess() -> void:
+	super()
+	# force sprite shaker to stop if object depossessed mid-attack
+	sprite_shaker.halt()
+
+
 func attack(target: Node3D) -> void:
 	if player_in_range and room.player_in_room:
 		# disable player detection

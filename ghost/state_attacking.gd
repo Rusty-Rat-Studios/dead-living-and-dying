@@ -59,7 +59,12 @@ func exit() -> void:
 	
 	attack_range_collision_shape.set_deferred("disabled", true)
 	winding_up = false
+	# force sprite shaker to stop if mid-attack
+	sprite_shaker.halt()
 	
+	# reset target to self position
+	_parent.set_target(_parent.global_position)
+
 	# restore sprite color to normal
 	if _parent.sprite.modulate != base_color:
 		var color_tween: Tween = create_tween()
