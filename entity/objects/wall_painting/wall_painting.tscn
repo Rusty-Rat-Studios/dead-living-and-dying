@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://3gsxuhfeo5qs"]
+
+[ext_resource type="Texture2D" uid="uid://cx0s455hjtlf8" path="res://entity/objects/wall_painting/wall_painting.png" id="1_hxpws"]
+[ext_resource type="PackedScene" uid="uid://bfmkrask6gxl3" path="res://possessable/attack/possessable_ranged.tscn" id="1_y53pr"]
+[ext_resource type="Script" path="res://common/sprite_backlight.gd" id="2_tux6f"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p76ih"]
+size = Vector3(4, 5, 0.2)
+
+[node name="WallPainting" type="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_p76ih")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture = ExtResource("1_hxpws")
+script = ExtResource("2_tux6f")
+
+[node name="PossessableRanged" parent="." instance=ExtResource("1_y53pr")]
