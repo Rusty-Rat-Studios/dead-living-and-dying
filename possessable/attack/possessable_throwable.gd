@@ -26,6 +26,9 @@ const FLOAT_HEIGHT: float = 4
 func _ready() -> void:
 	super()
 	
+	# disable physics process - re-enabled by possess()
+	set_physics_process(false)
+	
 	# instantiate hitbox as a slightly larger duplicate of parent collision shape
 	# to guarantee hitbox collision is detected before physics collision
 	hitbox_collision_shape.shape = parent.get_node("CollisionShape3D").shape.duplicate()
@@ -45,6 +48,9 @@ func _physics_process(delta: float) -> void:
 		hitbox_collision_shape.set_deferred("disabled", true)
 		# set flag to allow possession again
 		is_possessable = true
+		float_time_offset = 0
+		# disable physics process - re-enabled by possess()
+		set_physics_process(false)
 	
 	# animate object to "float" in the air
 	if is_possessed:
@@ -70,6 +76,12 @@ func _physics_process(delta: float) -> void:
 		if speed > SPEED_THRESHOLD:
 			parent.linear_velocity.x = lerp(parent.linear_velocity.x, 0.0, delta)
 			parent.linear_velocity.z = lerp(parent.linear_velocity.z, 0.0, delta)
+
+
+func possess() -> void:
+	super()
+	# enable physics processing - disabled along with hitbox when slow enough
+	set_physics_process(true)
 
 
 func attack(target: Node3D) -> void:
