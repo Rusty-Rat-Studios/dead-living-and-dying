@@ -5,9 +5,10 @@ const LIGHT_ENERGY: float = 0.2
 const TWEEN_IN_DURATION: float = 2
 const TWEEN_OUT_DURATION: float = 0.5
 
+var light_tween: Tween
+
 @onready var range_collision_shape: CollisionShape3D = $AttackRange/CollisionShape3D
 
-var light_tween: Tween
 
 func _ready() -> void:
 	super()
