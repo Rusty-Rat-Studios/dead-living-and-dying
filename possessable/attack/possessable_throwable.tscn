@@ -10,6 +10,9 @@ radius = 0.7
 [node name="Throwable" instance=ExtResource("1_5pall")]
 script = ExtResource("2_fk2mr")
 
+[node name="GPUParticles3D" parent="." index="0"]
+amount = 32
+
 [node name="Hitbox" type="Area3D" parent="." index="3"]
 collision_layer = 4
 collision_mask = 0

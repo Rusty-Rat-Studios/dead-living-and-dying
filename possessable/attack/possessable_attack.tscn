@@ -17,3 +17,9 @@ monitorable = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AttackRange" index="0"]
 shape = SubResource("SphereShape3D_1udu2")
 disabled = true
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
+light_color = Color(0.513726, 0, 0.662745, 1)
+light_energy = 0.0
+omni_range = 1.0
