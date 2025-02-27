@@ -45,7 +45,7 @@ func init(parent: CharacterBody3D, state_machine: StateMachine) -> void:
 	decision_timer.timeout.connect(_on_decision_timeout)
 	add_child(decision_timer)
 	detector = _parent.get_node("PossessableDetector")
-	detector.body_entered.connect(_on_contact_possessable)
+	detector.area_entered.connect(_on_contact_possessable)
 	detector_collision_shape = detector.get_node("CollisionShape3D")
 
 
@@ -106,7 +106,7 @@ func set_closest_target() -> void:
 	_parent.set_target(target_possessable.global_position)
 	
 	# check if already overlapping the target possessable and immediately possess
-	if detector.overlaps_body(target_possessable):
+	if detector.overlaps_area(target_possessable):
 		if target_possessable.is_possessable:
 			target_possessable.possess()
 			is_possessing = true

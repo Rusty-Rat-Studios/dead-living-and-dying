@@ -18,13 +18,29 @@ const FLOAT_FORCE: float = 1.4
 const FLOAT_HEIGHT: float = 4
 # for timing float effect oscillation
 @onready var float_time_offset: float = 0.0
+@onready var base_height: float = parent.position.y
 @onready var hitbox: Area3D = $Hitbox
 @onready var hitbox_collision_shape: CollisionShape3D = $Hitbox/CollisionShape3D
 
-func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
+
+func _ready() -> void:
+	super()
+	
+	# instantiate hitbox as a slightly larger duplicate of parent collision shape
+	# to guarantee hitbox collision is detected before physics collision
+	hitbox_collision_shape.shape = parent.get_node("CollisionShape3D").shape.duplicate()
+	if hitbox_collision_shape.shape is not CylinderShape3D:
+		push_error("ERROR: possessable throwable initialized as child of non-cylinder collision shape. 
+			Throwable objects must have a CylinderShape3D collision shape.")
+		return
+	hitbox_collision_shape.shape.height *= 1.1
+	hitbox_collision_shape.shape.radius *= 1.1
+
+
+func _physics_process(delta: float) -> void:
 	# if object has been thrown, thus depossessed, it should not be possessable
 	# again until object has slowed down enough
-	if not is_possessable and linear_velocity.length() < DAMAGE_VELOCITY:
+	if not is_possessable and parent.linear_velocity.length() < DAMAGE_VELOCITY:
 		# disable hurtbox when slow enough
 		hitbox_collision_shape.set_deferred("disabled", true)
 		# set flag to allow possession again
@@ -34,32 +50,26 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	if is_possessed:
 		# record time difference of how far the object should have floated
 		# up-and-down (FLOAT_RANGE) at it's peak height (float_height)
-		float_time_offset += state.step * FLOAT_SPEED
+		float_time_offset += delta * FLOAT_SPEED
 		
 		# add default on-the-floor height to floating height and add an
 		# oscillating sine component to float above/below target height
-		var target_height: float = starting_transform.origin.y + FLOAT_HEIGHT + FLOAT_RANGE * sin(float_time_offset)
-		var current_height: float = position.y
+		var target_height: float = base_height + FLOAT_HEIGHT + FLOAT_RANGE * sin(float_time_offset)
+		var current_height: float = parent.position.y
 		var height_diff: float = target_height - current_height
 		
 		# ensure no "downward" velocity applies; let gravity do it
 		if height_diff > 0:
 			# increase velocity exponentially proportional to the target/current height difference
 			# --- higher increase if far from target, smaller increase if close to target
-			state.linear_velocity.y = lerp(state.linear_velocity.y, height_diff**2 * FLOAT_FORCE, state.step)
+			parent.linear_velocity.y = lerp(parent.linear_velocity.y, height_diff**2 * FLOAT_FORCE, delta)
 		
 		# get magnitude of xz-plane velocity
-		var speed: float = Vector3(state.linear_velocity.x, 0, state.linear_velocity.z).length()
+		var speed: float = Vector3(parent.linear_velocity.x, 0, parent.linear_velocity.z).length()
 		# slow down possessed object if it is travelling above a given speed
 		if speed > SPEED_THRESHOLD:
-			state.linear_velocity.x = lerp(state.linear_velocity.x, 0.0, state.step)
-			state.linear_velocity.z = lerp(state.linear_velocity.z, 0.0, state.step)
-
-
-func possess() -> void:
-	super()
-	# apply impulse to bring _integrate_forces() out of sleep
-	apply_impulse(Vector3.ZERO)
+			parent.linear_velocity.x = lerp(parent.linear_velocity.x, 0.0, delta)
+			parent.linear_velocity.z = lerp(parent.linear_velocity.z, 0.0, delta)
 
 
 func attack(target: Node3D) -> void:
@@ -71,4 +81,4 @@ func attack(target: Node3D) -> void:
 		# disallow re-possession during attack
 		is_possessable = false
 		# VIOLENTLY LAUNCH SELF TOWARDS PLAYER \m/
-		apply_impulse(global_position.direction_to(target.global_position) * THROW_FORCE)
+		parent.apply_impulse(global_position.direction_to(target.global_position) * THROW_FORCE)

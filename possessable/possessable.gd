@@ -1,5 +1,5 @@
 class_name Possessable
-extends RigidBody3D
+extends Area3D
 
 """
 COLLISION MASKING SCHEME:
@@ -17,9 +17,10 @@ COLLISION MASKING SCHEME:
 # signal connected when ghost discovers all possessables in the room
 signal possessed
 
+@onready var parent: Node3D = get_parent()
 # store room for attaching self to "possessables_available" group that is 
 # checked by ghosts in the same room for available possession targets
-@onready var room: Room = get_parent()
+@onready var room: Room = parent.get_parent()
 # flag for ensuring object is not repossessed too soon after depossession
 @onready var is_possessable: bool = true
 # flag for ensuring object is "free" for possession
