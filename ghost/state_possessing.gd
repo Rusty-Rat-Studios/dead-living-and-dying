@@ -57,6 +57,14 @@ func enter() -> void:
 	# reset decision timer
 	decision_timer.wait_time = DECISION_TIME
 	
+	# negate attack delay if the player is already in the room
+	if _parent.player_in_room:
+		attack_delay = 0
+		can_attack = true
+	else:
+		attack_delay = DECISION_TIME
+		can_attack = false
+	
 	# connect/disconnect in enter/exit to ensure function only fires while state is active
 	SignalBus.player_state_changed.connect(_on_player_state_changed)
 	SignalBus.player_entered_room.connect(_on_player_entered_room)
@@ -77,8 +85,6 @@ func exit() -> void:
 	
 	decision_timer.stop()
 	target_possessable = null
-	# restore attack delay to maximum value
-	attack_delay = DECISION_TIME
 	
 	# clunky, but ensure no connections to possessables remain
 	for p: Possessable in _parent.current_room.possessables_available:
