@@ -1,9 +1,11 @@
-[gd_scene load_steps=20 format=3 uid="uid://web8bdry114l"]
+[gd_scene load_steps=22 format=3 uid="uid://web8bdry114l"]
 
 [ext_resource type="Script" path="res://map/rooms/shrine/shrine.gd" id="1_fbitt"]
 [ext_resource type="PackedScene" uid="uid://cnbim08e5mqrn" path="res://ui/interactable.tscn" id="2_6wln3"]
 [ext_resource type="Texture2D" uid="uid://cy64qmfwed8h8" path="res://map/rooms/shrine/shrine.png" id="3_fitia"]
 [ext_resource type="Script" path="res://common/sprite_backlight.gd" id="4_hscdd"]
+[ext_resource type="Texture2D" uid="uid://dw3sqamfip4v1" path="res://map/rooms/shrine/shrine_base.png" id="5_q7n7m"]
+[ext_resource type="PackedScene" uid="uid://b3nn5u3a5o85j" path="res://map/room_components/floor.tscn" id="6_k5joq"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_d8oqx"]
 size = Vector3(5.5, 4, 2)
@@ -165,3 +167,12 @@ light_color = Color(0.825061, 0.311682, 0.151324, 1)
 light_energy = 2.0
 spot_range = 10.0
 spot_angle = 60.0
+
+[node name="Decal" type="Decal" parent="."]
+transform = Transform3D(0.999391, 0, 0.0348995, 0, 1, 0, -0.0348995, 0, 0.999391, -0.1, 0, -4.2)
+layers = 2
+size = Vector3(10, 2, 15)
+texture_albedo = ExtResource("5_q7n7m")
+cull_mask = 1048574
+
+[node name="Floor" parent="." instance=ExtResource("6_k5joq")]
