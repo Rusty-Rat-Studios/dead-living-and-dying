@@ -4,7 +4,7 @@ const PRE_ATTACK_SPEED: float = 7.0
 const ATTACK_SPEED: float = 10.0
 
 # red color to modulate ghost when initiating attack
-const ATTACK_COLOR: Color = Color("743737")
+const ATTACK_COLOR: Color = Color("74373733")
 # how long the shake animation is displayed before attacking
 const ATTACK_WINDUP: float = 1
 # how much the shake animation moves in x or y dimensions
@@ -28,11 +28,10 @@ func init(parent: CharacterBody3D, state_machine: StateMachine) -> void:
 	
 	attack_range_collision_shape = _parent.attack_range.get_node("CollisionShape3D")
 	_parent.attack_range.body_entered.connect(_on_player_entered_attack_range)
-	
-	base_color = _parent.sprite.modulate
 
 
 func enter() -> void:
+	base_color = _parent.sprite.modulate
 	# ensure player is in a place/state to be attacked
 	if not is_player_attackable():
 		change_state(GhostStateMachine.States.WAITING)

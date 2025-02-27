@@ -15,10 +15,6 @@ const TARGET_RESET_DELAY: float = 0.1
 const ATTACK_DELAY_INCREMENT: float = 0.05
 const ATTACK_DELAY_DECREMENT: float = 0.1
 const ATTACK_DELAY_INCREMENT_DURATION: float = 0.1
-# how long the shake animation is displayed before attacking
-const ATTACK_WINDUP: float = 2
-# how much the shake animation moves in x or y dimensions
-const ATTACK_SHAKE_MAGNITUDE: Vector2 = Vector2(1, 0.5)
 
 var target_possessable: Possessable
 var is_possessing: bool = false
@@ -32,8 +28,6 @@ var attack_delay: float = DECISION_TIME
 @onready var decision_timer: Timer = Timer.new()
 # used to delay attacking if player has just entered the room
 @onready var attack_delay_increment_timer: Timer = Timer.new()
-# used to animate sprite for attack
-@onready var sprite_shaker: SpriteShaker = SpriteShaker.new()
 
 
 func _ready() -> void:
@@ -144,8 +138,8 @@ func process_state() -> void:
 
 
 func _depossess() -> void:
-	# depossess object and go to WAITING
 	# check if ghost has already been forced into WAITING by player state change
+	# depossess object and go to WAITING
 	if target_possessable:
 		target_possessable.depossess()
 		is_possessing = false
@@ -153,14 +147,10 @@ func _depossess() -> void:
 
 
 func _attack() -> void:
-	sprite_shaker.animate(target_possessable.parent.get_node("Sprite3D"), ATTACK_WINDUP, ATTACK_SHAKE_MAGNITUDE)
-	await Utility.delay(ATTACK_WINDUP)
-	
-	# if player not in range, possessable.attack() simply depossesses
 	# check if ghost has already been forced into WAITING by player state change
+	# if player not in range, possessable.attack() simply depossesses
 	if target_possessable:
-		target_possessable.attack(PlayerHandler.get_player())
-		target_possessable.depossess()
+		await target_possessable.attack(PlayerHandler.get_player())
 		is_possessing = false
 		change_state(GhostStateMachine.States.WAITING)
 
