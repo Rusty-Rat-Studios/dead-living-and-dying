@@ -33,8 +33,8 @@ func _ready() -> void:
 	# to guarantee hitbox collision is detected before physics collision
 	hitbox_collision_shape.shape = parent.get_node("CollisionShape3D").shape.duplicate()
 	if hitbox_collision_shape.shape is not CylinderShape3D:
-		push_error("ERROR: possessable throwable initialized as child of non-cylinder collision shape. 
-			Throwable objects must have a CylinderShape3D collision shape.")
+		push_error("ERROR: possessable throwable initialized as child of non-cylinder collision shape.",
+			"Throwable objects must have a CylinderShape3D collision shape.")
 		return
 	hitbox_collision_shape.shape.height *= 1.1
 	hitbox_collision_shape.shape.radius *= 1.1
