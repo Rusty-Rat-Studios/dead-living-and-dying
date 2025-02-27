@@ -15,6 +15,10 @@ const TARGET_RESET_DELAY: float = 0.1
 const ATTACK_DELAY_INCREMENT: float = 0.05
 const ATTACK_DELAY_DECREMENT: float = 0.1
 const ATTACK_DELAY_INCREMENT_DURATION: float = 0.1
+# how long the shake animation is displayed before attacking
+const ATTACK_WINDUP: float = 2
+# how much the shake animation moves in x or y dimensions
+const ATTACK_SHAKE_MAGNITUDE: Vector2 = Vector2(1, 0.5)
 
 var target_possessable: Possessable
 var is_possessing: bool = false
@@ -28,6 +32,8 @@ var attack_delay: float = DECISION_TIME
 @onready var decision_timer: Timer = Timer.new()
 # used to delay attacking if player has just entered the room
 @onready var attack_delay_increment_timer: Timer = Timer.new()
+# used to animate sprite for attack
+@onready var sprite_shaker: SpriteShaker = SpriteShaker.new()
 
 
 func _ready() -> void:
@@ -145,6 +151,9 @@ func _depossess() -> void:
 
 
 func _attack() -> void:
+	sprite_shaker.animate(target_possessable.parent.get_node("Sprite3D"), ATTACK_WINDUP, Vector2(1, 0.5))
+	await Utility.delay(2)
+	
 	# if player not in range, possessable.attack() simply depossesses
 	target_possessable.attack(PlayerHandler.get_player())
 	target_possessable.depossess()
@@ -167,7 +176,7 @@ func _on_decision_timeout() -> void:
 		# add option to attack only if attack delay has expired
 		if can_attack:
 			choices[_attack] = ATTACK_CHANCE
-		RNG.call_weighted_random(choices)
+		RNG.call_async_weighted_random(choices)
 
 
 func _on_contact_possessable(body: Node3D) -> void:
