@@ -151,7 +151,6 @@ func _attack() -> void:
 	# if player not in range, possessable.attack() simply depossesses
 	if target_possessable:
 		await target_possessable.attack(PlayerHandler.get_player())
-		is_possessing = false
 		change_state(GhostStateMachine.States.WAITING)
 
 

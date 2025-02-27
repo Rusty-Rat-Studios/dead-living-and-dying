@@ -107,10 +107,12 @@ func attack(target: Node3D) -> void:
 		is_possessable = false
 		
 		# display "wind-up" to attack
-		sprite_shaker.animate(parent.get_node("Sprite3D"), ATTACK_WINDUP, ATTACK_SHAKE_MAGNITUDE)
-		await Utility.delay(ATTACK_WINDUP)
+		await sprite_shaker.animate(parent.get_node("Sprite3D"), ATTACK_WINDUP, ATTACK_SHAKE_MAGNITUDE)
+		#await Utility.delay(ATTACK_WINDUP)
 		
-		# VIOLENTLY LAUNCH SELF TOWARDS PLAYER \m/
-		parent.apply_impulse(global_position.direction_to(target.global_position) * THROW_FORCE)
+		# check again that object wasn't depossessed mid-attack
+		if is_possessed:
+			# VIOLENTLY LAUNCH SELF TOWARDS PLAYER \m/
+			parent.apply_impulse(global_position.direction_to(target.global_position) * THROW_FORCE)
 	
 	depossess()

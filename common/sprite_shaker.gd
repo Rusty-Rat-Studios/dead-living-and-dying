@@ -13,6 +13,8 @@ func animate(sprite: SpriteBase3D, duration: float, xy_magnitude: Vector2 = Vect
 	var original_position: Vector3 = sprite.position
 	var sprite_position: Vector3
 	
+	halt_requested = false
+	
 	while time_elapsed < duration and not halt_requested:
 		# track sprite position as the parent object moves
 		#sprite_position = sprite.get_parent().position + original_position
