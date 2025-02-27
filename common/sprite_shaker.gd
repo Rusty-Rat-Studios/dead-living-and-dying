@@ -4,7 +4,7 @@ extends Resource
 const MAX_OFFSET: float = 0.1
 const FREQUENCY: float = 30
 
-func animate(sprite: Sprite3D, duration: float, xy_magnitude: Vector2 = Vector2(1, 1)) -> void:
+func animate(sprite: SpriteBase3D, duration: float, xy_magnitude: Vector2 = Vector2(1, 1)) -> void:
 	var time_elapsed: float = 0.0
 	var original_position: Vector3 = sprite.position
 	var sprite_position: Vector3
