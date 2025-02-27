@@ -29,7 +29,7 @@ func animate(sprite: SpriteBase3D, duration: float, xy_magnitude: Vector2 = Vect
 	sprite.position = original_position
 	
 	# reset halt signal to allow sprite shaker to operate next call
-	halt_requested = true
+	halt_requested = false
 
 
 func halt() -> void:
