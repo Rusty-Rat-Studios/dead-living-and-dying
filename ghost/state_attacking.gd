@@ -1,6 +1,7 @@
 extends GhostState
 
-const ATTACK_SPEED: float = 7.0
+const PRE_ATTACK_SPEED: float = 7.0
+const ATTACK_SPEED: float = 10.0
 
 # red color to modulate ghost when initiating attack
 const ATTACK_COLOR: Color = Color("743737")
@@ -36,6 +37,9 @@ func enter() -> void:
 	if not is_player_attackable():
 		change_state(GhostStateMachine.States.WAITING)
 		return
+	
+	_parent.speed = PRE_ATTACK_SPEED
+	
 	# reset at_target flag to handle case where previous state reached target
 	# since this flag is used to detect when to exit ATTACKING state
 	_parent.at_target = false
@@ -74,7 +78,7 @@ func process_state() -> void:
 	else:
 		_parent.set_target(_parent.global_position)
 	
-	if _parent.global_position.distance_squared_to(PlayerHandler.get_player().global_position) < 0.1:
+	if _parent.global_position.distance_squared_to(PlayerHandler.get_player().global_position) < 0.5:
 		change_state(GhostStateMachine.States.WAITING)
 
 
