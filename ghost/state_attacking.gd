@@ -109,8 +109,7 @@ func _on_player_exited_room(room: Node3D) -> void:
 
 
 func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
-	if (_state_machine.current_state == GhostStateMachine.States.ATTACKING 
-		and state == PlayerStateMachine.States.LIVING):
+	if (state != PlayerStateMachine.States.DYING):
 		change_state(GhostStateMachine.States.WAITING)
 
 
