@@ -1,6 +1,19 @@
 class_name SpriteShaker
 extends Resource
 
+"""
+SpriteShaker operates on the animate() function which "shakes" the provided sprite
+along to xy-plane for the provided duration. Optionally, a 2D vector can be provided
+to specify the intensity it shakes along each axis - e.g. providing xy_magnitude = 
+Vector2(1, 0) would only shake the sprite along the x-axis. The animate() function
+operates on the local position of the sprite and resets it once finished, allowing
+it to follow its parent object appropriately if it is moved during the animation.
+
+There is an additional "halt_requested" variable set by the halt() function that
+MUST be called any time the shaker is interrupted or cancelled to stop the animation
+immediately.
+"""
+
 const MAX_OFFSET: float = 0.1
 const FREQUENCY: float = 30
 
@@ -17,7 +30,6 @@ func animate(sprite: SpriteBase3D, duration: float, xy_magnitude: Vector2 = Vect
 	
 	while time_elapsed < duration and not halt_requested:
 		# track sprite position as the parent object moves
-		#sprite_position = sprite.get_parent().position + original_position
 		var shake_offset: Vector3 = Vector3(
 			randf_range(-MAX_OFFSET, MAX_OFFSET) * xy_magnitude.x,
 			randf_range(-MAX_OFFSET, MAX_OFFSET) * xy_magnitude.y,
