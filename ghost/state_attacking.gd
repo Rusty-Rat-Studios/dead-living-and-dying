@@ -1,7 +1,9 @@
 extends GhostState
 
-const PRE_ATTACK_SPEED: float = 7.0
+const PRE_ATTACK_SPEED: float = 6.0
 const ATTACK_SPEED: float = 9.5
+# speed to move toward/away from player while winding up
+const WINDUP_SPEED: float = 4.0
 
 # how long the shake animation is displayed before attacking
 const ATTACK_WINDUP: float = 1
@@ -76,10 +78,15 @@ func exit() -> void:
 
 
 func process_state() -> void:
+	var player_position: Vector3 = PlayerHandler.get_player().global_position
 	if not winding_up:
-		_parent.set_target(PlayerHandler.get_player().global_position)
+		_parent.set_target(player_position)
 	else:
-		_parent.set_target(_parent.global_position)
+		# set target position to edge of attack range
+		# use xz coordinates to avoid floating up into the air
+		var position_xz: Vector3 = Vector3(_parent.global_position.x, 0, _parent.global_position.z)
+		var direction: Vector3 = (player_position - position_xz).normalized()
+		_parent.set_target(PlayerHandler.get_player().global_position - direction * attack_range_collision_shape.shape.radius)
 	
 	if _parent.global_position.distance_squared_to(PlayerHandler.get_player().global_position) < 0.5:
 		change_state(GhostStateMachine.States.WAITING)
@@ -97,6 +104,7 @@ func is_player_attackable() -> bool:
 func attack() -> void:
 	# checked in process_state() to pause movement
 	winding_up = true
+	_parent.speed = WINDUP_SPEED
 	# disable collision area to avoid re-triggering attack if player moved out of area
 	attack_range_collision_shape.set_deferred("disabled", true)
 	
