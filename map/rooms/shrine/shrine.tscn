@@ -169,7 +169,6 @@ spot_angle = 60.0
 
 [node name="Decal" type="Decal" parent="."]
 transform = Transform3D(0.999391, 0, 0.0348995, 0, 1, 0, -0.0348995, 0, 0.999391, -0.1, 0, -4.2)
-layers = 2
 size = Vector3(10, 2, 15)
 texture_albedo = ExtResource("5_q7n7m")
-cull_mask = 1048574
+cull_mask = 1047554
