@@ -16,12 +16,19 @@ const FLOAT_SPEED: float = 2
 const FLOAT_FORCE: float = 1
 # target height for possessed objects to float to
 const FLOAT_HEIGHT: float = 4
+# how long the shake animation is displayed before attacking
+const ATTACK_WINDUP: float = 2
+# how much the shake animation moves in x or y dimensions
+const ATTACK_SHAKE_MAGNITUDE: Vector2 = Vector2(1, 0.5)
+
 # for timing float effect oscillation
 @onready var float_time_offset: float = 0.0
 @onready var base_height: float = parent.position.y
 @onready var hitbox: Area3D = $Hitbox
 @onready var hitbox_collision_shape: CollisionShape3D = $Hitbox/CollisionShape3D
 
+# used to animate sprite for attack
+@onready var sprite_shaker: SpriteShaker = SpriteShaker.new()
 
 func _ready() -> void:
 	super()
@@ -43,7 +50,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	# if object has been thrown, thus depossessed, it should not be possessable
 	# again until object has slowed down enough
-	if not is_possessable and parent.linear_velocity.length() < DAMAGE_VELOCITY:
+	if not is_possessable and not is_possessed and parent.linear_velocity.length() < DAMAGE_VELOCITY:
 		# disable hurtbox when slow enough
 		hitbox_collision_shape.set_deferred("disabled", true)
 		# set flag to allow possession again
@@ -84,6 +91,12 @@ func possess() -> void:
 	set_physics_process(true)
 
 
+func depossess() -> void:
+	super()
+	# force sprite shaker to stop if object depossessed mid-attack
+	sprite_shaker.halt()
+
+
 func attack(target: Node3D) -> void:
 	if player_in_range and room.player_in_room:
 		# disable player detection
@@ -92,5 +105,13 @@ func attack(target: Node3D) -> void:
 		hitbox_collision_shape.disabled = false
 		# disallow re-possession during attack
 		is_possessable = false
-		# VIOLENTLY LAUNCH SELF TOWARDS PLAYER \m/
-		parent.apply_impulse(global_position.direction_to(target.global_position) * THROW_FORCE)
+		
+		# display "wind-up" to attack
+		await sprite_shaker.animate(parent.get_node("Sprite3D"), ATTACK_WINDUP, ATTACK_SHAKE_MAGNITUDE)
+		
+		# check again that object wasn't depossessed mid-attack
+		if is_possessed:
+			# VIOLENTLY LAUNCH SELF TOWARDS PLAYER \m/
+			parent.apply_impulse(global_position.direction_to(target.global_position) * THROW_FORCE)
+	
+	depossess()

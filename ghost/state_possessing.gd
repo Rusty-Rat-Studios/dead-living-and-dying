@@ -138,18 +138,20 @@ func process_state() -> void:
 
 
 func _depossess() -> void:
+	# check if ghost has already been forced into WAITING by player state change
 	# depossess object and go to WAITING
-	target_possessable.depossess()
-	is_possessing = false
-	change_state(GhostStateMachine.States.WAITING)
+	if target_possessable:
+		target_possessable.depossess()
+		is_possessing = false
+		change_state(GhostStateMachine.States.WAITING)
 
 
 func _attack() -> void:
+	# check if ghost has already been forced into WAITING by player state change
 	# if player not in range, possessable.attack() simply depossesses
-	target_possessable.attack(PlayerHandler.get_player())
-	target_possessable.depossess()
-	is_possessing = false
-	change_state(GhostStateMachine.States.WAITING)
+	if target_possessable:
+		await target_possessable.attack(PlayerHandler.get_player())
+		change_state(GhostStateMachine.States.WAITING)
 
 
 func _wait() -> void:
@@ -167,7 +169,7 @@ func _on_decision_timeout() -> void:
 		# add option to attack only if attack delay has expired
 		if can_attack:
 			choices[_attack] = ATTACK_CHANCE
-		RNG.call_weighted_random(choices)
+		RNG.call_async_weighted_random(choices)
 
 
 func _on_contact_possessable(body: Node3D) -> void:
