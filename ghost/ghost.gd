@@ -20,6 +20,8 @@ var light_enabled: bool = false
 
 @onready var state_machine: GhostStateMachine = $StateMachine
 @onready var hitbox: Area3D = $Hitbox
+# used by state ATTACKING to detect if player in range of stun attack
+@onready var attack_range: Area3D = $AttackRange
 
 @onready var sprite: AnimatedSprite3D = $AnimatedSprite3D
 @onready var light: OmniLight3D = $OmniLight3D
@@ -50,7 +52,7 @@ func _ready() -> void:
 	SignalBus.player_entered_room.connect(_on_player_entered_room)
 	SignalBus.player_exited_room.connect(_on_player_exited_room)
 	# attach signal to update ghost visibility based on player state
-	SignalBus.player_state_changed.connect(_on_player_state_changed)
+	SignalBus.player_state_changed.connect(_on_player_state_changed, CONNECT_DEFERRED)
 	
 	hit.connect(_on_hit)
 
