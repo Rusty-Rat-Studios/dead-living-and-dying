@@ -3,6 +3,7 @@ extends Control
 @export var skip_to_game: bool = false
 
 @onready var game_scene: PackedScene = load("res://game.tscn")
+@onready var how_to_scene: PackedScene = load("res://ui/menus/how_to_play.tscn")
 @onready var buttons: VBoxContainer = $MarginContainer/MarginContainer/VBoxContainer/VBoxButtons
 
 func _ready() -> void:
@@ -37,7 +38,7 @@ func _on_options_pressed() -> void:
 
 
 func _on_how_pressed() -> void:
-	pass
+	get_tree().change_scene_to_packed(how_to_scene)
 
 
 func _on_quit_pressed() -> void:
