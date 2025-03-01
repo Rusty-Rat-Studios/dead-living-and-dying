@@ -1,13 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://2euj11qyja1u"]
+[gd_scene load_steps=8 format=3 uid="uid://2euj11qyja1u"]
 
 [ext_resource type="PackedScene" uid="uid://e6l8r6x4mqfq" path="res://ui/menus/menu_background.tscn" id="1_n4ixf"]
+[ext_resource type="Script" path="res://ui/menus/how_to_play.gd" id="2_1syyh"]
 [ext_resource type="FontFile" uid="uid://bvx6yxwpx1rfq" path="res://ui/resources/princess_sofia_font/PrincessSofia-Regular.ttf" id="2_fvrgu"]
 [ext_resource type="FontFile" uid="uid://c16563s6uqwuy" path="res://ui/resources/oswald_font/Oswald-VariableFont_wght.ttf" id="3_opoqq"]
-[ext_resource type="Texture2D" uid="uid://cqcvbmlssy3y5" path="res://ui/resources/how_to_play_possess.png" id="4_t5783"]
-[ext_resource type="Texture2D" uid="uid://dxnykiuxu0oui" path="res://ui/resources/how_to_play_possess2.png" id="5_8bc4e"]
+[ext_resource type="Texture2D" uid="uid://cqcvbmlssy3y5" path="res://ui/resources/how_to_play_possession.png" id="4_t5783"]
+[ext_resource type="Texture2D" uid="uid://dxnykiuxu0oui" path="res://ui/resources/how_to_play_possession2.png" id="5_8bc4e"]
 [ext_resource type="Theme" uid="uid://casdoijkjemc2" path="res://ui/resources/menu_theme.tres" id="5_8m8i8"]
 
 [node name="HowToPlay" instance=ExtResource("1_n4ixf")]
+script = ExtResource("2_1syyh")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" index="0"]
 layout_mode = 2
@@ -66,7 +68,6 @@ horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" index="1"]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -83,11 +84,12 @@ layout_mode = 2
 size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("3_opoqq")
 theme_override_font_sizes/font_size = 24
-text = "There are various objects around each room that ghosts can possess."
+text = "Ghosts can attack you with some of these possessed objects. Watch out for any objects acting strangely!"
 horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer" index="2"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
