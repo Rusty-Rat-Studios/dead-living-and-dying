@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://c176v8gdlci8v" path="res://old_man/old_man.tscn" id="11_6mutg"]
 [ext_resource type="PackedScene" uid="uid://3gsxuhfeo5qs" path="res://entity/objects/wall_painting/wall_painting.tscn" id="12_7d0il"]
 [ext_resource type="PackedScene" uid="uid://8tfld0cdj22d" path="res://items/crucifix/crucifix_world.tscn" id="13_0dcr2"]
-[ext_resource type="PackedScene" uid="uid://web8bdry114l" path="res://map/shrine.tscn" id="14_eaohd"]
+[ext_resource type="PackedScene" uid="uid://web8bdry114l" path="res://map/rooms/shrine/shrine.tscn" id="14_eaohd"]
 [ext_resource type="PackedScene" uid="uid://yihpxsaeuqdi" path="res://ghost/ghost.tscn" id="15_b5bwo"]
 [ext_resource type="PackedScene" uid="uid://cko3wlfgl81ce" path="res://entity/objects/crate/crate.tscn" id="16_sppgp"]
 [ext_resource type="PackedScene" uid="uid://d3uaapt6yn0ed" path="res://items/tea/tea_world.tscn" id="17_sxuq4"]
