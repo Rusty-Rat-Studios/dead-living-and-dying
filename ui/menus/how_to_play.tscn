@@ -123,19 +123,30 @@ custom_minimum_size = Vector2(140, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-focus_neighbor_top = NodePath("../ButtonStart")
-focus_neighbor_bottom = NodePath("../ButtonNext")
+focus_neighbor_left = NodePath("../ButtonNext")
+focus_neighbor_right = NodePath("../ButtonExit")
 theme = ExtResource("5_8m8i8")
 theme_override_font_sizes/font_size = 28
 text = "Previous"
 
-[node name="ButtonNext" type="Button" parent="MarginContainer/VBoxContainer/HboxButtons" index="1"]
+[node name="ButtonExit" type="Button" parent="MarginContainer/VBoxContainer/HboxButtons" index="1"]
 custom_minimum_size = Vector2(140, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-focus_neighbor_top = NodePath("../ButtonPrevious")
-focus_neighbor_bottom = NodePath("../ButtonQuit")
+focus_neighbor_left = NodePath("../ButtonPrevious")
+focus_neighbor_right = NodePath("../ButtonNext")
+theme = ExtResource("5_8m8i8")
+theme_override_font_sizes/font_size = 28
+text = "Exit To Menu"
+
+[node name="ButtonNext" type="Button" parent="MarginContainer/VBoxContainer/HboxButtons" index="2"]
+custom_minimum_size = Vector2(140, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_neighbor_left = NodePath("../ButtonExit")
+focus_neighbor_right = NodePath("../ButtonPrevious")
 theme = ExtResource("5_8m8i8")
 theme_override_font_sizes/font_size = 28
 text = "Next"

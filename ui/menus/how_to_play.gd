@@ -71,15 +71,19 @@ var current_screen: Screen = Screen.POSSESSION
 
 @onready var button_next: Button = $MarginContainer/VBoxContainer/HboxButtons/ButtonNext
 @onready var button_previous: Button = $MarginContainer/VBoxContainer/HboxButtons/ButtonPrevious
+@onready var button_exit: Button = $MarginContainer/VBoxContainer/HboxButtons/ButtonExit
 
 @onready var main_menu_scene: PackedScene = load("res://ui/menus/main_menu.tscn")
 @onready var game_scene: PackedScene = load("res://game.tscn")
 
 func _ready() -> void:
-	button_previous.text = "Exit To Menu"
+	toggle_button_visible(button_previous)
+	
+	button_next.grab_focus()
 	
 	button_next.pressed.connect(_on_next_pressed)
 	button_previous.pressed.connect(_on_previous_pressed)
+	button_exit.pressed.connect(_on_exit_pressed)
 
 
 func update_text_and_images() -> void:
@@ -92,12 +96,24 @@ func update_text_and_images() -> void:
 	instruction3.text = instructions3[current_screen]
 
 
+# toggle button visibility without updating layout
+func toggle_button_visible(button: Button) -> void:
+	if button.modulate.a == 0:
+		button.modulate.a = 1
+		button.mouse_filter = Control.MOUSE_FILTER_STOP
+	else:
+		button.modulate.a = 0
+		button.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	
+	button_next.grab_focus()
+
+
 func _on_next_pressed() -> void:
 	match current_screen:
 		Screen.POSSESSION:
 			current_screen = Screen.STATES
 			image_box3.visible = true
-			button_previous.text = "Previous"
+			toggle_button_visible(button_previous)
 		Screen.STATES:
 			current_screen = Screen.MAP
 		Screen.MAP:
@@ -116,7 +132,7 @@ func _on_previous_pressed() -> void:
 		Screen.STATES:
 			current_screen = Screen.POSSESSION
 			image_box3.visible = false
-			button_previous.text = "Exit To Menu"
+			toggle_button_visible(button_previous)
 		Screen.MAP:
 			current_screen = Screen.STATES
 		Screen.KEY_ITEM:
@@ -124,3 +140,7 @@ func _on_previous_pressed() -> void:
 			button_next.text = "Next"
 	
 	update_text_and_images()
+
+
+func _on_exit_pressed() -> void:
+	get_tree().change_scene_to_packed(main_menu_scene)
