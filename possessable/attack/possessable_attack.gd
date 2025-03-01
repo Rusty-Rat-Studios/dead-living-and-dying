@@ -1,7 +1,14 @@
 class_name PossessableAttack
 extends Possessable
 
+const LIGHT_ENERGY: float = 0.2
+const TWEEN_IN_DURATION: float = 2
+const TWEEN_OUT_DURATION: float = 0.5
+
+var light_tween: Tween
+
 @onready var range_collision_shape: CollisionShape3D = $AttackRange/CollisionShape3D
+
 
 func _ready() -> void:
 	super()
@@ -18,12 +25,20 @@ func possess() -> void:
 	# check if player in range on initial possession
 	if $AttackRange.overlaps_body(PlayerHandler.get_player()):
 		player_in_range = true
+	
+	# make possessable glow
+	light_tween = create_tween()
+	light_tween.tween_property($OmniLight3D, "light_energy", LIGHT_ENERGY, TWEEN_IN_DURATION)
 
 
 func depossess() -> void:
 	super()
 	# disable player detection
 	range_collision_shape.set_deferred("disabled", true)
+	
+	# stop glow effect
+	light_tween = create_tween()
+	light_tween.tween_property($OmniLight3D, "light_energy", 0, TWEEN_OUT_DURATION)
 
 
 func _on_player_entered_range(_player: Player) -> void:

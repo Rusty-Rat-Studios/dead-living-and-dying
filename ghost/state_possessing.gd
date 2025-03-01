@@ -45,7 +45,7 @@ func init(parent: CharacterBody3D, state_machine: StateMachine) -> void:
 	decision_timer.timeout.connect(_on_decision_timeout)
 	add_child(decision_timer)
 	detector = _parent.get_node("PossessableDetector")
-	detector.body_entered.connect(_on_contact_possessable)
+	detector.area_entered.connect(_on_contact_possessable)
 	detector_collision_shape = detector.get_node("CollisionShape3D")
 
 
@@ -56,6 +56,14 @@ func enter() -> void:
 	detector_collision_shape.set_deferred("disabled", false)
 	# reset decision timer
 	decision_timer.wait_time = DECISION_TIME
+	
+	# negate attack delay if the player is already in the room
+	if _parent.player_in_room:
+		attack_delay = 0
+		can_attack = true
+	else:
+		attack_delay = DECISION_TIME
+		can_attack = false
 	
 	# connect/disconnect in enter/exit to ensure function only fires while state is active
 	SignalBus.player_state_changed.connect(_on_player_state_changed)
@@ -77,8 +85,6 @@ func exit() -> void:
 	
 	decision_timer.stop()
 	target_possessable = null
-	# restore attack delay to maximum value
-	attack_delay = DECISION_TIME
 	
 	# clunky, but ensure no connections to possessables remain
 	for p: Possessable in _parent.current_room.possessables_available:
@@ -106,7 +112,7 @@ func set_closest_target() -> void:
 	_parent.set_target(target_possessable.global_position)
 	
 	# check if already overlapping the target possessable and immediately possess
-	if detector.overlaps_body(target_possessable):
+	if detector.overlaps_area(target_possessable):
 		if target_possessable.is_possessable:
 			target_possessable.possess()
 			is_possessing = true
