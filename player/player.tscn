@@ -12,6 +12,7 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uy1l0"]
 radius = 0.4
+height = 2.6
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bh504"]
 animations = [{
@@ -41,6 +42,7 @@ collision_layer = 6
 script = ExtResource("1_ndccg")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.15, 0)
 shape = SubResource("CapsuleShape3D_uy1l0")
 
 [node name="RotationOffset" type="Marker3D" parent="."]
