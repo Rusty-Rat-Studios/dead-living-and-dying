@@ -52,7 +52,7 @@ var instructions1: Array = [TEXT_POSSESSION1, TEXT_STATE1, TEXT_MAP1, TEXT_KEY_I
 var instructions2: Array = [TEXT_POSSESSION2, TEXT_STATE2, TEXT_MAP2, TEXT_KEY_ITEM2]
 var instructions3: Array = ["", TEXT_STATE3, TEXT_MAP3, TEXT_KEY_ITEM3] # possession does not have a third image
 
-var current_screen: Screen = Screen.POSSESSION
+var current_view: Screen = Screen.POSSESSION
 
 @onready var instructions_box: HBoxContainer = $MarginContainer/VBoxContainer/MarginContainer/HBoxContainer
 @onready var image_box1: VBoxContainer = instructions_box.get_node("VBoxContainer")
@@ -85,27 +85,27 @@ func _ready() -> void:
 
 
 func update_text_and_images() -> void:
-	topic.text = topics[current_screen]
+	topic.text = topics[current_view]
 	# update images
-	image1.texture = images1[current_screen]
-	image2.texture = images2[current_screen]
-	image3.texture = images3[current_screen]
+	image1.texture = images1[current_view]
+	image2.texture = images2[current_view]
+	image3.texture = images3[current_view]
 	
-	instruction1.text = instructions1[current_screen]
-	instruction2.text = instructions2[current_screen]
-	instruction3.text = instructions3[current_screen]
+	instruction1.text = instructions1[current_view]
+	instruction2.text = instructions2[current_view]
+	instruction3.text = instructions3[current_view]
 
 
 func _on_next_pressed() -> void:
-	match current_screen:
+	match current_view:
 		Screen.POSSESSION:
-			current_screen = Screen.STATES
+			current_view = Screen.STATES
 			image_box3.visible = true
 			button_previous.disabled = false
 		Screen.STATES:
-			current_screen = Screen.MAP
+			current_view = Screen.MAP
 		Screen.MAP:
-			current_screen = Screen.KEY_ITEM
+			current_view = Screen.KEY_ITEM
 			button_next.text = "Start Game"
 		Screen.KEY_ITEM:
 			get_tree().change_scene_to_packed(game_scene)
@@ -114,17 +114,17 @@ func _on_next_pressed() -> void:
 
 
 func _on_previous_pressed() -> void:
-	match current_screen:
+	match current_view:
 		Screen.POSSESSION:
 			get_tree().change_scene_to_packed(main_menu_scene)
 		Screen.STATES:
-			current_screen = Screen.POSSESSION
+			current_view = Screen.POSSESSION
 			image_box3.visible = false
 			button_previous.disabled = true
 		Screen.MAP:
-			current_screen = Screen.STATES
+			current_view = Screen.STATES
 		Screen.KEY_ITEM:
-			current_screen = Screen.MAP
+			current_view = Screen.MAP
 			button_next.text = "Next"
 	
 	update_text_and_images()
