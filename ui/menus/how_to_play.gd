@@ -54,6 +54,7 @@ var instructions3: Array = ["", TEXT_STATE3, TEXT_MAP3, TEXT_KEY_ITEM3] # posses
 
 var current_view: Screen = Screen.POSSESSION
 
+#gdlint:ignore = max-line-length
 @onready var instructions_box: HBoxContainer = $MenuBackground/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer
 @onready var image_box1: VBoxContainer = instructions_box.get_node("VBoxContainer")
 @onready var image_box2: VBoxContainer = instructions_box.get_node("VBoxContainer2")
