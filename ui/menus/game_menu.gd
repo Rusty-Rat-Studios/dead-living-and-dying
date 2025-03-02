@@ -12,6 +12,7 @@ const GAME_OVER_DELAY: float = 2.0
 
 func _ready() -> void:
 	buttons.get_node("ButtonContinue").pressed.connect(_on_continue_pressed)
+	buttons.get_node("ButtonHow").pressed.connect(_on_how_pressed)
 	buttons.get_node("ButtonQuit").pressed.connect(_on_quit_pressed)
 	SignalBus.game_over.connect(_on_game_over)
 	SignalBus.level_complete.connect(_on_level_complete)
@@ -38,6 +39,10 @@ func pause() -> void:
 
 func _on_continue_pressed() -> void:
 	resume()
+
+
+func _on_how_pressed() -> void:
+	$HowToPlay.show()
 
 
 func _on_quit_pressed() -> void:

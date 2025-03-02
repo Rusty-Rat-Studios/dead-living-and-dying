@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://player/state_machine/state_living.gd" id="5_7fl8v"]
 [ext_resource type="Script" path="res://player/state_machine/state_dying.gd" id="6_xupbb"]
 [ext_resource type="Script" path="res://map/world_grid.gd" id="7_24rg8"]
-[ext_resource type="PackedScene" uid="uid://dic5onsop66y4" path="res://ui/game_menu.tscn" id="8_ah51h"]
+[ext_resource type="PackedScene" uid="uid://dic5onsop66y4" path="res://ui/menus/game_menu.tscn" id="8_ah51h"]
 [ext_resource type="PackedScene" uid="uid://bwmbngtw81o3y" path="res://ui/debug_console.tscn" id="8_en8lj"]
 
 [node name="Game" type="Node3D"]
