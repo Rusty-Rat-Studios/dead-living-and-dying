@@ -1,7 +1,7 @@
 extends PassiveItemInventory
 
 
-var speed_modifier: float = 4.0
+var speed_modifier: float = 1.3
 
 func _ready() -> void:
 	update()
