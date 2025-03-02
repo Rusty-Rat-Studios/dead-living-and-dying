@@ -94,4 +94,3 @@ theme_override_font_sizes/font_size = 50
 text = "Quit"
 
 [node name="HowToPlay" parent="." instance=ExtResource("3_ocxaj")]
-visible = false
