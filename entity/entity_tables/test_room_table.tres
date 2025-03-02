@@ -10,7 +10,7 @@ entity = ExtResource("2_8uqyd")
 base_chance = 0.0
 chance_change = 0.0
 max_spawn = -1
-min_spawn = 100
+min_spawn = 10
 
 [resource]
 script = ExtResource("2_pws74")
