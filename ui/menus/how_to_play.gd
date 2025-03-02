@@ -30,17 +30,17 @@ const TEXT_KEY_ITEM3: String = ("If you die, the Key Item is dropped and begins 
 var image_possession1: Texture2D = load("res://ui/resources/how_to_play_possession.png")
 var image_possession2: Texture2D = load("res://ui/resources/how_to_play_possession2.png")
 
-var image_state1: Texture2D
-var image_state2: Texture2D
-var image_state3: Texture2D
+var image_state1: Texture2D = load("res://ui/resources/how_to_play_state.png")
+var image_state2: Texture2D = load("res://ui/resources/how_to_play_state2.png")
+var image_state3: Texture2D = load("res://ui/resources/how_to_play_state3.png")
 
-var image_map1: Texture2D
-var image_map2: Texture2D
-var image_map3: Texture2D
+var image_map1: Texture2D = load("res://ui/resources/how_to_play_map.png")
+var image_map2: Texture2D = load("res://ui/resources/how_to_play_map2.png")
+var image_map3: Texture2D = load("res://ui/resources/how_to_play_map3.png")
 
-var image_key_item1: Texture2D
-var image_key_item2: Texture2D
-var image_key_item3: Texture2D
+var image_key_item1: Texture2D = load("res://ui/resources/how_to_play_key_item.png")
+var image_key_item2: Texture2D = load("res://ui/resources/how_to_play_key_item2.png")
+var image_key_item3: Texture2D = load("res://ui/resources/how_to_play_key_item3.png")
 
 var images1: Array = [image_possession1, image_state1, image_map1, image_key_item1]
 var images2: Array = [image_possession2, image_state2, image_map2, image_key_item2]
@@ -87,7 +87,9 @@ func _ready() -> void:
 func update_text_and_images() -> void:
 	topic.text = topics[current_screen]
 	# update images
-	#image1.texture = images1[current_screen]
+	image1.texture = images1[current_screen]
+	image2.texture = images2[current_screen]
+	image3.texture = images3[current_screen]
 	
 	instruction1.text = instructions1[current_screen]
 	instruction2.text = instructions2[current_screen]
