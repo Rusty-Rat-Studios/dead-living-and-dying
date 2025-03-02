@@ -1,7 +1,7 @@
 class_name GhostStateMachine
 extends StateMachine
 
-enum States { WAITING, POSSESSING, STUNNED, ATTACKING }
+enum States { WAITING, POSSESSING, STUNNED, ATTACKING, MOVING}
 
 
 func _ready() -> void:
@@ -18,6 +18,8 @@ func get_state_node(state: GhostStateMachine.States) -> GhostState:
 			return $Stunned
 		States.ATTACKING:
 			return $Attacking
+		States.MOVING:
+			return $Moving
 	
 	push_error("Attempting to access invalid state: " + str(state))
 	return null

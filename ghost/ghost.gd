@@ -71,6 +71,7 @@ func reset() -> void:
 
 
 func set_target(target_global: Vector3) -> void:
+	at_target = false
 	# set the target_pos value
 	target_pos = target_global
 	# flip sprite horizontally according to direction of target

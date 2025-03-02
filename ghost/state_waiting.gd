@@ -6,6 +6,7 @@ const PAUSE_DURATION_MIN: float = 1.0
 const POSSESS_CHANCE: float = 0.5
 const ATTACK_CHANCE: float = 0.25
 const WAIT_CHANCE: float = 0.25
+const MOVE_CHANCE: float = 1
 
 var room_boundaries: Rect2 # select random points in room to wander to
 
@@ -85,7 +86,8 @@ func pause() -> void:
 	var choices: Dictionary = {
 		_possess: POSSESS_CHANCE,
 		_attack: ATTACK_CHANCE,
-		set_random_target: WAIT_CHANCE
+		set_random_target: WAIT_CHANCE,
+		_move: MOVE_CHANCE
 	}
 	RNG.call_weighted_random(choices)
 
@@ -98,3 +100,7 @@ func _attack() -> void:
 	# attack state will check if player is in DYING state
 	# if player is living, return to WAITING which defaults to set_random_target()
 	change_state(GhostStateMachine.States.ATTACKING)
+
+
+func _move() -> void:
+	change_state(GhostStateMachine.States.MOVING)
