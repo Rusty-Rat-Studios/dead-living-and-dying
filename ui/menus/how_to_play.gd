@@ -77,8 +77,6 @@ var current_screen: Screen = Screen.POSSESSION
 @onready var game_scene: PackedScene = load("res://game.tscn")
 
 func _ready() -> void:
-	toggle_button_visible(button_previous)
-	
 	button_next.grab_focus()
 	
 	button_next.pressed.connect(_on_next_pressed)
@@ -96,24 +94,12 @@ func update_text_and_images() -> void:
 	instruction3.text = instructions3[current_screen]
 
 
-# toggle button visibility without updating layout
-func toggle_button_visible(button: Button) -> void:
-	if button.modulate.a == 0:
-		button.modulate.a = 1
-		button.mouse_filter = Control.MOUSE_FILTER_STOP
-	else:
-		button.modulate.a = 0
-		button.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	
-	button_next.grab_focus()
-
-
 func _on_next_pressed() -> void:
 	match current_screen:
 		Screen.POSSESSION:
 			current_screen = Screen.STATES
 			image_box3.visible = true
-			toggle_button_visible(button_previous)
+			button_previous.disabled = false
 		Screen.STATES:
 			current_screen = Screen.MAP
 		Screen.MAP:
@@ -132,7 +118,7 @@ func _on_previous_pressed() -> void:
 		Screen.STATES:
 			current_screen = Screen.POSSESSION
 			image_box3.visible = false
-			toggle_button_visible(button_previous)
+			button_previous.disabled = true
 		Screen.MAP:
 			current_screen = Screen.STATES
 		Screen.KEY_ITEM:
