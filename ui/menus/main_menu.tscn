@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://d1lsqw58va6up"]
+[gd_scene load_steps=7 format=3 uid="uid://d1lsqw58va6up"]
 
 [ext_resource type="Texture2D" uid="uid://curlcs6otrt6g" path="res://ui/resources/title.png" id="1_6lwwj"]
 [ext_resource type="Script" path="res://ui/menus/main_menu.gd" id="1_85sq6"]
 [ext_resource type="Texture2D" uid="uid://yg1f6tea1m18" path="res://ui/resources/main_menu_border.png" id="1_qverk"]
 [ext_resource type="PackedScene" uid="uid://e6l8r6x4mqfq" path="res://ui/menus/menu_background.tscn" id="1_xct2y"]
 [ext_resource type="Theme" uid="uid://casdoijkjemc2" path="res://ui/resources/menu_theme.tres" id="4_31m45"]
+[ext_resource type="PackedScene" uid="uid://d2i1eypiamq2d" path="res://ui/menus/how_to_play.tscn" id="6_s0122"]
 
 [node name="MainMenu" instance=ExtResource("1_xct2y")]
 script = ExtResource("1_85sq6")
@@ -102,3 +103,7 @@ focus_neighbor_bottom = NodePath("../ButtonStart")
 theme = ExtResource("4_31m45")
 theme_override_font_sizes/font_size = 28
 text = "Quit"
+
+[node name="HowToPlay" parent="." index="3" instance=ExtResource("6_s0122")]
+gui_embed_subwindows = false
+visible = false

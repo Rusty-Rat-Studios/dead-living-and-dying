@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dic5onsop66y4"]
+[gd_scene load_steps=4 format=3 uid="uid://dic5onsop66y4"]
 
 [ext_resource type="Script" path="res://ui/menus/game_menu.gd" id="1_8ljcd"]
 [ext_resource type="Theme" uid="uid://casdoijkjemc2" path="res://ui/resources/menu_theme.tres" id="2_jjy7d"]
+[ext_resource type="PackedScene" uid="uid://d2i1eypiamq2d" path="res://ui/menus/how_to_play.tscn" id="3_ocxaj"]
 
 [node name="GameMenu" type="Control"]
 process_mode = 3
@@ -91,3 +92,6 @@ layout_mode = 2
 theme = ExtResource("2_jjy7d")
 theme_override_font_sizes/font_size = 50
 text = "Quit"
+
+[node name="HowToPlay" parent="." instance=ExtResource("3_ocxaj")]
+visible = false

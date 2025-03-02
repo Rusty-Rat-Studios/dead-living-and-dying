@@ -1,4 +1,4 @@
-extends Control
+extends PopupPanel
 
 enum Screen { POSSESSION, STATES, MAP, KEY_ITEM }
 
@@ -54,7 +54,7 @@ var instructions3: Array = ["", TEXT_STATE3, TEXT_MAP3, TEXT_KEY_ITEM3] # posses
 
 var current_view: Screen = Screen.POSSESSION
 
-@onready var instructions_box: HBoxContainer = $MarginContainer/VBoxContainer/MarginContainer/HBoxContainer
+@onready var instructions_box: HBoxContainer = $MenuBackground/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer
 @onready var image_box1: VBoxContainer = instructions_box.get_node("VBoxContainer")
 @onready var image_box2: VBoxContainer = instructions_box.get_node("VBoxContainer2")
 @onready var image_box3: VBoxContainer = instructions_box.get_node("VBoxContainer3")
@@ -63,18 +63,16 @@ var current_view: Screen = Screen.POSSESSION
 @onready var image2: TextureRect = image_box2.get_node("TextureRect")
 @onready var image3: TextureRect = image_box3.get_node("TextureRect")
 
-@onready var topic: Label = $MarginContainer/VBoxContainer/Topic
+@onready var topic: Label = $MenuBackground/MarginContainer/VBoxContainer/Topic
 
 @onready var instruction1: Label = image_box1.get_node("Instructions")
 @onready var instruction2: Label = image_box2.get_node("Instructions")
 @onready var instruction3: Label = image_box3.get_node("Instructions")
 
-@onready var button_next: Button = $MarginContainer/VBoxContainer/HboxButtons/ButtonNext
-@onready var button_previous: Button = $MarginContainer/VBoxContainer/HboxButtons/ButtonPrevious
-@onready var button_exit: Button = $MarginContainer/VBoxContainer/HboxButtons/ButtonExit
+@onready var button_next: Button = $MenuBackground/MarginContainer/VBoxContainer/HboxButtons/ButtonNext
+@onready var button_previous: Button = $MenuBackground/MarginContainer/VBoxContainer/HboxButtons/ButtonPrevious
+@onready var button_exit: Button = $MenuBackground/MarginContainer/VBoxContainer/HboxButtons/ButtonExit
 
-@onready var main_menu_scene: PackedScene = load("res://ui/menus/main_menu.tscn")
-@onready var game_scene: PackedScene = load("res://game.tscn")
 
 func _ready() -> void:
 	button_next.grab_focus()
@@ -106,17 +104,13 @@ func _on_next_pressed() -> void:
 			current_view = Screen.MAP
 		Screen.MAP:
 			current_view = Screen.KEY_ITEM
-			button_next.text = "Start Game"
-		Screen.KEY_ITEM:
-			get_tree().change_scene_to_packed(game_scene)
+			button_next.disabled = true
 	
 	update_text_and_images()
 
 
 func _on_previous_pressed() -> void:
 	match current_view:
-		Screen.POSSESSION:
-			get_tree().change_scene_to_packed(main_menu_scene)
 		Screen.STATES:
 			current_view = Screen.POSSESSION
 			image_box3.visible = false
@@ -125,10 +119,10 @@ func _on_previous_pressed() -> void:
 			current_view = Screen.STATES
 		Screen.KEY_ITEM:
 			current_view = Screen.MAP
-			button_next.text = "Next"
+			button_next.disabled = false
 	
 	update_text_and_images()
 
 
 func _on_exit_pressed() -> void:
-	get_tree().change_scene_to_packed(main_menu_scene)
+	hide()
