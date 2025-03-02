@@ -21,11 +21,12 @@
 [ext_resource type="Texture2D" uid="uid://chry31axu0hdv" path="res://player/dying.png" id="19_f483l"]
 [ext_resource type="Script" path="res://ui/dying_screen_effect.gd" id="20_cto7x"]
 [ext_resource type="PackedScene" uid="uid://bh1qwbhfylkio" path="res://ui/inventory/inventory_container.tscn" id="21_au1pb"]
-[ext_resource type="PackedScene" uid="uid://dic5onsop66y4" path="res://ui/game_menu.tscn" id="22_vvtdu"]
+[ext_resource type="PackedScene" uid="uid://dic5onsop66y4" path="res://ui/menus/game_menu.tscn" id="22_vvtdu"]
 [ext_resource type="PackedScene" uid="uid://bwmbngtw81o3y" path="res://ui/debug_console.tscn" id="23_50xpl"]
 
-[node name="Game" type="Node3D"]
+[node name="Game" type="Node3D" node_paths=PackedStringArray("old_man")]
 script = ExtResource("1_goqwn")
+old_man = NodePath("WorldGrid/RoomStart/OldMan")
 
 [node name="Player" parent="." instance=ExtResource("2_2bptp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
