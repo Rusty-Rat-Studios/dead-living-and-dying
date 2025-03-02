@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://entity/entity_table_entry.gd" id="1_77xku"]
 [ext_resource type="PackedScene" uid="uid://yihpxsaeuqdi" path="res://ghost/ghost.tscn" id="2_n1cha"]
-[ext_resource type="PackedScene" uid="uid://c1hur2s8mgagv" path="res://possessable/attack/possessable_throwable.tscn" id="3_h77gq"]
+[ext_resource type="PackedScene" uid="uid://cko3wlfgl81ce" path="res://entity/objects/crate/crate.tscn" id="3_0ciyp"]
 [ext_resource type="PackedScene" uid="uid://8tfld0cdj22d" path="res://items/crucifix/crucifix_world.tscn" id="4_u85v7"]
 [ext_resource type="Script" path="res://entity/entity_table.gd" id="5_53opc"]
 
@@ -16,7 +16,7 @@ min_spawn = -1
 
 [sub_resource type="Resource" id="Resource_gdc5m"]
 script = ExtResource("1_77xku")
-entity = ExtResource("3_h77gq")
+entity = ExtResource("3_0ciyp")
 base_chance = 15.0
 chance_change = -3.0
 max_spawn = -1
