@@ -14,7 +14,6 @@ func _ready() -> void:
 	$CooldownTimer.wait_time = BASE_COOLDOWN_DURATION
 	$ActiveTimer.timeout.connect(_on_active_timer_timeout)
 	$CooldownTimer.timeout.connect(_on_cooldown_timer_timeout)
-	
 
 
 func _input(event: InputEvent) -> void:

@@ -1,31 +1,19 @@
 extends PlayerState
 
-const DYING_SPEED: float = 4.0
+const SPEED_MODIFIER: float = -2.0
 
-const DYING_LIGHT_OMNI_RANGE: float = 4.5
-const DYING_LIGHT_SPOT_RANGE: float = 7
-const DYING_LIGHT_ENERGY: float = 1
+const LIGHT_OMNI_RANGE_MODIFIER: float = -1.5
+const LIGHT_SPOT_RANGE_MODIFIER: float = -3
 
 
 func enter() -> void:
 	super()
 	# update player stats
-	_parent.current_stats.speed = DYING_SPEED
-	_parent.current_stats.light_omni_range = DYING_LIGHT_OMNI_RANGE
-	_parent.current_stats.light_energy = DYING_LIGHT_ENERGY
-	_parent.current_stats.light_spot_range = DYING_LIGHT_SPOT_RANGE
+	_parent.current_stats.speed += SPEED_MODIFIER
+	_parent.current_stats.light_omni_range += LIGHT_OMNI_RANGE_MODIFIER
+	_parent.current_stats.light_spot_range += LIGHT_SPOT_RANGE_MODIFIER
 	# apply inventory buffs to modified stats
 	_parent.inventory_update()
-	
-	# DEBUG: modulate color according to state
-	_parent.get_node("RotationOffset/AnimatedSprite3D").modulate = Color(1, 0.5, 0.5)
-	
-	SignalBus.player_hurt.connect(_on_player_hurt)
-	
-	# enable and configure stunbox values
-	_parent.stunbox.collision_shape.set_deferred("disabled", false)
-	_parent.stunbox.set_values(_parent.current_stats.speed, _parent.current_stats.light_omni_range,
-		_parent.current_stats.light_spot_range, _parent.current_stats.light_energy)
 	
 
 func exit() -> void:

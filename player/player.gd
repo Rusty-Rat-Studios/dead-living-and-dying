@@ -8,7 +8,7 @@ var corpse: Corpse
 # player state machine, sibling node under Game node
 var _state_machine: PlayerStateMachine
 #load in the player_stats.gd script
-@onready var player_stats: GDScript = load("res://player/player_stats.gd")
+@onready var player_stats: PlayerStats = PlayerStats.new()
 #declaration of the object that holds all of the players current stats
 @onready var current_stats: PlayerStats.CurrentStats = player_stats.CurrentStats.new()
 # light variables used by state machine to adjust light strength based on state
@@ -34,12 +34,11 @@ func _ready() -> void:
 	SignalBus.item_picked_up.connect(_on_item_picked_up)
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	light_omni.omni_range = current_stats.light_omni_range
 	light_omni.light_energy = current_stats.light_energy
 	light_spot.spot_range = current_stats.light_spot_range
 	light_spot.light_energy = current_stats.light_energy
-	delta = delta
 
 
 func init(state_machine: Node) -> void:
