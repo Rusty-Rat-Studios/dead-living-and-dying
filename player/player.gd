@@ -7,10 +7,9 @@ var state_machine: Node
 var corpse: Corpse
 # player state machine, sibling node under Game node
 var _state_machine: PlayerStateMachine
-# player stats, sibling node under Game node
-var _player_stats: PlayerStats
-#declaration of the object that holds all of the players current stats
+#load in the player_stats.gd script
 var player_stats: GDScript = load("res://player/player_stats.gd")
+#declaration of the object that holds all of the players current stats
 var current_stats: PlayerStats.CurrentStats = player_stats.CurrentStats.new()
 # light variables used by state machine to adjust light strength based on state
 @onready var light_omni: OmniLight3D = $OmniLight3D
