@@ -4,11 +4,10 @@ extends PlayerState
 func enter() -> void:
 	super()
 	# update player stats
-	_parent.current_stats.speed = _parent.player_stats.BASE_SPEED
-	_parent.current_stats.light_omni_range = _parent.player_stats.BASE_LIGHT_OMNI_RANGE
-	_parent.current_stats.light_energy = _parent.player_stats.BASE_LIGHT_ENERGY
-	_parent.current_stats.light_spot_range = _parent.player_stats.BASE_LIGHT_SPOT_RANGE
+	_parent.stat_update_remove(_parent.current_stats.stat_modifier_speed, "dead")
+
 	# apply inventory buffs to modified stats
+	_parent.inventory_update()
 	_parent.stat_update()
 	
 	# DEBUG: modulate color according to state

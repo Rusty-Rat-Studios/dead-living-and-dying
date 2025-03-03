@@ -108,3 +108,7 @@ func stat_update_remove( stat: Dictionary, name: String) -> void:
 
 func stat_update() -> void:
 	current_stats.update_stats()
+
+
+func inventory_update() -> void:
+	$Inventory.update_all()

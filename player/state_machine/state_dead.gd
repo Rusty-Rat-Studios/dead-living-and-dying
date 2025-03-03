@@ -1,6 +1,6 @@
 extends PlayerState
 
-const DEAD_SPEED: float = 10.0
+const SPEED_MODIFIER: float = 4
 
 const RESPAWN_TIME: float = 2
 
@@ -10,7 +10,10 @@ func enter() -> void:
 	_parent.stat_update_remove(_parent.current_stats.stat_modifier_speed, "dying")
 	_parent.stat_update_remove(_parent.current_stats.stat_modifier_light_omni_range, "dying")
 	_parent.stat_update_remove(_parent.current_stats.stat_modifier_light_spot_range, "dying")
-	_parent.current_stats.speed = DEAD_SPEED
+	
+	remove_stat_modifiers(_parent.current_stats)
+	
+	_parent.stat_update_add(_parent.current_stats.stat_modifier_speed, SPEED_MODIFIER, "dead")
 
 	
 	# disable player light
@@ -89,6 +92,23 @@ func move_to_shrine() -> void:
 	# enable collision layers for spirit plane
 	_parent.hurtbox.collision_shape.set_deferred("disabled", false)
 	_parent.collision_shape.set_deferred("disabled", false)
+
+
+func remove_stat_modifiers(current_stats: PlayerStats.CurrentStats) -> void:
+	for i: String in current_stats.stat_modifier_speed:
+		_parent.current_stats.stat_modifier_speed.erase(i)
+	for i: String in current_stats.stat_modifier_light_omni_range:
+		_parent.current_stats.stat_modifier_light_omni_range.erase(i)
+	for i: String in current_stats.stat_modifier_light_spot_range:
+		_parent.current_stats.stat_modifier_light_spot_range.erase(i)
+	for i: String in current_stats.stat_modifier_light_energy:
+		_parent.current_stats.stat_modifier_light_energy.erase(i)
+	for i: String in current_stats.stat_modifier_cooldown_reduction:
+		_parent.current_stats.stat_modifier_cooldown_reduction.erase(i)
+	for i: String in current_stats.stat_modifier_duration:
+		_parent.current_stats.stat_modifier_duration.erase(i)
+	for i: String in current_stats.stat_modifier_area_size:
+		_parent.current_stats.stat_modifier_area_size.erase(i)
 
 
 func _on_player_hurt() -> void:
