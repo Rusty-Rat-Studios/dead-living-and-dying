@@ -35,6 +35,7 @@ func _ready() -> void:
 # TEMPORARY - to be removed once map generation complete
 func reset() -> void:
 	consumed = false
+	$Sprite3D.replace_texture(TEXTURE)
 	
 	if default:
 		activated = true
@@ -51,6 +52,7 @@ func enable_effects() -> void:
 	$FountainParticles.emitting = true
 	$FireParticles.emitting = true
 	$FireParticles2.emitting = true
+	$OmniLight3D.visible = true
 	
 	var light_tween: Tween = create_tween().set_parallel()
 	light_tween.tween_property($FireParticles/SpotLight3D, "light_energy", LIGHT_ENERGY, TWEEN_DURATION)
@@ -61,6 +63,7 @@ func disable_effects() -> void:
 	$FountainParticles.emitting = false
 	$FireParticles.emitting = false
 	$FireParticles2.emitting = false
+	$OmniLight3D.visible = false
 	
 	var light_tween: Tween = create_tween().set_parallel()
 	light_tween.tween_property($FireParticles/SpotLight3D, "light_energy", 0, TWEEN_DURATION)
