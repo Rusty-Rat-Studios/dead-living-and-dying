@@ -1,48 +1,17 @@
 class_name Player
 extends CharacterBody3D
 
-#used when calling stat_update
-enum Stats {
-	SPEED,
-	LIGHT_OMNI_RANGE,
-	LIGHT_SPOT_RANGE,
-	LIGHT_ENERGY,
-	COOLDOWN_REDUCTION,
-	DURATION,
-	AREA_SIZE
-}
-
-#player base stats
-const BASE_SPEED: float = 6.0
-const BASE_COOLDOWN_REDUCTION: float = 1.0
-const BASE_DURATION: float = 1.0
-const BASE_AREA_SIZE: float = 1.0
-
-# base values used for light range and strength
-const BASE_LIGHT_OMNI_RANGE: float = 6.0
-const BASE_LIGHT_SPOT_RANGE: float = 10.0
-const BASE_LIGHT_ENERGY: float = 1.0
-
-#implementation of class to hold players stats
-class PlayerStats:
-	var speed: float = BASE_SPEED
-	var light_omni_range: float = BASE_LIGHT_OMNI_RANGE
-	var light_spot_range: float = BASE_LIGHT_SPOT_RANGE
-	var light_energy: float = BASE_LIGHT_ENERGY
-	var cooldown_reduction: float = BASE_COOLDOWN_REDUCTION
-	var duration: float = BASE_DURATION
-	var area_size: float = BASE_AREA_SIZE
-
-#declaration of the object that holds all of the players current stats
-var current_stats: PlayerStats = PlayerStats.new()
-
 # player state machine, sibling node under Game node
 var state_machine: Node
 # used to track player corpse - handled by states
 var corpse: Corpse
 # player state machine, sibling node under Game node
 var _state_machine: PlayerStateMachine
-
+# player stats, sibling node under Game node
+var _player_stats: PlayerStats
+#declaration of the object that holds all of the players current stats
+var player_stats: GDScript = load("res://player/player_stats.gd")
+var current_stats: PlayerStats.CurrentStats = player_stats.CurrentStats.new()
 # light variables used by state machine to adjust light strength based on state
 @onready var light_omni: OmniLight3D = $OmniLight3D
 @onready var light_spot: SpotLight3D = $SpotLight3D
@@ -129,20 +98,20 @@ func _on_item_picked_up(item: ItemInventory) -> void:
 	item.position = Vector3.ZERO
 
 
-func stat_update( stat: Stats, stat_modifier: float) -> void:
-	if stat == Stats.SPEED:
+func stat_update( stat: PlayerStats.Stats, stat_modifier: float) -> void:
+	if stat == player_stats.Stats.SPEED:
 		current_stats.speed += stat_modifier
-	elif stat == Stats.LIGHT_OMNI_RANGE:
+	elif stat == player_stats.Stats.LIGHT_OMNI_RANGE:
 		current_stats.light_omni_range += stat_modifier
-	elif stat == Stats.LIGHT_SPOT_RANGE:
+	elif stat == player_stats.Stats.LIGHT_SPOT_RANGE:
 		current_stats.light_spot_range += stat_modifier
-	elif stat == Stats.LIGHT_ENERGY:
+	elif stat == player_stats.Stats.LIGHT_ENERGY:
 		current_stats.light_energy += stat_modifier
-	elif stat == Stats.COOLDOWN_REDUCTION:
+	elif stat == player_stats.Stats.COOLDOWN_REDUCTION:
 		current_stats.cooldown_reduction += stat_modifier
-	elif stat == Stats.DURATION:
+	elif stat == player_stats.Stats.DURATION:
 		current_stats.duration += stat_modifier
-	elif stat == Stats.AREA_SIZE:
+	elif stat == player_stats.Stats.AREA_SIZE:
 		current_stats.area_size += stat_modifier
 
 

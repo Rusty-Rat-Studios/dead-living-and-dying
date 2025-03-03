@@ -46,6 +46,6 @@ func _on_cooldown_timer_timeout() -> void:
 func temp_stat_update(omni_range_modifier: float, spot_range_modifier: float, 
 	energy_modifier: float) -> void:
 	var player: Node = PlayerHandler.get_player()
-	player.stat_update(player.Stats.LIGHT_OMNI_RANGE, omni_range_modifier)
-	player.stat_update(player.Stats.LIGHT_SPOT_RANGE, spot_range_modifier)
-	player.stat_update(player.Stats.LIGHT_ENERGY, energy_modifier)
+	player.stat_update(player.player_stats.Stats.LIGHT_OMNI_RANGE, omni_range_modifier)
+	player.stat_update(player.player_stats.Stats.LIGHT_SPOT_RANGE, spot_range_modifier)
+	player.stat_update(player.player_stats.Stats.LIGHT_ENERGY, energy_modifier)
