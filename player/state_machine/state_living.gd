@@ -9,7 +9,7 @@ func enter() -> void:
 	_parent.current_stats.light_energy = _parent.player_stats.BASE_LIGHT_ENERGY
 	_parent.current_stats.light_spot_range = _parent.player_stats.BASE_LIGHT_SPOT_RANGE
 	# apply inventory buffs to modified stats
-	_parent.inventory_update()
+	_parent.stat_update()
 	
 	# DEBUG: modulate color according to state
 	_parent.get_node("RotationOffset/AnimatedSprite3D").modulate = Color(0.5, 1, 0.5)
