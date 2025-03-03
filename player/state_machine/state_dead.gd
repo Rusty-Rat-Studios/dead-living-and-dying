@@ -7,8 +7,10 @@ const RESPAWN_TIME: float = 2
 func enter() -> void:
 	super()
 
+	_parent.stat_update_remove(_parent.current_stats.stat_modifier_speed, "dying")
+	_parent.stat_update_remove(_parent.current_stats.stat_modifier_light_omni_range, "dying")
+	_parent.stat_update_remove(_parent.current_stats.stat_modifier_light_spot_range, "dying")
 	_parent.current_stats.speed = DEAD_SPEED
-
 
 	
 	# disable player light

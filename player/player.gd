@@ -96,22 +96,15 @@ func _on_item_picked_up(item: ItemInventory) -> void:
 	item.position = Vector3.ZERO
 
 
-func stat_update( stat: PlayerStats.Stats, stat_modifier: float) -> void:
-	if stat == player_stats.Stats.SPEED:
-		current_stats.speed += stat_modifier
-	elif stat == player_stats.Stats.LIGHT_OMNI_RANGE:
-		current_stats.light_omni_range += stat_modifier
-	elif stat == player_stats.Stats.LIGHT_SPOT_RANGE:
-		current_stats.light_spot_range += stat_modifier
-	elif stat == player_stats.Stats.LIGHT_ENERGY:
-		current_stats.light_energy += stat_modifier
-	elif stat == player_stats.Stats.COOLDOWN_REDUCTION:
-		current_stats.cooldown_reduction += stat_modifier
-	elif stat == player_stats.Stats.DURATION:
-		current_stats.duration += stat_modifier
-	elif stat == player_stats.Stats.AREA_SIZE:
-		current_stats.area_size += stat_modifier
+func stat_update_add( stat: Dictionary, stat_modifier: float, name: String) -> void:
+	stat[name] = stat_modifier
+	current_stats.update_stats()
+
+
+func stat_update_remove( stat: Dictionary, name: String) -> void:
+	stat.erase(name)
+	current_stats.update_stats()
 
 
 func inventory_update() -> void:
-	$Inventory.update_all()
+	current_stats.update_stats()

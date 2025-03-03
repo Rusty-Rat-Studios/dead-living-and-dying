@@ -33,7 +33,7 @@ func use() -> void:
 
 
 func _on_active_timer_timeout() -> void:
-	temp_stat_update(-OMNI_RANGE_MODIFIER, -SPOT_RANGE_MODIFIER, -ENERGY_MODIFIER)
+	reset_stat_update()
 	$CooldownTimer.wait_time = BASE_COOLDOWN_DURATION / player.current_stats.cooldown_reduction
 	$CooldownTimer.start()
 
@@ -45,6 +45,13 @@ func _on_cooldown_timer_timeout() -> void:
 func temp_stat_update(omni_range_modifier: float, spot_range_modifier: float, 
 	energy_modifier: float) -> void:
 	var player: Node = PlayerHandler.get_player()
-	player.stat_update(player.player_stats.Stats.LIGHT_OMNI_RANGE, omni_range_modifier)
-	player.stat_update(player.player_stats.Stats.LIGHT_SPOT_RANGE, spot_range_modifier)
-	player.stat_update(player.player_stats.Stats.LIGHT_ENERGY, energy_modifier)
+	player.stat_update_add(player.current_stats.stat_modifier_light_omni_range, omni_range_modifier, "fuel")
+	player.stat_update_add(player.current_stats.stat_modifier_light_spot_range, spot_range_modifier, "fuel")
+	player.stat_update_add(player.current_stats.stat_modifier_light_energy, energy_modifier, "fuel")
+
+
+func reset_stat_update() -> void:
+	var player: Node = PlayerHandler.get_player()
+	player.stat_update_remove(player.current_stats.stat_modifier_light_omni_range, "fuel")
+	player.stat_update_remove(player.current_stats.stat_modifier_light_spot_range, "fuel")
+	player.stat_update_remove(player.current_stats.stat_modifier_light_energy, "fuel")

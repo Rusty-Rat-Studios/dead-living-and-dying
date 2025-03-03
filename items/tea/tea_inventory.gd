@@ -9,4 +9,4 @@ func _ready() -> void:
 
 func update() -> void:
 	var player: Node = PlayerHandler.get_player()
-	player.stat_update(player.player_stats.Stats.SPEED, speed_modifier)
+	player.stat_update_add(player.current_stats.stat_modifier_speed, speed_modifier, "tea")
