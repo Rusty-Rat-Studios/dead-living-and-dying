@@ -172,3 +172,7 @@ transform = Transform3D(0.999391, 0, 0.0348995, 0, 1, 0, -0.0348995, 0, 0.999391
 size = Vector3(10, 2, 15)
 texture_albedo = ExtResource("5_q7n7m")
 cull_mask = 1047554
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.52083, 0.115419)
+light_energy = 0.5
