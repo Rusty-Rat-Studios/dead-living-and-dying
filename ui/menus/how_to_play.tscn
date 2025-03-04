@@ -8,13 +8,19 @@
 [ext_resource type="Texture2D" uid="uid://dxnykiuxu0oui" path="res://ui/resources/how_to_play_possession2.png" id="5_8bc4e"]
 [ext_resource type="Theme" uid="uid://casdoijkjemc2" path="res://ui/resources/menu_theme.tres" id="5_8m8i8"]
 
-[node name="HowToPlay" type="PopupPanel"]
+[node name="HowToPlay" type="Window"]
 gui_embed_subwindows = true
 initial_position = 2
 size = Vector2i(1152, 648)
-visible = true
+wrap_controls = true
+transient = true
 exclusive = true
+borderless = true
 always_on_top = true
+popup_window = true
+extend_to_title = true
+content_scale_mode = 1
+content_scale_aspect = 4
 script = ExtResource("2_1syyh")
 
 [node name="MenuBackground" parent="." instance=ExtResource("1_n4ixf")]
@@ -72,7 +78,6 @@ stretch_mode = 5
 [node name="Instructions" type="Label" parent="MenuBackground/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
-size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("3_opoqq")
 theme_override_font_sizes/font_size = 24
 text = "There are various objects around each room that ghosts can possess."
@@ -93,7 +98,6 @@ stretch_mode = 5
 [node name="Instructions" type="Label" parent="MenuBackground/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
-size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("3_opoqq")
 theme_override_font_sizes/font_size = 24
 text = "Ghosts can attack you with some of these possessed objects. Watch out for any objects acting strangely!"

@@ -1,4 +1,4 @@
-extends PopupPanel
+extends Window
 
 enum Screen { POSSESSION, STATES, MAP, KEY_ITEM }
 
