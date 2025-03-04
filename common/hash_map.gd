@@ -8,7 +8,7 @@ extends Resource
 # retrieve_with_hash, and contains_hash. Other than the key being a hash, the 
 # dictionary is like any other (except maybe a little faster).
 
-var _hash_map: Dictionary = {}
+var _hash_map: Dictionary[PackedByteArray, Variant] = {}
 
 
 func add(key: Variant, value: Variant) -> bool:
@@ -78,7 +78,7 @@ func size() -> int:
 	return _hash_map.size()
 
 
-func dict() -> Dictionary:
+func dict() -> Dictionary[PackedByteArray, Variant]:
 	return _hash_map
 
 

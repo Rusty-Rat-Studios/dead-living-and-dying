@@ -53,8 +53,8 @@ func generate_grid(grid: WorldGrid) -> void:
 			continue
 		
 		# Returns a dictionary of room_pos, occupied_grid, door_grid 
-		var valid_room_placement: Dictionary = _get_valid_room_placement_at_doors(room_information, 
-			target_door.invert().location, valid_room_doors)
+		var valid_room_placement: Dictionary[String, Variant] = _get_valid_room_placement_at_doors(
+			room_information, target_door.invert().location, valid_room_doors)
 		
 		# Fail if no valid placements
 		if valid_room_placement.has('invalid'):
@@ -79,12 +79,12 @@ func generate_grid(grid: WorldGrid) -> void:
 # place the room at, the occupied_grid of the room, and the door_grid of the room.
 # If no doors are valid, returns { 'invalid': true }
 func _get_valid_room_placement_at_doors(room_information: RoomInformation, room_location: Vector2, 
-	valid_room_doors: Array[DoorLocation]) -> Dictionary:
+	valid_room_doors: Array[DoorLocation]) -> Dictionary[String, Variant]:
 	while valid_room_doors.size() > 0:
 		var random_valid_room_door: DoorLocation = RNG.random_from_list(valid_room_doors)
 		valid_room_doors.erase(random_valid_room_door)
 		var room_pos: Vector2 = -random_valid_room_door.location + room_location
-		var room_occupied_and_door_grids: Dictionary = WorldGrid.get_room_occupied_and_door_grids(
+		var room_occupied_and_door_grids: Dictionary[String, Array] = WorldGrid.get_room_occupied_and_door_grids(
 			room_information, room_pos)
 		var room_occupied_grid: Array[Vector2]
 		room_occupied_grid.assign(room_occupied_and_door_grids.get('occupied_grid'))
