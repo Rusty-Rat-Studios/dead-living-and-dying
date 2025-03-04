@@ -65,7 +65,6 @@ var current_view: Screen = Screen.POSSESSION
 @onready var image2: TextureRect = image_box.get_node("TextureRect2")
 @onready var image3: TextureRect = image_box.get_node("TextureRect3")
 
-
 @onready var instruction1: Label = instruction_box.get_node("Instructions")
 @onready var instruction2: Label = instruction_box.get_node("Instructions2")
 @onready var instruction3: Label = instruction_box.get_node("Instructions3")
