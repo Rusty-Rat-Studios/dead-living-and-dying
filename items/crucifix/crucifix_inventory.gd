@@ -1,7 +1,5 @@
 extends DefenseItemInventory
 
-signal item_used(cooldown_timer: Timer)
-
 const BASE_COOLDOWN_DURATION: float = 5
 const BASE_ACTIVE_DURATION: float = 2
 const BASE_RADIUS: float = 2
@@ -39,9 +37,9 @@ func use() -> void:
 	$Hitbox.visible = true
 	$ActiveTimer.wait_time = BASE_ACTIVE_DURATION * player.player_stats.duration
 	$ActiveTimer.start()
-	
-	cooldown_active = true
+	$CooldownTimer.wait_time = BASE_COOLDOWN_DURATION / player.player_stats.cooldown_reduction
 	$CooldownTimer.start()
+	cooldown_active = true
 	
 	item_used.emit($CooldownTimer)
 
@@ -49,8 +47,6 @@ func use() -> void:
 func _on_active_timer_timeout() -> void:
 	$Hitbox/CollisionShape3D.disabled = true
 	$Hitbox.visible = false
-	$CooldownTimer.wait_time = BASE_COOLDOWN_DURATION / player.player_stats.cooldown_reduction
-	$CooldownTimer.start()
 
 
 func _on_cooldown_timer_timeout() -> void:

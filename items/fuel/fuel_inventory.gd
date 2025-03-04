@@ -32,13 +32,15 @@ func use() -> void:
 	temp_stat_update(OMNI_RANGE_MODIFIER, SPOT_RANGE_MODIFIER, ENERGY_MODIFIER)
 	$ActiveTimer.wait_time = BASE_ACTIVE_DURATION * player.player_stats.duration
 	$ActiveTimer.start()
+	$CooldownTimer.wait_time = BASE_COOLDOWN_DURATION / player.player_stats.cooldown_reduction
+	$CooldownTimer.start()
 	cooldown_active = true
+	
+	item_used.emit($CooldownTimer)
 
 
 func _on_active_timer_timeout() -> void:
 	reset_stat_update()
-	$CooldownTimer.wait_time = BASE_COOLDOWN_DURATION / player.player_stats.cooldown_reduction
-	$CooldownTimer.start()
 
 
 func _on_cooldown_timer_timeout() -> void:
