@@ -13,14 +13,10 @@ gui_embed_subwindows = true
 initial_position = 2
 size = Vector2i(1152, 648)
 wrap_controls = true
-transient = true
-exclusive = true
 borderless = true
 always_on_top = true
 popup_window = true
 extend_to_title = true
-content_scale_mode = 1
-content_scale_aspect = 4
 script = ExtResource("2_1syyh")
 
 [node name="MenuBackground" parent="." instance=ExtResource("1_n4ixf")]
