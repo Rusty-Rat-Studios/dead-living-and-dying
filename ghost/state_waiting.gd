@@ -82,7 +82,7 @@ func pause() -> void:
 	is_paused = false
 	
 	# weighted chances for choosing next action
-	var choices: Dictionary = {
+	var choices: Dictionary[Callable, float] = {
 		_possess: POSSESS_CHANCE,
 		_attack: ATTACK_CHANCE,
 		set_random_target: WAIT_CHANCE

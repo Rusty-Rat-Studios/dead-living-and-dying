@@ -1,8 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cexvn2mosncly"]
 
-[ext_resource type="Script" path="res://map/room_components/door.gd" id="1_6px5k"]
+[ext_resource type="Script" uid="uid://btisf3jhp0nte" path="res://map/room_components/door.gd" id="1_6px5k"]
 [ext_resource type="PackedScene" uid="uid://fpivfcuv6s1r" path="res://map/room_components/wall_with_doorway.tscn" id="2_tobwv"]
-
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_03pyr"]
 albedo_color = Color(0.288541, 0.146007, 9.62615e-08, 1)

@@ -1,14 +1,14 @@
 [gd_scene load_steps=18 format=3 uid="uid://yihpxsaeuqdi"]
 
-[ext_resource type="Script" path="res://ghost/ghost.gd" id="1_vr82v"]
+[ext_resource type="Script" uid="uid://bhwqa6bloe8me" path="res://ghost/ghost.gd" id="1_vr82v"]
 [ext_resource type="Texture2D" uid="uid://cjyk53bm811ec" path="res://ghost/ghost_active.png" id="2_mfm4n"]
-[ext_resource type="Script" path="res://ghost/ghost_state_machine.gd" id="2_qkh1e"]
+[ext_resource type="Script" uid="uid://2kbqqaoti6rf" path="res://ghost/ghost_state_machine.gd" id="2_qkh1e"]
 [ext_resource type="Texture2D" uid="uid://885rtol40jd5" path="res://ghost/ghost_idle.png" id="3_dvhg2"]
-[ext_resource type="Script" path="res://ghost/state_waiting.gd" id="3_gb04i"]
-[ext_resource type="Script" path="res://ghost/state_possessing.gd" id="4_muv24"]
+[ext_resource type="Script" uid="uid://bjrqp6cm5j0s5" path="res://ghost/state_waiting.gd" id="3_gb04i"]
+[ext_resource type="Script" uid="uid://b1rk313utxpsb" path="res://ghost/state_possessing.gd" id="4_muv24"]
 [ext_resource type="PackedScene" uid="uid://bp0ydphecs3iv" path="res://common/shadow.tscn" id="7_0liqe"]
-[ext_resource type="Script" path="res://ghost/state_stunned.gd" id="7_yplap"]
-[ext_resource type="Script" path="res://ghost/state_attacking.gd" id="8_a4kr4"]
+[ext_resource type="Script" uid="uid://dnejv78e6bqw6" path="res://ghost/state_stunned.gd" id="7_yplap"]
+[ext_resource type="Script" uid="uid://bwxdjfnmqcqlx" path="res://ghost/state_attacking.gd" id="8_a4kr4"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_seahj"]
 animations = [{

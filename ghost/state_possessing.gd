@@ -162,7 +162,7 @@ func _wait() -> void:
 
 func _on_decision_timeout() -> void:
 	if is_possessing:
-		var choices: Dictionary = {
+		var choices: Dictionary[Callable, float] = {
 			_depossess: DEPOSSESS_CHANCE,
 			_wait: WAIT_CHANCE
 		}

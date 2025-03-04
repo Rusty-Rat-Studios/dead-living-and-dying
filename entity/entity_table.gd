@@ -12,8 +12,8 @@ func get_random_entity() -> Resource:
 
 # Returns a choices dictionary, filtered to include only valid entities.
 # Any entity that is at/above its max spawn limit will not be included.
-func _get_choices_dictionary_from_entities() -> Dictionary:
-	var choices: Dictionary = {}
+func _get_choices_dictionary_from_entities() -> Dictionary[EntityTableEntry, float]:
+	var choices: Dictionary[EntityTableEntry, float] = {}
 	for entry: EntityTableEntry in entities:
 		if entry.max_spawn == -1 or entry.current < entry.max_spawn:
 			choices[entry] = entry.base_chance

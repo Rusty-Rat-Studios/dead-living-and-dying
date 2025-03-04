@@ -19,7 +19,7 @@ func _ready() -> void:
 
 func setup_grid() -> void:
 	add_room(BASIC_ROOM, Vector2(0,0)) # Hardcoded to a basic room for now
-	var room_occupied_and_door_grids: Dictionary = get_room_occupied_and_door_grids(
+	var room_occupied_and_door_grids: Dictionary[String, Array] = get_room_occupied_and_door_grids(
 		BASIC_ROOM, Vector2(0,0))
 	var generator: WorldGenerator = WorldGenerator.new(
 		room_occupied_and_door_grids.get('occupied_grid'), 
@@ -39,7 +39,8 @@ func clear() -> void:
 
 
 # Returns the occupied_grid and door_grid of a room
-static func get_room_occupied_and_door_grids(room_info: RoomInformation, grid_location: Vector2) -> Dictionary:
+static func get_room_occupied_and_door_grids(room_info: RoomInformation, 
+	grid_location: Vector2) -> Dictionary[String, Array]:
 	var room_occupied: Array[Vector2]
 	room_occupied.assign(room_info.room_shape.map(
 		func(value: Vector2) -> Vector2:

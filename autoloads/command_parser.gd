@@ -1,7 +1,7 @@
 extends Node
 
 # Map a command definition to a Callable
-@onready var commands: Dictionary = {
+@onready var commands: Dictionary[String, Command] = {
 	"help": preload("res://ui/commands/command_help.gd").new(),
 	"debuglight": preload("res://ui/commands/command_debuglight.gd").new(),
 	"ghostopacity": preload("res://ui/commands/command_ghostopacity.gd").new(),

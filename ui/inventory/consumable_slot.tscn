@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://m60x4oieeliy"]
 
 [ext_resource type="PackedScene" uid="uid://bi3maar4f7ltv" path="res://ui/inventory/inventory_slot.tscn" id="1_m162s"]
-[ext_resource type="Script" path="res://ui/inventory/consumable_slot.gd" id="2_l63gr"]
+[ext_resource type="Script" uid="uid://borbb1othqrww" path="res://ui/inventory/consumable_slot.gd" id="2_l63gr"]
 
 [node name="ConsumableSlot" instance=ExtResource("1_m162s")]
 script = ExtResource("2_l63gr")

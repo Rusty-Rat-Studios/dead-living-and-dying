@@ -23,13 +23,13 @@ const BASE_LIGHT_OMNI_RANGE: float = 6.0
 const BASE_LIGHT_SPOT_RANGE: float = 10.0
 const BASE_LIGHT_ENERGY: float = 1.0
 
-var stat_modifier_speed: Dictionary = {}
-var stat_modifier_light_omni_range: Dictionary = {}
-var stat_modifier_light_spot_range: Dictionary = {}
-var stat_modifier_light_energy: Dictionary = {}
-var stat_modifier_cooldown_reduction: Dictionary = {}
-var stat_modifier_duration: Dictionary = {}
-var stat_modifier_area_size: Dictionary = {}
+var stat_modifier_speed: Dictionary[String, float] = {}
+var stat_modifier_light_omni_range: Dictionary[String, float] = {}
+var stat_modifier_light_spot_range: Dictionary[String, float] = {}
+var stat_modifier_light_energy: Dictionary[String, float] = {}
+var stat_modifier_cooldown_reduction: Dictionary[String, float] = {}
+var stat_modifier_duration: Dictionary[String, float] = {}
+var stat_modifier_area_size: Dictionary[String, float] = {}
 
 var speed: float = BASE_SPEED + dictionary_sum(stat_modifier_speed)
 var light_omni_range: float = BASE_LIGHT_OMNI_RANGE + dictionary_sum(stat_modifier_light_omni_range)
@@ -40,7 +40,7 @@ var duration: float = BASE_DURATION + dictionary_sum(stat_modifier_duration)
 var area_size: float = BASE_AREA_SIZE + dictionary_sum(stat_modifier_area_size)
 
 # map enum values to dicts
-var _stat_map: Dictionary = {
+var _stat_map: Dictionary[Stats, Dictionary] = {
 	Stats.SPEED: self.stat_modifier_speed,
 	Stats.LIGHT_OMNI_RANGE: self.stat_modifier_light_omni_range,
 	Stats.LIGHT_SPOT_RANGE: self.stat_modifier_light_spot_range,
@@ -51,7 +51,7 @@ var _stat_map: Dictionary = {
 }
 
 
-func dictionary_sum(stat_modifier: Dictionary) -> float:
+func dictionary_sum(stat_modifier: Dictionary[String, float]) -> float:
 	var total_modifier: float = 0.0
 	for i: String in stat_modifier:
 		total_modifier += stat_modifier[i]
