@@ -39,7 +39,8 @@ func clear() -> void:
 
 
 # Returns the occupied_grid and door_grid of a room
-static func get_room_occupied_and_door_grids(room_info: RoomInformation, grid_location: Vector2) -> Dictionary[String, Array]:
+static func get_room_occupied_and_door_grids(room_info: RoomInformation, 
+	grid_location: Vector2) -> Dictionary[String, Array]:
 	var room_occupied: Array[Vector2]
 	room_occupied.assign(room_info.room_shape.map(
 		func(value: Vector2) -> Vector2:
