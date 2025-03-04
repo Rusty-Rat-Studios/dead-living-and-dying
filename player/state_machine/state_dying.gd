@@ -1,6 +1,6 @@
 extends PlayerState
 
-const SPEED_MODIFIER: float = -2.0
+const SPEED_MODIFIER: float = -0.5
 
 const LIGHT_OMNI_RANGE_MODIFIER: float = -1.5
 const LIGHT_SPOT_RANGE_MODIFIER: float = -3
