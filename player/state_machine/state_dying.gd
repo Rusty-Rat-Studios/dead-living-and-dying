@@ -21,9 +21,7 @@ func enter() -> void:
 	
 	# enable and configure stunbox values
 	_parent.stunbox.collision_shape.set_deferred("disabled", false)
-	_parent.stunbox.set_values(_parent.current_stats.speed, _parent.current_stats.light_omni_range,
-		_parent.current_stats.light_spot_range, _parent.current_stats.light_energy)
-	
+
 
 func exit() -> void:
 	SignalBus.player_hurt.disconnect(_on_player_hurt)
