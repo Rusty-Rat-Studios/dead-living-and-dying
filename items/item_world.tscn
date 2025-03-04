@@ -6,7 +6,6 @@
 [ext_resource type="Script" path="res://common/sprite_backlight.gd" id="3_e25w4"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fj23q"]
-load_path = "res://.godot/imported/based.png-b2b87d870a01b4dad6e3f3b470b77de0.s3tc.ctex"
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_usb8p"]
 radius = 1.0

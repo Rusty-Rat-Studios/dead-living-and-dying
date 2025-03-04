@@ -1,4 +1,4 @@
-extends PopupPanel
+extends Window
 
 enum Screen { POSSESSION, STATES, MAP, KEY_ITEM }
 
@@ -11,9 +11,9 @@ const TEXT_POSSESSION1: String = "There are various objects around each room tha
 const TEXT_POSSESSION2: String = ("Ghosts can attack you with some of these possessed objects. "
 	+ "Watch out for any objects acting strangely!")
 
-const TEXT_STATE1: String = "You cannot see ghosts and they can only attack you by possessing an object."
-const TEXT_STATE2: String = "You move slower and can't see as far. Ghosts can directly attack you now."
-const TEXT_STATE3: String = ("Your spirit roams free! If a ghost reaches you it's game over. "
+const TEXT_STATE1: String = "LIVING: You cannot see ghosts and they can only attack you by possessing an object."
+const TEXT_STATE2: String = "DYING: You move slower and can't see as far. Ghosts can directly attack you now."
+const TEXT_STATE3: String = ("DEAD: Your spirit roams free! If a ghost reaches you it's game over. "
 	+ "Make it back to where you died to return to the Living state.")
 
 const TEXT_MAP1: String = ("Shrines are located around the map. "
@@ -54,21 +54,20 @@ var instructions3: Array = ["", TEXT_STATE3, TEXT_MAP3, TEXT_KEY_ITEM3] # posses
 
 var current_view: Screen = Screen.POSSESSION
 
-#gdlint:ignore = max-line-length
-@onready var instructions_box: HBoxContainer = $MenuBackground/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer
-@onready var image_box1: VBoxContainer = instructions_box.get_node("VBoxContainer")
-@onready var image_box2: VBoxContainer = instructions_box.get_node("VBoxContainer2")
-@onready var image_box3: VBoxContainer = instructions_box.get_node("VBoxContainer3")
-
-@onready var image1: TextureRect = image_box1.get_node("TextureRect")
-@onready var image2: TextureRect = image_box2.get_node("TextureRect")
-@onready var image3: TextureRect = image_box3.get_node("TextureRect")
-
 @onready var topic: Label = $MenuBackground/MarginContainer/VBoxContainer/Topic
 
-@onready var instruction1: Label = image_box1.get_node("Instructions")
-@onready var instruction2: Label = image_box2.get_node("Instructions")
-@onready var instruction3: Label = image_box3.get_node("Instructions")
+#gdlint:ignore = max-line-length
+@onready var instructions_box: VBoxContainer = $MenuBackground/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer
+@onready var image_box: HBoxContainer = instructions_box.get_node("HBoxImage")
+@onready var instruction_box: HBoxContainer = instructions_box.get_node("HBoxLabel")
+
+@onready var image1: TextureRect = image_box.get_node("TextureRect")
+@onready var image2: TextureRect = image_box.get_node("TextureRect2")
+@onready var image3: TextureRect = image_box.get_node("TextureRect3")
+
+@onready var instruction1: Label = instruction_box.get_node("Instructions")
+@onready var instruction2: Label = instruction_box.get_node("Instructions2")
+@onready var instruction3: Label = instruction_box.get_node("Instructions3")
 
 @onready var button_next: Button = $MenuBackground/MarginContainer/VBoxContainer/HboxButtons/ButtonNext
 @onready var button_previous: Button = $MenuBackground/MarginContainer/VBoxContainer/HboxButtons/ButtonPrevious
@@ -99,7 +98,8 @@ func _on_next_pressed() -> void:
 	match current_view:
 		Screen.POSSESSION:
 			current_view = Screen.STATES
-			image_box3.visible = true
+			image3.visible = true
+			instruction3.visible = true
 			button_previous.disabled = false
 		Screen.STATES:
 			current_view = Screen.MAP
@@ -114,7 +114,8 @@ func _on_previous_pressed() -> void:
 	match current_view:
 		Screen.STATES:
 			current_view = Screen.POSSESSION
-			image_box3.visible = false
+			image3.visible = false
+			instruction3.visible = false
 			button_previous.disabled = true
 		Screen.MAP:
 			current_view = Screen.STATES

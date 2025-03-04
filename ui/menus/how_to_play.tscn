@@ -8,13 +8,16 @@
 [ext_resource type="Texture2D" uid="uid://dxnykiuxu0oui" path="res://ui/resources/how_to_play_possession2.png" id="5_8bc4e"]
 [ext_resource type="Theme" uid="uid://casdoijkjemc2" path="res://ui/resources/menu_theme.tres" id="5_8m8i8"]
 
-[node name="HowToPlay" type="PopupPanel"]
+[node name="HowToPlay" type="Window"]
 gui_embed_subwindows = true
 initial_position = 2
 size = Vector2i(1152, 648)
-visible = true
+wrap_controls = true
 exclusive = true
+borderless = true
 always_on_top = true
+popup_window = true
+extend_to_title = true
 script = ExtResource("2_1syyh")
 
 [node name="MenuBackground" parent="." instance=ExtResource("1_n4ixf")]
@@ -22,6 +25,8 @@ offset_left = 4.0
 offset_top = 4.0
 offset_right = -4.0
 offset_bottom = -4.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MenuBackground/MarginContainer" index="0"]
 layout_mode = 2
@@ -53,25 +58,48 @@ size_flags_vertical = 3
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_right = 32
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MenuBackground/MarginContainer/VBoxContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuBackground/MarginContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
+alignment = 1
+
+[node name="HBoxImage" type="HBoxContainer" parent="MenuBackground/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 theme_override_constants/separation = 40
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MenuBackground/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="MenuBackground/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/HBoxImage"]
 layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="TextureRect" type="TextureRect" parent="MenuBackground/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
 texture = ExtResource("4_t5783")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Instructions" type="Label" parent="MenuBackground/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="TextureRect2" type="TextureRect" parent="MenuBackground/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/HBoxImage"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("5_8bc4e")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect3" type="TextureRect" parent="MenuBackground/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/HBoxImage"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("5_8bc4e")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HBoxLabel" type="HBoxContainer" parent="MenuBackground/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Instructions" type="Label" parent="MenuBackground/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/HBoxLabel"]
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("3_opoqq")
 theme_override_font_sizes/font_size = 24
@@ -79,20 +107,10 @@ text = "There are various objects around each room that ghosts can possess."
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="MenuBackground/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="TextureRect" type="TextureRect" parent="MenuBackground/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-size_flags_vertical = 3
-texture = ExtResource("5_8bc4e")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Instructions" type="Label" parent="MenuBackground/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer2"]
+[node name="Instructions2" type="Label" parent="MenuBackground/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/HBoxLabel"]
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("3_opoqq")
 theme_override_font_sizes/font_size = 24
@@ -100,21 +118,12 @@ text = "Ghosts can attack you with some of these possessed objects. Watch out fo
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="MenuBackground/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+[node name="Instructions3" type="Label" parent="MenuBackground/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/HBoxLabel"]
 visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="TextureRect" type="TextureRect" parent="MenuBackground/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer3"]
-layout_mode = 2
-size_flags_vertical = 3
-texture = ExtResource("5_8bc4e")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Instructions" type="Label" parent="MenuBackground/MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/VBoxContainer3"]
 custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("3_opoqq")
 theme_override_font_sizes/font_size = 24
 text = "Ghosts can attack you with some of these possessed objects. Watch out for any objects acting strangely!"

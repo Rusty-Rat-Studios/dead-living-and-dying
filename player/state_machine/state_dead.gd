@@ -1,15 +1,15 @@
 extends PlayerState
 
-const DEAD_SPEED: float = 10.0
+const SPEED_MODIFIER: float = 4
 
 const RESPAWN_TIME: float = 2
 
 func enter() -> void:
 	super()
-
-	_parent.stat_dict[Player.Stats.SPEED] = DEAD_SPEED
-
-
+	
+	_parent.player_stats.remove_stat_modifiers()
+	_parent.player_stats.stat_update_add(PlayerStats.Stats.SPEED, SPEED_MODIFIER, "dead")
+	
 	
 	# disable player light
 	_parent.light_omni.visible = false
@@ -39,6 +39,8 @@ func exit() -> void:
 	_parent.light_omni.visible = true
 	_parent.light_spot.visible = true
 	
+	_parent.player_stats.remove_stat_modifiers()
+  
 	# restore player color and opacity
 	_parent.get_node("RotationOffset/AnimatedSprite3D").modulate = Color(1, 1, 1, 1)
 	
