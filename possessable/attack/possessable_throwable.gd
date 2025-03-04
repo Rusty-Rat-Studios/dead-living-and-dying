@@ -4,7 +4,7 @@ extends PossessableAttack
 # impulse strength used to throw the object
 const THROW_FORCE: float = 15.0
 # speed threshold for enabling/disabling hurtbox
-const DAMAGE_VELOCITY: float = 2.0
+const DAMAGE_VELOCITY: float = 3.0
 # speed threshold for slowing down possessable when bumped while possessed
 # used to avoid "floating away"
 const SPEED_THRESHOLD: float = 1
