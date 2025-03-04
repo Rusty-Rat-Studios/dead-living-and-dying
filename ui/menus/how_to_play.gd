@@ -11,9 +11,9 @@ const TEXT_POSSESSION1: String = "There are various objects around each room tha
 const TEXT_POSSESSION2: String = ("Ghosts can attack you with some of these possessed objects. "
 	+ "Watch out for any objects acting strangely!")
 
-const TEXT_STATE1: String = "You cannot see ghosts and they can only attack you by possessing an object."
-const TEXT_STATE2: String = "You move slower and can't see as far. Ghosts can directly attack you now."
-const TEXT_STATE3: String = ("Your spirit roams free! If a ghost reaches you it's game over. "
+const TEXT_STATE1: String = "LIVING: You cannot see ghosts and they can only attack you by possessing an object."
+const TEXT_STATE2: String = "DYING: You move slower and can't see as far. Ghosts can directly attack you now."
+const TEXT_STATE3: String = ("DEAD: Your spirit roams free! If a ghost reaches you it's game over. "
 	+ "Make it back to where you died to return to the Living state.")
 
 const TEXT_MAP1: String = ("Shrines are located around the map. "
