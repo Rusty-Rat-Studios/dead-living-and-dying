@@ -36,9 +36,13 @@ func call_random_from_list(list: Array[Callable]) -> Variant:
 
 # call the output of weighted_random() (Dict keys should be Callable)
 func call_weighted_random(choices: Dictionary[Callable, float]) -> Variant:
-	return weighted_random(choices).call()
+	var untyped_choices: Dictionary[Variant, float]
+	untyped_choices.assign(choices)
+	return weighted_random(untyped_choices).call()
 
 
 # asynchronously call the output of weighted_random() (Dict keys should be Callable)
 func call_async_weighted_random(choices: Dictionary[Callable, float]) -> Variant:
-	return await weighted_random(choices).call()
+	var untyped_choices: Dictionary[Variant, float]
+	untyped_choices.assign(choices)
+	return await weighted_random(untyped_choices).call()
