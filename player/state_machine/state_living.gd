@@ -3,8 +3,6 @@ extends PlayerState
 
 func enter() -> void:
 	super()
-	# update player stats
-	_parent.stat_update_remove(_parent.current_stats.stat_modifier_speed, "dead")
 
 	# apply inventory buffs to modified stats
 	_parent.inventory_update()

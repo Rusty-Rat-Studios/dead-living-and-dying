@@ -56,3 +56,12 @@ class CurrentStats:
 		cooldown_reduction = BASE_COOLDOWN_REDUCTION + dictionary_sum(stat_modifier_cooldown_reduction)
 		duration = BASE_DURATION + dictionary_sum(stat_modifier_duration)
 		area_size = BASE_AREA_SIZE + dictionary_sum(stat_modifier_area_size)
+
+	func remove_stat_modifiers() -> void:
+		stat_modifier_speed.clear()
+		stat_modifier_light_omni_range.clear()
+		stat_modifier_light_spot_range.clear()
+		stat_modifier_light_energy.clear()
+		stat_modifier_cooldown_reduction.clear()
+		stat_modifier_duration.clear()
+		stat_modifier_area_size.clear()

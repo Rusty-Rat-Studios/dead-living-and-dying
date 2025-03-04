@@ -111,4 +111,5 @@ func stat_update() -> void:
 
 
 func inventory_update() -> void:
+	current_stats.remove_stat_modifiers()
 	$Inventory.update_all()
