@@ -62,10 +62,10 @@ func restore_instantly() -> void:
 	
 	$StunTimer.stop()
 	
-	remove_stun_modifiers()
+	_remove_stun_modifiers()
 
 
-func remove_stun_modifiers() -> void:
+func _remove_stun_modifiers() -> void:
 	_player.stat_update_remove(_player.current_stats.stat_modifier_speed, "stun")
 	_player.stat_update_remove(_player.current_stats.stat_modifier_light_omni_range, "stun")
 	_player.stat_update_remove(_player.current_stats.stat_modifier_light_spot_range, "stun")
@@ -73,7 +73,7 @@ func remove_stun_modifiers() -> void:
 
 
 func _on_tween_finished() -> void:
-	remove_stun_modifiers()
+	_remove_stun_modifiers()
 
 
 func _on_enemy_area_entered(_body: Node3D) -> void:
