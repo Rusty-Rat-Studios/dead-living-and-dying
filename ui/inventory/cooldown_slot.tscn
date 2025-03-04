@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://xmk4uynyor1t"]
 
 [ext_resource type="PackedScene" uid="uid://bi3maar4f7ltv" path="res://ui/inventory/inventory_slot.tscn" id="1_jxo5l"]
-[ext_resource type="Script" path="res://ui/inventory/cooldown_slot.gd" id="2_gg45m"]
+[ext_resource type="Script" uid="uid://bln0ly6ivksc" path="res://ui/inventory/cooldown_slot.gd" id="2_gg45m"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u5cnd"]
 bg_color = Color(0.219608, 0.219608, 0.219608, 0.501961)

@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://d2i1eypiamq2d"]
 
 [ext_resource type="PackedScene" uid="uid://e6l8r6x4mqfq" path="res://ui/menus/menu_background.tscn" id="1_n4ixf"]
-[ext_resource type="Script" path="res://ui/menus/how_to_play.gd" id="2_1syyh"]
+[ext_resource type="Script" uid="uid://y7okbj4eqm6n" path="res://ui/menus/how_to_play.gd" id="2_1syyh"]
 [ext_resource type="FontFile" uid="uid://bvx6yxwpx1rfq" path="res://ui/resources/princess_sofia_font/PrincessSofia-Regular.ttf" id="2_fvrgu"]
 [ext_resource type="FontFile" uid="uid://c16563s6uqwuy" path="res://ui/resources/oswald_font/Oswald-VariableFont_wght.ttf" id="3_opoqq"]
 [ext_resource type="Texture2D" uid="uid://cqcvbmlssy3y5" path="res://ui/resources/how_to_play_possession.png" id="4_t5783"]

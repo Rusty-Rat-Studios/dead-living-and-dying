@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bson3umirpot2"]
 
-[ext_resource type="Script" path="res://map/room_components/wall.gd" id="1_cmcax"]
+[ext_resource type="Script" uid="uid://uyg6vw1fndgn" path="res://map/room_components/wall.gd" id="1_cmcax"]
 [ext_resource type="Material" uid="uid://dfx01t1blqt3y" path="res://map/room_components/transparent_wall_material.tres" id="2_08np8"]
 [ext_resource type="Material" uid="uid://bjpn3uixmhwm8" path="res://map/room_components/wall_material.tres" id="2_fyiye"]
 

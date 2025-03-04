@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dd6e1m2nlvph4"]
 
 [ext_resource type="PackedScene" uid="uid://bi3maar4f7ltv" path="res://ui/inventory/inventory_slot.tscn" id="1_q4hk2"]
-[ext_resource type="Script" path="res://ui/inventory/passive_slot.gd" id="2_5g3y2"]
+[ext_resource type="Script" uid="uid://6jkna172qn2r" path="res://ui/inventory/passive_slot.gd" id="2_5g3y2"]
 
 [node name="PassiveSlot" instance=ExtResource("1_q4hk2")]
 anchors_preset = 8

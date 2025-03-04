@@ -1,12 +1,12 @@
 [gd_scene load_steps=10 format=3 uid="uid://bq2dwqp4q6dn1"]
 
-[ext_resource type="Script" path="res://game.gd" id="1_xwopn"]
+[ext_resource type="Script" uid="uid://br2ou0xf5p2mo" path="res://game.gd" id="1_xwopn"]
 [ext_resource type="PackedScene" uid="uid://bbow7knip3g6g" path="res://player/player.tscn" id="2_xkdfq"]
-[ext_resource type="Script" path="res://player/state_machine/player_state_machine.gd" id="3_3ig3n"]
-[ext_resource type="Script" path="res://player/state_machine/state_dead.gd" id="4_r4nk8"]
-[ext_resource type="Script" path="res://player/state_machine/state_living.gd" id="5_7fl8v"]
-[ext_resource type="Script" path="res://player/state_machine/state_dying.gd" id="6_xupbb"]
-[ext_resource type="Script" path="res://map/world_grid.gd" id="7_24rg8"]
+[ext_resource type="Script" uid="uid://d27rd5rlvycvc" path="res://player/state_machine/player_state_machine.gd" id="3_3ig3n"]
+[ext_resource type="Script" uid="uid://kgcxuhne3rbl" path="res://player/state_machine/state_dead.gd" id="4_r4nk8"]
+[ext_resource type="Script" uid="uid://btdlvy02iwmn2" path="res://player/state_machine/state_living.gd" id="5_7fl8v"]
+[ext_resource type="Script" uid="uid://bfwa3mijk47us" path="res://player/state_machine/state_dying.gd" id="6_xupbb"]
+[ext_resource type="Script" uid="uid://dk6tfo4i3solm" path="res://map/world_grid.gd" id="7_24rg8"]
 [ext_resource type="PackedScene" uid="uid://dic5onsop66y4" path="res://ui/menus/game_menu.tscn" id="8_ah51h"]
 [ext_resource type="PackedScene" uid="uid://bwmbngtw81o3y" path="res://ui/debug_console.tscn" id="8_en8lj"]
 

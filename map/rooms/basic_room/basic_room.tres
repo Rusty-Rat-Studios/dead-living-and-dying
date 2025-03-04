@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="RoomInformation" load_steps=8 format=3 uid="uid://c8gdgt8v5cjel"]
 
-[ext_resource type="Script" path="res://common/room_information.gd" id="1_1wex3"]
-[ext_resource type="Script" path="res://common/door_location.gd" id="1_b6o1x"]
+[ext_resource type="Script" uid="uid://bv4f3snq7u1u2" path="res://common/room_information.gd" id="1_1wex3"]
+[ext_resource type="Script" uid="uid://dqhrw6rxew3fa" path="res://common/door_location.gd" id="1_b6o1x"]
 [ext_resource type="PackedScene" uid="uid://dh8q75xrlxeaa" path="res://map/rooms/basic_room/basic_room.tscn" id="2_htt27"]
 
 [sub_resource type="Resource" id="Resource_3y6bj"]

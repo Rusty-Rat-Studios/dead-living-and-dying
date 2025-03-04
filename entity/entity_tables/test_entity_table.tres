@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="EntityTable" load_steps=10 format=3 uid="uid://cinkoxiqgkewm"]
 
-[ext_resource type="Script" path="res://entity/entity_table_entry.gd" id="1_77xku"]
+[ext_resource type="Script" uid="uid://dt04phs8a5k3h" path="res://entity/entity_table_entry.gd" id="1_77xku"]
 [ext_resource type="PackedScene" uid="uid://yihpxsaeuqdi" path="res://ghost/ghost.tscn" id="2_n1cha"]
 [ext_resource type="PackedScene" uid="uid://c1hur2s8mgagv" path="res://possessable/attack/possessable_throwable.tscn" id="3_h77gq"]
 [ext_resource type="PackedScene" uid="uid://8tfld0cdj22d" path="res://items/crucifix/crucifix_world.tscn" id="4_u85v7"]
-[ext_resource type="Script" path="res://entity/entity_table.gd" id="5_53opc"]
+[ext_resource type="Script" uid="uid://caxs80c62syve" path="res://entity/entity_table.gd" id="5_53opc"]
 
 [sub_resource type="Resource" id="Resource_mbjog"]
 script = ExtResource("1_77xku")
