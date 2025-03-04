@@ -11,7 +11,9 @@ func _ready() -> void:
 	DisplayServer.window_set_min_size(Vector2i(800, 600))
 	
 	if skip_to_game:
-		start_game()
+		# use call deferred to wait until scene tree finishes constructing to avoid error
+		call_deferred("start_game")
+		return
 	
 	buttons.get_node("ButtonStart").pressed.connect(_on_start_pressed)
 	buttons.get_node("ButtonOptions").pressed.connect(_on_options_pressed)

@@ -5,6 +5,8 @@ const SPEED_MODIFIER: float = -2.0
 const LIGHT_OMNI_RANGE_MODIFIER: float = -1.5
 const LIGHT_SPOT_RANGE_MODIFIER: float = -3
 
+@onready var screen_effect: TextureRect = get_node("/root/Game/UI/DyingScreenEffect")
+
 
 func enter() -> void:
 	super()
@@ -13,13 +15,15 @@ func enter() -> void:
 	_parent.player_stats.stat_update_add(PlayerStats.Stats.LIGHT_OMNI_RANGE, LIGHT_OMNI_RANGE_MODIFIER, "dying")
 	_parent.player_stats.stat_update_add(PlayerStats.Stats.LIGHT_SPOT_RANGE, LIGHT_SPOT_RANGE_MODIFIER, "dying")
 	
-	# DEBUG: modulate color according to state
-	_parent.get_node("RotationOffset/AnimatedSprite3D").modulate = Color(1, 0.5, 0.5)
-	
 	SignalBus.player_hurt.connect(_on_player_hurt)
 	
 	# enable and configure stunbox values
 	_parent.stunbox.collision_shape.set_deferred("disabled", false)
+	
+	# stun the player when they are hit
+	_parent.stunbox.stun()
+	# enable "dying" screen effect
+	screen_effect.enable()
 
 
 func exit() -> void:
@@ -28,6 +32,8 @@ func exit() -> void:
 	_parent.stunbox.collision_shape.set_deferred("disabled", true)
 	# invalidate any stun effects
 	_parent.stunbox.restore_instantly()
+	
+	screen_effect.disable()
 
 
 func _on_player_hurt() -> void:

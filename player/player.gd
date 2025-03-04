@@ -13,6 +13,7 @@ var _state_machine: PlayerStateMachine
 @onready var light_omni: OmniLight3D = $OmniLight3D
 @onready var light_spot: SpotLight3D = $SpotLight3D
 @onready var camera: Camera3D = $RotationOffset/Camera3D
+@onready var sprite: AnimatedSprite3D = $RotationOffset/AnimatedSprite3D
 # updated by state machine when changing states
 @onready var hurtbox: Area3D = $Hurtbox
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
@@ -54,6 +55,8 @@ func reset() -> void:
 
 func _physics_process(delta: float) -> void:
 	handle_movement(delta) 
+	# Set Player position for shaders
+	RenderingServer.global_shader_parameter_set("Player", self.global_position)
 
 
 func handle_movement(delta: float) -> void:
@@ -79,6 +82,7 @@ func handle_movement(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, player_stats.speed)
 		velocity.z = move_toward(velocity.z, 0, player_stats.speed)
+
 	move_and_slide()
 
 

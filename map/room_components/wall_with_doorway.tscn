@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=4 uid="uid://fpivfcuv6s1r"]
+
+[ext_resource type="Script" path="res://map/room_components/wall.gd" id="1_qq7eh"]
+[ext_resource type="Material" uid="uid://hnvx3t8awqp1" path="res://map/room_components/transparent_wall_with_doorway_material.tres" id="2_akohn"]
+[ext_resource type="Material" uid="uid://ca6og85us0udr" path="res://map/room_components/wall_with_doorway_material.tres" id="2_nyej4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nv0kj"]
+resource_name = "Material"
+cull_mode = 2
+albedo_color = Color(0.906332, 0.906332, 0.906332, 1)
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_yqa6q"]
+_surfaces = [{
+"aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1),
+"format": 34896613377,
+"index_count": 84,
+"index_data": PackedByteArray("CgACAAsABAAJAAYABAAIAAkACgAAAAIABAAKAAgAAAAKAAQABgANAAcABgAJAA0AAwALAAIAAwAMAAsABwAEAAYABwAFAAQADwAHAA0AAQAMAAMAAQAOAAwADwAFAAcAAQAPAA4ABQAPAAEAAQACAAAAAQADAAIABQAAAAQABQABAAAADwAJAAgADwANAAkADgAIAAoADgAPAAgACwAOAAoACwAMAA4A"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 16,
+"vertex_data": PackedByteArray("/////wAAAAD//wAAAAAAAP///////wAA//8AAP//AAAAAP//AAAAAAAAAAAAAAAAAAD/////AAAAAAAA//8AAP9v////fwAA/2//////AAD/j////38AAP+P/////wAA/48AAP//AAD/bwAA//8AAP+PAAD/fwAA/28AAP9/AAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_38klx"]
+resource_name = "wall_with_doorway_Cube"
+_surfaces = [{
+"aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1),
+"attribute_data": PackedByteArray("/5//f/+f/3//n/9//1//f/9f/3//X/9//5//P/+f/z//n/8//1//P/9f/z//X/8//5//v//f/3//n/+//1//v/8f/3//X/+//58AAP/f/z//n////18AAP8f/z//X///MoP/v//D/18yg/+//5//G//D/z8yg1T1MoP/f/+7/18yg/9//5//I/+7/z8yg6pK/1//I/9D/z/MfKpK/1//G/87/z/MfFT1zHz/f/9D/1/MfP9/zHz/v/87/1/MfP+/"),
+"format": 34896613399,
+"index_count": 84,
+"index_data": PackedByteArray("HwAHACIADQAcABMADQAZABwAHwABAAcADQAfABkAAQAfAA0AEgAnABUAEgAbACcACQAhAAYACQAkACEAFwAOABQAFwARAA4ALgAWACgABAAlAAoABAArACUALgAQABYABAAuACsAEAAuAAQABQAIAAIABQALAAgADwAAAAwADwADAAAALwAdABoALwApAB0AKgAYAB4AKgAtABgAIwAsACAAIwAmACwA"),
+"material": SubResource("StandardMaterial3D_nv0kj"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 48,
+"vertex_data": PackedByteArray("/////wAA////////AAD///////8AAFTV//8AAAAA/////wAAAAD/v///AAAAAFTV/////////7///////////////////1TV//8AAP///7///wAA////v///AAD//1TVAAD//wAA//8AAP//AAD//wAA//8AAFTVAAAAAAAA//8AAAAAAAD/vwAAAAAAAFTVAAD//////78AAP///////wAA/////1TVAAAAAP///78AAAAA////vwAAAAD//1TV/2////9//z//b////3////9v////f6oq/2///////7//b/////////9v/////6oq/4////9//z//j////3////+P////f6oq/4///////7//j/////////+P/////6oq/48AAP///7//jwAA////v/+PAAD//6oq/28AAP///7//bwAA////v/9vAAD//6oq/48AAP9//z//jwAA/3//v/+PAAD/f6oq/28AAP9//z//bwAA/3//v/9vAAD/f6oq/7//v/9//7+qKqoq/7//vwAA/3+qKqoq//////9//7+qKqoq/////wAA/3+qKqoq/7//v/9//79U1VTV/7//vwAA/39U1VTV//////9//79U1VTV/////wAA/39U1VTV//////9//7+qKqoq//////9//7+qKqoq//////9//79U1VTV//////9//79U1VTV/////wAA/39U1VTV/////wAA/3+qKqoq/////wAA/39U1VTV/////wAA/3+qKqoq")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_yqa6q")
+
+[node name="WallWithDoorway" type="StaticBody3D"]
+script = ExtResource("1_qq7eh")
+transparent_wall_material = ExtResource("2_akohn")
+wall_material = ExtResource("2_nyej4")
+
+[node name="WallMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(16, 0, 0, 0, 0, -5, 0, 0.1, 0, 0, 2.5, 0)
+mesh = SubResource("ArrayMesh_38klx")
+skeleton = NodePath("")
+surface_material_override/0 = ExtResource("2_nyej4")
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="."]
+polygon = PackedVector2Array(-8, 0, -1, 0, -1, 2.5, 1, 2.5, 1, 0, 8, 0, 8, 5, -8, 5)

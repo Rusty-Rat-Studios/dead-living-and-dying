@@ -32,6 +32,16 @@ SpawnerManager="*res://autoloads/spawner_manager.gd"
 gdscript/warnings/untyped_declaration=2
 gdscript/warnings/inferred_declaration=2
 
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/stretch/scale=0.8
+
+[filesystem]
+
+import/blender/enabled=false
+
 [input]
 
 ui_accept={
@@ -147,3 +157,10 @@ use_active_item={
 [rendering]
 
 environment/defaults/default_clear_color=Color(0, 0, 0, 1)
+
+[shader_globals]
+
+Player={
+"type": "vec3",
+"value": Vector3(0, 0, 0)
+}

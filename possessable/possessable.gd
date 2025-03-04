@@ -1,5 +1,5 @@
 class_name Possessable
-extends RigidBody3D
+extends Area3D
 
 """
 COLLISION MASKING SCHEME:
@@ -17,9 +17,10 @@ COLLISION MASKING SCHEME:
 # signal connected when ghost discovers all possessables in the room
 signal possessed
 
+@onready var parent: Node3D = get_parent()
 # store room for attaching self to "possessables_available" group that is 
 # checked by ghosts in the same room for available possession targets
-@onready var room: Room = get_parent()
+@onready var room: Room = parent.get_parent()
 # flag for ensuring object is not repossessed too soon after depossession
 @onready var is_possessable: bool = true
 # flag for ensuring object is "free" for possession
@@ -28,6 +29,7 @@ signal possessed
 @onready var player_in_range: bool = false
 # store initial position to return to when calling reset()
 @onready var starting_transform: Transform3D = transform
+
 
 func _ready() -> void:
 	# add self to possessables in room
@@ -44,14 +46,15 @@ func reset() -> void:
 
 
 func possess() -> void:
-	# remove self from room's available possessables
-	# to disallow other ghosts to set it as a target
-	room.remove_possessable(self)
-	# signal to ghosts on the way to target it that it has been taken
-	possessed.emit()
-	is_possessed = true
-	
-	$GPUParticles3D.emitting = true
+	if is_possessable:
+		# remove self from room's available possessables
+		# to disallow other ghosts to set it as a target
+		room.remove_possessable(self)
+		# signal to ghosts on the way to target it that it has been taken
+		possessed.emit()
+		is_possessed = true
+		
+		$GPUParticles3D.emitting = true
 
 
 func depossess() -> void:

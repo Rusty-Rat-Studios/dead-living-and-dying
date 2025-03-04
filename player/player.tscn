@@ -1,21 +1,23 @@
 [gd_scene load_steps=13 format=3 uid="uid://bbow7knip3g6g"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_ndccg"]
-[ext_resource type="Shape3D" uid="uid://d140c2qk5hbt2" path="res://player/player_collision_shape.tres" id="2_a56u6"]
-[ext_resource type="Texture2D" uid="uid://s8o3w3qwl6uv" path="res://icon_back.png" id="3_syjgo"]
-[ext_resource type="Texture2D" uid="uid://cvadlfyuhhlsa" path="res://icon.svg" id="4_5bmh1"]
+[ext_resource type="Texture2D" uid="uid://cdu1sybc4l0vp" path="res://player/caretaker_idle.png" id="3_b0ygv"]
 [ext_resource type="Script" path="res://player/camera.gd" id="4_mmf56"]
 [ext_resource type="Script" path="res://player/spotlight.gd" id="5_nwynq"]
 [ext_resource type="Script" path="res://player/hurtbox.gd" id="6_ltudm"]
 [ext_resource type="PackedScene" uid="uid://umlwhr2u3iej" path="res://player/corpse.tscn" id="8_865w7"]
 [ext_resource type="Script" path="res://player/stunbox.gd" id="9_25lto"]
 [ext_resource type="Script" path="res://player/inventory.gd" id="9_qaadw"]
+[ext_resource type="PackedScene" uid="uid://bp0ydphecs3iv" path="res://common/shadow.tscn" id="11_7sgie"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uy1l0"]
+radius = 0.4
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bh504"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_syjgo")
+"texture": ExtResource("3_b0ygv")
 }],
 "loop": true,
 "name": &"back",
@@ -23,7 +25,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_5bmh1")
+"texture": ExtResource("3_b0ygv")
 }],
 "loop": true,
 "name": &"front",
@@ -39,17 +41,19 @@ collision_layer = 6
 script = ExtResource("1_ndccg")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = ExtResource("2_a56u6")
+shape = SubResource("CapsuleShape3D_uy1l0")
 
 [node name="RotationOffset" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642787, 0, -0.642787, 0.766044, 0, 0, 0)
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="RotationOffset"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
+billboard = 2
 sprite_frames = SubResource("SpriteFrames_bh504")
 animation = &"front"
 
 [node name="Camera3D" type="Camera3D" parent="RotationOffset"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
 script = ExtResource("4_mmf56")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
@@ -85,6 +89,7 @@ one_shot = true
 [node name="CorpseContainer" type="Node" parent="."]
 
 [node name="Corpse" parent="CorpseContainer" instance=ExtResource("8_865w7")]
+visible = false
 
 [node name="Inventory" type="Node3D" parent="."]
 script = ExtResource("9_qaadw")
@@ -101,3 +106,6 @@ disabled = true
 
 [node name="StunTimer" type="Timer" parent="Stunbox"]
 one_shot = true
+
+[node name="Shadow" parent="." instance=ExtResource("11_7sgie")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 0)

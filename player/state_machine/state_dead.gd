@@ -15,8 +15,8 @@ func enter() -> void:
 	_parent.light_omni.visible = false
 	_parent.light_spot.visible = false
 	
-	# DEBUG: modulate color according to state
-	_parent.get_node("RotationOffset/AnimatedSprite3D").modulate = Color(0.5, 0.5, 0.5, 0.5)
+	# modulate player color and opacity to appear ghostly
+	_parent.get_node("RotationOffset/AnimatedSprite3D").modulate = Color(0.5, 0.5, 0.5, 0.3)
 	
 	# change collision layers out of physical plane into spirit plane
 	_parent.collision_layer = CollisionBit.PLAYER + CollisionBit.SPIRIT
@@ -40,6 +40,9 @@ func exit() -> void:
 	_parent.light_spot.visible = true
 	
 	_parent.player_stats.remove_stat_modifiers()
+  
+	# restore player color and opacity
+	_parent.get_node("RotationOffset/AnimatedSprite3D").modulate = Color(1, 1, 1, 1)
 	
 	# change collision layers out of spirit plane into physical plane
 	_parent.collision_layer = CollisionBit.PLAYER + CollisionBit.PHYSICAL

@@ -6,15 +6,25 @@ signal hit
 const BASE_SPEED: float = 4.0
 # time to wait before attacking when player enters room
 const ATTACK_DELAY: float = 0.3
+# time to tween light visibility when ghost starts/stops moving
+const LIGHT_FADE_DURATION: float = 0.3
+const LIGHT_ENERGY: float = 0.1
 
 # opacity values set according to player state
 const OPACITY_DYING: float = 0.2
 const OPACITY_DEAD: float = 0.8
 
 var movement_boundaries: Rect2
+var light_tween: Tween
+var light_enabled: bool = false
 
 @onready var state_machine: GhostStateMachine = $StateMachine
 @onready var hitbox: Area3D = $Hitbox
+# used by state ATTACKING to detect if player in range of stun attack
+@onready var attack_range: Area3D = $AttackRange
+
+@onready var sprite: AnimatedSprite3D = $AnimatedSprite3D
+@onready var light: OmniLight3D = $OmniLight3D
 
 @onready var speed: float = BASE_SPEED
 @onready var current_room: Room = get_parent()
@@ -31,13 +41,18 @@ func _ready() -> void:
 	# pass reference of the ghost to the states
 	state_machine.init(self)
 	
+	# set opacity to 0 and disable self-light
+	# left visible in editor for debugging purposes
+	sprite.modulate.a = 0
+	light.light_energy = 0
+	
 	# attach signals for updating player_in_room flag
 	# states listening for same signals are connected with CONNECT_DEFERRED
 	# to ensure this connection always evaluates first when signal emits
 	SignalBus.player_entered_room.connect(_on_player_entered_room)
 	SignalBus.player_exited_room.connect(_on_player_exited_room)
 	# attach signal to update ghost visibility based on player state
-	SignalBus.player_state_changed.connect(_on_player_state_changed)
+	SignalBus.player_state_changed.connect(_on_player_state_changed, CONNECT_DEFERRED)
 	
 	hit.connect(_on_hit)
 
@@ -55,6 +70,20 @@ func reset() -> void:
 	state_machine.reset()
 
 
+func set_target(target_global: Vector3) -> void:
+	# set the target_pos value
+	target_pos = target_global
+	# flip sprite horizontally according to direction of target
+	# with a deadzone margin to prevent oscillating back and forth
+	if abs(target_global.x - global_position.x) > 0.5:
+		sprite.flip_h = target_global.x > global_position.x
+	
+	if light_enabled:
+		# make light visible
+		light_tween = create_tween()
+		light_tween.tween_property(light, "light_energy", LIGHT_ENERGY, LIGHT_FADE_DURATION)
+
+
 func move_to_target(delta: float) -> void:
 	var direction: Vector3 = target_pos - global_position
 	# force target_pos onto y=1 plane to ensure ghost can "reach" targets
@@ -67,6 +96,13 @@ func move_to_target(delta: float) -> void:
 		at_target = true
 		velocity = Vector3.ZERO
 		target_pos = global_position
+		
+		if light_enabled:
+			# make light invisible
+			if light_tween:
+				light_tween.kill()
+			light_tween = create_tween()
+			light_tween.tween_property(light, "light_energy", 0, LIGHT_FADE_DURATION)
 	else:
 		at_target = false
 		direction = direction.normalized()
@@ -97,15 +133,19 @@ func _on_hit() -> void:
 
 
 func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
-	var material: Material = $MeshInstance3D.mesh.material
-	
 	var opacity: float
 	match state:
 		PlayerStateMachine.States.LIVING:
 			opacity = 0
+			$Shadow.visible = false
+			light_enabled = false
 		PlayerStateMachine.States.DYING:
 			opacity = OPACITY_DYING
+			$Shadow.visible = true
+			light_enabled = true
 		PlayerStateMachine.States.DEAD:
 			opacity = OPACITY_DEAD
+			$Shadow.visible = true
+			light_enabled = false
 	
-	material.albedo_color.a = opacity
+	sprite.modulate.a = opacity
