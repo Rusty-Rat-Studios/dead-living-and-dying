@@ -86,3 +86,4 @@ func remove_stat_modifiers() -> void:
 	stat_modifier_cooldown_reduction.clear()
 	stat_modifier_duration.clear()
 	stat_modifier_area_size.clear()
+	update_stats()

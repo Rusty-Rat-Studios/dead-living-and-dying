@@ -51,7 +51,7 @@ func _restore_step(value: float) -> void:
 	_player.player_stats.stat_modifier_light_omni_range["stun"] = LIGHT_RANGE_MODIFIER * value
 	_player.player_stats.stat_modifier_light_spot_range["stun"] = LIGHT_RANGE_MODIFIER * value
 	_player.player_stats.stat_modifier_light_energy["stun"] = LIGHT_ENERGY_MODIFIER * value
-	_player.player_stats.stat_update()
+	_player.player_stats.update_stats()
 
 
 func restore_instantly() -> void:
@@ -66,10 +66,10 @@ func restore_instantly() -> void:
 
 
 func _remove_stun_modifiers() -> void:
-	_player.stat_update_remove(_player.current_stats.stat_modifier_speed, "stun")
-	_player.stat_update_remove(_player.current_stats.stat_modifier_light_omni_range, "stun")
-	_player.stat_update_remove(_player.current_stats.stat_modifier_light_spot_range, "stun")
-	_player.stat_update_remove(_player.current_stats.stat_modifier_light_energy, "stun")
+	_player.player_stats.stat_update_remove(PlayerStats.Stats.SPEED, "stun")
+	_player.player_stats.stat_update_remove(PlayerStats.Stats.LIGHT_OMNI_RANGE, "stun")
+	_player.player_stats.stat_update_remove(PlayerStats.Stats.LIGHT_SPOT_RANGE, "stun")
+	_player.player_stats.stat_update_remove(PlayerStats.Stats.LIGHT_ENERGY, "stun")
 
 
 func _on_tween_finished() -> void:
