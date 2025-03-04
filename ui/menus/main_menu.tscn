@@ -105,5 +105,4 @@ theme_override_font_sizes/font_size = 28
 text = "Quit"
 
 [node name="HowToPlay" parent="." index="3" instance=ExtResource("6_s0122")]
-gui_embed_subwindows = false
 visible = false
