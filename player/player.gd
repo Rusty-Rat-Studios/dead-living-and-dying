@@ -96,20 +96,7 @@ func _on_item_picked_up(item: ItemInventory) -> void:
 	item.position = Vector3.ZERO
 
 
-func stat_update_add( stat: Dictionary, stat_modifier: float, name: String) -> void:
-	stat[name] = stat_modifier
-	current_stats.update_stats()
-
-
-func stat_update_remove( stat: Dictionary, name: String) -> void:
-	stat.erase(name)
-	current_stats.update_stats()
-
-
-func stat_update() -> void:
-	current_stats.update_stats()
-
-
 func inventory_update() -> void:
 	current_stats.remove_stat_modifiers()
 	$Inventory.update_all()
+	current_stats.update_stats()

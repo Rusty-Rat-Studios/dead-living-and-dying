@@ -6,11 +6,10 @@ const RESPAWN_TIME: float = 2
 
 func enter() -> void:
 	super()
-
-	_parent.current_stats.remove_stat_modifiers()
 	
-	_parent.stat_update_add(_parent.current_stats.stat_modifier_speed, SPEED_MODIFIER, "dead")
-
+	_parent.current_stats.remove_stat_modifiers()
+	_parent.current_stats.stat_update_add(PlayerStats.Stats.SPEED, SPEED_MODIFIER, "dead")
+	
 	
 	# disable player light
 	_parent.light_omni.visible = false

@@ -1,7 +1,7 @@
 class_name PlayerStats
 extends Resource
 
-#used when calling stat_update
+#used when calling stat_update_* methods
 enum Stats {
 	SPEED,
 	LIGHT_OMNI_RANGE,
@@ -40,15 +40,34 @@ class CurrentStats:
 	var duration: float = BASE_DURATION + dictionary_sum(stat_modifier_duration)
 	var area_size: float = BASE_AREA_SIZE + dictionary_sum(stat_modifier_area_size)
 	
+	var _stat_map: Dictionary = {
+		Stats.SPEED: self.stat_modifier_speed,
+		Stats.LIGHT_OMNI_RANGE: self.stat_modifier_light_omni_range,
+		Stats.LIGHT_SPOT_RANGE: self.stat_modifier_light_spot_range,
+		Stats.LIGHT_ENERGY: self.stat_modifier_light_energy,
+		Stats.COOLDOWN_REDUCTION: self.stat_modifier_cooldown_reduction,
+		Stats.DURATION: self.stat_modifier_duration,
+		Stats.AREA_SIZE: self.stat_modifier_area_size
+	}
 	
-	func dictionary_sum(stat_modifier: Dictionary)-> float:
+	func dictionary_sum(stat_modifier: Dictionary) -> float:
 		var total_modifier: float = 0.0
 		for i: String in stat_modifier:
 			total_modifier += stat_modifier[i]
 		return total_modifier
 	
 	
-	func update_stats()-> void:
+	func stat_update_add( stat: Stats, stat_modifier: float, name: String) -> void:
+		_stat_map.get(stat)[name] = stat_modifier
+		update_stats()
+
+
+	func stat_update_remove( stat: Stats, name: String) -> void:
+		_stat_map.get(stat).erase(name)
+		update_stats()
+	
+	
+	func update_stats() -> void:
 		speed = BASE_SPEED + dictionary_sum(stat_modifier_speed)
 		light_omni_range = BASE_LIGHT_OMNI_RANGE + dictionary_sum(stat_modifier_light_omni_range)
 		light_spot_range = BASE_LIGHT_SPOT_RANGE + dictionary_sum(stat_modifier_light_spot_range)
@@ -56,6 +75,7 @@ class CurrentStats:
 		cooldown_reduction = BASE_COOLDOWN_REDUCTION + dictionary_sum(stat_modifier_cooldown_reduction)
 		duration = BASE_DURATION + dictionary_sum(stat_modifier_duration)
 		area_size = BASE_AREA_SIZE + dictionary_sum(stat_modifier_area_size)
+
 
 	func remove_stat_modifiers() -> void:
 		stat_modifier_speed.clear()

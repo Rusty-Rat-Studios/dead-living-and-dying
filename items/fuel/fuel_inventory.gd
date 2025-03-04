@@ -5,8 +5,11 @@ const BASE_ACTIVE_DURATION: float = 4
 const OMNI_RANGE_MODIFIER: float = 3
 const SPOT_RANGE_MODIFIER: float = 3
 const ENERGY_MODIFIER: float = 1
+
 var player: Node = PlayerHandler.get_player()
+
 @onready var cooldown_active: bool = false 
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -45,13 +48,13 @@ func _on_cooldown_timer_timeout() -> void:
 func temp_stat_update(omni_range_modifier: float, spot_range_modifier: float, 
 	energy_modifier: float) -> void:
 	var player: Node = PlayerHandler.get_player()
-	player.stat_update_add(player.current_stats.stat_modifier_light_omni_range, omni_range_modifier, "fuel")
-	player.stat_update_add(player.current_stats.stat_modifier_light_spot_range, spot_range_modifier, "fuel")
-	player.stat_update_add(player.current_stats.stat_modifier_light_energy, energy_modifier, "fuel")
+	player.current_stats.stat_update_add(PlayerStats.Stats.LIGHT_OMNI_RANGE, omni_range_modifier, "fuel")
+	player.current_stats.stat_update_add(PlayerStats.Stats.LIGHT_SPOT_RANGE, spot_range_modifier, "fuel")
+	player.current_stats.stat_update_add(PlayerStats.Stats.LIGHT_ENERGY, energy_modifier, "fuel")
 
 
 func reset_stat_update() -> void:
 	var player: Node = PlayerHandler.get_player()
-	player.stat_update_remove(player.current_stats.stat_modifier_light_omni_range, "fuel")
-	player.stat_update_remove(player.current_stats.stat_modifier_light_spot_range, "fuel")
-	player.stat_update_remove(player.current_stats.stat_modifier_light_energy, "fuel")
+	player.current_stats.stat_update_remove(PlayerStats.Stats.LIGHT_OMNI_RANGE, "fuel")
+	player.current_stats.stat_update_remove(PlayerStats.Stats.LIGHT_SPOT_RANGE, "fuel")
+	player.current_stats.stat_update_remove(PlayerStats.Stats.LIGHT_ENERGY, "fuel")

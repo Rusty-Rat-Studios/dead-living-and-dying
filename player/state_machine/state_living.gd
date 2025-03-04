@@ -6,7 +6,6 @@ func enter() -> void:
 
 	# apply inventory buffs to modified stats
 	_parent.inventory_update()
-	_parent.stat_update()
 	
 	# DEBUG: modulate color according to state
 	_parent.get_node("RotationOffset/AnimatedSprite3D").modulate = Color(0.5, 1, 0.5)
