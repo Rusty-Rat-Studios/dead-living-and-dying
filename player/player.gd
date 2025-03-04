@@ -82,7 +82,10 @@ func handle_movement(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, player_stats.speed)
 		velocity.z = move_toward(velocity.z, 0, player_stats.speed)
-
+	
+	if abs(velocity.x) > 0.01:
+		sprite.flip_h = direction.x < 0
+	
 	move_and_slide()
 
 

@@ -1,6 +1,6 @@
 extends PassiveItemInventory
 
-const SPEED_MODIFIER: float = 4.0
+const SPEED_MODIFIER: float = 1.3
 
 
 func _ready() -> void:

@@ -13,6 +13,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8ljcd")
+show_how_to_play_on_start = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -94,4 +95,3 @@ theme_override_font_sizes/font_size = 50
 text = "Quit"
 
 [node name="HowToPlay" parent="." instance=ExtResource("3_ocxaj")]
-visible = false

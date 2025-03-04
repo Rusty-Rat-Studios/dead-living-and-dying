@@ -25,8 +25,9 @@
 [ext_resource type="PackedScene" uid="uid://dxrbbho8wlerh" path="res://items/fuel/fuel_world.tscn" id="23_3haxr"]
 [ext_resource type="PackedScene" uid="uid://bh1qwbhfylkio" path="res://ui/inventory/inventory_container.tscn" id="23_q3mfq"]
 
-[node name="Game" type="Node3D"]
+[node name="Game" type="Node3D" node_paths=PackedStringArray("old_man")]
 script = ExtResource("1_77rk7")
+old_man = NodePath("WorldGrid/RoomBottom/OldMan")
 
 [node name="Player" parent="." instance=ExtResource("1_hu241")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -3)

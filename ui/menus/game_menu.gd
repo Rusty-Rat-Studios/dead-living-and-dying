@@ -4,6 +4,7 @@ extends Control
 const GAME_OVER_DELAY: float = 2.0
 
 @export var disable_popup: bool = false
+@export var show_how_to_play_on_start: bool = false
 
 @onready var scene: PackedScene = preload("res://game.tscn")
 
@@ -11,6 +12,12 @@ const GAME_OVER_DELAY: float = 2.0
 @onready var message: Label = $PanelContainer/MarginContainer/VBoxContainer/Message
 
 func _ready() -> void:
+	if show_how_to_play_on_start:
+		get_tree().paused = true
+		# resume game when popup window is closed
+		# needed because it can be closed by clicking "Exit" or clicking outside the window
+		$HowToPlay.button_exit.pressed.connect(func() -> void: resume(), CONNECT_ONE_SHOT)
+	
 	buttons.get_node("ButtonContinue").pressed.connect(_on_continue_pressed)
 	buttons.get_node("ButtonHow").pressed.connect(_on_how_pressed)
 	buttons.get_node("ButtonQuit").pressed.connect(_on_quit_pressed)
