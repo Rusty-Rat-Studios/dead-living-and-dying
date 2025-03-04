@@ -26,12 +26,12 @@ func _input(event: InputEvent) -> void:
 func use() -> void:
 	if cooldown_active:
 		return
-	$Hitbox/CollisionShape3D.shape.radius = BASE_RADIUS * player.current_stats.area_size
-	$Hitbox/MeshInstance3D.mesh.outer_radius = BASE_RADIUS * player.current_stats.area_size
+	$Hitbox/CollisionShape3D.shape.radius = BASE_RADIUS * player.player_stats.area_size
+	$Hitbox/MeshInstance3D.mesh.outer_radius = BASE_RADIUS * player.player_stats.area_size
 	$Hitbox/MeshInstance3D.mesh.inner_radius = $Hitbox/MeshInstance3D.mesh.outer_radius - 0.2
 	$Hitbox/CollisionShape3D.disabled = false
 	$Hitbox.visible = true
-	$ActiveTimer.wait_time = BASE_ACTIVE_DURATION * player.current_stats.duration
+	$ActiveTimer.wait_time = BASE_ACTIVE_DURATION * player.player_stats.duration
 	$ActiveTimer.start()
 	cooldown_active = true
 
@@ -39,7 +39,7 @@ func use() -> void:
 func _on_active_timer_timeout() -> void:
 	$Hitbox/CollisionShape3D.disabled = true
 	$Hitbox.visible = false
-	$CooldownTimer.wait_time = BASE_COOLDOWN_DURATION / player.current_stats.cooldown_reduction
+	$CooldownTimer.wait_time = BASE_COOLDOWN_DURATION / player.player_stats.cooldown_reduction
 	$CooldownTimer.start()
 
 

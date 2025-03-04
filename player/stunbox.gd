@@ -28,10 +28,10 @@ func stun() -> void:
 		_restore_tween.kill()
 	
 	# add negative stat modifiers to player
-	_player.stat_update_add(_player.current_stats.stat_modifier_speed, SPEED_MODIFIER, "stun")
-	_player.stat_update_add(_player.current_stats.stat_modifier_light_omni_range, LIGHT_RANGE_MODIFIER, "stun")
-	_player.stat_update_add(_player.current_stats.stat_modifier_light_spot_range, LIGHT_RANGE_MODIFIER, "stun")
-	_player.stat_update_add(_player.current_stats.stat_modifier_light_energy, LIGHT_ENERGY_MODIFIER, "stun")
+	_player.player_stats.stat_update_add(PlayerStats.Stats.SPEED, SPEED_MODIFIER, "stun")
+	_player.player_stats.stat_update_add(PlayerStats.Stats.LIGHT_OMNI_RANGE, LIGHT_RANGE_MODIFIER, "stun")
+	_player.player_stats.stat_update_add(PlayerStats.Stats.LIGHT_SPOT_RANGE, LIGHT_RANGE_MODIFIER, "stun")
+	_player.player_stats.stat_update_add(PlayerStats.Stats.LIGHT_ENERGY, LIGHT_ENERGY_MODIFIER, "stun")
 	
 	$StunTimer.start()
 
@@ -47,11 +47,11 @@ func restore() -> void:
 func _restore_step(value: float) -> void:
 	# each stat is multiplied over time from 1 (full value) to 0 to create
 	# a "reducing" effect over time
-	_player.current_stats.stat_modifier_speed["stun"] = SPEED_MODIFIER * value
-	_player.current_stats.stat_modifier_light_omni_range["stun"] = LIGHT_RANGE_MODIFIER * value
-	_player.current_stats.stat_modifier_light_spot_range["stun"] = LIGHT_RANGE_MODIFIER * value
-	_player.current_stats.stat_modifier_light_energy["stun"] = LIGHT_ENERGY_MODIFIER * value
-	_player.stat_update()
+	_player.player_stats.stat_modifier_speed["stun"] = SPEED_MODIFIER * value
+	_player.player_stats.stat_modifier_light_omni_range["stun"] = LIGHT_RANGE_MODIFIER * value
+	_player.player_stats.stat_modifier_light_spot_range["stun"] = LIGHT_RANGE_MODIFIER * value
+	_player.player_stats.stat_modifier_light_energy["stun"] = LIGHT_ENERGY_MODIFIER * value
+	_player.player_stats.stat_update()
 
 
 func restore_instantly() -> void:

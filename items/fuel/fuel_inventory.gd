@@ -30,14 +30,14 @@ func use() -> void:
 	if cooldown_active:
 		return
 	temp_stat_update(OMNI_RANGE_MODIFIER, SPOT_RANGE_MODIFIER, ENERGY_MODIFIER)
-	$ActiveTimer.wait_time = BASE_ACTIVE_DURATION * player.current_stats.duration
+	$ActiveTimer.wait_time = BASE_ACTIVE_DURATION * player.player_stats.duration
 	$ActiveTimer.start()
 	cooldown_active = true
 
 
 func _on_active_timer_timeout() -> void:
 	reset_stat_update()
-	$CooldownTimer.wait_time = BASE_COOLDOWN_DURATION / player.current_stats.cooldown_reduction
+	$CooldownTimer.wait_time = BASE_COOLDOWN_DURATION / player.player_stats.cooldown_reduction
 	$CooldownTimer.start()
 
 
@@ -48,13 +48,13 @@ func _on_cooldown_timer_timeout() -> void:
 func temp_stat_update(omni_range_modifier: float, spot_range_modifier: float, 
 	energy_modifier: float) -> void:
 	var player: Node = PlayerHandler.get_player()
-	player.current_stats.stat_update_add(PlayerStats.Stats.LIGHT_OMNI_RANGE, omni_range_modifier, "fuel")
-	player.current_stats.stat_update_add(PlayerStats.Stats.LIGHT_SPOT_RANGE, spot_range_modifier, "fuel")
-	player.current_stats.stat_update_add(PlayerStats.Stats.LIGHT_ENERGY, energy_modifier, "fuel")
+	player.player_stats.stat_update_add(PlayerStats.Stats.LIGHT_OMNI_RANGE, omni_range_modifier, "fuel")
+	player.player_stats.stat_update_add(PlayerStats.Stats.LIGHT_SPOT_RANGE, spot_range_modifier, "fuel")
+	player.player_stats.stat_update_add(PlayerStats.Stats.LIGHT_ENERGY, energy_modifier, "fuel")
 
 
 func reset_stat_update() -> void:
 	var player: Node = PlayerHandler.get_player()
-	player.current_stats.stat_update_remove(PlayerStats.Stats.LIGHT_OMNI_RANGE, "fuel")
-	player.current_stats.stat_update_remove(PlayerStats.Stats.LIGHT_SPOT_RANGE, "fuel")
-	player.current_stats.stat_update_remove(PlayerStats.Stats.LIGHT_ENERGY, "fuel")
+	player.player_stats.stat_update_remove(PlayerStats.Stats.LIGHT_OMNI_RANGE, "fuel")
+	player.player_stats.stat_update_remove(PlayerStats.Stats.LIGHT_SPOT_RANGE, "fuel")
+	player.player_stats.stat_update_remove(PlayerStats.Stats.LIGHT_ENERGY, "fuel")

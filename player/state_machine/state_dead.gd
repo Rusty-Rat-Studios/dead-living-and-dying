@@ -7,8 +7,8 @@ const RESPAWN_TIME: float = 2
 func enter() -> void:
 	super()
 	
-	_parent.current_stats.remove_stat_modifiers()
-	_parent.current_stats.stat_update_add(PlayerStats.Stats.SPEED, SPEED_MODIFIER, "dead")
+	_parent.player_stats.remove_stat_modifiers()
+	_parent.player_stats.stat_update_add(PlayerStats.Stats.SPEED, SPEED_MODIFIER, "dead")
 	
 	
 	# disable player light
@@ -39,7 +39,7 @@ func exit() -> void:
 	_parent.light_omni.visible = true
 	_parent.light_spot.visible = true
 	
-	_parent.current_stats.remove_stat_modifiers()
+	_parent.player_stats.remove_stat_modifiers()
 	
 	# change collision layers out of spirit plane into physical plane
 	_parent.collision_layer = CollisionBit.PLAYER + CollisionBit.PHYSICAL

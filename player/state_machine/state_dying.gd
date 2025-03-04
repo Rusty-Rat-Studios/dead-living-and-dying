@@ -9,9 +9,9 @@ const LIGHT_SPOT_RANGE_MODIFIER: float = -3
 func enter() -> void:
 	super()
 	# update player stats
-	_parent.current_stats.stat_update_add(PlayerStats.Stats.SPEED, SPEED_MODIFIER, "dying")
-	_parent.current_stats.stat_update_add(PlayerStats.Stats.LIGHT_OMNI_RANGE, LIGHT_OMNI_RANGE_MODIFIER, "dying")
-	_parent.current_stats.stat_update_add(PlayerStats.Stats.LIGHT_SPOT_RANGE, LIGHT_SPOT_RANGE_MODIFIER, "dying")
+	_parent.player_stats.stat_update_add(PlayerStats.Stats.SPEED, SPEED_MODIFIER, "dying")
+	_parent.player_stats.stat_update_add(PlayerStats.Stats.LIGHT_OMNI_RANGE, LIGHT_OMNI_RANGE_MODIFIER, "dying")
+	_parent.player_stats.stat_update_add(PlayerStats.Stats.LIGHT_SPOT_RANGE, LIGHT_SPOT_RANGE_MODIFIER, "dying")
 	
 	# DEBUG: modulate color according to state
 	_parent.get_node("RotationOffset/AnimatedSprite3D").modulate = Color(1, 0.5, 0.5)
