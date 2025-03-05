@@ -38,13 +38,16 @@ func setup_grid() -> void:
 	_spawn_entities()
 
 
-func add_room(room: Room, grid_location: Vector2) -> void:
+func add_room(room: Room, grid_location: Vector2, add_to_tree: bool = true) -> void:
+	print(Time.get_time_string_from_system(), 
+		": Added room at location ", grid_location)
 	room.grid_location = grid_location
 	# Adds each grid square that the room takes up to the HashMap & occupied_grid
 	for room_portion: Vector2 in room.room_information.room_shape:
 		var translated_room_portion: Vector2 = room_portion + grid_location
 		room_map.add_with_hash(_hash_vector2(translated_room_portion), room)
-	add_child(room)
+	if add_to_tree:
+		add_child(room)
 
 
 # If grid_location exists in the HashMap return room, otherwise returns null
@@ -64,9 +67,9 @@ func _load_grid_with_current_scene() -> Dictionary[String, Array]:
 	var door_grid: Array[DoorLocation] = []
 	for room: Room in get_children():
 		var grid_location: Vector2 = (
-			Vector2(room.global_position.x, room.global_position.y)/GRID_SCALE
+			Vector2(room.global_position.x, room.global_position.z)/GRID_SCALE
 			).round()
-		add_room(room, grid_location)
+		add_room(room, grid_location, false)
 		var room_occupied_and_door_grids: Dictionary[String, Array] = get_room_occupied_and_door_grids(
 			room.room_information, grid_location)
 		occupied_grid.append_array(room_occupied_and_door_grids.get("occupied_grid"))

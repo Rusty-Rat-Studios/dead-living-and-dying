@@ -25,7 +25,7 @@ func init() -> void:
 	var grid_scale: float = WorldGrid.GRID_SCALE
 	var room_location: Vector3 = Vector3(grid_location.x * grid_scale, 0, 
 		grid_location.y * grid_scale)
-	global_translate(room_location)
+	global_position = room_location
 	init_doors()
 	print(Time.get_time_string_from_system(), ": Room ", grid_location , " initialized")
 
