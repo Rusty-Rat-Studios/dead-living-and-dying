@@ -1,9 +1,9 @@
 extends GhostState
 
 # delay between ghost decision
-const DECISION_TIME: float = 3.0
+const DECISION_TIME: float = 1.0
 # used to determine whether ghost attacks
-const ATTACK_CHANCE: float = 0.5
+const ATTACK_CHANCE: float = 0.7
 # used to determine whether ghost depossesses
 const DEPOSSESS_CHANCE: float = 0.15
 # used to determine whether ghost waits
