@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://kpweub7m3k4n"]
+[gd_scene load_steps=26 format=3 uid="uid://kpweub7m3k4n"]
 
 [ext_resource type="Script" uid="uid://br2ou0xf5p2mo" path="res://game.gd" id="1_goqwn"]
 [ext_resource type="PackedScene" uid="uid://bbow7knip3g6g" path="res://player/player.tscn" id="2_2bptp"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://bh1qwbhfylkio" path="res://ui/inventory/inventory_container.tscn" id="21_au1pb"]
 [ext_resource type="PackedScene" uid="uid://dic5onsop66y4" path="res://ui/menus/game_menu.tscn" id="22_vvtdu"]
 [ext_resource type="PackedScene" uid="uid://bwmbngtw81o3y" path="res://ui/debug_console.tscn" id="23_50xpl"]
+[ext_resource type="Texture2D" uid="uid://b7hy3m0hwp7c3" path="res://ui/resources/black_screen.png" id="25_g5p2y"]
 
 [node name="Game" type="Node3D" node_paths=PackedStringArray("old_man")]
 script = ExtResource("1_goqwn")
@@ -994,6 +995,18 @@ mouse_filter = 2
 texture = ExtResource("19_f483l")
 expand_mode = 1
 script = ExtResource("20_cto7x")
+
+[node name="DeadScreenEffect" type="TextureRect" parent="UI"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("25_g5p2y")
+expand_mode = 1
 
 [node name="InventoryContainer" parent="UI" instance=ExtResource("21_au1pb")]
 offset_top = -142.0

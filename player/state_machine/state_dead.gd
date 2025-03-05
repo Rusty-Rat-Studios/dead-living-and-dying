@@ -10,20 +10,8 @@ func enter() -> void:
 	_parent.player_stats.remove_stat_modifiers()
 	_parent.player_stats.stat_update_add(PlayerStats.Stats.SPEED, SPEED_MODIFIER, "dead")
 	
-	# disable player light
-	_parent.light_omni.visible = false
-	_parent.light_spot.visible = false
-	
 	# modulate player color and opacity to appear ghostly
 	_parent.get_node("RotationOffset/AnimatedSprite3D").modulate = Color(0.5, 0.5, 0.5, 0.3)
-	
-	# change collision layers out of physical plane into spirit plane
-	_parent.collision_layer = CollisionBit.PLAYER + CollisionBit.SPIRIT
-	_parent.collision_mask = CollisionBit.WORLD + CollisionBit.SPIRIT
-	_parent.hurtbox.collision_mask = CollisionBit.SPIRIT
-	
-	SignalBus.player_hurt.connect(_on_player_hurt)
-	SignalBus.player_revived.connect(_on_player_revived)
 	
 	# drop key item if player is carrying it
 	var key_item: KeyItemInventory = _parent.get_node_or_null("Inventory/KeyItemInventory")
@@ -31,6 +19,19 @@ func enter() -> void:
 		key_item.drop()
 	
 	await move_to_shrine()
+	
+	# change collision layers out of physical plane into spirit plane
+	# temporarily moved during move_to_shrine()
+	_parent.collision_layer = CollisionBit.PLAYER + CollisionBit.SPIRIT
+	_parent.collision_mask = CollisionBit.WORLD + CollisionBit.SPIRIT
+	_parent.hurtbox.collision_mask = CollisionBit.SPIRIT
+	
+	SignalBus.player_hurt.connect(_on_player_hurt)
+	SignalBus.player_revived.connect(_on_player_revived)
+	
+	# disable player light
+	_parent.light_omni.visible = false
+	_parent.light_spot.visible = false
 
 
 func exit() -> void:
@@ -61,18 +62,11 @@ func process_state() -> void:
 
 
 func move_to_shrine() -> void:
-	# temporarily deactivate player collision and hurtbox to ensure they
-	# don't interact with anything while tweening to shrine
-	# --- reactivate after reaching shrine
-	_parent.hurtbox.collision_shape.set_deferred("disabled", true)
-	_parent.collision_shape.set_deferred("disabled", true)
+	# temporarily deactivate player hurtbox to ensure they don't get hit again
+	_parent.collision_layer = CollisionBit.PLAYER
+	_parent.collision_mask = CollisionBit.WORLD
 	
-	# spawn player corpse at death location
-	_parent._corpse.global_position = Vector3(_parent.global_position.x, 1, _parent.global_position.z)
-	# corpse collision is ignored because player collision is temporarily disabled
-	_parent._corpse.activate()
-	
-	# find and move player to closest active shrine
+	# find closest active shrine
 	var active_shrines: Array[Shrine] = ShrineManager.get_active_shrines()
 	# failsafe if no shrines exist in WorldGrid (should not happen during prod)
 	if active_shrines.size() == 0:
@@ -80,28 +74,43 @@ func move_to_shrine() -> void:
 		SignalBus.game_over.emit()
 		return
 	var target_shrine: Shrine = Utility.find_closest(active_shrines, _parent.global_position)
-	
-	# disable camera lagging for duration of motion
-	_parent.camera.disable()
-	var tween: Tween = get_tree().create_tween()
-	# move corpse towards shrine over RESPAWN_TIME duration
-	tween.tween_property(_parent, "global_position", target_shrine.global_position, 
-		RESPAWN_TIME).set_trans(Tween.TRANS_CUBIC)
-	
-	# wait for tween to finish before reactivating collision layers and camera
-	await Utility.delay(RESPAWN_TIME)
-	
-	# re-enable camera lagging
-	_parent.camera.enable()
 	# consume shrine (note: does not consume default shrine)
 	target_shrine.consume()
 	
-	# activate corpse indicator particle emission
-	_parent._corpse_indicator.emitting = true
+	# disable movement and camera lag for duration of motion
+	_parent.camera.disable()
+	_parent.set_physics_process(false)
 	
-	# enable collision layers for spirit plane
-	_parent.hurtbox.collision_shape.set_deferred("disabled", false)
-	_parent.collision_shape.set_deferred("disabled", false)
+	# add zero-opacity black screen fade effect over whole screen
+	var black_screen: TextureRect = get_tree().root.get_node("Game/UI/DeadScreenEffect")
+	black_screen.modulate.a = 0
+	black_screen.visible = true
+	
+	# fade black screen in
+	var visibility_tween: Tween = get_tree().create_tween()
+	visibility_tween.tween_property(black_screen, "modulate:a", 1, RESPAWN_TIME / 2)
+	await Utility.delay(RESPAWN_TIME / 2)
+	
+	# move player corpse to death location
+	_parent._corpse.global_position = Vector3(_parent.global_position.x, 1, _parent.global_position.z)
+	# move player to shrine
+	_parent.global_position = target_shrine.global_position
+	# execute single step of physics frame to trigger room visibility
+	_parent._physics_process(get_physics_process_delta_time())
+	
+	# fade black screen out
+	visibility_tween = get_tree().create_tween()
+	visibility_tween.tween_property(black_screen, "modulate:a", 0, RESPAWN_TIME / 2)
+	await Utility.delay(RESPAWN_TIME / 2)
+	black_screen.visible = false
+	
+	# re-enable movement and camera lag 
+	_parent.set_physics_process(true)
+	_parent.camera.enable()
+
+	# activate corpse and indicator particle emission
+	_parent._corpse.activate()
+	_parent._corpse_indicator.emitting = true
 
 
 func _on_player_hurt() -> void:
