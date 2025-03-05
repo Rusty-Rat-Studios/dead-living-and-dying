@@ -5,6 +5,9 @@
 
 [node name="Game" instance=ExtResource("1_o3xf6")]
 
+[node name="StateMachine" parent="." index="1"]
+_starting_state = 1
+
 [node name="Ghost" parent="DebugRoom" index="5" instance=ExtResource("2_1j14r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -3)
 
