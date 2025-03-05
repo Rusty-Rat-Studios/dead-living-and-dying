@@ -68,7 +68,7 @@ func move_to_shrine() -> void:
 	_parent.collision_shape.set_deferred("disabled", true)
 	
 	# spawn player corpse at death location
-	_parent._corpse.global_position = _parent.global_position
+	_parent._corpse.global_position = Vector3(_parent.global_position.x, 1, _parent.global_position.z)
 	# corpse collision is ignored because player collision is temporarily disabled
 	_parent._corpse.activate()
 	
