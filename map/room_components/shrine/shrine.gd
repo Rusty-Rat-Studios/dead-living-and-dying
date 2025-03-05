@@ -3,8 +3,8 @@ extends StaticBody3D
 
 const TEXT_INTERACTABLE: String = "[E] Activate"
 
-const TEXTURE: Texture2D = preload("res://map/rooms/shrine/shrine.png")
-const TEXTURE_CONSUMED: Texture2D = preload("res://map/rooms/shrine/shrine_consumed.png")
+const TEXTURE: Texture2D = preload("res://map/room_components/shrine/shrine.png")
+const TEXTURE_CONSUMED: Texture2D = preload("res://map/room_components/shrine/shrine_consumed.png")
 
 const LIGHT_ENERGY: float = 2
 const TWEEN_DURATION: float = 1
