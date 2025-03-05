@@ -15,6 +15,7 @@ func _ready() -> void:
 	if show_how_to_play_on_start:
 		$HowToPlay.visible = true
 		get_tree().paused = true
+		$HowToPlay.visible = true
 		# resume game when popup window is closed
 		# needed because it can be closed by clicking "Exit" or clicking outside the window
 		$HowToPlay.button_exit.pressed.connect(func() -> void: resume(), CONNECT_ONE_SHOT)

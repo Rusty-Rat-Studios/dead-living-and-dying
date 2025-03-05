@@ -6,7 +6,9 @@ extends Resource
 
 # Returns a random weighted entity from the valid entries in table
 func get_random_entity() -> Resource:
-	var entry: EntityTableEntry = RNG.weighted_random(_get_choices_dictionary_from_entities())
+	var choices_dictionary: Dictionary[Variant, float]
+	choices_dictionary.assign(_get_choices_dictionary_from_entities())
+	var entry: EntityTableEntry = RNG.weighted_random(choices_dictionary)
 	return entry.get_entity()
 
 
