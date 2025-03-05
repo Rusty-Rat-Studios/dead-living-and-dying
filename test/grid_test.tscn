@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bq2dwqp4q6dn1"]
+[gd_scene load_steps=16 format=3 uid="uid://bq2dwqp4q6dn1"]
 
 [ext_resource type="Script" uid="uid://br2ou0xf5p2mo" path="res://game.gd" id="1_xwopn"]
 [ext_resource type="PackedScene" uid="uid://bbow7knip3g6g" path="res://player/player.tscn" id="2_xkdfq"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://chry31axu0hdv" path="res://player/dying.png" id="8_e1b6l"]
 [ext_resource type="PackedScene" uid="uid://bwmbngtw81o3y" path="res://ui/debug_console.tscn" id="8_en8lj"]
 [ext_resource type="Script" uid="uid://b4yg822foka8j" path="res://ui/dying_screen_effect.gd" id="9_5fe06"]
+[ext_resource type="Resource" uid="uid://cinkoxiqgkewm" path="res://entity/entity_tables/test_entity_table.tres" id="9_kn4o2"]
 [ext_resource type="PackedScene" uid="uid://bh1qwbhfylkio" path="res://ui/inventory/inventory_container.tscn" id="10_emhx3"]
 [ext_resource type="PackedScene" uid="uid://dh8q75xrlxeaa" path="res://map/rooms/basic_room.tscn" id="14_emhx3"]
 
@@ -46,6 +47,7 @@ script = ExtResource("6_xupbb")
 [node name="WorldGrid" type="Node3D" parent="."]
 script = ExtResource("7_24rg8")
 room_table = ExtResource("8_5fe06")
+enemy_entity_table = ExtResource("9_kn4o2")
 
 [node name="BasicRoom" parent="WorldGrid" instance=ExtResource("14_emhx3")]
 

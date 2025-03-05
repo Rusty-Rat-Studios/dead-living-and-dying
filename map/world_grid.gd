@@ -6,13 +6,18 @@ extends Node3D
 # class to ask about the state of the WorldGrid.
 
 const GRID_SCALE: float = 16 # Size of each grid square in editor units
-const BASIC_ROOM: Resource = preload("res://map/rooms/basic_room.tscn")
 
 @export var room_table: EntityTable = null
 
-var room_map: HashMap = HashMap.new()
+@export_category("Spawner Entity Tables")
+@export var enemy_entity_table: EntityTable = null
+@export var item_entity_table: EntityTable = null
+@export var key_item_entity_table: EntityTable = null
+@export var entity_floor_entity_table: EntityTable = null
+@export var entity_wall_entity_table: EntityTable = null
+@export var boss_entity_table: EntityTable = null
 
-@onready var entity_table: EntityTable = load("res://entity/entity_tables/test_entity_table.tres")
+var room_map: HashMap = HashMap.new()
 
 
 func _ready() -> void:
@@ -79,7 +84,12 @@ func _init_all_rooms() -> void:
 
 
 func _spawn_entities() -> void:
-	SpawnerManager.spawn(Spawner.SpawnerType.ENEMY, entity_table)
+	SpawnerManager.spawn(Spawner.SpawnerType.ENEMY, enemy_entity_table)
+	SpawnerManager.spawn(Spawner.SpawnerType.ITEM, item_entity_table)
+	SpawnerManager.spawn(Spawner.SpawnerType.KEY_ITEM, key_item_entity_table)
+	SpawnerManager.spawn(Spawner.SpawnerType.ENTITY_FLOOR, entity_floor_entity_table)
+	SpawnerManager.spawn(Spawner.SpawnerType.ENTITY_WALL, entity_wall_entity_table)
+	SpawnerManager.spawn(Spawner.SpawnerType.BOSS, boss_entity_table)
 
 
 # Returns the occupied_grid and door_grid of a room
