@@ -8,7 +8,7 @@ extends Node3D
 const GRID_SCALE: float = 16 # Size of each grid square in editor units
 const BASIC_ROOM: Resource = preload("res://map/rooms/basic_room.tscn")
 
-@export var room_table: EntityTable
+@export var room_table: EntityTable = null
 
 var room_map: HashMap = HashMap.new()
 
@@ -20,17 +20,14 @@ func _ready() -> void:
 
 
 func setup_grid() -> void:
-	var room: Room = BASIC_ROOM.instantiate()
-	add_room(room, Vector2(0,0)) # Hardcoded to a basic room for now
-	var room_occupied_and_door_grids: Dictionary[String, Array] = get_room_occupied_and_door_grids(
-		room.room_information, Vector2(0,0))
-	if room_table:
+	var occupied_and_door_grids: Dictionary[String, Array] = _load_grid_with_current_scene()
+	
+	if room_table != null:
 		var generator: WorldGenerator = WorldGenerator.new(
 			room_table,
-			room_occupied_and_door_grids.get('occupied_grid'),
-			room_occupied_and_door_grids.get('door_grid')
+			occupied_and_door_grids.get('occupied_grid'),
+			occupied_and_door_grids.get('door_grid')
 		)
-		
 		generator.generate_grid(self)
 	_init_all_rooms()
 	_spawn_entities()
@@ -41,6 +38,24 @@ func clear() -> void:
 		if node is Room:
 			node.queue_free()
 	room_map.clear()
+
+
+func _load_grid_with_current_scene() -> Dictionary[String, Array]:
+	var occupied_grid: Array[Vector2] = []
+	var door_grid: Array[DoorLocation] = []
+	for room: Room in get_children():
+		var grid_location: Vector2 = (
+			Vector2(room.global_position.x, room.global_position.y)/GRID_SCALE
+			).round()
+		add_room(room, grid_location)
+		var room_occupied_and_door_grids: Dictionary[String, Array] = get_room_occupied_and_door_grids(
+			room.room_information, grid_location)
+		occupied_grid.append_array(room_occupied_and_door_grids.get("occupied_grid"))
+		add_to_door_grid_removing_matches(door_grid, room_occupied_and_door_grids.get("door_grid"))
+	return {
+		"occupied_grid": occupied_grid,
+		"door_grid": door_grid
+	}
 
 
 # Returns the occupied_grid and door_grid of a room
@@ -86,6 +101,23 @@ func _spawn_entities() -> void:
 # If grid_location exists in the HashMap return room, otherwise returns null
 func get_room_at_location(grid_location: Vector2) -> Room:
 	return room_map.retrieve_with_hash(_hash_vector2(grid_location))
+
+
+# Takes each DoorLocation in room_door_grid and sees if there is a connecting door
+# in door_grid. If there is, it is removed. If there is not, then the door location
+# is added to the grid. The resulting grid is returned.
+static func add_to_door_grid_removing_matches(door_grid: Array[DoorLocation], 
+	room_door_grid: Array[DoorLocation]) -> void:
+	for door_location: DoorLocation in room_door_grid:
+		var matches: Array[DoorLocation] = door_grid.filter(
+			func(value: DoorLocation) -> bool: 
+				return value.equals(door_location.invert())
+		)
+		
+		if matches.size() > 0:
+			door_grid.erase(matches.front())
+		else:
+			door_grid.append(door_location)
 
 
 func _hash_vector2(vector: Vector2) -> PackedByteArray:

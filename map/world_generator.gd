@@ -65,7 +65,7 @@ func generate_grid(grid: WorldGrid) -> void:
 			continue
 		
 		occupied_grid.append_array(valid_room_placement.get('occupied_grid'))
-		_add_to_door_grid_removing_matches(valid_room_placement.get('door_grid'))
+		WorldGrid.add_to_door_grid_removing_matches(door_grid, valid_room_placement.get('door_grid'))
 		
 		# Add room and reset 'fails'
 		print("Adding room at position %s" % [valid_room_placement.get('room_pos')])
@@ -100,22 +100,6 @@ func _get_valid_room_placement_at_doors(room_information: RoomInformation, room_
 			'door_grid': room_door_grid
 		}
 	return { 'invalid': true }
-
-
-# Takes each DoorLocation in room_door_grid and sees if there is a connecting door
-# in door_grid. If there is, it is removed. If there is not, then the door location
-# is added to the grid.
-func _add_to_door_grid_removing_matches(room_door_grid: Array[DoorLocation]) -> void:
-	for door_location: DoorLocation in room_door_grid:
-		var matches: Array[DoorLocation] = door_grid.filter(
-			func(value: DoorLocation) -> bool: 
-				return value.equals(door_location.invert())
-		)
-		
-		if matches.size() > 0:
-			door_grid.erase(matches.front())
-		else:
-			door_grid.append(door_location)
 
 
 # Returns all the door locations of a room facing a specific direction
