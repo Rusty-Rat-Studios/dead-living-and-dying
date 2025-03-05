@@ -57,8 +57,6 @@ func exit() -> void:
 
 
 func process_state() -> void:
-	#_parent._corpse_indicator.rotation = _parent.global_position.direction_to(_parent._corpse.global_position)
-	#_parent._corpse_indicator.process_material.direction = _parent.global_position.direction_to(_parent._corpse.global_position)
 	_parent._corpse_indicator.look_at(_parent._corpse.global_position, Vector3.UP)
 
 
