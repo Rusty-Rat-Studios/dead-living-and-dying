@@ -33,6 +33,20 @@ func setup_grid() -> void:
 	_spawn_entities()
 
 
+func add_room(room: Room, grid_location: Vector2) -> void:
+	room.grid_location = grid_location
+	# Adds each grid square that the room takes up to the HashMap & occupied_grid
+	for room_portion: Vector2 in room.room_information.room_shape:
+		var translated_room_portion: Vector2 = room_portion + grid_location
+		room_map.add_with_hash(_hash_vector2(translated_room_portion), room)
+	add_child(room)
+
+
+# If grid_location exists in the HashMap return room, otherwise returns null
+func get_room_at_location(grid_location: Vector2) -> Room:
+	return room_map.retrieve_with_hash(_hash_vector2(grid_location))
+
+
 func clear() -> void:
 	for node: Node in get_children():
 		if node is Room:
@@ -58,6 +72,16 @@ func _load_grid_with_current_scene() -> Dictionary[String, Array]:
 	}
 
 
+func _init_all_rooms() -> void:
+	for node: Node in self.get_children():
+		if node is Room:
+			node.init()
+
+
+func _spawn_entities() -> void:
+	SpawnerManager.spawn(Spawner.SpawnerType.ENEMY, entity_table)
+
+
 # Returns the occupied_grid and door_grid of a room
 static func get_room_occupied_and_door_grids(room_info: RoomInformation, 
 	grid_location: Vector2) -> Dictionary[String, Array]:
@@ -77,30 +101,6 @@ static func get_room_occupied_and_door_grids(room_info: RoomInformation,
 		'occupied_grid': room_occupied,
 		'door_grid': room_doors
 	}
-	
-
-func add_room(room: Room, grid_location: Vector2) -> void:
-	room.grid_location = grid_location
-	# Adds each grid square that the room takes up to the HashMap & occupied_grid
-	for room_portion: Vector2 in room.room_information.room_shape:
-		var translated_room_portion: Vector2 = room_portion + grid_location
-		room_map.add_with_hash(_hash_vector2(translated_room_portion), room)
-	add_child(room)
-
-
-func _init_all_rooms() -> void:
-	for node: Node in self.get_children():
-		if node is Room:
-			node.init()
-
-
-func _spawn_entities() -> void:
-	SpawnerManager.spawn(Spawner.SpawnerType.ENEMY, entity_table)
-
-
-# If grid_location exists in the HashMap return room, otherwise returns null
-func get_room_at_location(grid_location: Vector2) -> Room:
-	return room_map.retrieve_with_hash(_hash_vector2(grid_location))
 
 
 # Takes each DoorLocation in room_door_grid and sees if there is a connecting door
