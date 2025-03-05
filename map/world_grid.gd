@@ -65,7 +65,7 @@ func clear() -> void:
 func _load_grid_with_current_scene() -> Dictionary[String, Array]:
 	var occupied_grid: Array[Vector2] = []
 	var door_grid: Array[DoorLocation] = []
-	for room: Room in get_children():
+	for room: Room in find_children("*", "Room"):
 		var grid_location: Vector2 = (
 			Vector2(room.global_position.x, room.global_position.z)/GRID_SCALE
 			).round()

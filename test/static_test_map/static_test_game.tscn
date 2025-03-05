@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://kpweub7m3k4n"]
+[gd_scene load_steps=33 format=3 uid="uid://kpweub7m3k4n"]
 
 [ext_resource type="Script" uid="uid://br2ou0xf5p2mo" path="res://game.gd" id="1_goqwn"]
 [ext_resource type="PackedScene" uid="uid://bbow7knip3g6g" path="res://player/player.tscn" id="2_2bptp"]
@@ -6,10 +6,13 @@
 [ext_resource type="Script" uid="uid://kgcxuhne3rbl" path="res://player/state_machine/state_dead.gd" id="4_bt8ys"]
 [ext_resource type="Script" uid="uid://btdlvy02iwmn2" path="res://player/state_machine/state_living.gd" id="5_mhhd3"]
 [ext_resource type="Script" uid="uid://bfwa3mijk47us" path="res://player/state_machine/state_dying.gd" id="6_dughp"]
+[ext_resource type="Script" uid="uid://dk6tfo4i3solm" path="res://map/world_grid.gd" id="7_4g7ym"]
 [ext_resource type="Script" uid="uid://bo0tyfrjfebc6" path="res://map/room_components/room.gd" id="7_d8xjy"]
 [ext_resource type="PackedScene" uid="uid://b3nn5u3a5o85j" path="res://map/room_components/floor.tscn" id="8_ncqhn"]
 [ext_resource type="PackedScene" uid="uid://bson3umirpot2" path="res://map/room_components/wall.tscn" id="9_7nlrc"]
+[ext_resource type="Script" uid="uid://dqhrw6rxew3fa" path="res://common/door_location.gd" id="9_x122c"]
 [ext_resource type="PackedScene" uid="uid://fpivfcuv6s1r" path="res://map/room_components/wall_with_doorway.tscn" id="10_ogha5"]
+[ext_resource type="Script" uid="uid://bv4f3snq7u1u2" path="res://common/room_information.gd" id="10_rxyol"]
 [ext_resource type="PackedScene" uid="uid://c176v8gdlci8v" path="res://old_man/old_man.tscn" id="11_6mutg"]
 [ext_resource type="PackedScene" uid="uid://3gsxuhfeo5qs" path="res://entity/objects/wall_painting/wall_painting.tscn" id="12_7d0il"]
 [ext_resource type="PackedScene" uid="uid://8tfld0cdj22d" path="res://items/crucifix/crucifix_world.tscn" id="13_0dcr2"]
@@ -24,6 +27,31 @@
 [ext_resource type="PackedScene" uid="uid://bh1qwbhfylkio" path="res://ui/inventory/inventory_container.tscn" id="21_au1pb"]
 [ext_resource type="PackedScene" uid="uid://dic5onsop66y4" path="res://ui/menus/game_menu.tscn" id="22_vvtdu"]
 [ext_resource type="PackedScene" uid="uid://bwmbngtw81o3y" path="res://ui/debug_console.tscn" id="23_50xpl"]
+
+[sub_resource type="Resource" id="Resource_3y6bj"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 0
+
+[sub_resource type="Resource" id="Resource_b0qj2"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 1
+
+[sub_resource type="Resource" id="Resource_8lq6k"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 2
+
+[sub_resource type="Resource" id="Resource_8lnup"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 3
+
+[sub_resource type="Resource" id="Resource_eiksi"]
+script = ExtResource("10_rxyol")
+room_shape = Array[Vector2]([Vector2(0, 0)])
+possible_door_locations = Array[ExtResource("9_x122c")]([SubResource("Resource_3y6bj"), SubResource("Resource_b0qj2"), SubResource("Resource_8lq6k"), SubResource("Resource_8lnup")])
 
 [node name="Game" type="Node3D" node_paths=PackedStringArray("old_man")]
 script = ExtResource("1_goqwn")
@@ -55,9 +83,11 @@ script = ExtResource("5_mhhd3")
 script = ExtResource("6_dughp")
 
 [node name="WorldGrid" type="Node3D" parent="."]
+script = ExtResource("7_4g7ym")
 
 [node name="RoomStart" type="Node3D" parent="WorldGrid"]
 script = ExtResource("7_d8xjy")
+room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/RoomStart" instance=ExtResource("8_ncqhn")]
 
@@ -88,6 +118,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -4)
 [node name="Room" type="Node3D" parent="WorldGrid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16)
 script = ExtResource("7_d8xjy")
+room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room" instance=ExtResource("8_ncqhn")]
 
@@ -109,6 +140,7 @@ default = true
 [node name="Room5" type="Node3D" parent="WorldGrid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -16)
 script = ExtResource("7_d8xjy")
+room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room5" instance=ExtResource("8_ncqhn")]
 
@@ -160,6 +192,7 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -8, 0,
 [node name="Room6" type="Node3D" parent="WorldGrid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, 0, -32)
 script = ExtResource("7_d8xjy")
+room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room6" instance=ExtResource("8_ncqhn")]
 
@@ -202,6 +235,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0,
 [node name="Room24" type="Node3D" parent="WorldGrid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -80)
 script = ExtResource("7_d8xjy")
+room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room24" instance=ExtResource("8_ncqhn")]
 
@@ -244,6 +278,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0,
 [node name="Room10" type="Node3D" parent="WorldGrid"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 48, 0, -16)
 script = ExtResource("7_d8xjy")
+room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room10" instance=ExtResource("8_ncqhn")]
 
@@ -286,6 +321,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0,
 [node name="Room16" type="Node3D" parent="WorldGrid"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 48, 0, -48)
 script = ExtResource("7_d8xjy")
+room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room16" instance=ExtResource("8_ncqhn")]
 
@@ -337,6 +373,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0,
 [node name="Room20" type="Node3D" parent="WorldGrid"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 48, 0, -80)
 script = ExtResource("7_d8xjy")
+room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room20" instance=ExtResource("8_ncqhn")]
 
@@ -370,6 +407,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 [node name="Room7" type="Node3D" parent="WorldGrid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, 0, -16)
 script = ExtResource("7_d8xjy")
+room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room7" instance=ExtResource("8_ncqhn")]
 
@@ -391,6 +429,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -2)
 [node name="Room25" type="Node3D" parent="WorldGrid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -64)
 script = ExtResource("7_d8xjy")
+room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room25" instance=ExtResource("8_ncqhn")]
 
@@ -412,6 +451,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 [node name="Room11" type="Node3D" parent="WorldGrid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, 0)
 script = ExtResource("7_d8xjy")
+room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room11" instance=ExtResource("8_ncqhn")]
 
@@ -441,6 +481,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -5)
 [node name="Room2" type="Node3D" parent="WorldGrid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -16)
 script = ExtResource("7_d8xjy")
+room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room2" instance=ExtResource("8_ncqhn")]
 
@@ -468,6 +509,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 2)
 [node name="Room15" type="Node3D" parent="WorldGrid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -48)
 script = ExtResource("7_d8xjy")
+room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room15" instance=ExtResource("8_ncqhn")]
 
@@ -495,6 +537,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 2)
 [node name="Room17" type="Node3D" parent="WorldGrid"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 48, 0, -64)
 script = ExtResource("7_d8xjy")
+room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room17" instance=ExtResource("8_ncqhn")]
 
@@ -522,6 +565,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 2)
 [node name="Room18" type="Node3D" parent="WorldGrid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -80)
 script = ExtResource("7_d8xjy")
+room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room18" instance=ExtResource("8_ncqhn")]
 
@@ -551,6 +595,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 2)
 [node name="Room19" type="Node3D" parent="WorldGrid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -80)
 script = ExtResource("7_d8xjy")
+room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room19" instance=ExtResource("8_ncqhn")]
 
@@ -582,6 +627,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 2)
 [node name="Room3" type="Node3D" parent="WorldGrid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -16)
 script = ExtResource("7_d8xjy")
+room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room3" instance=ExtResource("8_ncqhn")]
 
@@ -615,6 +661,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
 [node name="Room14" type="Node3D" parent="WorldGrid"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -48)
 script = ExtResource("7_d8xjy")
+room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room14" instance=ExtResource("8_ncqhn")]
 
@@ -648,6 +695,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
 [node name="Room21" type="Node3D" parent="WorldGrid"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, -80)
 script = ExtResource("7_d8xjy")
+room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room21" instance=ExtResource("8_ncqhn")]
 
@@ -702,6 +750,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
 [node name="Room13" type="Node3D" parent="WorldGrid"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 32, 0, -48)
 script = ExtResource("7_d8xjy")
+room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room13" instance=ExtResource("8_ncqhn")]
 
@@ -723,6 +772,7 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 
 [node name="Room4" type="Node3D" parent="WorldGrid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -32)
 script = ExtResource("7_d8xjy")
+room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room4" instance=ExtResource("8_ncqhn")]
 
@@ -759,6 +809,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8, 0, 
 [node name="Room8" type="Node3D" parent="WorldGrid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -32)
 script = ExtResource("7_d8xjy")
+room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room8" instance=ExtResource("8_ncqhn")]
 
@@ -810,6 +861,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
 [node name="Room9" type="Node3D" parent="WorldGrid"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -32)
 script = ExtResource("7_d8xjy")
+room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room9" instance=ExtResource("8_ncqhn")]
 
@@ -834,6 +886,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
 [node name="Room12" type="Node3D" parent="WorldGrid"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 32, 0, -32)
 script = ExtResource("7_d8xjy")
+room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room12" instance=ExtResource("8_ncqhn")]
 
@@ -858,6 +911,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
 [node name="Room22" type="Node3D" parent="WorldGrid"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -64)
 script = ExtResource("7_d8xjy")
+room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room22" instance=ExtResource("8_ncqhn")]
 
@@ -882,6 +936,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
 [node name="Room23" type="Node3D" parent="WorldGrid"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -16, 0, -80)
 script = ExtResource("7_d8xjy")
+room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room23" instance=ExtResource("8_ncqhn")]
 
