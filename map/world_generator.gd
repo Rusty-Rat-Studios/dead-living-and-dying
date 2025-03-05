@@ -3,11 +3,13 @@ extends Object
 
 const GENERATOR_ATTEMPTS: int = 10 # Number of consecutive failed attempts before error 
 
+var room_table: EntityTable
 var occupied_grid: Array[Vector2] = []
 var door_grid: Array[DoorLocation] = []
 
 
-func _init(initial_occupied_grid: Array[Vector2], initial_door_grid: Array[DoorLocation]) -> void:
+func _init(_room_table: EntityTable, initial_occupied_grid: Array[Vector2], initial_door_grid: Array[DoorLocation]) -> void:
+	room_table = _room_table
 	occupied_grid = initial_occupied_grid
 	door_grid = initial_door_grid
 
@@ -24,7 +26,6 @@ func _init(initial_occupied_grid: Array[Vector2], initial_door_grid: Array[DoorL
 #        room occupies to occupied_grid, add door locations from room to door_grid
 #        (removing and pairs that connect), add room to grid, loop until complete
 func generate_grid(grid: WorldGrid) -> void:
-	var room_table: EntityTable = load("res://entity/entity_tables/test_room_table.tres")
 	var fails: int = 0
 	
 	while(fails < GENERATOR_ATTEMPTS):

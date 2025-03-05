@@ -8,6 +8,8 @@ extends Node3D
 const GRID_SCALE: float = 16 # Size of each grid square in editor units
 const BASIC_ROOM: Resource = preload("res://map/rooms/basic_room.tscn")
 
+@export var room_table: EntityTable
+
 var room_map: HashMap = HashMap.new()
 
 @onready var entity_table: EntityTable = load("res://entity/entity_tables/test_entity_table.tres")
@@ -22,12 +24,14 @@ func setup_grid() -> void:
 	add_room(room, Vector2(0,0)) # Hardcoded to a basic room for now
 	var room_occupied_and_door_grids: Dictionary[String, Array] = get_room_occupied_and_door_grids(
 		room.room_information, Vector2(0,0))
-	var generator: WorldGenerator = WorldGenerator.new(
-		room_occupied_and_door_grids.get('occupied_grid'), 
-		room_occupied_and_door_grids.get('door_grid')
-	)
-	
-	generator.generate_grid(self)
+	if room_table:
+		var generator: WorldGenerator = WorldGenerator.new(
+			room_table,
+			room_occupied_and_door_grids.get('occupied_grid'),
+			room_occupied_and_door_grids.get('door_grid')
+		)
+		
+		generator.generate_grid(self)
 	_init_all_rooms()
 	_spawn_entities()
 
