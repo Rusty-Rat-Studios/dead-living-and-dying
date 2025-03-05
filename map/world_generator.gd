@@ -8,7 +8,8 @@ var occupied_grid: Array[Vector2] = []
 var door_grid: Array[DoorLocation] = []
 
 
-func _init(_room_table: EntityTable, initial_occupied_grid: Array[Vector2], initial_door_grid: Array[DoorLocation]) -> void:
+func _init(_room_table: EntityTable, initial_occupied_grid: Array[Vector2], 
+	initial_door_grid: Array[DoorLocation]) -> void:
 	room_table = _room_table
 	occupied_grid = initial_occupied_grid
 	door_grid = initial_door_grid
