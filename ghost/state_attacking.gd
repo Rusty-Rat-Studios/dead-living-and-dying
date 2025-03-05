@@ -1,7 +1,7 @@
 extends GhostState
 
 const PRE_ATTACK_SPEED: float = 6.0
-const ATTACK_SPEED: float = 9.5
+const ATTACK_SPEED: float = 8.5
 # speed to move toward/away from player while winding up
 const WINDUP_SPEED: float = 4.0
 
