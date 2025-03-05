@@ -38,7 +38,7 @@ radius = 0.804186
 height = 2.35874
 
 [sub_resource type="Curve" id="Curve_ebec5"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.274834, 0), -0.18383, -0.18383, 0, 0, Vector2(0.612583, 0.380537), 0.0, 0.0, 0, 0, Vector2(0.784768, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.274834, 0), -0.18383, -0.18383, 0, 0, Vector2(0.642384, 0.0926174), 0.0, 0.0, 0, 0, Vector2(0.784768, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 5
 
 [sub_resource type="CurveTexture" id="CurveTexture_yllr7"]
@@ -46,7 +46,7 @@ curve = SubResource("Curve_ebec5")
 
 [sub_resource type="Gradient" id="Gradient_hg6s5"]
 offsets = PackedFloat32Array(0.427536, 1)
-colors = PackedColorArray(0.298039, 0.556863, 0.333333, 0.47451, 0, 0, 0, 0.552941)
+colors = PackedColorArray(0.607843, 0.890196, 0.945098, 0.301961, 0, 0, 0, 0.219608)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_8t03j"]
 gradient = SubResource("Gradient_hg6s5")
@@ -64,7 +64,7 @@ angle_max = 180.0
 direction = Vector3(0.1, 0, -1)
 spread = 10.0
 initial_velocity_min = 0.5
-initial_velocity_max = 2.0
+initial_velocity_max = 1.5
 gravity = Vector3(0, 0, 0)
 attractor_interaction_enabled = false
 scale_curve = SubResource("CurveTexture_ebec5")
@@ -72,14 +72,13 @@ color_initial_ramp = SubResource("GradientTexture1D_8t03j")
 alpha_curve = SubResource("CurveTexture_yllr7")
 
 [sub_resource type="Curve" id="Curve_8t03j"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.182635, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2ieo8"]
 transparency = 1
 shading_mode = 0
 vertex_color_use_as_albedo = true
-albedo_color = Color(0.298039, 0.556863, 0.333333, 0.623529)
 disable_receive_shadows = true
 use_particle_trails = true
 
