@@ -81,15 +81,9 @@ func move_to_shrine() -> void:
 	_parent.camera.disable()
 	_parent.set_physics_process(false)
 	
-	# add zero-opacity black screen fade effect over whole screen
+	# add black screen fade effect
 	var black_screen: TextureRect = get_tree().root.get_node("Game/UI/DeadScreenEffect")
-	black_screen.modulate.a = 0
-	black_screen.visible = true
-	
-	# fade black screen in
-	var visibility_tween: Tween = get_tree().create_tween()
-	visibility_tween.tween_property(black_screen, "modulate:a", 1, RESPAWN_TIME / 2)
-	await Utility.delay(RESPAWN_TIME / 2)
+	await black_screen.fade_in(RESPAWN_TIME / 2)
 	
 	# move player corpse to death location
 	_parent._corpse.global_position = Vector3(_parent.global_position.x, 1, _parent.global_position.z)
@@ -98,11 +92,8 @@ func move_to_shrine() -> void:
 	# execute single step of physics frame to trigger room visibility
 	_parent._physics_process(get_physics_process_delta_time())
 	
-	# fade black screen out
-	visibility_tween = get_tree().create_tween()
-	visibility_tween.tween_property(black_screen, "modulate:a", 0, RESPAWN_TIME / 2)
-	await Utility.delay(RESPAWN_TIME / 2)
-	black_screen.visible = false
+	# fade visibility back in
+	await black_screen.fade_out(RESPAWN_TIME / 2)
 	
 	# re-enable movement and camera lag 
 	_parent.set_physics_process(true)
