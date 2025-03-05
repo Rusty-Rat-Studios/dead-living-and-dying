@@ -13,7 +13,6 @@ const GAME_OVER_DELAY: float = 2.0
 
 func _ready() -> void:
 	if show_how_to_play_on_start:
-		$HowToPlay.visible = true
 		get_tree().paused = true
 		$HowToPlay.visible = true
 		# resume game when popup window is closed
