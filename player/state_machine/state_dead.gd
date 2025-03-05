@@ -10,7 +10,6 @@ func enter() -> void:
 	_parent.player_stats.remove_stat_modifiers()
 	_parent.player_stats.stat_update_add(PlayerStats.Stats.SPEED, SPEED_MODIFIER, "dead")
 	
-	
 	# disable player light
 	_parent.light_omni.visible = false
 	_parent.light_spot.visible = false
@@ -31,7 +30,7 @@ func enter() -> void:
 	if key_item:
 		key_item.drop()
 	
-	move_to_shrine()
+	await move_to_shrine()
 
 
 func exit() -> void:
@@ -49,8 +48,18 @@ func exit() -> void:
 	_parent.collision_mask = CollisionBit.WORLD
 	_parent.hurtbox.collision_mask = CollisionBit.PHYSICAL
 	
+	# deactivate corpse indicator particle emission
+	_parent._corpse_indicator.restart()
+	_parent._corpse_indicator.emitting = false
+	
 	SignalBus.player_hurt.disconnect(_on_player_hurt)
 	SignalBus.player_revived.disconnect(_on_player_revived)
+
+
+func process_state() -> void:
+	#_parent._corpse_indicator.rotation = _parent.global_position.direction_to(_parent._corpse.global_position)
+	#_parent._corpse_indicator.process_material.direction = _parent.global_position.direction_to(_parent._corpse.global_position)
+	_parent._corpse_indicator.look_at(_parent._corpse.global_position, Vector3.UP)
 
 
 func move_to_shrine() -> void:
@@ -88,6 +97,9 @@ func move_to_shrine() -> void:
 	_parent.camera.enable()
 	# consume shrine (note: does not consume default shrine)
 	target_shrine.consume()
+	
+	# activate corpse indicator particle emission
+	_parent._corpse_indicator.emitting = true
 	
 	# enable collision layers for spirit plane
 	_parent.hurtbox.collision_shape.set_deferred("disabled", false)
