@@ -5,7 +5,8 @@ extends Node3D
 # the position on the world grid, and the possessables in the room.
 # On init the room moves to its specified grid location and runs init_doors()
 
-var room_information: RoomInformation
+@export var room_information: RoomInformation
+
 var grid_location: Vector2
 var possessables_available: Array
 var doors: HashMap = HashMap.new()

@@ -41,10 +41,10 @@ func generate_grid(grid: WorldGrid) -> void:
 		
 		print("Selected door %s, needing direction %s" % [target_door.string(), DoorLocation.Direction.keys()[room_door_dir]])
 		
-		var room_information: RoomInformation = room_table.get_random_entity()
-		var valid_room_doors: Array[DoorLocation] = _get_door_locations_facing(room_information, room_door_dir)
+		var room: Room = (room_table.get_random_entity() as Resource).instantiate()
+		var valid_room_doors: Array[DoorLocation] = _get_door_locations_facing(room.room_information, room_door_dir)
 		
-		print("Selected room %s" % [room_information.resource])
+		print("Selected room %s" % [room])
 		
 		# Fail if no doors of correct direction
 		if valid_room_doors.size() == 0:
@@ -54,7 +54,7 @@ func generate_grid(grid: WorldGrid) -> void:
 		
 		# Returns a dictionary of room_pos, occupied_grid, door_grid 
 		var valid_room_placement: Dictionary[String, Variant] = _get_valid_room_placement_at_doors(
-			room_information, target_door.invert().location, valid_room_doors)
+			room.room_information, target_door.invert().location, valid_room_doors)
 		
 		# Fail if no valid placements
 		if valid_room_placement.has('invalid'):
@@ -67,7 +67,7 @@ func generate_grid(grid: WorldGrid) -> void:
 		
 		# Add room and reset 'fails'
 		print("Adding room at position %s" % [valid_room_placement.get('room_pos')])
-		grid.add_room(room_information, valid_room_placement.get('room_pos'))
+		grid.add_room(room, valid_room_placement.get('room_pos'))
 		fails = 0
 	
 	push_error("ERROR: Generator exceeded GENERATOR_ATTEMPTS")

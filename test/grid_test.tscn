@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bq2dwqp4q6dn1"]
+[gd_scene load_steps=13 format=3 uid="uid://bq2dwqp4q6dn1"]
 
 [ext_resource type="Script" uid="uid://br2ou0xf5p2mo" path="res://game.gd" id="1_xwopn"]
 [ext_resource type="PackedScene" uid="uid://bbow7knip3g6g" path="res://player/player.tscn" id="2_xkdfq"]
@@ -8,7 +8,10 @@
 [ext_resource type="Script" uid="uid://bfwa3mijk47us" path="res://player/state_machine/state_dying.gd" id="6_xupbb"]
 [ext_resource type="Script" uid="uid://dk6tfo4i3solm" path="res://map/world_grid.gd" id="7_24rg8"]
 [ext_resource type="PackedScene" uid="uid://dic5onsop66y4" path="res://ui/menus/game_menu.tscn" id="8_ah51h"]
+[ext_resource type="Texture2D" uid="uid://chry31axu0hdv" path="res://player/dying.png" id="8_e1b6l"]
 [ext_resource type="PackedScene" uid="uid://bwmbngtw81o3y" path="res://ui/debug_console.tscn" id="8_en8lj"]
+[ext_resource type="Script" uid="uid://b4yg822foka8j" path="res://ui/dying_screen_effect.gd" id="9_5fe06"]
+[ext_resource type="PackedScene" uid="uid://bh1qwbhfylkio" path="res://ui/inventory/inventory_container.tscn" id="10_emhx3"]
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_xwopn")
@@ -43,8 +46,26 @@ script = ExtResource("7_24rg8")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
+[node name="DyingScreenEffect" type="TextureRect" parent="UI"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("8_e1b6l")
+expand_mode = 1
+script = ExtResource("9_5fe06")
+
+[node name="InventoryContainer" parent="UI" instance=ExtResource("10_emhx3")]
+offset_top = -142.0
+offset_right = 282.0
+
 [node name="GameMenu" parent="UI" instance=ExtResource("8_ah51h")]
 visible = false
+disable_popup = true
+show_how_to_play_on_start = false
 
 [node name="DebugConsole" parent="UI" instance=ExtResource("8_en8lj")]
 process_mode = 3
