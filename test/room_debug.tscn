@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://d4cxt6unhu3c6"]
+[gd_scene load_steps=17 format=3 uid="uid://d4cxt6unhu3c6"]
 
 [ext_resource type="Script" uid="uid://br2ou0xf5p2mo" path="res://game.gd" id="1_qruwo"]
 [ext_resource type="PackedScene" uid="uid://bbow7knip3g6g" path="res://player/player.tscn" id="2_ahfm4"]
@@ -11,7 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://bson3umirpot2" path="res://map/room_components/wall.tscn" id="9_exyhi"]
 [ext_resource type="PackedScene" uid="uid://dic5onsop66y4" path="res://ui/menus/game_menu.tscn" id="10_14pjr"]
 [ext_resource type="Texture2D" uid="uid://chry31axu0hdv" path="res://player/dying.png" id="10_616hd"]
+[ext_resource type="Texture2D" uid="uid://b7hy3m0hwp7c3" path="res://ui/resources/black_screen.png" id="10_thsbo"]
 [ext_resource type="Script" uid="uid://b4yg822foka8j" path="res://ui/dying_screen_effect.gd" id="11_6hyob"]
+[ext_resource type="Script" uid="uid://d1tfstjfdr6xj" path="res://ui/dead_screen_effect.gd" id="11_616hd"]
 [ext_resource type="PackedScene" uid="uid://bwmbngtw81o3y" path="res://ui/debug_console.tscn" id="11_prqow"]
 [ext_resource type="PackedScene" uid="uid://bh1qwbhfylkio" path="res://ui/inventory/inventory_container.tscn" id="12_dhis3"]
 
@@ -72,6 +74,19 @@ mouse_filter = 2
 texture = ExtResource("10_616hd")
 expand_mode = 1
 script = ExtResource("11_6hyob")
+
+[node name="DeadScreenEffect" type="TextureRect" parent="UI"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("10_thsbo")
+expand_mode = 1
+script = ExtResource("11_616hd")
 
 [node name="InventoryContainer" parent="UI" instance=ExtResource("12_dhis3")]
 offset_top = -142.0

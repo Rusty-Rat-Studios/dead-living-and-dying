@@ -25,6 +25,7 @@ var _state_machine: PlayerStateMachine
 # used to track player corpse - handled by states
 # corpse set as child of Node to intentionally not inherit parent position
 @onready var _corpse: Corpse = $CorpseContainer/Corpse
+@onready var _corpse_indicator: GPUParticles3D = $CorpseIndicator
 
 
 func _ready() -> void:
@@ -57,6 +58,7 @@ func _physics_process(delta: float) -> void:
 	handle_movement(delta) 
 	# Set Player position for shaders
 	RenderingServer.global_shader_parameter_set("Player", self.global_position)
+	_state_machine.process_current_state()
 
 
 func handle_movement(delta: float) -> void:

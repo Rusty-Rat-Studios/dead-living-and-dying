@@ -14,6 +14,10 @@ func exit() -> void:
 	SignalBus.player_hurt.disconnect(_on_player_hurt)
 
 
+func process_state() -> void:
+	pass
+
+
 func _on_player_hurt() -> void:
 	_parent.take_damage()
 	_state_machine.change_state(PlayerStateMachine.States.DYING)

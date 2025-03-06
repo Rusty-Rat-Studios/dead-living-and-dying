@@ -19,6 +19,7 @@ direction = Vector3(0, 1, 0)
 spread = 30.0
 initial_velocity_min = 2.0
 initial_velocity_max = 2.0
+attractor_interaction_enabled = false
 
 [sub_resource type="Curve" id="Curve_w538j"]
 _data = [Vector2(0, 0.493882), 0.0, 0.0, 0, 0, Vector2(0.492878, 0.942158), 0.0, 0.0, 0, 0, Vector2(1, 0.15406), 0.0, 0.0, 0, 0]
@@ -73,6 +74,7 @@ angular_velocity_max = 40.0
 gravity = Vector3(0, 0, 0)
 linear_accel_min = 0.999998
 linear_accel_max = 5.0
+attractor_interaction_enabled = false
 scale_min = 0.1
 scale_max = 0.4
 scale_curve = SubResource("CurveTexture_vjhm8")

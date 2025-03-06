@@ -36,6 +36,10 @@ func exit() -> void:
 	screen_effect.disable()
 
 
+func process_state() -> void:
+	pass
+
+
 func _on_player_hurt() -> void:
 	# activate i-frames without flash
 	_parent.take_damage(false)
