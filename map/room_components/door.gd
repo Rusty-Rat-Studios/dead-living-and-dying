@@ -13,10 +13,13 @@ var linked_door: Door = null
 var door_open: bool = false
 
 @onready var world_grid: WorldGrid = get_node("/root/Game/WorldGrid")
-@onready var door_material: Material = $StaticBody3D/MeshInstance3D.mesh.material
+@onready var door_material: Material = $StaticBody3D/MeshInstance3D.mesh.material.duplicate()
 
 
-func _ready() -> void:	
+func _ready() -> void:
+	$StaticBody3D/MeshInstance3D.mesh = $StaticBody3D/MeshInstance3D.mesh.duplicate()
+	$StaticBody3D/MeshInstance3D.mesh.material = door_material
+	
 	$Spawn.visible = false # Make debug mesh invisible
 	$PlayerDetector.body_entered.connect(_on_body_entered)
 	$PlayerDetector.body_exited.connect(_on_body_exited)
@@ -83,6 +86,7 @@ func _on_interaction(input_name: String) -> void:
 	if input_name == "interact":
 		if door_open:
 			close_door()
+			$Interactable.display_message("[E] Open Door")
 		else:
 			open_door()
 			$Interactable.display_message("[E] Close Door")
