@@ -1,3 +1,4 @@
+class_name Interactable
 extends Node3D
 '''
 https://forum.godotengine.org/t/display-the-character-of-an-input-on-screen/4101
