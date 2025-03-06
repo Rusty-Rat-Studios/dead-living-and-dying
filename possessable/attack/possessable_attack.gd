@@ -27,6 +27,8 @@ func possess() -> void:
 		player_in_range = true
 	
 	# make possessable glow
+	if light_tween:
+		light_tween.kill()
 	light_tween = create_tween()
 	light_tween.tween_property($OmniLight3D, "light_energy", LIGHT_ENERGY, TWEEN_IN_DURATION)
 
@@ -37,6 +39,8 @@ func depossess() -> void:
 	range_collision_shape.set_deferred("disabled", true)
 	
 	# stop glow effect
+	if light_tween:
+		light_tween.kill()
 	light_tween = create_tween()
 	light_tween.tween_property($OmniLight3D, "light_energy", 0, TWEEN_OUT_DURATION)
 

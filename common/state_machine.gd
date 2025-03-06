@@ -18,12 +18,12 @@ _parent.process_physics()
 -> _state_machine.process_current_state()
 -> -> current_state.process_state()
 """
+# to be initialized with _ready() by inheritors or in the editor
+@export var _starting_state: int
 
 var current_state: int
 # track node for calling functions of child state nodes
 var _current_state_node: Node
-# to be initialized with _ready() by inheritors
-var _starting_state: int
 
 
 func init(parent: Node3D) -> void:
