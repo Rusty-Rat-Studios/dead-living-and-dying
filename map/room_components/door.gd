@@ -15,6 +15,8 @@ var door_open: bool = false
 
 @onready var world_grid: WorldGrid = get_node("/root/Game/WorldGrid")
 @onready var door_material: Material = $StaticBody3D/MeshInstance3D.mesh.material.duplicate()
+@onready var door_collision_shape: CollisionShape3D = $StaticBody3D/CollisionShape3D
+@onready var interactable: Interactable = $Interactable
 
 
 func _ready() -> void:
@@ -27,9 +29,9 @@ func _ready() -> void:
 	#player_received.connect(_on_player_received)
 	(get_parent() as Room).register_door(self)
 	
-	$Interactable.inputs = ["interact"]
-	$Interactable.hide_message()
-	$Interactable.input_detected.connect(_on_interaction)
+	interactable.inputs = ["interact"]
+	interactable.hide_message()
+	interactable.input_detected.connect(_on_interaction)
 
 
 func init(room_grid_location: Vector2) -> void:
@@ -55,8 +57,8 @@ func _convert_to_wall() -> void:
 func open_door() -> void:
 	door_open = true
 	door_material.albedo_texture = DOOR_TEXTURE_OPEN
-	linked_door.door_material.albedo_texture = DOOR_TEXTURE_OPEN
-	linked_room.visible = true
+	
+	door_collision_shape.set_deferred("disabled", true)
 
 
 func close_door() -> void:
@@ -68,6 +70,8 @@ func close_door() -> void:
 		get_parent().visible = false
 	elif not linked_room.player_in_room:
 		linked_room.visible = false
+	
+	door_collision_shape.set_deferred("disabled", false)
 
 
 func _on_body_entered(body: Node3D) -> void:
@@ -78,14 +82,14 @@ func _on_body_entered(body: Node3D) -> void:
 		print(Time.get_time_string_from_system(), ": ", body.name, " entered door ", self.door_location.string())
 		#linked_door.player_received.emit(body as Player)
 		
-		$Interactable.display_message("[E] Open Door")
-		$Interactable.enabled = true
+		interactable.display_message("[E] Open Door")
+		interactable.enabled = true
 
 
 func _on_body_exited(_body: Node3D) -> void:
 	# no node check required as collision mask is layer PLAYER
-	$Interactable.hide_message()
-	$Interactable.enabled = false
+	interactable.hide_message()
+	interactable.enabled = false
 	close_door()
 
 
@@ -93,10 +97,13 @@ func _on_interaction(input_name: String) -> void:
 	if input_name == "interact":
 		if door_open:
 			close_door()
-			$Interactable.display_message("[E] Open Door")
+			linked_door.close_door()
+			interactable.display_message("[E] Open Door")
 		else:
 			open_door()
-			$Interactable.display_message("[E] Close Door")
+			linked_door.open_door()
+			linked_room.visible = true
+			interactable.display_message("[E] Close Door")
 
 
 func _on_player_received(player: Player) -> void:

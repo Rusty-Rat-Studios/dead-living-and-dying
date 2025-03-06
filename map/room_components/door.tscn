@@ -22,7 +22,7 @@ size = Vector3(2, 2.5, 0.1)
 size = Vector3(2, 2.5, 0.1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xm1qk"]
-size = Vector3(2, 2.5, 1)
+size = Vector3(3, 2.5, 2)
 
 [sub_resource type="SphereMesh" id="SphereMesh_fts1y"]
 
@@ -46,7 +46,7 @@ collision_mask = 2
 monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetector"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0.6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 1.1)
 shape = SubResource("BoxShape3D_xm1qk")
 
 [node name="Spawn" type="Node3D" parent="."]
