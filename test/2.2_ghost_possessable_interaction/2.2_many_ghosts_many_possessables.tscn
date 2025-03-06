@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://d4cxt6unhu3c6" path="res://test/room_debug.tscn" id="1_kgyd3"]
 [ext_resource type="PackedScene" uid="uid://yihpxsaeuqdi" path="res://ghost/ghost.tscn" id="2_cehja"]
-[ext_resource type="PackedScene" uid="uid://bcep1wbs2caas" path="res://possessable/possessable.tscn" id="3_n61hl"]
+[ext_resource type="PackedScene" uid="uid://cko3wlfgl81ce" path="res://entity/objects/crate/crate.tscn" id="3_8surb"]
 
 [node name="Game" instance=ExtResource("1_kgyd3")]
 
@@ -24,20 +24,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, -4)
 [node name="Ghost2" parent="DebugRoom" index="10" instance=ExtResource("2_cehja")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0)
 
-[node name="Possessable" parent="DebugRoom" index="11" instance=ExtResource("3_n61hl")]
+[node name="Crate" parent="DebugRoom" index="11" instance=ExtResource("3_8surb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0)
 
-[node name="Possessable2" parent="DebugRoom" index="12" instance=ExtResource("3_n61hl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)
-
-[node name="Possessable3" parent="DebugRoom" index="13" instance=ExtResource("3_n61hl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, -2)
-
-[node name="Possessable4" parent="DebugRoom" index="14" instance=ExtResource("3_n61hl")]
+[node name="Crate2" parent="DebugRoom" index="12" instance=ExtResource("3_8surb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, -2)
 
-[node name="Possessable5" parent="DebugRoom" index="15" instance=ExtResource("3_n61hl")]
+[node name="Crate3" parent="DebugRoom" index="13" instance=ExtResource("3_8surb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, -4)
 
-[node name="Possessable6" parent="DebugRoom" index="16" instance=ExtResource("3_n61hl")]
+[node name="Crate4" parent="DebugRoom" index="14" instance=ExtResource("3_8surb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, -4)
+
+[node name="Crate5" parent="DebugRoom" index="15" instance=ExtResource("3_8surb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, -2)
+
+[node name="Crate6" parent="DebugRoom" index="16" instance=ExtResource("3_8surb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)

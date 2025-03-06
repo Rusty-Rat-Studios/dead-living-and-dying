@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://d4cxt6unhu3c6" path="res://test/room_debug.tscn" id="1_k8d3j"]
 [ext_resource type="PackedScene" uid="uid://yihpxsaeuqdi" path="res://ghost/ghost.tscn" id="2_dddbl"]
-[ext_resource type="PackedScene" uid="uid://bcep1wbs2caas" path="res://possessable/possessable.tscn" id="3_5mojs"]
+[ext_resource type="PackedScene" uid="uid://cko3wlfgl81ce" path="res://entity/objects/crate/crate.tscn" id="3_pfme1"]
 
 [node name="Game" instance=ExtResource("1_k8d3j")]
 
@@ -12,8 +12,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)
 [node name="Ghost2" parent="DebugRoom" index="6" instance=ExtResource("2_dddbl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0)
 
-[node name="Possessable" parent="DebugRoom" index="7" instance=ExtResource("3_5mojs")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)
-
-[node name="Possessable2" parent="DebugRoom" index="8" instance=ExtResource("3_5mojs")]
+[node name="Crate" parent="DebugRoom" index="7" instance=ExtResource("3_pfme1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0)
+
+[node name="Crate2" parent="DebugRoom" index="8" instance=ExtResource("3_pfme1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)

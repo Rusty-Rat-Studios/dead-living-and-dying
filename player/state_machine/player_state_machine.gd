@@ -4,10 +4,6 @@ extends StateMachine
 enum States { LIVING, DYING, DEAD }
 
 
-func _ready() -> void:
-	_starting_state = States.LIVING
-
-
 func _input(event: InputEvent) -> void:
 	# DEBUG: press tab to cycle state
 	if event is InputEventKey and event.pressed:
