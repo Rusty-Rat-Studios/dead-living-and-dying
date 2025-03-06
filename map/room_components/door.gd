@@ -10,6 +10,7 @@ const DOOR_TEXTURE_OPEN: Texture = preload("res://map/tileset-dhassa/door1_open.
 @export var door_location: DoorLocation
 
 var linked_door: Door = null
+var linked_room: Room = null
 var door_open: bool = false
 
 @onready var world_grid: WorldGrid = get_node("/root/Game/WorldGrid")
@@ -33,7 +34,7 @@ func _ready() -> void:
 
 func init(room_grid_location: Vector2) -> void:
 	var linked_door_location: DoorLocation = door_location.translate(room_grid_location).invert()
-	var linked_room: Room = world_grid.get_room_at_location(linked_door_location.location)
+	linked_room = world_grid.get_room_at_location(linked_door_location.location)
 	if linked_room == null:
 		_convert_to_wall()
 		return
@@ -54,13 +55,19 @@ func _convert_to_wall() -> void:
 func open_door() -> void:
 	door_open = true
 	door_material.albedo_texture = DOOR_TEXTURE_OPEN
+	linked_door.door_material.albedo_texture = DOOR_TEXTURE_OPEN
+	linked_room.visible = true
 
 
 func close_door() -> void:
 	door_open = false
 	door_material.albedo_texture = DOOR_TEXTURE
+	linked_door.door_material.albedo_texture = DOOR_TEXTURE
+	
 	if not get_parent().player_in_room:
 		get_parent().visible = false
+	elif not linked_room.player_in_room:
+		linked_room.visible = false
 
 
 func _on_body_entered(body: Node3D) -> void:
