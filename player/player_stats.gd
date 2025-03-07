@@ -65,7 +65,9 @@ func stat_update_add( stat: Stats, stat_modifier: float, name: String, id: int =
 	update_stats()
 
 
-func stat_update_remove( stat: Stats, name: String) -> void:
+func stat_update_remove( stat: Stats, name: String, id: int = -1) -> void:
+	if (id != -1):
+		name = name + ":" + str(id)
 	_stat_map.get(stat).erase(name)
 	update_stats()
 
