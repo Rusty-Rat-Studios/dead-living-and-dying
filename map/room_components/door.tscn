@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cexvn2mosncly"]
+[gd_scene load_steps=9 format=3 uid="uid://cexvn2mosncly"]
 
 [ext_resource type="Script" uid="uid://btisf3jhp0nte" path="res://map/room_components/door.gd" id="1_6px5k"]
 [ext_resource type="PackedScene" uid="uid://fpivfcuv6s1r" path="res://map/room_components/wall_with_doorway.tscn" id="2_tobwv"]
@@ -24,8 +24,6 @@ size = Vector3(2, 2.5, 0.1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_xm1qk"]
 size = Vector3(3, 2.5, 2)
 
-[sub_resource type="SphereMesh" id="SphereMesh_fts1y"]
-
 [node name="Door" type="Node3D"]
 script = ExtResource("1_6px5k")
 
@@ -48,11 +46,5 @@ monitorable = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetector"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 1.1)
 shape = SubResource("BoxShape3D_xm1qk")
-
-[node name="Spawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Spawn"]
-mesh = SubResource("SphereMesh_fts1y")
 
 [node name="Interactable" parent="." instance=ExtResource("4_53qlf")]

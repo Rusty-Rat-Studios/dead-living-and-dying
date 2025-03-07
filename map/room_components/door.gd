@@ -1,8 +1,6 @@
 class_name Door
 extends Node3D
 
-signal player_received(player: Player)
-
 const WALL: Resource = preload("res://map/room_components/wall.tscn")
 const DOOR_TEXTURE: Texture = preload("res://map/tileset-dhassa/door1.png")
 const DOOR_TEXTURE_OPEN: Texture = preload("res://map/tileset-dhassa/door1_open.png")
@@ -23,7 +21,6 @@ func _ready() -> void:
 	$StaticBody3D/MeshInstance3D.mesh = $StaticBody3D/MeshInstance3D.mesh.duplicate()
 	$StaticBody3D/MeshInstance3D.mesh.material = door_material
 	
-	$Spawn.visible = false # Make debug mesh invisible
 	$PlayerDetector.body_entered.connect(_on_body_entered)
 	$PlayerDetector.body_exited.connect(_on_body_exited)
 	
@@ -81,13 +78,6 @@ func close_door() -> void:
 
 
 func _on_body_entered(body: Node3D) -> void:
-	# TODO: if check may not be necessary
-	if body is Player and PlayerHandler.get_player_state() != PlayerStateMachine.States.DEAD:
-		if linked_door == null:
-			return push_error("ERROR: Door.linked_door is null")
-		print(Time.get_time_string_from_system(), ": ", body.name, " entered door ", self.door_location.string())
-		#linked_door.player_received.emit(body as Player)
-	
 	if not door_open:
 		interactable.display_message("[E] Open Door")
 		interactable.enabled = true
@@ -111,11 +101,6 @@ func _on_interaction(input_name: String) -> void:
 			linked_room.visible = true
 			interactable.enabled = false
 			interactable.hide_message()
-
-
-func _on_player_received(player: Player) -> void:
-	player.position.x = $Spawn.global_position.x
-	player.position.z = $Spawn.global_position.z
 
 
 ###############
