@@ -1,6 +1,7 @@
 extends PlayerState
 
 const SPEED_MODIFIER: float = 4
+const NAME: String = "dead"
 
 const RESPAWN_TIME: float = 2
 
@@ -8,7 +9,7 @@ func enter() -> void:
 	super()
 	
 	_parent.player_stats.remove_stat_modifiers()
-	_parent.player_stats.stat_update_add(PlayerStats.Stats.SPEED, SPEED_MODIFIER, "dead")
+	_parent.player_stats.stat_update_add(PlayerStats.Stats.SPEED, SPEED_MODIFIER, NAME)
 	
 	# modulate player color and opacity to appear ghostly
 	_parent.get_node("RotationOffset/AnimatedSprite3D").modulate = Color(0.5, 0.5, 0.5, 0.3)

@@ -5,6 +5,7 @@ const BASE_ACTIVE_DURATION: float = 4
 const OMNI_RANGE_MODIFIER: float = 3
 const SPOT_RANGE_MODIFIER: float = 3
 const ENERGY_MODIFIER: float = 1
+const NAME: String = "fuel"
 
 var cooldown_active: bool = false 
 
@@ -49,13 +50,13 @@ func _on_cooldown_timer_timeout() -> void:
 
 func temp_stat_update(omni_range_modifier: float, spot_range_modifier: float, 
 	energy_modifier: float) -> void:
-	player.player_stats.stat_update_add(PlayerStats.Stats.LIGHT_OMNI_RANGE, omni_range_modifier, "fuel")
-	player.player_stats.stat_update_add(PlayerStats.Stats.LIGHT_SPOT_RANGE, spot_range_modifier, "fuel")
-	player.player_stats.stat_update_add(PlayerStats.Stats.LIGHT_ENERGY, energy_modifier, "fuel")
+	player.player_stats.stat_update_add(PlayerStats.Stats.LIGHT_OMNI_RANGE, omni_range_modifier, NAME)
+	player.player_stats.stat_update_add(PlayerStats.Stats.LIGHT_SPOT_RANGE, spot_range_modifier, NAME)
+	player.player_stats.stat_update_add(PlayerStats.Stats.LIGHT_ENERGY, energy_modifier, NAME)
 
 
 func reset_stat_update() -> void:
 	var player: Node = PlayerHandler.get_player()
-	player.player_stats.stat_update_remove(PlayerStats.Stats.LIGHT_OMNI_RANGE, "fuel")
-	player.player_stats.stat_update_remove(PlayerStats.Stats.LIGHT_SPOT_RANGE, "fuel")
-	player.player_stats.stat_update_remove(PlayerStats.Stats.LIGHT_ENERGY, "fuel")
+	player.player_stats.stat_update_remove(PlayerStats.Stats.LIGHT_OMNI_RANGE, NAME)
+	player.player_stats.stat_update_remove(PlayerStats.Stats.LIGHT_SPOT_RANGE, NAME)
+	player.player_stats.stat_update_remove(PlayerStats.Stats.LIGHT_ENERGY, NAME)
