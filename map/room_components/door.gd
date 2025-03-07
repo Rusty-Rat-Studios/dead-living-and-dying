@@ -74,8 +74,6 @@ func close_door() -> void:
 	
 	if not get_parent().player_in_room and not door_open:
 		get_parent().visible = false
-	elif not linked_room.player_in_room and not linked_door.door_open:
-		linked_room.visible = false
 	
 	door_collision_shape.set_deferred("disabled", false)
 
