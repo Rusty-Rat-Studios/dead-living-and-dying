@@ -71,7 +71,6 @@ func move_to_shrine() -> void:
 	# failsafe if no shrines exist in WorldGrid (should not happen during prod)
 	if active_shrines.size() == 0:
 		push_error("No active shrine in game. There should always be a default shrine that is permanently active.")
-		SignalBus.game_over.emit()
 		return
 	var target_shrine: Shrine = Utility.find_closest(active_shrines, _parent.global_position)
 	# consume shrine (note: does not consume default shrine)
