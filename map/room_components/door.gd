@@ -26,6 +26,12 @@ func _ready() -> void:
 	$Spawn.visible = false # Make debug mesh invisible
 	$PlayerDetector.body_entered.connect(_on_body_entered)
 	$PlayerDetector.body_exited.connect(_on_body_exited)
+	
+	###############
+	# TEMP: remove once doors implemented in all scenes
+	SignalBus.player_exited_room.connect(_on_player_exited_room)
+	###############
+	
 	#player_received.connect(_on_player_received)
 	(get_parent() as Room).register_door(self)
 	
@@ -66,9 +72,9 @@ func close_door() -> void:
 	door_material.albedo_texture = DOOR_TEXTURE
 	linked_door.door_material.albedo_texture = DOOR_TEXTURE
 	
-	if not get_parent().player_in_room:
+	if not get_parent().player_in_room and not door_open:
 		get_parent().visible = false
-	elif not linked_room.player_in_room:
+	elif not linked_room.player_in_room and not linked_door.door_open:
 		linked_room.visible = false
 	
 	door_collision_shape.set_deferred("disabled", false)
@@ -81,7 +87,8 @@ func _on_body_entered(body: Node3D) -> void:
 			return push_error("ERROR: Door.linked_door is null")
 		print(Time.get_time_string_from_system(), ": ", body.name, " entered door ", self.door_location.string())
 		#linked_door.player_received.emit(body as Player)
-		
+	
+	if not door_open:
 		interactable.display_message("[E] Open Door")
 		interactable.enabled = true
 
@@ -90,22 +97,29 @@ func _on_body_exited(_body: Node3D) -> void:
 	# no node check required as collision mask is layer PLAYER
 	interactable.hide_message()
 	interactable.enabled = false
-	close_door()
+	# ensure door does not close until player is outside both door player detector ranges
+	if not linked_door.get_node("PlayerDetector").has_overlapping_bodies():
+		close_door()
+		linked_door.close_door()
 
 
 func _on_interaction(input_name: String) -> void:
 	if input_name == "interact":
-		if door_open:
-			close_door()
-			linked_door.close_door()
-			interactable.display_message("[E] Open Door")
-		else:
+		if not door_open:
 			open_door()
 			linked_door.open_door()
 			linked_room.visible = true
-			interactable.display_message("[E] Close Door")
+			interactable.enabled = false
+			interactable.hide_message()
 
 
 func _on_player_received(player: Player) -> void:
 	player.position.x = $Spawn.global_position.x
 	player.position.z = $Spawn.global_position.z
+
+
+###############
+# TEMP: remove once doors implemented in all scenes
+func _on_player_exited_room(room: Room) -> void:
+	room.visible = true
+###############
