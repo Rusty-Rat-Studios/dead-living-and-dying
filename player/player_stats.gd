@@ -58,12 +58,16 @@ func dictionary_sum(stat_modifier: Dictionary[String, float]) -> float:
 	return total_modifier
 
 
-func stat_update_add( stat: Stats, stat_modifier: float, name: String) -> void:
+func stat_update_add( stat: Stats, stat_modifier: float, name: String, id: int = -1) -> void:
+	if (id != -1):
+		name = name + ":" + str(id)
 	_stat_map.get(stat)[name] = stat_modifier
 	update_stats()
 
 
-func stat_update_remove( stat: Stats, name: String) -> void:
+func stat_update_remove( stat: Stats, name: String, id: int = -1) -> void:
+	if (id != -1):
+		name = name + ":" + str(id)
 	_stat_map.get(stat).erase(name)
 	update_stats()
 

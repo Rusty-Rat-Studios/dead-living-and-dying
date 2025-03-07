@@ -6,6 +6,7 @@ const LIGHT_RANGE_MODIFIER: float = -2
 const LIGHT_ENERGY_MODIFIER: float = -0.5
 const STUN_DURATION: float = 3.0
 const RESTORE_DURATION: float = 2.0
+const NAME: String = "stun"
 
 # store tween as variable to allow cancelling it if stunned during restore
 var _restore_tween: Tween
@@ -28,10 +29,10 @@ func stun() -> void:
 		_restore_tween.kill()
 	
 	# add negative stat modifiers to player
-	_player.player_stats.stat_update_add(PlayerStats.Stats.SPEED, SPEED_MODIFIER, "stun")
-	_player.player_stats.stat_update_add(PlayerStats.Stats.LIGHT_OMNI_RANGE, LIGHT_RANGE_MODIFIER, "stun")
-	_player.player_stats.stat_update_add(PlayerStats.Stats.LIGHT_SPOT_RANGE, LIGHT_RANGE_MODIFIER, "stun")
-	_player.player_stats.stat_update_add(PlayerStats.Stats.LIGHT_ENERGY, LIGHT_ENERGY_MODIFIER, "stun")
+	_player.player_stats.stat_update_add(PlayerStats.Stats.SPEED, SPEED_MODIFIER, NAME)
+	_player.player_stats.stat_update_add(PlayerStats.Stats.LIGHT_OMNI_RANGE, LIGHT_RANGE_MODIFIER, NAME)
+	_player.player_stats.stat_update_add(PlayerStats.Stats.LIGHT_SPOT_RANGE, LIGHT_RANGE_MODIFIER, NAME)
+	_player.player_stats.stat_update_add(PlayerStats.Stats.LIGHT_ENERGY, LIGHT_ENERGY_MODIFIER, NAME)
 	
 	$StunTimer.start()
 
@@ -47,10 +48,10 @@ func restore() -> void:
 func _restore_step(value: float) -> void:
 	# each stat is multiplied over time from 1 (full value) to 0 to create
 	# a "reducing" effect over time
-	_player.player_stats.stat_modifier_speed["stun"] = SPEED_MODIFIER * value
-	_player.player_stats.stat_modifier_light_omni_range["stun"] = LIGHT_RANGE_MODIFIER * value
-	_player.player_stats.stat_modifier_light_spot_range["stun"] = LIGHT_RANGE_MODIFIER * value
-	_player.player_stats.stat_modifier_light_energy["stun"] = LIGHT_ENERGY_MODIFIER * value
+	_player.player_stats.stat_modifier_speed[NAME] = SPEED_MODIFIER * value
+	_player.player_stats.stat_modifier_light_omni_range[NAME] = LIGHT_RANGE_MODIFIER * value
+	_player.player_stats.stat_modifier_light_spot_range[NAME] = LIGHT_RANGE_MODIFIER * value
+	_player.player_stats.stat_modifier_light_energy[NAME] = LIGHT_ENERGY_MODIFIER * value
 	_player.player_stats.update_stats()
 
 
@@ -66,10 +67,10 @@ func restore_instantly() -> void:
 
 
 func _remove_stun_modifiers() -> void:
-	_player.player_stats.stat_update_remove(PlayerStats.Stats.SPEED, "stun")
-	_player.player_stats.stat_update_remove(PlayerStats.Stats.LIGHT_OMNI_RANGE, "stun")
-	_player.player_stats.stat_update_remove(PlayerStats.Stats.LIGHT_SPOT_RANGE, "stun")
-	_player.player_stats.stat_update_remove(PlayerStats.Stats.LIGHT_ENERGY, "stun")
+	_player.player_stats.stat_update_remove(PlayerStats.Stats.SPEED, NAME)
+	_player.player_stats.stat_update_remove(PlayerStats.Stats.LIGHT_OMNI_RANGE, NAME)
+	_player.player_stats.stat_update_remove(PlayerStats.Stats.LIGHT_SPOT_RANGE, NAME)
+	_player.player_stats.stat_update_remove(PlayerStats.Stats.LIGHT_ENERGY, NAME)
 
 
 func _on_tween_finished() -> void:

@@ -4,6 +4,7 @@ const SPEED_MODIFIER: float = -0.5
 
 const LIGHT_OMNI_RANGE_MODIFIER: float = -1.5
 const LIGHT_SPOT_RANGE_MODIFIER: float = -3
+const NAME: String = "dying"
 
 @onready var screen_effect: TextureRect = get_node("/root/Game/UI/DyingScreenEffect")
 
@@ -11,9 +12,9 @@ const LIGHT_SPOT_RANGE_MODIFIER: float = -3
 func enter() -> void:
 	super()
 	# update player stats
-	_parent.player_stats.stat_update_add(PlayerStats.Stats.SPEED, SPEED_MODIFIER, "dying")
-	_parent.player_stats.stat_update_add(PlayerStats.Stats.LIGHT_OMNI_RANGE, LIGHT_OMNI_RANGE_MODIFIER, "dying")
-	_parent.player_stats.stat_update_add(PlayerStats.Stats.LIGHT_SPOT_RANGE, LIGHT_SPOT_RANGE_MODIFIER, "dying")
+	_parent.player_stats.stat_update_add(PlayerStats.Stats.SPEED, SPEED_MODIFIER, NAME)
+	_parent.player_stats.stat_update_add(PlayerStats.Stats.LIGHT_OMNI_RANGE, LIGHT_OMNI_RANGE_MODIFIER, NAME)
+	_parent.player_stats.stat_update_add(PlayerStats.Stats.LIGHT_SPOT_RANGE, LIGHT_SPOT_RANGE_MODIFIER, NAME)
 	
 	SignalBus.player_hurt.connect(_on_player_hurt)
 	
