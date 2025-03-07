@@ -14,6 +14,7 @@ var door_open: bool = false
 @onready var world_grid: WorldGrid = get_node("/root/Game/WorldGrid")
 @onready var door_material: Material = $StaticBody3D/MeshInstance3D.mesh.material.duplicate()
 @onready var door_collision_shape: CollisionShape3D = $StaticBody3D/CollisionShape3D
+@onready var detector_collision_shape: CollisionShape3D = $PlayerDetector/CollisionShape3D
 @onready var interactable: Interactable = $Interactable
 
 
@@ -23,6 +24,8 @@ func _ready() -> void:
 	
 	$PlayerDetector.body_entered.connect(_on_body_entered)
 	$PlayerDetector.body_exited.connect(_on_body_exited)
+	# disable door collision and interactable when player is spirit
+	SignalBus.player_state_changed.connect(_on_player_state_changed)
 	
 	###############
 	# TEMP: remove once doors implemented in all scenes
@@ -107,5 +110,16 @@ func _on_interaction(input_name: String) -> void:
 ###############
 # TEMP: remove once doors implemented in all scenes
 func _on_player_exited_room(room: Room) -> void:
-	room.visible = true
+	if PlayerHandler.get_player_state() != PlayerStateMachine.States.DEAD:
+		room.visible = true
 ###############
+
+
+func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
+	if state == PlayerStateMachine.States.LIVING:
+		door_collision_shape.set_deferred("disabled", false)
+		detector_collision_shape.set_deferred("disabled", false)
+	elif state == PlayerStateMachine.States.DEAD:
+		door_collision_shape.set_deferred("disabled", true)
+		detector_collision_shape.set_deferred("disabled", true)
+		
