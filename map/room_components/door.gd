@@ -77,7 +77,8 @@ func close_door() -> void:
 	door_collision_shape.set_deferred("disabled", false)
 
 
-func _on_body_entered(body: Node3D) -> void:
+func _on_body_entered(_body: Node3D) -> void:
+	# no node check required as collision mask is layer PLAYER
 	if not door_open:
 		interactable.display_message("[E] Open Door")
 		interactable.enabled = true
