@@ -40,7 +40,8 @@ func reset() -> void:
 	Utility.call_for_each(find_children("*Item*", "Item"), "reset")
 	
 	player.reset()
-	old_man.reset()
+	if old_man:
+		old_man.reset()
 
 
 func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
