@@ -1,4 +1,4 @@
-extends TextureRect
+extends ScreenOverlay
 
 @onready var fade_tween: Tween
 

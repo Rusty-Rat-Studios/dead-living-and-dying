@@ -1,4 +1,4 @@
-extends TextureRect
+extends ScreenOverlay
 
 const MAX_OPACITY: float = 0.125
 const MIN_OPACITY: float = 0.0625
@@ -32,7 +32,7 @@ func disable() -> void:
 
 
 func fade_to(target_opacity: float) -> void:
-	fade_tween = create_tween().set_ease(Tween.EASE_OUT_IN)
+	fade_tween = create_tween()
 	fade_tween.tween_property(self, "modulate:a", target_opacity, FADE_DURATION)
 
 
