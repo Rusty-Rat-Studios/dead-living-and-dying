@@ -62,6 +62,8 @@ func possess() -> void:
 
 
 func depossess() -> void:
+	if not is_possessed:
+		return
 	# add self back to room's available possessables
 	room.add_possessable(self)
 	# reset flags
