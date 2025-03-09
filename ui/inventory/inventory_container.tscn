@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://b4k5m1br05eiv" path="res://ui/inventory/active_slot.tscn" id="2_c5hy6"]
 [ext_resource type="PackedScene" uid="uid://m60x4oieeliy" path="res://ui/inventory/consumable_slot.tscn" id="3_kgiru"]
 [ext_resource type="Texture2D" uid="uid://eeobrjxbuowc" path="res://ui/resources/button-bg.png" id="4_0onxt"]
-[ext_resource type="Script" path="res://ui/inventory/passive_slot_container.gd" id="5_8n2x2"]
+[ext_resource type="Script" uid="uid://lhrfcibyyuob" path="res://ui/inventory/passive_slot_container.gd" id="5_8n2x2"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_a1yg3"]
 texture = ExtResource("4_0onxt")

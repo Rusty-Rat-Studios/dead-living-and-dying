@@ -5,7 +5,8 @@ extends Node3D
 # the position on the world grid, and the possessables in the room.
 # On init the room moves to its specified grid location and runs init_doors()
 
-var room_information: RoomInformation
+@export var room_information: RoomInformation
+
 var grid_location: Vector2
 var possessables_available: Array
 var doors: HashMap = HashMap.new()
@@ -24,7 +25,7 @@ func init() -> void:
 	var grid_scale: float = WorldGrid.GRID_SCALE
 	var room_location: Vector3 = Vector3(grid_location.x * grid_scale, 0, 
 		grid_location.y * grid_scale)
-	global_translate(room_location)
+	global_position = room_location
 	init_doors()
 	print(Time.get_time_string_from_system(), ": Room ", grid_location , " initialized")
 

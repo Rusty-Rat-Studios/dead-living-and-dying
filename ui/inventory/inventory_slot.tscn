@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bi3maar4f7ltv"]
 
-[ext_resource type="Script" path="res://ui/inventory/inventory_slot.gd" id="1_aiprx"]
+[ext_resource type="Script" uid="uid://jir4c8xkkr52" path="res://ui/inventory/inventory_slot.gd" id="1_aiprx"]
 [ext_resource type="Texture2D" uid="uid://eeobrjxbuowc" path="res://ui/resources/button-bg.png" id="2_pongt"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_l443k"]

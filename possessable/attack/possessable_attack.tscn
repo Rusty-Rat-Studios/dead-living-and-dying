@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://custksxq8jvgd"]
 
 [ext_resource type="PackedScene" uid="uid://bcep1wbs2caas" path="res://possessable/possessable.tscn" id="1_qmrf1"]
-[ext_resource type="Script" path="res://possessable/attack/possessable_attack.gd" id="2_v5ro8"]
+[ext_resource type="Script" uid="uid://l2dvk7nwsu04" path="res://possessable/attack/possessable_attack.gd" id="2_v5ro8"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_1udu2"]
-radius = 6.0
+radius = 8.0
 
 [node name="PossessableAttack" instance=ExtResource("1_qmrf1")]
 script = ExtResource("2_v5ro8")

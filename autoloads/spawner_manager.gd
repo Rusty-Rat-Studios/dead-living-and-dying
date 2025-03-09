@@ -1,6 +1,6 @@
 extends Node
 
-@onready var _spawners: Dictionary = {}
+@onready var _spawners: Dictionary[Spawner.SpawnerType, Array] = {}
 
 
 # Called in a Spawners _ready function

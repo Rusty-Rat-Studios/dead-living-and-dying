@@ -2,13 +2,13 @@ class_name Game
 extends Node3D
 
 @export var key_item_starting_position: Vector3
+@export var old_man: OldMan
 
 # state machine node-based design partially sourced from:
 # "Starter state machines in Godot 4" by "The Shaggy Dev"
 # https://www.youtube.com/watch?v=oqFbZoA2lnU
 @onready var state_machine: PlayerStateMachine = $StateMachine
 @onready var player: Player = $Player
-@onready var old_man: OldMan = $WorldGrid/RoomBottom/OldMan
 @onready var light_directional: DirectionalLight3D = $DirectionalLight3D
 
 
@@ -38,7 +38,8 @@ func reset() -> void:
 	Utility.call_for_each(find_children("*Item*", "Item"), "reset")
 	
 	player.reset()
-	old_man.reset()
+	if old_man:
+		old_man.reset()
 
 
 func _on_player_state_changed(state: PlayerStateMachine.States) -> void:

@@ -4,7 +4,7 @@ extends PossessableAttack
 # impulse strength used to throw the object
 const THROW_FORCE: float = 15.0
 # speed threshold for enabling/disabling hurtbox
-const DAMAGE_VELOCITY: float = 2.0
+const DAMAGE_VELOCITY: float = 3.0
 # speed threshold for slowing down possessable when bumped while possessed
 # used to avoid "floating away"
 const SPEED_THRESHOLD: float = 1
@@ -101,16 +101,16 @@ func attack(target: Node3D) -> void:
 	if player_in_range and room.player_in_room:
 		# disable player detection
 		range_collision_shape.disabled = true
-		# enable hurtbox
-		hitbox_collision_shape.disabled = false
 		# disallow re-possession during attack
 		is_possessable = false
 		
 		# display "wind-up" to attack
 		await sprite_shaker.animate(parent.get_node("Sprite3D"), ATTACK_WINDUP, ATTACK_SHAKE_MAGNITUDE)
-		
+
 		# check again that object wasn't depossessed mid-attack
 		if is_possessed:
+			# enable hurtbox 
+			hitbox_collision_shape.set_deferred("disabled", false)
 			# VIOLENTLY LAUNCH SELF TOWARDS PLAYER \m/
 			parent.apply_impulse(global_position.direction_to(target.global_position) * THROW_FORCE)
 	

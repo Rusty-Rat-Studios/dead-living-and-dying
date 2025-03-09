@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cko3wlfgl81ce"]
 
 [ext_resource type="Texture2D" uid="uid://d1vlfcehjxisy" path="res://entity/objects/crate/crate.png" id="1_82sgj"]
-[ext_resource type="Script" path="res://common/sprite_backlight.gd" id="2_0g82p"]
+[ext_resource type="Script" uid="uid://db2v7j1wnkduq" path="res://common/sprite_backlight.gd" id="2_0g82p"]
 [ext_resource type="PackedScene" uid="uid://bp0ydphecs3iv" path="res://common/shadow.tscn" id="3_lbco8"]
 [ext_resource type="PackedScene" uid="uid://c1hur2s8mgagv" path="res://possessable/attack/possessable_throwable.tscn" id="4_3avg1"]
 

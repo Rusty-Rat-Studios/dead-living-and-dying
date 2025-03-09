@@ -3,12 +3,7 @@ extends PlayerState
 
 func enter() -> void:
 	super()
-	# update player stats
-	_parent.stat_dict[Player.Stats.SPEED] = Player.BASE_SPEED
-	_parent.light_omni.omni_range = _parent.LIGHT_OMNI_RANGE
-	_parent.light_omni.light_energy = _parent.LIGHT_ENERGY
-	_parent.light_spot.spot_range = _parent.LIGHT_SPOT_RANGE
-	_parent.light_spot.light_energy = _parent.LIGHT_ENERGY
+
 	# apply inventory buffs to modified stats
 	_parent.inventory_update()
 	
@@ -17,6 +12,10 @@ func enter() -> void:
 
 func exit() -> void:
 	SignalBus.player_hurt.disconnect(_on_player_hurt)
+
+
+func process_state() -> void:
+	pass
 
 
 func _on_player_hurt() -> void:

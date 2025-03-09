@@ -1,12 +1,11 @@
 extends DefenseItemInventory
 
-signal item_used(cooldown_timer: Timer)
-
 const BASE_COOLDOWN_DURATION: float = 5
 const BASE_ACTIVE_DURATION: float = 2
+const BASE_RADIUS: float = 2
 
-@onready var cooldown_duration_modifier: float = 0
-@onready var active_duration_modifier: float = 0
+var player: Node = PlayerHandler.get_player()
+
 @onready var cooldown_active: bool = false
 
 # Called when the node enters the scene tree for the first time.
@@ -31,12 +30,16 @@ func _input(event: InputEvent) -> void:
 func use() -> void:
 	if cooldown_active:
 		return
+	$Hitbox/CollisionShape3D.shape.radius = BASE_RADIUS * player.player_stats.area_size
+	$Hitbox/MeshInstance3D.mesh.outer_radius = BASE_RADIUS * player.player_stats.area_size
+	$Hitbox/MeshInstance3D.mesh.inner_radius = $Hitbox/MeshInstance3D.mesh.outer_radius - 0.2
 	$Hitbox/CollisionShape3D.disabled = false
 	$Hitbox.visible = true
+	$ActiveTimer.wait_time = BASE_ACTIVE_DURATION * player.player_stats.duration
 	$ActiveTimer.start()
-	
-	cooldown_active = true
+	$CooldownTimer.wait_time = BASE_COOLDOWN_DURATION / player.player_stats.cooldown_reduction
 	$CooldownTimer.start()
+	cooldown_active = true
 	
 	item_used.emit($CooldownTimer)
 

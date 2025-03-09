@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://c176v8gdlci8v"]
 
 [ext_resource type="PackedScene" uid="uid://cnbim08e5mqrn" path="res://ui/interactable.tscn" id="1_k23bc"]
-[ext_resource type="Script" path="res://old_man/old_man.gd" id="1_kf68j"]
+[ext_resource type="Script" uid="uid://cjc1yby2mdkot" path="res://old_man/old_man.gd" id="1_kf68j"]
 [ext_resource type="Texture2D" uid="uid://xw1x8sgcrylx" path="res://old_man/old_man.png" id="3_jfj5u"]
-[ext_resource type="Script" path="res://common/sprite_backlight.gd" id="4_6tbt5"]
+[ext_resource type="Script" uid="uid://db2v7j1wnkduq" path="res://common/sprite_backlight.gd" id="4_6tbt5"]
 [ext_resource type="PackedScene" uid="uid://bp0ydphecs3iv" path="res://common/shadow.tscn" id="4_8mfuk"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_tlkjy"]

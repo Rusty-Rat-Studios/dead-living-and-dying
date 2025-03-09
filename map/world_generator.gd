@@ -3,11 +3,14 @@ extends Object
 
 const GENERATOR_ATTEMPTS: int = 10 # Number of consecutive failed attempts before error 
 
+var room_table: EntityTable
 var occupied_grid: Array[Vector2] = []
 var door_grid: Array[DoorLocation] = []
 
 
-func _init(initial_occupied_grid: Array[Vector2], initial_door_grid: Array[DoorLocation]) -> void:
+func _init(_room_table: EntityTable, initial_occupied_grid: Array[Vector2], 
+	initial_door_grid: Array[DoorLocation]) -> void:
+	room_table = _room_table
 	occupied_grid = initial_occupied_grid
 	door_grid = initial_door_grid
 
@@ -24,7 +27,6 @@ func _init(initial_occupied_grid: Array[Vector2], initial_door_grid: Array[DoorL
 #        room occupies to occupied_grid, add door locations from room to door_grid
 #        (removing and pairs that connect), add room to grid, loop until complete
 func generate_grid(grid: WorldGrid) -> void:
-	var room_table: EntityTable = load("res://entity/entity_tables/test_room_table.tres")
 	var fails: int = 0
 	
 	while(fails < GENERATOR_ATTEMPTS):
@@ -41,10 +43,10 @@ func generate_grid(grid: WorldGrid) -> void:
 		
 		print("Selected door %s, needing direction %s" % [target_door.string(), DoorLocation.Direction.keys()[room_door_dir]])
 		
-		var room_information: RoomInformation = room_table.get_random_entity()
-		var valid_room_doors: Array[DoorLocation] = _get_door_locations_facing(room_information, room_door_dir)
+		var room: Room = (room_table.get_random_entity() as Resource).instantiate()
+		var valid_room_doors: Array[DoorLocation] = _get_door_locations_facing(room.room_information, room_door_dir)
 		
-		print("Selected room %s" % [room_information.resource])
+		print("Selected room %s" % [room])
 		
 		# Fail if no doors of correct direction
 		if valid_room_doors.size() == 0:
@@ -53,8 +55,8 @@ func generate_grid(grid: WorldGrid) -> void:
 			continue
 		
 		# Returns a dictionary of room_pos, occupied_grid, door_grid 
-		var valid_room_placement: Dictionary = _get_valid_room_placement_at_doors(room_information, 
-			target_door.invert().location, valid_room_doors)
+		var valid_room_placement: Dictionary[String, Variant] = _get_valid_room_placement_at_doors(
+			room.room_information, target_door.invert().location, valid_room_doors)
 		
 		# Fail if no valid placements
 		if valid_room_placement.has('invalid'):
@@ -63,11 +65,11 @@ func generate_grid(grid: WorldGrid) -> void:
 			continue
 		
 		occupied_grid.append_array(valid_room_placement.get('occupied_grid'))
-		_add_to_door_grid_removing_matches(valid_room_placement.get('door_grid'))
+		WorldGrid.add_to_door_grid_removing_matches(door_grid, valid_room_placement.get('door_grid'))
 		
 		# Add room and reset 'fails'
 		print("Adding room at position %s" % [valid_room_placement.get('room_pos')])
-		grid.add_room(room_information, valid_room_placement.get('room_pos'))
+		grid.add_room(room, valid_room_placement.get('room_pos'))
 		fails = 0
 	
 	push_error("ERROR: Generator exceeded GENERATOR_ATTEMPTS")
@@ -79,12 +81,12 @@ func generate_grid(grid: WorldGrid) -> void:
 # place the room at, the occupied_grid of the room, and the door_grid of the room.
 # If no doors are valid, returns { 'invalid': true }
 func _get_valid_room_placement_at_doors(room_information: RoomInformation, room_location: Vector2, 
-	valid_room_doors: Array[DoorLocation]) -> Dictionary:
+	valid_room_doors: Array[DoorLocation]) -> Dictionary[String, Variant]:
 	while valid_room_doors.size() > 0:
 		var random_valid_room_door: DoorLocation = RNG.random_from_list(valid_room_doors)
 		valid_room_doors.erase(random_valid_room_door)
 		var room_pos: Vector2 = -random_valid_room_door.location + room_location
-		var room_occupied_and_door_grids: Dictionary = WorldGrid.get_room_occupied_and_door_grids(
+		var room_occupied_and_door_grids: Dictionary[String, Array] = WorldGrid.get_room_occupied_and_door_grids(
 			room_information, room_pos)
 		var room_occupied_grid: Array[Vector2]
 		room_occupied_grid.assign(room_occupied_and_door_grids.get('occupied_grid'))
@@ -98,22 +100,6 @@ func _get_valid_room_placement_at_doors(room_information: RoomInformation, room_
 			'door_grid': room_door_grid
 		}
 	return { 'invalid': true }
-
-
-# Takes each DoorLocation in room_door_grid and sees if there is a connecting door
-# in door_grid. If there is, it is removed. If there is not, then the door location
-# is added to the grid.
-func _add_to_door_grid_removing_matches(room_door_grid: Array[DoorLocation]) -> void:
-	for door_location: DoorLocation in room_door_grid:
-		var matches: Array[DoorLocation] = door_grid.filter(
-			func(value: DoorLocation) -> bool: 
-				return value.equals(door_location.invert())
-		)
-		
-		if matches.size() > 0:
-			door_grid.erase(matches.front())
-		else:
-			door_grid.append(door_location)
 
 
 # Returns all the door locations of a room facing a specific direction

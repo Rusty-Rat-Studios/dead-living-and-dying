@@ -1,11 +1,11 @@
 extends GhostState
 
-const WAITING_SPEED: float = 3.0
-const PAUSE_DURATION_MAX: float = 3.0
-const PAUSE_DURATION_MIN: float = 1.0
-const POSSESS_CHANCE: float = 0.5
+const WAITING_SPEED: float = 4.0
+const PAUSE_DURATION_MAX: float = 2.0
+const PAUSE_DURATION_MIN: float = 0.5
+const POSSESS_CHANCE: float = 0.75
 const ATTACK_CHANCE: float = 0.25
-const WAIT_CHANCE: float = 0.25
+const WAIT_CHANCE: float = 0.125
 const MOVE_CHANCE: float = 1
 
 var room_boundaries: Rect2 # select random points in room to wander to
@@ -83,7 +83,7 @@ func pause() -> void:
 	is_paused = false
 	
 	# weighted chances for choosing next action
-	var choices: Dictionary = {
+	var choices: Dictionary[Callable, float] = {
 		_possess: POSSESS_CHANCE,
 		_attack: ATTACK_CHANCE,
 		set_random_target: WAIT_CHANCE,

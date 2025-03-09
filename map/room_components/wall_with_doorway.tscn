@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=4 uid="uid://fpivfcuv6s1r"]
 
-[ext_resource type="Script" path="res://map/room_components/wall.gd" id="1_qq7eh"]
+[ext_resource type="Script" uid="uid://uyg6vw1fndgn" path="res://map/room_components/wall.gd" id="1_qq7eh"]
 [ext_resource type="Material" uid="uid://hnvx3t8awqp1" path="res://map/room_components/transparent_wall_with_doorway_material.tres" id="2_akohn"]
 [ext_resource type="Material" uid="uid://ca6og85us0udr" path="res://map/room_components/wall_with_doorway_material.tres" id="2_nyej4"]
 

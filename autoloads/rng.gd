@@ -13,7 +13,7 @@ func get_seed() -> int:
 
 # Given a list of items, pick one at random (equally weighted)
 func random_from_list(list: Array) -> Variant:
-	var choices: Dictionary = {}
+	var choices: Dictionary[Variant, float] = {}
 	for item: Variant in list:
 		choices[item] = 1
 	return weighted_random(choices)
@@ -22,7 +22,7 @@ func random_from_list(list: Array) -> Variant:
 # Given a dictionary in the format of {item: weight} pick an item from the 
 # dictionary respecting the weights. (Ex. {a:1, b:2} item b is twice as likely 
 # to be chosen as a)
-func weighted_random(choices: Dictionary) -> Variant:
+func weighted_random(choices: Dictionary[Variant, float]) -> Variant:
 	var weights: PackedFloat32Array = PackedFloat32Array(choices.values())
 	var items: Array = choices.keys()
 	var weighted_index: int = rng.rand_weighted(weights)
@@ -35,10 +35,14 @@ func call_random_from_list(list: Array[Callable]) -> Variant:
 
 
 # call the output of weighted_random() (Dict keys should be Callable)
-func call_weighted_random(choices: Dictionary) -> Variant:
-	return weighted_random(choices).call()
+func call_weighted_random(choices: Dictionary[Callable, float]) -> Variant:
+	var untyped_choices: Dictionary[Variant, float]
+	untyped_choices.assign(choices)
+	return weighted_random(untyped_choices).call()
 
 
 # asynchronously call the output of weighted_random() (Dict keys should be Callable)
-func call_async_weighted_random(choices: Dictionary) -> Variant:
-	return await weighted_random(choices).call()
+func call_async_weighted_random(choices: Dictionary[Callable, float]) -> Variant:
+	var untyped_choices: Dictionary[Variant, float]
+	untyped_choices.assign(choices)
+	return await weighted_random(untyped_choices).call()

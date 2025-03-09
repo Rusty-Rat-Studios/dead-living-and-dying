@@ -1,27 +1,14 @@
 class_name Player
 extends CharacterBody3D
 
-enum Stats {
-	SPEED
-}
-
-const BASE_SPEED: float = 6.0
-
-# base values used for light range and strength
-const LIGHT_OMNI_RANGE: float = 6
-const LIGHT_SPOT_RANGE: float = 10
-const LIGHT_ENERGY: float = 1
-
-var stat_dict: Dictionary = {
-	Stats.SPEED : 6.0
-}
 # player state machine, sibling node under Game node
 var state_machine: Node
 # used to track player corpse - handled by states
 var corpse: Corpse
 # player state machine, sibling node under Game node
 var _state_machine: PlayerStateMachine
-
+#declaration of the object that holds all of the players current stats
+@onready var player_stats: PlayerStats = PlayerStats.new()
 # light variables used by state machine to adjust light strength based on state
 @onready var light_omni: OmniLight3D = $OmniLight3D
 @onready var light_spot: SpotLight3D = $SpotLight3D
@@ -38,6 +25,7 @@ var _state_machine: PlayerStateMachine
 # used to track player corpse - handled by states
 # corpse set as child of Node to intentionally not inherit parent position
 @onready var _corpse: Corpse = $CorpseContainer/Corpse
+@onready var _corpse_indicator: GPUParticles3D = $CorpseIndicator
 
 
 func _ready() -> void:
@@ -46,6 +34,13 @@ func _ready() -> void:
 	light_omni.light_color = Color("GOLDENROD")
 	
 	SignalBus.item_picked_up.connect(_on_item_picked_up)
+
+
+func _process(_delta: float) -> void:
+	light_omni.omni_range = player_stats.light_omni_range
+	light_omni.light_energy = player_stats.light_energy
+	light_spot.spot_range = player_stats.light_spot_range
+	light_spot.light_energy = player_stats.light_energy
 
 
 func init(state_machine: Node) -> void:
@@ -65,6 +60,7 @@ func _physics_process(delta: float) -> void:
 	handle_movement(delta) 
 	# Set Player position for shaders
 	RenderingServer.global_shader_parameter_set("Player", self.global_position)
+	_state_machine.process_current_state()
 
 
 func handle_movement(delta: float) -> void:
@@ -85,14 +81,15 @@ func handle_movement(delta: float) -> void:
 		input_dir = Focus.input_get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 		direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
-		velocity.x = direction.x * stat_dict[Stats.SPEED]
-		velocity.z = direction.z * stat_dict[Stats.SPEED]
+		velocity.x = direction.x * player_stats.speed
+		velocity.z = direction.z * player_stats.speed
 	else:
-		velocity.x = move_toward(velocity.x, 0, stat_dict[Stats.SPEED])
-		velocity.z = move_toward(velocity.z, 0, stat_dict[Stats.SPEED])
+		velocity.x = move_toward(velocity.x, 0, player_stats.speed)
+		velocity.z = move_toward(velocity.z, 0, player_stats.speed)
 	
 	if abs(velocity.x) > 0.01:
 		sprite.flip_h = direction.x < 0
+	
 	move_and_slide()
 
 
@@ -108,10 +105,7 @@ func _on_item_picked_up(item: ItemInventory) -> void:
 	item.position = Vector3.ZERO
 
 
-func stat_update( stat: Stats, stat_modifier: float) -> void:
-	if stat_dict.has(stat):
-		stat_dict[stat] += stat_modifier
-
-
 func inventory_update() -> void:
+	player_stats.remove_stat_modifiers()
 	$Inventory.update_all()
+	player_stats.update_stats()

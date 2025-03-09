@@ -1,23 +1,28 @@
-[gd_scene load_steps=8 format=3 uid="uid://cexvn2mosncly"]
+[gd_scene load_steps=9 format=3 uid="uid://cexvn2mosncly"]
 
-[ext_resource type="Script" path="res://map/room_components/door.gd" id="1_6px5k"]
+[ext_resource type="Script" uid="uid://btisf3jhp0nte" path="res://map/room_components/door.gd" id="1_6px5k"]
 [ext_resource type="PackedScene" uid="uid://fpivfcuv6s1r" path="res://map/room_components/wall_with_doorway.tscn" id="2_tobwv"]
+[ext_resource type="Texture2D" uid="uid://dchbmibqpiyjl" path="res://map/tileset-dhassa/door1.png" id="3_5bxqp"]
+[ext_resource type="PackedScene" uid="uid://cnbim08e5mqrn" path="res://ui/interactable.tscn" id="4_53qlf"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_53qlf"]
+transparency = 1
+depth_draw_mode = 1
+specular_mode = 2
+albedo_texture = ExtResource("3_5bxqp")
+backlight_enabled = true
+backlight = Color(1, 1, 1, 1)
+uv1_scale = Vector3(3, 2, 1)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_03pyr"]
-albedo_color = Color(0.288541, 0.146007, 9.62615e-08, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_ab5g1"]
-material = SubResource("StandardMaterial3D_03pyr")
+[sub_resource type="BoxMesh" id="BoxMesh_53qlf"]
+material = SubResource("StandardMaterial3D_53qlf")
 size = Vector3(2, 2.5, 0.1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_r0x2q"]
 size = Vector3(2, 2.5, 0.1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xm1qk"]
-size = Vector3(2, 2.5, 0.25)
-
-[sub_resource type="SphereMesh" id="SphereMesh_fts1y"]
+size = Vector3(3, 2.5, 2)
 
 [node name="Door" type="Node3D"]
 script = ExtResource("1_6px5k")
@@ -28,22 +33,25 @@ script = ExtResource("1_6px5k")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-mesh = SubResource("BoxMesh_ab5g1")
+mesh = SubResource("BoxMesh_53qlf")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("BoxShape3D_r0x2q")
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="PlayerDetector" type="Area3D" parent="."]
 collision_mask = 2
 monitorable = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0.175)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 1.1)
 shape = SubResource("BoxShape3D_xm1qk")
 
-[node name="Spawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
+[node name="Interactable" parent="." instance=ExtResource("4_53qlf")]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Spawn"]
-mesh = SubResource("SphereMesh_fts1y")
+[node name="ObjectBlocker" type="StaticBody3D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ObjectBlocker"]
+shape = SubResource("BoxShape3D_r0x2q")

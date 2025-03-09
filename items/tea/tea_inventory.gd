@@ -1,7 +1,8 @@
 extends PassiveItemInventory
 
+const SPEED_MODIFIER: float = 1.3
+const NAME: String = "tea"
 
-var speed_modifier: float = 4.0
 
 func _ready() -> void:
 	update()
@@ -9,4 +10,4 @@ func _ready() -> void:
 
 func update() -> void:
 	var player: Node = PlayerHandler.get_player()
-	player.stat_update(player.Stats.SPEED, speed_modifier)
+	player.player_stats.stat_update_add(PlayerStats.Stats.SPEED, SPEED_MODIFIER, NAME, self.get_instance_id())
