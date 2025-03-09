@@ -86,6 +86,8 @@ func _physics_process(delta: float) -> void:
 
 
 func possess() -> void:
+	if not is_possessable:
+		return
 	super()
 	# enable physics processing - disabled along with hitbox when slow enough
 	set_physics_process(true)
