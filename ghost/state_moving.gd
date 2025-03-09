@@ -34,15 +34,17 @@ var target_room: Room
 
 func enter() -> void:
 	state = DoorStates.BEFORE
-	select_target_door()
-	_parent.target_reached.connect(_on_target_reached)
-	_parent.set_target(target_door_pos_near)
-
+	if find_target_door():
+		_parent.target_reached.connect(_on_target_reached)
+		_parent.set_target(target_door_pos_near)
+	else:
+		change_state(GhostStateMachine.States.WAITING)
 
 func exit() -> void:
 	# super() sets _parent.target_pos to its current position
 	# - ensure target_reached signal disconnected prior to calling super()
-	_parent.target_reached.disconnect(_on_target_reached)
+	if _parent.target_reached.is_connected(_on_target_reached):
+		_parent.target_reached.disconnect(_on_target_reached)
 	super()
 	target_door = null
 	target_door_pos_near = Vector3.ZERO
@@ -56,9 +58,11 @@ func process_state() -> void:
 
 
 # sets all variables related to target door selected at random from available doors
-func select_target_door() -> void:
+func find_target_door() -> bool:
 	# pick random door and set target
 	var doors: Array[Node] = _parent.current_room.find_children("*", "Door")
+	if doors.is_empty():
+		return false
 	
 	# pick random door
 	target_door = RNG.random_from_list(doors)
@@ -78,6 +82,8 @@ func select_target_door() -> void:
 	
 	target_door_pos_near = target_door.global_position + position_offset
 	target_door_pos_far = target_door.global_position - position_offset
+	
+	return true
 
 
 func _on_target_reached() -> void:
