@@ -2,6 +2,9 @@ class_name Ghost
 extends CharacterBody3D
 
 signal hit
+# connected to by states to process target-driven behavior
+# i.e. moving through a door
+signal target_reached
 
 const BASE_SPEED: float = 4.0
 # time to wait before attacking when player enters room
@@ -97,6 +100,7 @@ func move_to_target(delta: float) -> void:
 		at_target = true
 		velocity = Vector3.ZERO
 		target_pos = global_position
+		target_reached.emit()
 		
 		if light_enabled:
 			# make light invisible

@@ -1,7 +1,7 @@
 class_name GhostStateMachine
 extends StateMachine
 
-enum States { WAITING, POSSESSING, STUNNED, ATTACKING, MOVING}
+enum States { WAITING, POSSESSING, STUNNED, ATTACKING, MOVING }
 
 
 func _ready() -> void:
