@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://jlav0m1ndqde"]
+[gd_scene load_steps=36 format=3 uid="uid://jlav0m1ndqde"]
 
 [ext_resource type="Script" uid="uid://br2ou0xf5p2mo" path="res://game.gd" id="1_77rk7"]
 [ext_resource type="PackedScene" uid="uid://bbow7knip3g6g" path="res://player/player.tscn" id="1_hu241"]
@@ -29,6 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://dxrbbho8wlerh" path="res://items/fuel/fuel_world.tscn" id="23_3haxr"]
 [ext_resource type="PackedScene" uid="uid://bh1qwbhfylkio" path="res://ui/inventory/inventory_container.tscn" id="23_q3mfq"]
 [ext_resource type="Script" uid="uid://d1tfstjfdr6xj" path="res://ui/dead_screen_effect.gd" id="23_xa8c5"]
+[ext_resource type="PackedScene" uid="uid://dvc1unlr5pme3" path="res://ui/item_popup.tscn" id="30_36jdj"]
 
 [sub_resource type="Resource" id="Resource_3y6bj"]
 script = ExtResource("9_xa8c5")
@@ -310,3 +311,5 @@ visible = false
 [node name="DebugConsole" parent="UI" instance=ExtResource("15_rbtf5")]
 process_mode = 3
 visible = false
+
+[node name="ItemPopup" parent="UI" instance=ExtResource("30_36jdj")]
