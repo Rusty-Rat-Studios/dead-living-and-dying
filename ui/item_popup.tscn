@@ -1,9 +1,106 @@
-[gd_scene format=3 uid="uid://dvc1unlr5pme3"]
+[gd_scene load_steps=10 format=3 uid="uid://dvc1unlr5pme3"]
 
-[node name="ItemPopup" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
+[ext_resource type="Script" uid="uid://l1wv4ptsf202" path="res://ui/item_popup.gd" id="1_1utkn"]
+[ext_resource type="Texture2D" uid="uid://yg1f6tea1m18" path="res://ui/resources/main_menu_border.png" id="2_toqn8"]
+[ext_resource type="Texture2D" uid="uid://c66hil17x108r" path="res://items/key_item/key.png" id="3_mx3dx"]
+[ext_resource type="FontFile" uid="uid://c16563s6uqwuy" path="res://ui/resources/oswald_font/Oswald-VariableFont_wght.ttf" id="4_fvdrb"]
+
+[sub_resource type="Gradient" id="Gradient_cs4u5"]
+offsets = PackedFloat32Array(0.576389, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ytrdg"]
+gradient = SubResource("Gradient_cs4u5")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hmydm"]
+texture = SubResource("GradientTexture2D_ytrdg")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1utkn"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_top = 6
+border_color = Color(0.518482, 0.518482, 0.518482, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_toqn8"]
+bg_color = Color(1, 1, 1, 0.572549)
+
+[node name="ItemPopup" type="MarginContainer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = -157.5
+offset_top = -193.0
+offset_right = 157.5
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
+script = ExtResource("1_1utkn")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0.133333, 0.133333, 0.133333, 1)
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_hmydm")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+layout_mode = 2
+texture = ExtResource("2_toqn8")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_mx3dx")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_fvdrb")
+theme_override_font_sizes/font_size = 32
+text = "TITLE"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Description" type="Label" parent="MarginContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_fvdrb")
+theme_override_font_sizes/font_size = 24
+text = "DESCRIPTION"
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_1utkn")
+theme_override_styles/fill = SubResource("StyleBoxFlat_toqn8")
+fill_mode = 1
+show_percentage = false
+
+[node name="Timer" type="Timer" parent="."]
