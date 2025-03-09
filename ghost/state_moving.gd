@@ -1,15 +1,62 @@
 extends GhostState
 
+"""
+The ghost position and target is checked according to whether it has reached
+one of three target stages (DoorStates):
+1. BEFORE: current_room side of target door
+2. AT: center of target door, between rooms
+3. AFTER: target_room side of target door
+These checks are required when reparenting the ghost to the target room as
+the ghost's visibility is controlled by its parent room. If the ghost is
+reparented too early, it suddenly disappears from the current room; if it's 
+reparented too late, it suddenly appears in the target room. 
+
+For a smooth transition, the ghost is made intangible at stage BEFORE and made
+tangible again at stage AFTER. The ghost is reparented to the target room at
+stage AT (directly on top of target door) as this is the appropriate transition
+point if the visibility of the ghost were to toggle.
+"""
+enum DoorStates { BEFORE, AT, AFTER }
+
+const OFFSET_DISTANCE: float = 0.8
+
+var state: DoorStates = DoorStates.BEFORE
+
 # door in current room ghost is moving to
 var target_door: Door
-var target_door_pos: Vector3
+# the target position for the current room side of the door
+var target_door_pos_near: Vector3
+# the target position for the far side of the linked door in the target room
 var target_door_pos_far: Vector3
 # adjacent room ghost is moving to
 var target_room: Room
 
-var moving_through_door: bool = false
 
 func enter() -> void:
+	state = DoorStates.BEFORE
+	select_target_door()
+	_parent.target_reached.connect(_on_target_reached)
+	_parent.set_target(target_door_pos_near)
+
+
+func exit() -> void:
+	# super() sets _parent.target_pos to its current position
+	# - ensure target_reached signal disconnected prior to calling super()
+	_parent.target_reached.disconnect(_on_target_reached)
+	super()
+	target_door = null
+	target_door_pos_near = Vector3.ZERO
+	target_door_pos_far = Vector3.ZERO
+	target_room = null
+	state = DoorStates.BEFORE
+
+
+func process_state() -> void:
+	pass
+
+
+# sets all variables related to target door selected at random from available doors
+func select_target_door() -> void:
 	# pick random door and set target
 	var doors: Array[Node] = _parent.current_room.find_children("*", "Door")
 	
@@ -17,49 +64,38 @@ func enter() -> void:
 	target_door = RNG.random_from_list(doors)
 	target_room = target_door.linked_door.get_parent()
 	
-	target_door_pos = target_door.global_position
-	target_door_pos_far = target_door_pos
-	# shift target position to just in front of door
+	# shift target positions to slightly ahead/behind door
+	var position_offset: Vector3
 	match target_door.door_location.direction:
 		DoorLocation.Direction.NORTH:
-			target_door_pos += Vector3.BACK * 2
-			target_door_pos_far -= Vector3.BACK * 2
+			position_offset = Vector3.BACK * OFFSET_DISTANCE
 		DoorLocation.Direction.EAST:
-			target_door_pos += Vector3.LEFT * 2
-			target_door_pos_far -= Vector3.LEFT * 2
+			position_offset = Vector3.LEFT * OFFSET_DISTANCE
 		DoorLocation.Direction.SOUTH:
-			target_door_pos += Vector3.FORWARD * 2
-			target_door_pos_far -= Vector3.FORWARD * 2
+			position_offset = Vector3.FORWARD * OFFSET_DISTANCE
 		DoorLocation.Direction.WEST:
-			target_door_pos += Vector3.RIGHT * 2
-			target_door_pos_far -= Vector3.RIGHT * 2
+			position_offset = Vector3.RIGHT * OFFSET_DISTANCE
 	
-	_parent.set_target(target_door_pos)
+	target_door_pos_near = target_door.global_position + position_offset
+	target_door_pos_far = target_door.global_position - position_offset
 
 
-func exit() -> void:
-	super()
-	target_door = null
-	target_room = null
-	moving_through_door = false
-
-
-func process_state() -> void:
-	if _parent.at_target:
-		if moving_through_door:
-			# reached other side of the door
+func _on_target_reached() -> void:
+	match state:
+		DoorStates.BEFORE:
+			# make intangible before going through door
+			_parent.get_node("CollisionShape3D").set_deferred("disabled", true)
+			_parent.set_target(target_door.global_position)
+		DoorStates.AT:
+			# transition to next room
 			_parent.current_room = target_room
-			_parent.get_node("CollisionShape3D").set_deferred("disabled", false)
 			_parent.reparent(_parent.current_room)
+			_parent.set_target(target_door_pos_far)
+		DoorStates.AFTER:
+			# make tangible again when finished going through door
+			_parent.get_node("CollisionShape3D").set_deferred("disabled", false)
 			change_state(GhostStateMachine.States.WAITING)
-		else:
-			# in front of target door
-			move_through_door(target_door)
-
-
-func move_through_door(door: Door) -> void:
-	# disable ghost collision shape
-	_parent.get_node("CollisionShape3D").set_deferred("disabled", true)
-	# set target to same position relative to door in next room
-	_parent.set_target(target_door_pos_far)
-	moving_through_door = true
+			return
+	
+	# increment to next movement state
+	state += 1
