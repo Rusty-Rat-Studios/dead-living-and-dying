@@ -23,7 +23,7 @@ func _ready() -> void:
 	$Hitbox.body_entered.connect(_on_body_entered)
 
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if PlayerHandler.get_player_state() == PlayerStateMachine.States.DEAD:
 		return
 	if event.is_action_pressed("use_defense_item"):
