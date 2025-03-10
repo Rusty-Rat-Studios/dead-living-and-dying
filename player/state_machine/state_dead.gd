@@ -5,6 +5,24 @@ const NAME: String = "dead"
 
 const RESPAWN_TIME: float = 2
 
+# the amount of time before recalculating attacked effect from ghost contact
+const ATTACKED_INCREMENT_DURATION: float = 0.1
+# the multiplicative magnitude increase for each ghost in contact
+const ATTACKED_MAGNITUDE_MODIFIER: float = 1.2
+
+# used to implement debuffs from ghosts contacting player
+# incremented when in contact with ghosts, magnitude of increment
+var attacked_modifier: float = 0
+
+@onready var attacked_increment_timer: Timer = Timer.new()
+
+
+func init(parent: CharacterBody3D, state_machine: StateMachine) -> void:
+	super(parent, state_machine)
+	attacked_increment_timer.wait_time = ATTACKED_INCREMENT_DURATION
+	attacked_increment_timer.timeout.connect(_on_attacked_increment_timer_timeout)
+
+
 func enter() -> void:
 	super()
 	
@@ -105,7 +123,9 @@ func move_to_shrine() -> void:
 
 
 func _on_player_hurt(_entity: Node3D) -> void:
-	SignalBus.game_over.emit()
+	#_parent.player_stats.stat_update_add(PlayerStats.Stats.LIGHT_ENERGY, energy_modifier, NAME)
+	pass
+
 
 
 func _on_player_revived(corpse_global_position: Vector3) -> void:
@@ -113,3 +133,24 @@ func _on_player_revived(corpse_global_position: Vector3) -> void:
 	# provide i-frames on revive, no flashing
 	_parent.take_damage(false)
 	_state_machine.change_state(PlayerStateMachine.States.LIVING)
+
+
+func _on_attacked_increment_timer_timeout() -> void:
+	pass
+	# attack delay decrements while player is in the room until it reaches zero,
+	# enabling the ghost to attack. If the player is outside the room, it increments
+	# (twice as slowly as it decrements) until the attack delay is restored to
+	# its base value of DECISION_TIME
+	
+	# if [maximum modifier reached]
+	#	game over
+	# elif [ghosts in contact]
+	#	calculate num ghosts
+	#	calculate magnitude and apply to increment modifier
+	#	apply increment to attacked_modifer
+	# else [no ghosts in contact]
+	#	if [attacked_modifier == 0]
+	#		stop timer, return
+	#	apply negative increment to attacked_modifier
+	#
+	# apply attacked modifier to stats
