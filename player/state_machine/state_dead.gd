@@ -4,12 +4,14 @@ const SPEED_MODIFIER: float = 4
 const DEAD_MODIFIER_NAME: String = "dead"
 const ATTACKED_MODIFIER_NAME: String = "ghost attack"
 
-const RESPAWN_TIME: float = 2
-
 # the amount of time before recalculating attacked effect from ghost contact
 const ATTACKED_INCREMENT_DURATION: float = 0.1
 # the multiplicative magnitude increase for each ghost in contact
 const ATTACKED_MAGNITUDE_MODIFIER: float = 1.1
+# amount that attack_modifier is multiplied by before applying to speed
+const ATTACKED_MODIFIER_SPEED_SCALAR: float = 5
+
+const RESPAWN_TIME: float = 2
 
 # used to implement debuffs from ghosts contacting player
 # incremented when in contact with ghosts, magnitude of increment
@@ -194,7 +196,8 @@ func _on_attacked_increment_timer_timeout() -> void:
 	
 	# apply attacked modifier to dead light and player speed
 	dead_light.light_energy = dead_light_energy_default - attacked_modifier
-	_parent.player_stats.stat_update_add(PlayerStats.Stats.SPEED, -attacked_modifier * 4, ATTACKED_MODIFIER_NAME)
+	_parent.player_stats.stat_update_add(
+		PlayerStats.Stats.SPEED, -attacked_modifier * ATTACKED_MODIFIER_SPEED_SCALAR, ATTACKED_MODIFIER_NAME)
 	
 	if dead_light.light_energy <= 0:
 	#	full effect has applied - game over
