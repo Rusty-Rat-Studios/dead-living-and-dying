@@ -13,6 +13,8 @@ const ATTACKED_MAGNITUDE_MODIFIER: float = 1.2
 # used to implement debuffs from ghosts contacting player
 # incremented when in contact with ghosts, magnitude of increment
 var attacked_modifier: float = 0
+var attacked_modifier_increment: float = 0.1
+var attacking_ghosts: Array = []
 
 @onready var attacked_increment_timer: Timer = Timer.new()
 
@@ -46,6 +48,7 @@ func enter() -> void:
 	_parent.hurtbox.collision_mask = CollisionBit.SPIRIT
 	
 	SignalBus.player_hurt.connect(_on_player_hurt)
+	SignalBus.player_escaped.connect(_on_player_escaped)
 	SignalBus.player_revived.connect(_on_player_revived)
 	
 	# disable player light
@@ -122,10 +125,19 @@ func move_to_shrine() -> void:
 	_parent._corpse_indicator.emitting = true
 
 
-func _on_player_hurt(_entity: Node3D) -> void:
+func _on_player_hurt(entity: Node3D) -> void:
 	#_parent.player_stats.stat_update_add(PlayerStats.Stats.LIGHT_ENERGY, energy_modifier, NAME)
-	pass
+	print("player_hurt")
+	if entity is Ghost:
+		attacking_ghosts.append(entity)
+	print("attacked by: ", attacking_ghosts)
 
+
+func _on_player_escaped(entity: Node3D) -> void:
+	print("player escaped")
+	if entity is Ghost:
+		attacking_ghosts.remove_at(attacking_ghosts.find(entity))
+	print("escaped ghost: ", entity.name)
 
 
 func _on_player_revived(corpse_global_position: Vector3) -> void:
@@ -136,12 +148,12 @@ func _on_player_revived(corpse_global_position: Vector3) -> void:
 
 
 func _on_attacked_increment_timer_timeout() -> void:
-	pass
 	# attack delay decrements while player is in the room until it reaches zero,
 	# enabling the ghost to attack. If the player is outside the room, it increments
 	# (twice as slowly as it decrements) until the attack delay is restored to
 	# its base value of DECISION_TIME
 	
+	pass
 	# if [maximum modifier reached]
 	#	game over
 	# elif [ghosts in contact]
