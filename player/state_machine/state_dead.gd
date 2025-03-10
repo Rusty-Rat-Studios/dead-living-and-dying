@@ -6,6 +6,8 @@ const ATTACKED_MODIFIER_NAME: String = "ghost attack"
 
 # the amount of time before recalculating attacked effect from ghost contact
 const ATTACKED_INCREMENT_DURATION: float = 0.1
+# base amount that attack_modifier is incremented/decremented every timeout
+const ATTACKED_MODIFIER_INCREMENT: float = 0.03
 # the multiplicative magnitude increase for each ghost in contact
 const ATTACKED_MAGNITUDE_MODIFIER: float = 1.1
 # amount that attack_modifier is multiplied by before applying to speed
@@ -14,9 +16,9 @@ const ATTACKED_MODIFIER_SPEED_SCALAR: float = 5
 const RESPAWN_TIME: float = 2
 
 # used to implement debuffs from ghosts contacting player
-# incremented when in contact with ghosts, magnitude of increment
+# incremented when in contact with ghosts, multiplied by magnitude * number of ghosts
 var attacked_modifier: float = 0
-var attacked_modifier_increment: float = 0.03
+# tracks all ghosts currently contacting/attacking player
 var attacking_ghosts: Array = []
 
 var dead_light_energy_default: float 
@@ -51,7 +53,7 @@ func enter() -> void:
 	await move_to_shrine()
 	
 	# change collision layers out of physical plane into spirit plane
-	# temporarily moved during move_to_shrine()
+	# temporarily disabled during move_to_shrine()
 	_parent.collision_layer = CollisionBit.PLAYER + CollisionBit.SPIRIT
 	_parent.collision_mask = CollisionBit.WORLD
 	_parent.hurtbox.collision_mask = CollisionBit.SPIRIT
@@ -180,7 +182,7 @@ func _on_attacked_increment_timer_timeout() -> void:
 		var num_ghosts: int = attacking_ghosts.size()
 	#	increase increment magnitude according to number of ghosts attacking
 		var attacked_modifier_magnitude: float = num_ghosts * ATTACKED_MAGNITUDE_MODIFIER 
-		attacked_modifier += attacked_modifier_increment * attacked_modifier_magnitude
+		attacked_modifier += ATTACKED_MODIFIER_INCREMENT * attacked_modifier_magnitude
 	else:
 		# CASE: no ghosts attacking
 		if attacked_modifier <= 0:
@@ -192,7 +194,7 @@ func _on_attacked_increment_timer_timeout() -> void:
 			return
 		
 		# decrease effect over time
-		attacked_modifier -= attacked_modifier_increment
+		attacked_modifier -= ATTACKED_MODIFIER_INCREMENT
 	
 	# apply attacked modifier to dead light and player speed
 	dead_light.light_energy = dead_light_energy_default - attacked_modifier
@@ -200,7 +202,7 @@ func _on_attacked_increment_timer_timeout() -> void:
 		PlayerStats.Stats.SPEED, -attacked_modifier * ATTACKED_MODIFIER_SPEED_SCALAR, ATTACKED_MODIFIER_NAME)
 	
 	if dead_light.light_energy <= 0:
-	#	full effect has applied - game over
+		# full effect has applied - game over
 		SignalBus.game_over.emit()
 		dead_light.light_energy = dead_light_energy_default
 		attacked_increment_timer.stop()
