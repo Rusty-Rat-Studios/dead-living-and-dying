@@ -104,7 +104,7 @@ func move_to_shrine() -> void:
 	_parent._corpse_indicator.emitting = true
 
 
-func _on_player_hurt() -> void:
+func _on_player_hurt(_entity: Node3D) -> void:
 	SignalBus.game_over.emit()
 
 

@@ -21,6 +21,7 @@ func _ready() -> void:
 	$HitCooldown.timeout.connect(_on_hit_cooldown_timeout)
 	$HitFlash.timeout.connect(_on_hit_flash_timeout)
 	area_entered.connect(_on_enemy_area_entered)
+	area_exited.connect(_on_enemy_area_exited)
 
 
 func reset() -> void:
@@ -44,10 +45,22 @@ func activate_hit_cooldown(flash: bool = true) -> void:
 		$HitFlash.start()
 
 
-func _on_enemy_area_entered(_area: Area3D) -> void:
+func _on_enemy_area_entered(area: Area3D) -> void:
 	if not hit_cooldown_active:
 		# pass signal for state-specific behavior
-		SignalBus.player_hurt.emit()
+		var entity: Node3D = area.get_parent()
+		if entity is Ghost:
+			SignalBus.player_hurt.emit(entity)
+		else:
+			SignalBus.player_hurt.emit(null)
+
+
+func _on_enemy_area_exited(area: Area3D) -> void:
+	var entity: Node3D = area.get_parent()
+	if entity is Ghost:
+		SignalBus.player_escaped.emit(entity)
+	else:
+		SignalBus.player_escaped.emit(null)
 
 
 func _on_hit_cooldown_timeout() -> void:
