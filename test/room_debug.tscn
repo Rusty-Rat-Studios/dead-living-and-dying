@@ -53,9 +53,9 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8.05, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.05)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(-0.830566, 0.486173, -0.271654, 0.260189, 0.770014, 0.582563, 0.492404, 0.413176, -0.766044, 0, -4.37114e-07, -10)
 visible = false
-light_energy = 0.2
+light_color = Color(0.294118, 0.294118, 0.356863, 1)
 
 [node name="DebugLight" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.830566, 0.486173, -0.271654, -0.492404, -0.413176, 0.766044, 0.260189, 0.770014, 0.582564, 0, 10, 0)
