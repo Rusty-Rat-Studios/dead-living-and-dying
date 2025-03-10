@@ -5,9 +5,9 @@ const LIFETIME: float = 8
 const COLOR_BG: Color = Color(0.13, 0.13, 0.13, 1)
 const COLOR_BG_HOVER: Color = Color(0.2, 0.2, 0.2, 1)
 
-@onready var image: TextureRect = $MarginContainer/MarginContainer/HBoxContainer/TextureRect
-@onready var title: Label = $MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/Title
-@onready var description: Label = $MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/Description
+@onready var image: TextureRect = $MarginContainer/HBoxContainer/TextureRect
+@onready var title: Label = $MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/Title
+@onready var description: Label = $MarginContainer/HBoxContainer/VBoxContainer/Description
 
 @onready var _timer: Timer = $Timer
 @onready var _progress: ProgressBar = $NinePatchRect/MarginContainer/ProgressBar

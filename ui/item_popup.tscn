@@ -1,8 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://dvc1unlr5pme3"]
+[gd_scene load_steps=10 format=3 uid="uid://dvc1unlr5pme3"]
 
 [ext_resource type="Script" uid="uid://l1wv4ptsf202" path="res://ui/item_popup.gd" id="1_1utkn"]
 [ext_resource type="Texture2D" uid="uid://dpriohnhnc5tw" path="res://ui/resources/border-color.png" id="2_mx3dx"]
-[ext_resource type="Texture2D" uid="uid://yg1f6tea1m18" path="res://ui/resources/main_menu_border.png" id="2_toqn8"]
 [ext_resource type="Texture2D" uid="uid://c66hil17x108r" path="res://items/key_item/key.png" id="3_mx3dx"]
 [ext_resource type="FontFile" uid="uid://c16563s6uqwuy" path="res://ui/resources/oswald_font/Oswald-VariableFont_wght.ttf" id="4_fvdrb"]
 
@@ -27,8 +26,8 @@ border_color = Color(0.518482, 0.518482, 0.518482, 1)
 bg_color = Color(1, 1, 1, 0.572549)
 
 [node name="ItemPopup" type="MarginContainer"]
-offset_right = 460.0
-offset_bottom = 137.0
+offset_right = 396.0
+offset_bottom = 114.0
 mouse_filter = 0
 script = ExtResource("1_1utkn")
 
@@ -70,30 +69,18 @@ show_percentage = false
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
-visible = false
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-texture = ExtResource("2_toqn8")
-expand_mode = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 16
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MarginContainer"]
-layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="MarginContainer/MarginContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 size_flags_vertical = 4
@@ -101,23 +88,23 @@ texture = ExtResource("3_mx3dx")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_fvdrb")
 theme_override_font_sizes/font_size = 26
 text = "TITLE"
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Description" type="Label" parent="MarginContainer/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="Description" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_fvdrb")
