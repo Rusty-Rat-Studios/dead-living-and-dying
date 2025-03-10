@@ -1,19 +1,22 @@
 extends MarginContainer
 
-const LIFETIME: float = 5
+const LIFETIME: float = 8
+
+const COLOR_BG: Color = Color(0.13, 0.13, 0.13, 1)
+const COLOR_BG_HOVER: Color = Color(0.2, 0.2, 0.2, 1)
 
 @onready var image: TextureRect = $MarginContainer/MarginContainer/HBoxContainer/TextureRect
 @onready var title: Label = $MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/Title
 @onready var description: Label = $MarginContainer/MarginContainer/HBoxContainer/VBoxContainer/Description
 
 @onready var _timer: Timer = $Timer
-@onready var _progress: ProgressBar = $ProgressBar
+@onready var _progress: ProgressBar = $NinePatchRect/MarginContainer/ProgressBar
 
 
 func _ready() -> void:
 	visible = false
 	
-	$ProgressBar.max_value = LIFETIME
+	_progress.max_value = LIFETIME
 	_timer.wait_time = LIFETIME
 	_timer.timeout.connect(_on_lifetime_expired)
 	
@@ -55,7 +58,9 @@ func _on_item_picked_up(item: ItemInventory) -> void:
 
 func _on_mouse_entered() -> void:
 	_timer.paused = true
+	$ColorRect.color = COLOR_BG_HOVER
 
 
 func _on_mouse_exited() -> void:
 	_timer.paused = false
+	$ColorRect.color = COLOR_BG
