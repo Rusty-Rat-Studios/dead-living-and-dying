@@ -57,6 +57,7 @@ func enter() -> void:
 	SignalBus.player_hurt.connect(_on_player_hurt)
 	SignalBus.player_escaped.connect(_on_player_escaped)
 	SignalBus.player_revived.connect(_on_player_revived)
+	SignalBus.player_exited_room.connect(_on_player_exited_room)
 	
 	# disable player light
 	_parent.light_omni.visible = false
@@ -145,7 +146,11 @@ func _on_player_hurt(entity: Node3D) -> void:
 
 func _on_player_escaped(entity: Node3D) -> void:
 	if entity is Ghost:
-		attacking_ghosts.remove_at(attacking_ghosts.find(entity))
+		# handle case where player has entered another room and the
+		#  attacking_ghosts array is cleared while still contacting player
+		var ghost_position: int = attacking_ghosts.find(entity)
+		if ghost_position != -1:
+			attacking_ghosts.remove_at(ghost_position)
 
 
 func _on_player_revived(corpse_global_position: Vector3) -> void:
@@ -153,6 +158,14 @@ func _on_player_revived(corpse_global_position: Vector3) -> void:
 	# provide i-frames on revive, no flashing
 	_parent.take_damage(false)
 	_state_machine.change_state(PlayerStateMachine.States.LIVING)
+
+
+func _on_player_exited_room(_body: Node3D) -> void:
+	# clear attacking ghosts to ensure effect does not apply when player enters
+	# an adjacent room while ghosts are still in contact - they can still collide
+	# with the player in the doorway as they are entering the next room even if
+	# they are no longer explicitly attacking
+	attacking_ghosts.clear()
 
 
 func _on_attacked_increment_timer_timeout() -> void:
@@ -181,7 +194,7 @@ func _on_attacked_increment_timer_timeout() -> void:
 	
 	# apply attacked modifier to dead light and player speed
 	dead_light.light_energy = dead_light_energy_default - attacked_modifier
-	_parent.player_stats.stat_update_add(PlayerStats.Stats.SPEED, -attacked_modifier, ATTACKED_MODIFIER_NAME)
+	_parent.player_stats.stat_update_add(PlayerStats.Stats.SPEED, -attacked_modifier * 4, ATTACKED_MODIFIER_NAME)
 	
 	if dead_light.light_energy <= 0:
 	#	full effect has applied - game over
