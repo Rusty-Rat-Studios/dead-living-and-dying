@@ -10,3 +10,9 @@ _starting_state = 2
 
 [node name="Ghost" parent="DebugRoom" index="5" instance=ExtResource("2_2q31j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="DirectionalLight3D" parent="." index="3"]
+visible = true
+
+[node name="DebugLight" parent="." index="4"]
+visible = false
