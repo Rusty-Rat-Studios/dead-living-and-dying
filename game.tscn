@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://jlav0m1ndqde"]
+[gd_scene load_steps=29 format=3 uid="uid://jlav0m1ndqde"]
 
 [ext_resource type="Script" uid="uid://br2ou0xf5p2mo" path="res://game.gd" id="1_77rk7"]
 [ext_resource type="PackedScene" uid="uid://bbow7knip3g6g" path="res://player/player.tscn" id="1_hu241"]
@@ -15,20 +15,14 @@
 [ext_resource type="PackedScene" uid="uid://web8bdry114l" path="res://map/room_components/shrine/shrine.tscn" id="11_6msjq"]
 [ext_resource type="PackedScene" uid="uid://bson3umirpot2" path="res://map/room_components/wall.tscn" id="12_5tnol"]
 [ext_resource type="PackedScene" uid="uid://bwfkis8dga70e" path="res://items/key_item/key_item_world.tscn" id="12_tee81"]
-[ext_resource type="PackedScene" uid="uid://dic5onsop66y4" path="res://ui/menus/game_menu.tscn" id="13_owhbc"]
 [ext_resource type="PackedScene" uid="uid://fpivfcuv6s1r" path="res://map/room_components/wall_with_doorway.tscn" id="14_t1an3"]
 [ext_resource type="PackedScene" uid="uid://c176v8gdlci8v" path="res://old_man/old_man.tscn" id="15_3quv5"]
 [ext_resource type="PackedScene" uid="uid://8tfld0cdj22d" path="res://items/crucifix/crucifix_world.tscn" id="15_h8yld"]
-[ext_resource type="PackedScene" uid="uid://bwmbngtw81o3y" path="res://ui/debug_console.tscn" id="15_rbtf5"]
 [ext_resource type="PackedScene" uid="uid://3gsxuhfeo5qs" path="res://entity/objects/wall_painting/wall_painting.tscn" id="15_ythyp"]
 [ext_resource type="PackedScene" uid="uid://cko3wlfgl81ce" path="res://entity/objects/crate/crate.tscn" id="21_d31jr"]
 [ext_resource type="PackedScene" uid="uid://d3uaapt6yn0ed" path="res://items/tea/tea_world.tscn" id="21_lgjc2"]
-[ext_resource type="Script" uid="uid://b4yg822foka8j" path="res://ui/dying_screen_effect.gd" id="21_sxhuq"]
-[ext_resource type="Texture2D" uid="uid://chry31axu0hdv" path="res://player/dying.png" id="22_4eox8"]
-[ext_resource type="Texture2D" uid="uid://b7hy3m0hwp7c3" path="res://ui/resources/black_screen.png" id="22_i2p71"]
 [ext_resource type="PackedScene" uid="uid://dxrbbho8wlerh" path="res://items/fuel/fuel_world.tscn" id="23_3haxr"]
-[ext_resource type="PackedScene" uid="uid://bh1qwbhfylkio" path="res://ui/inventory/inventory_container.tscn" id="23_q3mfq"]
-[ext_resource type="Script" uid="uid://d1tfstjfdr6xj" path="res://ui/dead_screen_effect.gd" id="23_xa8c5"]
+[ext_resource type="PackedScene" uid="uid://cp7202hwhpcd5" path="res://ui/ui.tscn" id="23_qhcbd"]
 
 [sub_resource type="Resource" id="Resource_3y6bj"]
 script = ExtResource("9_xa8c5")
@@ -273,40 +267,9 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8.05, 
 
 [node name="Shrine" parent="WorldGrid/RoomTop" instance=ExtResource("11_6msjq")]
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" parent="." instance=ExtResource("23_qhcbd")]
 
-[node name="DyingScreenEffect" type="TextureRect" parent="UI"]
-modulate = Color(1, 1, 1, 0)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("22_4eox8")
-expand_mode = 1
-script = ExtResource("21_sxhuq")
+[node name="GameMenu" parent="UI" index="3"]
+show_how_to_play_on_start = false
 
-[node name="DeadScreenEffect" type="TextureRect" parent="UI"]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource("22_i2p71")
-expand_mode = 1
-script = ExtResource("23_xa8c5")
-
-[node name="InventoryContainer" parent="UI" instance=ExtResource("23_q3mfq")]
-offset_top = -142.0
-offset_right = 282.0
-
-[node name="GameMenu" parent="UI" instance=ExtResource("13_owhbc")]
-visible = false
-
-[node name="DebugConsole" parent="UI" instance=ExtResource("15_rbtf5")]
-process_mode = 3
-visible = false
+[editable path="UI"]
