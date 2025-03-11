@@ -60,7 +60,8 @@ func process_state() -> void:
 # sets all variables related to target door selected at random from available doors
 func find_target_door() -> bool:
 	# pick random door and set target
-	var doors: Array[Node] = _parent.current_room.find_children("*", "Door")
+	var doors: Array[Door]
+	doors.assign(_parent.current_room.doors.values())
 	if doors.is_empty():
 		return false
 	
