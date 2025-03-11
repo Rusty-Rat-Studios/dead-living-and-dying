@@ -93,16 +93,14 @@ func _on_target_reached() -> void:
 			# make intangible before going through door
 			_parent.get_node("CollisionShape3D").set_deferred("disabled", true)
 			_parent.set_target(target_door.global_position)
+			state = DoorStates.AT
 		DoorStates.AT:
 			# transition to next room
 			_parent.current_room = target_room
 			_parent.reparent(_parent.current_room)
 			_parent.set_target(target_door_pos_far)
+			state = DoorStates.AFTER
 		DoorStates.AFTER:
 			# make tangible again when finished going through door
 			_parent.get_node("CollisionShape3D").set_deferred("disabled", false)
 			change_state(GhostStateMachine.States.WAITING)
-			return
-	
-	# increment to next movement state
-	state += 1
