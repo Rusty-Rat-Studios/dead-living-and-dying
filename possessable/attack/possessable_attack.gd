@@ -8,6 +8,8 @@ const TWEEN_OUT_DURATION: float = 0.5
 var light_tween: Tween
 
 @onready var range_collision_shape: CollisionShape3D = $AttackRange/CollisionShape3D
+# flag for checking if player is in attack range
+@onready var player_in_range: bool = false
 
 
 func _ready() -> void:
@@ -18,13 +20,11 @@ func _ready() -> void:
 
 
 func possess() -> void:
+	if not is_possessable:
+		return
 	super()
 	# enable player detection
 	range_collision_shape.set_deferred("disabled", false)
-	is_possessed = true
-	# check if player in range on initial possession
-	if $AttackRange.overlaps_body(PlayerHandler.get_player()):
-		player_in_range = true
 	
 	# make possessable glow
 	if light_tween:
@@ -37,6 +37,7 @@ func depossess() -> void:
 	super()
 	# disable player detection
 	range_collision_shape.set_deferred("disabled", true)
+	player_in_range = false
 	
 	# stop glow effect
 	if light_tween:
