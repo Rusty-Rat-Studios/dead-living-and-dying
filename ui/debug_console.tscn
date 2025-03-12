@@ -31,6 +31,7 @@ anchor_bottom = 1.0
 offset_top = -31.0
 grow_horizontal = 2
 grow_vertical = 0
+keep_editing_on_text_submit = true
 caret_blink = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
