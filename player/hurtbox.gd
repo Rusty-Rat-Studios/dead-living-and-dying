@@ -48,19 +48,11 @@ func activate_hit_cooldown(flash: bool = true) -> void:
 func _on_enemy_area_entered(area: Area3D) -> void:
 	if not hit_cooldown_active:
 		# pass signal for state-specific behavior
-		var entity: Node3D = area.get_parent()
-		if entity is Ghost:
-			SignalBus.player_hurt.emit(entity)
-		else:
-			SignalBus.player_hurt.emit(null)
+		SignalBus.player_hurt.emit(area.get_parent_node_3d())
 
 
 func _on_enemy_area_exited(area: Area3D) -> void:
-	var entity: Node3D = area.get_parent()
-	if entity is Ghost:
-		SignalBus.player_escaped.emit(entity)
-	else:
-		SignalBus.player_escaped.emit(null)
+	SignalBus.player_escaped.emit(area.get_parent_node_3d())
 
 
 func _on_hit_cooldown_timeout() -> void:
@@ -70,7 +62,7 @@ func _on_hit_cooldown_timeout() -> void:
 	$HitFlash.stop()
 	if has_overlapping_areas():
 		# pass signal for state-specific behavior
-		SignalBus.player_hurt.emit()
+		SignalBus.player_hurt.emit(get_overlapping_bodies()[0])
 
 
 func _on_hit_flash_timeout() -> void:
