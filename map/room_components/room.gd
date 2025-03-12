@@ -18,7 +18,8 @@ var doors: HashMap = HashMap.new()
 func _ready() -> void:
 	$Floor/PlayerDetector.body_entered.connect(_on_player_entered_room)
 	$Floor/PlayerDetector.body_exited.connect(_on_player_exited_room)
-	SignalBus.attack_event.connect(_on_attack_event)
+	SignalBus.attack_event_started.connect(_on_attack_event_started)
+	SignalBus.attack_event_stopped.connect(_on_attack_event_stopped)
 	visible = false
 
 
@@ -79,7 +80,11 @@ func _on_player_exited_room(body: Node3D) -> void:
 		SignalBus.player_exited_room.emit(self)
 
 
-func _on_attack_event(room: Room) -> void:
+func _on_attack_event_started(room: Room) -> void:
 	if room == self:
-		print("Room ", self.name, " received attack_event signal")
-	
+		print(Time.get_time_string_from_system(), ": Room ", self.name, " received attack_event_started signal")
+
+
+func _on_attack_event_stopped(room: Room) -> void:
+	if room == self:
+		print(Time.get_time_string_from_system(), ": Room: ", self.name, " received attack_event_stopped signal")
