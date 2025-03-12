@@ -9,8 +9,13 @@ func _on_item_picked_up(item_inventory: ItemInventory) -> void:
 		
 		# function implemented in cooldown_slot.gd
 		_item_inventory.item_used.connect(_on_item_used)
+		_item_inventory.item_consumed.connect(_on_item_consumed)
 
 
 func _on_item_used() -> void:
 	# TODO: update UI display for number of charges remaining
 	pass
+
+
+func _on_item_consumed() -> void:
+	texture_rect.texture = null

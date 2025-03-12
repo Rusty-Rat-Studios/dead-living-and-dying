@@ -1,0 +1,42 @@
+extends ConsumableItemInventory
+
+const BASE_COOLDOWN_DURATION: float = 3
+const BASE_ACTIVE_DURATION: float = 3
+
+var player: Node = PlayerHandler.get_player()
+
+@onready var cooldown_active: bool = false
+
+
+func _ready() -> void:
+	world_resource = preload("res://items/holy_water/holy_water_world.tscn")
+	display_name = "Holy Water"
+	description = "CONSUMABLE ITEM: Use with Q to become invulnerable for a short duration."
+	texture = preload("res://items/holy_water/holy_water.png")
+	count = 1
+	
+	$ActiveTimer.wait_time = BASE_ACTIVE_DURATION
+	$ActiveTimer.timeout.connect(_on_active_timer_timeout)
+	
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if PlayerHandler.get_player_state() == PlayerStateMachine.States.DEAD:
+		return
+	if event.is_action_pressed("use_consumable_item"):
+		use()
+
+
+func use() -> void:
+		
+	#player.hurtbox.
+	count -= 1
+	$ActiveTimer.wait_time = BASE_ACTIVE_DURATION * player.player_stats.duration
+	$ActiveTimer.start()
+
+
+func _on_active_timer_timeout() -> void:
+	if (count == 0):
+		item_consumed.emit()
+		queue_free()
+		
