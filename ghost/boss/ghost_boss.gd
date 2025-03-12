@@ -27,6 +27,12 @@ func start_event() -> void:
 	SignalBus.attack_event_started.emit(current_room)
 	event_chance_timer.stop()
 	event_duration_timer.start()
+	
+	# make ghosts visible
+	for ghost: Ghost in get_tree().get_nodes_in_group("ghosts"):
+		ghost.set_opacity(OPACITY_DYING)
+		ghost.light_enabled_permanent = true
+		ghost.set_light(LIGHT_ENERGY)
 
 
 func stop_event() -> void:
@@ -34,6 +40,12 @@ func stop_event() -> void:
 	event_duration_timer.stop()
 	if player_in_room and event_chance_timer.is_stopped():
 		event_chance_timer.start()
+	
+	# reset ghosts visibility based on player state
+	for ghost: Ghost in get_tree().get_nodes_in_group("ghosts"):
+		ghost._on_player_state_changed(PlayerHandler.get_player_state())
+		ghost.light_enabled_permanent = false
+		ghost.set_light(0)
 
 
 func _on_event_chance_timer_timeout() -> void:

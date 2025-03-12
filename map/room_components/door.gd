@@ -13,6 +13,9 @@ const TWEEN_DURATION: float = 0.6
 var linked_door: Door = null
 var linked_room: Room = null
 var door_open: bool = false
+# needed to handle asynchronous collision shape handling
+# e.g. dying during ghost event
+var player_dead: bool = false
 # used to fade in fire light
 var light_tween: Tween
 
@@ -81,7 +84,8 @@ func close_door() -> void:
 	if not get_parent().player_in_room and not door_open:
 		get_parent().visible = false
 	
-	door_collision_shape.set_deferred("disabled", false)
+	if not player_dead:
+		door_collision_shape.set_deferred("disabled", false)
 
 
 func lock() -> void:
@@ -160,7 +164,8 @@ func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
 	if state == PlayerStateMachine.States.LIVING:
 		door_collision_shape.set_deferred("disabled", false)
 		detector_collision_shape.set_deferred("disabled", false)
+		player_dead = false
 	elif state == PlayerStateMachine.States.DEAD:
 		door_collision_shape.set_deferred("disabled", true)
 		detector_collision_shape.set_deferred("disabled", true)
-		
+		player_dead = true
