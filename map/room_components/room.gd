@@ -10,6 +10,7 @@ extends Node3D
 var grid_location: Vector2
 var possessables_available: Array
 var doors: HashMap = HashMap.new()
+var player_discovered_room: bool = false
 
 @onready var player_in_room: bool = false
 
@@ -69,6 +70,11 @@ func _on_player_entered_room(body: Node3D) -> void:
 		player_in_room = true
 		visible = true
 		SignalBus.player_entered_room.emit(self)
+		if not player_discovered_room:
+			player_discovered_room = true
+			var minimap_component: Node3D = room_information.minimap_component.instantiate()
+			minimap_component.global_position = global_position
+			$/root/Game/MinimapObjects.add_child(minimap_component)
 
 
 func _on_player_exited_room(body: Node3D) -> void:

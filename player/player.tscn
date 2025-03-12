@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bbow7knip3g6g"]
+[gd_scene load_steps=25 format=3 uid="uid://bbow7knip3g6g"]
 
 [ext_resource type="Script" uid="uid://bvc3eclccrf0p" path="res://player/player.gd" id="1_ndccg"]
 [ext_resource type="Texture2D" uid="uid://cdu1sybc4l0vp" path="res://player/caretaker_idle.png" id="3_b0ygv"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://umlwhr2u3iej" path="res://player/corpse.tscn" id="8_865w7"]
 [ext_resource type="Script" uid="uid://0omfdhsdjivb" path="res://player/stunbox.gd" id="9_25lto"]
 [ext_resource type="Script" uid="uid://dv0uf7xxo7jdj" path="res://player/inventory.gd" id="9_qaadw"]
+[ext_resource type="Material" uid="uid://dr3yoxb5o7j2u" path="res://ui/minimap/minimap_player_material.tres" id="10_8t03j"]
 [ext_resource type="PackedScene" uid="uid://bp0ydphecs3iv" path="res://common/shadow.tscn" id="11_7sgie"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uy1l0"]
@@ -87,6 +88,10 @@ material = SubResource("StandardMaterial3D_2ieo8")
 shape = 0
 section_length = 0.1
 curve = SubResource("Curve_8t03j")
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2ieo8"]
+material = ExtResource("10_8t03j")
+height = 0.3
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 6
@@ -174,3 +179,10 @@ one_shot = true
 
 [node name="Shadow" parent="." instance=ExtResource("11_7sgie")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 0)
+
+[node name="MinimapComponent" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.305, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MinimapComponent"]
+layers = 512
+mesh = SubResource("CylinderMesh_2ieo8")

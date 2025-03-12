@@ -40,6 +40,10 @@ func reset() -> void:
 	player.reset()
 	if old_man:
 		old_man.reset()
+	
+	# Clear the minimap
+	for child: Node3D in $WorldGrid/MinimapObjects.get_children():
+		child.queue_free()
 
 
 func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
