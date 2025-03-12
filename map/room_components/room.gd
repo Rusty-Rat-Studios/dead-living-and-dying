@@ -36,6 +36,10 @@ func init() -> void:
 	print(Time.get_time_string_from_system(), ": Room ", grid_location , " initialized")
 
 
+func reset() -> void:
+	room_discovered = false
+
+
 func add_possessable(possessable: Possessable) -> void:
 	possessables_available.append(possessable)
 
