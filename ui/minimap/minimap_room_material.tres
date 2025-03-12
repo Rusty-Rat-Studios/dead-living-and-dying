@@ -1,5 +1,42 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://ctvcmqmldyoar"]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://ctvcmqmldyoar"]
+
+[sub_resource type="Shader" id="Shader_w2wwy"]
+code = "shader_type spatial;
+render_mode unshaded;
+
+uniform vec4 fg_albedo : source_color;
+uniform vec4 bg_albedo : source_color;
+uniform float width = 0.2;
+
+void vertex() {
+	
+}
+
+void fragment() {
+	vec2 base_uv = UV;
+
+	if(UV.x <= width){
+		ALBEDO = fg_albedo.rgb;
+	}
+	else if(UV.x >= 1.0 - width){
+		ALBEDO = fg_albedo.rgb;
+	}
+	else if(UV.y <= width){
+		ALBEDO = fg_albedo.rgb;
+	}
+	else if(UV.y >= 1.0 - width){
+		ALBEDO = fg_albedo.rgb;
+	}
+	else{
+		ALBEDO = bg_albedo.rgb;
+	}
+	
+}
+"
 
 [resource]
-emission_enabled = true
-emission = Color(1, 1, 1, 1)
+render_priority = 0
+shader = SubResource("Shader_w2wwy")
+shader_parameter/fg_albedo = Color(1, 1, 1, 1)
+shader_parameter/bg_albedo = Color(0, 0, 0, 1)
+shader_parameter/width = 0.02
