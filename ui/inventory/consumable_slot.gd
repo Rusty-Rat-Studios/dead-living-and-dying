@@ -6,6 +6,7 @@ func _on_item_picked_up(item_inventory: ItemInventory) -> void:
 		_item_inventory = item_inventory
 		# update UI image to match item
 		texture_rect.texture = _item_inventory.texture
+		color_rect.visible = true
 		
 		# function implemented in cooldown_slot.gd
 		_item_inventory.item_used.connect(_on_item_used)
@@ -19,3 +20,4 @@ func _on_item_used() -> void:
 
 func _on_item_consumed() -> void:
 	texture_rect.texture = null
+	color_rect.visible = false

@@ -68,6 +68,8 @@ func _on_hit_cooldown_timeout() -> void:
 	$HitCooldown.wait_time = HIT_COOLDOWN
 	# stop flashing animation
 	$HitFlash.stop()
+	var current_color: Color = sprite.get_modulate()
+	sprite.modulate = Color(current_color, 1)
 	if has_overlapping_areas():
 		# pass signal for state-specific behavior
 		SignalBus.player_hurt.emit()
