@@ -7,6 +7,8 @@ extends Node3D
 
 signal player_discovered_room
 
+const ICON_MINIMAP: Resource = preload("res://ui/minimap/icon_minimap.tscn")
+
 @export var room_information: RoomInformation
 
 var grid_location: Vector2
@@ -86,6 +88,13 @@ func _on_player_exited_room(body: Node3D) -> void:
 
 func _on_player_discovered_room() -> void:
 	room_discovered = true
+	
 	var minimap_component: Node3D = room_information.minimap_component.instantiate()
 	$/root/Game/MinimapObjects.add_child(minimap_component)
 	minimap_component.global_position = global_position
+	
+	if room_information.room_icon != null:
+		var room_icon: Node3D = ICON_MINIMAP.instantiate()
+		$/root/Game/MinimapObjects.add_child(room_icon)
+		room_icon.global_position = global_position
+		room_icon.get_child(0).texture = room_information.room_icon
