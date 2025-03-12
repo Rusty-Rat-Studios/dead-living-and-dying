@@ -107,6 +107,7 @@ animation = &"front"
 
 [node name="Camera3D" type="Camera3D" parent="RotationOffset"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+cull_mask = 1048063
 script = ExtResource("4_mmf56")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
