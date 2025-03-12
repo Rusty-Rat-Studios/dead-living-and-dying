@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dh8q75xrlxeaa"]
+[gd_scene load_steps=17 format=3 uid="uid://dh8q75xrlxeaa"]
 
 [ext_resource type="Script" uid="uid://bo0tyfrjfebc6" path="res://map/room_components/room.gd" id="1_5h3g7"]
 [ext_resource type="Script" uid="uid://dqhrw6rxew3fa" path="res://common/door_location.gd" id="2_dd2d1"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://b3nn5u3a5o85j" path="res://map/room_components/floor.tscn" id="4_h3kao"]
 [ext_resource type="PackedScene" uid="uid://bmevu5yvsxttw" path="res://entity/spawner.tscn" id="5_crvnh"]
 [ext_resource type="PackedScene" uid="uid://cexvn2mosncly" path="res://map/room_components/door.tscn" id="6_pq5nb"]
-[ext_resource type="Texture2D" uid="uid://cvadlfyuhhlsa" path="res://icon.svg" id="8_koypu"]
 
 [sub_resource type="Resource" id="Resource_3y6bj"]
 script = ExtResource("2_dd2d1")
@@ -34,7 +33,6 @@ script = ExtResource("3_koypu")
 room_shape = Array[Vector2]([Vector2(0, 0)])
 possible_door_locations = Array[ExtResource("2_dd2d1")]([SubResource("Resource_3y6bj"), SubResource("Resource_b0qj2"), SubResource("Resource_8lq6k"), SubResource("Resource_8lnup")])
 minimap_component = ExtResource("2_koypu")
-room_icon = ExtResource("8_koypu")
 
 [sub_resource type="Resource" id="Resource_crghr"]
 script = ExtResource("2_dd2d1")
