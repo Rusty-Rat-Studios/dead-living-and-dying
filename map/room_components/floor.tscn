@@ -12,7 +12,7 @@ uv1_scale = Vector3(12, 6, 12)
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_1bktg"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2yroe"]
-size = Vector3(16, 5, 16)
+size = Vector3(15.2, 5, 15.2)
 
 [node name="Floor" type="StaticBody3D"]
 
