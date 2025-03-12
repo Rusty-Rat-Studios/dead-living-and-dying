@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://b58p4qke66th5"]
+[gd_scene load_steps=8 format=3 uid="uid://b58p4qke66th5"]
 
 [ext_resource type="PackedScene" uid="uid://yihpxsaeuqdi" path="res://ghost/ghost.tscn" id="1_4hc77"]
+[ext_resource type="Script" uid="uid://cxtusuc02tbf5" path="res://ghost/boss/ghost_boss.gd" id="2_3hoab"]
 [ext_resource type="Texture2D" uid="uid://bsy5lofefexpv" path="res://ghost/boss/ghost_boss_active.png" id="2_o42k7"]
 [ext_resource type="Texture2D" uid="uid://df180aq2x1ixp" path="res://ghost/boss/ghost_boss_idle.png" id="3_flwfh"]
 
@@ -30,6 +31,7 @@ radius = 0.6
 radius = 0.7
 
 [node name="GhostBoss" instance=ExtResource("1_4hc77")]
+script = ExtResource("2_3hoab")
 
 [node name="AnimatedSprite3D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_fu6tb")
