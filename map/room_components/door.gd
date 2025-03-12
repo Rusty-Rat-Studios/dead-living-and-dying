@@ -4,6 +4,7 @@ extends Node3D
 const WALL: Resource = preload("res://map/room_components/wall.tscn")
 const DOOR_TEXTURE: Texture = preload("res://map/tileset-dhassa/door1.png")
 const DOOR_TEXTURE_OPEN: Texture = preload("res://map/tileset-dhassa/door1_open.png")
+const MINIMAP_COMPONENT: Resource = preload("res://map/room_components/door_minimap.tscn")
 
 @export var door_location: DoorLocation
 
@@ -33,7 +34,9 @@ func _ready() -> void:
 	###############
 	
 	#player_received.connect(_on_player_received)
-	(get_parent() as Room).register_door(self)
+	var parent_room: Room = get_parent()
+	parent_room.player_discovered_room.connect(_on_player_discovered_room)
+	parent_room.register_door(self)
 	
 	interactable.inputs = ["interact"]
 	interactable.hide_message()
@@ -120,4 +123,11 @@ func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
 	elif state == PlayerStateMachine.States.DEAD:
 		door_collision_shape.set_deferred("disabled", true)
 		detector_collision_shape.set_deferred("disabled", true)
-		
+
+
+func _on_player_discovered_room() -> void:
+	var minimap_component: Node3D = MINIMAP_COMPONENT.instantiate()
+	$/root/Game/MinimapObjects.add_child(minimap_component)
+	minimap_component.global_position = global_position
+	minimap_component.global_rotation = global_rotation
+	print(global_rotation_degrees, rotation_degrees)

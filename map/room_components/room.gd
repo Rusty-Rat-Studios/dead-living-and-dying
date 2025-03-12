@@ -87,5 +87,5 @@ func _on_player_exited_room(body: Node3D) -> void:
 func _on_player_discovered_room() -> void:
 	room_discovered = true
 	var minimap_component: Node3D = room_information.minimap_component.instantiate()
-	minimap_component.global_position = global_position
 	$/root/Game/MinimapObjects.add_child(minimap_component)
+	minimap_component.global_position = global_position
