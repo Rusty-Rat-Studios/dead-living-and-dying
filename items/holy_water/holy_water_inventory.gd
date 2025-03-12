@@ -1,9 +1,10 @@
 extends ConsumableItemInventory
 
-const BASE_COOLDOWN_DURATION: float = 3
 const BASE_ACTIVE_DURATION: float = 3
+const CONSUMABLE_ID: int = 0
 
 var player: Node = PlayerHandler.get_player()
+var active: bool = false
 
 @onready var cooldown_active: bool = false
 
@@ -28,15 +29,18 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func use() -> void:
-		
-	#player.hurtbox.
+	if active:
+		return
+	player.hurtbox.activate_invulnerability($ActiveTimer.wait_time)
+	active = true
 	count -= 1
 	$ActiveTimer.wait_time = BASE_ACTIVE_DURATION * player.player_stats.duration
 	$ActiveTimer.start()
 
 
 func _on_active_timer_timeout() -> void:
-	if (count == 0):
+	active = false
+	if (count <= 0):
 		item_consumed.emit()
 		queue_free()
 		

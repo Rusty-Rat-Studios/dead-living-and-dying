@@ -98,9 +98,16 @@ func take_damage(flash: bool = true) -> void:
 
 
 func _on_item_picked_up(item: ItemInventory) -> void:
+	var stacking: bool = false
 	if item is KeyItemInventory:
 		SignalBus.key_item_picked_up.emit()
-	$Inventory.add_child(item)
+	if item is ConsumableItemInventory:
+		for n: Node in $Inventory.get_children():
+			if n is ConsumableItemInventory and n.CONSUMABLE_ID == item.CONSUMABLE_ID:
+				n.count += 1
+				stacking = true
+	if stacking == false:
+		$Inventory.add_child(item)
 	# ensure item position is directly on player
 	item.position = Vector3.ZERO
 

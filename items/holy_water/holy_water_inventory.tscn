@@ -6,3 +6,4 @@
 script = ExtResource("1_k1vrf")
 
 [node name="ActiveTimer" type="Timer" parent="."]
+one_shot = true

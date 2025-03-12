@@ -44,6 +44,18 @@ func activate_hit_cooldown(flash: bool = true) -> void:
 		$HitFlash.start()
 
 
+#for using invulnerability with a float duration instead of a static one
+func activate_invulnerability(duration: float, flash: bool = true, ) -> void:
+	if hit_cooldown_active:
+		return
+	hit_cooldown_active = true
+	$HitCooldown.wait_time = duration
+	$HitCooldown.start()
+	if flash:
+		hit_flash = true
+		$HitFlash.start()
+
+
 func _on_enemy_area_entered(_area: Area3D) -> void:
 	if not hit_cooldown_active:
 		# pass signal for state-specific behavior
@@ -53,6 +65,7 @@ func _on_enemy_area_entered(_area: Area3D) -> void:
 func _on_hit_cooldown_timeout() -> void:
 	# deactivate invincibility frames
 	hit_cooldown_active = false
+	$HitCooldown.wait_time = HIT_COOLDOWN
 	# stop flashing animation
 	$HitFlash.stop()
 	if has_overlapping_areas():
