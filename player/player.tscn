@@ -184,5 +184,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.305, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MinimapComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
 layers = 512
 mesh = SubResource("CylinderMesh_2ieo8")
