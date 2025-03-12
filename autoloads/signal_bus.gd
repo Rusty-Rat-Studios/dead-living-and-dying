@@ -24,3 +24,6 @@ extends Node
 
 @warning_ignore("unused_signal") signal key_item_picked_up()
 @warning_ignore("unused_signal") signal key_item_dropped()
+
+# emitted by boss ghost to notify room that it is the source of an attack event
+@warning_ignore("unused_signal") signal attack_event(room: Room)

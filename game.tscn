@@ -304,6 +304,7 @@ offset_right = 282.0
 
 [node name="GameMenu" parent="UI" instance=ExtResource("13_owhbc")]
 visible = false
+show_how_to_play_on_start = false
 
 [node name="DebugConsole" parent="UI" instance=ExtResource("15_rbtf5")]
 process_mode = 3

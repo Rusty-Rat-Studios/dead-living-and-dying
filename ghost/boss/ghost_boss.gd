@@ -2,6 +2,7 @@ extends Ghost
 
 # amount of time before rolling for event
 const EVENT_CHANCE_TIME: float = 5
+const EVENT_CHANCE: float = 0.5
 
 @onready var event_chance_timer: Timer = Timer.new()
 
@@ -12,7 +13,41 @@ func _ready() -> void:
 	add_child(event_chance_timer)
 	event_chance_timer.wait_time = EVENT_CHANCE_TIME
 	event_chance_timer.timeout.connect(_on_event_chance_timer_timeout)
+	SignalBus.player_state_changed.connect(_on_player_state_changed)
 
 
 func _on_event_chance_timer_timeout() -> void:
-	pass
+	# every timeout roll for a chance to start the attack event
+	if RNG.rng.randf() <= EVENT_CHANCE:
+		print("BOSS EVENT MAKE SURE TO RUN AND HIDE HAHAHAHAHAHAHAHAHAHAHA")
+		SignalBus.attack_event.emit(current_room)
+
+
+func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
+	super(state)
+	# handle edge case with the short delay after player dies 
+	# but before they are moved out of the room
+	if state == PlayerStateMachine.States.DEAD and not event_chance_timer.is_stopped():
+		event_chance_timer.stop()
+		print("event chance stopped")
+	elif state == PlayerStateMachine.States.LIVING and event_chance_timer.is_stopped():
+		# could use player_revived signal instead, but that doesn't register
+		# with using tab to switch states -> easier to debug this way
+		event_chance_timer.start()
+		print("event chance started")
+
+
+func _on_player_entered_room(room: Node3D) -> void:
+	super(room)
+	if (room == current_room 
+		and event_chance_timer.is_stopped()
+		and PlayerHandler.get_player_state() != PlayerStateMachine.States.DEAD):
+		event_chance_timer.start()
+		print("event chance started")
+
+
+func _on_player_exited_room(room: Node3D) -> void:
+	super(room)
+	if room == current_room and not event_chance_timer.is_stopped():
+		event_chance_timer.stop()
+		print("event chance stopped")
