@@ -83,8 +83,14 @@ func _on_player_exited_room(body: Node3D) -> void:
 func _on_attack_event_started(room: Room) -> void:
 	if room == self:
 		print(Time.get_time_string_from_system(), ": Room ", self.name, " received attack_event_started signal")
+		for door: Door in doors.values():
+			door.lock()
+			door.linked_door.lock()
 
 
 func _on_attack_event_stopped(room: Room) -> void:
 	if room == self:
 		print(Time.get_time_string_from_system(), ": Room: ", self.name, " received attack_event_stopped signal")
+		for door: Door in doors.values():
+			door.unlock()
+			door.linked_door.unlock()

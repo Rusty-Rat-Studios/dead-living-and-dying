@@ -2,7 +2,7 @@ extends Ghost
 
 # amount of time before rolling for event
 const EVENT_CHANCE_TIME: float = 5
-const EVENT_CHANCE: float = 0.5
+const EVENT_CHANCE: float = 1
 const EVENT_DURATION: float = 3
 
 @onready var event_chance_timer: Timer = Timer.new()
@@ -31,6 +31,9 @@ func start_event() -> void:
 
 func stop_event() -> void:
 	SignalBus.attack_event_stopped.emit(current_room)
+	event_duration_timer.stop()
+	if player_in_room and event_chance_timer.is_stopped():
+		event_chance_timer.start()
 
 
 func _on_event_chance_timer_timeout() -> void:
@@ -41,8 +44,6 @@ func _on_event_chance_timer_timeout() -> void:
 
 func _on_event_duration_timer_timeout() -> void:
 	stop_event()
-	if player_in_room and event_chance_timer.is_stopped():
-		event_chance_timer.start()
 
 
 func _on_player_state_changed(state: PlayerStateMachine.States) -> void:

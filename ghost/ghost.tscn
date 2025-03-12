@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bp0ydphecs3iv" path="res://common/shadow.tscn" id="7_0liqe"]
 [ext_resource type="Script" uid="uid://dnejv78e6bqw6" path="res://ghost/state_machine/state_stunned.gd" id="7_yplap"]
 [ext_resource type="Script" uid="uid://bwxdjfnmqcqlx" path="res://ghost/state_machine/state_attacking.gd" id="8_a4kr4"]
-[ext_resource type="Script" uid="uid://2ngv1mk144l5" path="res://ghost/state_moving.gd" id="9_cmmm8"]
+[ext_resource type="Script" uid="uid://2ngv1mk144l5" path="res://ghost/state_machine/state_moving.gd" id="9_cmmm8"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_seahj"]
 animations = [{

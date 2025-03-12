@@ -32,7 +32,6 @@ func _ready() -> void:
 	SignalBus.player_exited_room.connect(_on_player_exited_room)
 	###############
 	
-	#player_received.connect(_on_player_received)
 	(get_parent() as Room).register_door(self)
 	
 	interactable.inputs = ["interact"]
@@ -61,6 +60,7 @@ func _convert_to_wall() -> void:
 
 
 func open_door() -> void:
+	print("opening door")
 	door_open = true
 	door_material.albedo_texture = DOOR_TEXTURE_OPEN
 	
@@ -70,12 +70,24 @@ func open_door() -> void:
 func close_door() -> void:
 	door_open = false
 	door_material.albedo_texture = DOOR_TEXTURE
-	linked_door.door_material.albedo_texture = DOOR_TEXTURE
 	
 	if not get_parent().player_in_room and not door_open:
 		get_parent().visible = false
 	
 	door_collision_shape.set_deferred("disabled", false)
+
+
+func lock() -> void:
+	if door_open:
+		close_door()
+	interactable.hide_message()
+	interactable.enabled = false
+
+
+func unlock() -> void:
+	if $PlayerDetector.overlaps_body(PlayerHandler.get_player()):
+		interactable.display_message("[E] Open Door")
+		interactable.enabled = true
 
 
 func _on_body_entered(_body: Node3D) -> void:
