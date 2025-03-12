@@ -4,12 +4,17 @@ extends Node3D
 const WALL: Resource = preload("res://map/room_components/wall.tscn")
 const DOOR_TEXTURE: Texture = preload("res://map/tileset-dhassa/door1.png")
 const DOOR_TEXTURE_OPEN: Texture = preload("res://map/tileset-dhassa/door1_open.png")
+# energy of fire light; used to tween in/out
+const LIGHT_ENERGY: float = 2.0
+const TWEEN_DURATION: float = 0.6
 
 @export var door_location: DoorLocation
 
 var linked_door: Door = null
 var linked_room: Room = null
 var door_open: bool = false
+# used to fade in fire light
+var light_tween: Tween
 
 @onready var world_grid: WorldGrid = get_node("/root/Game/WorldGrid")
 @onready var door_material: Material = $StaticBody3D/MeshInstance3D.mesh.material.duplicate()
@@ -37,6 +42,8 @@ func _ready() -> void:
 	interactable.inputs = ["interact"]
 	interactable.hide_message()
 	interactable.input_detected.connect(_on_interaction)
+	
+	deactivate_effects(true)
 
 
 func init(room_grid_location: Vector2) -> void:
@@ -82,12 +89,36 @@ func lock() -> void:
 		close_door()
 	interactable.hide_message()
 	interactable.enabled = false
+	activate_effects()
 
 
 func unlock() -> void:
 	if $PlayerDetector.overlaps_body(PlayerHandler.get_player()):
 		interactable.display_message("[E] Open Door")
 		interactable.enabled = true
+	deactivate_effects()
+
+
+func activate_effects(instant: bool = false) -> void:
+	$FireParticles.emitting = true
+	if light_tween:
+		light_tween.kill()
+	if not instant:
+		light_tween = create_tween()
+		light_tween.tween_property($FireParticles/SpotLight3D, "light_energy", LIGHT_ENERGY, TWEEN_DURATION)
+	else:
+		$FireParticles/SpotLight3D.light_energy = LIGHT_ENERGY
+
+
+func deactivate_effects(instant: bool = false) -> void:
+	$FireParticles.emitting = false
+	if light_tween:
+		light_tween.kill()
+	if not instant:
+		light_tween = create_tween()
+		light_tween.tween_property($FireParticles/SpotLight3D, "light_energy", 0, TWEEN_DURATION)
+	else:
+		$FireParticles/SpotLight3D.light_energy = 0
 
 
 func _on_body_entered(_body: Node3D) -> void:
