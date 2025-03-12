@@ -61,7 +61,7 @@ height = 0.1
 [sub_resource type="SphereShape3D" id="SphereShape3D_rrxp0"]
 radius = 5.0
 
-[node name="Ghost" type="CharacterBody3D"]
+[node name="Ghost" type="CharacterBody3D" groups=["ghosts"]]
 collision_layer = 8
 script = ExtResource("1_vr82v")
 
