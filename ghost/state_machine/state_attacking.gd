@@ -88,7 +88,9 @@ func process_state() -> void:
 		var direction: Vector3 = (player_position - position_xz).normalized()
 		_parent.set_target(PlayerHandler.get_player().global_position - direction * attack_range_collision_shape.shape.radius)
 	
-	if _parent.global_position.distance_squared_to(PlayerHandler.get_player().global_position) < 0.5:
+	if (_parent.global_position.distance_squared_to(PlayerHandler.get_player().global_position) < 0.5
+		and PlayerHandler.get_player_state() != PlayerStateMachine.States.DEAD):
+		# only revert to waiting after "hit" if player is in DYING state
 		change_state(GhostStateMachine.States.WAITING)
 
 

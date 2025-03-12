@@ -5,6 +5,9 @@ const NAME: String = "tea"
 
 
 func _ready() -> void:
+	display_name = "Tea"
+	description = "PASSIVE ITEM: Increases your base speed. Refreshing!"
+	texture = preload("res://items/tea/tea.png")
 	update()
 
 

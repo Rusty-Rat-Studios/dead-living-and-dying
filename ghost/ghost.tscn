@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://yihpxsaeuqdi"]
+[gd_scene load_steps=19 format=3 uid="uid://yihpxsaeuqdi"]
 
 [ext_resource type="Script" uid="uid://bhwqa6bloe8me" path="res://ghost/ghost.gd" id="1_vr82v"]
 [ext_resource type="Texture2D" uid="uid://cjyk53bm811ec" path="res://ghost/ghost_active.png" id="2_mfm4n"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bp0ydphecs3iv" path="res://common/shadow.tscn" id="7_0liqe"]
 [ext_resource type="Script" uid="uid://dnejv78e6bqw6" path="res://ghost/state_machine/state_stunned.gd" id="7_yplap"]
 [ext_resource type="Script" uid="uid://bwxdjfnmqcqlx" path="res://ghost/state_machine/state_attacking.gd" id="8_a4kr4"]
+[ext_resource type="Script" uid="uid://2ngv1mk144l5" path="res://ghost/state_moving.gd" id="9_cmmm8"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_seahj"]
 animations = [{
@@ -89,6 +90,9 @@ script = ExtResource("7_yplap")
 
 [node name="Attacking" type="Node" parent="StateMachine"]
 script = ExtResource("8_a4kr4")
+
+[node name="Moving" type="Node" parent="StateMachine"]
+script = ExtResource("9_cmmm8")
 
 [node name="PossessableDetector" type="Area3D" parent="."]
 collision_layer = 0

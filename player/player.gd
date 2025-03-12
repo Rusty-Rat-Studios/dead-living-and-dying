@@ -29,6 +29,8 @@ var _state_machine: PlayerStateMachine
 
 
 func _ready() -> void:
+	PlayerHandler.register_player(self)
+	
 	light_omni.light_color = Color("GOLDENROD")
 	
 	SignalBus.item_picked_up.connect(_on_item_picked_up)

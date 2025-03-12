@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://kpweub7m3k4n"]
+[gd_scene load_steps=29 format=3 uid="uid://kpweub7m3k4n"]
 
 [ext_resource type="Script" uid="uid://br2ou0xf5p2mo" path="res://game.gd" id="1_goqwn"]
 [ext_resource type="PackedScene" uid="uid://bbow7knip3g6g" path="res://player/player.tscn" id="2_2bptp"]
@@ -21,14 +21,8 @@
 [ext_resource type="PackedScene" uid="uid://cko3wlfgl81ce" path="res://entity/objects/crate/crate.tscn" id="16_sppgp"]
 [ext_resource type="PackedScene" uid="uid://d3uaapt6yn0ed" path="res://items/tea/tea_world.tscn" id="17_sxuq4"]
 [ext_resource type="PackedScene" uid="uid://bwfkis8dga70e" path="res://items/key_item/key_item_world.tscn" id="18_hnnt0"]
-[ext_resource type="Texture2D" uid="uid://chry31axu0hdv" path="res://player/dying.png" id="19_f483l"]
 [ext_resource type="PackedScene" uid="uid://dxrbbho8wlerh" path="res://items/fuel/fuel_world.tscn" id="19_lb8w8"]
-[ext_resource type="Script" uid="uid://b4yg822foka8j" path="res://ui/dying_screen_effect.gd" id="20_cto7x"]
-[ext_resource type="PackedScene" uid="uid://bh1qwbhfylkio" path="res://ui/inventory/inventory_container.tscn" id="21_au1pb"]
-[ext_resource type="PackedScene" uid="uid://dic5onsop66y4" path="res://ui/menus/game_menu.tscn" id="22_vvtdu"]
-[ext_resource type="Script" uid="uid://d1tfstjfdr6xj" path="res://ui/dead_screen_effect.gd" id="23_1d0i0"]
-[ext_resource type="PackedScene" uid="uid://bwmbngtw81o3y" path="res://ui/debug_console.tscn" id="23_50xpl"]
-[ext_resource type="Texture2D" uid="uid://b7hy3m0hwp7c3" path="res://ui/resources/black_screen.png" id="25_g5p2y"]
+[ext_resource type="PackedScene" uid="uid://cp7202hwhpcd5" path="res://ui/ui.tscn" id="23_i7kop"]
 
 [sub_resource type="Resource" id="Resource_3y6bj"]
 script = ExtResource("9_x122c")
@@ -1082,40 +1076,6 @@ light_color = Color(0.854902, 0.647059, 0.12549, 1)
 light_energy = 2.0
 omni_range = 2.0
 
-[node name="UI" type="CanvasLayer" parent="."]
+[node name="UI" parent="." instance=ExtResource("23_i7kop")]
 
-[node name="DyingScreenEffect" type="TextureRect" parent="UI"]
-modulate = Color(1, 1, 1, 0)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = ExtResource("19_f483l")
-expand_mode = 1
-script = ExtResource("20_cto7x")
-
-[node name="DeadScreenEffect" type="TextureRect" parent="UI"]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource("25_g5p2y")
-expand_mode = 1
-script = ExtResource("23_1d0i0")
-
-[node name="InventoryContainer" parent="UI" instance=ExtResource("21_au1pb")]
-offset_top = -142.0
-offset_right = 282.0
-
-[node name="GameMenu" parent="UI" instance=ExtResource("22_vvtdu")]
-visible = false
-
-[node name="DebugConsole" parent="UI" instance=ExtResource("23_50xpl")]
-process_mode = 3
-visible = false
+[editable path="UI"]

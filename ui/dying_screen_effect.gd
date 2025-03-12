@@ -1,7 +1,7 @@
 extends TextureRect
 
-const MAX_OPACITY: float = 0.125
-const MIN_OPACITY: float = 0.0625
+const MAX_OPACITY: float = 0.7
+const MIN_OPACITY: float = 0.4
 const FADE_DURATION: float = 2
 
 var fade_timer: Timer = Timer.new()
@@ -19,7 +19,7 @@ func _ready() -> void:
 
 func enable() -> void:
 	# begin with an extra strong effect and transition to normal "max strength" effect
-	modulate.a = 0.5
+	modulate.a = 0.8
 	fade_to(MAX_OPACITY)
 	# ensure on timeout that next step is to fade out
 	fading_in = false

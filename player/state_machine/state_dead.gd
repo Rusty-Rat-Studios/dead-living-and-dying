@@ -1,15 +1,48 @@
 extends PlayerState
 
 const SPEED_MODIFIER: float = 4
-const NAME: String = "dead"
+const DEAD_MODIFIER_NAME: String = "dead"
+const ATTACKED_MODIFIER_NAME: String = "ghost attack"
+
+# the amount of time before recalculating attacked effect from ghost contact
+const ATTACKED_INCREMENT_DURATION: float = 0.1
+# base amount that attack_modifier is incremented/decremented every timeout
+const ATTACKED_MODIFIER_INCREMENT: float = 0.02
+# the multiplicative magnitude increase for each ghost in contact
+const ATTACKED_MAGNITUDE_MODIFIER: float = 1.1
+# provide a better indicator by "jumpstarting" the effect on first contact
+const ATTACKED_MODIFIER_START: float = 0.4
+# amount that attack_modifier is multiplied by before applying to speed
+const ATTACKED_MODIFIER_SPEED_SCALAR: float = 5
 
 const RESPAWN_TIME: float = 2
+
+# used to implement debuffs from ghosts contacting player
+# incremented when in contact with ghosts, multiplied by magnitude * number of ghosts
+var attacked_modifier: float = 0
+# tracks all ghosts currently contacting/attacking player
+var attacking_ghosts: Array[Ghost] = []
+
+var dead_light_energy_default: float 
+
+@onready var dead_light: DirectionalLight3D = get_tree().root.get_node("Game/DirectionalLight3D")
+@onready var attacked_increment_timer: Timer = Timer.new()
+
+
+func init(parent: CharacterBody3D, state_machine: StateMachine) -> void:
+	super(parent, state_machine)
+	add_child(attacked_increment_timer)
+	attacked_increment_timer.wait_time = ATTACKED_INCREMENT_DURATION
+	attacked_increment_timer.timeout.connect(_on_attacked_increment_timer_timeout)
+	
+	dead_light_energy_default = dead_light.light_energy
+
 
 func enter() -> void:
 	super()
 	
 	_parent.player_stats.remove_stat_modifiers()
-	_parent.player_stats.stat_update_add(PlayerStats.Stats.SPEED, SPEED_MODIFIER, NAME)
+	_parent.player_stats.stat_update_add(PlayerStats.Stats.SPEED, SPEED_MODIFIER, DEAD_MODIFIER_NAME)
 	
 	# modulate player color and opacity to appear ghostly
 	_parent.get_node("RotationOffset/AnimatedSprite3D").modulate = Color(0.5, 0.5, 0.5, 0.3)
@@ -22,13 +55,15 @@ func enter() -> void:
 	await move_to_shrine()
 	
 	# change collision layers out of physical plane into spirit plane
-	# temporarily moved during move_to_shrine()
+	# temporarily disabled during move_to_shrine()
 	_parent.collision_layer = CollisionBit.PLAYER + CollisionBit.SPIRIT
-	_parent.collision_mask = CollisionBit.WORLD + CollisionBit.SPIRIT
+	_parent.collision_mask = CollisionBit.WORLD
 	_parent.hurtbox.collision_mask = CollisionBit.SPIRIT
 	
 	SignalBus.player_hurt.connect(_on_player_hurt)
+	SignalBus.player_escaped.connect(_on_player_escaped)
 	SignalBus.player_revived.connect(_on_player_revived)
+	SignalBus.player_exited_room.connect(_on_player_exited_room)
 	
 	# disable player light
 	_parent.light_omni.visible = false
@@ -41,6 +76,10 @@ func exit() -> void:
 	_parent.light_spot.visible = true
 	
 	_parent.player_stats.remove_stat_modifiers()
+	dead_light.light_energy = dead_light_energy_default
+	attacked_modifier = 0
+	if not attacked_increment_timer.is_stopped():
+		attacked_increment_timer.stop()
   
 	# restore player color and opacity
 	_parent.get_node("RotationOffset/AnimatedSprite3D").modulate = Color(1, 1, 1, 1)
@@ -55,7 +94,9 @@ func exit() -> void:
 	_parent._corpse_indicator.emitting = false
 	
 	SignalBus.player_hurt.disconnect(_on_player_hurt)
+	SignalBus.player_escaped.disconnect(_on_player_escaped)
 	SignalBus.player_revived.disconnect(_on_player_revived)
+	SignalBus.player_exited_room.disconnect(_on_player_exited_room)
 
 
 func process_state() -> void:
@@ -104,8 +145,22 @@ func move_to_shrine() -> void:
 	_parent._corpse_indicator.emitting = true
 
 
-func _on_player_hurt() -> void:
-	SignalBus.game_over.emit()
+func _on_player_hurt(entity: Node3D) -> void:
+	if entity is Ghost:
+		attacking_ghosts.append(entity)
+	if attacked_increment_timer.is_stopped():
+		# start the effect partially complete to provide a clear indicator of damage
+		attacked_modifier = ATTACKED_MODIFIER_START
+		attacked_increment_timer.start()
+
+
+func _on_player_escaped(entity: Node3D) -> void:
+	if entity is Ghost:
+		# handle case where player has entered another room and the
+		#  attacking_ghosts array is cleared while still contacting player
+		var ghost_position: int = attacking_ghosts.find(entity)
+		if ghost_position != -1:
+			attacking_ghosts.remove_at(ghost_position)
 
 
 func _on_player_revived(corpse_global_position: Vector3) -> void:
@@ -113,3 +168,47 @@ func _on_player_revived(corpse_global_position: Vector3) -> void:
 	# provide i-frames on revive, no flashing
 	_parent.take_damage(false)
 	_state_machine.change_state(PlayerStateMachine.States.LIVING)
+
+
+func _on_player_exited_room(_body: Node3D) -> void:
+	# clear attacking ghosts to ensure effect does not apply when player enters
+	# an adjacent room while ghosts are still in contact - they can still collide
+	# with the player in the doorway as they are entering the next room even if
+	# they are no longer explicitly attacking
+	attacking_ghosts.clear()
+
+
+func _on_attacked_increment_timer_timeout() -> void:
+	# over short increments, apply an "attacked" effect of speed reduction
+	# and ghost light dimming according to how long the player has been attacked
+	# and by how many ghosts are currently attacking the player
+	
+	if not attacking_ghosts.is_empty():
+		# CASE: ghost(s) attacking player
+		var num_ghosts: int = attacking_ghosts.size()
+		# increase increment magnitude according to number of ghosts attacking
+		var attacked_modifier_magnitude: float = num_ghosts * ATTACKED_MAGNITUDE_MODIFIER 
+		attacked_modifier += ATTACKED_MODIFIER_INCREMENT * attacked_modifier_magnitude
+	else:
+		# CASE: no ghosts attacking
+		if attacked_modifier <= 0:
+			# CASE: player has fully recovered from attack
+			# remove effect entirely
+			attacked_increment_timer.stop()
+			attacked_modifier = 0
+			_parent.player_stats.stat_update_remove(PlayerStats.Stats.SPEED, ATTACKED_MODIFIER_NAME)
+			return
+		
+		# decrease effect over time
+		attacked_modifier -= ATTACKED_MODIFIER_INCREMENT
+	
+	# apply attacked modifier to dead light and player speed
+	dead_light.light_energy = dead_light_energy_default - attacked_modifier
+	_parent.player_stats.stat_update_add(
+		PlayerStats.Stats.SPEED, -attacked_modifier * ATTACKED_MODIFIER_SPEED_SCALAR, ATTACKED_MODIFIER_NAME)
+	
+	if dead_light.light_energy <= 0:
+		# full effect has applied - game over
+		SignalBus.game_over.emit()
+		dead_light.light_energy = dead_light_energy_default
+		attacked_increment_timer.stop()

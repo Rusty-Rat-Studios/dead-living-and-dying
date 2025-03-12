@@ -8,9 +8,12 @@ var player: Node = PlayerHandler.get_player()
 
 @onready var cooldown_active: bool = false
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
 	world_resource = preload("res://items/crucifix/crucifix_inventory.tscn")
+	display_name = "Crucifix"
+	description = "DEFENSE ITEM: Use with LMB to exorcise possessed objects within a limited range."
+	texture = preload("res://items/crucifix/crucifix.png")
 	
 	$ActiveTimer.wait_time = BASE_ACTIVE_DURATION
 	$CooldownTimer.wait_time = BASE_COOLDOWN_DURATION
@@ -20,7 +23,7 @@ func _ready() -> void:
 	$Hitbox.body_entered.connect(_on_body_entered)
 
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if PlayerHandler.get_player_state() == PlayerStateMachine.States.DEAD:
 		return
 	if event.is_action_pressed("use_defense_item"):

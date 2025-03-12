@@ -17,6 +17,11 @@ COLLISION MASKING SCHEME:
 # signal connected when ghost discovers all possessables in the room
 signal possessed
 
+# maximum amount of time a possessable can have (is_possessable == false)
+# after being depossessed. Needed because some inherited classes have
+# specific logic for when to set is_possessable, such as throwables
+const RESET_TIME: float = 3
+
 @onready var parent: Node3D = get_parent()
 # store room for attaching self to "possessables_available" group that is 
 # checked by ghosts in the same room for available possession targets
@@ -25,8 +30,6 @@ signal possessed
 @onready var is_possessable: bool = true
 # flag for ensuring object is "free" for possession
 @onready var is_possessed: bool = false
-# flag for checking if player is in attack range
-@onready var player_in_range: bool = false
 # store initial position to return to when calling reset()
 @onready var starting_transform: Transform3D = transform
 
@@ -46,23 +49,29 @@ func reset() -> void:
 
 
 func possess() -> void:
-	if is_possessable:
-		# remove self from room's available possessables
-		# to disallow other ghosts to set it as a target
-		room.remove_possessable(self)
-		# signal to ghosts on the way to target it that it has been taken
-		possessed.emit()
-		is_possessed = true
-		
-		$GPUParticles3D.emitting = true
+	if not is_possessable:
+		return
+	# remove self from room's available possessables
+	# to disallow other ghosts to set it as a target
+	room.remove_possessable(self)
+	# signal to ghosts on the way to target it that it has been taken
+	possessed.emit()
+	is_possessed = true
+	
+	$GPUParticles3D.emitting = true
 
 
 func depossess() -> void:
+	if not is_possessed:
+		return
 	# add self back to room's available possessables
 	room.add_possessable(self)
 	# reset flags
 	is_possessed = false
-	player_in_range = false
+	# force is_possessable flag to be set after RESET_TIME if not set by
+	# any inherited classes
+	get_tree().create_timer(RESET_TIME).timeout.connect(func () -> void: 
+		is_possessable = true, CONNECT_ONE_SHOT)
 	
 	$GPUParticles3D.emitting = false
 
