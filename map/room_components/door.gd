@@ -104,6 +104,8 @@ func _on_interaction(input_name: String) -> void:
 			open_door()
 			linked_door.open_door()
 			linked_room.visible = true
+			if not linked_room.room_discovered:
+				linked_room.player_discovered_room.emit()
 			interactable.enabled = false
 			interactable.hide_message()
 
