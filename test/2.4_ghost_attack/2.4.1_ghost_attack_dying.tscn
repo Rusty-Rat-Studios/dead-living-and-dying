@@ -16,3 +16,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, -3)
 
 [node name="Ghost3" parent="DebugRoom" index="7" instance=ExtResource("2_1j14r")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, -3)
+
+[editable path="UI"]
