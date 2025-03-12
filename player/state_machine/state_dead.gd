@@ -7,9 +7,11 @@ const ATTACKED_MODIFIER_NAME: String = "ghost attack"
 # the amount of time before recalculating attacked effect from ghost contact
 const ATTACKED_INCREMENT_DURATION: float = 0.1
 # base amount that attack_modifier is incremented/decremented every timeout
-const ATTACKED_MODIFIER_INCREMENT: float = 0.03
+const ATTACKED_MODIFIER_INCREMENT: float = 0.02
 # the multiplicative magnitude increase for each ghost in contact
 const ATTACKED_MAGNITUDE_MODIFIER: float = 1.1
+# provide a better indicator by "jumpstarting" the effect on first contact
+const ATTACKED_MODIFIER_START: float = 0.4
 # amount that attack_modifier is multiplied by before applying to speed
 const ATTACKED_MODIFIER_SPEED_SCALAR: float = 5
 
@@ -19,7 +21,7 @@ const RESPAWN_TIME: float = 2
 # incremented when in contact with ghosts, multiplied by magnitude * number of ghosts
 var attacked_modifier: float = 0
 # tracks all ghosts currently contacting/attacking player
-var attacking_ghosts: Array = []
+var attacking_ghosts: Array[Ghost] = []
 
 var dead_light_energy_default: float 
 
@@ -92,7 +94,9 @@ func exit() -> void:
 	_parent._corpse_indicator.emitting = false
 	
 	SignalBus.player_hurt.disconnect(_on_player_hurt)
+	SignalBus.player_escaped.disconnect(_on_player_escaped)
 	SignalBus.player_revived.disconnect(_on_player_revived)
+	SignalBus.player_exited_room.disconnect(_on_player_exited_room)
 
 
 func process_state() -> void:
@@ -145,6 +149,8 @@ func _on_player_hurt(entity: Node3D) -> void:
 	if entity is Ghost:
 		attacking_ghosts.append(entity)
 	if attacked_increment_timer.is_stopped():
+		# start the effect partially complete to provide a clear indicator of damage
+		attacked_modifier = ATTACKED_MODIFIER_START
 		attacked_increment_timer.start()
 
 
@@ -180,7 +186,7 @@ func _on_attacked_increment_timer_timeout() -> void:
 	if not attacking_ghosts.is_empty():
 		# CASE: ghost(s) attacking player
 		var num_ghosts: int = attacking_ghosts.size()
-	#	increase increment magnitude according to number of ghosts attacking
+		# increase increment magnitude according to number of ghosts attacking
 		var attacked_modifier_magnitude: float = num_ghosts * ATTACKED_MAGNITUDE_MODIFIER 
 		attacked_modifier += ATTACKED_MODIFIER_INCREMENT * attacked_modifier_magnitude
 	else:
