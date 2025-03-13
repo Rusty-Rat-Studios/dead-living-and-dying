@@ -10,7 +10,7 @@ uniform vec3 uv1_offset;
 
 uniform vec3 player_offset = vec3(0, 3, 0);
 uniform float sphere_radius = 6.5;
-uniform float intensity = 0.0;
+instance uniform float intensity = 0.0;
 
 global uniform vec3 Player;
 
