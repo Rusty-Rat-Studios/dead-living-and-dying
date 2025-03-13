@@ -5,10 +5,6 @@ uniform vec4 fg_albedo : source_color;
 uniform vec4 bg_albedo : source_color;
 uniform float width = 0.2;
 
-void vertex() {
-	
-}
-
 void fragment() {
 	vec2 base_uv = UV;
 
