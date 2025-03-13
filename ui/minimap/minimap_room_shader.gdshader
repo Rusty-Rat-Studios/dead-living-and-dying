@@ -6,8 +6,6 @@ uniform vec4 bg_albedo : source_color;
 uniform float width = 0.2;
 
 void fragment() {
-	vec2 base_uv = UV;
-
 	if(UV.x <= width){
 		ALBEDO = fg_albedo.rgb;
 	}
@@ -23,5 +21,4 @@ void fragment() {
 	else{
 		ALBEDO = bg_albedo.rgb;
 	}
-	
 }
