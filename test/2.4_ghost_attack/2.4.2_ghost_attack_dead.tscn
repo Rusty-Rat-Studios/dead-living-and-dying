@@ -16,3 +16,5 @@ visible = true
 
 [node name="DebugLight" parent="." index="4"]
 visible = false
+
+[editable path="UI"]

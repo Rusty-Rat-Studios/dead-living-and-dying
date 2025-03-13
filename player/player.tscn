@@ -1,13 +1,15 @@
-[gd_scene load_steps=23 format=3 uid="uid://bbow7knip3g6g"]
+[gd_scene load_steps=27 format=3 uid="uid://bbow7knip3g6g"]
 
 [ext_resource type="Script" uid="uid://bvc3eclccrf0p" path="res://player/player.gd" id="1_ndccg"]
 [ext_resource type="Texture2D" uid="uid://cdu1sybc4l0vp" path="res://player/caretaker_idle.png" id="3_b0ygv"]
 [ext_resource type="Script" uid="uid://v3pynygc6ya7" path="res://player/camera.gd" id="4_mmf56"]
 [ext_resource type="Script" uid="uid://cs3pdh132h0y1" path="res://player/spotlight.gd" id="5_nwynq"]
 [ext_resource type="Script" uid="uid://xxlxp6iy7vgv" path="res://player/hurtbox.gd" id="6_ltudm"]
+[ext_resource type="Material" uid="uid://c3kjv3w8w3dws" path="res://ui/minimap/minimap_corpse_material.tres" id="7_2ieo8"]
 [ext_resource type="PackedScene" uid="uid://umlwhr2u3iej" path="res://player/corpse.tscn" id="8_865w7"]
 [ext_resource type="Script" uid="uid://0omfdhsdjivb" path="res://player/stunbox.gd" id="9_25lto"]
 [ext_resource type="Script" uid="uid://dv0uf7xxo7jdj" path="res://player/inventory.gd" id="9_qaadw"]
+[ext_resource type="Material" uid="uid://dr3yoxb5o7j2u" path="res://ui/minimap/minimap_player_material.tres" id="10_8t03j"]
 [ext_resource type="PackedScene" uid="uid://bp0ydphecs3iv" path="res://common/shadow.tscn" id="11_7sgie"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uy1l0"]
@@ -36,6 +38,10 @@ animations = [{
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3bb63"]
 radius = 0.804186
 height = 2.35874
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ebec5"]
+material = ExtResource("7_2ieo8")
+height = 0.3
 
 [sub_resource type="Curve" id="Curve_ebec5"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.274834, 0), -0.18383, -0.18383, 0, 0, Vector2(0.642384, 0.0926174), 0.0, 0.0, 0, 0, Vector2(0.784768, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -88,6 +94,10 @@ shape = 0
 section_length = 0.1
 curve = SubResource("Curve_8t03j")
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_2ieo8"]
+material = ExtResource("10_8t03j")
+height = 0.3
+
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 6
 script = ExtResource("1_ndccg")
@@ -107,6 +117,7 @@ animation = &"front"
 
 [node name="Camera3D" type="Camera3D" parent="RotationOffset"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+cull_mask = 1048063
 script = ExtResource("4_mmf56")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
@@ -144,6 +155,13 @@ one_shot = true
 [node name="Corpse" parent="CorpseContainer" instance=ExtResource("8_865w7")]
 visible = false
 
+[node name="MinimapComponent" type="Node3D" parent="CorpseContainer/Corpse"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CorpseContainer/Corpse/MinimapComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+layers = 512
+mesh = SubResource("CylinderMesh_ebec5")
+
 [node name="CorpseIndicator" type="GPUParticles3D" parent="."]
 layers = 2
 emitting = false
@@ -173,3 +191,10 @@ one_shot = true
 
 [node name="Shadow" parent="." instance=ExtResource("11_7sgie")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 0)
+
+[node name="MinimapComponent" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MinimapComponent"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
+layers = 512
+mesh = SubResource("CylinderMesh_2ieo8")
