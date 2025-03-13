@@ -132,4 +132,3 @@ func _on_player_discovered_room() -> void:
 	$/root/Game/MinimapObjects.add_child(minimap_component)
 	minimap_component.global_position = global_position
 	minimap_component.global_rotation = global_rotation
-	print(global_rotation_degrees, rotation_degrees)
