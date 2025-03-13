@@ -17,3 +17,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0)
 
 [node name="Crate2" parent="DebugRoom" index="8" instance=ExtResource("3_pfme1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)
+
+[editable path="UI"]

@@ -13,6 +13,7 @@ const TWEEN_DURATION: float = 0.6
 var linked_door: Door = null
 var linked_room: Room = null
 var door_open: bool = false
+var door_locked: bool = false
 # needed to handle asynchronous collision shape handling
 # e.g. dying during ghost event
 var player_dead: bool = false
@@ -89,6 +90,7 @@ func close_door() -> void:
 
 
 func lock() -> void:
+	door_locked = true
 	if door_open:
 		close_door()
 	interactable.hide_message()
@@ -97,6 +99,7 @@ func lock() -> void:
 
 
 func unlock() -> void:
+	door_locked = false
 	if $PlayerDetector.overlaps_body(PlayerHandler.get_player()):
 		interactable.display_message("[E] Open Door")
 		interactable.enabled = true
@@ -127,7 +130,7 @@ func deactivate_effects(instant: bool = false) -> void:
 
 func _on_body_entered(_body: Node3D) -> void:
 	# no node check required as collision mask is layer PLAYER
-	if not door_open:
+	if not door_open and not door_locked:
 		interactable.display_message("[E] Open Door")
 		interactable.enabled = true
 
