@@ -17,6 +17,8 @@ func _on_item_picked_up(item_inventory: ItemInventory, current_consumable: bool 
 		# function implemented in cooldown_slot.gd
 		_item_inventory.item_used.connect(_on_item_used)
 	elif item_inventory is ConsumableItemInventory and current_consumable == true:
+		texture_rect.texture = _item_inventory.texture
+		color_rect.visible = true
 		count += 1
 		label.text = str(count)
 

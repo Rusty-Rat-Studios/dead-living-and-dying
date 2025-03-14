@@ -28,11 +28,11 @@ func _unhandled_input(event: InputEvent) -> void:
 func use() -> void:
 	if active:
 		return
+	$ActiveTimer.wait_time = BASE_ACTIVE_DURATION * player.player_stats.duration
+	$ActiveTimer.start()
 	player.hurtbox.activate_hit_cooldown(true, $ActiveTimer.wait_time)
 	active = true
 	count -= 1
-	$ActiveTimer.wait_time = BASE_ACTIVE_DURATION * player.player_stats.duration
-	$ActiveTimer.start()
 	item_used.emit()
 
 
