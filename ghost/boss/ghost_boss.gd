@@ -41,10 +41,15 @@ func start_event() -> void:
 	print(Time.get_time_string_from_system(), ": BOSS EVENT MAKE SURE TO RUN AND HIDE HAHAHAHAHAHAHAHAHAHAHA")
 	state_machine.change_state(GhostStateMachine.States.WAITING)
 	set_target(current_room.global_position)
-	SignalBus.attack_event_started.emit(current_room)
+	#SignalBus.attack_event_started.emit(current_room)
 	event_chance_timer.stop()
 	event_duration_timer.start()
 	event_active = true
+	
+	# lock all doors
+	for door: Door in current_room.doors.values():
+		door.lock()
+		door.linked_door.lock()
 	
 	# make ghosts visible
 	for ghost: Ghost in get_tree().get_nodes_in_group("ghosts"):
@@ -54,9 +59,14 @@ func start_event() -> void:
 
 
 func stop_event() -> void:
-	SignalBus.attack_event_stopped.emit(current_room)
+	#SignalBus.attack_event_stopped.emit(current_room)
 	event_duration_timer.stop()
 	event_active = false
+	
+	# unlock all doors
+	for door: Door in current_room.doors.values():
+		door.unlock()
+		door.linked_door.unlock()
 	
 	if player_in_room and event_chance_timer.is_stopped():
 		event_chance_timer.start()
