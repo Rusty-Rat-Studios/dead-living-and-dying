@@ -6,8 +6,6 @@ const GAME_OVER_DELAY: float = 2.0
 @export var disable_popup: bool = false
 @export var show_how_to_play_on_start: bool = false
 
-@onready var scene: PackedScene = load("res://game.tscn")
-
 @onready var buttons: VBoxContainer = $PanelContainer/MarginContainer/VBoxContainer/VBoxButtons
 @onready var message: Label = $PanelContainer/MarginContainer/VBoxContainer/Message
 
