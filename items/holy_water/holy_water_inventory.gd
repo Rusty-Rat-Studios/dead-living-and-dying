@@ -36,11 +36,10 @@ func use() -> void:
 	count -= 1
 	$ActiveTimer.wait_time = BASE_ACTIVE_DURATION * player.player_stats.duration
 	$ActiveTimer.start()
+	item_used.emit()
 
 
 func _on_active_timer_timeout() -> void:
 	active = false
 	if (count <= 0):
-		item_consumed.emit()
 		queue_free()
-		

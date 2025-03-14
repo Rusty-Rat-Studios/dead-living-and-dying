@@ -2,7 +2,6 @@ class_name ConsumableItemInventory
 extends ItemInventory
 
 signal item_used(cooldown_timer: Timer)
-signal item_consumed()
 
 var count: int
 
