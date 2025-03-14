@@ -30,7 +30,6 @@ size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MenuBackground/MarginContainer" index="0"]
 layout_mode = 2
-theme_override_constants/separation = 4
 
 [node name="Title" type="Label" parent="MenuBackground/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -147,7 +146,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 focus_neighbor_left = NodePath("../ButtonNext")
 theme = ExtResource("5_8m8i8")
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 26
 text = "Previous"
 
 [node name="ButtonNext" type="Button" parent="MenuBackground/MarginContainer/VBoxContainer/HboxButtons"]
@@ -157,7 +156,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 focus_neighbor_right = NodePath("../ButtonPrevious")
 theme = ExtResource("5_8m8i8")
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 26
 text = "Next"
 
 [editable path="MenuBackground"]
