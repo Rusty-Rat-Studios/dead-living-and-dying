@@ -97,16 +97,10 @@ func take_damage(flash: bool = true) -> void:
 	hurtbox.activate_hit_cooldown(flash)
 
 
-func _on_item_picked_up(item: ItemInventory) -> void:
-	var stacking: bool = false
+func _on_item_picked_up(item: ItemInventory, current_consumable: bool = false) -> void:
 	if item is KeyItemInventory:
 		SignalBus.key_item_picked_up.emit()
-	if item is ConsumableItemInventory:
-		for n: Node in $Inventory.get_children():
-			if n is ConsumableItemInventory and n.CONSUMABLE_ID == item.CONSUMABLE_ID:
-				n.count += 1
-				stacking = true
-	if stacking == false:
+	if current_consumable == false:
 		$Inventory.add_child(item)
 	# ensure item position is directly on player
 	item.position = Vector3.ZERO

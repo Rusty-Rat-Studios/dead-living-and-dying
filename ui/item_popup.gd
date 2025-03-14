@@ -51,7 +51,7 @@ func _on_lifetime_expired() -> void:
 	hide_item()
 
 
-func _on_item_picked_up(item: ItemInventory) -> void:
+func _on_item_picked_up(item: ItemInventory, current_consumable: bool = false) -> void:
 	show_item(item)
 	_timer.start()
 

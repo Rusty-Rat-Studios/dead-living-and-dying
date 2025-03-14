@@ -1,7 +1,7 @@
 extends CooldownSlot
 
 
-func _on_item_picked_up(item_inventory: ItemInventory) -> void:
+func _on_item_picked_up(item_inventory: ItemInventory, current_consumable: bool = false) -> void:
 	if item_inventory is ActiveItemInventory:
 		_item_inventory = item_inventory
 		# update UI image to match item
