@@ -6,7 +6,7 @@ const PAUSE_DURATION_MIN: float = 0.5
 const POSSESS_CHANCE: float = 0.6
 const ATTACK_CHANCE: float = 0.2
 const WAIT_CHANCE: float = 0.1
-const MOVE_CHANCE: float = 0#0.1
+const MOVE_CHANCE: float = 0.1
 
 var room_boundaries: Rect2 # select random points in room to wander to
 

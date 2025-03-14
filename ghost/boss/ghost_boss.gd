@@ -2,8 +2,10 @@ extends Ghost
 
 # amount of time before rolling for event
 const EVENT_CHANCE_TIME: float = 5
-const EVENT_CHANCE: float = 1
-const EVENT_DURATION: float = 3
+const EVENT_CHANCE: float = 0.4
+const EVENT_DURATION: float = 15
+
+var event_active: bool = false
 
 @onready var event_chance_timer: Timer = Timer.new()
 @onready var event_duration_timer: Timer = Timer.new()
@@ -22,11 +24,27 @@ func _ready() -> void:
 	SignalBus.player_state_changed.connect(_on_player_state_changed)
 
 
+###########
+# TEMPORARY: prevent boss ghost from leaving room during event
+# to be replaced with movement chance modifier
+func _process(_delta: float) -> void:
+	if event_active and state_machine.current_state == GhostStateMachine.States.MOVING:
+		state_machine.change_state(GhostStateMachine.States.WAITING)
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_action("trigger_boss_event"):
+		start_event()
+
+
 func start_event() -> void:
 	print(Time.get_time_string_from_system(), ": BOSS EVENT MAKE SURE TO RUN AND HIDE HAHAHAHAHAHAHAHAHAHAHA")
+	state_machine.change_state(GhostStateMachine.States.WAITING)
+	set_target(current_room.global_position)
 	SignalBus.attack_event_started.emit(current_room)
 	event_chance_timer.stop()
 	event_duration_timer.start()
+	event_active = true
 	
 	# make ghosts visible
 	for ghost: Ghost in get_tree().get_nodes_in_group("ghosts"):
@@ -38,6 +56,8 @@ func start_event() -> void:
 func stop_event() -> void:
 	SignalBus.attack_event_stopped.emit(current_room)
 	event_duration_timer.stop()
+	event_active = false
+	
 	if player_in_room and event_chance_timer.is_stopped():
 		event_chance_timer.start()
 	
