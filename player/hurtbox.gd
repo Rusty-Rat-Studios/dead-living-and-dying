@@ -34,18 +34,7 @@ func reset() -> void:
 # from hit signal
 # e.g. for respawning, to ensure player can't immediately take damage
 # optional "flash" argument to disable the flashing animation
-func activate_hit_cooldown(flash: bool = true) -> void:
-	if hit_cooldown_active:
-		return
-	hit_cooldown_active = true
-	$HitCooldown.start()
-	if flash:
-		hit_flash = true
-		$HitFlash.start()
-
-
-#for using invulnerability with a float duration instead of a static one
-func activate_invulnerability(duration: float, flash: bool = true, ) -> void:
+func activate_hit_cooldown(flash: bool = true, duration: float = HIT_COOLDOWN,) -> void:
 	if hit_cooldown_active:
 		return
 	hit_cooldown_active = true
@@ -65,7 +54,6 @@ func _on_enemy_area_entered(_area: Area3D) -> void:
 func _on_hit_cooldown_timeout() -> void:
 	# deactivate invincibility frames
 	hit_cooldown_active = false
-	$HitCooldown.wait_time = HIT_COOLDOWN
 	# stop flashing animation
 	$HitFlash.stop()
 	var current_color: Color = sprite.get_modulate()

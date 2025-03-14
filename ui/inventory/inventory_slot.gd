@@ -4,8 +4,6 @@ extends PanelContainer
 var _item_inventory: ItemInventory
 
 @onready var texture_rect: TextureRect = $TextureRect
-@onready var color_rect: ColorRect = $ColorRect
-@onready var label: Label = $Label
 
 func _ready() -> void:
 	# emitted by ItemWorld when player picks up an item

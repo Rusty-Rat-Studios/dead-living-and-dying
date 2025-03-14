@@ -6,9 +6,6 @@ const CONSUMABLE_ID: int = 0
 var player: Node = PlayerHandler.get_player()
 var active: bool = false
 
-@onready var cooldown_active: bool = false
-
-
 func _ready() -> void:
 	world_resource = preload("res://items/holy_water/holy_water_world.tscn")
 	display_name = "Holy Water"
@@ -31,7 +28,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func use() -> void:
 	if active:
 		return
-	player.hurtbox.activate_invulnerability($ActiveTimer.wait_time)
+	player.hurtbox.activate_hit_cooldown(true, $ActiveTimer.wait_time)
 	active = true
 	count -= 1
 	$ActiveTimer.wait_time = BASE_ACTIVE_DURATION * player.player_stats.duration
