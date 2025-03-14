@@ -74,14 +74,13 @@ var current_view: Screen = Screen.POSSESSION
 
 
 func _ready() -> void:
-	button_next.grab_focus()
-	
 	# on first screen, previous button closes the window
 	# - update in code rather than editor so the editor has a "normal" view
 	button_previous.text = "Close"
 	
 	button_next.pressed.connect(_on_next_pressed)
 	button_previous.pressed.connect(_on_previous_pressed)
+	visibility_changed.connect(func () -> void: button_next.grab_focus())
 
 
 func reset() -> void:
