@@ -85,6 +85,7 @@ func _ready() -> void:
 
 
 func reset() -> void:
+	close_requested.emit()
 	hide()
 	current_view = 0
 	image3.visible = false
