@@ -71,15 +71,26 @@ var current_view: Screen = Screen.POSSESSION
 
 @onready var button_next: Button = $MenuBackground/MarginContainer/VBoxContainer/HboxButtons/ButtonNext
 @onready var button_previous: Button = $MenuBackground/MarginContainer/VBoxContainer/HboxButtons/ButtonPrevious
-@onready var button_exit: Button = $MenuBackground/MarginContainer/VBoxContainer/HboxButtons/ButtonExit
 
 
 func _ready() -> void:
 	button_next.grab_focus()
 	
+	# on first screen, previous button closes the window
+	# - update in code rather than editor so the editor has a "normal" view
+	button_previous.text = "Close"
+	
 	button_next.pressed.connect(_on_next_pressed)
 	button_previous.pressed.connect(_on_previous_pressed)
-	button_exit.pressed.connect(_on_exit_pressed)
+
+
+func reset() -> void:
+	hide()
+	current_view = 0
+	image3.visible = false
+	instruction3.visible = false
+	button_previous.text = "Close"
+	button_next.text = "Next"
 
 
 func update_text_and_images() -> void:
@@ -100,31 +111,31 @@ func _on_next_pressed() -> void:
 			current_view = Screen.STATES
 			image3.visible = true
 			instruction3.visible = true
-			button_previous.disabled = false
+			button_previous.text = "Previous"
 		Screen.STATES:
 			current_view = Screen.MAP
 		Screen.MAP:
 			current_view = Screen.KEY_ITEM
-			button_next.disabled = true
+			button_next.text = "Close"
+		Screen.KEY_ITEM:
+			reset()
 	
 	update_text_and_images()
 
 
 func _on_previous_pressed() -> void:
 	match current_view:
+		Screen.POSSESSION:
+			reset()
 		Screen.STATES:
 			current_view = Screen.POSSESSION
 			image3.visible = false
 			instruction3.visible = false
-			button_previous.disabled = true
+			button_previous.text = "Close"
 		Screen.MAP:
 			current_view = Screen.STATES
 		Screen.KEY_ITEM:
 			current_view = Screen.MAP
-			button_next.disabled = false
+			button_next.text = "Next"
 	
 	update_text_and_images()
-
-
-func _on_exit_pressed() -> void:
-	hide()
