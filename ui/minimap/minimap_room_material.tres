@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://ctvcmqmldyoar"]
+
+[ext_resource type="Shader" uid="uid://dcd2ax8an5v1y" path="res://ui/minimap/minimap_room_shader.gdshader" id="1_158hq"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_158hq")
+shader_parameter/fg_albedo = Color(1, 1, 1, 1)
+shader_parameter/bg_albedo = Color(0, 0, 0, 1)
+shader_parameter/width = 0.02

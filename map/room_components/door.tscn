@@ -6,7 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://cnbim08e5mqrn" path="res://ui/interactable.tscn" id="4_53qlf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_53qlf"]
-transparency = 1
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
 depth_draw_mode = 1
 specular_mode = 2
 albedo_texture = ExtResource("3_5bxqp")
@@ -97,6 +99,7 @@ script = ExtResource("1_6px5k")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+cast_shadow = 0
 mesh = SubResource("BoxMesh_53qlf")
 skeleton = NodePath("")
 

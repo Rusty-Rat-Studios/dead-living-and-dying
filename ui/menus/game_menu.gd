@@ -6,8 +6,6 @@ const GAME_OVER_DELAY: float = 2.0
 @export var disable_popup: bool = false
 @export var show_how_to_play_on_start: bool = false
 
-@onready var scene: PackedScene = preload("res://game.tscn")
-
 @onready var buttons: VBoxContainer = $PanelContainer/MarginContainer/VBoxContainer/VBoxButtons
 @onready var message: Label = $PanelContainer/MarginContainer/VBoxContainer/Message
 
@@ -16,8 +14,7 @@ func _ready() -> void:
 		get_tree().paused = true
 		$HowToPlay.visible = true
 		# resume game when popup window is closed
-		# needed because it can be closed by clicking "Exit" or clicking outside the window
-		$HowToPlay.button_exit.pressed.connect(func() -> void: resume(), CONNECT_ONE_SHOT)
+		$HowToPlay.close_requested.connect(func() -> void: resume(), CONNECT_ONE_SHOT)
 	
 	buttons.get_node("ButtonContinue").pressed.connect(_on_continue_pressed)
 	buttons.get_node("ButtonHow").pressed.connect(_on_how_pressed)

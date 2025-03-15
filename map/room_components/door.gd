@@ -7,6 +7,7 @@ const DOOR_TEXTURE_OPEN: Texture = preload("res://map/tileset-dhassa/door1_open.
 # energy of fire light; used to tween in/out
 const LIGHT_ENERGY: float = 2.0
 const TWEEN_DURATION: float = 0.6
+const MINIMAP_COMPONENT: Resource = preload("res://map/room_components/door_minimap.tscn")
 
 @export var door_location: DoorLocation
 
@@ -36,12 +37,9 @@ func _ready() -> void:
 	# disable door collision and interactable when player is spirit
 	SignalBus.player_state_changed.connect(_on_player_state_changed)
 	
-	###############
-	# TEMP: remove once doors implemented in all scenes
-	SignalBus.player_exited_room.connect(_on_player_exited_room)
-	###############
-	
-	(get_parent() as Room).register_door(self)
+	var parent_room: Room = get_parent()
+	parent_room.player_discovered_room.connect(_on_player_discovered_room)
+	parent_room.register_door(self)
 	
 	interactable.inputs = ["interact"]
 	interactable.hide_message()
@@ -151,16 +149,10 @@ func _on_interaction(input_name: String) -> void:
 			open_door()
 			linked_door.open_door()
 			linked_room.visible = true
+			if not linked_room.room_discovered:
+				linked_room.player_discovered_room.emit()
 			interactable.enabled = false
 			interactable.hide_message()
-
-
-###############
-# TEMP: remove once doors implemented in all scenes
-func _on_player_exited_room(room: Room) -> void:
-	if PlayerHandler.get_player_state() != PlayerStateMachine.States.DEAD:
-		room.visible = true
-###############
 
 
 func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
@@ -172,3 +164,10 @@ func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
 		door_collision_shape.set_deferred("disabled", true)
 		detector_collision_shape.set_deferred("disabled", true)
 		player_dead = true
+
+
+func _on_player_discovered_room() -> void:
+	var minimap_component: Node3D = MINIMAP_COMPONENT.instantiate()
+	$/root/Game/MinimapObjects.add_child(minimap_component)
+	minimap_component.global_position = global_position
+	minimap_component.global_rotation = global_rotation

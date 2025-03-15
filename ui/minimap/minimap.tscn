@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://d23ipl17cebgs"]
+
+[ext_resource type="Script" uid="uid://dt260yaknm17t" path="res://ui/minimap/minimap.gd" id="1_m6qbg"]
+[ext_resource type="Shader" uid="uid://dxnorthu88wpg" path="res://ui/minimap/minimap_shader.gdshader" id="2_nfbjl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_buwfp"]
+shader = ExtResource("2_nfbjl")
+shader_parameter/radius = 0.35
+shader_parameter/feather = 0.15
+
+[node name="Minimap" type="Control"]
+clip_contents = true
+custom_minimum_size = Vector2(512, 512)
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -307.195
+offset_right = 204.805
+offset_bottom = 512.0
+grow_horizontal = 0
+scale = Vector2(0.6, 0.6)
+script = ExtResource("1_m6qbg")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+material = SubResource("ShaderMaterial_buwfp")
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+stretch_shrink = 3
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 40, 0)
+cull_mask = 512
+projection = 1
+size = 60.0
