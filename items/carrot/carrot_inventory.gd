@@ -1,6 +1,6 @@
 extends PassiveItemInventory
 
-const OMNI_MODIFIER: float = 2.0
+const LIGHT_MODIFIER: float = 2.0
 const NAME: String = "carrot"
 
 
@@ -13,4 +13,5 @@ func _ready() -> void:
 
 func update() -> void:
 	var player: Node = PlayerHandler.get_player()
-	player.player_stats.stat_update_add(PlayerStats.Stats.LIGHT_OMNI_RANGE, OMNI_MODIFIER, NAME, self.get_instance_id())
+	player.player_stats.stat_update_add(PlayerStats.Stats.LIGHT_OMNI_RANGE, LIGHT_MODIFIER, NAME, self.get_instance_id())
+	player.player_stats.stat_update_add(PlayerStats.Stats.LIGHT_SPOT_RANGE, LIGHT_MODIFIER, NAME, self.get_instance_id())
