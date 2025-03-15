@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://jlav0m1ndqde"]
+[gd_scene load_steps=41 format=3 uid="uid://jlav0m1ndqde"]
 
 [ext_resource type="Script" uid="uid://br2ou0xf5p2mo" path="res://game.gd" id="1_77rk7"]
 [ext_resource type="PackedScene" uid="uid://bbow7knip3g6g" path="res://player/player.tscn" id="1_hu241"]
@@ -26,6 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://b58p4qke66th5" path="res://ghost/boss/ghost_boss.tscn" id="23_36jdj"]
 [ext_resource type="PackedScene" uid="uid://cp7202hwhpcd5" path="res://ui/ui.tscn" id="23_qhcbd"]
 [ext_resource type="PackedScene" uid="uid://bsy7ilicbox53" path="res://items/holy_water/holy_water_world.tscn" id="24_f1jbl"]
+[ext_resource type="PackedScene" uid="uid://k5kxbl8tsn6d" path="res://items/carrot/carrot_world.tscn" id="27_xa8c5"]
 
 [sub_resource type="Resource" id="Resource_3y6bj"]
 script = ExtResource("9_xa8c5")
@@ -214,6 +215,9 @@ door_location = SubResource("Resource_36jdj")
 [node name="Door4" parent="WorldGrid/RoomCenter" instance=ExtResource("19_vaj68")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8, 0, 0)
 door_location = SubResource("Resource_xfvwf")
+
+[node name="CarrotWorld" parent="WorldGrid/RoomCenter" instance=ExtResource("27_xa8c5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.12629, 1.25974, 2.12721)
 
 [node name="RoomLeft" type="Node3D" parent="WorldGrid" groups=["rooms"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -16)
