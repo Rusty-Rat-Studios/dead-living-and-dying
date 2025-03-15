@@ -46,7 +46,7 @@ func generate_grid(grid: WorldGrid) -> void:
 			weighted_door_grid[door_location] = dist
 		
 		var target_door: DoorLocation = RNG.weighted_random(weighted_door_grid)
-		var room_door_dir: DoorLocation.Direction = target_door.invert().direction # Diection of required connecting door
+		var room_door_dir: DoorLocation.Direction = target_door.invert().direction # Direction of required connecting door
 		
 		print("Selected door %s, needing direction %s" % [target_door.string(), DoorLocation.Direction.keys()[room_door_dir]])
 		
