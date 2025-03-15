@@ -46,6 +46,7 @@ room_table = ExtResource("8_5fe06")
 enemy_entity_table = ExtResource("9_kn4o2")
 
 [node name="BasicRoom" parent="WorldGrid" instance=ExtResource("14_emhx3")]
+spawn_room = true
 
 [node name="MinimapObjects" type="Node3D" parent="."]
 
