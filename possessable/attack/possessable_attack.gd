@@ -28,8 +28,8 @@ func possess() -> void:
 	enable_effects()
 
 
-func depossess(disable_effects: bool = true) -> void:
-	super(disable_effects)
+func depossess(disable_effects_flag: bool = true) -> void:
+	super(disable_effects_flag)
 	# disable player detection
 	range_collision_shape.set_deferred("disabled", true)
 	player_in_range = false

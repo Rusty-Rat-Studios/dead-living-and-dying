@@ -60,7 +60,7 @@ func possess() -> void:
 	enable_effects()
 
 
-func depossess(disable_effects: bool = true) -> void:
+func depossess(disable_effects_flag: bool = true) -> void:
 	# add self back to room's available possessables
 	room.add_possessable(self)
 	# reset flags
@@ -70,7 +70,7 @@ func depossess(disable_effects: bool = true) -> void:
 	get_tree().create_timer(RESET_TIME).timeout.connect(func () -> void: 
 		is_possessable = true, CONNECT_ONE_SHOT)
 	
-	if disable_effects:
+	if disable_effects_flag:
 		disable_effects()
 
 

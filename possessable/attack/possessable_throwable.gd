@@ -95,8 +95,8 @@ func possess() -> void:
 	set_physics_process(true)
 
 
-func depossess(disable_effects: bool = true) -> void:
-	super(disable_effects)
+func depossess(disable_effects_flag: bool = true) -> void:
+	super(disable_effects_flag)
 	# force sprite shaker to stop if object depossessed mid-attack
 	sprite_shaker.halt()
 
