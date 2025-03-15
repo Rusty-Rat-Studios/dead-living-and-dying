@@ -28,12 +28,6 @@ func _ready() -> void:
 	# disable door collision and interactable when player is spirit
 	SignalBus.player_state_changed.connect(_on_player_state_changed)
 	
-	###############
-	# TEMP: remove once doors implemented in all scenes
-	SignalBus.player_exited_room.connect(_on_player_exited_room)
-	###############
-	
-	#player_received.connect(_on_player_received)
 	var parent_room: Room = get_parent()
 	parent_room.player_discovered_room.connect(_on_player_discovered_room)
 	parent_room.register_door(self)
@@ -108,14 +102,6 @@ func _on_interaction(input_name: String) -> void:
 				linked_room.player_discovered_room.emit()
 			interactable.enabled = false
 			interactable.hide_message()
-
-
-###############
-# TEMP: remove once doors implemented in all scenes
-func _on_player_exited_room(room: Room) -> void:
-	if PlayerHandler.get_player_state() != PlayerStateMachine.States.DEAD:
-		room.visible = true
-###############
 
 
 func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
