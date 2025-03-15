@@ -145,32 +145,18 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 focus_neighbor_left = NodePath("../ButtonNext")
-focus_neighbor_right = NodePath("../ButtonExit")
 theme = ExtResource("5_8m8i8")
-theme_override_font_sizes/font_size = 28
-disabled = true
+theme_override_font_sizes/font_size = 26
 text = "Previous"
-
-[node name="ButtonExit" type="Button" parent="MenuBackground/MarginContainer/VBoxContainer/HboxButtons"]
-custom_minimum_size = Vector2(140, 50)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-focus_neighbor_left = NodePath("../ButtonPrevious")
-focus_neighbor_right = NodePath("../ButtonNext")
-theme = ExtResource("5_8m8i8")
-theme_override_font_sizes/font_size = 28
-text = "Exit"
 
 [node name="ButtonNext" type="Button" parent="MenuBackground/MarginContainer/VBoxContainer/HboxButtons"]
 custom_minimum_size = Vector2(140, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-focus_neighbor_left = NodePath("../ButtonExit")
 focus_neighbor_right = NodePath("../ButtonPrevious")
 theme = ExtResource("5_8m8i8")
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 26
 text = "Next"
 
 [editable path="MenuBackground"]
