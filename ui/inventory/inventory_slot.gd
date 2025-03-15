@@ -12,5 +12,5 @@ func _ready() -> void:
 
 # implemented by final inheritors including type-checking for
 # what kind of item was picked up - replace particular slots
-func _on_item_picked_up(_item_inventory: ItemInventory) -> void:
+func _on_item_picked_up(_item_inventory: ItemInventory, _current_consumable: bool = false) -> void:
 	push_error("AbstractMethodError: function _on_item_picked_up called from base class")

@@ -4,6 +4,9 @@ extends Node3D
 const WALL: Resource = preload("res://map/room_components/wall.tscn")
 const DOOR_TEXTURE: Texture = preload("res://map/tileset-dhassa/door1.png")
 const DOOR_TEXTURE_OPEN: Texture = preload("res://map/tileset-dhassa/door1_open.png")
+# energy of fire light; used to tween in/out
+const LIGHT_ENERGY: float = 2.0
+const TWEEN_DURATION: float = 0.6
 const MINIMAP_COMPONENT: Resource = preload("res://map/room_components/door_minimap.tscn")
 
 @export var door_location: DoorLocation
@@ -11,6 +14,12 @@ const MINIMAP_COMPONENT: Resource = preload("res://map/room_components/door_mini
 var linked_door: Door = null
 var linked_room: Room = null
 var door_open: bool = false
+var door_locked: bool = false
+# needed to handle asynchronous collision shape handling
+# e.g. dying during ghost event
+var player_dead: bool = false
+# used to fade in fire light
+var light_tween: Tween
 
 @onready var world_grid: WorldGrid = get_node("/root/Game/WorldGrid")
 @onready var door_material: Material = $StaticBody3D/MeshInstance3D.mesh.material.duplicate()
@@ -28,12 +37,6 @@ func _ready() -> void:
 	# disable door collision and interactable when player is spirit
 	SignalBus.player_state_changed.connect(_on_player_state_changed)
 	
-	###############
-	# TEMP: remove once doors implemented in all scenes
-	SignalBus.player_exited_room.connect(_on_player_exited_room)
-	###############
-	
-	#player_received.connect(_on_player_received)
 	var parent_room: Room = get_parent()
 	parent_room.player_discovered_room.connect(_on_player_discovered_room)
 	parent_room.register_door(self)
@@ -41,6 +44,8 @@ func _ready() -> void:
 	interactable.inputs = ["interact"]
 	interactable.hide_message()
 	interactable.input_detected.connect(_on_interaction)
+	
+	deactivate_effects(true)
 
 
 func init(room_grid_location: Vector2) -> void:
@@ -64,6 +69,7 @@ func _convert_to_wall() -> void:
 
 
 func open_door() -> void:
+	print("opening door")
 	door_open = true
 	door_material.albedo_texture = DOOR_TEXTURE_OPEN
 	
@@ -73,17 +79,56 @@ func open_door() -> void:
 func close_door() -> void:
 	door_open = false
 	door_material.albedo_texture = DOOR_TEXTURE
-	linked_door.door_material.albedo_texture = DOOR_TEXTURE
 	
 	if not get_parent().player_in_room and not door_open:
 		get_parent().visible = false
 	
-	door_collision_shape.set_deferred("disabled", false)
+	if not player_dead:
+		door_collision_shape.set_deferred("disabled", false)
+
+
+func lock() -> void:
+	door_locked = true
+	if door_open:
+		close_door()
+	interactable.hide_message()
+	interactable.enabled = false
+	activate_effects()
+
+
+func unlock() -> void:
+	door_locked = false
+	if $PlayerDetector.overlaps_body(PlayerHandler.get_player()):
+		interactable.display_message("[E] Open Door")
+		interactable.enabled = true
+	deactivate_effects()
+
+
+func activate_effects(instant: bool = false) -> void:
+	$FireParticles.emitting = true
+	if light_tween:
+		light_tween.kill()
+	if not instant:
+		light_tween = create_tween()
+		light_tween.tween_property($FireParticles/SpotLight3D, "light_energy", LIGHT_ENERGY, TWEEN_DURATION)
+	else:
+		$FireParticles/SpotLight3D.light_energy = LIGHT_ENERGY
+
+
+func deactivate_effects(instant: bool = false) -> void:
+	$FireParticles.emitting = false
+	if light_tween:
+		light_tween.kill()
+	if not instant:
+		light_tween = create_tween()
+		light_tween.tween_property($FireParticles/SpotLight3D, "light_energy", 0, TWEEN_DURATION)
+	else:
+		$FireParticles/SpotLight3D.light_energy = 0
 
 
 func _on_body_entered(_body: Node3D) -> void:
 	# no node check required as collision mask is layer PLAYER
-	if not door_open:
+	if not door_open and not door_locked:
 		interactable.display_message("[E] Open Door")
 		interactable.enabled = true
 
@@ -110,21 +155,15 @@ func _on_interaction(input_name: String) -> void:
 			interactable.hide_message()
 
 
-###############
-# TEMP: remove once doors implemented in all scenes
-func _on_player_exited_room(room: Room) -> void:
-	if PlayerHandler.get_player_state() != PlayerStateMachine.States.DEAD:
-		room.visible = true
-###############
-
-
 func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
 	if state == PlayerStateMachine.States.LIVING:
 		door_collision_shape.set_deferred("disabled", false)
 		detector_collision_shape.set_deferred("disabled", false)
+		player_dead = false
 	elif state == PlayerStateMachine.States.DEAD:
 		door_collision_shape.set_deferred("disabled", true)
 		detector_collision_shape.set_deferred("disabled", true)
+		player_dead = true
 
 
 func _on_player_discovered_room() -> void:

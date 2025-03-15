@@ -98,6 +98,7 @@ func _on_target_reached() -> void:
 			# transition to next room
 			_parent.current_room = target_room
 			_parent.reparent(_parent.current_room)
+			_parent.player_in_room = true if _parent.current_room.player_in_room else false
 			_parent.set_target(target_door_pos_far)
 			state = DoorStates.AFTER
 		DoorStates.AFTER:

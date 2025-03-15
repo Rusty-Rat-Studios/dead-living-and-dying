@@ -1,7 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://m60x4oieeliy"]
+[gd_scene load_steps=4 format=3 uid="uid://m60x4oieeliy"]
 
 [ext_resource type="PackedScene" uid="uid://bi3maar4f7ltv" path="res://ui/inventory/inventory_slot.tscn" id="1_m162s"]
 [ext_resource type="Script" uid="uid://borbb1othqrww" path="res://ui/inventory/consumable_slot.gd" id="2_l63gr"]
 
+[sub_resource type="LabelSettings" id="LabelSettings_x4203"]
+font_size = 20
+font_color = Color(0, 0, 0, 1)
+
 [node name="ConsumableSlot" instance=ExtResource("1_m162s")]
 script = ExtResource("2_l63gr")
+
+[node name="Label" type="Label" parent="." index="2"]
+layout_mode = 2
+size_flags_vertical = 1
+label_settings = SubResource("LabelSettings_x4203")
+horizontal_alignment = 2
+vertical_alignment = 2

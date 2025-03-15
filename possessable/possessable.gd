@@ -74,12 +74,10 @@ func possess() -> void:
 	# signal to ghosts on the way to target it that it has been taken
 	possessed.emit()
 	is_possessed = true
-	is_possessable = false
-	
-	$GPUParticles3D.emitting = true
+	enable_effects()
 
 
-func depossess() -> void:
+func depossess(disable_effects_flag: bool = true) -> void:
 	if not is_possessed or cooldown_active:
 		return
 	# reset flags
@@ -89,6 +87,15 @@ func depossess() -> void:
 		# reset timer is started -> when finished, will set "is_possessable = true"
 		is_possessable = true
 	
+	if disable_effects_flag:
+		disable_effects()
+
+
+func enable_effects() -> void:
+	$GPUParticles3D.emitting = true
+
+
+func disable_effects() -> void:
 	$GPUParticles3D.emitting = false
 
 
