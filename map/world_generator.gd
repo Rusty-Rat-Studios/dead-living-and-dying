@@ -40,7 +40,12 @@ func generate_grid(grid: WorldGrid) -> void:
 			push_error("ERROR: Room generation failed, ¯\\_(ツ)_/¯ Ran out of doors")
 			return
 		
-		var target_door: DoorLocation = RNG.random_from_list(door_grid)
+		var weighted_door_grid: Dictionary[Variant, float] = {}
+		for door_location: DoorLocation in door_grid:
+			var dist: float = door_location.invert().location.length() ** spread
+			weighted_door_grid[door_location] = dist
+		
+		var target_door: DoorLocation = RNG.weighted_random(weighted_door_grid)
 		var room_door_dir: DoorLocation.Direction = target_door.invert().direction # Diection of required connecting door
 		
 		print("Selected door %s, needing direction %s" % [target_door.string(), DoorLocation.Direction.keys()[room_door_dir]])

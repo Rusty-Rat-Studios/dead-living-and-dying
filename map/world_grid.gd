@@ -80,7 +80,7 @@ func _init_all_rooms() -> void:
 
 func _spawn_entities() -> void:
 	SpawnerManager.spawn(Spawner.SpawnerType.ENEMY, generator_settings.enemy_entity_table)
-	SpawnerManager.spawn(Spawner.SpawnerType.ITEM, generator_settings.enemy_entity_tablee)
+	SpawnerManager.spawn(Spawner.SpawnerType.ITEM, generator_settings.enemy_entity_table)
 	SpawnerManager.spawn(Spawner.SpawnerType.KEY_ITEM, generator_settings.enemy_entity_table)
 	SpawnerManager.spawn(Spawner.SpawnerType.ENTITY_FLOOR, generator_settings.enemy_entity_table)
 	SpawnerManager.spawn(Spawner.SpawnerType.ENTITY_WALL, generator_settings.enemy_entity_table)
