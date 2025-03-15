@@ -35,10 +35,11 @@ func reset() -> void:
 # from hit signal
 # e.g. for respawning, to ensure player can't immediately take damage
 # optional "flash" argument to disable the flashing animation
-func activate_hit_cooldown(flash: bool = true) -> void:
+func activate_hit_cooldown(flash: bool = true, duration: float = HIT_COOLDOWN,) -> void:
 	if hit_cooldown_active:
 		return
 	hit_cooldown_active = true
+	$HitCooldown.wait_time = duration
 	$HitCooldown.start()
 	if flash:
 		hit_flash = true
@@ -60,6 +61,8 @@ func _on_hit_cooldown_timeout() -> void:
 	hit_cooldown_active = false
 	# stop flashing animation
 	$HitFlash.stop()
+	var current_color: Color = sprite.get_modulate()
+	sprite.modulate = Color(current_color, 1)
 	if has_overlapping_areas():
 		# pass signal for state-specific behavior
 		SignalBus.player_hurt.emit(get_overlapping_bodies()[0])

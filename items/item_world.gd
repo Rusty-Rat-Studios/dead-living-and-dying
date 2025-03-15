@@ -30,8 +30,15 @@ func pick_up() -> void:
 	# emits a signal caught by the player who then adds a child
 	# of the inventory resource version to its $Inventory node
 	var item_inventory: ItemInventory = inventory_resource.instantiate()
+	var player: Node = PlayerHandler.get_player()
+	var current_consumable: bool = false
 	item_inventory.texture = $Sprite3D.texture
-	SignalBus.item_picked_up.emit(item_inventory)
+	if item_inventory is ConsumableItemInventory:
+		for n: Node in player.get_node("Inventory").get_children():
+			if n is ConsumableItemInventory and n.CONSUMABLE_ID == item_inventory.CONSUMABLE_ID:
+				current_consumable = true
+				n.count += 1
+	SignalBus.item_picked_up.emit(item_inventory, current_consumable)
 	queue_free()
 
 
