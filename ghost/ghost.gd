@@ -90,6 +90,8 @@ func set_target(target_global: Vector3) -> void:
 
 func move_to_target(delta: float) -> void:
 	var direction: Vector3 = target_pos - global_position
+	# ensure ghost only moves in xz-plane and does not follow objects up into the air
+	direction.y = 0
 	# force target_pos onto y=1 plane to ensure ghost can "reach" targets
 	# at different heights - i.e. player which is at a lower height
 	target_pos = Vector3(target_pos.x, 1, target_pos.z)
