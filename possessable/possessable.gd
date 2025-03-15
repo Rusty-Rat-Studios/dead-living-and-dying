@@ -81,7 +81,6 @@ func depossess() -> void:
 	is_possessed = false
 	# reset is_possessable flag after RESET_TIME
 	reset_timer.start()
-	print(self.name, " possession cooldown started")
 	
 	$GPUParticles3D.emitting = false
 
@@ -91,7 +90,6 @@ func attack(_target: Node3D) -> void:
 
 
 func _on_reset_timer_timeout() -> void:
-	print(self.name, " is possessable again")
 	# add self back to room's available possessables
 	room.add_possessable(self)
 	is_possessable = true
