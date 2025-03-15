@@ -9,6 +9,7 @@ signal player_discovered_room
 
 const ICON_MINIMAP: Resource = preload("res://ui/minimap/icon_minimap.tscn")
 
+@export var spawn_room: bool = false
 @export var room_information: RoomInformation
 
 var grid_location: Vector2
@@ -38,6 +39,8 @@ func init() -> void:
 
 func reset() -> void:
 	room_discovered = false
+	if spawn_room:
+		player_discovered_room.emit()
 
 
 func add_possessable(possessable: Possessable) -> void:

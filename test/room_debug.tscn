@@ -41,6 +41,7 @@ script = ExtResource("6_imvu0")
 
 [node name="DebugRoom" type="Node3D" parent="." groups=["rooms"]]
 script = ExtResource("7_01ym3")
+spawn_room = true
 room_information = SubResource("Resource_dhis3")
 
 [node name="Floor" parent="DebugRoom" instance=ExtResource("8_0ag1w")]

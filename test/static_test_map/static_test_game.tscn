@@ -85,6 +85,7 @@ script = ExtResource("7_4g7ym")
 
 [node name="RoomStart" type="Node3D" parent="WorldGrid" groups=["rooms"]]
 script = ExtResource("7_d8xjy")
+spawn_room = true
 room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/RoomStart" instance=ExtResource("8_ncqhn")]
