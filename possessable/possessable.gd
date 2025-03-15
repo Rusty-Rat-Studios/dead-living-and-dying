@@ -16,6 +16,8 @@ COLLISION MASKING SCHEME:
 
 # signal connected when ghost discovers all possessables in the room
 signal possessed
+# signal emitted by ghost when possessing this object and are stunned
+signal exorcised
 
 # maximum amount of time a possessable can have (is_possessable == false)
 # after being depossessed. Needed because some inherited classes have
@@ -31,6 +33,8 @@ const RESET_TIME: float = 5
 # flag for ensuring object is "free" for possession
 @onready var is_possessed: bool = false
 @onready var reset_timer: Timer = Timer.new()
+# tracks cooldown for being possessed again if exorcised by the player
+@onready var cooldown_active: bool = false
 # store initial position to return to when calling reset()
 @onready var starting_transform: Transform3D = transform
 
@@ -49,6 +53,7 @@ func _ready() -> void:
 	reset_timer.one_shot = true
 	reset_timer.timeout.connect(_on_reset_timer_timeout)
 	
+	exorcised.connect(_on_exorcised)
 
 
 func reset() -> void:
@@ -75,12 +80,14 @@ func possess() -> void:
 
 
 func depossess() -> void:
-	if not is_possessed:
+	if not is_possessed or cooldown_active:
 		return
 	# reset flags
 	is_possessed = false
-	# reset is_possessable flag after RESET_TIME
-	reset_timer.start()
+	if not cooldown_active:
+		# if the cooldown is active, this object has been exorcised and the
+		# reset timer is started -> when finished, will set "is_possessable = true"
+		is_possessable = true
 	
 	$GPUParticles3D.emitting = false
 
@@ -93,3 +100,14 @@ func _on_reset_timer_timeout() -> void:
 	# add self back to room's available possessables
 	room.add_possessable(self)
 	is_possessable = true
+
+
+func _on_exorcised() -> void:
+	cooldown_active = true
+	reset_timer.start()
+	
+	# ensure this object was removed from the room's possessable array
+	var position_in_room_array: int = room.possessables_available.find(self)
+	if position_in_room_array == -1:
+		return
+	room.possessables_available.remove_at(position_in_room_array)

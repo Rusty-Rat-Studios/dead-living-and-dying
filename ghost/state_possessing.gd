@@ -69,6 +69,7 @@ func enter() -> void:
 	SignalBus.player_state_changed.connect(_on_player_state_changed)
 	SignalBus.player_entered_room.connect(_on_player_entered_room)
 	SignalBus.player_exited_room.connect(_on_player_exited_room)
+	_parent.hit.connect(_on_hit)
 	
 	set_closest_target()
 
@@ -94,6 +95,7 @@ func exit() -> void:
 	SignalBus.player_state_changed.disconnect(_on_player_state_changed)
 	SignalBus.player_entered_room.disconnect(_on_player_entered_room)
 	SignalBus.player_exited_room.disconnect(_on_player_exited_room)
+	_parent.hit.disconnect(_on_hit)
 
 
 func set_closest_target() -> void:
@@ -223,3 +225,11 @@ func _on_attack_delay_increment_timer_timeout() -> void:
 		attack_delay_increment_timer.stop()
 	if attack_delay <= 0:
 		can_attack = true
+
+
+func _on_hit() -> void:
+	# ghost has been hit and will move into stunned state
+	#########
+	# PROBLEM: exit() is called before the hit signal is fired and target_possessable is null
+	if is_possessing:
+		target_possessable.exorcised.emit()
