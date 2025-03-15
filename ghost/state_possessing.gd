@@ -140,7 +140,7 @@ func process_state() -> void:
 func _depossess() -> void:
 	# check if ghost has already been forced into WAITING by player state change
 	# depossess object and go to WAITING
-	if target_possessable:
+	if is_possessing:
 		target_possessable.depossess()
 		is_possessing = false
 		change_state(GhostStateMachine.States.WAITING)
@@ -150,6 +150,8 @@ func _attack() -> void:
 	# check if ghost has already been forced into WAITING by player state change
 	# if player not in range, possessable.attack() simply depossesses
 	if target_possessable:
+		# await necessary for some overloaded functions of inheritors
+		@warning_ignore("redundant_await")
 		await target_possessable.attack(PlayerHandler.get_player())
 		is_possessing = false
 		change_state(GhostStateMachine.States.WAITING)
