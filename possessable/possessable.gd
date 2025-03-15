@@ -39,6 +39,11 @@ func _ready() -> void:
 	# add self to possessables in room
 	room.add_possessable(self)
 	
+	# move possession node forward relative to parent object to ensure the
+	# ghost is always visible in front of the object - otherwise z-fighting
+	# may occur if the item gets lifted and is closer to the camera
+	position.z = 0.8
+	
 	add_child(reset_timer)
 	reset_timer.wait_time = RESET_TIME
 	reset_timer.one_shot = true
