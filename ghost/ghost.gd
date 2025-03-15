@@ -16,10 +16,14 @@ const LIGHT_ENERGY: float = 0.1
 # opacity values set according to player state
 const OPACITY_DYING: float = 0.2
 const OPACITY_DEAD: float = 0.8
+const OPACITY_FADE_DURATION: float = 1
 
 var movement_boundaries: Rect2
+var opacity_tween: Tween
 var light_tween: Tween
 var light_enabled: bool = false
+# set when the light should be permanently visible (e.g. boss events)
+var light_enabled_permanent: bool = false
 
 @onready var state_machine: GhostStateMachine = $StateMachine
 @onready var hitbox: Area3D = $Hitbox
@@ -82,10 +86,9 @@ func set_target(target_global: Vector3) -> void:
 	if abs(target_global.x - global_position.x) > 0.5:
 		sprite.flip_h = target_global.x > global_position.x
 	
-	if light_enabled:
+	if light_enabled and not light_enabled_permanent:
 		# make light visible
-		light_tween = create_tween()
-		light_tween.tween_property(light, "light_energy", LIGHT_ENERGY, LIGHT_FADE_DURATION)
+		set_light(LIGHT_ENERGY)
 
 
 func move_to_target(delta: float) -> void:
@@ -102,17 +105,28 @@ func move_to_target(delta: float) -> void:
 		target_pos = global_position
 		target_reached.emit()
 		
-		if light_enabled:
+		if light_enabled and not light_enabled_permanent:
 			# make light invisible
-			if light_tween:
-				light_tween.kill()
-			light_tween = create_tween()
-			light_tween.tween_property(light, "light_energy", 0, LIGHT_FADE_DURATION)
+			set_light(0)
 	else:
 		at_target = false
 		direction = direction.normalized()
 		velocity = direction * speed
 		move_and_slide()
+
+
+func set_opacity(opacity: float) -> void:
+	if opacity_tween:
+		opacity_tween.kill()
+	opacity_tween = create_tween()
+	opacity_tween.tween_property(sprite, "modulate:a", opacity, OPACITY_FADE_DURATION)
+
+
+func set_light(energy: float) -> void:
+	if light_tween:
+		light_tween.kill()
+	light_tween = create_tween()
+	light_tween.tween_property(light, "light_energy", energy, LIGHT_FADE_DURATION)
 
 
 func _on_player_entered_room(room: Node3D) -> void:
@@ -153,4 +167,4 @@ func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
 			$Shadow.visible = true
 			light_enabled = false
 	
-	sprite.modulate.a = opacity
+	set_opacity(opacity)
