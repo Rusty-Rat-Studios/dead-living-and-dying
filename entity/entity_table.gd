@@ -28,3 +28,22 @@ func are_constraints_met() -> bool:
 		func(entry: EntityTableEntry) -> bool: 
 			return entry.is_within_constraints()
 	)
+
+
+func count_remaining_entities() -> int:
+	return entities.reduce(
+		func(accum: int, entity: EntityTableEntry) -> int:
+			if entity.max_spawn == -1:
+				return accum
+			var remaining: int = entity.max_spawn - entity.current
+			return accum + remaining
+	, 0)
+
+
+func count_max_entities() -> int:
+	return entities.reduce(
+		func(accum: int, entity: EntityTableEntry) -> int:
+			if entity.max_spawn == -1:
+				return accum
+			return accum + entity.max_spawn
+	, 0)
