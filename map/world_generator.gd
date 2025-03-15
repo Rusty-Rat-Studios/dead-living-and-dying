@@ -4,13 +4,15 @@ extends Object
 const GENERATOR_ATTEMPTS: int = 10 # Number of consecutive failed attempts before error 
 
 var room_table: EntityTable
+var spread: float
 var occupied_grid: Array[Vector2] = []
 var door_grid: Array[DoorLocation] = []
 
 
-func _init(_room_table: EntityTable, initial_occupied_grid: Array[Vector2], 
+func _init(generator_settings: GeneratorSettings, initial_occupied_grid: Array[Vector2], 
 	initial_door_grid: Array[DoorLocation]) -> void:
-	room_table = _room_table
+	room_table = generator_settings.room_table
+	spread = generator_settings.spread
 	occupied_grid = initial_occupied_grid
 	door_grid = initial_door_grid
 
