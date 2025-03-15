@@ -57,13 +57,10 @@ func possess() -> void:
 	# signal to ghosts on the way to target it that it has been taken
 	possessed.emit()
 	is_possessed = true
-	
-	$GPUParticles3D.emitting = true
+	enable_effects()
 
 
-func depossess() -> void:
-	if not is_possessed:
-		return
+func depossess(disable_effects: bool = true) -> void:
 	# add self back to room's available possessables
 	room.add_possessable(self)
 	# reset flags
@@ -73,6 +70,15 @@ func depossess() -> void:
 	get_tree().create_timer(RESET_TIME).timeout.connect(func () -> void: 
 		is_possessable = true, CONNECT_ONE_SHOT)
 	
+	if disable_effects:
+		disable_effects()
+
+
+func enable_effects() -> void:
+	$GPUParticles3D.emitting = true
+
+
+func disable_effects() -> void:
 	$GPUParticles3D.emitting = false
 
 

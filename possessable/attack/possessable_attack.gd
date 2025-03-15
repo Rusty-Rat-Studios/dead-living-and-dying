@@ -1,7 +1,7 @@
 class_name PossessableAttack
 extends Possessable
 
-const LIGHT_ENERGY: float = 0.2
+const LIGHT_ENERGY: float = 1
 const TWEEN_IN_DURATION: float = 2
 const TWEEN_OUT_DURATION: float = 0.5
 
@@ -25,7 +25,18 @@ func possess() -> void:
 	super()
 	# enable player detection
 	range_collision_shape.set_deferred("disabled", false)
-	
+	enable_effects()
+
+
+func depossess(disable_effects: bool = true) -> void:
+	super(disable_effects)
+	# disable player detection
+	range_collision_shape.set_deferred("disabled", true)
+	player_in_range = false
+
+
+func enable_effects() -> void:
+	super()
 	# make possessable glow
 	if light_tween:
 		light_tween.kill()
@@ -33,12 +44,8 @@ func possess() -> void:
 	light_tween.tween_property($OmniLight3D, "light_energy", LIGHT_ENERGY, TWEEN_IN_DURATION)
 
 
-func depossess() -> void:
+func disable_effects() -> void:
 	super()
-	# disable player detection
-	range_collision_shape.set_deferred("disabled", true)
-	player_in_range = false
-	
 	# stop glow effect
 	if light_tween:
 		light_tween.kill()
