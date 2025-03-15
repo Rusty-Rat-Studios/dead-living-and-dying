@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dl55of0q8hdcm"]
+
+[ext_resource type="Texture2D" uid="uid://cvadlfyuhhlsa" path="res://icon.svg" id="1_587dw"]
+
+[node name="MinimapComponent" type="Node3D"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, -1.31134e-07, 3, 0, -3, -1.31134e-07, 0, 2, 0)
+layers = 512
+texture = ExtResource("1_587dw")

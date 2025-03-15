@@ -21,6 +21,7 @@ func _ready() -> void:
 	$HitCooldown.timeout.connect(_on_hit_cooldown_timeout)
 	$HitFlash.timeout.connect(_on_hit_flash_timeout)
 	area_entered.connect(_on_enemy_area_entered)
+	area_exited.connect(_on_enemy_area_exited)
 
 
 func reset() -> void:
@@ -45,10 +46,14 @@ func activate_hit_cooldown(flash: bool = true, duration: float = HIT_COOLDOWN,) 
 		$HitFlash.start()
 
 
-func _on_enemy_area_entered(_area: Area3D) -> void:
+func _on_enemy_area_entered(area: Area3D) -> void:
 	if not hit_cooldown_active:
 		# pass signal for state-specific behavior
-		SignalBus.player_hurt.emit()
+		SignalBus.player_hurt.emit(area.get_parent_node_3d())
+
+
+func _on_enemy_area_exited(area: Area3D) -> void:
+	SignalBus.player_escaped.emit(area.get_parent_node_3d())
 
 
 func _on_hit_cooldown_timeout() -> void:
@@ -60,7 +65,7 @@ func _on_hit_cooldown_timeout() -> void:
 	sprite.modulate = Color(current_color, 1)
 	if has_overlapping_areas():
 		# pass signal for state-specific behavior
-		SignalBus.player_hurt.emit()
+		SignalBus.player_hurt.emit(get_overlapping_bodies()[0])
 
 
 func _on_hit_flash_timeout() -> void:

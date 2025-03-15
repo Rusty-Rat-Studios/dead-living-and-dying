@@ -75,3 +75,5 @@ text = "HURTBOX (Physical)
 Come here to 
 get hurt ;_ ;"
 font_size = 64
+
+[editable path="UI"]

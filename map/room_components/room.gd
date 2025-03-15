@@ -5,11 +5,16 @@ extends Node3D
 # the position on the world grid, and the possessables in the room.
 # On init the room moves to its specified grid location and runs init_doors()
 
+signal player_discovered_room
+
+const ICON_MINIMAP: Resource = preload("res://ui/minimap/icon_minimap.tscn")
+
 @export var room_information: RoomInformation
 
 var grid_location: Vector2
 var possessables_available: Array
 var doors: HashMap = HashMap.new()
+var room_discovered: bool = false
 
 @onready var player_in_room: bool = false
 
@@ -18,6 +23,7 @@ var doors: HashMap = HashMap.new()
 func _ready() -> void:
 	$Floor/PlayerDetector.body_entered.connect(_on_player_entered_room)
 	$Floor/PlayerDetector.body_exited.connect(_on_player_exited_room)
+	player_discovered_room.connect(_on_player_discovered_room)
 	visible = false
 
 
@@ -28,6 +34,10 @@ func init() -> void:
 	global_position = room_location
 	init_doors()
 	print(Time.get_time_string_from_system(), ": Room ", grid_location , " initialized")
+
+
+func reset() -> void:
+	room_discovered = false
 
 
 func add_possessable(possessable: Possessable) -> void:
@@ -69,6 +79,8 @@ func _on_player_entered_room(body: Node3D) -> void:
 		player_in_room = true
 		visible = true
 		SignalBus.player_entered_room.emit(self)
+		if not room_discovered:
+			player_discovered_room.emit()
 
 
 func _on_player_exited_room(body: Node3D) -> void:
@@ -76,3 +88,17 @@ func _on_player_exited_room(body: Node3D) -> void:
 		player_in_room = false
 		visible = false
 		SignalBus.player_exited_room.emit(self)
+
+
+func _on_player_discovered_room() -> void:
+	room_discovered = true
+	
+	var minimap_component: Node3D = room_information.minimap_component.instantiate()
+	$/root/Game/MinimapObjects.add_child(minimap_component)
+	minimap_component.global_position = global_position
+	
+	if room_information.room_icon != null:
+		var room_icon: Node3D = ICON_MINIMAP.instantiate()
+		$/root/Game/MinimapObjects.add_child(room_icon)
+		room_icon.global_position = global_position
+		room_icon.get_child(0).texture = room_information.room_icon

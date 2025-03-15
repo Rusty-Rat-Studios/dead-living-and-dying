@@ -40,6 +40,12 @@ func reset() -> void:
 	player.reset()
 	if old_man:
 		old_man.reset()
+	
+	# Clear the minimap
+	for child: Node3D in $MinimapObjects.get_children():
+		child.queue_free()
+	
+	get_tree().call_group("rooms", "reset")
 
 
 func _on_player_state_changed(state: PlayerStateMachine.States) -> void:

@@ -1,14 +1,8 @@
-[gd_scene load_steps=7 format=4 uid="uid://fpivfcuv6s1r"]
+[gd_scene load_steps=6 format=4 uid="uid://fpivfcuv6s1r"]
 
 [ext_resource type="Script" uid="uid://uyg6vw1fndgn" path="res://map/room_components/wall.gd" id="1_qq7eh"]
 [ext_resource type="Material" uid="uid://hnvx3t8awqp1" path="res://map/room_components/transparent_wall_with_doorway_material.tres" id="2_akohn"]
 [ext_resource type="Material" uid="uid://ca6og85us0udr" path="res://map/room_components/wall_with_doorway_material.tres" id="2_nyej4"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nv0kj"]
-resource_name = "Material"
-cull_mode = 2
-albedo_color = Color(0.906332, 0.906332, 0.906332, 1)
-roughness = 0.5
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_yqa6q"]
 _surfaces = [{
@@ -32,7 +26,6 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 84,
 "index_data": PackedByteArray("HwAHACIADQAcABMADQAZABwAHwABAAcADQAfABkAAQAfAA0AEgAnABUAEgAbACcACQAhAAYACQAkACEAFwAOABQAFwARAA4ALgAWACgABAAlAAoABAArACUALgAQABYABAAuACsAEAAuAAQABQAIAAIABQALAAgADwAAAAwADwADAAAALwAdABoALwApAB0AKgAYAB4AKgAtABgAIwAsACAAIwAmACwA"),
-"material": SubResource("StandardMaterial3D_nv0kj"),
 "name": "Material",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),

@@ -5,7 +5,8 @@ extends Node
 @warning_ignore("unused_signal") signal player_state_changed(state: PlayerStateMachine.States)
 
 # when the player takes damage. caught by player states to cause state change
-@warning_ignore("unused_signal") signal player_hurt
+@warning_ignore("unused_signal") signal player_hurt(entity: Node3D)
+@warning_ignore("unused_signal") signal player_escaped(entity: Node3D)
 @warning_ignore("unused_signal") signal game_over
 @warning_ignore("unused_signal") signal level_complete
 

@@ -41,7 +41,7 @@ func process_state() -> void:
 	pass
 
 
-func _on_player_hurt() -> void:
+func _on_player_hurt(_entity: Node3D) -> void:
 	# activate i-frames without flash
 	_parent.take_damage(false)
 	_state_machine.change_state(PlayerStateMachine.States.DEAD)
