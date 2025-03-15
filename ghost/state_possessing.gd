@@ -79,7 +79,7 @@ func exit() -> void:
 	detector_collision_shape.set_deferred("disabled", true)
 	
 	# depossess any currently possessed item
-	if is_possessing:
+	if is_possessing or target_possessable:
 		target_possessable.depossess()
 		is_possessing = false
 	
