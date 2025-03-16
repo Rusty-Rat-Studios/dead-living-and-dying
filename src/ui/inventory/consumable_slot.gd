@@ -2,8 +2,8 @@ extends InventorySlot
 
 var count: int
 
-@onready var label: Label = $Label
-@onready var color_rect: ColorRect = $ColorRect
+@onready var label: Label = $MarginContainer/Label
+@onready var color_rect: ColorRect = $MarginContainer/ColorRect
 
 func _on_item_picked_up(item_inventory: ItemInventory, current_consumable: bool = false) -> void:
 	if item_inventory is ConsumableItemInventory and current_consumable == false:
