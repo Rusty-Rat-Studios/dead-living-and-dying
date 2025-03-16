@@ -13,12 +13,16 @@ enum Stats {
 }
 
 # player base stats
+# additive
 const BASE_SPEED: float = 4.5
+
+# multipicative
 const BASE_COOLDOWN_REDUCTION: float = 1.0
 const BASE_DURATION: float = 1.0
 const BASE_AREA_SIZE: float = 1.0
 
 # base values used for light range and strength
+# additive
 const BASE_LIGHT_OMNI_RANGE: float = 6.0
 const BASE_LIGHT_SPOT_RANGE: float = 10.0
 const BASE_LIGHT_ENERGY: float = 1.0
