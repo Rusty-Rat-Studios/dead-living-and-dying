@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="EntityTable" load_steps=5 format=3 uid="uid://brngxo180e7qn"]
+
+[ext_resource type="Script" uid="uid://dt04phs8a5k3h" path="res://src/entity/entity_table_entry.gd" id="1_v674j"]
+[ext_resource type="PackedScene" uid="uid://dh8q75xrlxeaa" path="res://src/map/rooms/basic_room.tscn" id="2_3hsld"]
+[ext_resource type="Script" uid="uid://caxs80c62syve" path="res://src/entity/entity_table.gd" id="2_pws74"]
+
+[sub_resource type="Resource" id="Resource_b5ttb"]
+script = ExtResource("1_v674j")
+entity = ExtResource("2_3hsld")
+base_chance = 0.0
+chance_change = 0.0
+max_spawn = -1
+min_spawn = 25
+metadata/_custom_type_script = "uid://dt04phs8a5k3h"
+
+[resource]
+script = ExtResource("2_pws74")
+entities = Array[ExtResource("1_v674j")]([SubResource("Resource_b5ttb")])

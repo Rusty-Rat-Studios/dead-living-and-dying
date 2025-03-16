@@ -1,7 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://c5ivq2lahf7w0"]
-
-[ext_resource type="PackedScene" uid="uid://emms6seth0ys" path="res://items/item_inventory.tscn" id="1_cdi6h"]
-[ext_resource type="Script" uid="uid://ra5jn5q6q2qh" path="res://items/consumable_item_inventory.gd" id="2_84tp6"]
-
-[node name="ConsumableItemInventory" instance=ExtResource("1_cdi6h")]
-script = ExtResource("2_84tp6")

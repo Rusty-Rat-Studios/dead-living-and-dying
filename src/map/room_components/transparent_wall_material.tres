@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dfx01t1blqt3y"]
+
+[ext_resource type="Shader" uid="uid://bgy36jmkglwva" path="res://src/map/room_components/transparent_wall_shader.gdshader" id="1_xq5p1"]
+[ext_resource type="Texture2D" uid="uid://c6fjrr2bcg8tw" path="res://src/map/tileset-dhassa/wall2.png" id="2_mwxyv"]
+
+
+[resource]
+render_priority = 1
+shader = ExtResource("1_xq5p1")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("2_mwxyv")
+shader_parameter/uv1_scale = Vector3(15, 2, 2)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/player_offset = Vector3(0, 3, 0)
+shader_parameter/sphere_radius = 6.5

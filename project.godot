@@ -11,21 +11,21 @@ config_version=5
 [application]
 
 config/name="Dead Living and Dying"
-run/main_scene="res://ui/menus/main_menu.tscn"
+run/main_scene="res://src/ui/menus/main_menu.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="res://src/icon.svg"
 
 [autoload]
 
-SignalBus="*res://autoloads/signal_bus.gd"
-PlayerHandler="*res://autoloads/player_handler.gd"
-Focus="*res://autoloads/focus.gd"
-CollisionBit="*res://autoloads/collision_bit.gd"
-Utility="*res://autoloads/utility.gd"
-CommandParser="*res://autoloads/command_parser.gd"
-ShrineManager="*res://autoloads/shrine_manager.gd"
-RNG="*res://autoloads/rng.gd"
-SpawnerManager="*res://autoloads/spawner_manager.gd"
+SignalBus="*res://src/autoloads/signal_bus.gd"
+PlayerHandler="*res://src/autoloads/player_handler.gd"
+Focus="*res://src/autoloads/focus.gd"
+CollisionBit="*res://src/autoloads/collision_bit.gd"
+Utility="*res://src/autoloads/utility.gd"
+CommandParser="*res://src/autoloads/command_parser.gd"
+ShrineManager="*res://src/autoloads/shrine_manager.gd"
+RNG="*res://src/autoloads/rng.gd"
+SpawnerManager="*res://src/autoloads/spawner_manager.gd"
 
 [debug]
 
