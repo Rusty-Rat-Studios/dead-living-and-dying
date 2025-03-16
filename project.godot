@@ -26,6 +26,7 @@ CommandParser="*res://src/autoloads/command_parser.gd"
 ShrineManager="*res://src/autoloads/shrine_manager.gd"
 RNG="*res://src/autoloads/rng.gd"
 SpawnerManager="*res://src/autoloads/spawner_manager.gd"
+DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
 
 [debug]
 
@@ -40,7 +41,7 @@ window/stretch/scale=0.8
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/gut/plugin.cfg")
+enabled=PackedStringArray("res://addons/debug_menu/plugin.cfg", "res://addons/gut/plugin.cfg")
 
 [filesystem]
 
