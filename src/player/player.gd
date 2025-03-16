@@ -1,8 +1,6 @@
 class_name Player
 extends CharacterBody3D
 
-# player state machine, sibling node under Game node
-var state_machine: Node
 # used to track player corpse - handled by states
 var corpse: Corpse
 # player state machine, sibling node under Game node

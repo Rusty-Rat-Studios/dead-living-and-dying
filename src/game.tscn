@@ -28,7 +28,6 @@
 [ext_resource type="PackedScene" uid="uid://bsy7ilicbox53" path="res://src/entity/items/holy_water/holy_water_world.tscn" id="24_f1jbl"]
 [ext_resource type="PackedScene" uid="uid://k5kxbl8tsn6d" path="res://src/entity/items/carrot/carrot_world.tscn" id="27_xa8c5"]
 
-
 [sub_resource type="Resource" id="Resource_3y6bj"]
 script = ExtResource("9_xa8c5")
 location = Vector2(0, 0)
