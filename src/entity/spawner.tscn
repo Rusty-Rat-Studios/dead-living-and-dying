@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bmevu5yvsxttw"]
+
+[ext_resource type="Script" uid="uid://cmi16cdpctsb4" path="res://src/entity/spawner.gd" id="1_3bfx7"]
+
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kdpws"]
+albedo_color = Color(0.832057, 0.348852, 1.92523e-07, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_gnqmg"]
+material = SubResource("StandardMaterial3D_kdpws")
+
+[node name="Spawner" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+script = ExtResource("1_3bfx7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_gnqmg")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, 1)
+collide_with_bodies = false

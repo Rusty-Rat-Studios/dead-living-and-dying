@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="EntityTable" load_steps=10 format=3 uid="uid://cinkoxiqgkewm"]
+
+[ext_resource type="Script" uid="uid://dt04phs8a5k3h" path="res://src/entity/entity_table_entry.gd" id="1_77xku"]
+[ext_resource type="PackedScene" uid="uid://yihpxsaeuqdi" path="res://src/entity/ghost/ghost.tscn" id="2_n1cha"]
+[ext_resource type="PackedScene" uid="uid://cko3wlfgl81ce" path="res://src/entity/objects/crate/crate.tscn" id="3_xqmfg"]
+[ext_resource type="PackedScene" uid="uid://8tfld0cdj22d" path="res://src/entity/items/crucifix/crucifix_world.tscn" id="4_u85v7"]
+[ext_resource type="Script" uid="uid://caxs80c62syve" path="res://src/entity/entity_table.gd" id="5_53opc"]
+
+[sub_resource type="Resource" id="Resource_mbjog"]
+script = ExtResource("1_77xku")
+entity = ExtResource("2_n1cha")
+base_chance = 10.0
+chance_change = -3.0
+max_spawn = -1
+min_spawn = -1
+
+[sub_resource type="Resource" id="Resource_gdc5m"]
+script = ExtResource("1_77xku")
+entity = ExtResource("3_xqmfg")
+base_chance = 15.0
+chance_change = -3.0
+max_spawn = -1
+min_spawn = -1
+
+[sub_resource type="Resource" id="Resource_u8hqv"]
+script = ExtResource("1_77xku")
+entity = ExtResource("4_u85v7")
+base_chance = 10.0
+chance_change = -10.0
+max_spawn = -1
+min_spawn = -1
+
+[sub_resource type="Resource" id="Resource_sbsac"]
+script = ExtResource("1_77xku")
+base_chance = 20.0
+chance_change = -3.0
+max_spawn = -1
+min_spawn = -1
+
+[resource]
+script = ExtResource("5_53opc")
+entities = Array[ExtResource("1_77xku")]([SubResource("Resource_mbjog"), SubResource("Resource_gdc5m"), SubResource("Resource_u8hqv"), SubResource("Resource_sbsac")])

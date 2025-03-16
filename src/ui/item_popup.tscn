@@ -1,0 +1,116 @@
+[gd_scene load_steps=10 format=3 uid="uid://dvc1unlr5pme3"]
+
+[ext_resource type="Script" uid="uid://l1wv4ptsf202" path="res://src/ui/item_popup.gd" id="1_1utkn"]
+[ext_resource type="Texture2D" uid="uid://dpriohnhnc5tw" path="res://src/ui/resources/border-color.png" id="2_mx3dx"]
+[ext_resource type="Texture2D" uid="uid://c66hil17x108r" path="res://src/entity/items/key_item/key.png" id="3_mx3dx"]
+[ext_resource type="FontFile" uid="uid://c16563s6uqwuy" path="res://src/ui/resources/oswald_font/Oswald-VariableFont_wght.ttf" id="4_fvdrb"]
+
+
+[sub_resource type="Gradient" id="Gradient_cs4u5"]
+offsets = PackedFloat32Array(0.576389, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ytrdg"]
+gradient = SubResource("Gradient_cs4u5")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hmydm"]
+texture = SubResource("GradientTexture2D_ytrdg")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1utkn"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_bottom = 6
+border_color = Color(0.518482, 0.518482, 0.518482, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_toqn8"]
+bg_color = Color(1, 1, 1, 0.572549)
+
+[node name="ItemPopup" type="MarginContainer"]
+offset_right = 396.0
+offset_bottom = 114.0
+mouse_filter = 0
+script = ExtResource("1_1utkn")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0.133333, 0.133333, 0.133333, 1)
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_hmydm")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_mx3dx")
+draw_center = false
+region_rect = Rect2(0.15, 0.15, 0.7, 0.7)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+
+[node name="ProgressBar" type="ProgressBar" parent="NinePatchRect/MarginContainer"]
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_1utkn")
+theme_override_styles/fill = SubResource("StyleBoxFlat_toqn8")
+fill_mode = 1
+show_percentage = false
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("3_mx3dx")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_fvdrb")
+theme_override_font_sizes/font_size = 26
+text = "TITLE"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Description" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_fvdrb")
+theme_override_font_sizes/font_size = 20
+text = "DESCRIPTION"
+autowrap_mode = 2
+
+[node name="Timer" type="Timer" parent="."]

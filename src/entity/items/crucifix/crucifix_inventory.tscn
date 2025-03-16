@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://cdibgy57rubh6"]
+
+[ext_resource type="PackedScene" uid="uid://bpkp2ej6u0kax" path="res://src/entity/items/defense_item_inventory.tscn" id="1_x5nou"]
+[ext_resource type="Script" uid="uid://cycj76pyudxkc" path="res://src/entity/items/crucifix/crucifix_inventory.gd" id="2_8ft1u"]
+
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1v5j2"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.12549)
+
+[sub_resource type="TorusMesh" id="TorusMesh_4x5sf"]
+material = SubResource("StandardMaterial3D_1v5j2")
+inner_radius = 1.8
+outer_radius = 2.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_xw4mg"]
+height = 4.0
+radius = 2.0
+
+[node name="CrucifixInventory" instance=ExtResource("1_x5nou")]
+script = ExtResource("2_8ft1u")
+
+[node name="Hitbox" type="Area3D" parent="." index="0"]
+visible = false
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Hitbox" index="0"]
+mesh = SubResource("TorusMesh_4x5sf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="1"]
+shape = SubResource("CylinderShape3D_xw4mg")
+disabled = true
+
+[node name="CooldownTimer" type="Timer" parent="." index="1"]
+one_shot = true
+
+[node name="ActiveTimer" type="Timer" parent="." index="2"]
+one_shot = true
