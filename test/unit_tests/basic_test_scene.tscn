@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://d4cxt6unhu3c6"]
+[gd_scene load_steps=8 format=3 uid="uid://dwvs4yuhtwl10"]
 
 [ext_resource type="Script" uid="uid://br2ou0xf5p2mo" path="res://src/game.gd" id="1_qruwo"]
 [ext_resource type="PackedScene" uid="uid://bbow7knip3g6g" path="res://src/player/player.tscn" id="2_ahfm4"]
@@ -6,20 +6,7 @@
 [ext_resource type="Script" uid="uid://kgcxuhne3rbl" path="res://src/player/state_machine/state_dead.gd" id="4_6a0g5"]
 [ext_resource type="Script" uid="uid://btdlvy02iwmn2" path="res://src/player/state_machine/state_living.gd" id="5_dobku"]
 [ext_resource type="Script" uid="uid://bfwa3mijk47us" path="res://src/player/state_machine/state_dying.gd" id="6_imvu0"]
-[ext_resource type="Script" uid="uid://bo0tyfrjfebc6" path="res://src/map/room_components/room.gd" id="7_01ym3"]
-[ext_resource type="PackedScene" uid="uid://b3nn5u3a5o85j" path="res://src/map/room_components/floor.tscn" id="8_0ag1w"]
-[ext_resource type="PackedScene" uid="uid://te0dpapcosk4" path="res://src/map/rooms/basic_room_minimap.tscn" id="8_thsbo"]
-[ext_resource type="Script" uid="uid://dqhrw6rxew3fa" path="res://src/common/door_location.gd" id="9_616hd"]
-[ext_resource type="PackedScene" uid="uid://bson3umirpot2" path="res://src/map/room_components/wall.tscn" id="9_exyhi"]
-[ext_resource type="Script" uid="uid://bv4f3snq7u1u2" path="res://src/common/room_information.gd" id="10_6hyob"]
 [ext_resource type="PackedScene" uid="uid://cp7202hwhpcd5" path="res://src/ui/ui.tscn" id="10_feeg7"]
-
-[sub_resource type="Resource" id="Resource_dhis3"]
-script = ExtResource("10_6hyob")
-room_shape = Array[Vector2]([Vector2(0, 0)])
-possible_door_locations = Array[ExtResource("9_616hd")]([])
-minimap_component = ExtResource("8_thsbo")
-metadata/_custom_type_script = "uid://bv4f3snq7u1u2"
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_qruwo")
@@ -38,25 +25,6 @@ script = ExtResource("5_dobku")
 
 [node name="Dying" type="Node" parent="StateMachine"]
 script = ExtResource("6_imvu0")
-
-[node name="DebugRoom" type="Node3D" parent="." groups=["rooms"]]
-script = ExtResource("7_01ym3")
-spawn_room = true
-room_information = SubResource("Resource_dhis3")
-
-[node name="Floor" parent="DebugRoom" instance=ExtResource("8_0ag1w")]
-
-[node name="WallWithoutDoor" parent="DebugRoom" instance=ExtResource("9_exyhi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.05)
-
-[node name="WallWithoutDoor2" parent="DebugRoom" instance=ExtResource("9_exyhi")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.05, 0, 0)
-
-[node name="WallWithoutDoor3" parent="DebugRoom" instance=ExtResource("9_exyhi")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8.05, 0, 0)
-
-[node name="WallWithoutDoor4" parent="DebugRoom" instance=ExtResource("9_exyhi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.05)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.830566, 0.486173, -0.271654, 0.260189, 0.770014, 0.582563, 0.492404, 0.413176, -0.766044, 0, -4.37114e-07, -10)
