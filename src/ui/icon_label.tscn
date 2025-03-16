@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvug3f6e36er6"]
+
+[ext_resource type="Script" uid="uid://be4y8bjljh5g8" path="res://src/ui/icon_label.gd" id="1_665ji"]
+
+[node name="IconLabel" type="RichTextLabel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "Press [img={30}]res://src/ui/resources/control_icons/E.png[/img] to activate"
+scroll_active = false
+horizontal_alignment = 2
+vertical_alignment = 2
+script = ExtResource("1_665ji")
