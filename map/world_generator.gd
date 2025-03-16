@@ -4,13 +4,15 @@ extends Object
 const GENERATOR_ATTEMPTS: int = 10 # Number of consecutive failed attempts before error 
 
 var room_table: EntityTable
+var spread: float
 var occupied_grid: Array[Vector2] = []
 var door_grid: Array[DoorLocation] = []
 
 
-func _init(_room_table: EntityTable, initial_occupied_grid: Array[Vector2], 
+func _init(generator_settings: GeneratorSettings, initial_occupied_grid: Array[Vector2], 
 	initial_door_grid: Array[DoorLocation]) -> void:
-	room_table = _room_table
+	room_table = generator_settings.room_table
+	spread = generator_settings.spread
 	occupied_grid = initial_occupied_grid
 	door_grid = initial_door_grid
 
@@ -38,8 +40,14 @@ func generate_grid(grid: WorldGrid) -> void:
 			push_error("ERROR: Room generation failed, ¯\\_(ツ)_/¯ Ran out of doors")
 			return
 		
-		var target_door: DoorLocation = RNG.random_from_list(door_grid)
-		var room_door_dir: DoorLocation.Direction = target_door.invert().direction # Diection of required connecting door
+		var weighted_door_grid: Dictionary[Variant, float] = {}
+		
+		for door_location: DoorLocation in door_grid:
+			var dist: float = door_location.invert().location.length() ** spread
+			weighted_door_grid[door_location] = dist
+		
+		var target_door: DoorLocation = RNG.weighted_random(weighted_door_grid)
+		var room_door_dir: DoorLocation.Direction = target_door.invert().direction # Direction of required connecting door
 		
 		print("Selected door %s, needing direction %s" % [target_door.string(), DoorLocation.Direction.keys()[room_door_dir]])
 		

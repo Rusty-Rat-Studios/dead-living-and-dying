@@ -7,15 +7,7 @@ extends Node3D
 
 const GRID_SCALE: float = 16 # Size of each grid square in editor units
 
-@export var room_table: EntityTable = null
-
-@export_category("Spawner Entity Tables")
-@export var enemy_entity_table: EntityTable = null
-@export var item_entity_table: EntityTable = null
-@export var key_item_entity_table: EntityTable = null
-@export var entity_floor_entity_table: EntityTable = null
-@export var entity_wall_entity_table: EntityTable = null
-@export var boss_entity_table: EntityTable = null
+@export var generator_settings: GeneratorSettings = null
 
 var room_map: HashMap = HashMap.new()
 
@@ -27,9 +19,9 @@ func _ready() -> void:
 func setup_grid() -> void:
 	var occupied_and_door_grids: Dictionary[String, Array] = _load_grid_with_current_scene()
 	
-	if room_table != null:
+	if generator_settings != null and generator_settings.room_table != null:
 		var generator: WorldGenerator = WorldGenerator.new(
-			room_table,
+			generator_settings,
 			occupied_and_door_grids.get('occupied_grid'),
 			occupied_and_door_grids.get('door_grid')
 		)
@@ -87,12 +79,12 @@ func _init_all_rooms() -> void:
 
 
 func _spawn_entities() -> void:
-	SpawnerManager.spawn(Spawner.SpawnerType.ENEMY, enemy_entity_table)
-	SpawnerManager.spawn(Spawner.SpawnerType.ITEM, item_entity_table)
-	SpawnerManager.spawn(Spawner.SpawnerType.KEY_ITEM, key_item_entity_table)
-	SpawnerManager.spawn(Spawner.SpawnerType.ENTITY_FLOOR, entity_floor_entity_table)
-	SpawnerManager.spawn(Spawner.SpawnerType.ENTITY_WALL, entity_wall_entity_table)
-	SpawnerManager.spawn(Spawner.SpawnerType.BOSS, boss_entity_table)
+	SpawnerManager.spawn(Spawner.SpawnerType.ENEMY, generator_settings.enemy_entity_table)
+	SpawnerManager.spawn(Spawner.SpawnerType.ITEM, generator_settings.enemy_entity_table)
+	SpawnerManager.spawn(Spawner.SpawnerType.KEY_ITEM, generator_settings.enemy_entity_table)
+	SpawnerManager.spawn(Spawner.SpawnerType.ENTITY_FLOOR, generator_settings.enemy_entity_table)
+	SpawnerManager.spawn(Spawner.SpawnerType.ENTITY_WALL, generator_settings.enemy_entity_table)
+	SpawnerManager.spawn(Spawner.SpawnerType.BOSS, generator_settings.enemy_entity_table)
 
 
 # Returns the occupied_grid and door_grid of a room
