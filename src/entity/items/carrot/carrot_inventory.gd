@@ -7,7 +7,7 @@ const NAME: String = "carrot"
 func _ready() -> void:
 	display_name = "carrot"
 	description = "PASSIVE ITEM: Increases your base light radius. Tasty!"
-	texture = preload("res://items/carrot/carrot.png")
+	texture = preload("res://src/entity/items/carrot/carrot.png")
 	update()
 
 
