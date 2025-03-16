@@ -7,7 +7,6 @@
 [ext_resource type="Theme" uid="uid://casdoijkjemc2" path="res://src/ui/resources/menu_theme.tres" id="4_31m45"]
 [ext_resource type="PackedScene" uid="uid://d2i1eypiamq2d" path="res://src/ui/menus/how_to_play.tscn" id="6_s0122"]
 
-
 [node name="MainMenu" instance=ExtResource("1_xct2y")]
 script = ExtResource("1_85sq6")
 
