@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://did6fp0d5ial8"
-path="res://.godot/imported/F.png-2ef67e416d22f10bf1ab010e16cdf861.ctex"
+uid="uid://bqk6tblbe7khh"
+path="res://.godot/imported/button_xbox_digital_b_1.png-6a72699addc5ffd2445ce1f7b87a60d1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/resources/control_icons/F.png"
-dest_files=["res://.godot/imported/F.png-2ef67e416d22f10bf1ab010e16cdf861.ctex"]
+source_file="res://src/ui/resources/control_icons/button_xbox_digital_b_1.png"
+dest_files=["res://.godot/imported/button_xbox_digital_b_1.png-6a72699addc5ffd2445ce1f7b87a60d1.ctex"]
 
 [params]
 

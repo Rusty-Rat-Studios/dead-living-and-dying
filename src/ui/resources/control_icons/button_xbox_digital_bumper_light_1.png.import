@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://f0lytkrqptcr"
-path="res://.godot/imported/button_xbox_digital_x_1.png-982f0fa75286850c61e0c4639825e2a9.ctex"
+uid="uid://chcuwo551u45j"
+path="res://.godot/imported/button_xbox_digital_bumper_light_1.png-1205204e3c08b4673b15074e8b114836.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/resources/control_icons/button_xbox_digital_x_1.png"
-dest_files=["res://.godot/imported/button_xbox_digital_x_1.png-982f0fa75286850c61e0c4639825e2a9.ctex"]
+source_file="res://src/ui/resources/control_icons/button_xbox_digital_bumper_light_1.png"
+dest_files=["res://.godot/imported/button_xbox_digital_bumper_light_1.png-1205204e3c08b4673b15074e8b114836.ctex"]
 
 [params]
 

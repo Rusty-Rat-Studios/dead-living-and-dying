@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://clhkwjb5m4bxe"
-path="res://.godot/imported/E.png-a822c930f0c64db193528291fb73e452.ctex"
+uid="uid://crhqje61w2pmb"
+path="res://.godot/imported/button_xbox_analog_trigger_light_2.png-ea027b88e40571ad8881166eb79ad885.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://ui/resources/control_icons/E.png"
-dest_files=["res://.godot/imported/E.png-a822c930f0c64db193528291fb73e452.ctex"]
+source_file="res://src/ui/resources/control_icons/button_xbox_analog_trigger_light_2.png"
+dest_files=["res://.godot/imported/button_xbox_analog_trigger_light_2.png-ea027b88e40571ad8881166eb79ad885.ctex"]
 
 [params]
 
