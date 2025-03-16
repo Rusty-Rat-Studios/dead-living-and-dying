@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0ilwk6w6qtbw"]
+
+[ext_resource type="Script" uid="uid://bemtru136ei5c" path="res://src/entity/items/rosary/rosary_inventory.gd" id="1_g65dg"]
+
+[node name="RosaryInventory" type="Node3D"]
+script = ExtResource("1_g65dg")

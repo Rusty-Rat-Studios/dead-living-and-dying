@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://jlav0m1ndqde"]
+[gd_scene load_steps=42 format=3 uid="uid://jlav0m1ndqde"]
 
 [ext_resource type="Script" uid="uid://br2ou0xf5p2mo" path="res://src/game.gd" id="1_77rk7"]
 [ext_resource type="PackedScene" uid="uid://bbow7knip3g6g" path="res://src/player/player.tscn" id="1_hu241"]
@@ -22,12 +22,12 @@
 [ext_resource type="PackedScene" uid="uid://cexvn2mosncly" path="res://src/map/room_components/door.tscn" id="19_vaj68"]
 [ext_resource type="PackedScene" uid="uid://cko3wlfgl81ce" path="res://src/entity/objects/crate/crate.tscn" id="21_d31jr"]
 [ext_resource type="PackedScene" uid="uid://d3uaapt6yn0ed" path="res://src/entity/items/tea/tea_world.tscn" id="21_lgjc2"]
+[ext_resource type="PackedScene" uid="uid://80yawtiqgmqy" path="res://src/entity/items/rosary/rosary_world.tscn" id="22_p8kkm"]
 [ext_resource type="PackedScene" uid="uid://dxrbbho8wlerh" path="res://src/entity/items/fuel/fuel_world.tscn" id="23_3haxr"]
 [ext_resource type="PackedScene" uid="uid://b58p4qke66th5" path="res://src/entity/ghost/boss/ghost_boss.tscn" id="23_36jdj"]
 [ext_resource type="PackedScene" uid="uid://cp7202hwhpcd5" path="res://src/ui/ui.tscn" id="23_qhcbd"]
 [ext_resource type="PackedScene" uid="uid://bsy7ilicbox53" path="res://src/entity/items/holy_water/holy_water_world.tscn" id="24_f1jbl"]
 [ext_resource type="PackedScene" uid="uid://k5kxbl8tsn6d" path="res://src/entity/items/carrot/carrot_world.tscn" id="27_xa8c5"]
-
 
 [sub_resource type="Resource" id="Resource_3y6bj"]
 script = ExtResource("9_xa8c5")
@@ -181,6 +181,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05321, 1.25974, -5.80922)
 
 [node name="holy_water2" parent="WorldGrid/RoomBottom" instance=ExtResource("24_f1jbl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.03833, 1.25974, -5.00578)
+
+[node name="RosaryWorld" parent="WorldGrid/RoomBottom" instance=ExtResource("22_p8kkm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.4075, 0.793856, 1.78992)
 
 [node name="RoomCenter" type="Node3D" parent="WorldGrid" groups=["rooms"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16)
