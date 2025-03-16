@@ -42,16 +42,9 @@ func generate_grid(grid: WorldGrid) -> void:
 		
 		var weighted_door_grid: Dictionary[Variant, float] = {}
 		
-		if room_table.count_remaining_entities() < room_table.count_max_entities() / 2:
-			for door_location: DoorLocation in door_grid:
-				var connected_door_location: Vector2 = door_location.invert().location
-				var dist: float = connected_door_location.length()
-				weighted_door_grid[door_location] = spread ** (-dist)
-		else:
-			for door_location: DoorLocation in door_grid:
-				var connected_door_location: Vector2 = door_location.invert().location
-				var dist: float = connected_door_location.length()
-				weighted_door_grid[door_location] = dist ** spread
+		for door_location: DoorLocation in door_grid:
+			var dist: float = door_location.invert().location.length() ** spread
+			weighted_door_grid[door_location] = dist
 		
 		var target_door: DoorLocation = RNG.weighted_random(weighted_door_grid)
 		var room_door_dir: DoorLocation.Direction = target_door.invert().direction # Direction of required connecting door
