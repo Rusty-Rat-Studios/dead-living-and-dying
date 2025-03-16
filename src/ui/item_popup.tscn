@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://l1wv4ptsf202" path="res://src/ui/item_popup.gd" id="1_1utkn"]
 [ext_resource type="Texture2D" uid="uid://dpriohnhnc5tw" path="res://src/ui/resources/border-color.png" id="2_mx3dx"]
-[ext_resource type="Texture2D" uid="uid://c66hil17x108r" path="res://src/items/key_item/key.png" id="3_mx3dx"]
+[ext_resource type="Texture2D" uid="uid://c66hil17x108r" path="res://src/entity/items/key_item/key.png" id="3_mx3dx"]
 [ext_resource type="FontFile" uid="uid://c16563s6uqwuy" path="res://src/ui/resources/oswald_font/Oswald-VariableFont_wght.ttf" id="4_fvdrb"]
 
 
