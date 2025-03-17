@@ -9,6 +9,7 @@ var count: int
 func _ready() -> void:
 	super()
 	# set icon according to input map
+	_input_event = "use_consumable_item"
 	$MarginIcon/IconLabel.init("use_consumable_item")
 
 

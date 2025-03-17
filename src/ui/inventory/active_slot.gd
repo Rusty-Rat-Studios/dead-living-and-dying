@@ -4,6 +4,7 @@ extends CooldownSlot
 func _ready() -> void:
 	super()
 	# set icon according to input map
+	_input_event = "use_active_item"
 	$MarginIcon/IconLabel.init("use_active_item")
 
 

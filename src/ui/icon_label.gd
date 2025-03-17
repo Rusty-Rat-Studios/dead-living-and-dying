@@ -16,6 +16,10 @@ func init(input_string: String) -> void:
 	text = UIDevice.retrieve_icon(input_string)
 
 
+func update(input_string: String, size: int = bbcode_size) -> void:
+	text = UIDevice.retrieve_icon_sized(input_string, size)
+	
+
 func _on_parent_resized() -> void:
 	bbcode_size = get_parent().size.x / SCALE_FACTOR
 	if text:
