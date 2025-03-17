@@ -1,12 +1,14 @@
 extends RichTextLabel
 
+# used for single icons (e.g. UI inventory slots) as they need
+# to be extra-large and based on the size of the parent container
 const SCALE_FACTOR: float = 4
 
 @export var single_icon: bool = false
 
+# set to either proportional to container or default size
+# based on if "single_icon" export is set
 var bbcode_size: int
-
-@onready var bbcode: String = text
 
 
 func _ready() -> void:
@@ -23,6 +25,8 @@ func init(input_string: String) -> void:
 	text = UIDevice.retrieve_icon(input_string)
 
 
+# takes in a text string with an embedded BBCode [img] tag
+# and replaces it with the current device icon, optionally resized
 func update(input_string: String, updated_size: int = bbcode_size) -> void:
 	# preserve text before and after BBCode icon
 	var bbcode_start: int = text.find("[")
@@ -35,6 +39,7 @@ func update(input_string: String, updated_size: int = bbcode_size) -> void:
 	text_icon = UIDevice.retrieve_icon_sized(input_string, updated_size)
 	# reconstruct existing string with updated BBCode image
 	text = text_pre_icon + text_icon + text_post_icon
+
 
 func _on_parent_resized() -> void:
 	bbcode_size = get_parent().size.x / SCALE_FACTOR

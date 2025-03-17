@@ -1,31 +1,31 @@
 extends Node
 
 """
-have an array of all controller input
+This script contains two dictionaries, one for KBM and one for controller,
+containing the related BBCode image tag for displaying the icon related
+to an input event according to the device.
 
-for every input detected, check if it maps to an controller input
-
-if so, change the reference for the list of icons for a ui action
-to the respective controller input
-
-if switched to controller input, swap the detection to listen for
-a keyboard/mouse input
+It detects if the input device has changed and updates the current icon
+map to point to the one for the last-used input device. Then it emits a
+signal that is caught by all nodes that display an icon who then can
+retrieve the related icon according to the updated map.
 """
 
 # emitted when input detected on a different device than current one
 # i.e. keyboard is the current map and controller input is detected
 signal icon_map_changed
 
+# if no size is provided for bbcode image, this default size is used
 const DEFAULT_BBCODE_SIZE: int = 15
 
 var icon_map_keyboard: Dictionary
-
 var icon_map_controller: Dictionary
 
 # pointer for which icon map to use
 # changed according to last input device
 var current_map: Dictionary = icon_map_keyboard
 
+# for debugging -> displayed if no icon is found
 var no_icon_found: String = "[img={}]res://src/icon.svg[/img]"
 
 func _ready() -> void:
@@ -45,8 +45,8 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	# search for event as hardcoded key-presses ("k" key, "x button", etc.) not their corresponing ui event
-	# change current_map to point to keyboard or controller map based on the source device of the last input pressed
+	# change current_map to point to keyboard or controller map 
+	# based on the source device of the last input pressed
 	if (current_map == icon_map_controller and 
 		(event is InputEventKey or
 		event is InputEventMouseButton)):
@@ -69,14 +69,11 @@ func retrieve_icon(input: String) -> String:
 # performs same action as retrieve_icon() but inserts a size parameter to the [img] tag
 # e.g. given size = 6, returns [img={6}]{image_path}[/img]
 func retrieve_icon_sized(input: String, size: int = DEFAULT_BBCODE_SIZE) -> String:
-	var img_sized: String
 	if current_map.has(input):
 		return resize_bbcode(current_map[input], size)
 	return resize_bbcode(no_icon_found, size)
 
 
-# takes a text string and inserts a size parameter to the [img] tag
+# takes a BBCode text string and inserts a size parameter to the [img] tag
 func resize_bbcode(text: String, size: int = DEFAULT_BBCODE_SIZE) -> String:
-	#print("resizing: ", text)
-	#print("to: ", String("[img={" + String.num_int64(size) + "}" + text.substr(text.find("]"))))
 	return String("[img={" + String.num_int64(size) + "}" + text.substr(text.find("]")))

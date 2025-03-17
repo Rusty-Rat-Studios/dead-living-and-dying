@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://dfd0jw1e7o2xv" path="res://src/ui/interactable.gd" id="1_x07wr"]
 
-
 [node name="Interactable" type="Node3D"]
 script = ExtResource("1_x07wr")
 
