@@ -14,7 +14,7 @@ func _ready() -> void:
 		bbcode_size = get_parent().size.x / SCALE_FACTOR
 		get_parent().resized.connect(_on_parent_resized)
 	else:
-		bbcode_size = 15
+		bbcode_size = UIDevice.DEFAULT_BBCODE_SIZE
 	if text:
 		text = UIDevice.resize_bbcode(text, bbcode_size)
 
@@ -23,7 +23,7 @@ func init(input_string: String) -> void:
 	text = UIDevice.retrieve_icon(input_string)
 
 
-func update(input_string: String, size: int = bbcode_size) -> void:
+func update(input_string: String, updated_size: int = bbcode_size) -> void:
 	# preserve text before and after BBCode icon
 	var bbcode_start: int = text.find("[")
 	var bbcode_end: int = text.rfind("]") + 1
@@ -32,7 +32,7 @@ func update(input_string: String, size: int = bbcode_size) -> void:
 	var text_post_icon: String = text.substr(bbcode_end) # text after [/img]
 	
 	# update BBCode
-	text_icon = UIDevice.retrieve_icon_sized(input_string, size)
+	text_icon = UIDevice.retrieve_icon_sized(input_string, updated_size)
 	# reconstruct existing string with updated BBCode image
 	text = text_pre_icon + text_icon + text_post_icon
 

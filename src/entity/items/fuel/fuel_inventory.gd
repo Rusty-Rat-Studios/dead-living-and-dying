@@ -16,7 +16,7 @@ var cooldown_active: bool = false
 func _ready() -> void:
 	display_name = "Fuel"
 	input_event = "use_active_item"
-	description = ("Active ITEM: Use with " + UIDevice.retrieve_icon_sized(input_event, UIDevice.DEFAULT_BBCODE_SIZE)
+	description = ("Active ITEM: Use with " + UIDevice.retrieve_icon_sized(input_event)
 		+ " to temporarily increase your light's strength.")
 	texture = preload("res://src/entity/items/fuel/fuel.png")
 	

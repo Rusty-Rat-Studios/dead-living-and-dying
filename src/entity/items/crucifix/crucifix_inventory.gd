@@ -13,7 +13,7 @@ func _ready() -> void:
 	world_resource = preload("res://src/entity/items/crucifix/crucifix_inventory.tscn")
 	display_name = "Crucifix"
 	input_event = "use_defense_item"
-	description = ("DEFENSE ITEM: Use with " + UIDevice.retrieve_icon_sized(input_event, UIDevice.DEFAULT_BBCODE_SIZE)
+	description = ("DEFENSE ITEM: Use with " + UIDevice.retrieve_icon_sized(input_event)
 		+ " to exorcise possessed objects within a limited range.")
 	texture = preload("res://src/entity/items/crucifix/crucifix.png")
 	
