@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://yihpxsaeuqdi" path="res://src/entity/ghost/ghost.tscn" id="2_dtqoj"]
 [ext_resource type="PackedScene" uid="uid://cko3wlfgl81ce" path="res://src/entity/objects/crate/crate.tscn" id="3_j38xt"]
 
-
 [node name="Game" instance=ExtResource("1_oa6jy")]
 
 [node name="Ghost" parent="DebugRoom" index="5" instance=ExtResource("2_dtqoj")]

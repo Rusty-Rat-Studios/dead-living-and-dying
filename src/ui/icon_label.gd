@@ -7,7 +7,6 @@ const SCALE_FACTOR: float = 4
 
 
 func _ready() -> void:
-	print("bbcode size: ", bbcode_size)
 	get_parent().resized.connect(_on_parent_resized)
 	if text:
 		text = UIDevice.resize_bbcode(text, bbcode_size)

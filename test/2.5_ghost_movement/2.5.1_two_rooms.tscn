@@ -18,7 +18,6 @@
 [ext_resource type="PackedScene" uid="uid://yihpxsaeuqdi" path="res://src/entity/ghost/ghost.tscn" id="15_v3dvb"]
 [ext_resource type="PackedScene" uid="uid://cp7202hwhpcd5" path="res://src/ui/ui.tscn" id="17_tmdmn"]
 
-
 [sub_resource type="Resource" id="Resource_3y6bj"]
 script = ExtResource("3_be0u2")
 location = Vector2(0, 0)

@@ -37,9 +37,9 @@ func _ready() -> void:
 	
 	icon_map_controller["ui_accept"] = "[img={}]res://src/ui/resources/control_icons/button_xbox_digital_a_1.png[/img]"
 	icon_map_controller["interact"] = "[img={}]res://src/ui/resources/control_icons/button_xbox_digital_x_1.png[/img]"
-	icon_map_controller["use_defense_item"] = "[img={}]res://src/ui/resources/control_icons/button_xbox_analog_trigger_light_2.png[/img]" #right trigger
-	icon_map_controller["use_active_item"] = "[img={}]res://src/ui/resources/control_icons/button_xbox_analog_trigger_light_1.png[/img]" # left trigger
-	icon_map_controller["use_consumable_item"] = "[img={}]res://src/ui/resources/control_icons/button_xbox_digital_bumper_light_2.png[/img]" # right bumper
+	icon_map_controller["use_defense_item"] = "[img={}]res://src/ui/resources/control_icons/button_xbox_analog_trigger_light_2.png[/img]"
+	icon_map_controller["use_active_item"] = "[img={}]res://src/ui/resources/control_icons/button_xbox_analog_trigger_light_1.png[/img]"
+	icon_map_controller["use_consumable_item"] = "[img={}]res://src/ui/resources/control_icons/button_xbox_digital_bumper_light_2.png[/img]"
 
 
 func _input(event: InputEvent) -> void:
@@ -68,16 +68,15 @@ func retrieve_icon(input: String) -> String:
 # e.g. given size = 6, returns [img={6}]{image_path}[/img]
 func retrieve_icon_sized(input: String, size: int) -> String:
 	var img_sized: String
-	if not current_map.has(input):
-		return resize_bbcode(no_icon_found, size)
-	else:
+	if current_map.has(input):
 		return resize_bbcode(current_map[input], size)
+	return resize_bbcode(no_icon_found, size)
 
 
 # takes a text string and inserts a size parameter to the [img] tag
 func resize_bbcode(text: String, size: int) -> String:
-	print("resizing: ", text)
-	print("to: ", String("[img={" + String.num_int64(size) + "}" + text.substr(text.find("]"))))
+	#print("resizing: ", text)
+	#print("to: ", String("[img={" + String.num_int64(size) + "}" + text.substr(text.find("]"))))
 	return String("[img={" + String.num_int64(size) + "}" + text.substr(text.find("]")))
 
 

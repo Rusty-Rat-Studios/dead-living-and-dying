@@ -14,7 +14,6 @@
 [ext_resource type="Script" uid="uid://bv4f3snq7u1u2" path="res://src/common/room_information.gd" id="10_6hyob"]
 [ext_resource type="PackedScene" uid="uid://cp7202hwhpcd5" path="res://src/ui/ui.tscn" id="10_feeg7"]
 
-
 [sub_resource type="Resource" id="Resource_dhis3"]
 script = ExtResource("10_6hyob")
 room_shape = Array[Vector2]([Vector2(0, 0)])
