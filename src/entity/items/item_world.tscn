@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://bp0ydphecs3iv" path="res://src/common/shadow.tscn" id="3_116lv"]
 [ext_resource type="Script" uid="uid://db2v7j1wnkduq" path="res://src/common/sprite_backlight.gd" id="3_e25w4"]
 
-
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fj23q"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_usb8p"]

@@ -15,7 +15,9 @@ var cooldown_active: bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	display_name = "Fuel"
-	description = "Active ITEM: Use with RMB to temporarily increase your light's strength."
+	input_event = "use_active_item"
+	description = ("Active ITEM: Use with " + UIDevice.retrieve_icon_sized(input_event, UIDevice.DEFAULT_BBCODE_SIZE)
+		+ " to temporarily increase your light's strength.")
 	texture = preload("res://src/entity/items/fuel/fuel.png")
 	
 	$ActiveTimer.wait_time = BASE_ACTIVE_DURATION

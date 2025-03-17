@@ -1,10 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://dvc1unlr5pme3"]
+[gd_scene load_steps=11 format=3 uid="uid://dvc1unlr5pme3"]
 
 [ext_resource type="Script" uid="uid://l1wv4ptsf202" path="res://src/ui/item_popup.gd" id="1_1utkn"]
 [ext_resource type="Texture2D" uid="uid://dpriohnhnc5tw" path="res://src/ui/resources/border-color.png" id="2_mx3dx"]
 [ext_resource type="Texture2D" uid="uid://c66hil17x108r" path="res://src/entity/items/key_item/key.png" id="3_mx3dx"]
 [ext_resource type="FontFile" uid="uid://c16563s6uqwuy" path="res://src/ui/resources/oswald_font/Oswald-VariableFont_wght.ttf" id="4_fvdrb"]
-
+[ext_resource type="PackedScene" uid="uid://dvug3f6e36er6" path="res://src/ui/icon_label.tscn" id="5_2by1c"]
 
 [sub_resource type="Gradient" id="Gradient_cs4u5"]
 offsets = PackedFloat32Array(0.576389, 1)
@@ -105,12 +105,13 @@ text = "TITLE"
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Description" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="Description" parent="MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("5_2by1c")]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4_fvdrb")
-theme_override_font_sizes/font_size = 20
-text = "DESCRIPTION"
-autowrap_mode = 2
+size_flags_vertical = 4
+text = "DESCRIPTION WITH ICON [img={30}]res://src/ui/resources/control_icons/E.png[/img]"
+fit_content = true
+horizontal_alignment = 0
+vertical_alignment = 0
 
 [node name="Timer" type="Timer" parent="."]

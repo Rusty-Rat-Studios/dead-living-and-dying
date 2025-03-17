@@ -36,3 +36,4 @@ theme_override_constants/margin_bottom = 7
 [node name="IconLabel" parent="MarginIcon" instance=ExtResource("3_4m7xu")]
 layout_mode = 2
 text = "[img={20}]res://src/ui/resources/control_icons/E.png[/img]"
+single_icon = true

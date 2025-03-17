@@ -16,6 +16,8 @@ a keyboard/mouse input
 # i.e. keyboard is the current map and controller input is detected
 signal icon_map_changed
 
+const DEFAULT_BBCODE_SIZE: int = 15
+
 var icon_map_keyboard: Dictionary
 
 var icon_map_controller: Dictionary
@@ -27,8 +29,6 @@ var current_map: Dictionary = icon_map_keyboard
 var no_icon_found: String = "[img={}]res://src/icon.svg[/img]"
 
 func _ready() -> void:
-	icon_map_changed.connect(_on_icon_map_changed)
-	
 	#gdlint:disable=max-line-length
 	icon_map_keyboard["ui_accept"] = "[img={}]res://src/ui/resources/control_icons/ENTER.png[/img]"
 	icon_map_keyboard["interact"] = "[img={}]res://src/ui/resources/control_icons/E.png[/img]"
@@ -68,7 +68,7 @@ func retrieve_icon(input: String) -> String:
 
 # performs same action as retrieve_icon() but inserts a size parameter to the [img] tag
 # e.g. given size = 6, returns [img={6}]{image_path}[/img]
-func retrieve_icon_sized(input: String, size: int) -> String:
+func retrieve_icon_sized(input: String, size: int = DEFAULT_BBCODE_SIZE) -> String:
 	var img_sized: String
 	if current_map.has(input):
 		return resize_bbcode(current_map[input], size)
@@ -76,11 +76,7 @@ func retrieve_icon_sized(input: String, size: int) -> String:
 
 
 # takes a text string and inserts a size parameter to the [img] tag
-func resize_bbcode(text: String, size: int) -> String:
+func resize_bbcode(text: String, size: int = DEFAULT_BBCODE_SIZE) -> String:
 	#print("resizing: ", text)
 	#print("to: ", String("[img={" + String.num_int64(size) + "}" + text.substr(text.find("]"))))
 	return String("[img={" + String.num_int64(size) + "}" + text.substr(text.find("]")))
-
-
-func _on_icon_map_changed() -> void:
-	print("icon map changed to ", current_map)

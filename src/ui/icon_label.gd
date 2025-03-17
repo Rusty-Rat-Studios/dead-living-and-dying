@@ -2,12 +2,19 @@ extends RichTextLabel
 
 const SCALE_FACTOR: float = 4
 
-@onready var bbcode_size: int = get_parent().size.x / SCALE_FACTOR
+@export var single_icon: bool = false
+
+var bbcode_size: int
+
 @onready var bbcode: String = text
 
 
 func _ready() -> void:
-	get_parent().resized.connect(_on_parent_resized)
+	if single_icon:
+		bbcode_size = get_parent().size.x / SCALE_FACTOR
+		get_parent().resized.connect(_on_parent_resized)
+	else:
+		bbcode_size = 15
 	if text:
 		text = UIDevice.resize_bbcode(text, bbcode_size)
 
