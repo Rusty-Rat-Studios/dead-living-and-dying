@@ -13,4 +13,5 @@
   "suffix":".test.gd",
   "tests":[],
   "unit_test_name":"",
+  "hide_orphans": true,
 }
