@@ -29,6 +29,7 @@ var no_icon_found: String = "[img={}]res://src/icon.svg[/img]"
 func _ready() -> void:
 	icon_map_changed.connect(_on_icon_map_changed)
 	
+	#gdlint:disable=max-line-length
 	icon_map_keyboard["ui_accept"] = "[img={}]res://src/ui/resources/control_icons/ENTER.png[/img]"
 	icon_map_keyboard["interact"] = "[img={}]res://src/ui/resources/control_icons/E.png[/img]"
 	icon_map_keyboard["use_defense_item"] = "[img={}]res://src/ui/resources/control_icons/LMB.png[/img]"
@@ -40,6 +41,7 @@ func _ready() -> void:
 	icon_map_controller["use_defense_item"] = "[img={}]res://src/ui/resources/control_icons/button_xbox_analog_trigger_light_2.png[/img]"
 	icon_map_controller["use_active_item"] = "[img={}]res://src/ui/resources/control_icons/button_xbox_analog_trigger_light_1.png[/img]"
 	icon_map_controller["use_consumable_item"] = "[img={}]res://src/ui/resources/control_icons/button_xbox_digital_bumper_light_2.png[/img]"
+	#gdlint:disable=max-line-length
 
 
 func _input(event: InputEvent) -> void:
