@@ -28,6 +28,11 @@ texture = ExtResource("2_pongt")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="IconLabel" parent="MarginContainer" instance=ExtResource("3_4m7xu")]
+[node name="MarginIcon" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_right = 7
+theme_override_constants/margin_bottom = 7
+
+[node name="IconLabel" parent="MarginIcon" instance=ExtResource("3_4m7xu")]
 layout_mode = 2
 text = "[img={20}]res://src/ui/resources/control_icons/E.png[/img]"

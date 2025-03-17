@@ -5,6 +5,13 @@ var count: int
 @onready var label: Label = $MarginContainer/Label
 @onready var color_rect: ColorRect = $MarginContainer/ColorRect
 
+
+func _ready() -> void:
+	super()
+	# set icon according to input map
+	$MarginIcon/IconLabel.init("use_consumable_item")
+
+
 func _on_item_picked_up(item_inventory: ItemInventory, current_consumable: bool = false) -> void:
 	if item_inventory is ConsumableItemInventory and current_consumable == false:
 		_item_inventory = item_inventory
