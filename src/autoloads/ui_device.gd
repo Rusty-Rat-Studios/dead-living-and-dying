@@ -27,6 +27,8 @@ var current_map: Dictionary = icon_map_controller
 var no_icon_found: String = "[img={}]res://src/icon.svg[/img]"
 
 func _ready() -> void:
+	icon_map_changed.connect(_on_icon_map_changed)
+	
 	icon_map_keyboard["ui_accept"] = "[img={}]res://src/ui/resources/control_icons/ENTER.png[/img]"
 	icon_map_keyboard["interact"] = "[img={}]res://src/ui/resources/control_icons/E.png[/img]"
 	#icon_map_keyboard["use_defense_item"] = "[img={}]res://src/ui/resources/control_icons/LMB.png[/img]"
@@ -40,10 +42,19 @@ func _ready() -> void:
 	icon_map_controller["use_consumable_item"] = "[img={}]res://src/ui/resources/control_icons/button_xbox_digital_bumper_light_2.png[/img]" # right bumper
 
 
-func _input(_event: InputEvent) -> void:
-	pass
+func _input(event: InputEvent) -> void:
 	# search for event as hardcoded key-presses ("k" key, "x button", etc.) not their corresponing ui event
 	# change current_map to point to keyboard or controller map based on the source device of the last input pressed
+	if (current_map == icon_map_controller and 
+		(event is InputEventKey or
+		event is InputEventMouseButton)):
+		current_map = icon_map_keyboard
+		icon_map_changed.emit()
+	elif (current_map == icon_map_keyboard and
+		(event is InputEventJoypadButton or
+		event is InputEventJoypadMotion)):
+		current_map = icon_map_controller
+		icon_map_changed.emit()
 
 
 # input: event action (e.g. "ui_accept")
@@ -68,3 +79,7 @@ func resize_bbcode(text: String, size: int) -> String:
 	print("resizing: ", text)
 	print("to: ", String("[img={" + String.num_int64(size) + "}" + text.substr(text.find("]"))))
 	return String("[img={" + String.num_int64(size) + "}" + text.substr(text.find("]")))
+
+
+func _on_icon_map_changed() -> void:
+	print("icon map changed to ", current_map)
