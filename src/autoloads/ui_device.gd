@@ -22,7 +22,7 @@ var icon_map_controller: Dictionary
 
 # pointer for which icon map to use
 # changed according to last input device
-var current_map: Dictionary = icon_map_controller
+var current_map: Dictionary = icon_map_keyboard
 
 var no_icon_found: String = "[img={}]res://src/icon.svg[/img]"
 
@@ -31,8 +31,8 @@ func _ready() -> void:
 	
 	icon_map_keyboard["ui_accept"] = "[img={}]res://src/ui/resources/control_icons/ENTER.png[/img]"
 	icon_map_keyboard["interact"] = "[img={}]res://src/ui/resources/control_icons/E.png[/img]"
-	#icon_map_keyboard["use_defense_item"] = "[img={}]res://src/ui/resources/control_icons/LMB.png[/img]"
-	#icon_map_keyboard["use_active_item"] = "[img={}]res://src/ui/resources/control_icons/RMB.png[/img]"
+	icon_map_keyboard["use_defense_item"] = "[img={}]res://src/ui/resources/control_icons/LMB.png[/img]"
+	icon_map_keyboard["use_active_item"] = "[img={}]res://src/ui/resources/control_icons/RMB.png[/img]"
 	icon_map_keyboard["use_consumable_item"] = "[img={}]res://src/ui/resources/control_icons/Q.png[/img]"
 	
 	icon_map_controller["ui_accept"] = "[img={}]res://src/ui/resources/control_icons/button_xbox_digital_a_1.png[/img]"
