@@ -18,7 +18,6 @@ const OPACITY_DYING: float = 0.2
 const OPACITY_DEAD: float = 0.8
 const OPACITY_FADE_DURATION: float = 1
 
-var movement_boundaries: Rect2
 var opacity_tween: Tween
 var light_tween: Tween
 var light_enabled: bool = false

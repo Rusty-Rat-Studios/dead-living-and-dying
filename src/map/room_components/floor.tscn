@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://b3nn5u3a5o85j"]
+[gd_scene load_steps=5 format=3 uid="uid://b3nn5u3a5o85j"]
 
 [ext_resource type="Texture2D" uid="uid://54om7nxf8xh6" path="res://src/map/tileset-dhassa/floor1.png" id="1_o4kxu"]
-
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_o8kxe"]
 size = Vector2(16, 16)
@@ -11,9 +10,6 @@ albedo_texture = ExtResource("1_o4kxu")
 uv1_scale = Vector3(12, 6, 12)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_1bktg"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_2yroe"]
-size = Vector3(15.2, 5, 15.2)
 
 [node name="Floor" type="StaticBody3D"]
 
@@ -30,5 +26,7 @@ collision_layer = 0
 collision_mask = 2
 monitorable = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetector"]
-shape = SubResource("BoxShape3D_2yroe")
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="PlayerDetector"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.5, 0)
+depth = 3.0
+polygon = PackedVector2Array(-8, -8, -8, 8, 8, 8, 8, -8)
