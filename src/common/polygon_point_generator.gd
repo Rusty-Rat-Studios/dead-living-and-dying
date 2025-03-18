@@ -52,7 +52,7 @@ static func add_margin_to_polygon(polygon: PackedVector2Array, margin: float) ->
 		var next: Vector2 = polygon[0] if i == polygon.size()-1 else polygon[i+1]
 		var u: Vector2 = next - current
 		var v: Vector2 = prev - current
-		var bysector_dir: Vector2 = -(u.length() * v + v.length() * u).normalized()
+		var bysector_dir: Vector2 = -(u.length() * v + v.length() * u).normalized() # TODO: This might break with convex shapes
 		var newVector: Vector2 = current - (bysector_dir * margin)
 		newPolygon.append(newVector)
 	return newPolygon
