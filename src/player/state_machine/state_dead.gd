@@ -45,10 +45,10 @@ func enter() -> void:
 	_parent.player_stats.stat_update_add(PlayerStats.Stats.SPEED, SPEED_MODIFIER, DEAD_MODIFIER_NAME)
 	
 	# modulate player color and opacity to appear ghostly
-	_parent.get_node("RotationOffset/AnimatedSprite3D").modulate = Color(0.5, 0.5, 0.5, 0.3)
+	_parent.modulate_color(Color(0.5, 0.5, 0.5, 0.3))
 	
 	# drop key item if player is carrying it
-	var key_item: KeyItemInventory = _parent.get_node_or_null("Inventory/KeyItemInventory")
+	var key_item: KeyItemInventory = _parent.get_key_item_or_null()
 	if key_item:
 		key_item.drop()
 	
@@ -86,7 +86,7 @@ func exit() -> void:
 		attacked_increment_timer.stop()
   
 	# restore player color and opacity
-	_parent.get_node("RotationOffset/AnimatedSprite3D").modulate = Color(1, 1, 1, 1)
+	_parent.modulate_color(Color(1, 1, 1, 1))
 	
 	# change collision layers out of spirit plane into physical plane
 	_parent.collision_layer = CollisionBit.PLAYER + CollisionBit.PHYSICAL

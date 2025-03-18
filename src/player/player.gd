@@ -95,6 +95,20 @@ func take_damage(flash: bool = true) -> void:
 	hurtbox.activate_hit_cooldown(flash)
 
 
+func inventory_update() -> void:
+	player_stats.remove_stat_modifiers()
+	$Inventory.update_all()
+	player_stats.update_stats()
+
+
+func modulate_color(c: Color) -> void:
+	get_node("RotationOffset/AnimatedSprite3D").modulate = c
+
+
+func get_key_item_or_null() -> KeyItemInventory:
+	return get_node_or_null("Inventory/KeyItemInventory")
+
+
 func _on_item_picked_up(item: ItemInventory, current_consumable: bool = false) -> void:
 	if item is KeyItemInventory:
 		SignalBus.key_item_picked_up.emit()
@@ -102,9 +116,3 @@ func _on_item_picked_up(item: ItemInventory, current_consumable: bool = false) -
 		$Inventory.add_child(item)
 	# ensure item position is directly on player
 	item.position = Vector3.ZERO
-
-
-func inventory_update() -> void:
-	player_stats.remove_stat_modifiers()
-	$Inventory.update_all()
-	player_stats.update_stats()

@@ -21,7 +21,7 @@ class TestPlayerEnterDyingState:
 		_state_dying.screen_effect = double(DyingScreenEffect).new()
 	
 	
-	func test_living_state_variables_set_correctly() -> void:
+	func test_dying_state_variables_set_correctly() -> void:
 		_state_dying.enter()
 		
 		assert_call_count(_state_dying._parent.player_stats, "stat_update_add", 1, [PlayerStats.Stats.SPEED, StateDying.SPEED_MODIFIER, StateDying.NAME, -1])
@@ -61,7 +61,7 @@ class TestPlayerExitDyingState:
 		_state_dying.enter()
 	
 	
-	func test_living_state_variables_set_correctly() -> void:
+	func test_dying_state_variables_unset_correctly() -> void:
 		_state_dying.exit()
 		
 		assert_not_connected(SignalBus, _state_dying, 'player_hurt')
