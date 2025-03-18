@@ -52,7 +52,7 @@ class TestGhostExitWaitingState:
 	
 	func before_each() -> void:
 		_state_waiting = StateWaiting.new()
-		_state_waiting._parent = double(Ghost, DOUBLE_STRATEGY.INCLUDE_NATIVE).new()
+		_state_waiting._parent = double(Ghost).new()
 		_state_waiting.pause_timer = double(Timer).new()
 		# _state_waiting._parent.target_pos = Vector3(0, 0, 0)
 		# _state_waiting._parent.global_position = Vector3(1, 1, 1)
@@ -64,7 +64,7 @@ class TestGhostExitWaitingState:
 		_state_waiting.exit()
 		
 		# Cannot test as it uses global_position which refuses to work correctly if not in tree
-		# Test manually
+		# Test manually (This goes for all GhostStates)
 		# assert_eq(_state_waiting._parent.target_pos, Vector3(1, 1, 1))
 		
 		assert_eq(_state_waiting._parent.speed, _state_waiting._parent.BASE_SPEED)
