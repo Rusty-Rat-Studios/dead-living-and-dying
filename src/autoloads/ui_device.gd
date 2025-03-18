@@ -15,8 +15,7 @@ retrieve the related icon according to the updated map.
 # i.e. keyboard is the current map and controller input is detected
 signal icon_map_changed
 
-# if no size is provided for bbcode image, this default size is used
-const DEFAULT_BBCODE_SIZE: int = 15
+const DEFAULT_BBCODE_SIZE: int = 32
 
 var icon_map_keyboard: Dictionary
 var icon_map_controller: Dictionary
@@ -60,14 +59,9 @@ func _input(event: InputEvent) -> void:
 
 
 # input: event action (e.g. "ui_accept")
-# output: BBCode for icon related to event action according 
-# 	to last used device (keyboard or controller)
-func retrieve_icon(input: String) -> String:
-	return current_map[input] if current_map.has(input) else no_icon_found
-
-
-# performs same action as retrieve_icon() but inserts a size parameter to the [img] tag
-# e.g. given size = 6, returns [img={6}]{image_path}[/img]
+# output: BBCode for icon related to event action according to last used device 
+# (keyboard or controller) and inserts a size parameter to the [img] tag
+# - e.g. given size = 6, returns [img={6}]{image_path}[/img]
 func retrieve_icon_sized(input: String, size: int = DEFAULT_BBCODE_SIZE) -> String:
 	if current_map.has(input):
 		return resize_bbcode(current_map[input], size)
@@ -76,4 +70,4 @@ func retrieve_icon_sized(input: String, size: int = DEFAULT_BBCODE_SIZE) -> Stri
 
 # takes a BBCode text string and inserts a size parameter to the [img] tag
 func resize_bbcode(text: String, size: int = DEFAULT_BBCODE_SIZE) -> String:
-	return String("[img={" + String.num_int64(size) + "}" + text.substr(text.find("]")))
+	return String("[img height=\"" + String.num_int64(size) + "\"" + text.substr(text.find("]")))

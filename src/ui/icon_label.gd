@@ -1,28 +1,16 @@
 extends RichTextLabel
 
-# used for single icons (e.g. UI inventory slots) as they need
-# to be extra-large and based on the size of the parent container
-const SCALE_FACTOR: float = 4
-
-@export var single_icon: bool = false
-
-# set to either proportional to container or default size
-# based on if "single_icon" export is set
-var bbcode_size: int
+var bbcode_size: int = UIDevice.DEFAULT_BBCODE_SIZE
 
 
 func _ready() -> void:
-	if single_icon:
-		bbcode_size = get_parent().size.x / SCALE_FACTOR
-		get_parent().resized.connect(_on_parent_resized)
-	else:
-		bbcode_size = UIDevice.DEFAULT_BBCODE_SIZE
+	bbcode_size = UIDevice.DEFAULT_BBCODE_SIZE
 	if text:
 		text = UIDevice.resize_bbcode(text, bbcode_size)
 
 
 func init(input_string: String) -> void:
-	text = UIDevice.retrieve_icon(input_string)
+	text = UIDevice.retrieve_icon_sized(input_string)
 
 
 # takes in a text string with an embedded BBCode [img] tag
@@ -39,10 +27,3 @@ func update(input_string: String, updated_size: int = bbcode_size) -> void:
 	text_icon = UIDevice.retrieve_icon_sized(input_string, updated_size)
 	# reconstruct existing string with updated BBCode image
 	text = text_pre_icon + text_icon + text_post_icon
-
-
-func _on_parent_resized() -> void:
-	bbcode_size = get_parent().size.x / SCALE_FACTOR
-	if text:
-		# resize bbcode width value according to parent size
-		text = UIDevice.resize_bbcode(text, bbcode_size)
