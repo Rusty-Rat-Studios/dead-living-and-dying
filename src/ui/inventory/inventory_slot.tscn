@@ -29,11 +29,12 @@ expand_mode = 1
 stretch_mode = 4
 
 [node name="MarginIcon" type="MarginContainer" parent="."]
+modulate = Color(1, 1, 1, 0.392157)
 layout_mode = 2
-theme_override_constants/margin_right = 7
-theme_override_constants/margin_bottom = 7
+theme_override_constants/margin_top = -40
 
 [node name="IconLabel" parent="MarginIcon" instance=ExtResource("3_4m7xu")]
 layout_mode = 2
 text = "[img={20}]res://src/ui/resources/control_icons/E.png[/img]"
-single_icon = true
+horizontal_alignment = 1
+vertical_alignment = 0
