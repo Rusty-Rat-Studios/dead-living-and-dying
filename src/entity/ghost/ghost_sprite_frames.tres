@@ -1,0 +1,23 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://bygn7dpqwa3pk"]
+
+[ext_resource type="Texture2D" uid="uid://cjyk53bm811ec" path="res://src/entity/ghost/ghost_active.png" id="1_qggq4"]
+[ext_resource type="Texture2D" uid="uid://885rtol40jd5" path="res://src/entity/ghost/ghost_idle.png" id="2_4cw6u"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_qggq4")
+}],
+"loop": true,
+"name": &"active",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_4cw6u")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
