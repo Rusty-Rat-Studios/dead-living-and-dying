@@ -4,7 +4,7 @@ extends Area3D
 const HIT_COOLDOWN: float = 2.0
 # used to flash player sprite while hit cooldown active
 const HIT_FLASH_SPEED: float = 0.3
-const FLASH_OPACITY: float = 0.2
+const OPACITY_FLASH: float = 0.2
 
 # flag for tracking whether player can take damage or not
 @onready var hit_cooldown_active: bool = false
@@ -35,7 +35,7 @@ func reset() -> void:
 # from hit signal
 # e.g. for respawning, to ensure player can't immediately take damage
 # optional "flash" argument to disable the flashing animation
-func activate_hit_cooldown(flash: bool = true, duration: float = HIT_COOLDOWN,) -> void:
+func activate_hit_cooldown(flash: bool = true, duration: float = HIT_COOLDOWN) -> void:
 	if hit_cooldown_active:
 		return
 	hit_cooldown_active = true
@@ -61,8 +61,10 @@ func _on_hit_cooldown_timeout() -> void:
 	hit_cooldown_active = false
 	# stop flashing animation
 	$HitFlash.stop()
-	var current_color: Color = sprite.get_modulate()
-	sprite.modulate = Color(current_color, 1)
+	if PlayerHandler.get_player_state() != PlayerStateMachine.States.DEAD:
+		sprite.modulate.a = 1
+	else:
+		sprite.modulate.a = get_parent().OPACITY_DEAD
 	if has_overlapping_areas():
 		# pass signal for state-specific behavior
 		SignalBus.player_hurt.emit(get_overlapping_bodies()[0])
@@ -71,7 +73,7 @@ func _on_hit_cooldown_timeout() -> void:
 func _on_hit_flash_timeout() -> void:
 	var current_color: Color = sprite.get_modulate()
 	if hit_flash:
-		sprite.modulate = Color(current_color, FLASH_OPACITY)
+		sprite.modulate = Color(current_color, OPACITY_FLASH)
 	else:
 		sprite.modulate = Color(current_color, 1)
 	hit_flash = not hit_flash
