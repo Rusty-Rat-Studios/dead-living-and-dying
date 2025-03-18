@@ -1,6 +1,8 @@
 class_name Player
 extends CharacterBody3D
 
+const OPACITY_DEAD: float = 0.3
+
 # player state machine, sibling node under Game node
 var state_machine: Node
 # used to track player corpse - handled by states

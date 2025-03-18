@@ -45,7 +45,7 @@ func enter() -> void:
 	_parent.player_stats.stat_update_add(PlayerStats.Stats.SPEED, SPEED_MODIFIER, DEAD_MODIFIER_NAME)
 	
 	# modulate player color and opacity to appear ghostly
-	_parent.get_node("RotationOffset/AnimatedSprite3D").modulate = Color(0.5, 0.5, 0.5, 0.3)
+	_parent.get_node("RotationOffset/AnimatedSprite3D").modulate = Color(0.5, 0.5, 0.5, _parent.OPACITY_DEAD)
 	
 	# drop key item if player is carrying it
 	var key_item: KeyItemInventory = _parent.get_node_or_null("Inventory/KeyItemInventory")
