@@ -4,7 +4,6 @@ var bbcode_size: int = UIDevice.DEFAULT_BBCODE_SIZE
 
 
 func _ready() -> void:
-	bbcode_size = UIDevice.DEFAULT_BBCODE_SIZE
 	if text:
 		text = UIDevice.resize_bbcode(text, bbcode_size)
 
