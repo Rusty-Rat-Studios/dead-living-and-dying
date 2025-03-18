@@ -12,7 +12,6 @@
 [ext_resource type="Material" uid="uid://dr3yoxb5o7j2u" path="res://src/ui/minimap/minimap_player_material.tres" id="10_8t03j"]
 [ext_resource type="PackedScene" uid="uid://bp0ydphecs3iv" path="res://src/common/shadow.tscn" id="11_7sgie"]
 
-
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uy1l0"]
 radius = 0.4
 height = 2.4
