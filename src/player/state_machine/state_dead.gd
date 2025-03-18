@@ -54,6 +54,10 @@ func enter() -> void:
 	
 	await move_to_shrine()
 	
+	# activate corpse and indicator particle emission
+	_parent._corpse.activate()
+	_parent._corpse_indicator.emitting = true
+	
 	# change collision layers out of physical plane into spirit plane
 	# temporarily disabled during move_to_shrine()
 	_parent.collision_layer = CollisionBit.PLAYER + CollisionBit.SPIRIT
@@ -139,10 +143,6 @@ func move_to_shrine() -> void:
 	# re-enable movement and camera lag 
 	_parent.set_physics_process(true)
 	_parent.camera.enable()
-
-	# activate corpse and indicator particle emission
-	_parent._corpse.activate()
-	_parent._corpse_indicator.emitting = true
 
 
 func _on_player_hurt(entity: Node3D) -> void:
