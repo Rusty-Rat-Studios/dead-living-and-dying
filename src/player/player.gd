@@ -24,7 +24,7 @@ var _state_machine: PlayerStateMachine
 @onready var starting_position: Vector3 = position
 # used to track player corpse - handled by states
 # corpse set as child of Node to intentionally not inherit parent position
-@onready var _corpse: Corpse = $CorpseContainer/Corpse
+@onready var _corpse: Corpse = $Corpse
 @onready var _corpse_indicator: GPUParticles3D = $CorpseIndicator
 
 

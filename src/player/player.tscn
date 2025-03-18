@@ -150,14 +150,13 @@ one_shot = true
 
 [node name="HitFlash" type="Timer" parent="Hurtbox"]
 
-[node name="CorpseContainer" type="Node" parent="."]
-
-[node name="Corpse" parent="CorpseContainer" instance=ExtResource("8_865w7")]
+[node name="Corpse" parent="." instance=ExtResource("8_865w7")]
+top_level = true
 visible = false
 
-[node name="MinimapComponent" type="Node3D" parent="CorpseContainer/Corpse"]
+[node name="MinimapComponent" type="Node3D" parent="Corpse"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CorpseContainer/Corpse/MinimapComponent"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Corpse/MinimapComponent"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 layers = 512
 mesh = SubResource("CylinderMesh_ebec5")
