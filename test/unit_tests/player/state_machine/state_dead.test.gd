@@ -81,6 +81,7 @@ class TestPlayerExitDeadState:
 		_state_dead._state_machine = double(PlayerStateMachine).new()
 		_state_dead.dead_light = partial_double(DirectionalLight3D).new()
 		_state_dead.attacked_increment_timer = double(Timer).new()
+		stub(_state_dead, "move_to_shrine").to_do_nothing()
 		_state_dead.enter()
 		_state_dead._parent._corpse_indicator.emitting = true
 		_state_dead._parent.collision_layer = 0
