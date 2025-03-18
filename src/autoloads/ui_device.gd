@@ -61,7 +61,7 @@ func _input(event: InputEvent) -> void:
 # input: event action (e.g. "ui_accept")
 # output: BBCode for icon related to event action according to last used device 
 # (keyboard or controller) and inserts a size parameter to the [img] tag
-# - e.g. given size = 6, returns [img={6}]{image_path}[/img]
+# - e.g. given size = 6, returns [img height="6"]{image_path}[/img]
 func retrieve_icon_sized(input: String, size: int = DEFAULT_BBCODE_SIZE) -> String:
 	if current_map.has(input):
 		return resize_bbcode(current_map[input], size)
