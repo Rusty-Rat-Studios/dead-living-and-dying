@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://cdibgy57rubh6" path="res://src/entity/items/crucifix/crucifix_inventory.tscn" id="3_e25lq"]
 [ext_resource type="Texture2D" uid="uid://coa8lvqi23xya" path="res://src/entity/items/crucifix/crucifix.png" id="3_lw6l4"]
 
-
 [node name="CrucifixWorld" instance=ExtResource("1_20v5o")]
 inventory_resource = ExtResource("3_e25lq")
 

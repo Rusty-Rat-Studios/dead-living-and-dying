@@ -3,10 +3,5 @@
 [ext_resource type="PackedScene" uid="uid://xmk4uynyor1t" path="res://src/ui/inventory/cooldown_slot.tscn" id="1_i51n3"]
 [ext_resource type="Script" uid="uid://c1m1bekwulgw6" path="res://src/ui/inventory/defense_slot.gd" id="2_usb56"]
 
-
 [node name="CooldownSlot" instance=ExtResource("1_i51n3")]
 script = ExtResource("2_usb56")
-
-[node name="TextureRect" parent="." index="1"]
-custom_minimum_size = Vector2(0, 0)
-expand_mode = 2
