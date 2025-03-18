@@ -4,10 +4,12 @@ extends GutTest
 class TestPlayerEnterLivingState:
 	extends GutTest
 	
+	var StateLiving: Script = load("res://src/player/state_machine/state_living.gd")
+	
 	var _state_living: PlayerState
 	
 	func before_each() -> void:
-		_state_living = load("res://src/player/state_machine/state_living.gd").new()
+		_state_living = StateLiving.new()
 		_state_living._parent = double(Player).new()
 		stub(_state_living._parent, "inventory_update").to_do_nothing()
 		_state_living._state_machine = double(PlayerStateMachine).new()
@@ -32,14 +34,15 @@ class TestPlayerEnterLivingState:
 class TestPlayerExitLivingState:
 	extends GutTest
 	
+	var StateLiving: Script = load("res://src/player/state_machine/state_living.gd")
+	
 	var _state_living: PlayerState
 	
 	func before_each() -> void:
-		_state_living = load("res://src/player/state_machine/state_living.gd").new()
+		_state_living = StateLiving.new()
 		_state_living._parent = double(Player).new()
 		stub(_state_living._parent, "inventory_update").to_do_nothing()
 		_state_living._state_machine = double(PlayerStateMachine).new()
-		_state_living._state_machine.current_state = PlayerStateMachine.States.LIVING
 		_state_living.enter()
 	
 	
