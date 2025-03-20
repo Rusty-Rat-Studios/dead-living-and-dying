@@ -166,7 +166,6 @@ func _on_player_escaped(entity: Node3D) -> void:
 
 
 func _on_player_revived(corpse_global_position: Vector3) -> void:
-	_parent.global_position = corpse_global_position
 	# provide i-frames on revive, no flashing
 	_parent.take_damage(false)
 	_state_machine.change_state(PlayerStateMachine.States.LIVING)
