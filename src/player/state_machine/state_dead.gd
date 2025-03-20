@@ -126,7 +126,7 @@ func move_to_shrine() -> void:
 	_parent.set_physics_process(false)
 	
 	# move player corpse to death location
-	_parent._corpse.global_position = _parent.global_position#Vector3(_parent.global_position.x, 1, _parent.global_position.z)
+	_parent._corpse.global_position = _parent.global_position
 	_parent._corpse.animate_fall()
 	
 	# add black screen fade effect
@@ -137,6 +137,8 @@ func move_to_shrine() -> void:
 	_parent.global_position = target_shrine.global_position
 	# execute single step of physics frame to trigger room visibility
 	_parent._physics_process(get_physics_process_delta_time())
+	# activate corpse light after fade-out to avoid "popping-in" if corpse visible on respawn
+	_parent._corpse.activate()
 	
 	# fade visibility back in
 	await black_screen.fade_out(RESPAWN_TIME / 2)
@@ -144,7 +146,6 @@ func move_to_shrine() -> void:
 	# re-enable movement and camera lag 
 	_parent.set_physics_process(true)
 	_parent.camera.enable()
-	_parent._corpse.activate()
 
 
 func _on_player_hurt(entity: Node3D) -> void:

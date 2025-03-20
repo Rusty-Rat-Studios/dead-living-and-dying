@@ -19,3 +19,9 @@ shape = SubResource("SphereShape3D_5huj5")
 [node name="Sprite3D" type="Sprite3D" parent="SpriteBase"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 1.4, 0)
 texture = ExtResource("3_roijj")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
+light_color = Color(0.607843, 0.890196, 0.945098, 1)
+light_energy = 2.0
+omni_range = 4.0

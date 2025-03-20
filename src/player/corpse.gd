@@ -27,11 +27,13 @@ func reset() -> void:
 
 func activate() -> void:
 	visible = true
+	$OmniLight3D.visible = true
 	collision_shape.set_deferred("disabled", false)
 
 
 func deactivate() -> void:
 	visible = false
+	$OmniLight3D.visible = false
 	# reset sprite rotaiton
 	sprite_base.rotation.x = 0
 	collision_shape.set_deferred("disabled", true)
