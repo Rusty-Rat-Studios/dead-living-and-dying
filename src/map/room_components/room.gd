@@ -77,6 +77,10 @@ func init_doors() -> void:
 		door.init(grid_location)
 
 
+func get_room_polygon() -> PackedVector2Array:
+	return $Floor/PlayerDetector/CollisionPolygon3D.polygon
+
+
 func _on_player_entered_room(body: Node3D) -> void:
 	if body == PlayerHandler.get_player():
 		player_in_room = true

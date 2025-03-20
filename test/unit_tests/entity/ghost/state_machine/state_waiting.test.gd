@@ -9,25 +9,22 @@ class TestGhostEnterWaitingState:
 	
 	var _state_waiting: GhostState
 	
-	func _get_mesh_instance() -> MeshInstance3D:
-		var _mesh_instance: MeshInstance3D = partial_double(MeshInstance3D).new()
-		var _plane_mesh: PlaneMesh = double(PlaneMesh).new()
-		_mesh_instance.mesh = _plane_mesh
-		_plane_mesh.size = Vector2(5, 8)
-		return _mesh_instance
-	
 	func before_each() -> void:
 		_state_waiting = partial_double(StateWaiting).new()
 		_state_waiting._parent = double(Ghost).new()
 		_state_waiting._parent.sprite = double(AnimatedSprite3D).new()
 		_state_waiting._parent.sprite.sprite_frames = GhostSpriteFrames
 		_state_waiting._parent.current_room = double(Room, DOUBLE_STRATEGY.INCLUDE_NATIVE).new()
-		stub(_state_waiting._parent.current_room, "get_node").to_return(_get_mesh_instance())
+		var polygon: PackedVector2Array = PackedVector2Array([
+			Vector2(-8, -8),
+			Vector2(-8, 8),
+			Vector2(8, 8),
+			Vector2(8, -8)
+		])
+		stub(_state_waiting._parent.current_room, "get_room_polygon").to_return(polygon)
 		stub(_state_waiting, "set_random_target").to_do_nothing()
 		_state_waiting._parent.speed = 9999
 		_state_waiting._parent.sprite.animation = "active"
-		_state_waiting.room_boundaries = Rect2(Vector2(0, 0), Vector2(0, 0))
-		_state_waiting._parent.movement_boundaries = Rect2(Vector2(0, 0), Vector2(0, 0))
 		_state_waiting.is_paused = true
 	
 	
@@ -36,8 +33,6 @@ class TestGhostEnterWaitingState:
 		
 		assert_eq(_state_waiting._parent.speed, StateWaiting.WAITING_SPEED)
 		assert_eq(_state_waiting._parent.sprite.animation, "idle")
-		assert_eq(_state_waiting.room_boundaries, Rect2(Vector2(-1.5, -3), Vector2(3, 6)))
-		assert_eq(_state_waiting._parent.movement_boundaries, Rect2(Vector2(-1.5, -3), Vector2(3, 6)))
 		assert_eq(_state_waiting.is_paused, false)
 		assert_called(_state_waiting, "set_random_target")
 

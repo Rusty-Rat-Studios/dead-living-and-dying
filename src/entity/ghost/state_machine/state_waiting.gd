@@ -27,7 +27,7 @@ func enter() -> void:
 	_parent.sprite.animation = "idle"
 	
 	# dynamically grab region based ghost's current room
-	polygon_point_generator = PolygonPointGenerator.new(RNG.rng, _parent.current_room.get_node("Floor/PlayerDetector/CollisionPolygon3D").polygon)
+	polygon_point_generator = PolygonPointGenerator.new(RNG.rng, _parent.current_room.get_room_polygon())
 	
 	is_paused = false
 	set_random_target()
