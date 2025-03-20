@@ -54,8 +54,7 @@ func enter() -> void:
 	
 	await move_to_shrine()
 	
-	# activate corpse and indicator particle emission
-	_parent._corpse.activate()
+	# activate corpse indicator particle emission
 	_parent._corpse_indicator.emitting = true
 	
 	# change collision layers out of physical plane into spirit plane
@@ -126,12 +125,14 @@ func move_to_shrine() -> void:
 	_parent.camera.disable()
 	_parent.set_physics_process(false)
 	
+	# move player corpse to death location
+	_parent._corpse.global_position = _parent.global_position#Vector3(_parent.global_position.x, 1, _parent.global_position.z)
+	_parent._corpse.animate_fall()
+	
 	# add black screen fade effect
 	var black_screen: TextureRect = get_tree().root.get_node("Game/UI/DeadScreenEffect")
-	await black_screen.fade_in(RESPAWN_TIME / 2)
+	await black_screen.fade_in(RESPAWN_TIME)
 	
-	# move player corpse to death location
-	_parent._corpse.global_position = Vector3(_parent.global_position.x, 1, _parent.global_position.z)
 	# move player to shrine
 	_parent.global_position = target_shrine.global_position
 	# execute single step of physics frame to trigger room visibility
@@ -143,6 +144,7 @@ func move_to_shrine() -> void:
 	# re-enable movement and camera lag 
 	_parent.set_physics_process(true)
 	_parent.camera.enable()
+	_parent._corpse.activate()
 
 
 func _on_player_hurt(entity: Node3D) -> void:

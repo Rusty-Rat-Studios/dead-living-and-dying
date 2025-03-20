@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://umlwhr2u3iej"]
+[gd_scene load_steps=7 format=3 uid="uid://umlwhr2u3iej"]
 
 [ext_resource type="Script" uid="uid://c4i6wccygglve" path="res://src/player/corpse.gd" id="1_ejgu4"]
 [ext_resource type="Texture2D" uid="uid://cvadlfyuhhlsa" path="res://src/icon.svg" id="1_kvadm"]
-
-
+[ext_resource type="Texture2D" uid="uid://cdu1sybc4l0vp" path="res://src/player/caretaker_idle.png" id="3_roijj"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_5huj5"]
 
@@ -15,7 +14,6 @@ albedo_texture = ExtResource("1_kvadm")
 material = SubResource("StandardMaterial3D_2y6rd")
 
 [node name="Corpse" type="Area3D"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_ejgu4")
@@ -25,4 +23,11 @@ shape = SubResource("SphereShape3D_5huj5")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+visible = false
 mesh = SubResource("SphereMesh_cbh3o")
+
+[node name="SpriteBase" type="Node3D" parent="."]
+
+[node name="Sprite3D" type="Sprite3D" parent="SpriteBase"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 1.4, 0)
+texture = ExtResource("3_roijj")
