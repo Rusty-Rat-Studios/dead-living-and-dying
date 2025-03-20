@@ -1,4 +1,5 @@
-# Adapted from kleonc & zendarva at https://www.reddit.com/r/godot/comments/mqp29g/comment/hddil1b/?utm_source=share&utm_medium=web2x&context=3
+# Adapted from kleonc & zendarva at 
+# https://www.reddit.com/r/godot/comments/mqp29g/comment/hddil1b/?utm_source=share&utm_medium=web2x&context=3
 
 class_name PolygonPointGenerator
 
@@ -46,14 +47,15 @@ static func triangle_area(a: Vector2, b: Vector2, c: Vector2) -> float:
 # Only works if polygon is convex and non-intersecting
 static func add_margin_to_convex_polygon(polygon: PackedVector2Array, margin: float) -> PackedVector2Array:
 	assert(polygon.size() >= 3)
-	var newPolygon: PackedVector2Array = []
+	var new_polygon: PackedVector2Array = []
 	for i: int in range(polygon.size()):
 		var prev: Vector2 = polygon[polygon.size()-1] if i == 0 else polygon[i-1]
 		var current: Vector2 = polygon[i]
 		var next: Vector2 = polygon[0] if i == polygon.size()-1 else polygon[i+1]
 		var u: Vector2 = next - current
 		var v: Vector2 = prev - current
-		var bysector_dir: Vector2 = -(u.length() * v + v.length() * u).normalized() # TODO: This might break with convex shapes
-		var newVector: Vector2 = current - (bysector_dir * margin)
-		newPolygon.append(newVector)
-	return newPolygon
+		# TODO: This breaks convex shapes
+		var bysector_dir: Vector2 = -(u.length() * v + v.length() * u).normalized()
+		var new_vertex: Vector2 = current - (bysector_dir * margin)
+		new_polygon.append(new_vertex)
+	return new_polygon
