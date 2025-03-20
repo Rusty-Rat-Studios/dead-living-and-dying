@@ -6,6 +6,8 @@ const FALL_DURATION: float = 0.7
 # needed for rotating about the base of the sprite rather than the center
 const SPRITE_OFFSET: float = 1.4
 
+const DEAD_COLOR: Color = Color(0.5, 0.125, 0.125)
+
 var fall_tween: Tween
 
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
@@ -43,14 +45,16 @@ func animate_fall() -> void:
 	sprite_base.position.y -= SPRITE_OFFSET
 	
 	# rotate along x-axis to show sprite as "falling" backwards
-	fall_tween = create_tween().set_ease(Tween.EASE_IN)
+	fall_tween = create_tween().set_ease(Tween.EASE_IN).set_parallel()
 	fall_tween.tween_property(sprite_base, "rotation:x", -PI/2, FALL_DURATION)
+	fall_tween.tween_property(sprite, "modulate", DEAD_COLOR, FALL_DURATION)
 	await Utility.delay(FALL_DURATION)
 
 
 func animate_revive() -> void:
-	fall_tween = create_tween()
+	fall_tween = create_tween().set_ease(Tween.EASE_OUT).set_parallel()
 	fall_tween.tween_property(sprite_base, "rotation:x", 0, FALL_DURATION)
+	fall_tween.tween_property(sprite, "modulate", Color.WHITE, FALL_DURATION)
 	await Utility.delay(FALL_DURATION)
 	deactivate()
 
