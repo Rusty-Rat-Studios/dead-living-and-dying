@@ -5,7 +5,7 @@ const BASE_ACTIVE_DURATION: float = 4
 const OMNI_RANGE_MODIFIER: float = 3
 const SPOT_RANGE_MODIFIER: float = 3
 const ENERGY_MODIFIER: float = 1
-const NAME: String = "fuel"
+const NAME: String = "lamp_oil"
 
 var cooldown_active: bool = false 
 
@@ -14,11 +14,11 @@ var cooldown_active: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	display_name = "Fuel"
+	display_name = "Lamp Oil"
 	input_event = "use_active_item"
 	description = ("Active ITEM: Use with " + UIDevice.retrieve_icon_sized(input_event)
 		+ " to temporarily increase your light's strength.")
-	texture = preload("res://src/entity/items/fuel/fuel.png")
+	texture = preload("res://src/entity/items/lamp_oil/lamp_oil.png")
 	
 	$ActiveTimer.wait_time = BASE_ACTIVE_DURATION
 	$CooldownTimer.wait_time = BASE_COOLDOWN_DURATION

@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxrbbho8wlerh"]
+
+[ext_resource type="PackedScene" uid="uid://bslonn3bn1m6s" path="res://src/entity/items/item_world.tscn" id="1_f5fxc"]
+[ext_resource type="PackedScene" uid="uid://bgtj8y8ilr3h3" path="res://src/entity/items/lamp_oil/lamp_oil_inventory.tscn" id="2_apvme"]
+[ext_resource type="Texture2D" uid="uid://don6jkufvlqg3" path="res://src/entity/items/lamp_oil/lamp_oil.png" id="3_agrf5"]
+
+[node name="FuelWorld" instance=ExtResource("1_f5fxc")]
+inventory_resource = ExtResource("2_apvme")
+
+[node name="Sprite3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+texture = ExtResource("3_agrf5")

@@ -22,8 +22,9 @@
 [ext_resource type="PackedScene" uid="uid://cko3wlfgl81ce" path="res://src/entity/objects/crate/crate.tscn" id="16_sppgp"]
 [ext_resource type="PackedScene" uid="uid://d3uaapt6yn0ed" path="res://src/entity/items/tea/tea_world.tscn" id="17_sxuq4"]
 [ext_resource type="PackedScene" uid="uid://bwfkis8dga70e" path="res://src/entity/items/key_item/key_item_world.tscn" id="18_hnnt0"]
-[ext_resource type="PackedScene" uid="uid://dxrbbho8wlerh" path="res://src/entity/items/fuel/fuel_world.tscn" id="19_lb8w8"]
+[ext_resource type="PackedScene" uid="uid://dxrbbho8wlerh" path="res://src/entity/items/lamp_oil/lamp_oil_world.tscn" id="19_lb8w8"]
 [ext_resource type="PackedScene" uid="uid://cp7202hwhpcd5" path="res://src/ui/ui.tscn" id="23_i7kop"]
+
 
 
 [sub_resource type="Resource" id="Resource_3y6bj"]

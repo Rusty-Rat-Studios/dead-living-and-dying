@@ -1,10 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://bgtj8y8ilr3h3"]
 
-[ext_resource type="Script" uid="uid://cv3o1gqpd6qjl" path="res://src/entity/items/fuel/fuel_inventory.gd" id="1_vnlx3"]
-
+[ext_resource type="Script" uid="uid://cv3o1gqpd6qjl" path="res://src/entity/items/lamp_oil/lamp_oil_inventory.gd" id="1_ccvtb"]
 
 [node name="FuelInventory" type="Node3D"]
-script = ExtResource("1_vnlx3")
+script = ExtResource("1_ccvtb")
 
 [node name="CooldownTimer" type="Timer" parent="."]
 one_shot = true
