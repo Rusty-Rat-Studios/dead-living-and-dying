@@ -29,15 +29,15 @@ func _init(rand: RandomNumberGenerator, polygon: PackedVector2Array) -> void:
 
 func get_random_point() -> Vector2:
 	var total_area: float = _cumulated_triangle_areas[-1]
-	var choosen_triangle_index: int = _cumulated_triangle_areas.bsearch(_rand.randf() * total_area)
-	var a: Vector2 = _polygon[_triangles[3 * choosen_triangle_index + 0]]
-	var b: Vector2 = _polygon[_triangles[3 * choosen_triangle_index + 1]]
-	var c: Vector2 = _polygon[_triangles[3 * choosen_triangle_index + 2]]
+	var chosen_triangle_index: int = _cumulated_triangle_areas.bsearch(_rand.randf() * total_area)
+	var a: Vector2 = _polygon[_triangles[3 * chosen_triangle_index + 0]]
+	var b: Vector2 = _polygon[_triangles[3 * chosen_triangle_index + 1]]
+	var c: Vector2 = _polygon[_triangles[3 * chosen_triangle_index + 2]]
 	return _random_triangle_point(a, b, c)
 
 
 func _random_triangle_point(a: Vector2, b: Vector2, c: Vector2) -> Vector2:
-	return a + sqrt(randf()) * (-a + b + _rand.randf() * (c - b))
+	return a + sqrt(_rand.randf()) * (-a + b + _rand.randf() * (c - b))
 
 
 static func triangle_area(a: Vector2, b: Vector2, c: Vector2) -> float:
