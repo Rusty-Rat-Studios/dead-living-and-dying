@@ -10,7 +10,7 @@ var _cumulated_triangle_areas: Array
 var _rand: RandomNumberGenerator
 
 
-func _init(rand: RandomNumberGenerator, polygon: PackedVector2Array, margin: float = 0) -> void:
+func _init(rand: RandomNumberGenerator, polygon: PackedVector2Array) -> void:
 	_polygon = polygon
 	_triangles = Geometry2D.triangulate_polygon(_polygon)
 	_rand = rand
@@ -43,7 +43,8 @@ static func triangle_area(a: Vector2, b: Vector2, c: Vector2) -> float:
 	return 0.5 * abs((c.x - a.x) * (b.y - a.y) - (b.x - a.x) * (c.y - a.y))
 
 
-static func add_margin_to_polygon(polygon: PackedVector2Array, margin: float) -> PackedVector2Array:
+# Only works if polygon is convex and non-intersecting
+static func add_margin_to_convex_polygon(polygon: PackedVector2Array, margin: float) -> PackedVector2Array:
 	assert(polygon.size() >= 3)
 	var newPolygon: PackedVector2Array = []
 	for i: int in range(polygon.size()):
