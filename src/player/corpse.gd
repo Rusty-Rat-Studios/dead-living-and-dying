@@ -10,6 +10,8 @@ const DEAD_COLOR: Color = Color(0.5, 0.125, 0.125)
 
 var fall_tween: Tween
 
+var current_room: Room
+
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
 # used to rotate sprite about its base to provide a "falling over" effect
 @onready var sprite_base: Node3D = $SpriteBase
@@ -18,6 +20,7 @@ var fall_tween: Tween
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
+	SignalBus.player_entered_room.connect(_on_player_entered_room)
 	deactivate()
 
 
@@ -29,6 +32,8 @@ func activate() -> void:
 	visible = true
 	$OmniLight3D.visible = true
 	collision_shape.set_deferred("disabled", false)
+	# stop updating current_room based on player's position
+	SignalBus.player_entered_room.disconnect(_on_player_entered_room)
 
 
 func deactivate() -> void:
@@ -37,6 +42,8 @@ func deactivate() -> void:
 	# reset sprite rotaiton
 	sprite_base.rotation.x = 0
 	collision_shape.set_deferred("disabled", true)
+	# restart updating current_room based on player's position
+	SignalBus.player_entered_room.connect(_on_player_entered_room)
 
 
 func animate_fall() -> void:
@@ -64,3 +71,14 @@ func animate_revive() -> void:
 func _on_body_entered(body: Node3D) -> void:
 	if body == PlayerHandler.get_player():
 		SignalBus.player_revived.emit(global_position)
+
+
+func _on_player_entered_room(room: Room) -> void:
+	current_room = room
+	if current_room.visibility_changed.is_connected(_on_room_visibity_changed):
+		current_room.visibility_changed.disconnect(_on_room_visibity_changed)
+	current_room.visibility_changed.connect(_on_room_visibity_changed, CONNECT_DEFERRED)
+
+
+func _on_room_visibity_changed() -> void:
+	visible = current_room.visible

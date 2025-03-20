@@ -3,8 +3,6 @@ extends CharacterBody3D
 
 const OPACITY_DEAD: float = 0.3
 
-# used to track player corpse - handled by states
-var corpse: Corpse
 # player state machine, sibling node under Game node
 var _state_machine: PlayerStateMachine
 #declaration of the object that holds all of the players current stats
@@ -22,8 +20,7 @@ var _state_machine: PlayerStateMachine
 
 # store initial position to return to when calling reset()
 @onready var starting_position: Vector3 = position
-# used to track player corpse - handled by states
-# corpse set as child of Node to intentionally not inherit parent position
+# used to track player corpse - handled by DEAD state
 @onready var _corpse: Corpse = $Corpse
 @onready var _corpse_indicator: GPUParticles3D = $CorpseIndicator
 
