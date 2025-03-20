@@ -110,7 +110,7 @@ func _on_interaction(input_name: String) -> void:
 		activate()
 
 
-func _on_player_revived(_corpse_position: Vector3) -> void:
+func _on_player_revived() -> void:
 	# handle edge case of player reviving inside inactive shrine
 	var player: Player = PlayerHandler.get_player()
 	if detector.overlaps_body(player):

@@ -166,7 +166,7 @@ func _on_player_escaped(entity: Node3D) -> void:
 			attacking_ghosts.remove_at(ghost_position)
 
 
-func _on_player_revived(corpse_global_position: Vector3) -> void:
+func _on_player_revived() -> void:
 	# provide i-frames on revive, no flashing
 	_parent.take_damage(false)
 	

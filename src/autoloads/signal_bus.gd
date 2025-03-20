@@ -18,7 +18,7 @@ extends Node
 @warning_ignore("unused_signal") signal player_exited_room(room: Node3D)
 
 # emitted when player contacts their corpse in DEAD state
-@warning_ignore("unused_signal") signal player_revived(corpse_position: Vector3)
+@warning_ignore("unused_signal") signal player_revived()
 
 # emitted by item when the player interacts to pick it up
 @warning_ignore("unused_signal") signal item_picked_up(item: ItemInventory)

@@ -23,10 +23,6 @@ func _ready() -> void:
 	deactivate()
 
 
-func _physics_process(delta: float) -> void:
-	pass
-
-
 func reset() -> void:
 	deactivate()
 
@@ -79,7 +75,7 @@ func animate_revive() -> void:
 
 func _on_body_entered(body: Node3D) -> void:
 	if body == PlayerHandler.get_player():
-		SignalBus.player_revived.emit(global_position)
+		SignalBus.player_revived.emit()
 
 
 func _on_player_entered_room(room: Room) -> void:
