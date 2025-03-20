@@ -168,6 +168,15 @@ func _on_player_escaped(entity: Node3D) -> void:
 func _on_player_revived(corpse_global_position: Vector3) -> void:
 	# provide i-frames on revive, no flashing
 	_parent.take_damage(false)
+	
+	# disable movement and camera lag for revive duration
+	_parent.camera.disable()
+	_parent.set_physics_process(false)
+	create_tween().tween_property(_parent, "global_position", _parent._corpse.global_position, 0.3)
+	await _parent._corpse.animate_revive()
+	_parent.camera.enable()
+	_parent.set_physics_process(true)
+	
 	_state_machine.change_state(PlayerStateMachine.States.LIVING)
 
 

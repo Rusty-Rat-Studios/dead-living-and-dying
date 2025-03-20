@@ -48,7 +48,13 @@ func animate_fall() -> void:
 	await Utility.delay(FALL_DURATION)
 
 
+func animate_revive() -> void:
+	fall_tween = create_tween()
+	fall_tween.tween_property(sprite_base, "rotation:x", 0, FALL_DURATION)
+	await Utility.delay(FALL_DURATION)
+	deactivate()
+
+
 func _on_body_entered(body: Node3D) -> void:
 	if body == PlayerHandler.get_player():
-		deactivate()
 		SignalBus.player_revived.emit(global_position)
