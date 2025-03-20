@@ -5,7 +5,6 @@ const FALL_DURATION: float = 0.7
 # y-offset from sprite center to its base
 # needed for rotating about the base of the sprite rather than the center
 const SPRITE_OFFSET: float = 1.4
-
 const DEAD_COLOR: Color = Color(0.5, 0.125, 0.125)
 
 var fall_tween: Tween
@@ -24,6 +23,10 @@ func _ready() -> void:
 	deactivate()
 
 
+func _physics_process(delta: float) -> void:
+	pass
+
+
 func reset() -> void:
 	deactivate()
 
@@ -32,8 +35,10 @@ func activate() -> void:
 	visible = true
 	$OmniLight3D.visible = true
 	collision_shape.set_deferred("disabled", false)
+	
 	# stop updating current_room based on player's position
 	SignalBus.player_entered_room.disconnect(_on_player_entered_room)
+	current_room.visibility_changed.connect(_on_room_visibity_changed)
 
 
 func deactivate() -> void:
@@ -42,8 +47,12 @@ func deactivate() -> void:
 	# reset sprite rotaiton
 	sprite_base.rotation.x = 0
 	collision_shape.set_deferred("disabled", true)
+	
 	# restart updating current_room based on player's position
-	SignalBus.player_entered_room.connect(_on_player_entered_room)
+	if not SignalBus.player_entered_room.is_connected(_on_player_entered_room):
+		SignalBus.player_entered_room.connect(_on_player_entered_room)
+	if current_room and current_room.visibility_changed.is_connected(_on_room_visibity_changed):
+		current_room.visibility_changed.disconnect(_on_room_visibity_changed)
 
 
 func animate_fall() -> void:
@@ -75,9 +84,6 @@ func _on_body_entered(body: Node3D) -> void:
 
 func _on_player_entered_room(room: Room) -> void:
 	current_room = room
-	if current_room.visibility_changed.is_connected(_on_room_visibity_changed):
-		current_room.visibility_changed.disconnect(_on_room_visibity_changed)
-	current_room.visibility_changed.connect(_on_room_visibity_changed, CONNECT_DEFERRED)
 
 
 func _on_room_visibity_changed() -> void:
