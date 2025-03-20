@@ -1,6 +1,5 @@
 extends GhostState
 
-const ROOM_BOUNDARIES_MARGIN: float = 2.0
 const WAITING_SPEED: float = 4.0
 const PAUSE_DURATION_MAX: float = 2.0
 const PAUSE_DURATION_MIN: float = 0.5
@@ -15,6 +14,7 @@ var polygon_point_generator: PolygonPointGenerator # select random points in roo
 @onready var is_paused: bool = false
 # timer for pause duration
 @onready var pause_timer: Timer = Timer.new()
+
 
 func _ready() -> void:
 	add_child(pause_timer)
