@@ -173,8 +173,14 @@ func _on_player_revived(corpse_global_position: Vector3) -> void:
 	# disable movement and camera lag for revive duration
 	_parent.camera.disable()
 	_parent.set_physics_process(false)
+	# prevent ghosts from continuing to attack while reviving
+	if not attacked_increment_timer.is_stopped():
+		attacked_modifier = 0
+		attacked_increment_timer.stop()
 	create_tween().tween_property(_parent, "global_position", _parent._corpse.global_position, 0.3)
 	await _parent._corpse.animate_revive()
+	
+	# re-enable player control
 	_parent.camera.enable()
 	_parent.set_physics_process(true)
 	
