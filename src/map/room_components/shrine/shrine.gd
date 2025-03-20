@@ -17,6 +17,7 @@ const TWEEN_DURATION: float = 1
 # for disallowing further revivals at this shrine
 @onready var consumed: bool = false
 @onready var detector: Area3D = $PlayerDetector
+@onready var respawn_point: Vector3 = $RespawnPoint.global_position
 
 
 func _ready() -> void:

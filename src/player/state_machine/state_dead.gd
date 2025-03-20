@@ -134,7 +134,7 @@ func move_to_shrine() -> void:
 	await black_screen.fade_in(RESPAWN_TIME)
 	
 	# move player to shrine
-	_parent.global_position = target_shrine.global_position
+	_parent.global_position = target_shrine.respawn_point
 	# execute single step of physics frame to trigger room visibility
 	_parent._physics_process(get_physics_process_delta_time())
 	# activate corpse light after fade-out to avoid "popping-in" if corpse visible on respawn
