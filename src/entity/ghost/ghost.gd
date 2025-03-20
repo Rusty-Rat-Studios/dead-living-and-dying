@@ -18,7 +18,6 @@ const OPACITY_DYING: float = 0.2
 const OPACITY_DEAD: float = 0.8
 const OPACITY_FADE_DURATION: float = 1
 
-var movement_boundaries: Rect2
 var opacity_tween: Tween
 var light_tween: Tween
 var light_enabled: bool = false
@@ -38,6 +37,7 @@ var light_enabled_permanent: bool = false
 @onready var player_in_room: bool = false
 @onready var target_pos: Vector3 = Vector3.ZERO
 @onready var at_target: bool = false
+@onready var movement_timeout_timer: Timer = $MovementTimeoutTimer
 
 # store initial position to return to when calling reset()
 @onready var starting_position: Vector3 = position
@@ -60,6 +60,8 @@ func _ready() -> void:
 	SignalBus.player_exited_room.connect(_on_player_exited_room)
 	# attach signal to update ghost visibility based on player state
 	SignalBus.player_state_changed.connect(_on_player_state_changed, CONNECT_DEFERRED)
+	
+	movement_timeout_timer.timeout.connect(_stop_at_target_and_emit)
 	
 	hit.connect(_on_hit)
 
@@ -89,6 +91,7 @@ func set_target(target_global: Vector3) -> void:
 	if light_enabled and not light_enabled_permanent:
 		# make light visible
 		set_light(LIGHT_ENERGY)
+	movement_timeout_timer.start()
 
 
 func move_to_target(delta: float) -> void:
@@ -99,15 +102,7 @@ func move_to_target(delta: float) -> void:
 	var distance_to_target: float = global_position.distance_squared_to(target_pos)
 	
 	if distance_to_target < speed * delta:
-		# set target to ghost position if close enough
-		at_target = true
-		velocity = Vector3.ZERO
-		target_pos = global_position
-		target_reached.emit()
-		
-		if light_enabled and not light_enabled_permanent:
-			# make light invisible
-			set_light(0)
+		_stop_at_target_and_emit()
 	else:
 		at_target = false
 		direction = direction.normalized()
@@ -127,6 +122,18 @@ func set_light(energy: float) -> void:
 		light_tween.kill()
 	light_tween = create_tween()
 	light_tween.tween_property(light, "light_energy", energy, LIGHT_FADE_DURATION)
+
+
+func _stop_at_target_and_emit() -> void:
+	# set target to ghost position if close enough
+	at_target = true
+	velocity = Vector3.ZERO
+	target_pos = global_position
+	target_reached.emit()
+	
+	if light_enabled and not light_enabled_permanent:
+		# make light invisible
+		set_light(0)
 
 
 func _on_player_entered_room(room: Node3D) -> void:

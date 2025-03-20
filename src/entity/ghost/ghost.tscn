@@ -117,3 +117,7 @@ monitorable = false
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AttackRange"]
 shape = SubResource("SphereShape3D_rrxp0")
 disabled = true
+
+[node name="MovementTimeoutTimer" type="Timer" parent="."]
+wait_time = 6.0
+one_shot = true
