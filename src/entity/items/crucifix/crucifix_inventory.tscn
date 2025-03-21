@@ -1,16 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://cdibgy57rubh6"]
+[gd_scene load_steps=9 format=3 uid="uid://cdibgy57rubh6"]
 
 [ext_resource type="PackedScene" uid="uid://bpkp2ej6u0kax" path="res://src/entity/items/defense_item_inventory.tscn" id="1_x5nou"]
 [ext_resource type="Script" uid="uid://cycj76pyudxkc" path="res://src/entity/items/crucifix/crucifix_inventory.gd" id="2_8ft1u"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1v5j2"]
-transparency = 1
-albedo_color = Color(1, 1, 1, 0.12549)
-
-[sub_resource type="TorusMesh" id="TorusMesh_4x5sf"]
-material = SubResource("StandardMaterial3D_1v5j2")
-inner_radius = 1.8
-outer_radius = 2.0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_xw4mg"]
 height = 4.0
@@ -47,13 +38,16 @@ turbulence_noise_scale = 0.047
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1e77t"]
 cull_mode = 2
-shading_mode = 0
+backlight_enabled = true
+backlight = Color(1, 1, 1, 1)
+use_particle_trails = true
 
 [sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_hupak"]
 material = SubResource("StandardMaterial3D_1e77t")
 shape = 0
-size = 0.025
-section_length = 0.1
+size = 0.01
+sections = 8
+section_length = 0.05
 
 [node name="CrucifixInventory" instance=ExtResource("1_x5nou")]
 script = ExtResource("2_8ft1u")
@@ -63,16 +57,12 @@ collision_layer = 0
 collision_mask = 8
 monitorable = false
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Hitbox" index="0"]
-visible = false
-mesh = SubResource("TorusMesh_4x5sf")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="1"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="0"]
 shape = SubResource("CylinderShape3D_xw4mg")
 disabled = true
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="Hitbox" index="2"]
-amount = 32
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Hitbox" index="1"]
+amount = 64
 lifetime = 2.0
 preprocess = 1.0
 local_coords = true
@@ -80,9 +70,6 @@ trail_enabled = true
 trail_lifetime = 2.0
 process_material = SubResource("ParticleProcessMaterial_pyfjc")
 draw_pass_1 = SubResource("RibbonTrailMesh_hupak")
-
-[node name="GPUParticlesAttractorSphere3D" type="GPUParticlesAttractorSphere3D" parent="Hitbox/GPUParticles3D" index="0"]
-radius = 6.0
 
 [node name="CooldownTimer" type="Timer" parent="." index="1"]
 one_shot = true

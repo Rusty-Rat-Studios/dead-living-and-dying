@@ -17,6 +17,8 @@ func _ready() -> void:
 		+ " to exorcise possessed objects within a limited range.")
 	texture = preload("res://src/entity/items/crucifix/crucifix.png")
 	
+	$Hitbox/GPUParticles3D.emitting = false
+	
 	$ActiveTimer.wait_time = BASE_ACTIVE_DURATION
 	$CooldownTimer.wait_time = BASE_COOLDOWN_DURATION
 	$ActiveTimer.timeout.connect(_on_active_timer_timeout)
@@ -43,6 +45,7 @@ func use() -> void:
 	$Hitbox/CollisionShape3D.disabled = false
 	$Shield/CollisionShape3D.disabled = false
 	$Hitbox.visible = true
+	$Hitbox/GPUParticles3D.emitting = true
 	$ActiveTimer.wait_time = BASE_ACTIVE_DURATION * player.player_stats.duration
 	$ActiveTimer.start()
 	$CooldownTimer.wait_time = BASE_COOLDOWN_DURATION / player.player_stats.cooldown_reduction
@@ -56,6 +59,7 @@ func _on_active_timer_timeout() -> void:
 	$Hitbox/CollisionShape3D.disabled = true
 	$Shield/CollisionShape3D.disabled = true
 	$Hitbox.visible = false
+	$Hitbox/GPUParticles3D.emitting = false
 
 
 func _on_cooldown_timer_timeout() -> void:
