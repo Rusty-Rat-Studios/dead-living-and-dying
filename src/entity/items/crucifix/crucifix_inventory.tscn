@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cdibgy57rubh6"]
+[gd_scene load_steps=11 format=3 uid="uid://cdibgy57rubh6"]
 
 [ext_resource type="PackedScene" uid="uid://bpkp2ej6u0kax" path="res://src/entity/items/defense_item_inventory.tscn" id="1_x5nou"]
 [ext_resource type="Script" uid="uid://cycj76pyudxkc" path="res://src/entity/items/crucifix/crucifix_inventory.gd" id="2_8ft1u"]
@@ -26,6 +26,7 @@ curve = SubResource("Curve_1e77t")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pyfjc"]
 particle_flag_align_y = true
+particle_flag_damping_as_friction = true
 emission_shape = 6
 emission_ring_axis = Vector3(0, 1, 0)
 emission_ring_height = 1.0
@@ -41,22 +42,29 @@ tangential_accel_max = -8.0
 tangential_accel_curve = SubResource("CurveTexture_kfemg")
 damping_min = 2.0
 damping_max = 2.0
+turbulence_noise_strength = 0.05
+turbulence_noise_scale = 0.047
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1e77t"]
+cull_mode = 2
+shading_mode = 0
 
 [sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_hupak"]
-size = 0.05
+material = SubResource("StandardMaterial3D_1e77t")
+shape = 0
+size = 0.025
 section_length = 0.1
-section_segments = 16
 
 [node name="CrucifixInventory" instance=ExtResource("1_x5nou")]
 script = ExtResource("2_8ft1u")
 
 [node name="Hitbox" type="Area3D" parent="." index="0"]
-visible = false
 collision_layer = 0
 collision_mask = 8
 monitorable = false
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Hitbox" index="0"]
+visible = false
 mesh = SubResource("TorusMesh_4x5sf")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="1"]
@@ -66,7 +74,7 @@ disabled = true
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Hitbox" index="2"]
 amount = 32
 lifetime = 2.0
-preprocess = 0.88
+preprocess = 1.0
 local_coords = true
 trail_enabled = true
 trail_lifetime = 2.0
