@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=4 uid="uid://cd4th2g2hethj"]
+[gd_scene load_steps=7 format=3 uid="uid://cd4th2g2hethj"]
 
 [ext_resource type="Script" uid="uid://uyg6vw1fndgn" path="res://src/map/room_components/wall.gd" id="1_kyfxr"]
 [ext_resource type="Texture2D" uid="uid://c6fjrr2bcg8tw" path="res://src/map/tileset-dhassa/wall2.png" id="2_0mtdn"]
 [ext_resource type="Shader" uid="uid://bgy36jmkglwva" path="res://src/map/room_components/transparent_wall_shader.gdshader" id="2_4ysrj"]
+[ext_resource type="PackedScene" uid="uid://dpdko5ur4ea8p" path="res://models/wall_with_doorway_x4.glb" id="4_4ysrj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6iq4c"]
 render_priority = 0
@@ -19,55 +20,19 @@ albedo_texture = ExtResource("2_0mtdn")
 uv1_scale = Vector3(4, -4, 1)
 uv1_offset = Vector3(-0.5, 2, 0)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xcm5l"]
-resource_name = "Material"
-cull_mode = 2
-albedo_color = Color(0.906332, 0.906332, 0.906332, 1)
-roughness = 0.5
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_exn4u"]
-_surfaces = [{
-"aabb": AABB(-0.125, -0.5, -0.5, 0.25, 1, 1),
-"format": 34896613377,
-"index_count": 84,
-"index_data": PackedByteArray("AAABAAIAAwACAAEAAwAEAAIABQADAAEABQAEAAMAAgAEAAYABQAGAAQAAgAGAAAABQABAAcAAAAHAAEABQAIAAYABgAJAAAABgAIAAkACgAAAAkABwAAAAoACwAFAAcACwAIAAUACwAHAAoACAAMAAkACgAJAAwACAALAA0ADQALAAoACAANAA4ACAAOAAwADQAKAA8ADwAOAA0ACgAMAA8ADwAMAA4A"),
-"name": "Material",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 16,
-"vertex_data": PackedByteArray("/7////9/AAD///////8AAP+//////wAA//8AAP//AAD/vwAA//8AAP//AAAAAAAA/78AAP9/AAD/////AAAAAP8/AAD/fwAA/z////9/AAAAAP//AAAAAAAAAAAAAAAA/z//////AAAAAAAA//8AAP8/AAD//wAAAAD/////AAA=")
-}]
-blend_shape_mode = 0
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_kwiyb"]
-resource_name = "wall_with_doorway_x4_Cube"
-_surfaces = [{
-"aabb": AABB(-0.125, -0.5, -0.5, 0.25, 1, 1),
-"attribute_data": PackedByteArray("/7v/X/+f/z//u/8//5//f//f/3//w/9f/8P/P//f/z//nwAA/1//G/9fAAD/n/8b/1//P/+f/yP/n/8//1//I/9f////n/+//5////9f/7//O/9f/x//P/87/z//H/9//1//f/9D/1//Q/8//1//P/9f/3//n/8//5//f/9f/z//X/+//5//f/+f/7//X/9/zHz/vzKDVPUyg/+/zHxU9cx8/38yg/+/MoP/f8x8/78yg6pKzHz/fzKD/3/MfKpK"),
-"format": 34896613399,
-"index_count": 84,
-"index_data": PackedByteArray("AAABAAIAAAADAAEAAwAAAAQABAAAAAUABAAFAAYABAAGAAcACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUAFwAUABgAGAAUABkAGAAZABoAGAAaABsAHAAdAB4AHAAfAB0AIAAhACIAIAAjACEAJAAlACYAJAAnACUAKAApACoAKAArACkALAAtAC4ALAAvAC0A"),
-"material": SubResource("StandardMaterial3D_xcm5l"),
-"name": "Material",
-"primitive": 3,
-"uv_scale": Vector4(0, 0, 0, 0),
-"vertex_count": 48,
-"vertex_data": PackedByteArray("/7////9///////////////+//////////////wAA//8AAP//AAD///8/////f////z////////8AAP///////wAA//////+//z8AAP///78AAAAA////v/8///////+///8AAP///7//v///////v/////////+//78AAP///78AAAAA//9U1QAA//8AAFTVAAD/////VNUAAAAAAABU1f8/AAD/f/+/AAAAAP///7//PwAA////vwAAAAAAAP+///8AAAAA/7//vwAA/3//v/+/AAD///+///8AAP///7///wAAAABU1f///////1TV/////wAAVNX//wAA//9U1QAAAAAAAP///////wAA//8AAP//AAD/////AAAAAP///z8AAP9/qir/P/////+qKv8/////f6oq/z8AAP//qir/vwAA/3//P/8/////f/8//7////9//z//PwAA/3//P/+//////6oq/78AAP9/qir/v////3+qKv+/AAD//6oq/3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7///////////////////////////////////////////1TVVNVU1VTVVNVU1VTVVNUAAP9/AAD/fwAA/38AAP9/AAD/fwAA/38AAP9/AAD/f6oqqiqqKqoqqiqqKqoqqir/v/+//7//v/+//7//v/+/qiqqKqoqqiqqKqoqqiqqKv////////////////////9U1VTVVNVU1VTVVNVU1VTV")
-}]
-blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_exn4u")
-
-[node name="WallWithDoorwayX4" type="StaticBody3D"]
+[node name="WallWithDoorwayX4" type="StaticBody3D" node_paths=PackedStringArray("wall_mesh")]
 script = ExtResource("1_kyfxr")
-preview_transparent_material = true
+wall_mesh = NodePath("wall_with_doorway_x4/Cube")
 transparent_wall_material = SubResource("ShaderMaterial_6iq4c")
 wall_material = SubResource("StandardMaterial3D_4ysrj")
 
-[node name="WallMesh" type="MeshInstance3D" parent="."]
-transform = Transform3D(16, 0, 0, 0, 0, -5, 0, 0.1, 0, 0, 2.5, 0)
-mesh = SubResource("ArrayMesh_kwiyb")
-skeleton = NodePath("")
-surface_material_override/0 = SubResource("ShaderMaterial_6iq4c")
+[node name="wall_with_doorway_x4" parent="." instance=ExtResource("4_4ysrj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+
+[node name="Cube" parent="wall_with_doorway_x4" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_4ysrj")
 
 [node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="."]
 polygon = PackedVector2Array(-2, 0, -2, 5, 2, 5, 2, 0, 1, 0, 1, 2.5, -1, 2.5, -1, 0)
+
+[editable path="wall_with_doorway_x4"]

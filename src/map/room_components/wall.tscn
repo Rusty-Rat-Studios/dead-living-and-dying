@@ -7,8 +7,9 @@
 [sub_resource type="BoxMesh" id="BoxMesh_8nfv3"]
 size = Vector3(16, 5, 0.1)
 
-[node name="Wall" type="StaticBody3D"]
+[node name="Wall" type="StaticBody3D" node_paths=PackedStringArray("wall_mesh")]
 script = ExtResource("1_45mg4")
+wall_mesh = NodePath("WallMesh")
 transparent_wall_material = ExtResource("2_sgpqo")
 wall_material = ExtResource("3_u5826")
 
