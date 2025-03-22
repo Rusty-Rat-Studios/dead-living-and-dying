@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://b6pd0nir4sadl"]
+
+[ext_resource type="PackedScene" uid="uid://cexvn2mosncly" path="res://src/map/room_components/door_base.tscn" id="1_3nrkc"]
+[ext_resource type="PackedScene" uid="uid://bson3umirpot2" path="res://src/map/room_components/wall.tscn" id="2_hjx7f"]
+[ext_resource type="PackedScene" uid="uid://fpivfcuv6s1r" path="res://src/map/room_components/wall_with_doorway.tscn" id="2_tobwv"]
+
+[node name="Door" instance=ExtResource("1_3nrkc")]
+wall_scene = ExtResource("2_hjx7f")
+
+[node name="WallWithDoorway" parent="." index="5" instance=ExtResource("2_tobwv")]

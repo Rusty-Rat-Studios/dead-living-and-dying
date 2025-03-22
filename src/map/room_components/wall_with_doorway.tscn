@@ -4,7 +4,6 @@
 [ext_resource type="Material" uid="uid://hnvx3t8awqp1" path="res://src/map/room_components/transparent_wall_with_doorway_material.tres" id="2_akohn"]
 [ext_resource type="Material" uid="uid://ca6og85us0udr" path="res://src/map/room_components/wall_with_doorway_material.tres" id="2_nyej4"]
 
-
 [sub_resource type="ArrayMesh" id="ArrayMesh_yqa6q"]
 _surfaces = [{
 "aabb": AABB(-0.5, -0.5, -0.5, 1, 1, 1),

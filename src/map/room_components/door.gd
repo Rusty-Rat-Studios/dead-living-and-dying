@@ -1,7 +1,6 @@
 class_name Door
 extends Node3D
 
-const WALL: Resource = preload("res://src/map/room_components/wall.tscn")
 const DOOR_TEXTURE: Texture = preload("res://src/map/tileset-dhassa/door1.png")
 const DOOR_TEXTURE_OPEN: Texture = preload("res://src/map/tileset-dhassa/door1_open.png")
 # energy of fire light; used to tween in/out
@@ -9,6 +8,7 @@ const LIGHT_ENERGY: float = 2.0
 const TWEEN_DURATION: float = 0.6
 const MINIMAP_COMPONENT: Resource = preload("res://src/map/room_components/door_minimap.tscn")
 
+@export var wall_scene: PackedScene
 @export var door_location: DoorLocation
 
 var linked_door: Door = null
@@ -61,7 +61,7 @@ func init(room_grid_location: Vector2) -> void:
 
 func _convert_to_wall() -> void:
 	(get_parent() as Room).deregister_door(self)
-	var wall: Node3D = WALL.instantiate()
+	var wall: Node3D = wall_scene.instantiate()
 	wall.position = self.position
 	wall.rotation = self.rotation
 	add_sibling(wall)
