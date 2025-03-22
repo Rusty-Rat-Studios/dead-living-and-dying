@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=4 uid="uid://bwr5n122fnh00"]
+
+[ext_resource type="PackedScene" uid="uid://84hedrtlny03" path="res://models/hallway_L_curve_floor.glb" id="1_jag5x"]
+[ext_resource type="Material" uid="uid://ctvcmqmldyoar" path="res://src/ui/minimap/minimap_room_material.tres" id="2_m0f0w"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_jnhyh"]
+_surfaces = [{
+"aabb": AABB(-8, 0, -9, 10, 1e-05, 10),
+"format": 34896613377,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAgAEAAMAAgABAAUAAgAFAAYABgAFAAcACAAGAAcACAAJAAYA"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 10,
+"vertex_data": PackedByteArray("ZmYAAAAAAAAyswAAAAAAAGZmAABmZgAAAAAAAAAAAAAAAAAAZmYAAP//AADMTAAAmZkAAJmZAAD//wAAmZkAAP//AAD//wAAmZkAAP//AAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_5h7j0"]
+resource_name = "hallway_L_curve_floor_Plane_002"
+_surfaces = [{
+"aabb": AABB(-8, 0, -9, 10, 1e-05, 10),
+"attribute_data": PackedByteArray("N3L+/xq5//83chK1eaGdj/7/zsf+/52PN3IStf7/zsd5oZ2P//+xRHmhnY/+/52PN3IStRq5///+/87H//+xRHmhsUR5oZ2PN3IStbIT/v83cv7/N3IStbITErWyE/7/"),
+"format": 34896613399,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAwAEAAUABgAHAAgACQAKAAsADAANAA4ADwAQABEAEgATABQAFQAWABcA"),
+"material": ExtResource("2_m0f0w"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(8.12356, 5.12425, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("ZmYAAAAA/z8yswAAAAD/P2ZmAABmZv8/mZkAAJmZ/z///wAAzEz/P///AACZmf8/ZmYAAGZm/z///wAAzEz/P5mZAACZmf8///8AAP///z+ZmQAAmZn/P///AACZmf8/ZmYAAGZm/z8yswAAAAD/P///AADMTP8///8AAP///z+ZmQAA////P5mZAACZmf8/ZmYAAGZm/z8AAAAAAAD/P2ZmAAAAAP8/ZmYAAGZm/z8AAAAAZmb/PwAAAAAAAP8//v//f/7//3/+//9//v//f/7//3/+//9//v//f/7//3/+//9//v//f/7//3/+//9//v//f/7//3/+//9//v//f/7//3/+//9//v//f/7//3/+//9//v//f/7//3/+//9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_jnhyh")
+
+[node name="MinimapComponent" type="Node3D"]
+
+[node name="hallway_L_curve_floor" parent="." instance=ExtResource("1_jag5x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7)
+
+[node name="Plane" parent="hallway_L_curve_floor" index="0"]
+layers = 512
+mesh = SubResource("ArrayMesh_5h7j0")
+
+[editable path="hallway_L_curve_floor"]
