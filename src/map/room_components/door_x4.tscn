@@ -1,8 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://bjca8n1kvkwg0"]
+[gd_scene load_steps=4 format=3 uid="uid://bjca8n1kvkwg0"]
 
 [ext_resource type="PackedScene" uid="uid://cexvn2mosncly" path="res://src/map/room_components/door_base.tscn" id="1_v6yi0"]
+[ext_resource type="PackedScene" uid="uid://cmcamo5tn0b7t" path="res://src/map/room_components/wall_x4.tscn" id="2_0ud3k"]
 [ext_resource type="PackedScene" uid="uid://cd4th2g2hethj" path="res://src/map/room_components/wall_with_doorway_x4.tscn" id="2_8mhla"]
 
-[node name="Door" instance=ExtResource("1_v6yi0")]
+[node name="Door" node_paths=PackedStringArray("wall_with_doorway") instance=ExtResource("1_v6yi0")]
+wall_with_doorway = NodePath("WallWithDoorwayX4")
+wall_scene = ExtResource("2_0ud3k")
 
 [node name="WallWithDoorwayX4" parent="." index="5" instance=ExtResource("2_8mhla")]
+monitor_for_transparency = false

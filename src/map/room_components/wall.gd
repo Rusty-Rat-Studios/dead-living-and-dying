@@ -26,7 +26,8 @@ const TWEEN_DURATION: float = 1.0
 		wall_material = value
 		values_changed.emit()
 
-var is_horizontal_wall: bool = false
+@export var monitor_for_transparency: bool = false
+
 var is_transparent: bool = false
 var intensity: float = 0.0
 var transparent_tween: Tween
@@ -42,14 +43,11 @@ func _ready() -> void:
 			wall_mesh.set_surface_override_material(0, wall_material)
 		else:
 			wall_mesh.set_surface_override_material(0, null)
-		
-		if fmod(global_rotation_degrees.y, 180) == 0:
-			is_horizontal_wall = true
 
 
 func _process(_delta: float) -> void:
 	if not Engine.is_editor_hint(): # only run in engine
-		if is_horizontal_wall:
+		if monitor_for_transparency:
 			wall_mesh.set_instance_shader_parameter("intensity", intensity)
 			if (PlayerHandler.get_player().global_position.z < global_position.z) and not is_transparent:
 				_apply_material_transparent()

@@ -8,6 +8,7 @@ const LIGHT_ENERGY: float = 2.0
 const TWEEN_DURATION: float = 0.6
 const MINIMAP_COMPONENT: Resource = preload("res://src/map/room_components/door_minimap.tscn")
 
+@export var wall_with_doorway: Wall
 @export var wall_scene: PackedScene
 @export var door_location: DoorLocation
 
@@ -61,9 +62,10 @@ func init(room_grid_location: Vector2) -> void:
 
 func _convert_to_wall() -> void:
 	(get_parent() as Room).deregister_door(self)
-	var wall: Node3D = wall_scene.instantiate()
+	var wall: Wall = wall_scene.instantiate()
 	wall.position = self.position
 	wall.rotation = self.rotation
+	wall.monitor_for_transparency = wall_with_doorway.monitor_for_transparency
 	add_sibling(wall)
 	queue_free()
 

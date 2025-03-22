@@ -10,6 +10,7 @@ script = ExtResource("1_qq7eh")
 wall_mesh = NodePath("wall_with_doorway/Cube")
 transparent_wall_material = ExtResource("2_akohn")
 wall_material = ExtResource("2_nyej4")
+monitor_for_transparency = null
 
 [node name="wall_with_doorway" parent="." instance=ExtResource("4_sujnr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)

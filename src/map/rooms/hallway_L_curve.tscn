@@ -127,6 +127,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0, -2)
 length = 7.0
 transparent_wall_material = SubResource("ShaderMaterial_br06e")
 wall_material = SubResource("StandardMaterial3D_s271h")
+monitor_for_transparency = null
 
 [node name="WallMesh" parent="Wall" index="0"]
 mesh = SubResource("BoxMesh_7hqeo")
@@ -140,6 +141,7 @@ transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 
 length = 4.25
 transparent_wall_material = SubResource("ShaderMaterial_8624k")
 wall_material = SubResource("StandardMaterial3D_m0foj")
+monitor_for_transparency = null
 
 [node name="WallMesh" parent="Wall2" index="0"]
 mesh = SubResource("BoxMesh_eht8d")
@@ -153,6 +155,7 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 0, 
 length = 7.0
 transparent_wall_material = SubResource("ShaderMaterial_br06e")
 wall_material = SubResource("StandardMaterial3D_s271h")
+monitor_for_transparency = null
 
 [node name="WallMesh" parent="Wall3" index="0"]
 mesh = SubResource("BoxMesh_8cq5c")
@@ -166,6 +169,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 2)
 length = 4.0
 transparent_wall_material = SubResource("ShaderMaterial_70f6a")
 wall_material = SubResource("StandardMaterial3D_br06e")
+monitor_for_transparency = true
 
 [node name="WallMesh" parent="Wall4" index="0"]
 mesh = SubResource("BoxMesh_s271h")
@@ -179,6 +183,7 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2, 0,
 length = 4.0
 transparent_wall_material = SubResource("ShaderMaterial_70f6a")
 wall_material = SubResource("StandardMaterial3D_br06e")
+monitor_for_transparency = true
 
 [node name="WallMesh" parent="Wall5" index="0"]
 mesh = SubResource("BoxMesh_s271h")
@@ -192,6 +197,7 @@ transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 
 length = 2.83
 transparent_wall_material = SubResource("ShaderMaterial_70f6a")
 wall_material = SubResource("StandardMaterial3D_7hqeo")
+monitor_for_transparency = true
 
 [node name="WallMesh" parent="Wall6" index="0"]
 mesh = SubResource("BoxMesh_m0foj")
@@ -205,6 +211,9 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 
 wall_scene = ExtResource("12_x6o5c")
 door_location = SubResource("Resource_x6o5c")
 
+[node name="WallWithDoorwayX4" parent="Door" index="5"]
+monitor_for_transparency = true
+
 [node name="Door2" parent="." instance=ExtResource("11_7eu7n")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.95, 0, 0)
 wall_scene = ExtResource("12_x6o5c")
@@ -217,3 +226,4 @@ door_location = SubResource("Resource_7eu7n")
 [editable path="Wall4"]
 [editable path="Wall5"]
 [editable path="Wall6"]
+[editable path="Door"]

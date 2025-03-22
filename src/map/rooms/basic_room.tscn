@@ -80,6 +80,9 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.899,
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.95)
 door_location = SubResource("Resource_yemrt")
 
+[node name="WallWithDoorway" parent="Door" index="5"]
+monitor_for_transparency = true
+
 [node name="Door2" parent="." instance=ExtResource("6_pq5nb")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7.95, 0, 0)
 door_location = SubResource("Resource_5j2dc")
@@ -91,3 +94,9 @@ door_location = SubResource("Resource_m5xcn")
 [node name="Door4" parent="." instance=ExtResource("6_pq5nb")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 7.95)
 door_location = SubResource("Resource_3pebv")
+
+[node name="WallWithDoorway" parent="Door4" index="5"]
+monitor_for_transparency = true
+
+[editable path="Door"]
+[editable path="Door4"]

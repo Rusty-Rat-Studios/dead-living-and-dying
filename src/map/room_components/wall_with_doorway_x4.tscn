@@ -25,6 +25,7 @@ script = ExtResource("1_kyfxr")
 wall_mesh = NodePath("wall_with_doorway_x4/Cube")
 transparent_wall_material = SubResource("ShaderMaterial_6iq4c")
 wall_material = SubResource("StandardMaterial3D_4ysrj")
+monitor_for_transparency = null
 
 [node name="wall_with_doorway_x4" parent="." instance=ExtResource("4_4ysrj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
