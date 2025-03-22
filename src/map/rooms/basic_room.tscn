@@ -77,17 +77,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.842, 0.5, 3.099)
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.899, 0.5, 3.289)
 
 [node name="Door" parent="." instance=ExtResource("6_pq5nb")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.95)
 door_location = SubResource("Resource_yemrt")
 
 [node name="Door2" parent="." instance=ExtResource("6_pq5nb")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7.95, 0, 0)
 door_location = SubResource("Resource_5j2dc")
 
 [node name="Door3" parent="." instance=ExtResource("6_pq5nb")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.95, 0, 0)
 door_location = SubResource("Resource_m5xcn")
 
 [node name="Door4" parent="." instance=ExtResource("6_pq5nb")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 8)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 7.95)
 door_location = SubResource("Resource_3pebv")
