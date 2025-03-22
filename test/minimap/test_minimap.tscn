@@ -101,6 +101,7 @@ room_information = SubResource("Resource_stl1i")
 
 [node name="Wall" parent="WorldGrid/RoomStart" instance=ExtResource("13_gmigq")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 8)
+monitor_for_transparency = true
 
 [node name="Wall2" parent="WorldGrid/RoomStart" instance=ExtResource("13_gmigq")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0, 0)
@@ -111,6 +112,9 @@ transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 8, 0, 0)
 [node name="Door" parent="WorldGrid/RoomStart" instance=ExtResource("14_q73u3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
 door_location = SubResource("Resource_85chv")
+
+[node name="WallWithDoorway" parent="WorldGrid/RoomStart/Door" index="5"]
+monitor_for_transparency = true
 
 [node name="Room" type="Node3D" parent="WorldGrid" groups=["rooms"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16)
@@ -132,6 +136,9 @@ transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 8, 0, 0)
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 8)
 door_location = SubResource("Resource_v444v")
 
+[node name="WallWithDoorway" parent="WorldGrid/Room/Door" index="5"]
+monitor_for_transparency = true
+
 [node name="MinimapObjects" type="Node3D" parent="."]
 
 [node name="UI" parent="." instance=ExtResource("17_vamge")]
@@ -139,4 +146,6 @@ door_location = SubResource("Resource_v444v")
 [node name="GameMenu" parent="UI" index="3"]
 show_how_to_play_on_start = false
 
+[editable path="WorldGrid/RoomStart/Door"]
+[editable path="WorldGrid/Room/Door"]
 [editable path="UI"]

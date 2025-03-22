@@ -48,6 +48,7 @@ room_information = SubResource("Resource_dhis3")
 
 [node name="WallWithoutDoor" parent="DebugRoom" instance=ExtResource("9_exyhi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.05)
+monitor_for_transparency = true
 
 [node name="WallWithoutDoor2" parent="DebugRoom" instance=ExtResource("9_exyhi")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.05, 0, 0)
