@@ -8,6 +8,7 @@ extends Wall
 
 
 func _ready() -> void:
+	super()
 	if Engine.is_editor_hint(): # only run as tool
 		values_changed.connect(_on_values_changed)
 
