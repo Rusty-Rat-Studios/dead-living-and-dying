@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EntityTable" load_steps=15 format=3 uid="uid://brngxo180e7qn"]
+[gd_resource type="Resource" script_class="EntityTable" load_steps=17 format=3 uid="uid://brngxo180e7qn"]
 
 [ext_resource type="Script" uid="uid://dt04phs8a5k3h" path="res://src/entity/entity_table_entry.gd" id="1_v674j"]
 [ext_resource type="PackedScene" uid="uid://dh8q75xrlxeaa" path="res://src/map/rooms/basic_room.tscn" id="2_3hsld"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://ohg7gvmagx2q" path="res://src/map/rooms/hallway_curve_north_west.tscn" id="5_02hms"]
 [ext_resource type="PackedScene" uid="uid://dmsv4o7br2mj4" path="res://src/map/rooms/hallway_curve_north_east.tscn" id="6_xjnb4"]
 [ext_resource type="PackedScene" uid="uid://bfbveo3pc6kfq" path="res://src/map/rooms/hallway_straight_north_south.tscn" id="7_ylr8c"]
+[ext_resource type="PackedScene" uid="uid://dvfm52rrn70uh" path="res://src/map/rooms/hallway_straight_east_west.tscn" id="8_2gvgd"]
 
 [sub_resource type="Resource" id="Resource_b5ttb"]
 script = ExtResource("1_v674j")
@@ -63,6 +64,15 @@ max_spawn = -1
 min_spawn = -1
 metadata/_custom_type_script = "uid://dt04phs8a5k3h"
 
+[sub_resource type="Resource" id="Resource_waavr"]
+script = ExtResource("1_v674j")
+entity = ExtResource("8_2gvgd")
+base_chance = 1.0
+chance_change = 0.0
+max_spawn = -1
+min_spawn = -1
+metadata/_custom_type_script = "uid://dt04phs8a5k3h"
+
 [resource]
 script = ExtResource("2_pws74")
-entities = Array[ExtResource("1_v674j")]([SubResource("Resource_b5ttb"), SubResource("Resource_ab0a5"), SubResource("Resource_xjnb4"), SubResource("Resource_ylr8c"), SubResource("Resource_2gvgd"), SubResource("Resource_s0rfh")])
+entities = Array[ExtResource("1_v674j")]([SubResource("Resource_b5ttb"), SubResource("Resource_ab0a5"), SubResource("Resource_xjnb4"), SubResource("Resource_ylr8c"), SubResource("Resource_2gvgd"), SubResource("Resource_s0rfh"), SubResource("Resource_waavr")])
