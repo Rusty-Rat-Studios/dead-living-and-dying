@@ -1,10 +1,11 @@
-[gd_scene load_steps=30 format=3 uid="uid://d142i6jit8s2f"]
+[gd_scene load_steps=31 format=3 uid="uid://d142i6jit8s2f"]
 
 [ext_resource type="Script" uid="uid://bo0tyfrjfebc6" path="res://src/map/room_components/room.gd" id="1_3kabm"]
 [ext_resource type="PackedScene" uid="uid://b4teav5cf7dm4" path="res://src/map/room_components/floor/floor_collision_shape.tscn" id="2_0v0cg"]
 [ext_resource type="PackedScene" uid="uid://te0dpapcosk4" path="res://src/map/rooms/room_minimap/basic_room_minimap.tscn" id="2_fi0hv"]
 [ext_resource type="Script" uid="uid://bv4f3snq7u1u2" path="res://src/common/room_information.gd" id="4_1kr6n"]
 [ext_resource type="PackedScene" uid="uid://bqsc7pbjuxsmh" path="res://src/map/room_components/floor/player_detector.tscn" id="4_lxcpm"]
+[ext_resource type="Texture2D" uid="uid://dsbt0jay6l62e" path="res://src/ui/minimap/shrine_icon.png" id="4_uuedo"]
 [ext_resource type="PackedScene" uid="uid://b6pd0nir4sadl" path="res://src/map/room_components/door/door_x16.tscn" id="5_1kr6n"]
 [ext_resource type="Script" uid="uid://dqhrw6rxew3fa" path="res://src/common/door_location.gd" id="6_6gi6o"]
 [ext_resource type="Texture2D" uid="uid://q5r4y2tfhkxc" path="res://src/map/tileset-dhassa/floor3.png" id="6_w6w2w"]
@@ -42,6 +43,7 @@ script = ExtResource("4_1kr6n")
 room_shape = Array[Vector2]([Vector2(0, 0)])
 possible_door_locations = Array[ExtResource("6_6gi6o")]([SubResource("Resource_6gi6o"), SubResource("Resource_w6w2w"), SubResource("Resource_uuedo"), SubResource("Resource_rplmb")])
 minimap_component = ExtResource("2_fi0hv")
+room_icon = ExtResource("4_uuedo")
 metadata/_custom_type_script = "uid://bv4f3snq7u1u2"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w6w2w"]
