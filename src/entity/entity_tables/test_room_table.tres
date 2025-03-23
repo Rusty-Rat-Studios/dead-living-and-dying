@@ -3,12 +3,12 @@
 [ext_resource type="Script" uid="uid://dt04phs8a5k3h" path="res://src/entity/entity_table_entry.gd" id="1_v674j"]
 [ext_resource type="PackedScene" uid="uid://dh8q75xrlxeaa" path="res://src/map/rooms/basic_room.tscn" id="2_3hsld"]
 [ext_resource type="Script" uid="uid://caxs80c62syve" path="res://src/entity/entity_table.gd" id="2_pws74"]
-[ext_resource type="PackedScene" uid="uid://dskoq14673ixv" path="res://src/map/rooms/hallway_curve_south_west.tscn" id="3_ab0a5"]
-[ext_resource type="PackedScene" uid="uid://52e5qhbv4ogi" path="res://src/map/rooms/hallway_curve_south_east.tscn" id="4_02hms"]
-[ext_resource type="PackedScene" uid="uid://ohg7gvmagx2q" path="res://src/map/rooms/hallway_curve_north_west.tscn" id="5_02hms"]
-[ext_resource type="PackedScene" uid="uid://dmsv4o7br2mj4" path="res://src/map/rooms/hallway_curve_north_east.tscn" id="6_xjnb4"]
-[ext_resource type="PackedScene" uid="uid://bfbveo3pc6kfq" path="res://src/map/rooms/hallway_straight_north_south.tscn" id="7_ylr8c"]
-[ext_resource type="PackedScene" uid="uid://dvfm52rrn70uh" path="res://src/map/rooms/hallway_straight_east_west.tscn" id="8_2gvgd"]
+[ext_resource type="PackedScene" uid="uid://dskoq14673ixv" path="res://src/map/rooms/hallway_curve_south_west_room.tscn" id="3_ab0a5"]
+[ext_resource type="PackedScene" uid="uid://52e5qhbv4ogi" path="res://src/map/rooms/hallway_curve_south_east_room.tscn" id="4_02hms"]
+[ext_resource type="PackedScene" uid="uid://ohg7gvmagx2q" path="res://src/map/rooms/hallway_curve_north_west_room.tscn" id="5_02hms"]
+[ext_resource type="PackedScene" uid="uid://dmsv4o7br2mj4" path="res://src/map/rooms/hallway_curve_north_east_room.tscn" id="6_xjnb4"]
+[ext_resource type="PackedScene" uid="uid://bfbveo3pc6kfq" path="res://src/map/rooms/hallway_straight_north_south_room.tscn" id="7_ylr8c"]
+[ext_resource type="PackedScene" uid="uid://dvfm52rrn70uh" path="res://src/map/rooms/hallway_straight_east_west_room.tscn" id="8_2gvgd"]
 
 [sub_resource type="Resource" id="Resource_b5ttb"]
 script = ExtResource("1_v674j")

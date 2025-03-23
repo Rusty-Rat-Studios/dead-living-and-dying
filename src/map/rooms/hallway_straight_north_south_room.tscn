@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://bfbveo3pc6kfq"]
 
 [ext_resource type="Script" uid="uid://bo0tyfrjfebc6" path="res://src/map/room_components/room.gd" id="1_ehouu"]
-[ext_resource type="PackedScene" uid="uid://1wjbi5kgqfip" path="res://src/map/rooms/room_minimap/hallway_straight_north_south_minimap.tscn" id="2_2y38q"]
+[ext_resource type="PackedScene" uid="uid://1wjbi5kgqfip" path="res://src/map/rooms/room_minimap/hallway_straight_north_south_room_minimap.tscn" id="2_2y38q"]
 [ext_resource type="PackedScene" uid="uid://b4teav5cf7dm4" path="res://src/map/room_components/floor/floor_collision_shape.tscn" id="2_onfog"]
 [ext_resource type="Texture2D" uid="uid://54om7nxf8xh6" path="res://src/map/tileset-dhassa/floor1.png" id="3_2y38q"]
 [ext_resource type="PackedScene" uid="uid://bqsc7pbjuxsmh" path="res://src/map/room_components/floor/player_detector.tscn" id="4_a1l0h"]

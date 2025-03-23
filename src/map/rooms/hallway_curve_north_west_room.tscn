@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bo0tyfrjfebc6" path="res://src/map/room_components/room.gd" id="1_afm0g"]
 [ext_resource type="PackedScene" uid="uid://b4teav5cf7dm4" path="res://src/map/room_components/floor/floor_collision_shape.tscn" id="2_i3sfy"]
-[ext_resource type="PackedScene" uid="uid://chfxmlgmlm4ag" path="res://src/map/rooms/room_minimap/hallway_curve_north_west_minimap.tscn" id="2_lrr2c"]
+[ext_resource type="PackedScene" uid="uid://chfxmlgmlm4ag" path="res://src/map/rooms/room_minimap/hallway_curve_north_west_room_minimap.tscn" id="2_lrr2c"]
 [ext_resource type="PackedScene" uid="uid://cftul0udkvfu1" path="res://models/hallway_L_curve_floor_rotated.glb" id="3_cgqs2"]
 [ext_resource type="PackedScene" uid="uid://bqsc7pbjuxsmh" path="res://src/map/room_components/floor/player_detector.tscn" id="4_i3sfy"]
 [ext_resource type="Script" uid="uid://bv4f3snq7u1u2" path="res://src/common/room_information.gd" id="4_uctod"]

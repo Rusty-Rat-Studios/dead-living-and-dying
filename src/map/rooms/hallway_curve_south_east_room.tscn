@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bo0tyfrjfebc6" path="res://src/map/room_components/room.gd" id="1_5dcub"]
 [ext_resource type="PackedScene" uid="uid://b4teav5cf7dm4" path="res://src/map/room_components/floor/floor_collision_shape.tscn" id="1_cmlby"]
-[ext_resource type="PackedScene" uid="uid://s1g7pptsmaeq" path="res://src/map/rooms/room_minimap/hallway_curve_south_east_minimap.tscn" id="2_34wky"]
+[ext_resource type="PackedScene" uid="uid://s1g7pptsmaeq" path="res://src/map/rooms/room_minimap/hallway_curve_south_east_room_minimap.tscn" id="2_34wky"]
 [ext_resource type="Script" uid="uid://dqhrw6rxew3fa" path="res://src/common/door_location.gd" id="2_ae4p6"]
 [ext_resource type="PackedScene" uid="uid://cftul0udkvfu1" path="res://models/hallway_L_curve_floor_rotated.glb" id="2_vvw1f"]
 [ext_resource type="PackedScene" uid="uid://bqsc7pbjuxsmh" path="res://src/map/room_components/floor/player_detector.tscn" id="3_3pxeg"]

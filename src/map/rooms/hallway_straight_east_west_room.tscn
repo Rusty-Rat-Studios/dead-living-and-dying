@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bo0tyfrjfebc6" path="res://src/map/room_components/room.gd" id="1_hq34h"]
 [ext_resource type="Script" uid="uid://dqhrw6rxew3fa" path="res://src/common/door_location.gd" id="2_5egyf"]
-[ext_resource type="PackedScene" uid="uid://weufpuk4guct" path="res://src/map/rooms/room_minimap/hallway_straight_east_west_minimap.tscn" id="2_5pt8l"]
+[ext_resource type="PackedScene" uid="uid://weufpuk4guct" path="res://src/map/rooms/room_minimap/hallway_straight_east_west_room_minimap.tscn" id="2_5pt8l"]
 [ext_resource type="Script" uid="uid://bv4f3snq7u1u2" path="res://src/common/room_information.gd" id="3_5pt8l"]
 [ext_resource type="PackedScene" uid="uid://b4teav5cf7dm4" path="res://src/map/room_components/floor/floor_collision_shape.tscn" id="4_wntow"]
 [ext_resource type="Texture2D" uid="uid://54om7nxf8xh6" path="res://src/map/tileset-dhassa/floor1.png" id="5_gkbmt"]
