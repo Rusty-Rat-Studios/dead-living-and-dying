@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://bfwa3mijk47us" path="res://src/player/state_machine/state_dying.gd" id="6_h5wto"]
 [ext_resource type="Script" uid="uid://dk6tfo4i3solm" path="res://src/map/world_grid.gd" id="7_0tsjf"]
 [ext_resource type="Script" uid="uid://bo0tyfrjfebc6" path="res://src/map/room_components/room.gd" id="8_2bd5c"]
-[ext_resource type="PackedScene" uid="uid://te0dpapcosk4" path="res://src/map/rooms/basic_room_minimap.tscn" id="9_4nb7o"]
+[ext_resource type="PackedScene" uid="uid://te0dpapcosk4" path="res://src/map/rooms/room_minimap/basic_room_minimap.tscn" id="9_4nb7o"]
 [ext_resource type="Script" uid="uid://dqhrw6rxew3fa" path="res://src/common/door_location.gd" id="10_4upm5"]
 [ext_resource type="Script" uid="uid://bv4f3snq7u1u2" path="res://src/common/room_information.gd" id="11_fega5"]
 [ext_resource type="Texture2D" uid="uid://cvadlfyuhhlsa" path="res://src/icon.svg" id="11_stl1i"]

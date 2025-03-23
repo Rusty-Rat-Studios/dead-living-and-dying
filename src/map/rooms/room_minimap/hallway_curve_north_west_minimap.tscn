@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=4 uid="uid://chfxmlgmlm4ag"]
+
+[ext_resource type="PackedScene" uid="uid://cftul0udkvfu1" path="res://models/hallway_L_curve_floor_rotated.glb" id="1_mg142"]
+[ext_resource type="Material" uid="uid://dia3qp0ehxsxi" path="res://src/ui/minimap/minimap_room_material.tres" id="2_xr40c"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_6p8aa"]
+_surfaces = [{
+"aabb": AABB(-5.7, 0, -4.3, 10, 1e-05, 10),
+"format": 34896613377,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAgAEAAMAAgABAAUAAgAFAAYABgAFAAcACAAGAAcACAAJAAYA"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 10,
+"vertex_data": PackedByteArray("ZWYAAAAAAAAyswAAAAAAAGVmAABmZgAAAAAAAAAAAAAAAAAAZmYAAP//AADMTAAAmZkAAJmZAAD//wAAmZkAAP//AAD//wAAmZkAAP//AAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_eeafo"]
+resource_name = "hallway_L_curve_floor_rotated_Plane_002"
+_surfaces = [{
+"aabb": AABB(-5.7, 0, -4.3, 10, 1e-05, 10),
+"attribute_data": PackedByteArray("9Cc/tfQnL31ffj+19Cf//19+///EaB9FlKnfj5SpH0X//x9F/v/fjw=="),
+"format": 34896613399,
+"index_count": 24,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAgAEAAMAAgABAAUAAgAFAAYABgAFAAcACAAGAAcACAAJAAYA"),
+"material": ExtResource("2_xr40c"),
+"name": "Material",
+"primitive": 3,
+"uv_scale": Vector4(8.80976, 5.09238, 0, 0),
+"vertex_count": 10,
+"vertex_data": PackedByteArray("ZWYAAAAAVNUyswAAAABU1WVmAABmZlTVAAAAAAAAVNUAAAAAZmZU1f//AADMTFTVmZkAAJmZVNX//wAAmZlU1f//AAD//1TVmZkAAP//VNWqqqqqqaqqqqqqqqqqqqqqqqqqqqmqqqqpqqqqqaqqqqmqqqqqqqqq")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_6p8aa")
+
+[node name="MinimapComponent" type="Node3D"]
+
+[node name="hallway_L_curve_floor_rotated" parent="." instance=ExtResource("1_mg142")]
+transform = Transform3D(-0.938, 0, -8.20026e-08, 0, 0.938, 0, 8.20026e-08, 0, -0.938, 0, 0, 0)
+
+[node name="Plane" parent="hallway_L_curve_floor_rotated" index="0"]
+layers = 512
+mesh = SubResource("ArrayMesh_eeafo")
+
+[editable path="hallway_L_curve_floor_rotated"]
