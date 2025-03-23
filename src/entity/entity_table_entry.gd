@@ -9,12 +9,15 @@ extends Resource
 var current: int = 0
 
 
-# Returns the entity resource specified in 'entity'. Also updates 'base_chance'
-# and increments 'current'
+# Returns the entity resource specified in 'entity'
 func get_entity() -> Resource:
+	return entity
+
+
+# Updates 'base_chance' and increments 'current'
+func update_entity() -> void:
 	base_chance += chance_change
 	current += 1
-	return entity
 
 
 # Returns true if 'current' is within the specified constraints.

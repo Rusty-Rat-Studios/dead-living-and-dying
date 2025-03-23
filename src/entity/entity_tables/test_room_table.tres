@@ -1,18 +1,28 @@
-[gd_resource type="Resource" script_class="EntityTable" load_steps=5 format=3 uid="uid://brngxo180e7qn"]
+[gd_resource type="Resource" script_class="EntityTable" load_steps=7 format=3 uid="uid://brngxo180e7qn"]
 
 [ext_resource type="Script" uid="uid://dt04phs8a5k3h" path="res://src/entity/entity_table_entry.gd" id="1_v674j"]
 [ext_resource type="PackedScene" uid="uid://dh8q75xrlxeaa" path="res://src/map/rooms/basic_room.tscn" id="2_3hsld"]
 [ext_resource type="Script" uid="uid://caxs80c62syve" path="res://src/entity/entity_table.gd" id="2_pws74"]
+[ext_resource type="PackedScene" uid="uid://dskoq14673ixv" path="res://src/map/rooms/hallway_L_curve.tscn" id="3_lt8qu"]
 
 [sub_resource type="Resource" id="Resource_b5ttb"]
 script = ExtResource("1_v674j")
 entity = ExtResource("2_3hsld")
-base_chance = 0.0
+base_chance = 1.0
 chance_change = 0.0
 max_spawn = -1
-min_spawn = 25
+min_spawn = -1
+metadata/_custom_type_script = "uid://dt04phs8a5k3h"
+
+[sub_resource type="Resource" id="Resource_ab0a5"]
+script = ExtResource("1_v674j")
+entity = ExtResource("3_lt8qu")
+base_chance = 1.0
+chance_change = 0.0
+max_spawn = -1
+min_spawn = -1
 metadata/_custom_type_script = "uid://dt04phs8a5k3h"
 
 [resource]
 script = ExtResource("2_pws74")
-entities = Array[ExtResource("1_v674j")]([SubResource("Resource_b5ttb")])
+entities = Array[ExtResource("1_v674j")]([SubResource("Resource_b5ttb"), SubResource("Resource_ab0a5")])
