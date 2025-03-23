@@ -1,7 +1,7 @@
 class_name Spawner
 extends Node
 
-enum SpawnerType { ENEMY, ITEM, KEY_ITEM, ENTITY_FLOOR, ENTITY_WALL, BOSS }
+enum SpawnerType { ENEMY, ITEM, KEY_ITEM, BOSS }
 
 @export var spawner_type: SpawnerType
 
