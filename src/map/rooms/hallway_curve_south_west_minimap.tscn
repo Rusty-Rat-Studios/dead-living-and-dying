@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=4 uid="uid://bwr5n122fnh00"]
 
-[ext_resource type="PackedScene" uid="uid://84hedrtlny03" path="res://models/hallway_L_curve_floor.glb" id="1_jag5x"]
-[ext_resource type="Material" uid="uid://dia3qp0ehxsxi" path="res://src/ui/minimap/minimap_room_material.tres" id="2_m0f0w"]
+[ext_resource type="PackedScene" uid="uid://84hedrtlny03" path="res://models/hallway_L_curve_floor.glb" id="1_wq1y5"]
+[ext_resource type="Material" uid="uid://dia3qp0ehxsxi" path="res://src/ui/minimap/minimap_room_material.tres" id="2_uvs4g"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_jnhyh"]
 _surfaces = [{
@@ -25,7 +25,7 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 24,
 "index_data": PackedByteArray("AAABAAIAAwAEAAUABgAHAAgACQAKAAsADAANAA4ADwAQABEAEgATABQAFQAWABcA"),
-"material": ExtResource("2_m0f0w"),
+"material": ExtResource("2_uvs4g"),
 "name": "Material",
 "primitive": 3,
 "uv_scale": Vector4(8.12356, 5.12425, 0, 0),
@@ -37,7 +37,7 @@ shadow_mesh = SubResource("ArrayMesh_jnhyh")
 
 [node name="MinimapComponent" type="Node3D"]
 
-[node name="hallway_L_curve_floor" parent="." instance=ExtResource("1_jag5x")]
+[node name="hallway_L_curve_floor" parent="." instance=ExtResource("1_wq1y5")]
 transform = Transform3D(0.938, 0, 0, 0, 0.938, 0, 0, 0, 0.938, 0, 0, 6.595)
 
 [node name="Plane" parent="hallway_L_curve_floor" index="0"]

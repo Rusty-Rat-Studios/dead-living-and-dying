@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dt04phs8a5k3h" path="res://src/entity/entity_table_entry.gd" id="1_v674j"]
 [ext_resource type="PackedScene" uid="uid://dh8q75xrlxeaa" path="res://src/map/rooms/basic_room.tscn" id="2_3hsld"]
 [ext_resource type="Script" uid="uid://caxs80c62syve" path="res://src/entity/entity_table.gd" id="2_pws74"]
-[ext_resource type="PackedScene" uid="uid://dskoq14673ixv" path="res://src/map/rooms/hallway_L_curve.tscn" id="3_lt8qu"]
+[ext_resource type="PackedScene" uid="uid://dskoq14673ixv" path="res://src/map/rooms/hallway_curve_south_west.tscn" id="3_lt8qu"]
 
 [sub_resource type="Resource" id="Resource_b5ttb"]
 script = ExtResource("1_v674j")

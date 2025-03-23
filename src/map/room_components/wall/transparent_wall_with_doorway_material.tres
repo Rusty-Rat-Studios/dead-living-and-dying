@@ -1,7 +1,8 @@
 [gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://hnvx3t8awqp1"]
 
-[ext_resource type="Shader" uid="uid://bgy36jmkglwva" path="res://src/map/room_components/transparent_wall_shader.gdshader" id="1_j0df6"]
+[ext_resource type="Shader" uid="uid://bgy36jmkglwva" path="res://src/map/room_components/wall/transparent_wall_shader.gdshader" id="1_j0df6"]
 [ext_resource type="Texture2D" uid="uid://c6fjrr2bcg8tw" path="res://src/map/tileset-dhassa/wall2.png" id="2_1ia6p"]
+
 
 [resource]
 render_priority = 1

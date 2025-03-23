@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://fpivfcuv6s1r"]
 
-[ext_resource type="Script" uid="uid://uyg6vw1fndgn" path="res://src/map/room_components/wall.gd" id="1_qq7eh"]
-[ext_resource type="Material" uid="uid://hnvx3t8awqp1" path="res://src/map/room_components/transparent_wall_with_doorway_material.tres" id="2_akohn"]
-[ext_resource type="Material" uid="uid://ca6og85us0udr" path="res://src/map/room_components/wall_with_doorway_material.tres" id="2_nyej4"]
+[ext_resource type="Script" uid="uid://uyg6vw1fndgn" path="res://src/map/room_components/wall/wall.gd" id="1_qq7eh"]
+[ext_resource type="Material" uid="uid://hnvx3t8awqp1" path="res://src/map/room_components/wall/transparent_wall_with_doorway_material.tres" id="2_akohn"]
+[ext_resource type="Material" uid="uid://ca6og85us0udr" path="res://src/map/room_components/wall/wall_with_doorway_material.tres" id="2_nyej4"]
 [ext_resource type="PackedScene" uid="uid://djouwsk23px2c" path="res://models/wall_with_doorway.glb" id="4_sujnr"]
 
 [node name="WallWithDoorway" type="StaticBody3D" node_paths=PackedStringArray("wall_mesh")]

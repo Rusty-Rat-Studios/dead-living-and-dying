@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://cd4th2g2hethj"]
 
-[ext_resource type="Script" uid="uid://uyg6vw1fndgn" path="res://src/map/room_components/wall.gd" id="1_kyfxr"]
+[ext_resource type="Script" uid="uid://uyg6vw1fndgn" path="res://src/map/room_components/wall/wall.gd" id="1_kyfxr"]
 [ext_resource type="Texture2D" uid="uid://c6fjrr2bcg8tw" path="res://src/map/tileset-dhassa/wall2.png" id="2_0mtdn"]
-[ext_resource type="Shader" uid="uid://bgy36jmkglwva" path="res://src/map/room_components/transparent_wall_shader.gdshader" id="2_4ysrj"]
+[ext_resource type="Shader" uid="uid://bgy36jmkglwva" path="res://src/map/room_components/wall/transparent_wall_shader.gdshader" id="2_4ysrj"]
 [ext_resource type="PackedScene" uid="uid://dpdko5ur4ea8p" path="res://models/wall_with_doorway_x4.glb" id="4_4ysrj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6iq4c"]

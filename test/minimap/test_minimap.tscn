@@ -12,9 +12,9 @@
 [ext_resource type="Script" uid="uid://dqhrw6rxew3fa" path="res://src/common/door_location.gd" id="10_4upm5"]
 [ext_resource type="Script" uid="uid://bv4f3snq7u1u2" path="res://src/common/room_information.gd" id="11_fega5"]
 [ext_resource type="Texture2D" uid="uid://cvadlfyuhhlsa" path="res://src/icon.svg" id="11_stl1i"]
-[ext_resource type="PackedScene" uid="uid://b3nn5u3a5o85j" path="res://src/map/room_components/16x16_floor.tscn" id="12_4y87q"]
-[ext_resource type="PackedScene" uid="uid://bson3umirpot2" path="res://src/map/room_components/wall.tscn" id="13_gmigq"]
-[ext_resource type="PackedScene" uid="uid://b6pd0nir4sadl" path="res://src/map/room_components/door_x16.tscn" id="14_q73u3"]
+[ext_resource type="PackedScene" uid="uid://b3nn5u3a5o85j" path="res://src/map/room_components/floor/16x16_floor.tscn" id="12_4y87q"]
+[ext_resource type="PackedScene" uid="uid://bson3umirpot2" path="res://src/map/room_components/wall/wall.tscn" id="13_gmigq"]
+[ext_resource type="PackedScene" uid="uid://b6pd0nir4sadl" path="res://src/map/room_components/door/door_x16.tscn" id="14_q73u3"]
 [ext_resource type="PackedScene" uid="uid://cp7202hwhpcd5" path="res://src/ui/ui.tscn" id="17_vamge"]
 
 [sub_resource type="Resource" id="Resource_3y6bj"]

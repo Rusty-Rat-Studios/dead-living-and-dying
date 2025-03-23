@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bqsc7pbjuxsmh"]
 
-[ext_resource type="Script" uid="uid://ow6b5o56yj3t" path="res://src/map/room_components/player_detector.gd" id="1_notk5"]
+[ext_resource type="Script" uid="uid://ow6b5o56yj3t" path="res://src/map/room_components/floor/player_detector.gd" id="1_notk5"]
 
 [node name="PlayerDetector" type="Area3D"]
 collision_layer = 0

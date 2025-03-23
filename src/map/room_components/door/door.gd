@@ -6,7 +6,7 @@ const DOOR_TEXTURE_OPEN: Texture = preload("res://src/map/tileset-dhassa/door1_o
 # energy of fire light; used to tween in/out
 const LIGHT_ENERGY: float = 2.0
 const TWEEN_DURATION: float = 0.6
-const MINIMAP_COMPONENT: Resource = preload("res://src/map/room_components/door_minimap.tscn")
+const MINIMAP_COMPONENT: Resource = preload("res://src/map/room_components/door/door_minimap.tscn")
 
 @export var wall_with_doorway: Wall
 @export var wall_scene: PackedScene
