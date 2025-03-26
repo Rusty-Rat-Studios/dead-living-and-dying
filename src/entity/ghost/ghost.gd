@@ -63,7 +63,8 @@ func _ready() -> void:
 	
 	movement_timeout_timer.timeout.connect(_stop_at_target_and_emit)
 	
-	hit.connect(_on_hit)
+	# defer connection to allow state-specific logic to execute before changing states
+	hit.connect(_on_hit, CONNECT_DEFERRED)
 
 
 func _physics_process(delta: float) -> void:
