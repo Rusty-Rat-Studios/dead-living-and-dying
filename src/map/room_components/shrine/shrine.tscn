@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://db2v7j1wnkduq" path="res://src/common/sprite_backlight.gd" id="4_hscdd"]
 [ext_resource type="Texture2D" uid="uid://dw3sqamfip4v1" path="res://src/map/room_components/shrine/shrine_base.png" id="5_q7n7m"]
 
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_d8oqx"]
 size = Vector3(5.5, 4, 2)
 
@@ -179,3 +178,6 @@ cull_mask = 1047554
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.52083, 0.115419)
 light_energy = 0.5
+
+[node name="RespawnPoint" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
