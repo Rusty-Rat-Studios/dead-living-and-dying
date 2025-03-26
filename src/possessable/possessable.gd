@@ -87,6 +87,8 @@ func depossess(disable_effects_flag: bool = true) -> void:
 		# reset timer is started -> when finished, will set "is_possessable = true"
 		is_possessable = true
 	
+	room.add_possessable(self)
+	
 	if disable_effects_flag:
 		disable_effects()
 
