@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://bh1qwbhfylkio"]
+
+[ext_resource type="PackedScene" uid="uid://cpxwnex1yaj45" path="res://src/ui/inventory/defense_slot.tscn" id="1_gxjw6"]
+[ext_resource type="PackedScene" uid="uid://b4k5m1br05eiv" path="res://src/ui/inventory/active_slot.tscn" id="2_c5hy6"]
+[ext_resource type="PackedScene" uid="uid://m60x4oieeliy" path="res://src/ui/inventory/consumable_slot.tscn" id="3_kgiru"]
+[ext_resource type="Texture2D" uid="uid://eeobrjxbuowc" path="res://src/ui/resources/button-bg.png" id="4_0onxt"]
+[ext_resource type="Script" uid="uid://lhrfcibyyuob" path="res://src/ui/inventory/passive_slot_container.gd" id="5_8n2x2"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_a1yg3"]
+texture = ExtResource("4_0onxt")
+
+[node name="InventoryContainer" type="MarginContainer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="DefenseSlot" parent="VBoxContainer/HBoxContainer" instance=ExtResource("1_gxjw6")]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ActiveSlot" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource("2_c5hy6")]
+layout_mode = 2
+
+[node name="ConsumableSlot" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource("3_kgiru")]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxTexture_a1yg3")
+
+[node name="PassiveSlotContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 5
+script = ExtResource("5_8n2x2")

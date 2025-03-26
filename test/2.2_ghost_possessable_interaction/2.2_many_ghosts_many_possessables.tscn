@@ -1,8 +1,9 @@
 [gd_scene load_steps=4 format=3 uid="uid://bhgrfohu51hk4"]
 
 [ext_resource type="PackedScene" uid="uid://d4cxt6unhu3c6" path="res://test/room_debug.tscn" id="1_kgyd3"]
-[ext_resource type="PackedScene" uid="uid://yihpxsaeuqdi" path="res://ghost/ghost.tscn" id="2_cehja"]
-[ext_resource type="PackedScene" uid="uid://cko3wlfgl81ce" path="res://entity/objects/crate/crate.tscn" id="3_8surb"]
+[ext_resource type="PackedScene" uid="uid://yihpxsaeuqdi" path="res://src/entity/ghost/ghost.tscn" id="2_cehja"]
+[ext_resource type="PackedScene" uid="uid://cko3wlfgl81ce" path="res://src/entity/objects/crate/crate.tscn" id="3_8surb"]
+
 
 [node name="Game" instance=ExtResource("1_kgyd3")]
 

@@ -1,0 +1,163 @@
+[gd_scene load_steps=8 format=3 uid="uid://d2i1eypiamq2d"]
+
+[ext_resource type="PackedScene" uid="uid://e6l8r6x4mqfq" path="res://src/ui/menus/menu_background.tscn" id="1_n4ixf"]
+[ext_resource type="Script" uid="uid://y7okbj4eqm6n" path="res://src/ui/menus/how_to_play.gd" id="2_1syyh"]
+[ext_resource type="FontFile" uid="uid://bvx6yxwpx1rfq" path="res://src/ui/resources/princess_sofia_font/PrincessSofia-Regular.ttf" id="2_fvrgu"]
+[ext_resource type="FontFile" uid="uid://c16563s6uqwuy" path="res://src/ui/resources/oswald_font/Oswald-VariableFont_wght.ttf" id="3_opoqq"]
+[ext_resource type="Texture2D" uid="uid://cqcvbmlssy3y5" path="res://src/ui/resources/how_to_play_possession.png" id="4_t5783"]
+[ext_resource type="Texture2D" uid="uid://dxnykiuxu0oui" path="res://src/ui/resources/how_to_play_possession2.png" id="5_8bc4e"]
+[ext_resource type="Theme" uid="uid://casdoijkjemc2" path="res://src/ui/resources/menu_theme.tres" id="5_8m8i8"]
+
+
+[node name="HowToPlay" type="Window"]
+gui_embed_subwindows = true
+initial_position = 2
+size = Vector2i(1152, 648)
+wrap_controls = true
+exclusive = true
+borderless = true
+always_on_top = true
+popup_window = true
+extend_to_title = true
+script = ExtResource("2_1syyh")
+
+[node name="MenuBackground" parent="." instance=ExtResource("1_n4ixf")]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuBackground/MarginContainer" index="0"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MenuBackground/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fvrgu")
+theme_override_font_sizes/font_size = 56
+text = "How to Play"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Topic" type="Label" parent="MenuBackground/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_opoqq")
+theme_override_font_sizes/font_size = 28
+text = "Ghosts attack you by possessing
+objects in the room."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="MenuBackground/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="MarginContainer" type="MarginContainer" parent="MenuBackground/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_right = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MenuBackground/MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="HBoxImage" type="HBoxContainer" parent="MenuBackground/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="MenuBackground/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/HBoxImage"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_t5783")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="MenuBackground/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/HBoxImage"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("5_8bc4e")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect3" type="TextureRect" parent="MenuBackground/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/HBoxImage"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("5_8bc4e")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="HBoxLabel" type="HBoxContainer" parent="MenuBackground/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Instructions" type="Label" parent="MenuBackground/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/HBoxLabel"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("3_opoqq")
+theme_override_font_sizes/font_size = 24
+text = "There are various objects around each room that ghosts can possess."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Instructions2" type="Label" parent="MenuBackground/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/HBoxLabel"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("3_opoqq")
+theme_override_font_sizes/font_size = 24
+text = "Ghosts can attack you with some of these possessed objects. Watch out for any objects acting strangely!"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Instructions3" type="Label" parent="MenuBackground/MarginContainer/VBoxContainer/MarginContainer/VBoxContainer/HBoxLabel"]
+visible = false
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("3_opoqq")
+theme_override_font_sizes/font_size = 24
+text = "Ghosts can attack you with some of these possessed objects. Watch out for any objects acting strangely!"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="MenuBackground/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="HboxButtons" type="HBoxContainer" parent="MenuBackground/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="ButtonPrevious" type="Button" parent="MenuBackground/MarginContainer/VBoxContainer/HboxButtons"]
+custom_minimum_size = Vector2(140, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_neighbor_left = NodePath("../ButtonNext")
+theme = ExtResource("5_8m8i8")
+theme_override_font_sizes/font_size = 26
+text = "Previous"
+
+[node name="ButtonNext" type="Button" parent="MenuBackground/MarginContainer/VBoxContainer/HboxButtons"]
+custom_minimum_size = Vector2(140, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+focus_neighbor_right = NodePath("../ButtonPrevious")
+theme = ExtResource("5_8m8i8")
+theme_override_font_sizes/font_size = 26
+text = "Next"
+
+[editable path="MenuBackground"]

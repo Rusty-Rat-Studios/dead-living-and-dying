@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgx8njy38eynp"]
+
+[ext_resource type="Script" uid="uid://mq0f8ye20sw5" path="res://src/entity/items/holy_water/holy_water_inventory.gd" id="1_k1vrf"]
+
+[node name="HolyWaterInventory" type="Node3D"]
+script = ExtResource("1_k1vrf")
+
+[node name="ActiveTimer" type="Timer" parent="."]
+one_shot = true

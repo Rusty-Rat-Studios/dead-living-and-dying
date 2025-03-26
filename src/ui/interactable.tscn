@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://cnbim08e5mqrn"]
+
+[ext_resource type="Script" uid="uid://dfd0jw1e7o2xv" path="res://src/ui/interactable.gd" id="1_x07wr"]
+
+[node name="Interactable" type="Node3D"]
+script = ExtResource("1_x07wr")
+
+[node name="Label3D" type="Label3D" parent="."]
+billboard = 1
+no_depth_test = true
+render_priority = 1
+text = "UNITIALIZED
+INTERACTABLE"
+font_size = 64

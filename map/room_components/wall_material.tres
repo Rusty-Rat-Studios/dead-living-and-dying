@@ -1,8 +1,0 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bjpn3uixmhwm8"]
-
-[ext_resource type="Texture2D" uid="uid://c6fjrr2bcg8tw" path="res://map/tileset-dhassa/wall2.png" id="1_w05ll"]
-
-[resource]
-render_priority = 1
-albedo_texture = ExtResource("1_w05ll")
-uv1_scale = Vector3(15, 2, 2)

@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://c176v8gdlci8v"]
+
+[ext_resource type="PackedScene" uid="uid://cnbim08e5mqrn" path="res://src/ui/interactable.tscn" id="1_k23bc"]
+[ext_resource type="Script" uid="uid://cjc1yby2mdkot" path="res://src/old_man/old_man.gd" id="1_kf68j"]
+[ext_resource type="Texture2D" uid="uid://xw1x8sgcrylx" path="res://src/old_man/old_man.png" id="3_jfj5u"]
+[ext_resource type="Script" uid="uid://db2v7j1wnkduq" path="res://src/common/sprite_backlight.gd" id="4_6tbt5"]
+[ext_resource type="PackedScene" uid="uid://bp0ydphecs3iv" path="res://src/common/shadow.tscn" id="4_8mfuk"]
+
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_tlkjy"]
+radius = 0.6
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_i62q5"]
+radius = 2.2
+
+[node name="OldMan" type="StaticBody3D"]
+script = ExtResource("1_kf68j")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.145691)
+shape = SubResource("SphereShape3D_tlkjy")
+
+[node name="Interactable" parent="." instance=ExtResource("1_k23bc")]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+billboard = 2
+shaded = true
+texture = ExtResource("3_jfj5u")
+script = ExtResource("4_6tbt5")
+
+[node name="PlayerDetector" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetector"]
+shape = SubResource("SphereShape3D_i62q5")
+
+[node name="Shadow" parent="." instance=ExtResource("4_8mfuk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.257671, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, 0.5)
+light_color = Color(0.854902, 0.745098, 0.184314, 1)
+light_energy = 0.2
+shadow_enabled = true
+omni_range = 10.0

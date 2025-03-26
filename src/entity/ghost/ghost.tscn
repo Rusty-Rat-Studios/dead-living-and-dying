@@ -1,0 +1,123 @@
+[gd_scene load_steps=17 format=3 uid="uid://yihpxsaeuqdi"]
+
+[ext_resource type="Script" uid="uid://bhwqa6bloe8me" path="res://src/entity/ghost/ghost.gd" id="1_vr82v"]
+[ext_resource type="SpriteFrames" uid="uid://bygn7dpqwa3pk" path="res://src/entity/ghost/ghost_sprite_frames.tres" id="2_8v45s"]
+[ext_resource type="Script" uid="uid://2kbqqaoti6rf" path="res://src/entity/ghost/state_machine/ghost_state_machine.gd" id="2_qkh1e"]
+[ext_resource type="Script" uid="uid://bjrqp6cm5j0s5" path="res://src/entity/ghost/state_machine/state_waiting.gd" id="3_gb04i"]
+[ext_resource type="Script" uid="uid://b1rk313utxpsb" path="res://src/entity/ghost/state_machine/state_possessing.gd" id="4_muv24"]
+[ext_resource type="PackedScene" uid="uid://bp0ydphecs3iv" path="res://src/common/shadow.tscn" id="7_0liqe"]
+[ext_resource type="Script" uid="uid://dnejv78e6bqw6" path="res://src/entity/ghost/state_machine/state_stunned.gd" id="7_yplap"]
+[ext_resource type="Script" uid="uid://bwxdjfnmqcqlx" path="res://src/entity/ghost/state_machine/state_attacking.gd" id="8_a4kr4"]
+[ext_resource type="Script" uid="uid://2ngv1mk144l5" path="res://src/entity/ghost/state_machine/state_moving.gd" id="9_cmmm8"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cokcw"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_dnpbh"]
+radius = 1.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_x245q"]
+radius = 0.6
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vmkbj"]
+emission_shape = 3
+emission_box_extents = Vector3(0.25, 0.25, 0.25)
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 3.0
+initial_velocity_max = 3.0
+gravity = Vector3(0, 1, 0)
+linear_accel_min = -6.0
+linear_accel_max = -6.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cvd0x"]
+transparency = 1
+albedo_color = Color(0.513726, 0, 0.662745, 0.352941)
+
+[sub_resource type="SphereMesh" id="SphereMesh_wv6vs"]
+material = SubResource("StandardMaterial3D_cvd0x")
+radius = 0.05
+height = 0.1
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_rrxp0"]
+radius = 5.0
+
+[node name="Ghost" type="CharacterBody3D" groups=["ghosts"]]
+collision_layer = 8
+script = ExtResource("1_vr82v")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.15, 0.425032, 0)
+cast_shadow = 0
+billboard = 2
+shaded = true
+sprite_frames = ExtResource("2_8v45s")
+animation = &"idle"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_cokcw")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("2_qkh1e")
+
+[node name="Waiting" type="Node" parent="StateMachine"]
+script = ExtResource("3_gb04i")
+
+[node name="Possessing" type="Node" parent="StateMachine"]
+script = ExtResource("4_muv24")
+
+[node name="Stunned" type="Node" parent="StateMachine"]
+script = ExtResource("7_yplap")
+
+[node name="Attacking" type="Node" parent="StateMachine"]
+script = ExtResource("8_a4kr4")
+
+[node name="Moving" type="Node" parent="StateMachine"]
+script = ExtResource("9_cmmm8")
+
+[node name="PossessableDetector" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 32
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PossessableDetector"]
+shape = SubResource("SphereShape3D_dnpbh")
+disabled = true
+
+[node name="Hitbox" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+shape = SubResource("CapsuleShape3D_x245q")
+
+[node name="ParticleBurst" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 64
+lifetime = 0.6
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_vmkbj")
+draw_pass_1 = SubResource("SphereMesh_wv6vs")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.128161, 0.0763355)
+light_color = Color(0.854902, 0.647059, 0.12549, 1)
+light_energy = 0.01
+omni_range = 0.5
+
+[node name="Shadow" parent="." instance=ExtResource("7_0liqe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.621386, 0)
+
+[node name="AttackRange" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AttackRange"]
+shape = SubResource("SphereShape3D_rrxp0")
+disabled = true
+
+[node name="MovementTimeoutTimer" type="Timer" parent="."]
+wait_time = 6.0
+one_shot = true

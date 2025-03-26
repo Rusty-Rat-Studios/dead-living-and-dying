@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://7p0wv0hucnr2"]
+
+[ext_resource type="Script" uid="uid://day77pwpv6efh" path="res://src/entity/items/tea/tea_inventory.gd" id="1_rqwew"]
+
+[node name="TeaInventory" type="Node3D"]
+script = ExtResource("1_rqwew")
