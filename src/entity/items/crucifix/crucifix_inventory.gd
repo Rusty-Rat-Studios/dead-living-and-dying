@@ -6,6 +6,7 @@ const BASE_RADIUS: float = 2
 
 var player: Node = PlayerHandler.get_player()
 
+@onready var particle_material: ParticleProcessMaterial = $Hitbox/GPUParticles3D.process_material
 @onready var cooldown_active: bool = false
 
 
@@ -40,8 +41,8 @@ func use() -> void:
 		return
 	$Hitbox/CollisionShape3D.shape.radius = BASE_RADIUS * player.player_stats.area_size
 	$Shield/CollisionShape3D.shape.radius = BASE_RADIUS * player.player_stats.area_size
-	$Hitbox/MeshInstance3D.mesh.outer_radius = BASE_RADIUS * player.player_stats.area_size
-	$Hitbox/MeshInstance3D.mesh.inner_radius = $Hitbox/MeshInstance3D.mesh.outer_radius - 0.2
+	particle_material.emission_ring_radius = BASE_RADIUS * player.player_stats.area_size
+	particle_material.emission_ring_inner_radius = particle_material.emission_ring_radius - 0.2
 	$Hitbox/CollisionShape3D.disabled = false
 	$Shield/CollisionShape3D.disabled = false
 	$Hitbox.visible = true
