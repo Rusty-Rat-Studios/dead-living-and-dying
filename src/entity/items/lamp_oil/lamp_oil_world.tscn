@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bgtj8y8ilr3h3" path="res://src/entity/items/lamp_oil/lamp_oil_inventory.tscn" id="2_apvme"]
 [ext_resource type="Texture2D" uid="uid://don6jkufvlqg3" path="res://src/entity/items/lamp_oil/lamp_oil.png" id="3_agrf5"]
 
-[node name="FuelWorld" instance=ExtResource("1_f5fxc")]
+[node name="LampOilWorld" instance=ExtResource("1_f5fxc")]
 inventory_resource = ExtResource("2_apvme")
 
 [node name="Sprite3D" parent="." index="1"]

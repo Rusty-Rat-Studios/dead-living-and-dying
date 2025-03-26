@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cv3o1gqpd6qjl" path="res://src/entity/items/lamp_oil/lamp_oil_inventory.gd" id="1_ccvtb"]
 
-[node name="FuelInventory" type="Node3D"]
+[node name="LampOilInventory" type="Node3D"]
 script = ExtResource("1_ccvtb")
 
 [node name="CooldownTimer" type="Timer" parent="."]
