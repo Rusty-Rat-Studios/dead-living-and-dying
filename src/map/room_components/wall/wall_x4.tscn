@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://cmcamo5tn0b7t"]
+
+[ext_resource type="PackedScene" uid="uid://bson3umirpot2" path="res://src/map/room_components/wall/wall.tscn" id="1_ye288"]
+[ext_resource type="Shader" uid="uid://bgy36jmkglwva" path="res://src/map/room_components/wall/transparent_wall_shader.gdshader" id="2_o1fff"]
+[ext_resource type="Texture2D" uid="uid://c6fjrr2bcg8tw" path="res://src/map/tileset-dhassa/wall2.png" id="3_7mtv1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_802bl"]
+render_priority = 0
+shader = ExtResource("2_o1fff")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("3_7mtv1")
+shader_parameter/uv1_scale = Vector3(3, 2, 0)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/player_offset = Vector3(0, 3, 0)
+shader_parameter/sphere_radius = 6.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ocyiq"]
+albedo_texture = ExtResource("3_7mtv1")
+uv1_scale = Vector3(3, 2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_y66na"]
+size = Vector3(4, 5, 0.1)
+
+[node name="Wall" instance=ExtResource("1_ye288")]
+length = 4.0
+transparent_wall_material = SubResource("ShaderMaterial_802bl")
+wall_material = SubResource("StandardMaterial3D_ocyiq")
+monitor_for_transparency = null
+
+[node name="WallMesh" parent="." index="0"]
+mesh = SubResource("BoxMesh_y66na")
+surface_material_override/0 = SubResource("StandardMaterial3D_ocyiq")
+
+[node name="CollisionPolygon3D" parent="." index="1"]
+polygon = PackedVector2Array(-2, 0, -2, 5, 2, 5, 2, 0)

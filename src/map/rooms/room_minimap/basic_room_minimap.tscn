@@ -1,7 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://te0dpapcosk4"]
 
-[ext_resource type="Material" uid="uid://ctvcmqmldyoar" path="res://src/ui/minimap/minimap_room_material.tres" id="1_hojif"]
-
+[ext_resource type="Material" uid="uid://dia3qp0ehxsxi" path="res://src/ui/minimap/minimap_room_material.tres" id="1_hojif"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_koypu"]
 material = ExtResource("1_hojif")

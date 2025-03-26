@@ -15,7 +15,8 @@
 
 [sub_resource type="Resource" id="Resource_5fe06"]
 script = ExtResource("10_e1b6l")
-spread = 4.0
+spread = 0.0
+min_rooms = 25
 room_table = ExtResource("8_5fe06")
 enemy_entity_table = ExtResource("9_kn4o2")
 metadata/_custom_type_script = "uid://b6py5yqiivmff"
@@ -34,6 +35,7 @@ shadow_enabled = true
 
 [node name="DebugLight" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.830566, 0.486173, -0.271654, -0.492404, -0.413176, 0.766044, 0.260189, 0.770014, 0.582564, 0, 10, 0)
+visible = false
 light_color = Color(0.29219, 0.29219, 0.29219, 1)
 
 [node name="StateMachine" type="Node" parent="."]

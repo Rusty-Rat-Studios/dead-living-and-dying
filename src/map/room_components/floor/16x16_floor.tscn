@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://b3nn5u3a5o85j"]
+
+[ext_resource type="Texture2D" uid="uid://54om7nxf8xh6" path="res://src/map/tileset-dhassa/floor1.png" id="1_o4kxu"]
+[ext_resource type="PackedScene" uid="uid://b4teav5cf7dm4" path="res://src/map/room_components/floor/floor_collision_shape.tscn" id="2_uw7h6"]
+[ext_resource type="PackedScene" uid="uid://bqsc7pbjuxsmh" path="res://src/map/room_components/floor/player_detector.tscn" id="3_xftam"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_o8kxe"]
+size = Vector2(16, 16)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7ulll"]
+albedo_texture = ExtResource("1_o4kxu")
+uv1_scale = Vector3(12, 6, 12)
+
+[node name="Floor" type="StaticBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+layers = 2
+mesh = SubResource("PlaneMesh_o8kxe")
+surface_material_override/0 = SubResource("StandardMaterial3D_7ulll")
+
+[node name="FloorCollisionShape" parent="." instance=ExtResource("2_uw7h6")]
+
+[node name="PlayerDetector" parent="." instance=ExtResource("3_xftam")]

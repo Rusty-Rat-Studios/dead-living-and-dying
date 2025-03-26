@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://c6rcol647a7p4"]
+
+[ext_resource type="Script" uid="uid://croy7sj72lxy3" path="res://src/map/room_components/wall/normal_wall.gd" id="1_518ri"]
+[ext_resource type="Shader" uid="uid://bgy36jmkglwva" path="res://src/map/room_components/wall/transparent_wall_shader.gdshader" id="2_7d0dy"]
+[ext_resource type="Texture2D" uid="uid://m535shlqnuux" path="res://src/map/tileset-dhassa/wall3.png" id="3_orbdm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tt0pl"]
+render_priority = 0
+shader = ExtResource("2_7d0dy")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("3_orbdm")
+shader_parameter/uv1_scale = Vector3(64, 16, 0)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/player_offset = Vector3(0, 3, 0)
+shader_parameter/sphere_radius = 6.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ues46"]
+albedo_texture = ExtResource("3_orbdm")
+uv1_scale = Vector3(64, 16, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kp86y"]
+size = Vector3(16, 5, 0.1)
+
+[node name="OutsideWall" type="StaticBody3D" node_paths=PackedStringArray("wall_mesh")]
+script = ExtResource("1_518ri")
+wall_mesh = NodePath("WallMesh")
+transparent_wall_material = SubResource("ShaderMaterial_tt0pl")
+wall_material = SubResource("StandardMaterial3D_ues46")
+
+[node name="WallMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+layers = 5
+mesh = SubResource("BoxMesh_kp86y")
+surface_material_override/0 = SubResource("StandardMaterial3D_ues46")
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="."]
+polygon = PackedVector2Array(-8, 0, -8, 5, 8, 5, 8, 0)

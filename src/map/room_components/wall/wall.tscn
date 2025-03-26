@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://bson3umirpot2"]
+
+[ext_resource type="Script" uid="uid://croy7sj72lxy3" path="res://src/map/room_components/wall/normal_wall.gd" id="1_45mg4"]
+[ext_resource type="Material" uid="uid://dfx01t1blqt3y" path="res://src/map/room_components/wall/transparent_wall_material.tres" id="2_sgpqo"]
+[ext_resource type="Material" uid="uid://bjpn3uixmhwm8" path="res://src/map/room_components/wall/wall_material.tres" id="3_u5826"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_8nfv3"]
+size = Vector3(16, 5, 0.1)
+
+[node name="Wall" type="StaticBody3D" node_paths=PackedStringArray("wall_mesh")]
+script = ExtResource("1_45mg4")
+wall_mesh = NodePath("WallMesh")
+transparent_wall_material = ExtResource("2_sgpqo")
+wall_material = ExtResource("3_u5826")
+
+[node name="WallMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+mesh = SubResource("BoxMesh_8nfv3")
+surface_material_override/0 = ExtResource("3_u5826")
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="."]
+polygon = PackedVector2Array(-8, 0, -8, 5, 8, 5, 8, 0)

@@ -1,0 +1,80 @@
+[gd_scene load_steps=17 format=3 uid="uid://dvfm52rrn70uh"]
+
+[ext_resource type="Script" uid="uid://bo0tyfrjfebc6" path="res://src/map/room_components/room.gd" id="1_hq34h"]
+[ext_resource type="Script" uid="uid://dqhrw6rxew3fa" path="res://src/common/door_location.gd" id="2_5egyf"]
+[ext_resource type="PackedScene" uid="uid://weufpuk4guct" path="res://src/map/rooms/room_minimap/hallway_straight_east_west_room_minimap.tscn" id="2_5pt8l"]
+[ext_resource type="Script" uid="uid://bv4f3snq7u1u2" path="res://src/common/room_information.gd" id="3_5pt8l"]
+[ext_resource type="PackedScene" uid="uid://b4teav5cf7dm4" path="res://src/map/room_components/floor/floor_collision_shape.tscn" id="4_wntow"]
+[ext_resource type="Texture2D" uid="uid://54om7nxf8xh6" path="res://src/map/tileset-dhassa/floor1.png" id="5_gkbmt"]
+[ext_resource type="PackedScene" uid="uid://bqsc7pbjuxsmh" path="res://src/map/room_components/floor/player_detector.tscn" id="6_bxsla"]
+[ext_resource type="PackedScene" uid="uid://bson3umirpot2" path="res://src/map/room_components/wall/wall.tscn" id="7_8hdlq"]
+[ext_resource type="PackedScene" uid="uid://bjca8n1kvkwg0" path="res://src/map/room_components/door/door_x4.tscn" id="8_wsqo5"]
+
+[sub_resource type="Resource" id="Resource_8cg03"]
+script = ExtResource("2_5egyf")
+location = Vector2(0, 0)
+direction = 1
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_gjv6k"]
+script = ExtResource("2_5egyf")
+location = Vector2(0, 0)
+direction = 3
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_kk8hp"]
+script = ExtResource("3_5pt8l")
+room_shape = Array[Vector2]([Vector2(0, 0)])
+possible_door_locations = Array[ExtResource("2_5egyf")]([SubResource("Resource_8cg03"), SubResource("Resource_gjv6k")])
+minimap_component = ExtResource("2_5pt8l")
+metadata/_custom_type_script = "uid://bv4f3snq7u1u2"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wyjjr"]
+albedo_texture = ExtResource("5_gkbmt")
+uv1_scale = Vector3(12, 2, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_53jjd"]
+material = SubResource("StandardMaterial3D_wyjjr")
+size = Vector2(16, 4)
+
+[sub_resource type="Resource" id="Resource_phrcd"]
+script = ExtResource("2_5egyf")
+location = Vector2(0, 0)
+direction = 3
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_x5hmn"]
+script = ExtResource("2_5egyf")
+location = Vector2(0, 0)
+direction = 1
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[node name="HallwayStraightEastWest" type="Node3D" groups=["rooms"]]
+script = ExtResource("1_hq34h")
+room_information = SubResource("Resource_kk8hp")
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="FloorCollisionShape" parent="Floor" instance=ExtResource("4_wntow")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+layers = 2
+mesh = SubResource("PlaneMesh_53jjd")
+
+[node name="PlayerDetector" parent="Floor" instance=ExtResource("6_bxsla")]
+polygon = PackedVector2Array(-8, -2, 8, -2, 8, 2, -8, 2)
+
+[node name="Wall" parent="." instance=ExtResource("7_8hdlq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.95)
+
+[node name="Wall2" parent="." instance=ExtResource("7_8hdlq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.95)
+monitor_for_transparency = true
+
+[node name="Door" parent="." instance=ExtResource("8_wsqo5")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.95, 0, 0)
+door_location = SubResource("Resource_phrcd")
+
+[node name="Door2" parent="." instance=ExtResource("8_wsqo5")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7.95, 0, 0)
+door_location = SubResource("Resource_x5hmn")
