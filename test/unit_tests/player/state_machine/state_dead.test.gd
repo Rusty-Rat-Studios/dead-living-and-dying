@@ -40,7 +40,6 @@ class TestPlayerEnterDeadState:
 		assert_called(_state_dead._parent, "modulate_color")
 		assert_called(_key_item, "drop")
 		assert_called(_state_dead, "move_to_shrine")
-		assert_called(_state_dead._parent._corpse, "activate")
 		assert_eq(_state_dead._parent._corpse_indicator.emitting, true)
 		assert_eq(_state_dead._parent.collision_layer, CollisionBit.PLAYER + CollisionBit.SPIRIT)
 		assert_eq(_state_dead._parent.collision_mask, CollisionBit.WORLD)

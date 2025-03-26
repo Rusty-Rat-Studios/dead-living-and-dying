@@ -17,6 +17,7 @@ const TWEEN_DURATION: float = 1
 # for disallowing further revivals at this shrine
 @onready var consumed: bool = false
 @onready var detector: Area3D = $PlayerDetector
+@onready var respawn_point: Vector3 = $RespawnPoint.global_position
 
 
 func _ready() -> void:
@@ -109,7 +110,7 @@ func _on_interaction(input_name: String) -> void:
 		activate()
 
 
-func _on_player_revived(_corpse_position: Vector3) -> void:
+func _on_player_revived() -> void:
 	# handle edge case of player reviving inside inactive shrine
 	var player: Player = PlayerHandler.get_player()
 	if detector.overlaps_body(player):
