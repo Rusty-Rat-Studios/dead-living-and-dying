@@ -43,6 +43,7 @@ class TestGhostEnterPossessingState:
 		assert_connected(SignalBus, _state_possessing, "player_state_changed")
 		assert_connected(SignalBus, _state_possessing, "player_entered_room")
 		assert_connected(SignalBus, _state_possessing, "player_exited_room")
+		assert_connected(_state_possessing._parent, _state_possessing, "hit")
 	
 	
 	func test_possessing_state_variables_set_correctly_player_not_in_room() -> void:
@@ -68,6 +69,7 @@ class TestGhostEnterPossessingState:
 		assert_connected(SignalBus, _state_possessing, "player_state_changed")
 		assert_connected(SignalBus, _state_possessing, "player_entered_room")
 		assert_connected(SignalBus, _state_possessing, "player_exited_room")
+		assert_connected(_state_possessing._parent, _state_possessing, "hit")
 
 
 # Test 1.2.4
@@ -91,6 +93,7 @@ class TestGhostExitPossessingState:
 		SignalBus.player_state_changed.connect(_state_possessing._on_player_state_changed)
 		SignalBus.player_entered_room.connect(_state_possessing._on_player_entered_room)
 		SignalBus.player_exited_room.connect(_state_possessing._on_player_exited_room)
+		_state_possessing._parent.hit.connect(_state_possessing._on_hit)
 		_state_possessing.is_possessing = true
 	
 	
@@ -106,3 +109,4 @@ class TestGhostExitPossessingState:
 		assert_not_connected(SignalBus, _state_possessing, "player_state_changed")
 		assert_not_connected(SignalBus, _state_possessing, "player_entered_room")
 		assert_not_connected(SignalBus, _state_possessing, "player_exited_room")
+		assert_not_connected(_state_possessing._parent, _state_possessing, "hit")
