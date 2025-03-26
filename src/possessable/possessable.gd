@@ -16,11 +16,13 @@ COLLISION MASKING SCHEME:
 
 # signal connected when ghost discovers all possessables in the room
 signal possessed
+# signal emitted by ghost when possessing this object and are stunned
+signal exorcised
 
 # maximum amount of time a possessable can have (is_possessable == false)
 # after being depossessed. Needed because some inherited classes have
 # specific logic for when to set is_possessable, such as throwables
-const RESET_TIME: float = 3
+const RESET_TIME: float = 5
 
 @onready var parent: Node3D = get_parent()
 # store room for attaching self to "possessables_available" group that is 
@@ -30,6 +32,9 @@ const RESET_TIME: float = 3
 @onready var is_possessable: bool = true
 # flag for ensuring object is "free" for possession
 @onready var is_possessed: bool = false
+@onready var reset_timer: Timer = Timer.new()
+# tracks cooldown for being possessed again if exorcised by the player
+@onready var cooldown_active: bool = false
 # store initial position to return to when calling reset()
 @onready var starting_transform: Transform3D = transform
 
@@ -37,6 +42,18 @@ const RESET_TIME: float = 3
 func _ready() -> void:
 	# add self to possessables in room
 	room.add_possessable(self)
+	
+	# move possession node forward relative to parent object to ensure the
+	# ghost is always visible in front of the object - otherwise z-fighting
+	# may occur if the item gets lifted and is closer to the camera
+	position.z = 0.8
+	
+	add_child(reset_timer)
+	reset_timer.wait_time = RESET_TIME
+	reset_timer.one_shot = true
+	reset_timer.timeout.connect(_on_reset_timer_timeout)
+	
+	exorcised.connect(_on_exorcised)
 
 
 func reset() -> void:
@@ -61,14 +78,16 @@ func possess() -> void:
 
 
 func depossess(disable_effects_flag: bool = true) -> void:
-	# add self back to room's available possessables
-	room.add_possessable(self)
+	if not is_possessed or cooldown_active:
+		return
 	# reset flags
 	is_possessed = false
-	# force is_possessable flag to be set after RESET_TIME if not set by
-	# any inherited classes
-	get_tree().create_timer(RESET_TIME).timeout.connect(func () -> void: 
-		is_possessable = true, CONNECT_ONE_SHOT)
+	if not cooldown_active:
+		# if the cooldown is active, this object has been exorcised and the
+		# reset timer is started -> when finished, will set "is_possessable = true"
+		is_possessable = true
+	
+	room.add_possessable(self)
 	
 	if disable_effects_flag:
 		disable_effects()
@@ -84,3 +103,20 @@ func disable_effects() -> void:
 
 func attack(_target: Node3D) -> void:
 	print(Time.get_time_string_from_system(), ": WARNING - attack() function called from base possessable ", self)
+
+
+func _on_reset_timer_timeout() -> void:
+	# add self back to room's available possessables
+	room.add_possessable(self)
+	is_possessable = true
+
+
+func _on_exorcised() -> void:
+	cooldown_active = true
+	reset_timer.start()
+	
+	# ensure this object was removed from the room's possessable array
+	var position_in_room_array: int = room.possessables_available.find(self)
+	if position_in_room_array == -1:
+		return
+	room.possessables_available.remove_at(position_in_room_array)

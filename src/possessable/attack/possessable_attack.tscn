@@ -3,7 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://bcep1wbs2caas" path="res://src/possessable/possessable.tscn" id="1_qmrf1"]
 [ext_resource type="Script" uid="uid://l2dvk7nwsu04" path="res://src/possessable/attack/possessable_attack.gd" id="2_v5ro8"]
 
-
 [sub_resource type="SphereShape3D" id="SphereShape3D_1udu2"]
 radius = 8.0
 
@@ -20,7 +19,6 @@ shape = SubResource("SphereShape3D_1udu2")
 disabled = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
 light_color = Color(0.513726, 0, 0.662745, 1)
 light_energy = 0.0
-omni_range = 1.0
+omni_range = 1.5
