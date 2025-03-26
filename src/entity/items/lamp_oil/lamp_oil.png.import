@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwmi6hifnju62"
-path.s3tc="res://.godot/imported/fuel.png-1f58189688a1a22eb2b671e5052b49ec.s3tc.ctex"
+uid="uid://don6jkufvlqg3"
+path.s3tc="res://.godot/imported/lamp_oil.png-90679814f7b99d374740590bb18d6167.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://src/entity/items/fuel/fuel.png"
-dest_files=["res://.godot/imported/fuel.png-1f58189688a1a22eb2b671e5052b49ec.s3tc.ctex"]
+source_file="res://src/entity/items/lamp_oil/lamp_oil.png"
+dest_files=["res://.godot/imported/lamp_oil.png-90679814f7b99d374740590bb18d6167.s3tc.ctex"]
 
 [params]
 
