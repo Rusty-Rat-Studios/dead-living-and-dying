@@ -164,10 +164,12 @@ func _on_hit() -> void:
 
 func _on_reveal() -> void:
 	var starting_opacity: float = sprite.modulate.a
+	sprite.shaded = false
 	set_opacity(OPACITY_DEAD)
 	await Utility.delay(2)
 	set_opacity(starting_opacity)
-
+	await Utility.delay(1)
+	sprite.shaded = true
 
 
 func _on_player_state_changed(state: PlayerStateMachine.States) -> void:

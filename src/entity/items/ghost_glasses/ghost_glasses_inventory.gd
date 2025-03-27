@@ -42,9 +42,9 @@ func use() -> void:
 	var mesh_inner_tween: Tween = create_tween()
 	var collision_tween: Tween = create_tween()
 	mesh_inner_tween.finished.connect(_on_tween_finished)
-	collision_tween.tween_property($Hitbox/CollisionShape3D.shape, "radius", 10, 0.5)
-	mesh_outer_tween.tween_property($Hitbox/MeshInstance3D.mesh, "inner_radius", 9.8, 0.5)
-	mesh_inner_tween.tween_property($Hitbox/MeshInstance3D.mesh, "outer_radius", 10, 0.5)
+	collision_tween.tween_property($Hitbox/CollisionShape3D.shape, "radius", 20, 0.5)
+	mesh_outer_tween.tween_property($Hitbox/MeshInstance3D.mesh, "inner_radius", 19.8, 0.5)
+	mesh_inner_tween.tween_property($Hitbox/MeshInstance3D.mesh, "outer_radius", 20, 0.5)
 	$CooldownTimer.start()
 	cooldown_active = true
 	
