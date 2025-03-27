@@ -5,7 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://bp0ydphecs3iv" path="res://src/common/shadow.tscn" id="3_lbco8"]
 [ext_resource type="PackedScene" uid="uid://c1hur2s8mgagv" path="res://src/possessable/attack/possessable_throwable.tscn" id="4_3avg1"]
 
-
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_gyir3"]
 height = 1.5
 radius = 0.6

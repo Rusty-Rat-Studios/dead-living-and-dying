@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://jlav0m1ndqde"]
+[gd_scene load_steps=43 format=3 uid="uid://jlav0m1ndqde"]
 
 [ext_resource type="Script" uid="uid://br2ou0xf5p2mo" path="res://src/game.gd" id="1_77rk7"]
 [ext_resource type="PackedScene" uid="uid://bbow7knip3g6g" path="res://src/player/player.tscn" id="1_hu241"]
@@ -28,6 +28,7 @@
 [ext_resource type="PackedScene" uid="uid://cp7202hwhpcd5" path="res://src/ui/ui.tscn" id="23_qhcbd"]
 [ext_resource type="PackedScene" uid="uid://bsy7ilicbox53" path="res://src/entity/items/holy_water/holy_water_world.tscn" id="24_f1jbl"]
 [ext_resource type="PackedScene" uid="uid://k5kxbl8tsn6d" path="res://src/entity/items/carrot/carrot_world.tscn" id="27_xa8c5"]
+[ext_resource type="PackedScene" uid="uid://c3wmqi8pl2yas" path="res://src/entity/objects/wall_sconce/wall_sconce_forward.tscn" id="28_rbnx6"]
 
 [sub_resource type="Resource" id="Resource_3y6bj"]
 script = ExtResource("9_xa8c5")
@@ -232,6 +233,9 @@ monitor_for_transparency = true
 [node name="Door4" parent="WorldGrid/RoomCenter" instance=ExtResource("19_vaj68")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.95, 0, 0)
 door_location = SubResource("Resource_xm868")
+
+[node name="WallSconceForward" parent="WorldGrid/RoomCenter" instance=ExtResource("28_rbnx6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.33971, 2.88915, -7.80321)
 
 [node name="RoomLeft" type="Node3D" parent="WorldGrid" groups=["rooms"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -16)

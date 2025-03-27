@@ -1,13 +1,14 @@
 extends Possessable
 
 @export var player_detector: Area3D
+@export var fire: GPUParticles3D
 var lit: bool = false
 
 
 func _ready() -> void:
 	super()
 	player_detector.body_entered.connect(_on_body_entered)
-	player_detector.body_entered.connect(_on_body_exited)
+	player_detector.body_exited.connect(_on_body_exited)
 	$Interactable.input_detected.connect(_on_interaction)
 	reset()
 
@@ -21,16 +22,19 @@ func reset() -> void:
 
 func attack(_target: Node3D) -> void:
 	snuff()
+	depossess()
 
 
 func ignite() -> void:
-	$FireParticles.emitting = true
-	$FireParticles.visible = true
+	lit = true
+	fire.emitting = true
+	fire.visible = true
 
 
 func snuff() -> void:
-	$FireParticles.emitting = false
-	$FireParticles.visible = false
+	lit = false
+	fire.emitting = false
+	fire.visible = false
 
 
 func _on_interaction(input_name: String) -> void:
@@ -39,15 +43,20 @@ func _on_interaction(input_name: String) -> void:
 			snuff()
 		else:
 			ignite()
+		update_interactable()
 
 
 func _on_body_entered(_body: Node3D) -> void:
 	# no node check required as collision mask is layer PLAYER
+	update_interactable()
+	$Interactable.enabled = true
+
+
+func update_interactable() -> void:
 	if lit:
 		$Interactable.display_message("[E] Snuff")
 	else:
 		$Interactable.display_message("[E] Ignite")
-	$Interactable.enabled = true
 
 
 func _on_body_exited(_body: Node3D) -> void:

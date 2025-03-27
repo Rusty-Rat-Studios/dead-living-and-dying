@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://coc0pkajg5w25" path="res://src/possessable/possessable.gd" id="1_4ebmk"]
 
-
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rvnlq"]
 emission_shape = 3
 emission_box_extents = Vector3(0.5, 0.5, 0.5)
