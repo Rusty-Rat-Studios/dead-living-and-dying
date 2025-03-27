@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3qx8taq4i8mc"]
+
+[ext_resource type="PackedScene" uid="uid://bslonn3bn1m6s" path="res://src/entity/items/item_world.tscn" id="1_lvrxx"]
+[ext_resource type="PackedScene" uid="uid://dlj3ytwttlkva" path="res://src/entity/items/ghost_glasses/ghost_glasses_inventory.tscn" id="2_twbqf"]
+
+[node name="ItemWorld" instance=ExtResource("1_lvrxx")]
+inventory_resource = ExtResource("2_twbqf")
