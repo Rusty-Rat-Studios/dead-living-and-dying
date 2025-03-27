@@ -11,6 +11,7 @@ inner_radius = 1.136
 script = ExtResource("1_85rpy")
 
 [node name="CooldownTimer" type="Timer" parent="."]
+one_shot = true
 
 [node name="Hitbox" type="Area3D" parent="."]
 visible = false
