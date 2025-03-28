@@ -46,9 +46,12 @@ func use() -> void:
 	var collision_tween: Tween = create_tween()
 	var opacity_tween: Tween = create_tween()
 	mesh_inner_tween.finished.connect(_on_tween_finished)
-	collision_tween.tween_property($Hitbox/CollisionShape3D.shape, "radius", END_RADIUS * player.player_stats.area_size, 1)
-	mesh_outer_tween.tween_property($Hitbox/MeshInstance3D.mesh, "inner_radius", END_RADIUS * player.player_stats.area_size - 0.02, 1)
-	mesh_inner_tween.tween_property($Hitbox/MeshInstance3D.mesh, "outer_radius", END_RADIUS * player.player_stats.area_size, 1)
+	collision_tween.tween_property($Hitbox/CollisionShape3D.shape, "radius", 
+		END_RADIUS * player.player_stats.area_size, 1)
+	mesh_outer_tween.tween_property($Hitbox/MeshInstance3D.mesh, "inner_radius", 
+		END_RADIUS * player.player_stats.area_size - 0.02, 1)
+	mesh_inner_tween.tween_property($Hitbox/MeshInstance3D.mesh, "outer_radius", 
+		END_RADIUS * player.player_stats.area_size, 1)
 	opacity_tween.tween_property($Hitbox/MeshInstance3D.mesh.material, "albedo_color:a",0, 1)
 	$CooldownTimer.start()
 	cooldown_active = true
