@@ -14,8 +14,10 @@ const LIGHT_FADE_DURATION: float = 0.3
 const LIGHT_ENERGY: float = 0.1
 
 # opacity values set according to player state
-const OPACITY_DYING: float = 0.2
-const OPACITY_DEAD: float = 0.8
+const OPACITY_DYING_MODIFIER: float = 0.2
+const OPACITY_DEAD_MODIFIER: float = 0.8
+const OPACITY_DYING_MODIFIER_NAME: String = "dying"
+const OPACITY_DEAD_MODIFIER_NAME: String = "dead"
 const OPACITY_FADE_DURATION: float = 1
 
 var movement_boundaries: Rect2
@@ -26,6 +28,9 @@ var light_enabled: bool = false
 var light_enabled_permanent: bool = false
 
 @onready var state_machine: GhostStateMachine = $StateMachine
+
+@onready var stats: GhostStats = GhostStats.new()
+
 @onready var hitbox: Area3D = $Hitbox
 # used by state ATTACKING to detect if player in range of stun attack
 @onready var attack_range: Area3D = $AttackRange
@@ -98,7 +103,7 @@ func move_to_target(delta: float) -> void:
 	target_pos = Vector3(target_pos.x, 1, target_pos.z)
 	var distance_to_target: float = global_position.distance_squared_to(target_pos)
 	
-	if distance_to_target < speed * delta:
+	if distance_to_target < stats.speed * delta:
 		# set target to ghost position if close enough
 		at_target = true
 		velocity = Vector3.ZERO
@@ -111,15 +116,15 @@ func move_to_target(delta: float) -> void:
 	else:
 		at_target = false
 		direction = direction.normalized()
-		velocity = direction * speed
+		velocity = direction * stats.speed
 		move_and_slide()
 
 
-func set_opacity(opacity: float) -> void:
+func set_opacity() -> void:
 	if opacity_tween:
 		opacity_tween.kill()
 	opacity_tween = create_tween()
-	opacity_tween.tween_property(sprite, "modulate:a", opacity, OPACITY_FADE_DURATION)
+	opacity_tween.tween_property(sprite, "modulate:a", stats.opacity, OPACITY_FADE_DURATION)
 
 
 func set_light(energy: float) -> void:
@@ -136,7 +141,7 @@ func _on_player_entered_room(room: Node3D) -> void:
 	# regardless of state, attack the player if they enter the room in DEAD state
 	if player_in_room and PlayerHandler.get_player_state() == PlayerStateMachine.States.DEAD:
 		# add delay to allow player breathing room when entering the room
-		await Utility.delay(ATTACK_DELAY)
+		await Utility.delay(stats.attack_delay)
 		state_machine.change_state(state_machine.States.ATTACKING)
 
 
@@ -152,19 +157,19 @@ func _on_hit() -> void:
 
 
 func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
-	var opacity: float
+	stats.remove_modifier(GhostStats.Stats.OPACITY, "dying")
+	stats.remove_modifier(GhostStats.Stats.OPACITY, "dead")
 	match state:
 		PlayerStateMachine.States.LIVING:
-			opacity = 0
 			$Shadow.visible = false
 			light_enabled = false
 		PlayerStateMachine.States.DYING:
-			opacity = OPACITY_DYING
+			stats.add_modifier(GhostStats.Stats.OPACITY, OPACITY_DYING_MODIFIER, OPACITY_DYING_MODIFIER_NAME)
 			$Shadow.visible = true
 			light_enabled = true
 		PlayerStateMachine.States.DEAD:
-			opacity = OPACITY_DEAD
+			stats.add_modifier(GhostStats.Stats.OPACITY, OPACITY_DEAD_MODIFIER, OPACITY_DEAD_MODIFIER_NAME)
 			$Shadow.visible = true
 			light_enabled = false
 	
-	set_opacity(opacity)
+	set_opacity()
