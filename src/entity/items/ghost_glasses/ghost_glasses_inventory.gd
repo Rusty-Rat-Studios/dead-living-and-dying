@@ -1,6 +1,6 @@
 extends ActiveItemInventory
 
-const BASE_COOLDOWN_DURATION: float = 10
+const BASE_COOLDOWN_DURATION: float = 7
 const NAME: String = "ghost_glasses"
 const START_RADIUS: float = 0.5
 
