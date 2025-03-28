@@ -29,8 +29,8 @@ const BASE_WINDUP_DURATION: float = 1.0
 # state possessing
 const BASE_DECISION_TIME: float = 1.0
 const BASE_POSSESSION_ATTACK_CHANCE: float = 0.7
-const BASE_DEPOSSESS_CHANCE: float = 0.15
-const BASE_POSSESSION_WAIT_CHANCE: float = 0.35
+const BASE_DEPOSSESS_CHANCE: float = 0.1
+const BASE_POSSESSION_WAIT_CHANCE: float = 0.2
 # state stunned
 const BASE_STUN_DURATION: float = 3.0
 # state waiting
