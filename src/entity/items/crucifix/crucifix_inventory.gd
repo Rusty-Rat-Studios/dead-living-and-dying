@@ -68,4 +68,6 @@ func _on_body_entered(body: Node3D) -> void:
 
 
 func _on_body_entered2(body: Node3D) -> void:
-	body.apply_impulse(-(body.linear_velocity) * 1.6)
+	var force: Vector3 = body.linear_velocity
+	body.linear_velocity = Vector3(0,0,0);
+	body.apply_impulse(-force * 0.5)
