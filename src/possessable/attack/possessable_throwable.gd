@@ -55,6 +55,7 @@ func _physics_process(delta: float) -> void:
 		hitbox_collision_shape.set_deferred("disabled", true)
 		float_time_offset = 0
 		disable_effects()
+		get_parent().collision_layer = CollisionBit.PHYSICAL
 		# disable physics process - re-enabled by possess()
 		set_physics_process(false)
 		return
@@ -112,6 +113,7 @@ func attack(target: Node3D) -> void:
 			# enable hurtbox 
 			hitbox_collision_shape.set_deferred("disabled", false)
 			# VIOLENTLY LAUNCH SELF TOWARDS PLAYER \m/
+			get_parent().collision_layer = CollisionBit.PHYSICAL + CollisionBit.POSSESABLE
 			parent.apply_impulse(global_position.direction_to(target.global_position) * THROW_FORCE)
 	
 	# do not disable effects until hurtbox is disabled
