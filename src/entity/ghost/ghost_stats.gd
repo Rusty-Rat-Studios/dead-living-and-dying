@@ -5,7 +5,7 @@ enum Stats {
 	SPEED,
 	OPACITY,
 	# state attacking
-	ATTACK_DELAY,
+	ATTACK_DELAY, # time to wait before attacking when player enters room
 	WINDUP_DURATION,
 	# state possessing
 	DECISION_TIME,
@@ -86,7 +86,7 @@ var _stat_map: Dictionary[Stats, Dictionary] = {
 	Stats.DECISION_TIME: self.modifier_decision_time,
 	Stats.POSSESSION_ATTACK_CHANCE: self.modifier_possession_attack_chance,
 	Stats.DEPOSSESS_CHANCE: self.modifier_depossess_chance,
-	Stats.POSSESSION_WAIT_CHANCE: self.modifier_wait_chance,
+	Stats.POSSESSION_WAIT_CHANCE: self.modifier_possession_wait_chance,
 	# state stunned
 	Stats.STUN_DURATION: self.modifier_stun_duration,
 	# state waiting
@@ -104,21 +104,21 @@ func dictionary_sum(stat_modifier: Dictionary[String, float]) -> float:
 	return total_modifier
 
 
-func stat_update_add(stat: Stats, stat_modifier: float, name: String, id: int = -1) -> void:
+func add_modifier(stat: Stats, modifier: float, name: String, id: int = -1) -> void:
 	if (id != -1):
 		name = name + ":" + str(id)
-	_stat_map.get(stat)[name] = stat_modifier
-	update_stats()
+	_stat_map.get(stat)[name] = modifier
+	update()
 
 
-func stat_update_remove(stat: Stats, name: String, id: int = -1) -> void:
+func remove_modifier(stat: Stats, name: String, id: int = -1) -> void:
 	if (id != -1):
 		name = name + ":" + str(id)
 	_stat_map.get(stat).erase(name)
-	update_stats()
+	update()
 
 
-func update_stats() -> void:
+func update() -> void:
 	speed = BASE_SPEED + dictionary_sum(modifier_speed)
 	opacity = BASE_OPACITY + dictionary_sum(modifier_opacity)
 	# state attacking
@@ -157,4 +157,4 @@ func remove_stat_modifiers() -> void:
 	modifier_state_waiting_chance.clear()
 	modifier_state_moving_chance.clear()
 	
-	update_stats()
+	update()
