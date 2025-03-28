@@ -230,8 +230,5 @@ func _on_attack_delay_increment_timer_timeout() -> void:
 
 
 func _on_hit() -> void:
-	# ghost has been hit and will move into stunned state
-	#########
-	# PROBLEM: exit() is called before the hit signal is fired and target_possessable is null
 	if is_possessing:
 		target_possessable.exorcised.emit()
