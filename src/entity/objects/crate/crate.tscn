@@ -27,3 +27,4 @@ script = ExtResource("2_0g82p")
 [node name="Shadow" parent="." instance=ExtResource("3_lbco8")]
 
 [node name="Throwable" parent="." instance=ExtResource("4_3avg1")]
+monitoring = true
