@@ -1,11 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://dlj3ytwttlkva"]
+[gd_scene load_steps=5 format=3 uid="uid://dlj3ytwttlkva"]
 
 [ext_resource type="Script" uid="uid://eb6ehqyriner" path="res://src/entity/items/ghost_glasses/ghost_glasses_inventory.gd" id="1_85rpy"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_85rpy"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_85rpy"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0, 0.686275, 0, 0.686275)
+albedo_texture_force_srgb = true
+
 [sub_resource type="TorusMesh" id="TorusMesh_85rpy"]
-inner_radius = 1.136
+material = SubResource("StandardMaterial3D_85rpy")
 
 [node name="GhostGlassesInventory" type="Node3D"]
 script = ExtResource("1_85rpy")

@@ -3,6 +3,8 @@ extends ActiveItemInventory
 const BASE_COOLDOWN_DURATION: float = 7
 const NAME: String = "ghost_glasses"
 const START_RADIUS: float = 0.5
+const END_RADIUS: float = 20
+const STARTING_ALPHA: float = 0.686
 
 var cooldown_active: bool = false 
 var player: Node = PlayerHandler.get_player()
@@ -34,17 +36,20 @@ func use() -> void:
 		return
 	$Hitbox/CollisionShape3D.shape.radius = START_RADIUS * player.player_stats.area_size
 	$Hitbox/MeshInstance3D.mesh.outer_radius = START_RADIUS * player.player_stats.area_size
-	$Hitbox/MeshInstance3D.mesh.inner_radius = $Hitbox/MeshInstance3D.mesh.outer_radius - 0.2
+	$Hitbox/MeshInstance3D.mesh.inner_radius = $Hitbox/MeshInstance3D.mesh.outer_radius - 0.001
+	$Hitbox/MeshInstance3D.mesh.material.albedo_color.a = STARTING_ALPHA
 	$Hitbox/CollisionShape3D.disabled = false
 	$Hitbox.visible = true
 	$CooldownTimer.wait_time = BASE_COOLDOWN_DURATION / player.player_stats.cooldown_reduction
 	var mesh_outer_tween: Tween = create_tween()
 	var mesh_inner_tween: Tween = create_tween()
 	var collision_tween: Tween = create_tween()
+	var opacity_tween: Tween = create_tween()
 	mesh_inner_tween.finished.connect(_on_tween_finished)
-	collision_tween.tween_property($Hitbox/CollisionShape3D.shape, "radius", 20, 0.5)
-	mesh_outer_tween.tween_property($Hitbox/MeshInstance3D.mesh, "inner_radius", 19.8, 0.5)
-	mesh_inner_tween.tween_property($Hitbox/MeshInstance3D.mesh, "outer_radius", 20, 0.5)
+	collision_tween.tween_property($Hitbox/CollisionShape3D.shape, "radius", END_RADIUS * player.player_stats.area_size, 1)
+	mesh_outer_tween.tween_property($Hitbox/MeshInstance3D.mesh, "inner_radius", END_RADIUS * player.player_stats.area_size - 0.02, 1)
+	mesh_inner_tween.tween_property($Hitbox/MeshInstance3D.mesh, "outer_radius", END_RADIUS * player.player_stats.area_size, 1)
+	opacity_tween.tween_property($Hitbox/MeshInstance3D.mesh.material, "albedo_color:a",0, 1)
 	$CooldownTimer.start()
 	cooldown_active = true
 	
