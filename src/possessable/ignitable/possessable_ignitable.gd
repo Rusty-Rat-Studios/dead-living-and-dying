@@ -28,7 +28,6 @@ func attack(_target: Node3D) -> void:
 func possess() -> void:
 	if not lit:
 		return
-	
 	super()
 
 
