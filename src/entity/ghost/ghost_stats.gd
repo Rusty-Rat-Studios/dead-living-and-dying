@@ -6,44 +6,38 @@ enum Stats {
 	OPACITY,
 	# state attacking
 	ATTACK_DELAY,
-	PRE_ATTACK_SPEED,
-	WINDUP_SPEED,
 	WINDUP_DURATION,
 	# state possessing
 	DECISION_TIME,
-	ATTACK_CHANCE,
+	POSSESSION_ATTACK_CHANCE,
 	DEPOSSESS_CHANCE,
-	WAIT_CHANCE,
+	POSSESSION_WAIT_CHANCE,
 	# state stunned
 	STUN_DURATION,
 	# state waiting
-	POSSESSING_CHANCE,
-	ATTACKING_CHANCE,
-	WAITING_CHANCE,
-	MOVING_CHANCE
+	STATE_POSSESSING_CHANCE,
+	STATE_ATTACKING_CHANCE,
+	STATE_WAITING_CHANCE,
+	STATE_MOVING_CHANCE
 	}
 
 const BASE_SPEED: float = 4.0
 const BASE_OPACITY: float = 0.0
 # state attacking
 const BASE_ATTACK_DELAY: float = 0.3
-#const BASE_PRE_ATTACK_SPEED: float = 6.0 # modifier + 2
-#const BASE_ATTACK_SPEED: float = 8.5 # modifier + 2.5 on top of pre-attack_speed
-#const BASE_WINDUP_SPEED: float = 4.0 # modififer -2
 const BASE_WINDUP_DURATION: float = 1.0
 # state possessing
 const BASE_DECISION_TIME: float = 1.0
-const BASE_ATTACK_CHANCE: float = 0.7
+const BASE_POSSESSION_ATTACK_CHANCE: float = 0.7
 const BASE_DEPOSSESS_CHANCE: float = 0.15
-const BASE_WAIT_CHANCE: float = 0.35
+const BASE_POSSESSION_WAIT_CHANCE: float = 0.35
 # state stunned
 const BASE_STUN_DURATION: float = 3.0
 # state waiting
-#const BASE_WAITING_SPEED: float = 4.0 # modifier -2
-const BASE_POSSESSING_CHANCE: float = 0.6
-const BASE_ATTACKING_CHANCE: float = 0.2
-const BASE_WAITING_CHANCE: float = 0.1
-const BASE_MOVING_CHANCE: float = 0.1
+const BASE_STATE_POSSESSING_CHANCE: float = 0.6
+const BASE_STATE_ATTACKING_CHANCE: float = 0.2
+const BASE_STATE_WAITING_CHANCE: float = 0.1
+const BASE_STATE_MOVING_CHANCE: float = 0.1
 
 var modifier_speed: Dictionary[String, float] = {}
 var modifier_opacity: Dictionary[String, float] = {}
@@ -52,34 +46,34 @@ var modifier_attack_delay: Dictionary[String, float] = {}
 var modifier_windup_duration: Dictionary[String, float] = {}
 # state possessing
 var modifier_decision_time: Dictionary[String, float] = {}
-var modifier_attack_chance: Dictionary[String, float] = {}
+var modifier_possession_attack_chance: Dictionary[String, float] = {}
 var modifier_depossess_chance: Dictionary[String, float] = {}
-var modifier_wait_chance: Dictionary[String, float] = {}
+var modifier_possession_wait_chance: Dictionary[String, float] = {}
 # state stunned
 var modifier_stun_duration: Dictionary[String, float] = {}
 # state waiting
-var modifier_possessing_chance: Dictionary[String, float] = {}
-var modifier_attacking_chance: Dictionary[String, float] = {}
-var modifier_waiting_chance: Dictionary[String, float] = {}
-var modifier_moving_chance: Dictionary[String, float] = {}
+var modifier_state_possessing_chance: Dictionary[String, float] = {}
+var modifier_state_attacking_chance: Dictionary[String, float] = {}
+var modifier_state_waiting_chance: Dictionary[String, float] = {}
+var modifier_state_moving_chance: Dictionary[String, float] = {}
 
 var speed: float = BASE_SPEED + dictionary_sum(modifier_speed)
-var opacity: float = BASE_SPEED + dictionary_sum(modifier_speed)
+var opacity: float = BASE_OPACITY + dictionary_sum(modifier_opacity)
 # state attacking
-var attack_delay: float = BASE_SPEED + dictionary_sum(modifier_speed)
-var windup_duration: float = BASE_SPEED + dictionary_sum(modifier_speed)
+var attack_delay: float = BASE_ATTACK_DELAY + dictionary_sum(modifier_attack_delay)
+var windup_duration: float = BASE_WINDUP_DURATION + dictionary_sum(modifier_windup_duration)
 # state possessing
-var decision_time: float = BASE_SPEED + dictionary_sum(modifier_speed)
-var attack_chance: float = BASE_SPEED + dictionary_sum(modifier_speed)
-var depossess_chance: float = BASE_SPEED + dictionary_sum(modifier_speed)
-var wait_chance: float = BASE_SPEED + dictionary_sum(modifier_speed)
+var decision_time: float = BASE_DECISION_TIME + dictionary_sum(modifier_decision_time)
+var possession_attack_chance: float = BASE_POSSESSION_ATTACK_CHANCE + dictionary_sum(modifier_possession_attack_chance)
+var depossess_chance: float = BASE_DEPOSSESS_CHANCE + dictionary_sum(modifier_depossess_chance)
+var possession_wait_chance: float = BASE_POSSESSION_WAIT_CHANCE + dictionary_sum(modifier_possession_wait_chance)
 # state stunned
-var stun_duration: float = BASE_SPEED + dictionary_sum(modifier_speed)
+var stun_duration: float = BASE_STUN_DURATION + dictionary_sum(modifier_stun_duration)
 # state waiting
-var possessing_chance: float = BASE_SPEED + dictionary_sum(modifier_speed)
-var attacking_chance: float = BASE_SPEED + dictionary_sum(modifier_speed)
-var waiting_chance: float = BASE_SPEED + dictionary_sum(modifier_speed)
-var moving_chance: float = BASE_SPEED + dictionary_sum(modifier_speed)
+var state_possessing_chance: float = BASE_STATE_POSSESSING_CHANCE + dictionary_sum(modifier_state_possessing_chance)
+var state_attacking_chance: float = BASE_STATE_ATTACKING_CHANCE + dictionary_sum(modifier_state_attacking_chance)
+var state_waiting_chance: float = BASE_STATE_WAITING_CHANCE + dictionary_sum(modifier_state_waiting_chance)
+var state_moving_chance: float = BASE_STATE_MOVING_CHANCE + dictionary_sum(modifier_state_moving_chance)
 
 # map enum values to dicts
 var _stat_map: Dictionary[Stats, Dictionary] = {
@@ -90,16 +84,16 @@ var _stat_map: Dictionary[Stats, Dictionary] = {
 	Stats.WINDUP_DURATION: self.modifier_windup_duration,
 	# state possessing
 	Stats.DECISION_TIME: self.modifier_decision_time,
-	Stats.ATTACK_CHANCE: self.modifier_attack_chance,
+	Stats.POSSESSION_ATTACK_CHANCE: self.modifier_possession_attack_chance,
 	Stats.DEPOSSESS_CHANCE: self.modifier_depossess_chance,
-	Stats.WAIT_CHANCE: self.modifier_wait_chance,
+	Stats.POSSESSION_WAIT_CHANCE: self.modifier_wait_chance,
 	# state stunned
 	Stats.STUN_DURATION: self.modifier_stun_duration,
 	# state waiting
-	Stats.POSSESSING_CHANCE: self.modifier_possessing_chance,
-	Stats.ATTACKING_CHANCE: self.modifier_attacking_chance,
-	Stats.WAITING_CHANCE: self.modifier_waiting_chance,
-	Stats.MOVING_CHANCE: self.modifier_moving_chance
+	Stats.STATE_POSSESSING_CHANCE: self.modifier_state_possessing_chance,
+	Stats.STATE_ATTACKING_CHANCE: self.modifier_state_attacking_chance,
+	Stats.STATE_WAITING_CHANCE: self.modifier_state_waiting_chance,
+	Stats.STATE_MOVING_CHANCE: self.modifier_state_moving_chance
 }
 
 
@@ -126,8 +120,41 @@ func stat_update_remove(stat: Stats, name: String, id: int = -1) -> void:
 
 func update_stats() -> void:
 	speed = BASE_SPEED + dictionary_sum(modifier_speed)
+	opacity = BASE_OPACITY + dictionary_sum(modifier_opacity)
+	# state attacking
+	attack_delay = BASE_ATTACK_DELAY + dictionary_sum(modifier_attack_delay)
+	windup_duration = BASE_WINDUP_DURATION + dictionary_sum(modifier_windup_duration)
+	# state possessing
+	decision_time = BASE_DECISION_TIME + dictionary_sum(modifier_decision_time)
+	possession_attack_chance = BASE_POSSESSION_ATTACK_CHANCE + dictionary_sum(modifier_possession_attack_chance)
+	depossess_chance = BASE_DEPOSSESS_CHANCE + dictionary_sum(modifier_depossess_chance)
+	possession_wait_chance = BASE_POSSESSION_WAIT_CHANCE + dictionary_sum(modifier_possession_wait_chance)
+	# state stunned
+	stun_duration = BASE_STUN_DURATION + dictionary_sum(modifier_stun_duration)
+	# state waiting
+	state_possessing_chance = BASE_STATE_POSSESSING_CHANCE + dictionary_sum(modifier_state_possessing_chance)
+	state_attacking_chance = BASE_STATE_ATTACKING_CHANCE + dictionary_sum(modifier_state_attacking_chance)
+	state_waiting_chance = BASE_STATE_WAITING_CHANCE + dictionary_sum(modifier_state_waiting_chance)
+	state_moving_chance = BASE_STATE_MOVING_CHANCE + dictionary_sum(modifier_state_moving_chance)
 
 
 func remove_stat_modifiers() -> void:
 	modifier_speed.clear()
+	modifier_opacity.clear()
+	# state attacking
+	modifier_attack_delay.clear()
+	modifier_windup_duration.clear()
+	# state possessing
+	modifier_decision_time.clear()
+	modifier_possession_attack_chance.clear()
+	modifier_depossess_chance.clear()
+	modifier_possession_wait_chance.clear()
+	# state stunned
+	modifier_stun_duration.clear()
+	# state waiting
+	modifier_state_possessing_chance.clear()
+	modifier_state_attacking_chance.clear()
+	modifier_state_waiting_chance.clear()
+	modifier_state_moving_chance.clear()
+	
 	update_stats()
