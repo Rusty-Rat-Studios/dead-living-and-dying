@@ -25,6 +25,13 @@ func attack(_target: Node3D) -> void:
 	depossess()
 
 
+func possess() -> void:
+	if not lit:
+		return
+	
+	super()
+
+
 func ignite() -> void:
 	lit = true
 	fire.emitting = true
