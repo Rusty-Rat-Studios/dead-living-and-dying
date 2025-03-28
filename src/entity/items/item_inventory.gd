@@ -9,4 +9,8 @@ var description: String
 var texture: Texture2D
 
 func drop() -> void:
-	pass
+	var world_item: ItemWorld = world_resource.instantiate()
+	get_node("/root/Game").add_child(world_item)
+	world_item.position = PlayerHandler.get_player().position + Vector3(0, -0.75, -1)
+
+	queue_free()
