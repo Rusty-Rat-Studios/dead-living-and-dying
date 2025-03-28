@@ -67,3 +67,9 @@ func reset_stat_update() -> void:
 	player.player_stats.stat_update_remove(PlayerStats.Stats.LIGHT_OMNI_RANGE, NAME)
 	player.player_stats.stat_update_remove(PlayerStats.Stats.LIGHT_SPOT_RANGE, NAME)
 	player.player_stats.stat_update_remove(PlayerStats.Stats.LIGHT_ENERGY, NAME)
+
+
+func drop() -> void:
+	reset_stat_update()
+	super()
+	
