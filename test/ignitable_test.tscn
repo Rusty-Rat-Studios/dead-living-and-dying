@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://beonard4jucth"]
+
+[ext_resource type="PackedScene" uid="uid://d4cxt6unhu3c6" path="res://test/room_debug.tscn" id="1_oew4q"]
+[ext_resource type="PackedScene" uid="uid://c3wmqi8pl2yas" path="res://src/entity/objects/wall_sconce/wall_sconce_forward.tscn" id="2_ik1w3"]
+[ext_resource type="PackedScene" uid="uid://yihpxsaeuqdi" path="res://src/entity/ghost/ghost.tscn" id="3_xn4go"]
+[ext_resource type="PackedScene" uid="uid://cmxmbgqr3v5cn" path="res://src/entity/objects/wall_sconce/wall_sconce_side_right.tscn" id="4_m0fsn"]
+[ext_resource type="PackedScene" uid="uid://cjgov4f5bnaae" path="res://src/entity/objects/wall_sconce/wall_sconce_side_left.tscn" id="5_d42b0"]
+[ext_resource type="PackedScene" uid="uid://bgt18op8lbbdh" path="res://src/entity/objects/fireplace/Fireplace.tscn" id="6_1r60d"]
+
+[node name="Game" instance=ExtResource("1_oew4q")]
+
+[node name="WallSconceForward2" parent="DebugRoom" index="5" instance=ExtResource("2_ik1w3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.27571, 1.15, -7.88344)
+
+[node name="Ignitable" parent="DebugRoom/WallSconceForward2" index="0"]
+begin_lit = true
+
+[node name="WallSconceForward3" parent="DebugRoom" index="6" instance=ExtResource("2_ik1w3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.60159, 1.15, -7.88344)
+
+[node name="Ignitable" parent="DebugRoom/WallSconceForward3" index="0"]
+begin_lit = true
+
+[node name="Ghost" parent="DebugRoom" index="7" instance=ExtResource("3_xn4go")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.40468, 0)
+
+[node name="WallSconceSide" parent="DebugRoom" index="8" instance=ExtResource("4_m0fsn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.7936, 1.00113, 0)
+
+[node name="WallSconceSide2" parent="DebugRoom" index="9" instance=ExtResource("4_m0fsn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.7936, 1.00113, -3.65759)
+
+[node name="WallSconceSide3" parent="DebugRoom" index="10" instance=ExtResource("4_m0fsn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.7936, 1.00113, 2.95834)
+
+[node name="WallSconceSide4" parent="DebugRoom" index="11" instance=ExtResource("5_d42b0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.73977, 1, 0)
+
+[node name="WallSconceSide5" parent="DebugRoom" index="12" instance=ExtResource("5_d42b0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.73977, 1, -3.82912)
+
+[node name="WallSconceSide6" parent="DebugRoom" index="13" instance=ExtResource("5_d42b0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.73977, 1, 4.89996)
+
+[node name="Fireplace" parent="DebugRoom" index="14" instance=ExtResource("6_1r60d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.40505, -7.699)
+
+[node name="DebugLight" parent="." index="4"]
+visible = false
+
+[editable path="DebugRoom/WallSconceForward2"]
+[editable path="DebugRoom/WallSconceForward3"]
+[editable path="UI"]

@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://u73u0x8ln3pf"]
+
+[ext_resource type="PackedScene" uid="uid://bcep1wbs2caas" path="res://src/possessable/possessable.tscn" id="1_3g5ak"]
+[ext_resource type="Script" uid="uid://cnnfkcd0ufnqx" path="res://src/possessable/ignitable/possessable_ignitable.gd" id="2_12x63"]
+[ext_resource type="PackedScene" uid="uid://cnbim08e5mqrn" path="res://src/ui/interactable.tscn" id="3_uxt81"]
+
+[node name="Ignitable" instance=ExtResource("1_3g5ak")]
+script = ExtResource("2_12x63")
+begin_lit = false
+
+[node name="Interactable" parent="." index="2" instance=ExtResource("3_uxt81")]
