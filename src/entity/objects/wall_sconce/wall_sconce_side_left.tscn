@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjgov4f5bnaae"]
+
+[ext_resource type="PackedScene" uid="uid://cmxmbgqr3v5cn" path="res://src/entity/objects/wall_sconce/wall_sconce_side_right.tscn" id="1_i3xhn"]
+
+[node name="WallSconceSide" instance=ExtResource("1_i3xhn")]
+
+[node name="Sprite3D" parent="." index="1"]
+flip_h = true
+
+[node name="FireParticles" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.057, 1.963, 0)
