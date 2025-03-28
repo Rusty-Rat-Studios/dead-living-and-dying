@@ -8,4 +8,4 @@
 flip_h = true
 
 [node name="FireParticles" parent="." index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.057, 1.963, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.057, 1.22345, 0)
