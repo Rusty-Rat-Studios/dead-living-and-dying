@@ -59,14 +59,19 @@ func _on_interaction(input_name: String) -> void:
 func _on_body_entered(_body: Node3D) -> void:
 	# no node check required as collision mask is layer PLAYER
 	update_interactable()
-	$Interactable.enabled = true
 
 
 func update_interactable() -> void:
 	if lit:
 		$Interactable.display_message("[E] Snuff")
+		$Interactable.enabled = true
 	else:
-		$Interactable.display_message("[E] Ignite")
+		if PlayerHandler.get_player_state() == PlayerStateMachine.States.DEAD:
+			$Interactable.hide_message()
+			$Interactable.enabled = false
+		else:
+			$Interactable.display_message("[E] Ignite")
+			$Interactable.enabled = true
 
 
 func _on_body_exited(_body: Node3D) -> void:
