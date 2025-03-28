@@ -3,7 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://bpkp2ej6u0kax" path="res://src/entity/items/defense_item_inventory.tscn" id="1_x5nou"]
 [ext_resource type="Script" uid="uid://cycj76pyudxkc" path="res://src/entity/items/crucifix/crucifix_inventory.gd" id="2_8ft1u"]
 
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1v5j2"]
 transparency = 1
 albedo_color = Color(1, 1, 1, 0.12549)
