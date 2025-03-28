@@ -1,7 +1,7 @@
 extends ActiveItemInventory
 
 const BASE_COOLDOWN_DURATION: float = 7
-const NAME: String = "ghost_glasses"
+const NAME: String = "looking_stone"
 const START_RADIUS: float = 0.5
 const END_RADIUS: float = 20
 const STARTING_ALPHA: float = 0.686
@@ -11,12 +11,12 @@ var player: Node = PlayerHandler.get_player()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	world_resource = load("res://src/entity/items/ghost_glasses/ghost_glasses_world.tscn")
-	display_name = "Ghost Glasses"
+	world_resource = load("res://src/entity/items/looking_stone/looking_stone_world.tscn")
+	display_name = "Looking Stone"
 	input_event = "use_active_item"
 	description = ("Active ITEM: Use with " + UIDevice.retrieve_icon_sized(input_event)
 		+ " to reveal ghosts in a radius temporarily.")
-	texture = preload("res://src/entity/items/lamp_oil/lamp_oil.png")
+	texture = preload("res://src/entity/items/looking_stone/looking_stone.png")
 	
 	$CooldownTimer.wait_time = BASE_COOLDOWN_DURATION
 	$CooldownTimer.timeout.connect(_on_cooldown_timer_timeout)
