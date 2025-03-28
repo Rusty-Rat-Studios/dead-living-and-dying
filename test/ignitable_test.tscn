@@ -12,8 +12,14 @@
 [node name="WallSconceForward2" parent="DebugRoom" index="5" instance=ExtResource("2_ik1w3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.27571, 1.15, -7.88344)
 
+[node name="Ignitable" parent="DebugRoom/WallSconceForward2" index="0"]
+begin_lit = true
+
 [node name="WallSconceForward3" parent="DebugRoom" index="6" instance=ExtResource("2_ik1w3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.60159, 1.15, -7.88344)
+
+[node name="Ignitable" parent="DebugRoom/WallSconceForward3" index="0"]
+begin_lit = true
 
 [node name="Ghost" parent="DebugRoom" index="7" instance=ExtResource("3_xn4go")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.40468, 0)
@@ -42,4 +48,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.40505, -7.699)
 [node name="DebugLight" parent="." index="4"]
 visible = false
 
+[editable path="DebugRoom/WallSconceForward2"]
+[editable path="DebugRoom/WallSconceForward3"]
 [editable path="UI"]

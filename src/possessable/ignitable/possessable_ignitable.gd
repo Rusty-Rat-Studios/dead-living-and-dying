@@ -1,5 +1,6 @@
 extends Possessable
 
+@export var begin_lit: bool = false
 @export var player_detector: Area3D
 @export var fire: GPUParticles3D
 var lit: bool = false
@@ -17,7 +18,10 @@ func reset() -> void:
 	$Interactable.inputs = ["interact"]
 	$Interactable.hide_message()
 	$Interactable.enabled = false
-	snuff()
+	if(begin_lit):
+		ignite()
+	else:
+		snuff()
 
 
 func attack(_target: Node3D) -> void:

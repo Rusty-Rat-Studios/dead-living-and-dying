@@ -78,6 +78,7 @@ size = Vector2(0.1, 0.1)
 
 [node name="Ignitable" parent="." node_paths=PackedStringArray("player_detector", "fire") instance=ExtResource("1_q4pcj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.015, 0.165, 0)
+begin_lit = false
 player_detector = NodePath("../Area3D")
 fire = NodePath("../FireParticles")
 
@@ -95,6 +96,8 @@ shape = SubResource("SphereShape3D_q4pcj")
 
 [node name="FireParticles" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.015, 1.94, 0)
+visible = false
+emitting = false
 amount = 512
 lifetime = 0.18
 randomness = 0.5

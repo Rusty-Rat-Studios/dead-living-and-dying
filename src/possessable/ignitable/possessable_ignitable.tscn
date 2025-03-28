@@ -6,5 +6,6 @@
 
 [node name="Ignitable" instance=ExtResource("1_3g5ak")]
 script = ExtResource("2_12x63")
+begin_lit = false
 
 [node name="Interactable" parent="." index="2" instance=ExtResource("3_uxt81")]

@@ -100,6 +100,8 @@ shape = SubResource("SphereShape3D_cfwtk")
 
 [node name="FireParticles" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.015, -0.835259, 0.125585)
+visible = false
+emitting = false
 amount = 512
 lifetime = 0.47
 randomness = 0.5
