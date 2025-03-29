@@ -6,8 +6,9 @@ signal hit
 # i.e. moving through a door
 signal target_reached
 
+# TODO: remove when stats implemented across all states
 const BASE_SPEED: float = 4.0
-# time to wait before attacking when player enters room
+# TODO: remove when stats implemented across all states
 const ATTACK_DELAY: float = 0.3
 # time to tween light visibility when ghost starts/stops moving
 const LIGHT_FADE_DURATION: float = 0.3
