@@ -57,23 +57,23 @@ var modifier_state_attacking_chance: Dictionary[String, float] = {}
 var modifier_state_waiting_chance: Dictionary[String, float] = {}
 var modifier_state_moving_chance: Dictionary[String, float] = {}
 
-var speed: float = BASE_SPEED + dictionary_sum(modifier_speed)
-var opacity: float = BASE_OPACITY + dictionary_sum(modifier_opacity)
+var speed: float
+var opacity: float
 # state attacking
-var attack_delay: float = BASE_ATTACK_DELAY + dictionary_sum(modifier_attack_delay)
-var windup_duration: float = BASE_WINDUP_DURATION + dictionary_sum(modifier_windup_duration)
+var attack_delay: float
+var windup_duration: float
 # state possessing
-var decision_time: float = BASE_DECISION_TIME + dictionary_sum(modifier_decision_time)
-var possession_attack_chance: float = BASE_POSSESSION_ATTACK_CHANCE + dictionary_sum(modifier_possession_attack_chance)
-var depossess_chance: float = BASE_DEPOSSESS_CHANCE + dictionary_sum(modifier_depossess_chance)
-var possession_wait_chance: float = BASE_POSSESSION_WAIT_CHANCE + dictionary_sum(modifier_possession_wait_chance)
+var decision_time: float
+var possession_attack_chance: float
+var depossess_chance: float
+var possession_wait_chance: float
 # state stunned
-var stun_duration: float = BASE_STUN_DURATION + dictionary_sum(modifier_stun_duration)
+var stun_duration: float
 # state waiting
-var state_possessing_chance: float = BASE_STATE_POSSESSING_CHANCE + dictionary_sum(modifier_state_possessing_chance)
-var state_attacking_chance: float = BASE_STATE_ATTACKING_CHANCE + dictionary_sum(modifier_state_attacking_chance)
-var state_waiting_chance: float = BASE_STATE_WAITING_CHANCE + dictionary_sum(modifier_state_waiting_chance)
-var state_moving_chance: float = BASE_STATE_MOVING_CHANCE + dictionary_sum(modifier_state_moving_chance)
+var state_possessing_chance: float
+var state_attacking_chance: float
+var state_waiting_chance: float
+var state_moving_chance: float
 
 # map enum values to dicts
 var _stat_map: Dictionary[Stats, Dictionary] = {
@@ -95,6 +95,26 @@ var _stat_map: Dictionary[Stats, Dictionary] = {
 	Stats.STATE_WAITING_CHANCE: self.modifier_state_waiting_chance,
 	Stats.STATE_MOVING_CHANCE: self.modifier_state_moving_chance
 }
+
+
+func _ready() -> void:
+	speed = BASE_SPEED + dictionary_sum(modifier_speed)
+	opacity = BASE_OPACITY + dictionary_sum(modifier_opacity)
+	# state attacking
+	attack_delay = BASE_ATTACK_DELAY + dictionary_sum(modifier_attack_delay)
+	windup_duration = BASE_WINDUP_DURATION + dictionary_sum(modifier_windup_duration)
+	# state possessing
+	decision_time = BASE_DECISION_TIME + dictionary_sum(modifier_decision_time)
+	possession_attack_chance = BASE_POSSESSION_ATTACK_CHANCE + dictionary_sum(modifier_possession_attack_chance)
+	depossess_chance = BASE_DEPOSSESS_CHANCE + dictionary_sum(modifier_depossess_chance)
+	possession_wait_chance = BASE_POSSESSION_WAIT_CHANCE + dictionary_sum(modifier_possession_wait_chance)
+	# state stunned
+	stun_duration = BASE_STUN_DURATION + dictionary_sum(modifier_stun_duration)
+	# state waiting
+	state_possessing_chance = BASE_STATE_POSSESSING_CHANCE + dictionary_sum(modifier_state_possessing_chance)
+	state_attacking_chance = BASE_STATE_ATTACKING_CHANCE + dictionary_sum(modifier_state_attacking_chance)
+	state_waiting_chance = BASE_STATE_WAITING_CHANCE + dictionary_sum(modifier_state_waiting_chance)
+	state_moving_chance = BASE_STATE_MOVING_CHANCE + dictionary_sum(modifier_state_moving_chance)
 
 
 func dictionary_sum(stat_modifier: Dictionary[String, float]) -> float:

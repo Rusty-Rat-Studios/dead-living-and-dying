@@ -89,9 +89,9 @@ class TestGhostExitAttackingState:
 		await wait_frames(1) # for set_deferred call
 		
 		assert_called(_state_attacking._parent.stats, "remove_modifier", 
-			[GhostStats.Stats.SPEED, _state_attacking.SPEED_PRE_ATTACK_MODIFIER_NAME])
+			[GhostStats.Stats.SPEED, _state_attacking.SPEED_PRE_ATTACK_MODIFIER_NAME, -1])
 		assert_called(_state_attacking._parent.stats, "remove_modifier", 
-			[GhostStats.Stats.SPEED, _state_attacking.SPEED_ATTACK_MODIFIER_NAME])
+			[GhostStats.Stats.SPEED, _state_attacking.SPEED_ATTACK_MODIFIER_NAME, -1])
 		assert_eq(_state_attacking.attack_range_collision_shape.disabled, true)
 		assert_called(_state_attacking.sprite_shaker, "halt")
 		assert_eq(_state_attacking._parent.sprite.modulate, _state_attacking.base_color)
