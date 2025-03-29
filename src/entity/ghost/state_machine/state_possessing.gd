@@ -97,7 +97,7 @@ func set_closest_target() -> void:
 
 	# return to WAITING if no possessables available
 	if possessables.is_empty():
-		change_state(GhostStateMachine.States.WAITING)
+		change_state(GhostStateMachine.States.ATTACKING)
 		return
 	
 	# find nearest possessable and set it as target
