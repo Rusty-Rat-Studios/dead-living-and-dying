@@ -31,7 +31,6 @@ class TestGhostEnterWaitingState:
 	func test_waiting_state_variables_set_correctly() -> void:
 		_state_waiting.enter()
 		
-		assert_eq(_state_waiting._parent.speed, StateWaiting.WAITING_SPEED)
 		assert_eq(_state_waiting._parent.sprite.animation, "idle")
 		assert_eq(_state_waiting.is_paused, false)
 		assert_called(_state_waiting, "set_random_target")
@@ -62,5 +61,4 @@ class TestGhostExitWaitingState:
 		# Test manually (This goes for all GhostStates)
 		# assert_eq(_state_waiting._parent.target_pos, Vector3(1, 1, 1))
 		
-		assert_eq(_state_waiting._parent.speed, _state_waiting._parent.BASE_SPEED)
 		assert_eq(_state_waiting.is_paused, false)

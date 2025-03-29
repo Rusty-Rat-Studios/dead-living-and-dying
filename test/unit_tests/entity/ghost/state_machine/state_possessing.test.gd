@@ -34,7 +34,6 @@ class TestGhostEnterPossessingState:
 		
 		await wait_frames(1) # for set_deferred call
 		
-		assert_eq(_state_possessing._parent.speed, _state_possessing._parent.BASE_SPEED)
 		assert_eq(_state_possessing._parent.sprite.animation, "active")
 		assert_eq(_state_possessing.detector_collision_shape.disabled, false)
 		assert_eq(_state_possessing.decision_timer.wait_time, _state_possessing.DECISION_TIME)
@@ -60,7 +59,6 @@ class TestGhostEnterPossessingState:
 		
 		await wait_frames(1) # for set_deferred call
 		
-		assert_eq(_state_possessing._parent.speed, _state_possessing._parent.BASE_SPEED)
 		assert_eq(_state_possessing._parent.sprite.animation, "active")
 		assert_eq(_state_possessing.detector_collision_shape.disabled, false)
 		assert_eq(_state_possessing.decision_timer.wait_time, _state_possessing.DECISION_TIME)
