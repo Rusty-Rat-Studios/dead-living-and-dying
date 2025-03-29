@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhpg6bla1mtvu"]
+
+[ext_resource type="Texture2D" uid="uid://wfsvfwswtupe" path="res://src/entity/objects/potted_plant/potted_plant.png" id="1_osyyu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wpf8c"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("1_osyyu")
+backlight_enabled = true
+backlight = Color(1, 1, 1, 1)
+backlight_texture = ExtResource("1_osyyu")
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_g03hx"]
+height = 2.67
+radius = 0.43
+
+[node name="PottedPlant" type="StaticBody3D"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1.38, 0, 0, 0, 1.38, 0, 0, 0, 1.38, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_wpf8c")
+cast_shadow = 0
+texture = ExtResource("1_osyyu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_g03hx")
