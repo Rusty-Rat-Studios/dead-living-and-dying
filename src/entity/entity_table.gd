@@ -7,14 +7,14 @@ extends Resource
 # Returns a random weighted entity from the valid entries in table
 func get_random_entity() -> Resource:
 	var choices_dictionary: Dictionary[Variant, float]
-	choices_dictionary.assign(_get_choices_dictionary_from_entities())
+	choices_dictionary.assign(get_choices_dictionary())
 	var entry: EntityTableEntry = RNG.weighted_random(choices_dictionary)
 	return entry.get_entity()
 
 
 # Returns a choices dictionary, filtered to include only valid entities.
 # Any entity that is at/above its max spawn limit will not be included.
-func _get_choices_dictionary_from_entities() -> Dictionary[EntityTableEntry, float]:
+func get_choices_dictionary() -> Dictionary[EntityTableEntry, float]:
 	var choices: Dictionary[EntityTableEntry, float] = {}
 	for entry: EntityTableEntry in entities:
 		if entry.max_spawn == -1 or entry.current < entry.max_spawn:

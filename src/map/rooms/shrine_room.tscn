@@ -1,0 +1,244 @@
+[gd_scene load_steps=31 format=3 uid="uid://d142i6jit8s2f"]
+
+[ext_resource type="Script" uid="uid://bo0tyfrjfebc6" path="res://src/map/room_components/room.gd" id="1_3kabm"]
+[ext_resource type="PackedScene" uid="uid://b4teav5cf7dm4" path="res://src/map/room_components/floor/floor_collision_shape.tscn" id="2_0v0cg"]
+[ext_resource type="PackedScene" uid="uid://te0dpapcosk4" path="res://src/map/rooms/room_minimap/basic_room_minimap.tscn" id="2_fi0hv"]
+[ext_resource type="Script" uid="uid://bv4f3snq7u1u2" path="res://src/common/room_information.gd" id="4_1kr6n"]
+[ext_resource type="PackedScene" uid="uid://bqsc7pbjuxsmh" path="res://src/map/room_components/floor/player_detector.tscn" id="4_lxcpm"]
+[ext_resource type="Texture2D" uid="uid://dsbt0jay6l62e" path="res://src/ui/minimap/shrine_icon.png" id="4_uuedo"]
+[ext_resource type="PackedScene" uid="uid://b6pd0nir4sadl" path="res://src/map/room_components/door/door_x16.tscn" id="5_1kr6n"]
+[ext_resource type="Script" uid="uid://dqhrw6rxew3fa" path="res://src/common/door_location.gd" id="6_6gi6o"]
+[ext_resource type="Texture2D" uid="uid://q5r4y2tfhkxc" path="res://src/map/tileset-dhassa/floor3.png" id="6_w6w2w"]
+[ext_resource type="Shader" uid="uid://bgy36jmkglwva" path="res://src/map/room_components/wall/transparent_wall_shader.gdshader" id="9_uuedo"]
+[ext_resource type="PackedScene" uid="uid://c6rcol647a7p4" path="res://src/map/room_components/wall/outside_wall.tscn" id="9_w6w2w"]
+[ext_resource type="Texture2D" uid="uid://m535shlqnuux" path="res://src/map/tileset-dhassa/wall3.png" id="10_yr7ka"]
+[ext_resource type="PackedScene" uid="uid://web8bdry114l" path="res://src/map/room_components/shrine/shrine.tscn" id="11_8hnx1"]
+
+[sub_resource type="Resource" id="Resource_6gi6o"]
+script = ExtResource("6_6gi6o")
+location = Vector2(0, 0)
+direction = 0
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_w6w2w"]
+script = ExtResource("6_6gi6o")
+location = Vector2(0, 0)
+direction = 1
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_uuedo"]
+script = ExtResource("6_6gi6o")
+location = Vector2(0, 0)
+direction = 2
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_rplmb"]
+script = ExtResource("6_6gi6o")
+location = Vector2(0, 0)
+direction = 3
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_ownp1"]
+script = ExtResource("4_1kr6n")
+room_shape = Array[Vector2]([Vector2(0, 0)])
+possible_door_locations = Array[ExtResource("6_6gi6o")]([SubResource("Resource_6gi6o"), SubResource("Resource_w6w2w"), SubResource("Resource_uuedo"), SubResource("Resource_rplmb")])
+minimap_component = ExtResource("2_fi0hv")
+room_icon = ExtResource("4_uuedo")
+metadata/_custom_type_script = "uid://bv4f3snq7u1u2"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w6w2w"]
+albedo_texture = ExtResource("6_w6w2w")
+uv1_scale = Vector3(12, 12, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_uuedo"]
+material = SubResource("StandardMaterial3D_w6w2w")
+size = Vector2(16, 16)
+
+[sub_resource type="Resource" id="Resource_yr7ka"]
+script = ExtResource("6_6gi6o")
+location = Vector2(0, 0)
+direction = 0
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0dsgv"]
+render_priority = 0
+shader = ExtResource("9_uuedo")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("10_yr7ka")
+shader_parameter/uv1_scale = Vector3(64, 16, 0)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/player_offset = Vector3(0, 3, 0)
+shader_parameter/sphere_radius = 6.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8i2wd"]
+albedo_texture = ExtResource("10_yr7ka")
+uv1_scale = Vector3(64, 16, 1)
+
+[sub_resource type="Resource" id="Resource_8hnx1"]
+script = ExtResource("6_6gi6o")
+location = Vector2(0, 0)
+direction = 2
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_0dsgv"]
+script = ExtResource("6_6gi6o")
+location = Vector2(0, 0)
+direction = 3
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_8i2wd"]
+script = ExtResource("6_6gi6o")
+location = Vector2(0, 0)
+direction = 1
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6gi6o"]
+emission_shape = 3
+emission_box_extents = Vector3(7.5, 0.5, 7.5)
+direction = Vector3(0, -1, 0)
+spread = 5.0
+initial_velocity_min = 15.0
+initial_velocity_max = 15.0
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.0
+
+[sub_resource type="Curve" id="Curve_w6w2w"]
+_limits = [0.0, 0.1, 0.0, 0.1]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.00689655, 0.1), 0.0, 0.0, 0, 0, Vector2(0.0289655, 0.0112359), 0.0, 0.0, 0, 0, Vector2(0.1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uuedo"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+use_particle_trails = true
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_yr7ka"]
+material = SubResource("StandardMaterial3D_uuedo")
+curve = SubResource("Curve_w6w2w")
+
+[node name="ShrineRoom" type="Node3D" groups=["rooms"]]
+script = ExtResource("1_3kabm")
+room_information = SubResource("Resource_ownp1")
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="FloorCollisionShape" parent="Floor" instance=ExtResource("2_0v0cg")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+layers = 6
+mesh = SubResource("PlaneMesh_uuedo")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="Floor/MeshInstance3D"]
+size = Vector3(16, 2, 16)
+
+[node name="PlayerDetector" parent="Floor" instance=ExtResource("4_lxcpm")]
+
+[node name="Door" parent="." instance=ExtResource("5_1kr6n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.95)
+wall_scene = ExtResource("9_w6w2w")
+door_location = SubResource("Resource_yr7ka")
+
+[node name="MeshInstance3D" parent="Door/StaticBody3D" index="0"]
+layers = 5
+
+[node name="WallWithDoorway" parent="Door" index="5"]
+transparent_wall_material = SubResource("ShaderMaterial_0dsgv")
+wall_material = SubResource("StandardMaterial3D_8i2wd")
+monitor_for_transparency = true
+
+[node name="Cube" parent="Door/WallWithDoorway/wall_with_doorway" index="0"]
+layers = 5
+surface_material_override/0 = SubResource("StandardMaterial3D_8i2wd")
+
+[node name="Door2" parent="." instance=ExtResource("5_1kr6n")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 7.95)
+wall_scene = ExtResource("9_w6w2w")
+door_location = SubResource("Resource_8hnx1")
+
+[node name="MeshInstance3D" parent="Door2/StaticBody3D" index="0"]
+layers = 5
+
+[node name="WallWithDoorway" parent="Door2" index="5"]
+transparent_wall_material = SubResource("ShaderMaterial_0dsgv")
+wall_material = SubResource("StandardMaterial3D_8i2wd")
+monitor_for_transparency = true
+
+[node name="Cube" parent="Door2/WallWithDoorway/wall_with_doorway" index="0"]
+layers = 5
+surface_material_override/0 = SubResource("StandardMaterial3D_8i2wd")
+
+[node name="Door3" parent="." instance=ExtResource("5_1kr6n")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.95, 0, 0)
+wall_scene = ExtResource("9_w6w2w")
+door_location = SubResource("Resource_0dsgv")
+
+[node name="MeshInstance3D" parent="Door3/StaticBody3D" index="0"]
+layers = 5
+
+[node name="WallWithDoorway" parent="Door3" index="5"]
+transparent_wall_material = SubResource("ShaderMaterial_0dsgv")
+wall_material = SubResource("StandardMaterial3D_8i2wd")
+
+[node name="Cube" parent="Door3/WallWithDoorway/wall_with_doorway" index="0"]
+layers = 5
+surface_material_override/0 = SubResource("StandardMaterial3D_8i2wd")
+
+[node name="Door4" parent="." instance=ExtResource("5_1kr6n")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7.94697, 0.0341997, 0.0230465)
+wall_scene = ExtResource("9_w6w2w")
+door_location = SubResource("Resource_8i2wd")
+
+[node name="MeshInstance3D" parent="Door4/StaticBody3D" index="0"]
+layers = 5
+
+[node name="WallWithDoorway" parent="Door4" index="5"]
+transparent_wall_material = SubResource("ShaderMaterial_0dsgv")
+wall_material = SubResource("StandardMaterial3D_8i2wd")
+
+[node name="Cube" parent="Door4/WallWithDoorway/wall_with_doorway" index="0"]
+layers = 5
+surface_material_override/0 = SubResource("StandardMaterial3D_8i2wd")
+
+[node name="Shrine" parent="." instance=ExtResource("11_8hnx1")]
+
+[node name="Sprite3D" parent="Shrine" index="2"]
+layers = 5
+
+[node name="Decal" parent="Shrine" index="7"]
+layers = 5
+
+[node name="RainParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+amount = 200
+randomness = 0.66
+visibility_aabb = AABB(-8, -10.5, -8, 16, 11, 16)
+trail_enabled = true
+trail_lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_6gi6o")
+draw_pass_1 = SubResource("RibbonTrailMesh_yr7ka")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0471115, 1.35898, -0.00349998)
+light_color = Color(0.696872, 0.797807, 1, 1)
+light_energy = 0.2
+light_size = 0.5
+light_cull_mask = 4293918724
+omni_range = 14.0
+omni_attenuation = 0.0
+
+[editable path="Door"]
+[editable path="Door/WallWithDoorway"]
+[editable path="Door/WallWithDoorway/wall_with_doorway"]
+[editable path="Door2"]
+[editable path="Door2/WallWithDoorway"]
+[editable path="Door2/WallWithDoorway/wall_with_doorway"]
+[editable path="Door3"]
+[editable path="Door3/WallWithDoorway"]
+[editable path="Door3/WallWithDoorway/wall_with_doorway"]
+[editable path="Door4"]
+[editable path="Door4/WallWithDoorway"]
+[editable path="Door4/WallWithDoorway/wall_with_doorway"]
+[editable path="Shrine"]

@@ -3,7 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://bi3maar4f7ltv" path="res://src/ui/inventory/inventory_slot.tscn" id="1_q4hk2"]
 [ext_resource type="Script" uid="uid://6jkna172qn2r" path="res://src/ui/inventory/passive_slot.gd" id="2_5g3y2"]
 
-
 [node name="PassiveSlot" instance=ExtResource("1_q4hk2")]
 anchors_preset = 8
 anchor_left = 0.5
@@ -18,8 +17,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_5g3y2")
 
-[node name="TextureRect" parent="." index="1"]
-custom_minimum_size = Vector2(0, 30)
-size_flags_horizontal = 4
-size_flags_vertical = 4
-expand_mode = 2
+[node name="MarginIcon" parent="." index="1"]
+visible = false
+
+[node name="IconLabel" parent="MarginIcon" index="0"]
+text = ""

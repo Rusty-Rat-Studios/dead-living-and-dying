@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://bqsc7pbjuxsmh"]
+
+[ext_resource type="Script" uid="uid://ow6b5o56yj3t" path="res://src/map/room_components/floor/player_detector.gd" id="1_notk5"]
+
+[node name="PlayerDetector" type="Area3D"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_notk5")
+polygon = PackedVector2Array(-8, -8, -8, 8, 8, 8, 8, -8)
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.5, 0)
+depth = 3.0
+polygon = PackedVector2Array(-8, -8, -8, 8, 8, 8, 8, -8)

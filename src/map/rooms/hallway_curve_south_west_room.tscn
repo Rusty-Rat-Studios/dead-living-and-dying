@@ -1,0 +1,223 @@
+[gd_scene load_steps=29 format=3 uid="uid://dskoq14673ixv"]
+
+[ext_resource type="Script" uid="uid://bo0tyfrjfebc6" path="res://src/map/room_components/room.gd" id="1_m24bv"]
+[ext_resource type="PackedScene" uid="uid://bwr5n122fnh00" path="res://src/map/rooms/room_minimap/hallway_curve_south_west_room_minimap.tscn" id="2_7eu7n"]
+[ext_resource type="Script" uid="uid://dqhrw6rxew3fa" path="res://src/common/door_location.gd" id="3_x6o5c"]
+[ext_resource type="Script" uid="uid://bv4f3snq7u1u2" path="res://src/common/room_information.gd" id="4_5fpwo"]
+[ext_resource type="PackedScene" uid="uid://b4teav5cf7dm4" path="res://src/map/room_components/floor/floor_collision_shape.tscn" id="5_wjpjm"]
+[ext_resource type="PackedScene" uid="uid://84hedrtlny03" path="res://models/hallway_L_curve_floor.glb" id="6_rd8d1"]
+[ext_resource type="PackedScene" uid="uid://bqsc7pbjuxsmh" path="res://src/map/room_components/floor/player_detector.tscn" id="7_7j1ce"]
+[ext_resource type="PackedScene" uid="uid://bson3umirpot2" path="res://src/map/room_components/wall/wall.tscn" id="8_aam2o"]
+[ext_resource type="Shader" uid="uid://bgy36jmkglwva" path="res://src/map/room_components/wall/transparent_wall_shader.gdshader" id="9_qnben"]
+[ext_resource type="Texture2D" uid="uid://c6fjrr2bcg8tw" path="res://src/map/tileset-dhassa/wall2.png" id="10_vsqhh"]
+[ext_resource type="PackedScene" uid="uid://bjca8n1kvkwg0" path="res://src/map/room_components/door/door_x4.tscn" id="11_7eu7n"]
+
+[sub_resource type="Resource" id="Resource_ncutf"]
+script = ExtResource("3_x6o5c")
+location = Vector2(0, 0)
+direction = 3
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_8u8l4"]
+script = ExtResource("3_x6o5c")
+location = Vector2(0, 0)
+direction = 2
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_5herb"]
+script = ExtResource("4_5fpwo")
+room_shape = Array[Vector2]([Vector2(0, 0)])
+possible_door_locations = Array[ExtResource("3_x6o5c")]([SubResource("Resource_ncutf"), SubResource("Resource_8u8l4")])
+minimap_component = ExtResource("2_7eu7n")
+metadata/_custom_type_script = "uid://bv4f3snq7u1u2"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_br06e"]
+render_priority = 0
+shader = ExtResource("9_qnben")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("10_vsqhh")
+shader_parameter/uv1_scale = Vector3(6, 2, 0)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/player_offset = Vector3(0, 3, 0)
+shader_parameter/sphere_radius = 6.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s271h"]
+albedo_texture = ExtResource("10_vsqhh")
+uv1_scale = Vector3(6, 2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7hqeo"]
+size = Vector3(7, 5, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8624k"]
+render_priority = 0
+shader = ExtResource("9_qnben")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("10_vsqhh")
+shader_parameter/uv1_scale = Vector3(3, 2, 0)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/player_offset = Vector3(0, 3, 0)
+shader_parameter/sphere_radius = 6.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m0foj"]
+albedo_texture = ExtResource("10_vsqhh")
+uv1_scale = Vector3(3, 2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_eht8d"]
+size = Vector3(4.25, 5, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_8cq5c"]
+size = Vector3(7, 5, 0.1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_70f6a"]
+render_priority = 0
+shader = ExtResource("9_qnben")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("10_vsqhh")
+shader_parameter/uv1_scale = Vector3(3, 2, 0)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/player_offset = Vector3(0, 3, 0)
+shader_parameter/sphere_radius = 6.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_br06e"]
+albedo_texture = ExtResource("10_vsqhh")
+uv1_scale = Vector3(3, 2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_s271h"]
+size = Vector3(4, 5, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7hqeo"]
+albedo_texture = ExtResource("10_vsqhh")
+uv1_scale = Vector3(3, 2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_m0foj"]
+size = Vector3(2.83, 5, 0.1)
+
+[sub_resource type="Resource" id="Resource_x6o5c"]
+script = ExtResource("3_x6o5c")
+location = Vector2(0, 0)
+direction = 2
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_7eu7n"]
+script = ExtResource("3_x6o5c")
+location = Vector2(0, 0)
+direction = 3
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[node name="HallwayCurveSouthWest" type="Node3D" groups=["rooms"]]
+script = ExtResource("1_m24bv")
+room_information = SubResource("Resource_5herb")
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="FloorCollisionShape" parent="Floor" instance=ExtResource("5_wjpjm")]
+
+[node name="hallway_L_curve_floor" parent="Floor" instance=ExtResource("6_rd8d1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7)
+
+[node name="Plane" parent="Floor/hallway_L_curve_floor" index="0"]
+layers = 2
+
+[node name="PlayerDetector" parent="Floor" instance=ExtResource("7_7j1ce")]
+polygon = PackedVector2Array(-2, 8, -2, 4, -4, 2, -8, 2, -8, -2, -1, -2, 2, 1, 2, 8)
+
+[node name="Wall" parent="." instance=ExtResource("8_aam2o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0, -2)
+length = 7.0
+transparent_wall_material = SubResource("ShaderMaterial_br06e")
+wall_material = SubResource("StandardMaterial3D_s271h")
+
+[node name="WallMesh" parent="Wall" index="0"]
+mesh = SubResource("BoxMesh_7hqeo")
+surface_material_override/0 = SubResource("StandardMaterial3D_s271h")
+
+[node name="CollisionPolygon3D" parent="Wall" index="1"]
+polygon = PackedVector2Array(-3.5, 0, -3.5, 5, 3.5, 5, 3.5, 0)
+
+[node name="Wall2" parent="." instance=ExtResource("8_aam2o")]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0.5, 0, -0.5)
+length = 4.25
+transparent_wall_material = SubResource("ShaderMaterial_8624k")
+wall_material = SubResource("StandardMaterial3D_m0foj")
+
+[node name="WallMesh" parent="Wall2" index="0"]
+mesh = SubResource("BoxMesh_eht8d")
+surface_material_override/0 = SubResource("StandardMaterial3D_m0foj")
+
+[node name="CollisionPolygon3D" parent="Wall2" index="1"]
+polygon = PackedVector2Array(-2.125, 0, -2.125, 5, 2.125, 5, 2.125, 0)
+
+[node name="Wall3" parent="." instance=ExtResource("8_aam2o")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 0, 4.5)
+length = 7.0
+transparent_wall_material = SubResource("ShaderMaterial_br06e")
+wall_material = SubResource("StandardMaterial3D_s271h")
+
+[node name="WallMesh" parent="Wall3" index="0"]
+mesh = SubResource("BoxMesh_8cq5c")
+surface_material_override/0 = SubResource("StandardMaterial3D_s271h")
+
+[node name="CollisionPolygon3D" parent="Wall3" index="1"]
+polygon = PackedVector2Array(-3.5, 0, -3.5, 5, 3.5, 5, 3.5, 0)
+
+[node name="Wall4" parent="." instance=ExtResource("8_aam2o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 2)
+length = 4.0
+transparent_wall_material = SubResource("ShaderMaterial_70f6a")
+wall_material = SubResource("StandardMaterial3D_br06e")
+monitor_for_transparency = true
+
+[node name="WallMesh" parent="Wall4" index="0"]
+mesh = SubResource("BoxMesh_s271h")
+surface_material_override/0 = SubResource("StandardMaterial3D_br06e")
+
+[node name="CollisionPolygon3D" parent="Wall4" index="1"]
+polygon = PackedVector2Array(-2, 0, -2, 5, 2, 5, 2, 0)
+
+[node name="Wall5" parent="." instance=ExtResource("8_aam2o")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -2, 0, 6)
+length = 4.0
+transparent_wall_material = SubResource("ShaderMaterial_70f6a")
+wall_material = SubResource("StandardMaterial3D_br06e")
+monitor_for_transparency = true
+
+[node name="WallMesh" parent="Wall5" index="0"]
+mesh = SubResource("BoxMesh_s271h")
+surface_material_override/0 = SubResource("StandardMaterial3D_br06e")
+
+[node name="CollisionPolygon3D" parent="Wall5" index="1"]
+polygon = PackedVector2Array(-2, 0, -2, 5, 2, 5, 2, 0)
+
+[node name="Wall6" parent="." instance=ExtResource("8_aam2o")]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -3, 0, 3)
+length = 2.83
+transparent_wall_material = SubResource("ShaderMaterial_70f6a")
+wall_material = SubResource("StandardMaterial3D_7hqeo")
+monitor_for_transparency = true
+
+[node name="WallMesh" parent="Wall6" index="0"]
+mesh = SubResource("BoxMesh_m0foj")
+surface_material_override/0 = SubResource("StandardMaterial3D_7hqeo")
+
+[node name="CollisionPolygon3D" parent="Wall6" index="1"]
+polygon = PackedVector2Array(-1.415, 0, -1.415, 5, 1.415, 5, 1.415, 0)
+
+[node name="Door" parent="." instance=ExtResource("11_7eu7n")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 7.95)
+door_location = SubResource("Resource_x6o5c")
+
+[node name="WallWithDoorwayX4" parent="Door" index="5"]
+monitor_for_transparency = true
+
+[node name="Door2" parent="." instance=ExtResource("11_7eu7n")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.95, 0, 0)
+door_location = SubResource("Resource_7eu7n")
+
+[editable path="Floor/hallway_L_curve_floor"]
+[editable path="Wall"]
+[editable path="Wall2"]
+[editable path="Wall3"]
+[editable path="Wall4"]
+[editable path="Wall5"]
+[editable path="Wall6"]
+[editable path="Door"]

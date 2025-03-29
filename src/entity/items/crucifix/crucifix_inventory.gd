@@ -12,7 +12,9 @@ var player: Node = PlayerHandler.get_player()
 func _ready() -> void:
 	world_resource = preload("res://src/entity/items/crucifix/crucifix_inventory.tscn")
 	display_name = "Crucifix"
-	description = "DEFENSE ITEM: Use with LMB to exorcise possessed objects within a limited range."
+	input_event = "use_defense_item"
+	description = ("DEFENSE ITEM: Use with " + UIDevice.retrieve_icon_sized(input_event)
+		+ " to exorcise possessed objects within a limited range.")
 	texture = preload("res://src/entity/items/crucifix/crucifix.png")
 	
 	$ActiveTimer.wait_time = BASE_ACTIVE_DURATION
@@ -21,6 +23,7 @@ func _ready() -> void:
 	$CooldownTimer.timeout.connect(_on_cooldown_timer_timeout)
 	
 	$Hitbox.body_entered.connect(_on_body_entered)
+	$Shield.body_entered.connect(_on_body_entered2)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -34,9 +37,11 @@ func use() -> void:
 	if cooldown_active:
 		return
 	$Hitbox/CollisionShape3D.shape.radius = BASE_RADIUS * player.player_stats.area_size
+	$Shield/CollisionShape3D.shape.radius = BASE_RADIUS * player.player_stats.area_size
 	$Hitbox/MeshInstance3D.mesh.outer_radius = BASE_RADIUS * player.player_stats.area_size
 	$Hitbox/MeshInstance3D.mesh.inner_radius = $Hitbox/MeshInstance3D.mesh.outer_radius - 0.2
 	$Hitbox/CollisionShape3D.disabled = false
+	$Shield/CollisionShape3D.disabled = false
 	$Hitbox.visible = true
 	$ActiveTimer.wait_time = BASE_ACTIVE_DURATION * player.player_stats.duration
 	$ActiveTimer.start()
@@ -49,6 +54,7 @@ func use() -> void:
 
 func _on_active_timer_timeout() -> void:
 	$Hitbox/CollisionShape3D.disabled = true
+	$Shield/CollisionShape3D.disabled = true
 	$Hitbox.visible = false
 
 
@@ -59,3 +65,9 @@ func _on_cooldown_timer_timeout() -> void:
 func _on_body_entered(body: Node3D) -> void:
 	if body is Ghost:
 		body.hit.emit()
+
+
+func _on_body_entered2(body: Node3D) -> void:
+	var force: Vector3 = body.linear_velocity
+	body.linear_velocity = Vector3(0,0,0);
+	body.apply_impulse(-force * 0.5)

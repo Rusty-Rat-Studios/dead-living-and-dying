@@ -45,14 +45,17 @@ func enter() -> void:
 	_parent.player_stats.stat_update_add(PlayerStats.Stats.SPEED, SPEED_MODIFIER, DEAD_MODIFIER_NAME)
 	
 	# modulate player color and opacity to appear ghostly
-	_parent.get_node("RotationOffset/AnimatedSprite3D").modulate = Color(0.5, 0.5, 0.5, 0.3)
+	_parent.modulate_color(Color(0.5, 0.5, 0.5, _parent.OPACITY_DEAD))
 	
 	# drop key item if player is carrying it
-	var key_item: KeyItemInventory = _parent.get_node_or_null("Inventory/KeyItemInventory")
+	var key_item: KeyItemInventory = _parent.get_key_item_or_null()
 	if key_item:
 		key_item.drop()
 	
 	await move_to_shrine()
+	
+	# activate corpse indicator particle emission
+	_parent._corpse_indicator.emitting = true
 	
 	# change collision layers out of physical plane into spirit plane
 	# temporarily disabled during move_to_shrine()
@@ -82,7 +85,7 @@ func exit() -> void:
 		attacked_increment_timer.stop()
   
 	# restore player color and opacity
-	_parent.get_node("RotationOffset/AnimatedSprite3D").modulate = Color(1, 1, 1, 1)
+	_parent.modulate_color(Color(1, 1, 1, 1))
 	
 	# change collision layers out of spirit plane into physical plane
 	_parent.collision_layer = CollisionBit.PLAYER + CollisionBit.PHYSICAL
@@ -122,16 +125,20 @@ func move_to_shrine() -> void:
 	_parent.camera.disable()
 	_parent.set_physics_process(false)
 	
+	# move player corpse to death location
+	_parent._corpse.global_position = _parent.global_position
+	_parent._corpse.animate_fall()
+	
 	# add black screen fade effect
 	var black_screen: TextureRect = get_tree().root.get_node("Game/UI/DeadScreenEffect")
-	await black_screen.fade_in(RESPAWN_TIME / 2)
+	await black_screen.fade_in(RESPAWN_TIME)
 	
-	# move player corpse to death location
-	_parent._corpse.global_position = Vector3(_parent.global_position.x, 1, _parent.global_position.z)
 	# move player to shrine
-	_parent.global_position = target_shrine.global_position
+	_parent.global_position = target_shrine.respawn_point
 	# execute single step of physics frame to trigger room visibility
 	_parent._physics_process(get_physics_process_delta_time())
+	# activate corpse light after fade-out to avoid "popping-in" if corpse visible on respawn
+	_parent._corpse.activate()
 	
 	# fade visibility back in
 	await black_screen.fade_out(RESPAWN_TIME / 2)
@@ -139,10 +146,6 @@ func move_to_shrine() -> void:
 	# re-enable movement and camera lag 
 	_parent.set_physics_process(true)
 	_parent.camera.enable()
-
-	# activate corpse and indicator particle emission
-	_parent._corpse.activate()
-	_parent._corpse_indicator.emitting = true
 
 
 func _on_player_hurt(entity: Node3D) -> void:
@@ -163,10 +166,24 @@ func _on_player_escaped(entity: Node3D) -> void:
 			attacking_ghosts.remove_at(ghost_position)
 
 
-func _on_player_revived(corpse_global_position: Vector3) -> void:
-	_parent.global_position = corpse_global_position
+func _on_player_revived() -> void:
 	# provide i-frames on revive, no flashing
 	_parent.take_damage(false)
+	
+	# disable movement and camera lag for revive duration
+	_parent.camera.disable()
+	_parent.set_physics_process(false)
+	# prevent ghosts from continuing to attack while reviving
+	if not attacked_increment_timer.is_stopped():
+		attacked_modifier = 0
+		attacked_increment_timer.stop()
+	create_tween().tween_property(_parent, "global_position", _parent._corpse.global_position, 0.3)
+	await _parent._corpse.animate_revive()
+	
+	# re-enable player control
+	_parent.camera.enable()
+	_parent.set_physics_process(true)
+	
 	_state_machine.change_state(PlayerStateMachine.States.LIVING)
 
 

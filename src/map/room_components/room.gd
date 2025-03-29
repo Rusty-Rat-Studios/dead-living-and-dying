@@ -77,6 +77,10 @@ func init_doors() -> void:
 		door.init(grid_location)
 
 
+func get_room_polygon() -> PackedVector2Array:
+	return $Floor/PlayerDetector/CollisionPolygon3D.polygon
+
+
 func _on_player_entered_room(body: Node3D) -> void:
 	if body == PlayerHandler.get_player():
 		player_in_room = true
@@ -89,7 +93,7 @@ func _on_player_entered_room(body: Node3D) -> void:
 func _on_player_exited_room(body: Node3D) -> void:
 	if body == PlayerHandler.get_player():
 		player_in_room = false
-		visible = false
+		visible = false # TODO: Remove once all rooms have doors
 		SignalBus.player_exited_room.emit(self)
 
 

@@ -9,6 +9,7 @@ const GRID_SCALE: float = 16 # Size of each grid square in editor units
 
 @export var generator_settings: GeneratorSettings = null
 
+var number_of_rooms: int = 0
 var room_map: HashMap = HashMap.new()
 
 
@@ -38,6 +39,7 @@ func add_room(room: Room, grid_location: Vector2, add_to_tree: bool = true) -> v
 	for room_portion: Vector2 in room.room_information.room_shape:
 		var translated_room_portion: Vector2 = room_portion + grid_location
 		room_map.add_with_hash(_hash_vector2(translated_room_portion), room)
+	number_of_rooms += 1
 	if add_to_tree:
 		add_child(room)
 
@@ -83,8 +85,6 @@ func _spawn_entities() -> void:
 		SpawnerManager.spawn(Spawner.SpawnerType.ENEMY, generator_settings.enemy_entity_table)
 		SpawnerManager.spawn(Spawner.SpawnerType.ITEM, generator_settings.enemy_entity_table)
 		SpawnerManager.spawn(Spawner.SpawnerType.KEY_ITEM, generator_settings.enemy_entity_table)
-		SpawnerManager.spawn(Spawner.SpawnerType.ENTITY_FLOOR, generator_settings.enemy_entity_table)
-		SpawnerManager.spawn(Spawner.SpawnerType.ENTITY_WALL, generator_settings.enemy_entity_table)
 		SpawnerManager.spawn(Spawner.SpawnerType.BOSS, generator_settings.enemy_entity_table)
 
 

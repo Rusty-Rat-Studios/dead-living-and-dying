@@ -50,13 +50,12 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	# if object has been thrown, thus depossessed, it should not be possessable
 	# again until object has slowed down enough
-	if not is_possessable and not is_possessed and parent.linear_velocity.length() < DAMAGE_VELOCITY:
+	if not is_possessed and parent.linear_velocity.length() < DAMAGE_VELOCITY:
 		# disable hurtbox when slow enough
 		hitbox_collision_shape.set_deferred("disabled", true)
-		# set flag to allow possession again
-		is_possessable = true
 		float_time_offset = 0
 		disable_effects()
+		get_parent().collision_layer = CollisionBit.PHYSICAL
 		# disable physics process - re-enabled by possess()
 		set_physics_process(false)
 		return
@@ -105,8 +104,6 @@ func attack(target: Node3D) -> void:
 	if player_in_range and room.player_in_room:
 		# disable player detection
 		range_collision_shape.disabled = true
-		# disallow re-possession during attack
-		is_possessable = false
 		
 		# display "wind-up" to attack
 		await sprite_shaker.animate(parent.get_node("Sprite3D"), ATTACK_WINDUP, ATTACK_SHAKE_MAGNITUDE)
@@ -116,6 +113,7 @@ func attack(target: Node3D) -> void:
 			# enable hurtbox 
 			hitbox_collision_shape.set_deferred("disabled", false)
 			# VIOLENTLY LAUNCH SELF TOWARDS PLAYER \m/
+			get_parent().collision_layer = CollisionBit.PHYSICAL + CollisionBit.POSSESABLE
 			parent.apply_impulse(global_position.direction_to(target.global_position) * THROW_FORCE)
 	
 	# do not disable effects until hurtbox is disabled

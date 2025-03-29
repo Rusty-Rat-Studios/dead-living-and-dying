@@ -3,12 +3,13 @@ extends GhostState
 const PAUSE_DURATION_MAX: float = 2.0
 const PAUSE_DURATION_MIN: float = 0.5
 
-var room_boundaries: Rect2 # select random points in room to wander to
+var polygon_point_generator: PolygonPointGenerator # select random points in room to wander to
 
 # flag for pausing physics execution
 @onready var is_paused: bool = false
 # timer for pause duration
 @onready var pause_timer: Timer = Timer.new()
+
 
 func _ready() -> void:
 	add_child(pause_timer)
@@ -18,19 +19,8 @@ func _ready() -> void:
 func enter() -> void:
 	_parent.sprite.animation = "idle"
 	
-	# dynamically generate bounding box based on floor size of ghost's current room
-	var floor_mesh_instance: MeshInstance3D = _parent.current_room.get_node("Floor/MeshInstance3D")
-	var floor_mesh: PlaneMesh = floor_mesh_instance.mesh
-	var floor_width: float = floor_mesh.size.x - 2 # add padding from wall to avoid collision
-	var floor_depth: float = floor_mesh.size.y - 2 # add padding from wall to avoid collision
-	
-	# create movement boundary, Rect2(Vector2 position, Vector2 size)
-	# Rect2 position starts in top-left corner; x-extends right and y-extends down
-	room_boundaries = Rect2(Vector2(-floor_width / 2, -floor_depth / 2), 
-								Vector2(floor_width, floor_depth))
-	
-	# update parent movement boundaries
-	_parent.movement_boundaries = room_boundaries
+	# dynamically grab region based ghost's current room
+	polygon_point_generator = PolygonPointGenerator.new(RNG.rng, _parent.current_room.get_room_polygon())
 	
 	is_paused = false
 	set_random_target()
@@ -56,13 +46,9 @@ func set_random_target() -> void:
 	_parent.at_target = false
 	
 	# generate random movement target within room boundaries
-	# offset to avoid setting point within walls
-	var x: float = RNG.rng.randf_range(room_boundaries.position.x + 1,
-					room_boundaries.position.x + room_boundaries.size.x - 1)
-	var z: float = RNG.rng.randf_range(room_boundaries.position.y + 1,
-					room_boundaries.position.y + room_boundaries.size.y - 1)
+	var target: Vector2 = polygon_point_generator.get_random_point()
 	
-	_parent.set_target(_parent.current_room.global_position + Vector3(x, 1.0, z))
+	_parent.set_target(_parent.current_room.global_position + Vector3(target.x, 1.0, target.y))
 
 
 func pause() -> void:

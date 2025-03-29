@@ -1,6 +1,13 @@
 extends CooldownSlot
 
 
+func _ready() -> void:
+	super()
+	# set icon according to input map
+	_input_event = "use_active_item"
+	$MarginIcon/IconLabel.init("use_active_item")
+
+
 func _on_item_picked_up(item_inventory: ItemInventory, _current_consumable: bool = false) -> void:
 	if item_inventory is ActiveItemInventory:
 		_item_inventory = item_inventory
