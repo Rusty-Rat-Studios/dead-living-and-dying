@@ -2,12 +2,6 @@ extends GhostState
 
 # delay between ghost decision
 const DECISION_TIME: float = 1.0
-# used to determine whether ghost attacks
-const ATTACK_CHANCE: float = 0.7
-# used to determine whether ghost depossesses
-const DEPOSSESS_CHANCE: float = 0.15
-# used to determine whether ghost waits
-const WAIT_CHANCE: float = 0.35
 # short delay for the ghost to wait when failing to possess an object
 const TARGET_RESET_DELAY: float = 0.1
 # used by attack delay timer to increment/decrement attack delay counter
@@ -50,7 +44,6 @@ func init(parent: CharacterBody3D, state_machine: StateMachine) -> void:
 
 
 func enter() -> void:
-	_parent.speed = _parent.BASE_SPEED
 	_parent.sprite.animation = "active"
 	# enable possessable detector
 	detector_collision_shape.set_deferred("disabled", false)
@@ -166,12 +159,12 @@ func _wait() -> void:
 func _on_decision_timeout() -> void:
 	if is_possessing:
 		var choices: Dictionary[Callable, float] = {
-			_depossess: DEPOSSESS_CHANCE,
-			_wait: WAIT_CHANCE
+			_depossess: _parent.stats.depossess_chance,
+			_wait: _parent.stats.possession_wait_chance
 		}
 		# add option to attack only if attack delay has expired
 		if can_attack:
-			choices[_attack] = ATTACK_CHANCE
+			choices[_attack] = _parent.stats.possession_attack_chance
 		RNG.call_async_weighted_random(choices)
 
 
