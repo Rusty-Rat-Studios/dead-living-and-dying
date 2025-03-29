@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bhpg6bla1mtvu"]
+[gd_scene load_steps=5 format=3 uid="uid://bhpg6bla1mtvu"]
 
 [ext_resource type="Texture2D" uid="uid://wfsvfwswtupe" path="res://src/entity/objects/potted_plant/potted_plant.png" id="1_osyyu"]
+[ext_resource type="PackedScene" uid="uid://bp0ydphecs3iv" path="res://src/common/shadow.tscn" id="2_wpf8c"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wpf8c"]
 transparency = 2
@@ -25,3 +26,7 @@ texture = ExtResource("1_osyyu")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CylinderShape3D_g03hx")
+
+[node name="Shadow" parent="." instance=ExtResource("2_wpf8c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.12344, -0.125644)
+size = Vector3(1, 1, 1)
