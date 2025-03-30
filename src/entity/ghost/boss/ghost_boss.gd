@@ -20,8 +20,6 @@ func _ready() -> void:
 	event_duration_timer.wait_time = EVENT_DURATION
 	event_chance_timer.timeout.connect(_on_event_chance_timer_timeout)
 	event_duration_timer.timeout.connect(_on_event_duration_timer_timeout)
-	
-	SignalBus.player_state_changed.connect(_on_player_state_changed)
 
 
 ###########
@@ -53,7 +51,10 @@ func start_event() -> void:
 	
 	# make ghosts visible
 	for ghost: Ghost in get_tree().get_nodes_in_group("ghosts"):
-		ghost.set_opacity(OPACITY_DYING)
+		ghost.stats.remove_modifier(GhostStats.Stats.OPACITY, "dying")
+		ghost.stats.remove_modifier(GhostStats.Stats.OPACITY, "dead")
+		ghost.stats.add_modifier(GhostStats.Stats.OPACITY, OPACITY_DYING_MODIFIER, OPACITY_DYING_MODIFIER_NAME)
+		ghost.set_opacity()
 		ghost.light_enabled_permanent = true
 		ghost.set_light(LIGHT_ENERGY)
 
@@ -73,6 +74,7 @@ func stop_event() -> void:
 	
 	# reset ghosts visibility based on player state
 	for ghost: Ghost in get_tree().get_nodes_in_group("ghosts"):
+		# call function directly to handle setting opacity to state-appropriate value
 		ghost._on_player_state_changed(PlayerHandler.get_player_state())
 		ghost.light_enabled_permanent = false
 		ghost.set_light(0)
