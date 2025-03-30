@@ -95,9 +95,16 @@ func set_closest_target() -> void:
 	# get all possessable items in the room
 	var possessables: Array = _parent.current_room.possessables_available
 
-	# return to WAITING if no possessables available
+	# change to another state if no possessables available
 	if possessables.is_empty():
-		change_state(GhostStateMachine.States.ATTACKING)
+		# attacking state "is_player_attackable" check: in room and not living
+		if (_parent.player_in_room
+			and (PlayerHandler.get_player_state() == PlayerStateMachine.States.DEAD
+			or PlayerHandler.get_player_state() == PlayerStateMachine.States.DYING)):
+				change_state(GhostStateMachine.States.ATTACKING)
+		else:
+			# ghost cannot possess object or attack player, go to waiting
+			change_state(GhostStateMachine.States.WAITING)
 		return
 	
 	# find nearest possessable and set it as target
