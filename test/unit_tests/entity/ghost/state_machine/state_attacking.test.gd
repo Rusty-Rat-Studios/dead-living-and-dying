@@ -19,7 +19,7 @@ class TestGhostEnterAttackingState:
 		stub(_state_attacking, "change_state").to_do_nothing()
 		_state_attacking._parent.sprite.modulate = Color(0.5, 0.6, 0.7, 0.8)
 		_state_attacking.base_color = Color(0, 0, 0, 0)
-		_state_attacking._parent.speed = 0
+		_state_attacking._parent.stats.speed = 0
 		_state_attacking._parent.at_target = false
 		_state_attacking.attack_range_collision_shape.disabled = true
 		_state_attacking.winding_up = true
@@ -74,7 +74,7 @@ class TestGhostExitAttackingState:
 		_state_attacking._parent.sprite = double(AnimatedSprite3D).new()
 		_state_attacking.attack_range_collision_shape = partial_double(CollisionShape3D).new()
 		_state_attacking.sprite_shaker = double(SpriteShaker).new()
-		_state_attacking._parent.speed = 0
+		_state_attacking._parent.stats.speed = 0
 		_state_attacking.attack_range_collision_shape.disabled = false
 		_state_attacking.base_color = Color(0, 0, 0, 0)
 		_state_attacking._parent.sprite.modulate = Color(0.5, 0.5, 0.5, 1.0)
