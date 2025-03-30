@@ -13,7 +13,7 @@ backlight = Color(1, 1, 1, 1)
 backlight_texture = ExtResource("1_mj8ce")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_41tit"]
-size = Vector3(3.18, 2.39, 1.105)
+size = Vector3(3.8, 2.39, 1.105)
 
 [node name="CardboardBoxesStacked" type="StaticBody3D"]
 
