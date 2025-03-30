@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://bmyu4uefeccim"]
+
+[ext_resource type="Texture2D" uid="uid://blcrit1rsjk6a" path="res://src/entity/objects/cardboard_box/cardboard_box_open.png" id="1_dwvdf"]
+[ext_resource type="PackedScene" uid="uid://c1hur2s8mgagv" path="res://src/possessable/attack/possessable_throwable.tscn" id="2_6sf4y"]
+[ext_resource type="PackedScene" uid="uid://bp0ydphecs3iv" path="res://src/common/shadow.tscn" id="3_6sf4y"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sicie"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("1_dwvdf")
+backlight_enabled = true
+backlight = Color(1, 1, 1, 1)
+backlight_texture = ExtResource("1_dwvdf")
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0f2f8"]
+height = 1.4
+radius = 0.6
+
+[node name="CardboardBoxOpen" type="RigidBody3D"]
+collision_layer = 4
+collision_mask = 5
+lock_rotation = true
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+material_override = SubResource("StandardMaterial3D_sicie")
+cast_shadow = 0
+texture = ExtResource("1_dwvdf")
+
+[node name="Throwable" parent="." instance=ExtResource("2_6sf4y")]
+monitoring = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.105, 0)
+shape = SubResource("CylinderShape3D_0f2f8")
+
+[node name="Shadow" parent="." instance=ExtResource("3_6sf4y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.398296, -0.269965)
+size = Vector3(1.25, 1.25, 1.25)

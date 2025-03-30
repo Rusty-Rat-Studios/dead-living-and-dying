@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://duyse8sywgror"]
+
+[ext_resource type="Texture2D" uid="uid://b15l3foj0kbjn" path="res://src/entity/objects/table/table.png" id="1_11kil"]
+[ext_resource type="PackedScene" uid="uid://bp0ydphecs3iv" path="res://src/common/shadow.tscn" id="2_p3p02"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p3p02"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+specular_mode = 2
+albedo_texture = ExtResource("1_11kil")
+backlight_enabled = true
+backlight = Color(1, 1, 1, 1)
+backlight_texture = ExtResource("1_11kil")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p3p02"]
+size = Vector3(2.44, 2.185, 0.83)
+
+[node name="Table" type="StaticBody3D"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1.365, 0, 0, 0, 1.365, 0, 0, 0, 1.365, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_p3p02")
+cast_shadow = 0
+texture = ExtResource("1_11kil")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.025, -0.035, 0)
+shape = SubResource("BoxShape3D_p3p02")
+
+[node name="Shadow" parent="." instance=ExtResource("2_p3p02")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.551011, 0)
+size = Vector3(2.3, 1.75, 2.3)

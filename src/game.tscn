@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://jlav0m1ndqde"]
+[gd_scene load_steps=50 format=3 uid="uid://jlav0m1ndqde"]
 
 [ext_resource type="Script" uid="uid://br2ou0xf5p2mo" path="res://src/game.gd" id="1_77rk7"]
 [ext_resource type="PackedScene" uid="uid://bbow7knip3g6g" path="res://src/player/player.tscn" id="1_hu241"]
@@ -29,6 +29,13 @@
 [ext_resource type="PackedScene" uid="uid://bsy7ilicbox53" path="res://src/entity/items/holy_water/holy_water_world.tscn" id="24_f1jbl"]
 [ext_resource type="PackedScene" uid="uid://k5kxbl8tsn6d" path="res://src/entity/items/carrot/carrot_world.tscn" id="27_xa8c5"]
 [ext_resource type="PackedScene" uid="uid://c3wmqi8pl2yas" path="res://src/entity/objects/wall_sconce/wall_sconce_forward.tscn" id="28_rbnx6"]
+[ext_resource type="PackedScene" uid="uid://duyse8sywgror" path="res://src/entity/objects/table/table.tscn" id="29_au4ic"]
+[ext_resource type="PackedScene" uid="uid://bjw1p41vnaeve" path="res://src/entity/objects/table/table_and_chairs.tscn" id="30_2m2ji"]
+[ext_resource type="PackedScene" uid="uid://dwfaytjbaixjo" path="res://src/entity/objects/candle_holder/candle_holder.tscn" id="30_noxbr"]
+[ext_resource type="PackedScene" uid="uid://bhpg6bla1mtvu" path="res://src/entity/objects/potted_plant/potted_plant.tscn" id="31_xm868"]
+[ext_resource type="PackedScene" uid="uid://bmyu4uefeccim" path="res://src/entity/objects/cardboard_box/cardboard_box_open.tscn" id="32_3onxw"]
+[ext_resource type="PackedScene" uid="uid://qcl430tspnu1" path="res://src/entity/objects/cardboard_box/cardboard_box_closed.tscn" id="33_ou5k8"]
+[ext_resource type="PackedScene" uid="uid://dtv7i6ecsmj0f" path="res://src/entity/objects/cardboard_box/cardboard_boxes_stacked.tscn" id="34_4lake"]
 
 [sub_resource type="Resource" id="Resource_3y6bj"]
 script = ExtResource("9_xa8c5")
@@ -332,6 +339,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2, -7.96666)
 [node name="Door" parent="WorldGrid/RoomRight" instance=ExtResource("19_vaj68")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.95, 0, 0)
 door_location = SubResource("Resource_ou5k8")
+
+[node name="CandleHolder" parent="WorldGrid/RoomRight" instance=ExtResource("30_noxbr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.85209, 1.93026, 3.30512)
+
+[node name="Table" parent="WorldGrid/RoomRight" instance=ExtResource("29_au4ic")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.85209, 1.16417, 3.2497)
+
+[node name="TableAndChairs" parent="WorldGrid/RoomRight" instance=ExtResource("30_2m2ji")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.223839, 1.23406, 2.36917)
+
+[node name="PottedPlant" parent="WorldGrid/RoomRight" instance=ExtResource("31_xm868")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.83413, 1.29303, -4.98065)
+
+[node name="CardboardBoxOpen" parent="WorldGrid/RoomRight" instance=ExtResource("32_3onxw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.776241, 0)
+
+[node name="CardboardBoxClosed" parent="WorldGrid/RoomRight" instance=ExtResource("33_ou5k8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.844982, -2.31989)
+
+[node name="CardboardBoxesStacked" parent="WorldGrid/RoomRight" instance=ExtResource("34_4lake")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.65042, 1.27098, -5.40839)
 
 [node name="RoomTop" type="Node3D" parent="WorldGrid" groups=["rooms"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -32)
