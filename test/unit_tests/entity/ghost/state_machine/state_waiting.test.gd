@@ -12,6 +12,7 @@ class TestGhostEnterWaitingState:
 	func before_each() -> void:
 		_state_waiting = partial_double(StateWaiting).new()
 		_state_waiting._parent = double(Ghost).new()
+		_state_waiting._parent.stats = double(GhostStats).new()
 		_state_waiting._parent.sprite = double(AnimatedSprite3D).new()
 		_state_waiting._parent.sprite.sprite_frames = GhostSpriteFrames
 		_state_waiting._parent.current_room = double(Room, DOUBLE_STRATEGY.INCLUDE_NATIVE).new()
@@ -23,7 +24,7 @@ class TestGhostEnterWaitingState:
 		])
 		stub(_state_waiting._parent.current_room, "get_room_polygon").to_return(polygon)
 		stub(_state_waiting, "set_random_target").to_do_nothing()
-		_state_waiting._parent.speed = 9999
+		_state_waiting._parent.stats.speed = 9999
 		_state_waiting._parent.sprite.animation = "active"
 		_state_waiting.is_paused = true
 	
@@ -31,7 +32,6 @@ class TestGhostEnterWaitingState:
 	func test_waiting_state_variables_set_correctly() -> void:
 		_state_waiting.enter()
 		
-		assert_eq(_state_waiting._parent.speed, StateWaiting.WAITING_SPEED)
 		assert_eq(_state_waiting._parent.sprite.animation, "idle")
 		assert_eq(_state_waiting.is_paused, false)
 		assert_called(_state_waiting, "set_random_target")
@@ -48,10 +48,11 @@ class TestGhostExitWaitingState:
 	func before_each() -> void:
 		_state_waiting = StateWaiting.new()
 		_state_waiting._parent = double(Ghost).new()
+		_state_waiting._parent.stats = double(GhostStats).new()
 		_state_waiting.pause_timer = double(Timer).new()
 		# _state_waiting._parent.target_pos = Vector3(0, 0, 0)
 		# _state_waiting._parent.global_position = Vector3(1, 1, 1)
-		_state_waiting._parent.speed = 0
+		_state_waiting._parent.stats.speed = 0
 		_state_waiting.is_paused = true
 	
 	
@@ -62,5 +63,4 @@ class TestGhostExitWaitingState:
 		# Test manually (This goes for all GhostStates)
 		# assert_eq(_state_waiting._parent.target_pos, Vector3(1, 1, 1))
 		
-		assert_eq(_state_waiting._parent.speed, _state_waiting._parent.BASE_SPEED)
 		assert_eq(_state_waiting.is_paused, false)

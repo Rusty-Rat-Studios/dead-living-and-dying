@@ -1,12 +1,7 @@
 extends GhostState
 
-const WAITING_SPEED: float = 4.0
 const PAUSE_DURATION_MAX: float = 2.0
 const PAUSE_DURATION_MIN: float = 0.5
-const POSSESS_CHANCE: float = 0.6
-const ATTACK_CHANCE: float = 0.2
-const WAIT_CHANCE: float = 0.1
-const MOVE_CHANCE: float = 0.1
 
 var polygon_point_generator: PolygonPointGenerator # select random points in room to wander to
 
@@ -22,8 +17,6 @@ func _ready() -> void:
 
 
 func enter() -> void:
-	_parent.speed = WAITING_SPEED
-	
 	_parent.sprite.animation = "idle"
 	
 	# dynamically grab region based ghost's current room
@@ -35,7 +28,6 @@ func enter() -> void:
 
 func exit() -> void:
 	super()
-	_parent.speed = _parent.BASE_SPEED
 	is_paused = false
 	pause_timer.stop()
 
@@ -70,10 +62,10 @@ func pause() -> void:
 	
 	# weighted chances for choosing next action
 	var choices: Dictionary[Callable, float] = {
-		_possess: POSSESS_CHANCE,
-		_attack: ATTACK_CHANCE,
-		set_random_target: WAIT_CHANCE,
-		_move: MOVE_CHANCE
+		_possess: _parent.stats.state_possessing_chance,
+		_attack: _parent.stats.state_attacking_chance,
+		set_random_target: _parent.stats.state_waiting_chance,
+		_move: _parent.stats.state_moving_chance
 	}
 	RNG.call_weighted_random(choices)
 

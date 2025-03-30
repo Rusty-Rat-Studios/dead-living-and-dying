@@ -1,9 +1,11 @@
 extends GhostState
 
-const PRE_ATTACK_SPEED: float = 6.0
-const ATTACK_SPEED: float = 8.5
-# speed to move toward/away from player while winding up
-const WINDUP_SPEED: float = 4.0
+# ghost speed before initiating attack
+const SPEED_PRE_ATTACK_MODIFIER: float = 2.0
+# ghost speed after winding up and initiating attack
+const SPEED_ATTACK_MODIFIER: float = 4.5
+const SPEED_PRE_ATTACK_MODIFIER_NAME: String = "pre_attack"
+const SPEED_ATTACK_MODIFIER_NAME: String = "attack"
 
 # how long the shake animation is displayed before attacking
 const ATTACK_WINDUP: float = 1
@@ -39,7 +41,7 @@ func enter() -> void:
 		change_state(GhostStateMachine.States.POSSESSING)
 		return
 	
-	_parent.speed = PRE_ATTACK_SPEED
+	_parent.stats.add_modifier(GhostStats.Stats.SPEED, SPEED_PRE_ATTACK_MODIFIER, SPEED_PRE_ATTACK_MODIFIER_NAME)
 	
 	# reset at_target flag to handle case where previous state reached target
 	# since this flag is used to detect when to exit ATTACKING state
@@ -57,7 +59,8 @@ func enter() -> void:
 
 func exit() -> void:
 	super()
-	_parent.speed = _parent.BASE_SPEED
+	_parent.stats.remove_modifier(GhostStats.Stats.SPEED, SPEED_PRE_ATTACK_MODIFIER_NAME)
+	_parent.stats.remove_modifier(GhostStats.Stats.SPEED, SPEED_ATTACK_MODIFIER_NAME)
 	
 	attack_range_collision_shape.set_deferred("disabled", true)
 	winding_up = false
@@ -106,7 +109,7 @@ func is_player_attackable() -> bool:
 func attack() -> void:
 	# checked in process_state() to pause movement
 	winding_up = true
-	_parent.speed = WINDUP_SPEED
+	_parent.stats.remove_modifier(GhostStats.Stats.SPEED, SPEED_PRE_ATTACK_MODIFIER_NAME)
 	# disable collision area to avoid re-triggering attack if player moved out of area
 	attack_range_collision_shape.set_deferred("disabled", true)
 	
@@ -115,7 +118,7 @@ func attack() -> void:
 	await sprite_shaker.animate(_parent.sprite, ATTACK_WINDUP, ATTACK_SHAKE_MAGNITUDE)
 	
 	winding_up = false
-	_parent.speed = ATTACK_SPEED
+	_parent.stats.add_modifier(GhostStats.Stats.SPEED, SPEED_ATTACK_MODIFIER, SPEED_ATTACK_MODIFIER_NAME)
 	_parent.sprite.animation = "active"
 
 

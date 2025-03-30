@@ -12,6 +12,7 @@ class TestGhostEnterPossessingState:
 	func before_each() -> void:
 		_state_possessing = partial_double(StatePossessing).new()
 		_state_possessing._parent = double(Ghost).new()
+		_state_possessing._parent.stats = double(GhostStats).new()
 		_state_possessing._parent.sprite = double(AnimatedSprite3D).new()
 		_state_possessing._parent.sprite.sprite_frames = GhostSpriteFrames
 		_state_possessing._parent.current_room = double(Room).new()
@@ -23,7 +24,7 @@ class TestGhostEnterPossessingState:
 	func test_possessing_state_variables_set_correctly_player_in_room() -> void:
 		_state_possessing.detector_collision_shape.disabled = true
 		_state_possessing._parent.player_in_room = true
-		_state_possessing._parent.speed = 0
+		_state_possessing._parent.stats.speed = 0
 		_state_possessing._parent.sprite.animation = "idle"
 		_state_possessing.detector_collision_shape.disabled = true
 		_state_possessing.decision_timer.wait_time = 1
@@ -34,7 +35,6 @@ class TestGhostEnterPossessingState:
 		
 		await wait_frames(1) # for set_deferred call
 		
-		assert_eq(_state_possessing._parent.speed, _state_possessing._parent.BASE_SPEED)
 		assert_eq(_state_possessing._parent.sprite.animation, "active")
 		assert_eq(_state_possessing.detector_collision_shape.disabled, false)
 		assert_eq(_state_possessing.decision_timer.wait_time, _state_possessing.DECISION_TIME)
@@ -49,7 +49,7 @@ class TestGhostEnterPossessingState:
 	func test_possessing_state_variables_set_correctly_player_not_in_room() -> void:
 		_state_possessing.detector_collision_shape.disabled = true
 		_state_possessing._parent.player_in_room = false
-		_state_possessing._parent.speed = 0
+		_state_possessing._parent.stats.speed = 0
 		_state_possessing._parent.sprite.animation = "idle"
 		_state_possessing.detector_collision_shape.disabled = true
 		_state_possessing.decision_timer.wait_time = 1
@@ -60,7 +60,6 @@ class TestGhostEnterPossessingState:
 		
 		await wait_frames(1) # for set_deferred call
 		
-		assert_eq(_state_possessing._parent.speed, _state_possessing._parent.BASE_SPEED)
 		assert_eq(_state_possessing._parent.sprite.animation, "active")
 		assert_eq(_state_possessing.detector_collision_shape.disabled, false)
 		assert_eq(_state_possessing.decision_timer.wait_time, _state_possessing.DECISION_TIME)

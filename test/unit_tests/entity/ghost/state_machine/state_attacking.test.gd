@@ -12,13 +12,14 @@ class TestGhostEnterAttackingState:
 	func before_each() -> void:
 		_state_attacking = partial_double(StateAttacking).new()
 		_state_attacking._parent = double(Ghost).new()
+		_state_attacking._parent.stats = double(GhostStats).new()
 		_state_attacking._parent.sprite = double(AnimatedSprite3D).new()
 		_state_attacking._parent.sprite.sprite_frames = GhostSpriteFrames
 		_state_attacking.attack_range_collision_shape = partial_double(CollisionShape3D).new()
 		stub(_state_attacking, "change_state").to_do_nothing()
 		_state_attacking._parent.sprite.modulate = Color(0.5, 0.6, 0.7, 0.8)
 		_state_attacking.base_color = Color(0, 0, 0, 0)
-		_state_attacking._parent.speed = 0
+		_state_attacking._parent.stats.speed = 0
 		_state_attacking._parent.at_target = false
 		_state_attacking.attack_range_collision_shape.disabled = true
 		_state_attacking.winding_up = true
@@ -33,7 +34,8 @@ class TestGhostEnterAttackingState:
 		
 		assert_eq(_state_attacking.base_color, _state_attacking._parent.sprite.modulate)
 		assert_called(_state_attacking, "change_state")
-		assert_ne(_state_attacking._parent.speed, _state_attacking.PRE_ATTACK_SPEED)
+		assert_not_called(_state_attacking._parent.stats, "add_modifier", 
+			[GhostStats.Stats.SPEED, StateAttacking.SPEED_PRE_ATTACK_MODIFIER, StateAttacking.SPEED_PRE_ATTACK_MODIFIER_NAME, -1])
 		assert_ne(_state_attacking.attack_range_collision_shape.disabled, false)
 		assert_ne(_state_attacking.winding_up, false)
 		assert_not_connected(SignalBus, _state_attacking, "player_state_changed")
@@ -49,7 +51,8 @@ class TestGhostEnterAttackingState:
 		
 		assert_eq(_state_attacking.base_color, _state_attacking._parent.sprite.modulate)
 		assert_not_called(_state_attacking, "change_state")
-		assert_eq(_state_attacking._parent.speed, _state_attacking.PRE_ATTACK_SPEED)
+		assert_called(_state_attacking._parent.stats, "add_modifier", 
+			[GhostStats.Stats.SPEED, StateAttacking.SPEED_PRE_ATTACK_MODIFIER, StateAttacking.SPEED_PRE_ATTACK_MODIFIER_NAME, -1])
 		assert_eq(_state_attacking.attack_range_collision_shape.disabled, false)
 		assert_eq(_state_attacking.winding_up, false)
 		assert_connected(SignalBus, _state_attacking, "player_state_changed")
@@ -67,10 +70,11 @@ class TestGhostExitAttackingState:
 	func before_each() -> void:
 		_state_attacking = partial_double(StateAttacking).new()
 		_state_attacking._parent = double(Ghost).new()
+		_state_attacking._parent.stats = double(GhostStats).new()
 		_state_attacking._parent.sprite = double(AnimatedSprite3D).new()
 		_state_attacking.attack_range_collision_shape = partial_double(CollisionShape3D).new()
 		_state_attacking.sprite_shaker = double(SpriteShaker).new()
-		_state_attacking._parent.speed = 0
+		_state_attacking._parent.stats.speed = 0
 		_state_attacking.attack_range_collision_shape.disabled = false
 		_state_attacking.base_color = Color(0, 0, 0, 0)
 		_state_attacking._parent.sprite.modulate = Color(0.5, 0.5, 0.5, 1.0)
@@ -84,7 +88,10 @@ class TestGhostExitAttackingState:
 		
 		await wait_frames(1) # for set_deferred call
 		
-		assert_eq(_state_attacking._parent.speed, _state_attacking._parent.BASE_SPEED)
+		assert_called(_state_attacking._parent.stats, "remove_modifier", 
+			[GhostStats.Stats.SPEED, _state_attacking.SPEED_PRE_ATTACK_MODIFIER_NAME, -1])
+		assert_called(_state_attacking._parent.stats, "remove_modifier", 
+			[GhostStats.Stats.SPEED, _state_attacking.SPEED_ATTACK_MODIFIER_NAME, -1])
 		assert_eq(_state_attacking.attack_range_collision_shape.disabled, true)
 		assert_called(_state_attacking.sprite_shaker, "halt")
 		assert_eq(_state_attacking._parent.sprite.modulate, _state_attacking.base_color)
