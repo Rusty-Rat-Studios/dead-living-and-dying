@@ -35,5 +35,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.105, 0)
 shape = SubResource("CylinderShape3D_0f2f8")
 
 [node name="Shadow" parent="." instance=ExtResource("3_6sf4y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.255622, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.398296, -0.269965)
 size = Vector3(1.25, 1.25, 1.25)
