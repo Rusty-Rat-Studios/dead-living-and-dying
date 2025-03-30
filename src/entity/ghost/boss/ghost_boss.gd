@@ -5,6 +5,12 @@ const EVENT_CHANCE_TIME: float = 5
 const EVENT_CHANCE: float = 0.4
 const EVENT_DURATION: float = 15
 
+const OPACITY_BOSS_MODIFIER: float = 0.6
+const OPACITY_BOSS_MODIFIER_NAME: String = "boss_event"
+
+const STATE_MOVING_CHANCE_MODIFIER: float = -9999
+const STATE_MOVING_CHANCE_MODIFIER_NAME: String = "boss_event"
+
 var event_active: bool = false
 
 @onready var event_chance_timer: Timer = Timer.new()
@@ -39,7 +45,6 @@ func start_event() -> void:
 	print(Time.get_time_string_from_system(), ": BOSS EVENT MAKE SURE TO RUN AND HIDE HAHAHAHAHAHAHAHAHAHAHA")
 	state_machine.change_state(GhostStateMachine.States.WAITING)
 	set_target(current_room.global_position)
-	#SignalBus.attack_event_started.emit(current_room)
 	event_chance_timer.stop()
 	event_duration_timer.start()
 	event_active = true
@@ -49,18 +54,21 @@ func start_event() -> void:
 		door.lock()
 		door.linked_door.lock()
 	
-	# make ghosts visible
 	for ghost: Ghost in get_tree().get_nodes_in_group("ghosts"):
+		# make ghosts in room visibile
 		ghost.stats.remove_modifier(GhostStats.Stats.OPACITY, "dying")
 		ghost.stats.remove_modifier(GhostStats.Stats.OPACITY, "dead")
-		ghost.stats.add_modifier(GhostStats.Stats.OPACITY, OPACITY_DYING_MODIFIER, OPACITY_DYING_MODIFIER_NAME)
+		ghost.stats.add_modifier(GhostStats.Stats.OPACITY, OPACITY_BOSS_MODIFIER, OPACITY_BOSS_MODIFIER_NAME)
 		ghost.set_opacity()
 		ghost.light_enabled_permanent = true
 		ghost.set_light(LIGHT_ENERGY)
+		
+		# prevent ghosts from leaving the boss event room
+		#ghost.stats.add_modifier(GhostStats.Stats.STATE_MOVING_CHANCE, 
+		#	STATE_MOVING_CHANCE_MODIFIER, STATE_MOVING_CHANCE_MODIFIER_NAME)
 
 
 func stop_event() -> void:
-	#SignalBus.attack_event_stopped.emit(current_room)
 	event_duration_timer.stop()
 	event_active = false
 	
@@ -74,6 +82,8 @@ func stop_event() -> void:
 	
 	# reset ghosts visibility based on player state
 	for ghost: Ghost in get_tree().get_nodes_in_group("ghosts"):
+		ghost.stats.remove_modifier(GhostStats.Stats.OPACITY, OPACITY_BOSS_MODIFIER_NAME)
+		#ghost.stats.remove_modifier(GhostStats.Stats.STATE_MOVING_CHANCE, STATE_MOVING_CHANCE_MODIFIER_NAME)
 		# call function directly to handle setting opacity to state-appropriate value
 		ghost._on_player_state_changed(PlayerHandler.get_player_state())
 		ghost.light_enabled_permanent = false
