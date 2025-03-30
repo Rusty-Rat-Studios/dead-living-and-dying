@@ -6,9 +6,6 @@ signal hit
 # i.e. moving through a door
 signal target_reached
 
-# TODO: remove when stats implemented across all states
-const BASE_SPEED: float = 4.0
-# TODO: remove when stats implemented across all states
 const ATTACK_DELAY: float = 0.3
 # time to tween light visibility when ghost starts/stops moving
 const LIGHT_FADE_DURATION: float = 0.3
@@ -38,7 +35,6 @@ var light_enabled_permanent: bool = false
 @onready var sprite: AnimatedSprite3D = $AnimatedSprite3D
 @onready var light: OmniLight3D = $OmniLight3D
 
-@onready var speed: float = BASE_SPEED
 @onready var current_room: Room = get_parent()
 @onready var player_in_room: bool = false
 @onready var target_pos: Vector3 = Vector3.ZERO
@@ -110,7 +106,7 @@ func move_to_target(delta: float) -> void:
 	target_pos = Vector3(target_pos.x, 1, target_pos.z)
 	var distance_to_target: float = global_position.distance_squared_to(target_pos)
 	
-	if distance_to_target < speed * delta:
+	if distance_to_target < stats.speed * delta:
 		_stop_at_target_and_emit()
 	else:
 		at_target = false
@@ -152,7 +148,7 @@ func _on_player_entered_room(room: Node3D) -> void:
 	# regardless of state, attack the player if they enter the room in DEAD state
 	if player_in_room and PlayerHandler.get_player_state() == PlayerStateMachine.States.DEAD:
 		# add delay to allow player breathing room when entering the room
-		await Utility.delay(stats.attack_delay)
+		await Utility.delay(ATTACK_DELAY)
 		state_machine.change_state(state_machine.States.ATTACKING)
 
 

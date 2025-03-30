@@ -14,11 +14,12 @@ func _ready() -> void:
 func init(parent: CharacterBody3D, state_machine: StateMachine) -> void:
 	super(parent, state_machine)
 	collision_shape = _parent.hitbox.get_node("CollisionShape3D")
-	stun_timer.wait_time = _parent.stats.stun_duration
 
 
 func enter() -> void:
 	_parent.sprite.animation = "idle"
+	# set in enter function to capture any changes
+	stun_timer.wait_time = _parent.stats.stun_duration
 	stun_timer.start()
 	collision_shape.set_deferred("disabled", true)
 
