@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://dvc1unlr5pme3" path="res://src/ui/item_popup.tscn" id="8_diyc5"]
 [ext_resource type="PackedScene" uid="uid://d23ipl17cebgs" path="res://src/ui/minimap/minimap.tscn" id="9_pa1oa"]
 
-
 [node name="UI" type="CanvasLayer"]
 
 [node name="DyingScreenEffect" type="TextureRect" parent="."]
