@@ -1,0 +1,22 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://d22dd45o5or8i"]
+
+[ext_resource type="FontFile" uid="uid://c16563s6uqwuy" path="res://src/ui/resources/oswald_font/Oswald-VariableFont_wght.ttf" id="1_r7dtj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r7dtj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1r2q7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i87un"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xrjhr"]
+
+[resource]
+default_font = ExtResource("1_r7dtj")
+Button/colors/font_hover_color = Color(0.774156, 0.774157, 0, 1)
+Button/colors/font_hover_pressed_color = Color(0.449965, 0.449965, 7.70092e-07, 1)
+Button/colors/icon_focus_color = Color(0.772549, 0.772549, 0, 1)
+Button/colors/icon_pressed_color = Color(0.45098, 0.45098, 0, 1)
+Button/styles/focus = SubResource("StyleBoxEmpty_r7dtj")
+Button/styles/hover = SubResource("StyleBoxEmpty_1r2q7")
+Button/styles/normal = SubResource("StyleBoxEmpty_i87un")
+Button/styles/pressed = SubResource("StyleBoxEmpty_xrjhr")
