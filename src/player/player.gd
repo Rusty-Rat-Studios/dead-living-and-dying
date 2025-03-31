@@ -126,4 +126,5 @@ func _on_key_item_picked_up() -> void:
 
 
 func _on_key_item_dropped(_key_item: KeyItemInventory) -> void:
-	print("player detected key item dropped")
+	player_stats.stat_update_remove(PlayerStats.Stats.LIGHT_OMNI_RANGE, "key_item")
+	player_stats.stat_update_remove(PlayerStats.Stats.LIGHT_ENERGY, "key_item")
