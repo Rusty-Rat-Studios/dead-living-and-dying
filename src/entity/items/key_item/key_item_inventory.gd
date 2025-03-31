@@ -1,11 +1,6 @@
 class_name KeyItemInventory
 extends ItemInventory
 
-# TODO: update and apply to relevant value
-# could be ghost aggression
-# could be player light range
-const DEBUFF_MODIFIER: float = 0.25
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
