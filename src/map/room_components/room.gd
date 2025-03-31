@@ -114,7 +114,6 @@ func _on_player_discovered_room() -> void:
 
 func _on_key_item_dropped(key_item: KeyItemInventory) -> void:
 	if (player_in_room):
-		print("room ", self.name, " spawning key item")
 		var key_item_world: KeyItemWorld = key_item.world_resource.instantiate()
 		add_child(key_item_world)
 		key_item_world.global_position = PlayerHandler.get_player().global_position
