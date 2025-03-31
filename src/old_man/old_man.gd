@@ -3,6 +3,8 @@ extends StaticBody3D
 
 var player_has_key_item: bool = false
 
+@onready var dialogue: DialoguePopup = get_tree().root.get_node("Game/UI/DialoguePopup")
+
 func _ready() -> void:
 	$PlayerDetector.body_entered.connect(_on_player_entered)
 	$PlayerDetector.body_exited.connect(_on_player_exited)
@@ -21,11 +23,8 @@ func reset() -> void:
 
 func _on_player_entered(_player: Player) -> void:
 	if PlayerHandler.get_player_state() != PlayerStateMachine.States.DEAD:
-		if player_has_key_item:
-			$Interactable.display_message("[E] Give [KEY_ITEM]")
-			$Interactable.enabled = true
-		else:
-			$Interactable.display_message("Bring me the [KEY ITEM]")
+		$Interactable.display_message("[E] Talk")
+		$Interactable.enabled = true
 
 
 func _on_player_exited(_player: Player) -> void:
@@ -34,8 +33,10 @@ func _on_player_exited(_player: Player) -> void:
 
 
 func _on_interaction(input_name: String) -> void:
-	if input_name == "interact" and player_has_key_item:
-		SignalBus.level_complete.emit()
+	print("dialogue ", dialogue)
+	dialogue.show_dialogue()
+	#if input_name == "interact" and player_has_key_item:
+	#	SignalBus.level_complete.emit()
 
 
 func _on_key_item_picked_up() -> void:
