@@ -19,12 +19,13 @@ func _ready() -> void:
 		print("\t", response.text)
 	
 	responses[-1].pressed.connect(_on_close_pressed)
-	show_dialogue()
+	hide()
 
 
 func show_dialogue() -> void:
 	visible = true
 	get_tree().paused = true
+	responses[0].grab_focus()
 
 
 func hide_dialogue() -> void:

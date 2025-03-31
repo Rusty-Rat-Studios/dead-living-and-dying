@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cp7202hwhpcd5"]
+[gd_scene load_steps=11 format=3 uid="uid://cp7202hwhpcd5"]
 
 [ext_resource type="Texture2D" uid="uid://chry31axu0hdv" path="res://src/player/dying.png" id="1_gycre"]
 [ext_resource type="Script" uid="uid://b4yg822foka8j" path="res://src/ui/dying_screen_effect.gd" id="2_pa1oa"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bwmbngtw81o3y" path="res://src/ui/debug_console.tscn" id="7_os0ka"]
 [ext_resource type="PackedScene" uid="uid://dvc1unlr5pme3" path="res://src/ui/item_popup.tscn" id="8_diyc5"]
 [ext_resource type="PackedScene" uid="uid://d23ipl17cebgs" path="res://src/ui/minimap/minimap.tscn" id="9_pa1oa"]
+[ext_resource type="PackedScene" uid="uid://mrasucg8bfmi" path="res://src/ui/dialogue_popup.tscn" id="10_1mh4k"]
 
 [node name="UI" type="CanvasLayer"]
 
@@ -51,3 +52,5 @@ visible = false
 [node name="ItemPopup" parent="." instance=ExtResource("8_diyc5")]
 
 [node name="Minimap" parent="." instance=ExtResource("9_pa1oa")]
+
+[node name="DialoguePopup" parent="." instance=ExtResource("10_1mh4k")]

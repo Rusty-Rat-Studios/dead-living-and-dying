@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://mrasucg8bfmi"]
+[gd_scene load_steps=9 format=3 uid="uid://mrasucg8bfmi"]
 
 [ext_resource type="Script" uid="uid://lup3uw1dq3sk" path="res://src/ui/dialogue_popup.gd" id="1_4exln"]
 [ext_resource type="Texture2D" uid="uid://dpriohnhnc5tw" path="res://src/ui/resources/border-color.png" id="2_ad7xg"]
 [ext_resource type="Texture2D" uid="uid://bqhg7cexeb2s2" path="res://src/old_man/old_man_portrait.png" id="3_0llid"]
 [ext_resource type="Theme" uid="uid://d22dd45o5or8i" path="res://src/ui/resources/dialogue_responses.tres" id="4_0fa2r"]
+[ext_resource type="Script" uid="uid://b3ic7s4qm7vmv" path="res://src/ui/button_dialogue.gd" id="5_4exln"]
 
 [sub_resource type="Gradient" id="Gradient_7yfi4"]
 offsets = PackedFloat32Array(0.576389, 1)
@@ -89,12 +90,22 @@ alignment = 2
 
 [node name="Response1" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/Dialogue/Responses"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../CloseDialogue")
+focus_neighbor_bottom = NodePath("../CloseDialogue")
+focus_next = NodePath("../CloseDialogue")
+focus_previous = NodePath("../CloseDialogue")
 theme = ExtResource("4_0fa2r")
 text = "Default Response Text"
 alignment = 0
+script = ExtResource("5_4exln")
 
 [node name="CloseDialogue" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/Dialogue/Responses"]
 layout_mode = 2
+focus_neighbor_top = NodePath("../Response1")
+focus_neighbor_bottom = NodePath("../Response1")
+focus_next = NodePath("../Response1")
+focus_previous = NodePath("../Response1")
 theme = ExtResource("4_0fa2r")
 text = "Default Close Dialogue Text"
 alignment = 0
+script = ExtResource("5_4exln")
