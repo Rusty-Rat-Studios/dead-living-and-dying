@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://mrasucg8bfmi"]
+[gd_scene load_steps=9 format=3 uid="uid://mrasucg8bfmi"]
 
 [ext_resource type="Script" uid="uid://lup3uw1dq3sk" path="res://src/ui/dialogue_popup.gd" id="1_4exln"]
 [ext_resource type="Texture2D" uid="uid://dpriohnhnc5tw" path="res://src/ui/resources/border-color.png" id="2_ad7xg"]
 [ext_resource type="Texture2D" uid="uid://bqhg7cexeb2s2" path="res://src/old_man/old_man_portrait.png" id="3_0llid"]
 [ext_resource type="Theme" uid="uid://d22dd45o5or8i" path="res://src/ui/resources/dialogue_responses.tres" id="4_0fa2r"]
+[ext_resource type="Theme" uid="uid://casdoijkjemc2" path="res://src/ui/resources/menu_theme.tres" id="4_4exln"]
 
 [sub_resource type="Gradient" id="Gradient_7yfi4"]
 offsets = PackedFloat32Array(0.576389, 1)
@@ -71,17 +72,22 @@ texture = ExtResource("3_0llid")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="Responses" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Dialogue" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer/Responses"]
+[node name="OldManDialogue" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Dialogue"]
 layout_mode = 2
-text = "HERE IS DIALOGUE TEXT"
-fit_content = true
-scroll_active = false
+theme = ExtResource("4_4exln")
+text = "Did you find the [KEY ITEM]?"
 
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/Responses"]
+[node name="Responses" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Dialogue"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 2
+
+[node name="CloseDialogue" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/Dialogue/Responses"]
 layout_mode = 2
 theme = ExtResource("4_0fa2r")
-text = "Default Response"
+text = "Default Close Dialogue Text"
+alignment = 0
