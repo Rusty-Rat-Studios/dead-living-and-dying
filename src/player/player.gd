@@ -31,6 +31,7 @@ func _ready() -> void:
 	light_omni.light_color = Color("GOLDENROD")
 	
 	SignalBus.item_picked_up.connect(_on_item_picked_up)
+	SignalBus.key_item_dropped.connect(_on_key_item_dropped)
 
 
 func _process(_delta: float) -> void:
@@ -111,7 +112,12 @@ func get_key_item_or_null() -> KeyItemInventory:
 func _on_item_picked_up(item: ItemInventory, current_consumable: bool = false) -> void:
 	if item is KeyItemInventory:
 		SignalBus.key_item_picked_up.emit()
+		print("player detected key item pickup")
 	if current_consumable == false:
 		$Inventory.add_child(item)
 	# ensure item position is directly on player
 	item.position = Vector3.ZERO
+
+
+func _on_key_item_dropped(_key_item: KeyItemInventory) -> void:
+	print("player detected key item dropped")

@@ -13,11 +13,5 @@ func _ready() -> void:
 
 
 func drop() -> void:
-	SignalBus.key_item_dropped.emit()
-	# KeyItemWorld sets its starting position from the value saved in game.gd
-	# when _ready is called -> i.e. after .instantiate()
-	var world_item: ItemWorld = world_resource.instantiate()
-	get_node("/root/Game").add_child(world_item)
-	
-	
+	SignalBus.key_item_dropped.emit(self)
 	queue_free()

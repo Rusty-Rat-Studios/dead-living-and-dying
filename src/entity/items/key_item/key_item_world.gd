@@ -1,3 +1,4 @@
+class_name KeyItemWorld
 extends ItemWorld
 
 

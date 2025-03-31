@@ -25,6 +25,7 @@ func _ready() -> void:
 	$Floor/PlayerDetector.body_entered.connect(_on_player_entered_room)
 	$Floor/PlayerDetector.body_exited.connect(_on_player_exited_room)
 	player_discovered_room.connect(_on_player_discovered_room)
+	SignalBus.key_item_dropped.connect(_on_key_item_dropped)
 	visible = false
 
 
@@ -109,3 +110,13 @@ func _on_player_discovered_room() -> void:
 		$/root/Game/MinimapObjects.add_child(room_icon)
 		room_icon.global_position = global_position
 		room_icon.get_child(0).texture = room_information.room_icon
+
+
+func _on_key_item_dropped(key_item: KeyItemInventory) -> void:
+	if (player_in_room):
+		print("room ", self.name, " spawning key item")
+		var key_item_world: KeyItemWorld = key_item.world_resource.instantiate()
+		add_child(key_item_world)
+		key_item_world.global_position = PlayerHandler.get_player().global_position
+		key_item_world.global_position.y = 1
+		
