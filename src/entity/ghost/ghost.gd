@@ -63,6 +63,10 @@ func _ready() -> void:
 	# attach signal to update ghost visibility based on player state
 	SignalBus.player_state_changed.connect(_on_player_state_changed, CONNECT_DEFERRED)
 	
+	# key item stat modifiers added/removed when picked up
+	SignalBus.key_item_picked_up.connect(_on_key_item_picked_up)
+	SignalBus.key_item_dropped.connect(_on_key_item_dropped)
+	
 	movement_timeout_timer.timeout.connect(_stop_at_target_and_emit)
 	
 	# defer connection to allow state-specific logic to execute before changing states
@@ -180,3 +184,23 @@ func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
 			light_enabled = false
 	
 	set_opacity()
+
+
+func _on_key_item_picked_up() -> void:
+	print("ghost key item")
+	stats.add_modifier(GhostStats.Stats.SPEED, 0.5, "key_item") # move faster
+	stats.add_modifier(GhostStats.Stats.WINDUP_DURATION, -0.2, "key_item") # shorter delay to attack
+	stats.add_modifier(GhostStats.Stats.DECISION_TIME, -0.3, "key_item") # shorter decision time
+	stats.add_modifier(GhostStats.Stats.STATE_POSSESSING_CHANCE, 0.2, "key_item") # higher chance to possess
+	stats.add_modifier(GhostStats.Stats.POSSESSION_ATTACK_CHANCE, 0.2, "key_item") # higher chance of possess attack
+	stats.add_modifier(GhostStats.Stats.STATE_ATTACKING_CHANCE, 0.2, "key_item") # higher chance to attack
+
+
+func _on_key_item_dropped(_key_item: KeyItemInventory) -> void:
+	print("ghost key item drop")
+	stats.remove_modifier(GhostStats.Stats.SPEED, "key_item")
+	stats.remove_modifier(GhostStats.Stats.WINDUP_DURATION, "key_item")
+	stats.remove_modifier(GhostStats.Stats.DECISION_TIME, "key_item")
+	stats.remove_modifier(GhostStats.Stats.STATE_POSSESSING_CHANCE, "key_item")
+	stats.remove_modifier(GhostStats.Stats.POSSESSION_ATTACK_CHANCE, "key_item") 
+	stats.remove_modifier(GhostStats.Stats.STATE_ATTACKING_CHANCE, "key_item")
