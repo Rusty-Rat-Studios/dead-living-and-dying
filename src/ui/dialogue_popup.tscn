@@ -18,16 +18,18 @@ fill_from = Vector2(0.5, 0.5)
 texture = SubResource("GradientTexture2D_ytrdg")
 
 [node name="DialoguePopup" type="MarginContainer"]
-anchors_preset = 7
+process_mode = 2
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
+anchor_bottom = 0.5
 offset_left = -268.0
-offset_top = -248.0
+offset_top = -124.0
 offset_right = 268.0
+offset_bottom = 124.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
 mouse_filter = 0
 script = ExtResource("1_4exln")
 
@@ -84,6 +86,12 @@ text = "Did you find the [KEY ITEM]?"
 layout_mode = 2
 size_flags_vertical = 3
 alignment = 2
+
+[node name="Response1" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/Dialogue/Responses"]
+layout_mode = 2
+theme = ExtResource("4_0fa2r")
+text = "Default Response Text"
+alignment = 0
 
 [node name="CloseDialogue" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/Dialogue/Responses"]
 layout_mode = 2
