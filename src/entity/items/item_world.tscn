@@ -1,9 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://bslonn3bn1m6s"]
+[gd_scene load_steps=10 format=3 uid="uid://bslonn3bn1m6s"]
 
 [ext_resource type="Script" uid="uid://ckhpywxrqn5nh" path="res://src/entity/items/item_world.gd" id="1_12ywg"]
 [ext_resource type="PackedScene" uid="uid://cnbim08e5mqrn" path="res://src/ui/interactable.tscn" id="2_nvmey"]
 [ext_resource type="PackedScene" uid="uid://bp0ydphecs3iv" path="res://src/common/shadow.tscn" id="3_116lv"]
-[ext_resource type="Script" uid="uid://db2v7j1wnkduq" path="res://src/common/sprite_backlight.gd" id="3_e25w4"]
+[ext_resource type="Shader" uid="uid://cfosdmigwltdh" path="res://src/entity/items/item_world_shader.tres" id="3_s5php"]
+[ext_resource type="Texture2D" uid="uid://dnacl3n2x6ttj" path="res://src/entity/items/item_vfx/T_VFX_simple_1.png" id="4_8c8mh"]
+[ext_resource type="Script" uid="uid://ms0lk5wn5fdt" path="res://src/entity/items/item_sprite_backlight.gd" id="5_8c8mh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8c8mh"]
+render_priority = -1
+shader = ExtResource("3_s5php")
+shader_parameter/MainColor = Color(0.819152, 0.748705, 0.954583, 1)
+shader_parameter/TransparencyTexture = ExtResource("4_8c8mh")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fj23q"]
 
@@ -16,10 +24,10 @@ script = ExtResource("1_12ywg")
 [node name="Interactable" parent="." instance=ExtResource("2_nvmey")]
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
+material_overlay = SubResource("ShaderMaterial_8c8mh")
 billboard = 2
-shaded = true
 texture = SubResource("CompressedTexture2D_fj23q")
-script = ExtResource("3_e25w4")
+script = ExtResource("5_8c8mh")
 
 [node name="PlayerDetector" type="Area3D" parent="."]
 collision_layer = 0

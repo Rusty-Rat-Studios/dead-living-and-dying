@@ -1,3 +1,4 @@
+class_name SpriteBacklight
 extends Sprite3D
 
 var material: StandardMaterial3D = StandardMaterial3D.new()
