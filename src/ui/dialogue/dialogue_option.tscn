@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://buhf1dcnx405x"]
+
+[ext_resource type="Theme" uid="uid://d22dd45o5or8i" path="res://src/ui/resources/dialogue_responses.tres" id="1_rldnc"]
+[ext_resource type="Script" uid="uid://b3ic7s4qm7vmv" path="res://src/ui/dialogue/dialogue_option.gd" id="2_7qy0t"]
+
+[node name="CloseDialogue" type="Button"]
+size_flags_horizontal = 4
+theme = ExtResource("1_rldnc")
+text = "Default Close Dialogue Text"
+script = ExtResource("2_7qy0t")
