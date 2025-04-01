@@ -57,6 +57,7 @@ func animate_fall() -> void:
 	# ensure corpse sprite is aligned to player sprite
 	sprite_base.global_position = get_parent().sprite_torso.global_position
 	sprite_base.position.y -= SPRITE_OFFSET
+	sprite.flip_h = PlayerHandler.get_player().sprite_torso.flip_h
 	
 	# rotate along x-axis to show sprite as "falling" backwards
 	fall_tween = create_tween().set_ease(Tween.EASE_IN).set_parallel()
@@ -66,6 +67,10 @@ func animate_fall() -> void:
 
 
 func animate_revive() -> void:
+	# force player direction to match corpse direction
+	PlayerHandler.get_player().sprite_torso.flip_h = sprite.flip_h
+	
+	# inverse of fall animation
 	fall_tween = create_tween().set_ease(Tween.EASE_OUT).set_parallel()
 	fall_tween.tween_property(sprite_base, "rotation:x", 0, FALL_DURATION)
 	fall_tween.tween_property(sprite, "modulate", Color.WHITE, FALL_DURATION)
