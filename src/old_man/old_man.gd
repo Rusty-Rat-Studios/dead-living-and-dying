@@ -10,7 +10,7 @@ var dialogue: Dictionary[String, Dictionary] = {
 		},
 	"crucifix": {
 		"prompt": ("I wanted you to have this old crucifix of mine. I've had it for a long time\n" +
- 			"but I'd like you to take it as a 'thank you' for taking care of me. I hope it helps\n" +
+			"but I'd like you to take it as a 'thank you' for taking care of me. I hope it helps\n" +
 			"you feel safe in this old home."),
 		"responses": ["Thank you, I will take good care of it!NEXT"],
 		"next_stage": "fetch"
@@ -24,7 +24,7 @@ var dialogue: Dictionary[String, Dictionary] = {
 	"return": {
 		"prompt": "Have you found my [KEY_ITEM] yet?",
 		"responses": [
-			"Yes, I've got it here.NEXT",
+			"Yes, I've got it here.NEXT KEY_ITEM",
 			"Sorry, I haven't found it yet Grandpa.EXIT"
 			],
 		"next_stage": "return_success"
@@ -39,9 +39,9 @@ var dialogue: Dictionary[String, Dictionary] = {
 
 # reference to key item inventory instance - includes description, name, etc
 var _key_item: KeyItemInventory
-var player_has_key_item: bool = false
+var _player_has_key_item: bool = false
 
-var dialogue_stage: String
+var _dialogue_stage: String
 
 @onready var dialogue_popup: DialoguePopup = get_tree().root.get_node("Game/UI/DialoguePopup")
 
@@ -55,7 +55,7 @@ func _ready() -> void:
 	
 	$Interactable.inputs = ["interact"]
 	
-	dialogue_stage = "intro"
+	_dialogue_stage = "intro"
 	
 	reset()
 
@@ -69,7 +69,7 @@ func init(key_item: KeyItemInventory) -> void:
 func reset() -> void:
 	$Interactable.hide_message()
 	$Interactable.enabled = false
-	dialogue_stage = "intro"
+	_dialogue_stage = "intro"
 
 
 func _on_player_entered(_player: Player) -> void:
@@ -84,21 +84,22 @@ func _on_player_exited(_player: Player) -> void:
 
 
 func _on_interaction(input_name: String) -> void:
-	dialogue_popup.show_dialogue(dialogue[dialogue_stage])
+	if input_name == "interact":
+		dialogue_popup.show_dialogue(dialogue[_dialogue_stage])
 	#if input_name == "interact" and player_has_key_item:
 	#	SignalBus.level_complete.emit()
 
 
 func _on_response_selected(next_stage: String) -> void:
 	print("response selected:", next_stage)
-	dialogue_stage = next_stage
+	_dialogue_stage = next_stage
 	if dialogue_popup.visible:
-		dialogue_popup.show_dialogue(dialogue[dialogue_stage])
+		dialogue_popup.show_dialogue(dialogue[_dialogue_stage])
 
 
 func _on_key_item_picked_up() -> void:
-	player_has_key_item = true
+	_player_has_key_item = true
 
 
 func _on_key_item_dropped() -> void:
-	player_has_key_item = false
+	_player_has_key_item = false

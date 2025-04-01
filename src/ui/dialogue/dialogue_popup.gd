@@ -6,6 +6,7 @@ signal next_stage(next_dialogue_stage: String)
 var dialogue_container: VBoxContainer
 var old_man_dialogue: Label
 var player_responses: VBoxContainer
+var player_has_key_item: bool
 
 
 func _ready() -> void:
@@ -13,6 +14,10 @@ func _ready() -> void:
 	dialogue_container = $MarginContainer/VBoxContainer/HBoxContainer/Dialogue
 	old_man_dialogue = dialogue_container.get_node("OldManDialogue")
 	player_responses = dialogue_container.get_node("Responses")
+	
+	SignalBus.key_item_picked_up.connect(_on_key_item_picked_up)
+	SignalBus.key_item_dropped.connect(_on_key_item_dropped)
+	
 	hide()
 
 
@@ -44,6 +49,10 @@ func populate_dialogue_options(dialogue: Dictionary) -> void:
 	var buttons: Array[DialogueOption]
 	
 	for response: String in dialogue["responses"]:
+		# skip response if it relates to the key item and it is not in the player's inventory
+		if response.contains("KEY_ITEM") and not player_has_key_item:
+			continue
+		
 		var dialogue_option: DialogueOption = DialogueOption.new()
 		# check if the response has a flag (text at end of string) for EXIT or NEXT
 		# which indicate if the option closes or advances the dialogue, respectively
@@ -54,6 +63,8 @@ func populate_dialogue_options(dialogue: Dictionary) -> void:
 		if response.contains("NEXT"):
 			response = response.replace("NEXT", "")
 			dialogue_option.pressed.connect(_on_dialogue_next.bind(dialogue["next_stage"]), CONNECT_ONE_SHOT)
+		if response.contains("KEY_ITEM"):
+			response = response.replace("KEY_ITEM", "")
 		dialogue_option.text = response
 		player_responses.add_child(dialogue_option)
 		
@@ -83,3 +94,11 @@ func _on_close_pressed() -> void:
 
 func _on_dialogue_next(next_dialogue_stage: String) -> void:
 	next_stage.emit(next_dialogue_stage)
+
+
+func _on_key_item_picked_up() -> void:
+	player_has_key_item = true
+
+
+func _on_key_item_dropped() -> void:
+	player_has_key_item = false
