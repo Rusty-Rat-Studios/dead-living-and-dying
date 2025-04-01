@@ -23,8 +23,8 @@ const BASE_AREA_SIZE: float = 1.0
 
 # base values used for light range and strength
 # additive
-const BASE_LIGHT_OMNI_RANGE: float = 6.0
-const BASE_LIGHT_SPOT_RANGE: float = 10.0
+const BASE_LIGHT_OMNI_RANGE: float = 8.0
+const BASE_LIGHT_SPOT_RANGE: float = 18.0
 const BASE_LIGHT_ENERGY: float = 1.0
 
 var stat_modifier_speed: Dictionary[String, float] = {}
