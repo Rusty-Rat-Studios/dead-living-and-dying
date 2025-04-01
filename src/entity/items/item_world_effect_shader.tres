@@ -1,7 +1,7 @@
 [gd_resource type="VisualShader" load_steps=19 format=3 uid="uid://cfosdmigwltdh"]
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_jvrxf"]
-size = Vector2(2371, 1588)
+size = Vector2(2169, 1024)
 title = "Blinker"
 attached_nodes = PackedInt32Array(5, 2, 3, 9, 7, 6, 8, 11)
 
@@ -189,7 +189,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-1013.14, -175.818)
 flags/unshaded = true
 flags/shadows_disabled = true
 nodes/vertex/2/node = SubResource("VisualShaderNodeInput_6gxrr")
