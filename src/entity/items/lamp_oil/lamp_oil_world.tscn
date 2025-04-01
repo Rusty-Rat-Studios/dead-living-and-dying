@@ -1,12 +1,32 @@
-[gd_scene load_steps=4 format=3 uid="uid://dxrbbho8wlerh"]
+[gd_scene load_steps=6 format=3 uid="uid://dxrbbho8wlerh"]
 
 [ext_resource type="PackedScene" uid="uid://bslonn3bn1m6s" path="res://src/entity/items/item_world.tscn" id="1_f5fxc"]
 [ext_resource type="PackedScene" uid="uid://bgtj8y8ilr3h3" path="res://src/entity/items/lamp_oil/lamp_oil_inventory.tscn" id="2_apvme"]
+[ext_resource type="Shader" uid="uid://bqm7xmu54nr45" path="res://src/entity/items/item_world_shader.gdshader" id="3_17mke"]
 [ext_resource type="Texture2D" uid="uid://don6jkufvlqg3" path="res://src/entity/items/lamp_oil/lamp_oil.png" id="3_agrf5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8r8gl"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_17mke")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("3_agrf5")
+shader_parameter/alpha_scissor_threshold = 0.5
+shader_parameter/albedo_texture_size = Vector2i(160, 160)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
 
 [node name="LampOilWorld" instance=ExtResource("1_f5fxc")]
 inventory_resource = ExtResource("2_apvme")
 
 [node name="Sprite3D" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+material_overlay = SubResource("ShaderMaterial_8r8gl")
 texture = ExtResource("3_agrf5")
