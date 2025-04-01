@@ -9,15 +9,15 @@ var dialogue: Dictionary[String, Dictionary] = {
 		"next_stage": "crucifix"
 		},
 	"crucifix": {
-		"prompt": ("I wanted you to have this old crucifix of mine. I've had it for a long time
- 			but I'd like you to take it as a 'thank you' for taking care of me. I hope it helps 
-			you feel safe in this old home."),
+		"prompt": ("I wanted you to have this old crucifix of mine. I've had it for a long time\n" +
+ 			"but I'd like you to take it as a 'thank you' for taking care of me. I hope it helps\n" +
+			"you feel safe in this old home."),
 		"responses": ["Thank you, I will take good care of it!NEXT"],
 		"next_stage": "fetch"
 		},
 	"fetch": {
-		"prompt": ("I've been missing my [KEY_ITEM], it seems I've misplaced it. Could you be a dear and go 
-			find it for me? It should be somewhere in this blasted maze of a house."),
+		"prompt": ("I've been missing my [KEY_ITEM], it seems I've misplaced it. Could you be a\n" +
+		"dear and go find it for me? It should be somewhere in this blasted maze of a house."),
 		"responses": ["Of course, I'll be back with it as soon as I can.NEXT EXIT"],
 		"next_stage": "return"
 	},
@@ -30,8 +30,8 @@ var dialogue: Dictionary[String, Dictionary] = {
 		"next_stage": "return_success"
 	},
 	"return_success": {
-		"prompt": "Oh how wonderful, thank you very much! Here, I found this while you were gone and I
-			think you should have it. Go on, take it.",
+		"prompt": "Oh how wonderful, thank you very much! Here, I found this while you were gone\n" +
+		"and I think you should have it. Go on, take it.",
 		"responses": ["Thank you!EXIT"]
 	}
 }

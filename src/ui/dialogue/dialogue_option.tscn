@@ -9,4 +9,5 @@ size_flags_horizontal = 4
 theme = ExtResource("1_rldnc")
 text = "Default Close Dialogue Text"
 flat = true
+autowrap_mode = 2
 script = ExtResource("2_7qy0t")
