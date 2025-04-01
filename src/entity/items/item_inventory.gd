@@ -7,10 +7,11 @@ var display_name: String
 var input_event: String
 var description: String
 var texture: Texture2D
+const DELAY_DURATION: int = 1
 
 func drop() -> void:
 	var world_item: ItemWorld = world_resource.instantiate()
 	get_node("/root/Game").add_child(world_item)
 	world_item.position = PlayerHandler.get_player().position + Vector3(0, -0.5, 0)
-	world_item.disable_interactable(1)
+	world_item.disable_interactable(DELAY_DURATION)
 	queue_free()

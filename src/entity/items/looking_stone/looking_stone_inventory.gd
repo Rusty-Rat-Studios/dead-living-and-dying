@@ -5,6 +5,8 @@ const NAME: String = "looking_stone"
 const START_RADIUS: float = 0.5
 const END_RADIUS: float = 20
 const STARTING_ALPHA: float = 0.686
+const TWEEN_DURATION: int = 1
+const COLLISION_OFFSET: float = 0.001
 
 var cooldown_active: bool = false 
 var player: Node = PlayerHandler.get_player()
@@ -34,10 +36,10 @@ func _input(event: InputEvent) -> void:
 func use() -> void:
 	if cooldown_active:
 		return
-	$Hitbox/CollisionShape3D.shape.radius = START_RADIUS * player.player_stats.area_size
-	$Hitbox/MeshInstance3D.mesh.outer_radius = START_RADIUS * player.player_stats.area_size
-	$Hitbox/MeshInstance3D.mesh.inner_radius = $Hitbox/MeshInstance3D.mesh.outer_radius - 0.001
-	$Hitbox/MeshInstance3D.mesh.material.albedo_color.a = STARTING_ALPHA
+	$Hitbox/CollisionShape3D.shape.radius = START_RADIUS * player.player_stats.area_size + COLLISION_OFFSET
+	$Hitbox/MeshInstance3D.mesh.outer_radius = START_RADIUS * player.player_stats.area_size + COLLISION_OFFSET
+	$Hitbox/MeshInstance3D.mesh.inner_radius = $Hitbox/MeshInstance3D.mesh.outer_radius - 0.001 + COLLISION_OFFSET
+	$Hitbox/MeshInstance3D.mesh.material.albedo_color.a = STARTING_ALPHA + COLLISION_OFFSET
 	$Hitbox/CollisionShape3D.disabled = false
 	$Hitbox.visible = true
 	$CooldownTimer.wait_time = BASE_COOLDOWN_DURATION / player.player_stats.cooldown_reduction
@@ -47,12 +49,12 @@ func use() -> void:
 	var opacity_tween: Tween = create_tween()
 	mesh_inner_tween.finished.connect(_on_tween_finished)
 	collision_tween.tween_property($Hitbox/CollisionShape3D.shape, "radius", 
-		END_RADIUS * player.player_stats.area_size, 1)
+		END_RADIUS * player.player_stats.area_size, TWEEN_DURATION)
 	mesh_outer_tween.tween_property($Hitbox/MeshInstance3D.mesh, "inner_radius", 
-		END_RADIUS * player.player_stats.area_size - 0.02, 1)
+		END_RADIUS * player.player_stats.area_size - 0.02, TWEEN_DURATION)
 	mesh_inner_tween.tween_property($Hitbox/MeshInstance3D.mesh, "outer_radius", 
-		END_RADIUS * player.player_stats.area_size, 1)
-	opacity_tween.tween_property($Hitbox/MeshInstance3D.mesh.material, "albedo_color:a",0, 1)
+		END_RADIUS * player.player_stats.area_size, TWEEN_DURATION)
+	opacity_tween.tween_property($Hitbox/MeshInstance3D.mesh.material, "albedo_color:a",0, TWEEN_DURATION)
 	$CooldownTimer.start()
 	cooldown_active = true
 	
