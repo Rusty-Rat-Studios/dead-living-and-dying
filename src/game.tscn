@@ -242,7 +242,10 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.95,
 door_location = SubResource("Resource_xm868")
 
 [node name="WallSconceForward" parent="WorldGrid/RoomCenter" instance=ExtResource("28_rbnx6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.33971, 2.88915, -7.80321)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.33971, 0.88915, -7.80321)
+
+[node name="WallSconceForward2" parent="WorldGrid/RoomCenter" instance=ExtResource("28_rbnx6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.66029, 0.88915, -7.80321)
 
 [node name="RoomLeft" type="Node3D" parent="WorldGrid" groups=["rooms"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -16)
