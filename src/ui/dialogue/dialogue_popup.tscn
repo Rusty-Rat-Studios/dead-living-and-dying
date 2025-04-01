@@ -1,0 +1,88 @@
+[gd_scene load_steps=8 format=3 uid="uid://mrasucg8bfmi"]
+
+[ext_resource type="Script" uid="uid://lup3uw1dq3sk" path="res://src/ui/dialogue/dialogue_popup.gd" id="1_4exln"]
+[ext_resource type="Texture2D" uid="uid://dpriohnhnc5tw" path="res://src/ui/resources/border-color.png" id="2_ad7xg"]
+[ext_resource type="Texture2D" uid="uid://bqhg7cexeb2s2" path="res://src/old_man/old_man_portrait.png" id="3_0llid"]
+[ext_resource type="Theme" uid="uid://d22dd45o5or8i" path="res://src/ui/resources/dialogue_responses.tres" id="4_0fa2r"]
+
+[sub_resource type="Gradient" id="Gradient_7yfi4"]
+offsets = PackedFloat32Array(0.576389, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ytrdg"]
+gradient = SubResource("Gradient_7yfi4")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_l3m1k"]
+texture = SubResource("GradientTexture2D_ytrdg")
+
+[node name="DialoguePopup" type="MarginContainer"]
+process_mode = 2
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -248.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 0
+theme = ExtResource("4_0fa2r")
+script = ExtResource("1_4exln")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+color = Color(0.133333, 0.133333, 0.133333, 1)
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_l3m1k")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 2
+texture = ExtResource("2_ad7xg")
+draw_center = false
+region_rect = Rect2(0.15, 0.15, 0.7, 0.7)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="OldMan" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+texture = ExtResource("3_0llid")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Dialogue" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="OldManDialogue" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/Dialogue"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("4_0fa2r")
+text = "Did you find the [KEY ITEM]?"
+horizontal_alignment = 1
+
+[node name="Responses" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/Dialogue"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_constants/separation = 8
+alignment = 2

@@ -71,15 +71,4 @@ func _on_game_over() -> void:
 
 
 func _on_level_complete() -> void:
-	if not disable_popup:
-		pause()
-		buttons.hide()
-		message.text = "Level Complete!"
-		message.show()
-		await Utility.delay(GAME_OVER_DELAY)
-		message.hide()
-		message.text = ""
-		buttons.show()
-		resume()
-	
-	get_node("/root/Game").reset()
+	print("Level complete!")

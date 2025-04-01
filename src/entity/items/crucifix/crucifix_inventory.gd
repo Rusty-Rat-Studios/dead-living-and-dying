@@ -1,11 +1,12 @@
 extends DefenseItemInventory
 
 const BASE_COOLDOWN_DURATION: float = 5
-const BASE_ACTIVE_DURATION: float = 2
+const BASE_ACTIVE_DURATION: float = 1.5
 const BASE_RADIUS: float = 2
 
 var player: Node = PlayerHandler.get_player()
 
+@onready var particle_material: ParticleProcessMaterial = $GPUParticles3D.process_material
 @onready var cooldown_active: bool = false
 
 
@@ -16,6 +17,8 @@ func _ready() -> void:
 	description = ("DEFENSE ITEM: Use with " + UIDevice.retrieve_icon_sized(input_event)
 		+ " to exorcise possessed objects within a limited range.")
 	texture = preload("res://src/entity/items/crucifix/crucifix.png")
+	
+	$GPUParticles3D.emitting = false
 	
 	$ActiveTimer.wait_time = BASE_ACTIVE_DURATION
 	$CooldownTimer.wait_time = BASE_COOLDOWN_DURATION
@@ -38,11 +41,12 @@ func use() -> void:
 		return
 	$Hitbox/CollisionShape3D.shape.radius = BASE_RADIUS * player.player_stats.area_size
 	$Shield/CollisionShape3D.shape.radius = BASE_RADIUS * player.player_stats.area_size
-	$Hitbox/MeshInstance3D.mesh.outer_radius = BASE_RADIUS * player.player_stats.area_size
-	$Hitbox/MeshInstance3D.mesh.inner_radius = $Hitbox/MeshInstance3D.mesh.outer_radius - 0.2
+	particle_material.emission_ring_radius = BASE_RADIUS * player.player_stats.area_size
+	particle_material.emission_ring_inner_radius = particle_material.emission_ring_radius - 0.2
 	$Hitbox/CollisionShape3D.disabled = false
 	$Shield/CollisionShape3D.disabled = false
-	$Hitbox.visible = true
+	$GPUParticles3D.emitting = true
+	
 	$ActiveTimer.wait_time = BASE_ACTIVE_DURATION * player.player_stats.duration
 	$ActiveTimer.start()
 	$CooldownTimer.wait_time = BASE_COOLDOWN_DURATION / player.player_stats.cooldown_reduction
@@ -53,9 +57,10 @@ func use() -> void:
 
 
 func _on_active_timer_timeout() -> void:
+	$GPUParticles3D.emitting = false
+	await Utility.delay($GPUParticles3D.lifetime)
 	$Hitbox/CollisionShape3D.disabled = true
 	$Shield/CollisionShape3D.disabled = true
-	$Hitbox.visible = false
 
 
 func _on_cooldown_timer_timeout() -> void:
