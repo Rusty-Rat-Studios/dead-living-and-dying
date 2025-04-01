@@ -155,4 +155,29 @@ func build_room_graph() -> void:
 
 
 #Returns the shortest path from the current room to the target room.
-#func find_shortest_path(current: Room, target: Room) -> Array[Room]:
+func find_shortest_path(start_room: Room, end_room: Room) -> Array[Room]:
+	
+	if not room_graph.has(start_room) or not room_graph.has(end_room):
+		printerr("Start or end room not found in the graph.")
+		return []
+	
+	# array of array of rooms
+	var queue: Array[Array] = [[start_room]] # Queue of paths
+	var visited: Dictionary[Room, bool] = {start_room: true}
+	
+	while not queue.is_empty():
+		var current_path: Array = queue.pop_front()
+		var current_room: Room = current_path[-1]
+		
+		if current_room == end_room:
+			return current_path
+		
+		if room_graph.has(current_room):
+			for neighbor: Room in room_graph[current_room]:
+				if not visited.has(neighbor):
+					visited[neighbor] = true
+					var new_path: Array = current_path.duplicate()
+					new_path.append(neighbor)
+					queue.append(new_path)
+	
+	return [] # No path found

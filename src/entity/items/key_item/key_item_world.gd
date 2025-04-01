@@ -1,6 +1,7 @@
 extends ItemWorld
 
 var starting_room: Room
+var movement_path: Array[Room]
 
 
 func _ready() -> void:
