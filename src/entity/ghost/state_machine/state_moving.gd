@@ -104,4 +104,7 @@ func _on_target_reached() -> void:
 		DoorStates.AFTER:
 			# make tangible again when finished going through door
 			_parent.get_node("CollisionShape3D").set_deferred("disabled", false)
-			change_state(GhostStateMachine.States.WAITING)
+			if _parent.player_in_room and PlayerHandler.get_player_state() == PlayerStateMachine.States.DEAD:
+				change_state(GhostStateMachine.States.ATTACKING)
+			else:
+				change_state(GhostStateMachine.States.WAITING)

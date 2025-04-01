@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bslonn3bn1m6s" path="res://src/entity/items/item_world.tscn" id="1_6gyb5"]
 [ext_resource type="PackedScene" uid="uid://7p0wv0hucnr2" path="res://src/entity/items/tea/tea_inventory.tscn" id="2_88twn"]
-[ext_resource type="Texture2D" uid="uid://nrjcu5mlyg4k" path="res://src/entity/items/tea/tea.png" id="2_pv1nc"]
+[ext_resource type="Texture2D" uid="uid://c0631ltuowhh2" path="res://src/entity/items/tea/tea.png" id="2_pv1nc"]
 [ext_resource type="Shader" uid="uid://bqm7xmu54nr45" path="res://src/entity/items/item_world_shader.gdshader" id="3_i28e5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nc7p0"]
