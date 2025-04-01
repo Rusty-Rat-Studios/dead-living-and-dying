@@ -50,6 +50,12 @@ func pick_up() -> void:
 	queue_free()
 
 
+func disable_interactable(duration: int) -> void:
+	$PlayerDetector/CollisionShape3D.disabled = true
+	await Utility.delay(duration)
+	$PlayerDetector/CollisionShape3D.disabled = false
+
+
 func _on_body_entered(_body: Node3D) -> void:
 	# no node check required as collision mask is layer PLAYER
 	if PlayerHandler.get_player_state() != PlayerStateMachine.States.DEAD:
