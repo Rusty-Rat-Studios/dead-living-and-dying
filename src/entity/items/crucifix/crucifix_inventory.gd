@@ -11,7 +11,7 @@ var player: Node = PlayerHandler.get_player()
 
 
 func _ready() -> void:
-	world_resource = load("res://src/entity/items/crucifix/crucifix_inventory.tscn")
+	world_resource = load("res://src/entity/items/crucifix/crucifix_world.tscn")
 	display_name = "Crucifix"
 	input_event = "use_defense_item"
 	description = ("DEFENSE ITEM: Use with " + UIDevice.retrieve_icon_sized(input_event)
