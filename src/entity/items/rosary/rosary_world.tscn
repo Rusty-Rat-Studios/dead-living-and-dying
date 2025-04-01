@@ -1,11 +1,31 @@
-[gd_scene load_steps=4 format=3 uid="uid://80yawtiqgmqy"]
+[gd_scene load_steps=6 format=3 uid="uid://80yawtiqgmqy"]
 
 [ext_resource type="PackedScene" uid="uid://bslonn3bn1m6s" path="res://src/entity/items/item_world.tscn" id="1_qk5xx"]
 [ext_resource type="PackedScene" uid="uid://b0ilwk6w6qtbw" path="res://src/entity/items/rosary/rosary_inventory.tscn" id="2_eeyt1"]
+[ext_resource type="Shader" uid="uid://bqm7xmu54nr45" path="res://src/entity/items/item_world_shader.gdshader" id="3_8yax3"]
 [ext_resource type="Texture2D" uid="uid://d38se0ddn85xm" path="res://src/entity/items/rosary/rosary.png" id="3_auu30"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i63rm"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_8yax3")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("3_auu30")
+shader_parameter/alpha_scissor_threshold = 0.5
+shader_parameter/albedo_texture_size = Vector2i(160, 160)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
 
 [node name="RosaryWorld" instance=ExtResource("1_qk5xx")]
 inventory_resource = ExtResource("2_eeyt1")
 
 [node name="Sprite3D" parent="." index="1"]
+material_overlay = SubResource("ShaderMaterial_i63rm")
 texture = ExtResource("3_auu30")
