@@ -125,10 +125,10 @@ func skew_sprite() -> void:
 	
 	# flip animation based on rotation amount
 	if rotation.y > -PI/2 and rotation.y <= PI/2:
-		sprite.animation = SPRITE_ANIMATION_BACK
+		#sprite.animation = SPRITE_ANIMATION_BACK
 		sprite.rotation.y = clampf(rotation.y, -SKEW_ROTATION, SKEW_ROTATION)
 	else:
-		sprite.animation = SPRITE_ANIMATION_FRONT
+		#sprite.animation = SPRITE_ANIMATION_FRONT
 		
 		if rotation.y > 0:
 			sprite.rotation.y = clampf(rotation.y, PI - SKEW_ROTATION, PI)
@@ -147,7 +147,7 @@ func disable_skew() -> void:
 	# reset sprite skew
 	sprite.rotation.y = 0
 	sprite.scale.x = skew_scale_base
-	sprite.animation = SPRITE_ANIMATION_FRONT
+	#sprite.animation = SPRITE_ANIMATION_FRONT
 
 
 func _on_player_state_changed(state: PlayerStateMachine.States) -> void:

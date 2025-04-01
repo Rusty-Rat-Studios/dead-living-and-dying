@@ -11,6 +11,9 @@ const NAME: String = "dying"
 
 func enter() -> void:
 	super()
+	
+	_parent.sprite.animation = "dying"
+	
 	# update player stats
 	_parent.player_stats.stat_update_add(PlayerStats.Stats.SPEED, SPEED_MODIFIER, NAME)
 	_parent.player_stats.stat_update_add(PlayerStats.Stats.LIGHT_OMNI_RANGE, LIGHT_OMNI_RANGE_MODIFIER, NAME)

@@ -3,6 +3,8 @@ extends PlayerState
 
 func enter() -> void:
 	super()
+	
+	_parent.sprite.animation = "living"
 
 	# apply inventory buffs to modified stats
 	_parent.inventory_update()

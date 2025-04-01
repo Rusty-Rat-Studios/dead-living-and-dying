@@ -1,8 +1,10 @@
-[gd_scene load_steps=27 format=3 uid="uid://bbow7knip3g6g"]
+[gd_scene load_steps=29 format=3 uid="uid://bbow7knip3g6g"]
 
 [ext_resource type="Script" uid="uid://bvc3eclccrf0p" path="res://src/player/player.gd" id="1_ndccg"]
-[ext_resource type="Texture2D" uid="uid://cdu1sybc4l0vp" path="res://src/player/caretaker_idle.png" id="3_b0ygv"]
+[ext_resource type="Texture2D" uid="uid://bpcdo5v4oiwd2" path="res://src/player/caretaker_dead.png" id="2_2smqc"]
+[ext_resource type="Texture2D" uid="uid://ci76soceg0w06" path="res://src/player/caretaker_dying.png" id="3_rl62b"]
 [ext_resource type="Script" uid="uid://v3pynygc6ya7" path="res://src/player/camera.gd" id="4_mmf56"]
+[ext_resource type="Texture2D" uid="uid://b6dsgsujyqk2o" path="res://src/player/caretaker_living.png" id="4_wlj80"]
 [ext_resource type="Script" uid="uid://cs3pdh132h0y1" path="res://src/player/spotlight.gd" id="5_nwynq"]
 [ext_resource type="Script" uid="uid://xxlxp6iy7vgv" path="res://src/player/hurtbox.gd" id="6_ltudm"]
 [ext_resource type="Material" uid="uid://c3kjv3w8w3dws" path="res://src/ui/minimap/minimap_corpse_material.tres" id="7_2ieo8"]
@@ -20,18 +22,26 @@ height = 2.4
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_b0ygv")
+"texture": ExtResource("2_2smqc")
 }],
 "loop": true,
-"name": &"back",
+"name": &"dead",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_b0ygv")
+"texture": ExtResource("3_rl62b")
 }],
 "loop": true,
-"name": &"front",
+"name": &"dying",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_wlj80")
+}],
+"loop": true,
+"name": &"living",
 "speed": 5.0
 }]
 
@@ -113,7 +123,7 @@ transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642787, 0, -0.642787, 0.766044, 
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
 billboard = 2
 sprite_frames = SubResource("SpriteFrames_bh504")
-animation = &"front"
+animation = &"living"
 
 [node name="Camera3D" type="Camera3D" parent="RotationOffset"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
