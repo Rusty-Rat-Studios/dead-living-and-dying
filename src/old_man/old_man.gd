@@ -56,10 +56,10 @@ func _ready() -> void:
 	SignalBus.key_item_dropped.connect(_on_key_item_dropped)
 	
 	$Interactable.inputs = ["interact"]
+	$Interactable.hide_message()
+	$Interactable.enabled = false
 	
 	_dialogue_stage = "intro"
-	
-	reset()
 
 
 # called by game.gd and passed in the current level's key item
@@ -71,7 +71,7 @@ func init(key_item: KeyItemInventory) -> void:
 func reset() -> void:
 	$Interactable.hide_message()
 	$Interactable.enabled = false
-	_dialogue_stage = "intro"
+	_dialogue_stage = "fetch"
 
 
 func _on_player_entered(_player: Player) -> void:
