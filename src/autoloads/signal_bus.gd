@@ -25,3 +25,5 @@ extends Node
 
 @warning_ignore("unused_signal") signal key_item_picked_up()
 @warning_ignore("unused_signal") signal key_item_dropped(key_item: KeyItemInventory)
+
+@warning_ignore("unused_signal") signal hit(stun_modifer: float, stun_modifier_key: String)
