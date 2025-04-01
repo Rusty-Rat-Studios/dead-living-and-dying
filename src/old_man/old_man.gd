@@ -16,13 +16,13 @@ var dialogue: Dictionary[String, Dictionary] = {
 		"next_stage": "fetch"
 		},
 	"fetch": {
-		"prompt": ("I've been missing my [KEY_ITEM], it seems I've misplaced it. Could you be a\n" +
+		"prompt": ("I've been missing my KEY_ITEM, it seems I've misplaced it. Could you be a\n" +
 		"dear and go find it for me? It should be somewhere in this blasted maze of a house."),
 		"responses": ["Of course, I'll be back with it as soon as I can.NEXT EXIT"],
 		"next_stage": "return"
 	},
 	"return": {
-		"prompt": "Have you found my [KEY_ITEM] yet?",
+		"prompt": "Have you found my KEY_ITEM yet?",
 		"responses": [
 			"Yes, I've got it here.NEXT KEY_ITEM",
 			"Sorry, I haven't found it yet Grandpa.EXIT"
@@ -93,7 +93,6 @@ func _on_interaction(input_name: String) -> void:
 
 
 func _on_response_selected(next_stage: String) -> void:
-	print("response selected:", next_stage)
 	_dialogue_stage = next_stage
 	
 	match _dialogue_stage:

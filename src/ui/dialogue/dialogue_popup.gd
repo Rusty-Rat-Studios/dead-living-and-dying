@@ -7,6 +7,7 @@ var dialogue_container: VBoxContainer
 var old_man_dialogue: Label
 var player_responses: VBoxContainer
 var player_has_key_item: bool
+var key_item_title: String
 
 
 func _ready() -> void:
@@ -14,6 +15,8 @@ func _ready() -> void:
 	dialogue_container = $MarginContainer/VBoxContainer/HBoxContainer/Dialogue
 	old_man_dialogue = dialogue_container.get_node("OldManDialogue")
 	player_responses = dialogue_container.get_node("Responses")
+	
+	key_item_title = KeyItemHandler.get_display_name()
 	
 	SignalBus.key_item_picked_up.connect(_on_key_item_picked_up)
 	SignalBus.key_item_dropped.connect(_on_key_item_dropped)
@@ -25,7 +28,7 @@ func show_dialogue(dialogue: Dictionary) -> void:
 	visible = true
 	get_tree().paused = true
 	
-	old_man_dialogue.text = dialogue["prompt"]
+	old_man_dialogue.text = dialogue["prompt"].replace("KEY_ITEM", key_item_title)
 	
 	clear_dialogue_options()
 	populate_dialogue_options(dialogue)
@@ -54,6 +57,8 @@ func populate_dialogue_options(dialogue: Dictionary) -> void:
 			continue
 		
 		var dialogue_option: DialogueOption = DialogueOption.new()
+		# process the text to remove the flags without affecting the original raw string
+		var response_text: String
 		# check if the response has a flag (text at end of string) for EXIT or NEXT
 		# which indicate if the option closes or advances the dialogue, respectively
 		# - if so, remove the flag and connect the response to the relevant functions
