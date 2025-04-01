@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://4kutlqtpmjse"
-path.s3tc="res://.godot/imported/T_VFX_Flare_251.jpg-5c0f19c3e06a1421350fe120d4193c07.s3tc.ctex"
+uid="uid://dnacl3n2x6ttj"
+path.s3tc="res://.godot/imported/T_VFX_simple_1.png-d44f80c6a95f4845245903c0bf611dfb.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://src/entity/items/item_vfx/T_VFX_Flare_251.jpg"
-dest_files=["res://.godot/imported/T_VFX_Flare_251.jpg-5c0f19c3e06a1421350fe120d4193c07.s3tc.ctex"]
+source_file="res://src/entity/items/T_VFX_simple_1.png"
+dest_files=["res://.godot/imported/T_VFX_simple_1.png-d44f80c6a95f4845245903c0bf611dfb.s3tc.ctex"]
 
 [params]
 
