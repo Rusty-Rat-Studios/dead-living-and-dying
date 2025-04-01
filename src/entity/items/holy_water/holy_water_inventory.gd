@@ -7,7 +7,7 @@ var player: Node = PlayerHandler.get_player()
 var active: bool = false
 
 func _ready() -> void:
-	world_resource = preload("res://src/entity/items/holy_water/holy_water_world.tscn")
+	world_resource = load("res://src/entity/items/holy_water/holy_water_world.tscn")
 	display_name = "Holy Water"
 	input_event = "use_consumable_item"
 	description = ("CONSUMABLE ITEM: Use with " + UIDevice.retrieve_icon_sized(input_event)
