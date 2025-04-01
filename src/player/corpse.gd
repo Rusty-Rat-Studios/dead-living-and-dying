@@ -55,7 +55,7 @@ func animate_fall() -> void:
 	if not visible:
 		visible = true
 	# ensure corpse sprite is aligned to player sprite
-	sprite_base.global_position = get_parent().sprite.global_position
+	sprite_base.global_position = get_parent().sprite_torso.global_position
 	sprite_base.position.y -= SPRITE_OFFSET
 	
 	# rotate along x-axis to show sprite as "falling" backwards

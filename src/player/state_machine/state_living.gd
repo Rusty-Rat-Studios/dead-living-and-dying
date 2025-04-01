@@ -1,10 +1,12 @@
 extends PlayerState
 
+const ANIMATION_SPEED_SCALE: float = 2.5
 
 func enter() -> void:
 	super()
 	
-	_parent.sprite.animation = "living"
+	_parent.sprite_torso.animation = "living"
+	_parent.sprite_legs.speed_scale = ANIMATION_SPEED_SCALE
 
 	# apply inventory buffs to modified stats
 	_parent.inventory_update()

@@ -1,6 +1,7 @@
 extends PlayerState
 
 const SPEED_MODIFIER: float = -0.5
+const ANIMATION_SPEED_SCALE: float = 1.8
 
 const LIGHT_OMNI_RANGE_MODIFIER: float = -1.5
 const LIGHT_SPOT_RANGE_MODIFIER: float = -3
@@ -12,7 +13,8 @@ const NAME: String = "dying"
 func enter() -> void:
 	super()
 	
-	_parent.sprite.animation = "dying"
+	_parent.sprite_torso.animation = "dying"
+	_parent.sprite_legs.speed_scale = ANIMATION_SPEED_SCALE
 	
 	# update player stats
 	_parent.player_stats.stat_update_add(PlayerStats.Stats.SPEED, SPEED_MODIFIER, NAME)
