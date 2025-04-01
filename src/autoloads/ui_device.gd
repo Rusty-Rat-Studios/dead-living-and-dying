@@ -40,7 +40,7 @@ func _ready() -> void:
 	icon_map_controller["use_defense_item"] = "[img={}]res://src/ui/resources/control_icons/button_xbox_analog_trigger_light_2.png[/img]"
 	icon_map_controller["use_active_item"] = "[img={}]res://src/ui/resources/control_icons/button_xbox_analog_trigger_light_1.png[/img]"
 	icon_map_controller["use_consumable_item"] = "[img={}]res://src/ui/resources/control_icons/button_xbox_digital_bumper_light_2.png[/img]"
-	#gdlint:disable=max-line-length
+	#gdlint:enable=max-line-length
 
 
 func _input(event: InputEvent) -> void:
