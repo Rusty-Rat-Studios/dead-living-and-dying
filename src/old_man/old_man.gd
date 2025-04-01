@@ -36,6 +36,8 @@ var dialogue: Dictionary[String, Dictionary] = {
 	}
 }
 
+# used to instantiate crucifix to give to player when first talking to old man
+var crucifix_scene: PackedScene = load("res://src/entity/items/crucifix/crucifix_world.tscn")
 
 # reference to key item inventory instance - includes description, name, etc
 var _key_item: KeyItemInventory
@@ -93,6 +95,14 @@ func _on_interaction(input_name: String) -> void:
 func _on_response_selected(next_stage: String) -> void:
 	print("response selected:", next_stage)
 	_dialogue_stage = next_stage
+	
+	match _dialogue_stage:
+		"crucifix":
+			var crucifix: ItemWorld = crucifix_scene.instantiate()
+			crucifix.pick_up()
+		"return_success":
+			SignalBus.level_complete.emit()
+	
 	if dialogue_popup.visible:
 		dialogue_popup.show_dialogue(dialogue[_dialogue_stage])
 
