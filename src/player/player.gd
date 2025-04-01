@@ -11,7 +11,8 @@ var _state_machine: PlayerStateMachine
 @onready var light_omni: OmniLight3D = $OmniLight3D
 @onready var light_spot: SpotLight3D = $SpotLight3D
 @onready var camera: Camera3D = $RotationOffset/Camera3D
-@onready var sprite: AnimatedSprite3D = $RotationOffset/AnimatedSprite3D
+@onready var sprite_torso: AnimatedSprite3D = $RotationOffset/AnimatedSpriteTorso
+@onready var sprite_legs: AnimatedSprite3D = $RotationOffset/AnimatedSpriteLegs
 # updated by state machine when changing states
 @onready var hurtbox: Area3D = $Hurtbox
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
@@ -85,7 +86,13 @@ func handle_movement(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, player_stats.speed)
 	
 	if abs(velocity.x) > 0.01:
-		sprite.flip_h = direction.x < 0
+		sprite_torso.flip_h = direction.x < 0
+		sprite_legs.flip_h = direction.x < 0
+	
+	if velocity.length() > 0.01:
+		sprite_legs.play()
+	else:
+		sprite_legs.pause()
 	
 	move_and_slide()
 

@@ -12,7 +12,8 @@ const OPACITY_FLASH: float = 0.2
 @onready var hit_flash: bool = false
 # used by state machine when updating states
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
-@onready var sprite: AnimatedSprite3D = get_parent().get_node("RotationOffset/AnimatedSprite3D")
+@onready var sprite_torso: AnimatedSprite3D = get_parent().get_node("RotationOffset/AnimatedSpriteTorso")
+@onready var sprite_legs: AnimatedSprite3D = get_parent().get_node("RotationOffset/AnimatedSpriteLegs")
 
 func _ready() -> void:
 	$HitCooldown.wait_time = HIT_COOLDOWN
@@ -62,18 +63,22 @@ func _on_hit_cooldown_timeout() -> void:
 	# stop flashing animation
 	$HitFlash.stop()
 	if PlayerHandler.get_player_state() != PlayerStateMachine.States.DEAD:
-		sprite.modulate.a = 1
+		sprite_torso.modulate.a = 1
+		sprite_legs.modulate.a = 1
 	else:
-		sprite.modulate.a = get_parent().OPACITY_DEAD
+		sprite_torso.modulate.a = get_parent().OPACITY_DEAD
+		sprite_legs.modulate.a = get_parent().OPACITY_DEAD
 	if has_overlapping_areas():
 		# pass signal for state-specific behavior
 		SignalBus.player_hurt.emit(get_overlapping_bodies()[0])
 
 
 func _on_hit_flash_timeout() -> void:
-	var current_color: Color = sprite.get_modulate()
+	var current_color: Color = sprite_torso.get_modulate()
 	if hit_flash:
-		sprite.modulate = Color(current_color, OPACITY_FLASH)
+		sprite_torso.modulate = Color(current_color, OPACITY_FLASH)
+		sprite_legs.modulate = Color(current_color, OPACITY_FLASH)
 	else:
-		sprite.modulate = Color(current_color, 1)
+		sprite_torso.modulate = Color(current_color, 1)
+		sprite_legs.modulate = Color(current_color, 1)
 	hit_flash = not hit_flash
