@@ -111,4 +111,4 @@ func _on_key_item_picked_up() -> void:
 
 
 func _on_key_item_dropped(_key_item: KeyItemInventory) -> void:
-	player_has_key_item = false
+	_player_has_key_item = false
