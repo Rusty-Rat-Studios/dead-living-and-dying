@@ -4,7 +4,9 @@
 [ext_resource type="Script" uid="uid://b3ic7s4qm7vmv" path="res://src/ui/dialogue/dialogue_option.gd" id="2_7qy0t"]
 
 [node name="CloseDialogue" type="Button"]
+custom_minimum_size = Vector2(0, 50)
 size_flags_horizontal = 4
 theme = ExtResource("1_rldnc")
 text = "Default Close Dialogue Text"
+flat = true
 script = ExtResource("2_7qy0t")
