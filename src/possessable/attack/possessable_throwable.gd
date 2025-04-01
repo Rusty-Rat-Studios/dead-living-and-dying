@@ -16,8 +16,6 @@ const FLOAT_SPEED: float = 2
 const FLOAT_FORCE: float = 1
 # target height for possessed objects to float to
 const FLOAT_HEIGHT: float = 4
-# how long the shake animation is displayed before attacking
-const ATTACK_WINDUP: float = 2
 # how much the shake animation moves in x or y dimensions
 const ATTACK_SHAKE_MAGNITUDE: Vector2 = Vector2(1, 0.5)
 
@@ -55,6 +53,7 @@ func _physics_process(delta: float) -> void:
 		hitbox_collision_shape.set_deferred("disabled", true)
 		float_time_offset = 0
 		disable_effects()
+		get_parent().collision_layer = CollisionBit.PHYSICAL
 		# disable physics process - re-enabled by possess()
 		set_physics_process(false)
 		return
@@ -99,19 +98,20 @@ func depossess(disable_effects_flag: bool = true) -> void:
 	sprite_shaker.halt()
 
 
-func attack(target: Node3D) -> void:
+func attack(target: Node3D, attack_windup: float) -> void:
 	if player_in_range and room.player_in_room:
 		# disable player detection
 		range_collision_shape.disabled = true
 		
 		# display "wind-up" to attack
-		await sprite_shaker.animate(parent.get_node("Sprite3D"), ATTACK_WINDUP, ATTACK_SHAKE_MAGNITUDE)
+		await sprite_shaker.animate(parent.get_node("Sprite3D"), attack_windup, ATTACK_SHAKE_MAGNITUDE)
 
 		# check again that object wasn't depossessed mid-attack
 		if is_possessed:
 			# enable hurtbox 
 			hitbox_collision_shape.set_deferred("disabled", false)
 			# VIOLENTLY LAUNCH SELF TOWARDS PLAYER \m/
+			get_parent().collision_layer = CollisionBit.PHYSICAL + CollisionBit.POSSESABLE
 			parent.apply_impulse(global_position.direction_to(target.global_position) * THROW_FORCE)
 	
 	# do not disable effects until hurtbox is disabled

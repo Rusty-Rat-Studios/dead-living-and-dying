@@ -11,7 +11,8 @@ var _state_machine: PlayerStateMachine
 @onready var light_omni: OmniLight3D = $OmniLight3D
 @onready var light_spot: SpotLight3D = $SpotLight3D
 @onready var camera: Camera3D = $RotationOffset/Camera3D
-@onready var sprite: AnimatedSprite3D = $RotationOffset/AnimatedSprite3D
+@onready var sprite_torso: AnimatedSprite3D = $RotationOffset/AnimatedSpriteTorso
+@onready var sprite_legs: AnimatedSprite3D = $RotationOffset/AnimatedSpriteLegs
 # updated by state machine when changing states
 @onready var hurtbox: Area3D = $Hurtbox
 @onready var collision_shape: CollisionShape3D = $CollisionShape3D
@@ -31,6 +32,8 @@ func _ready() -> void:
 	light_omni.light_color = Color("GOLDENROD")
 	
 	SignalBus.item_picked_up.connect(_on_item_picked_up)
+	SignalBus.key_item_dropped.connect(_on_key_item_dropped)
+	SignalBus.key_item_picked_up.connect(_on_key_item_picked_up)
 
 
 func _process(_delta: float) -> void:
@@ -85,7 +88,13 @@ func handle_movement(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, player_stats.speed)
 	
 	if abs(velocity.x) > 0.01:
-		sprite.flip_h = direction.x < 0
+		sprite_torso.flip_h = direction.x < 0
+		sprite_legs.flip_h = direction.x < 0
+	
+	if velocity.length() > 0.01:
+		sprite_legs.play()
+	else:
+		sprite_legs.pause()
 	
 	move_and_slide()
 
@@ -111,7 +120,18 @@ func get_key_item_or_null() -> KeyItemInventory:
 func _on_item_picked_up(item: ItemInventory, current_consumable: bool = false) -> void:
 	if item is KeyItemInventory:
 		SignalBus.key_item_picked_up.emit()
+		print("player detected key item pickup")
 	if current_consumable == false:
 		$Inventory.add_child(item)
 	# ensure item position is directly on player
 	item.position = Vector3.ZERO
+
+
+func _on_key_item_picked_up() -> void:
+	player_stats.stat_update_add(PlayerStats.Stats.LIGHT_OMNI_RANGE, -1.0, "key_item")
+	player_stats.stat_update_add(PlayerStats.Stats.LIGHT_ENERGY, -0.2, "key_item")
+
+
+func _on_key_item_dropped(_key_item: KeyItemInventory) -> void:
+	player_stats.stat_update_remove(PlayerStats.Stats.LIGHT_OMNI_RANGE, "key_item")
+	player_stats.stat_update_remove(PlayerStats.Stats.LIGHT_ENERGY, "key_item")

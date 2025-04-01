@@ -78,7 +78,7 @@ func possess() -> void:
 
 
 func depossess(disable_effects_flag: bool = true) -> void:
-	if not is_possessed or cooldown_active:
+	if not is_possessed:
 		return
 	# reset flags
 	is_possessed = false
@@ -86,8 +86,7 @@ func depossess(disable_effects_flag: bool = true) -> void:
 		# if the cooldown is active, this object has been exorcised and the
 		# reset timer is started -> when finished, will set "is_possessable = true"
 		is_possessable = true
-	
-	room.add_possessable(self)
+		room.add_possessable(self)
 	
 	if disable_effects_flag:
 		disable_effects()
@@ -101,7 +100,7 @@ func disable_effects() -> void:
 	$GPUParticles3D.emitting = false
 
 
-func attack(_target: Node3D) -> void:
+func attack(_target: Node3D, _attack_windup: float) -> void:
 	print(Time.get_time_string_from_system(), ": WARNING - attack() function called from base possessable ", self)
 
 
@@ -109,6 +108,7 @@ func _on_reset_timer_timeout() -> void:
 	# add self back to room's available possessables
 	room.add_possessable(self)
 	is_possessable = true
+	cooldown_active = false
 
 
 func _on_exorcised() -> void:

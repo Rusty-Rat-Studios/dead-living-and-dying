@@ -6,5 +6,6 @@ enum {
 	PLAYER = 2,
 	PHYSICAL = 4,
 	SPIRIT = 8,
-	ITEM = 16
+	ITEM = 16,
+	POSSESABLE = 32
 }

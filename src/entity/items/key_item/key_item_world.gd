@@ -1,7 +1,10 @@
+class_name KeyItemWorld
 extends ItemWorld
 
 
 func _ready() -> void:
+	KeyItemHandler.register_key_item(self)
+	
 	# initialize game.gd value to track key starting position when it is
 	# re-created when dropped by the player
 	if get_node("/root/Game").key_item_starting_position == Vector3.ZERO:

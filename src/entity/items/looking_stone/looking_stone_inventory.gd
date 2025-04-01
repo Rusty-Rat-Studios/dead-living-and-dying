@@ -6,7 +6,7 @@ const START_RADIUS: float = 0.5
 const END_RADIUS: float = 20
 const STARTING_ALPHA: float = 0.686
 const TWEEN_DURATION: int = 1
-const COLLISION_OFFSET: float = 0.001
+const COLLISION_OFFSET: float = 0.002
 
 var cooldown_active: bool = false 
 var player: Node = PlayerHandler.get_player()

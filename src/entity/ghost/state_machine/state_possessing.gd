@@ -2,12 +2,6 @@ extends GhostState
 
 # delay between ghost decision
 const DECISION_TIME: float = 1.0
-# used to determine whether ghost attacks
-const ATTACK_CHANCE: float = 0.7
-# used to determine whether ghost depossesses
-const DEPOSSESS_CHANCE: float = 0.15
-# used to determine whether ghost waits
-const WAIT_CHANCE: float = 0.35
 # short delay for the ghost to wait when failing to possess an object
 const TARGET_RESET_DELAY: float = 0.1
 # used by attack delay timer to increment/decrement attack delay counter
@@ -50,7 +44,6 @@ func init(parent: CharacterBody3D, state_machine: StateMachine) -> void:
 
 
 func enter() -> void:
-	_parent.speed = _parent.BASE_SPEED
 	_parent.sprite.animation = "active"
 	# enable possessable detector
 	detector_collision_shape.set_deferred("disabled", false)
@@ -102,9 +95,16 @@ func set_closest_target() -> void:
 	# get all possessable items in the room
 	var possessables: Array = _parent.current_room.possessables_available
 
-	# return to WAITING if no possessables available
+	# change to another state if no possessables available
 	if possessables.is_empty():
-		change_state(GhostStateMachine.States.WAITING)
+		# attacking state "is_player_attackable" check: in room and not living
+		if (_parent.player_in_room
+			and (PlayerHandler.get_player_state() == PlayerStateMachine.States.DEAD
+			or PlayerHandler.get_player_state() == PlayerStateMachine.States.DYING)):
+				change_state(GhostStateMachine.States.ATTACKING)
+		else:
+			# ghost cannot possess object or attack player, go to waiting
+			change_state(GhostStateMachine.States.WAITING)
 		return
 	
 	# find nearest possessable and set it as target
@@ -154,7 +154,7 @@ func _attack() -> void:
 	if target_possessable:
 		# await necessary for some overloaded functions of inheritors
 		@warning_ignore("redundant_await")
-		await target_possessable.attack(PlayerHandler.get_player())
+		await target_possessable.attack(PlayerHandler.get_player(), _parent.stats.possession_attack_windup)
 		is_possessing = false
 		change_state(GhostStateMachine.States.WAITING)
 
@@ -168,12 +168,12 @@ func _wait() -> void:
 func _on_decision_timeout() -> void:
 	if is_possessing:
 		var choices: Dictionary[Callable, float] = {
-			_depossess: DEPOSSESS_CHANCE,
-			_wait: WAIT_CHANCE
+			_depossess: _parent.stats.depossess_chance,
+			_wait: _parent.stats.possession_wait_chance
 		}
 		# add option to attack only if attack delay has expired
 		if can_attack:
-			choices[_attack] = ATTACK_CHANCE
+			choices[_attack] = _parent.stats.possession_attack_chance
 		RNG.call_async_weighted_random(choices)
 
 
@@ -230,8 +230,5 @@ func _on_attack_delay_increment_timer_timeout() -> void:
 
 
 func _on_hit() -> void:
-	# ghost has been hit and will move into stunned state
-	#########
-	# PROBLEM: exit() is called before the hit signal is fired and target_possessable is null
 	if is_possessing:
 		target_possessable.exorcised.emit()

@@ -24,4 +24,4 @@ extends Node
 @warning_ignore("unused_signal") signal item_picked_up(item: ItemInventory)
 
 @warning_ignore("unused_signal") signal key_item_picked_up()
-@warning_ignore("unused_signal") signal key_item_dropped()
+@warning_ignore("unused_signal") signal key_item_dropped(key_item: KeyItemInventory)

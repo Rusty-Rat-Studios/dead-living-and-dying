@@ -7,16 +7,16 @@ signal reveal
 # i.e. moving through a door
 signal target_reached
 
-const BASE_SPEED: float = 4.0
-# time to wait before attacking when player enters room
 const ATTACK_DELAY: float = 0.3
 # time to tween light visibility when ghost starts/stops moving
 const LIGHT_FADE_DURATION: float = 0.3
 const LIGHT_ENERGY: float = 0.1
 
 # opacity values set according to player state
-const OPACITY_DYING: float = 0.2
-const OPACITY_DEAD: float = 0.8
+const OPACITY_DYING_MODIFIER: float = 0.2
+const OPACITY_DEAD_MODIFIER: float = 0.8
+const OPACITY_DYING_MODIFIER_NAME: String = "dying"
+const OPACITY_DEAD_MODIFIER_NAME: String = "dead"
 const OPACITY_FADE_DURATION: float = 1
 
 var opacity_tween: Tween
@@ -26,6 +26,9 @@ var light_enabled: bool = false
 var light_enabled_permanent: bool = false
 
 @onready var state_machine: GhostStateMachine = $StateMachine
+
+@onready var stats: GhostStats = GhostStats.new()
+
 @onready var hitbox: Area3D = $Hitbox
 # used by state ATTACKING to detect if player in range of stun attack
 @onready var attack_range: Area3D = $AttackRange
@@ -33,7 +36,6 @@ var light_enabled_permanent: bool = false
 @onready var sprite: AnimatedSprite3D = $AnimatedSprite3D
 @onready var light: OmniLight3D = $OmniLight3D
 
-@onready var speed: float = BASE_SPEED
 @onready var current_room: Room = get_parent()
 @onready var player_in_room: bool = false
 @onready var target_pos: Vector3 = Vector3.ZERO
@@ -62,10 +64,15 @@ func _ready() -> void:
 	# attach signal to update ghost visibility based on player state
 	SignalBus.player_state_changed.connect(_on_player_state_changed, CONNECT_DEFERRED)
 	
+	# key item stat modifiers added/removed when picked up
+	SignalBus.key_item_picked_up.connect(_on_key_item_picked_up)
+	SignalBus.key_item_dropped.connect(_on_key_item_dropped)
+	
 	movement_timeout_timer.timeout.connect(_stop_at_target_and_emit)
 	
-	hit.connect(_on_hit)
 	reveal.connect(_on_reveal)
+	# defer connection to allow state-specific logic to execute before changing states
+	hit.connect(_on_hit, CONNECT_DEFERRED)
 
 
 func _physics_process(delta: float) -> void:
@@ -105,20 +112,20 @@ func move_to_target(delta: float) -> void:
 	target_pos = Vector3(target_pos.x, 1, target_pos.z)
 	var distance_to_target: float = global_position.distance_squared_to(target_pos)
 	
-	if distance_to_target < speed * delta:
+	if distance_to_target < stats.speed * delta:
 		_stop_at_target_and_emit()
 	else:
 		at_target = false
 		direction = direction.normalized()
-		velocity = direction * speed
+		velocity = direction * stats.speed
 		move_and_slide()
 
 
-func set_opacity(opacity: float) -> void:
+func set_opacity() -> void:
 	if opacity_tween:
 		opacity_tween.kill()
 	opacity_tween = create_tween()
-	opacity_tween.tween_property(sprite, "modulate:a", opacity, OPACITY_FADE_DURATION)
+	opacity_tween.tween_property(sprite, "modulate:a", stats.opacity, OPACITY_FADE_DURATION)
 
 
 func set_light(energy: float) -> void:
@@ -163,29 +170,54 @@ func _on_hit() -> void:
 
 
 func _on_reveal() -> void:
-	var starting_opacity: float = sprite.modulate.a
 	sprite.shaded = false
-	set_opacity(OPACITY_DEAD)
+	stats.add_modifier(GhostStats.Stats.OPACITY, OPACITY_DEAD_MODIFIER, OPACITY_DEAD_MODIFIER_NAME)
+	set_opacity()
 	await Utility.delay(2)
-	set_opacity(starting_opacity)
+	stats.remove_modifier(GhostStats.Stats.OPACITY, "dead")
+	set_opacity()
 	await Utility.delay(1)
 	sprite.shaded = true
 
 
 func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
-	var opacity: float
+	stats.remove_modifier(GhostStats.Stats.OPACITY, "dying")
+	stats.remove_modifier(GhostStats.Stats.OPACITY, "dead")
 	match state:
 		PlayerStateMachine.States.LIVING:
-			opacity = 0
 			$Shadow.visible = false
 			light_enabled = false
 		PlayerStateMachine.States.DYING:
-			opacity = OPACITY_DYING
+			stats.add_modifier(GhostStats.Stats.OPACITY, OPACITY_DYING_MODIFIER, OPACITY_DYING_MODIFIER_NAME)
 			$Shadow.visible = true
 			light_enabled = true
 		PlayerStateMachine.States.DEAD:
-			opacity = OPACITY_DEAD
+			stats.add_modifier(GhostStats.Stats.OPACITY, OPACITY_DEAD_MODIFIER, OPACITY_DEAD_MODIFIER_NAME)
 			$Shadow.visible = true
 			light_enabled = false
 	
-	set_opacity(opacity)
+	set_opacity()
+
+
+func _on_key_item_picked_up() -> void:
+	#gdlint:disable=max-line-length
+	stats.add_modifier(GhostStats.Stats.SPEED, 0.5, "key_item") # move faster
+	stats.add_modifier(GhostStats.Stats.WINDUP_DURATION, -0.5, "key_item") # shorter delay to attack
+	stats.add_modifier(GhostStats.Stats.POSSESSION_DECISION_TIME, -0.5, "key_item") # shorter decision time
+	stats.add_modifier(GhostStats.Stats.STATE_POSSESSING_CHANCE, 0.4, "key_item") # higher chance to possess
+	stats.add_modifier(GhostStats.Stats.DEPOSSESS_CHANCE, -0.1, "key_item") # remove chance to depossess
+	stats.add_modifier(GhostStats.Stats.POSSESSION_WAIT_CHANCE, -0.2, "key_item") # remove chance to wait while possessing
+	stats.add_modifier(GhostStats.Stats.POSSESSION_ATTACK_WINDUP, -0.8, "key_item") # decrease possession attack windup duration
+	stats.add_modifier(GhostStats.Stats.STATE_ATTACKING_CHANCE, 0.2, "key_item") # higher chance to attack
+	#gdlint:disable=max-line-length
+
+
+func _on_key_item_dropped(_key_item: KeyItemInventory) -> void:
+	stats.remove_modifier(GhostStats.Stats.SPEED, "key_item")
+	stats.remove_modifier(GhostStats.Stats.WINDUP_DURATION, "key_item")
+	stats.remove_modifier(GhostStats.Stats.POSSESSION_DECISION_TIME, "key_item")
+	stats.remove_modifier(GhostStats.Stats.STATE_POSSESSING_CHANCE, "key_item")
+	stats.remove_modifier(GhostStats.Stats.DEPOSSESS_CHANCE, "key_item")
+	stats.remove_modifier(GhostStats.Stats.POSSESSION_WAIT_CHANCE, "key_item")
+	stats.remove_modifier(GhostStats.Stats.POSSESSION_ATTACK_WINDUP, "key_item") 
+	stats.remove_modifier(GhostStats.Stats.STATE_ATTACKING_CHANCE, "key_item")

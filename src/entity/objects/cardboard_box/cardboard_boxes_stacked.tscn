@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://dtv7i6ecsmj0f"]
+
+[ext_resource type="Texture2D" uid="uid://yv5ogl6aqkr4" path="res://src/entity/objects/cardboard_box/cardboard_boxes_stacked.png" id="1_mj8ce"]
+[ext_resource type="PackedScene" uid="uid://bp0ydphecs3iv" path="res://src/common/shadow.tscn" id="2_5vwny"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cs4cu"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("1_mj8ce")
+backlight_enabled = true
+backlight = Color(1, 1, 1, 1)
+backlight_texture = ExtResource("1_mj8ce")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_41tit"]
+size = Vector3(3.8, 2.39, 1.105)
+
+[node name="CardboardBoxesStacked" type="StaticBody3D"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+material_override = SubResource("StandardMaterial3D_cs4cu")
+cast_shadow = 0
+texture = ExtResource("1_mj8ce")
+
+[node name="Shadow" parent="." instance=ExtResource("2_5vwny")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.58071, -0.26058)
+size = Vector3(2.99, 1.835, 1.317)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.191129)
+shape = SubResource("BoxShape3D_41tit")

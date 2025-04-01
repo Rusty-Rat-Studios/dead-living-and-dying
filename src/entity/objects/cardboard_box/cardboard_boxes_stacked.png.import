@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdu1sybc4l0vp"
-path.s3tc="res://.godot/imported/caretaker_idle.png-bc7a3fb72ca7a951e1b684149ae26213.s3tc.ctex"
+uid="uid://yv5ogl6aqkr4"
+path.s3tc="res://.godot/imported/cardboard_boxes_stacked.png-e4fe08380ef0efb0d4cd862746e61e54.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://src/player/caretaker_idle.png"
-dest_files=["res://.godot/imported/caretaker_idle.png-bc7a3fb72ca7a951e1b684149ae26213.s3tc.ctex"]
+source_file="res://src/entity/objects/cardboard_box/cardboard_boxes_stacked.png"
+dest_files=["res://.godot/imported/cardboard_boxes_stacked.png-e4fe08380ef0efb0d4cd862746e61e54.s3tc.ctex"]
 
 [params]
 

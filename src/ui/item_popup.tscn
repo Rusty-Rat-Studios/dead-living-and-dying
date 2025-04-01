@@ -10,13 +10,13 @@
 offsets = PackedFloat32Array(0.576389, 1)
 colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_ytrdg"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2by1c"]
 gradient = SubResource("Gradient_cs4u5")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hmydm"]
-texture = SubResource("GradientTexture2D_ytrdg")
+texture = SubResource("GradientTexture2D_2by1c")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1utkn"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -110,6 +110,7 @@ mouse_filter = 2
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_vertical = 4
+theme_override_fonts/normal_font = ExtResource("4_fvdrb")
 text = "DESCRIPTION WITH ICON [img={30}]res://src/ui/resources/control_icons/E.png[/img]"
 fit_content = true
 horizontal_alignment = 0

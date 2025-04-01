@@ -1,11 +1,12 @@
 extends DefenseItemInventory
 
 const BASE_COOLDOWN_DURATION: float = 5
-const BASE_ACTIVE_DURATION: float = 2
+const BASE_ACTIVE_DURATION: float = 1.5
 const BASE_RADIUS: float = 2
 
 var player: Node = PlayerHandler.get_player()
 
+@onready var particle_material: ParticleProcessMaterial = $GPUParticles3D.process_material
 @onready var cooldown_active: bool = false
 
 
@@ -17,12 +18,15 @@ func _ready() -> void:
 		+ " to exorcise possessed objects within a limited range.")
 	texture = preload("res://src/entity/items/crucifix/crucifix.png")
 	
+	$GPUParticles3D.emitting = false
+	
 	$ActiveTimer.wait_time = BASE_ACTIVE_DURATION
 	$CooldownTimer.wait_time = BASE_COOLDOWN_DURATION
 	$ActiveTimer.timeout.connect(_on_active_timer_timeout)
 	$CooldownTimer.timeout.connect(_on_cooldown_timer_timeout)
 	
 	$Hitbox.body_entered.connect(_on_body_entered)
+	$Shield.body_entered.connect(_on_body_entered2)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -36,10 +40,13 @@ func use() -> void:
 	if cooldown_active:
 		return
 	$Hitbox/CollisionShape3D.shape.radius = BASE_RADIUS * player.player_stats.area_size
-	$Hitbox/MeshInstance3D.mesh.outer_radius = BASE_RADIUS * player.player_stats.area_size
-	$Hitbox/MeshInstance3D.mesh.inner_radius = $Hitbox/MeshInstance3D.mesh.outer_radius - 0.2
+	$Shield/CollisionShape3D.shape.radius = BASE_RADIUS * player.player_stats.area_size
+	particle_material.emission_ring_radius = BASE_RADIUS * player.player_stats.area_size
+	particle_material.emission_ring_inner_radius = particle_material.emission_ring_radius - 0.2
 	$Hitbox/CollisionShape3D.disabled = false
-	$Hitbox.visible = true
+	$Shield/CollisionShape3D.disabled = false
+	$GPUParticles3D.emitting = true
+	
 	$ActiveTimer.wait_time = BASE_ACTIVE_DURATION * player.player_stats.duration
 	$ActiveTimer.start()
 	$CooldownTimer.wait_time = BASE_COOLDOWN_DURATION / player.player_stats.cooldown_reduction
@@ -50,8 +57,10 @@ func use() -> void:
 
 
 func _on_active_timer_timeout() -> void:
+	$GPUParticles3D.emitting = false
+	await Utility.delay($GPUParticles3D.lifetime)
 	$Hitbox/CollisionShape3D.disabled = true
-	$Hitbox.visible = false
+	$Shield/CollisionShape3D.disabled = true
 
 
 func _on_cooldown_timer_timeout() -> void:
@@ -61,3 +70,9 @@ func _on_cooldown_timer_timeout() -> void:
 func _on_body_entered(body: Node3D) -> void:
 	if body is Ghost:
 		body.hit.emit()
+
+
+func _on_body_entered2(body: Node3D) -> void:
+	var force: Vector3 = body.linear_velocity
+	body.linear_velocity = Vector3(0,0,0);
+	body.apply_impulse(-force * 0.5)

@@ -12,6 +12,7 @@ class TestGhostEnterStunnedState:
 	func before_each() -> void:
 		_state_stunned = StateStunned.new()
 		_state_stunned._parent = double(Ghost).new()
+		_state_stunned._parent.stats = double(GhostStats).new()
 		_state_stunned._parent.sprite = double(AnimatedSprite3D).new()
 		_state_stunned._parent.sprite.sprite_frames = GhostSpriteFrames
 		_state_stunned.stun_timer = double(Timer).new()
