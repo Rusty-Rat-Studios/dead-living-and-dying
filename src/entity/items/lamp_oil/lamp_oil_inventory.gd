@@ -14,6 +14,7 @@ var cooldown_active: bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	world_resource = load("res://src/entity/items/lamp_oil/lamp_oil_world.tscn")
 	display_name = "Lamp Oil"
 	input_event = "use_active_item"
 	description = ("Active ITEM: Use with " + UIDevice.retrieve_icon_sized(input_event)
@@ -66,3 +67,9 @@ func reset_stat_update() -> void:
 	player.player_stats.stat_update_remove(PlayerStats.Stats.LIGHT_OMNI_RANGE, NAME)
 	player.player_stats.stat_update_remove(PlayerStats.Stats.LIGHT_SPOT_RANGE, NAME)
 	player.player_stats.stat_update_remove(PlayerStats.Stats.LIGHT_ENERGY, NAME)
+
+
+func drop() -> void:
+	reset_stat_update()
+	super()
+	
