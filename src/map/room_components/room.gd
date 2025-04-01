@@ -112,10 +112,14 @@ func _on_player_discovered_room() -> void:
 		room_icon.get_child(0).texture = room_information.room_icon
 
 
-func _on_key_item_dropped(key_item: KeyItemInventory) -> void:
-	if (player_in_room):
-		var key_item_world: KeyItemWorld = key_item.world_resource.instantiate()
-		add_child(key_item_world)
-		key_item_world.global_position = PlayerHandler.get_player().global_position
-		key_item_world.global_position.y = 1
+func _on_key_item_dropped(_key_item: KeyItemInventory) -> void:
+	if player_in_room:
+		var key_item: KeyItemWorld = KeyItemHandler.get_key_item()
+		key_item.reparent(self)
+		key_item.visible = true
 		
+		key_item.global_position = PlayerHandler.get_player().global_position
+		key_item.global_position.y = 1
+		
+		# update key item movement path with world-grid find_shortest_path algorithm
+		key_item.movement_path = get_parent().find_shortest_path(self, key_item.starting_room)

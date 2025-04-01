@@ -154,8 +154,8 @@ func build_room_graph() -> void:
 	print(room_graph)
 
 
-#Returns the shortest path from the current room to the target room.
-func find_shortest_path(start_room: Room, end_room: Room) -> Array[Room]:
+# Returns the shortest path as a set of rooms from the current room to the target room.
+func find_shortest_path(start_room: Room, end_room: Room) -> Array:
 	
 	if not room_graph.has(start_room) or not room_graph.has(end_room):
 		printerr("Start or end room not found in the graph.")
