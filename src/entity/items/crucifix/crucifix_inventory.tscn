@@ -28,8 +28,8 @@ direction = Vector3(0, 1, 0)
 gravity = Vector3(0, 0, 0)
 radial_accel_min = -6.0
 radial_accel_max = -4.0
-tangential_accel_min = -8.0
-tangential_accel_max = -8.0
+tangential_accel_min = -12.0
+tangential_accel_max = -12.0
 tangential_accel_curve = SubResource("CurveTexture_kfemg")
 damping_min = 2.0
 damping_max = 2.5
@@ -65,10 +65,9 @@ monitorable = false
 shape = SubResource("CylinderShape3D_xw4mg")
 disabled = true
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="Hitbox" index="1"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." index="1"]
 cast_shadow = 0
-amount = 64
-lifetime = 2.0
+amount = 128
 preprocess = 0.5
 local_coords = true
 trail_enabled = true
@@ -76,13 +75,13 @@ trail_lifetime = 2.0
 process_material = SubResource("ParticleProcessMaterial_pyfjc")
 draw_pass_1 = SubResource("RibbonTrailMesh_hupak")
 
-[node name="CooldownTimer" type="Timer" parent="." index="1"]
+[node name="CooldownTimer" type="Timer" parent="." index="2"]
 one_shot = true
 
-[node name="ActiveTimer" type="Timer" parent="." index="2"]
+[node name="ActiveTimer" type="Timer" parent="." index="3"]
 one_shot = true
 
-[node name="Shield" type="Area3D" parent="." index="3"]
+[node name="Shield" type="Area3D" parent="." index="4"]
 visible = false
 collision_layer = 32
 collision_mask = 32
