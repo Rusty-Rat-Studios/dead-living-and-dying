@@ -100,7 +100,7 @@ func disable_effects() -> void:
 	$GPUParticles3D.emitting = false
 
 
-func attack(_target: Node3D) -> void:
+func attack(_target: Node3D, _attack_windup: float) -> void:
 	print(Time.get_time_string_from_system(), ": WARNING - attack() function called from base possessable ", self)
 
 
