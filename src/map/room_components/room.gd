@@ -112,7 +112,7 @@ func _on_player_discovered_room() -> void:
 		room_icon.get_child(0).texture = room_information.room_icon
 
 
-func _on_key_item_dropped(_key_item: KeyItemInventory) -> void:
+func _on_key_item_dropped() -> void:
 	if player_in_room:
 		var key_item: KeyItemWorld = KeyItemHandler.get_key_item()
 		key_item.reparent(self)
