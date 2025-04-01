@@ -2,12 +2,12 @@ class_name ItemInventory
 extends Node3D
 
 # to be set by inheritors as a reference to their in-world partner version
+const DELAY_DURATION: int = 1
 var world_resource: Resource
 var display_name: String
 var input_event: String
 var description: String
 var texture: Texture2D
-const DELAY_DURATION: int = 1
 
 func drop() -> void:
 	var world_item: ItemWorld = world_resource.instantiate()
