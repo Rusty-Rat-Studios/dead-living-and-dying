@@ -1,5 +1,7 @@
 extends ItemWorld
 
+var starting_room: Room
+
 
 func _ready() -> void:
 	# initialize game.gd value to track key starting position when it is
@@ -8,6 +10,8 @@ func _ready() -> void:
 		get_node("/root/Game").key_item_starting_position = starting_position
 	else:
 		starting_position = get_node("/root/Game").key_item_starting_position
+	
+	starting_room = get_parent()
 	super()
 
 

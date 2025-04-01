@@ -11,10 +11,15 @@ const GRID_SCALE: float = 16 # Size of each grid square in editor units
 
 var number_of_rooms: int = 0
 var room_map: HashMap = HashMap.new()
+# adjacency list of each room's connected rooms
+# key == room node
+# value == array of connected room nodes
+var room_graph: Dictionary[Room, Array]
 
 
 func _ready() -> void:
 	setup_grid()
+	build_room_graph()
 
 
 func setup_grid() -> void:
@@ -129,3 +134,25 @@ static func add_to_door_grid_removing_matches(door_grid: Array[DoorLocation],
 func _hash_vector2(vector: Vector2) -> PackedByteArray:
 	var hash_string: String = "Vector2|%s" % [str(vector)]
 	return hash_string.sha256_buffer()
+
+
+# constructs a graph (nodes == rooms, edges == connected rooms/doors) of the map
+func build_room_graph() -> void:
+	for room_id: PackedByteArray in room_map.keys():
+		if not room_graph.has(room_map.retrieve_with_hash(room_id)):
+			var room: Room = room_map.retrieve_with_hash(room_id)
+			var linked_rooms: Array[Room]
+			
+			# get each door
+			for door_id: PackedByteArray in room.doors.keys():
+				var door: Door = room.doors.retrieve_with_hash(door_id)
+				# append each door's linked room to the list
+				linked_rooms.append(door.linked_room)
+			
+			room_graph[room_map.retrieve_with_hash(room_id)] = linked_rooms
+	
+	print(room_graph)
+
+
+#Returns the shortest path from the current room to the target room.
+#func find_shortest_path(current: Room, target: Room) -> Array[Room]:
