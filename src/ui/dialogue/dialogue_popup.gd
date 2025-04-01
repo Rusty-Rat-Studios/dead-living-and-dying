@@ -61,9 +61,6 @@ func populate_dialogue_options(dialogue: Dictionary) -> void:
 		buttons.append(dialogue_option)
 	
 	# set focus neighbours for controller use
-
-	
-	# set top and bottom options to wrap focus
 	if buttons.size() > 1:
 		for i: int in range(buttons.size()):
 			var current_button: DialogueOption = buttons[i]
@@ -72,11 +69,11 @@ func populate_dialogue_options(dialogue: Dictionary) -> void:
 			if i < buttons.size() - 1:
 				current_button.focus_neighbor_bottom = buttons[i + 1].get_path()
 		
+		# set first and last options to wrap focus
 		buttons[0].focus_neighbor_top = buttons[buttons.size() - 1].get_path()
 		buttons[buttons.size() - 1].focus_neighbor_bottom = buttons[0].get_path()
 	
 	# focus first dialogue option
-	#player_responses.get_child(0).grab_focus()
 	buttons[0].grab_focus()
 
 
