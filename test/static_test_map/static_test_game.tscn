@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://kpweub7m3k4n"]
+[gd_scene load_steps=29 format=3 uid="uid://kpweub7m3k4n"]
 
 [ext_resource type="Script" uid="uid://br2ou0xf5p2mo" path="res://src/game.gd" id="1_goqwn"]
 [ext_resource type="PackedScene" uid="uid://bbow7knip3g6g" path="res://src/player/player.tscn" id="2_2bptp"]
@@ -16,7 +16,6 @@
 [ext_resource type="Script" uid="uid://bv4f3snq7u1u2" path="res://src/common/room_information.gd" id="10_rxyol"]
 [ext_resource type="PackedScene" uid="uid://c176v8gdlci8v" path="res://src/old_man/old_man.tscn" id="11_6mutg"]
 [ext_resource type="PackedScene" uid="uid://3gsxuhfeo5qs" path="res://src/entity/objects/wall_painting/wall_painting.tscn" id="12_7d0il"]
-[ext_resource type="PackedScene" uid="uid://8tfld0cdj22d" path="res://src/entity/items/crucifix/crucifix_world.tscn" id="13_0dcr2"]
 [ext_resource type="PackedScene" uid="uid://web8bdry114l" path="res://src/map/room_components/shrine/shrine.tscn" id="14_eaohd"]
 [ext_resource type="PackedScene" uid="uid://yihpxsaeuqdi" path="res://src/entity/ghost/ghost.tscn" id="15_b5bwo"]
 [ext_resource type="PackedScene" uid="uid://cko3wlfgl81ce" path="res://src/entity/objects/crate/crate.tscn" id="16_sppgp"]
@@ -112,9 +111,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.25348, 2, -7.85561)
 
 [node name="WallPainting2" parent="WorldGrid/RoomStart" instance=ExtResource("12_7d0il")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.26277, 2, -7.85561)
-
-[node name="CrucifixWorld" parent="WorldGrid/RoomStart" instance=ExtResource("13_0dcr2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -4)
 
 [node name="Room" type="Node3D" parent="WorldGrid" groups=["rooms"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16)
