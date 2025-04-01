@@ -1,3 +1,4 @@
+class_name KeyItemWorld
 extends ItemWorld
 
 var starting_room: Room

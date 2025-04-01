@@ -24,7 +24,7 @@ func reset() -> void:
 		snuff()
 
 
-func attack(_target: Node3D) -> void:
+func attack(_target: Node3D, _attack_windup: float) -> void:
 	snuff()
 	depossess()
 

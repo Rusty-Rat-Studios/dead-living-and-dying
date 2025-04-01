@@ -7,8 +7,6 @@ const SPEED_ATTACK_MODIFIER: float = 4.5
 const SPEED_PRE_ATTACK_MODIFIER_NAME: String = "pre_attack"
 const SPEED_ATTACK_MODIFIER_NAME: String = "attack"
 
-# how long the shake animation is displayed before attacking
-const ATTACK_WINDUP: float = 1
 # how much the shake animation moves in x or y dimensions
 const ATTACK_SHAKE_MAGNITUDE: Vector2 = Vector2(1.5, 0.2)
 const COLOR_RESTORATION_DURATION: float = 1
@@ -114,8 +112,8 @@ func attack() -> void:
 	attack_range_collision_shape.set_deferred("disabled", true)
 	
 	color_tween = create_tween()
-	color_tween.tween_property(_parent.sprite, "modulate", ATTACK_COLOR * base_color, ATTACK_WINDUP)
-	await sprite_shaker.animate(_parent.sprite, ATTACK_WINDUP, ATTACK_SHAKE_MAGNITUDE)
+	color_tween.tween_property(_parent.sprite, "modulate", ATTACK_COLOR * base_color, _parent.stats.windup_duration)
+	await sprite_shaker.animate(_parent.sprite, _parent.stats.windup_duration, ATTACK_SHAKE_MAGNITUDE)
 	
 	winding_up = false
 	_parent.stats.add_modifier(GhostStats.Stats.SPEED, SPEED_ATTACK_MODIFIER, SPEED_ATTACK_MODIFIER_NAME)
