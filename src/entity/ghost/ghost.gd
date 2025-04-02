@@ -2,6 +2,7 @@ class_name Ghost
 extends CharacterBody3D
 
 signal hit
+signal reveal
 # connected to by states to process target-driven behavior
 # i.e. moving through a door
 signal target_reached
@@ -69,6 +70,7 @@ func _ready() -> void:
 	
 	movement_timeout_timer.timeout.connect(_stop_at_target_and_emit)
 	
+	reveal.connect(_on_reveal)
 	# defer connection to allow state-specific logic to execute before changing states
 	hit.connect(_on_hit, CONNECT_DEFERRED)
 
@@ -165,6 +167,17 @@ func _on_hit() -> void:
 	if state_machine.current_state != state_machine.States.STUNNED:
 		state_machine.change_state(state_machine.States.STUNNED)
 		$ParticleBurst.emitting = true
+
+
+func _on_reveal() -> void:
+	sprite.shaded = false
+	stats.add_modifier(GhostStats.Stats.OPACITY, OPACITY_DEAD_MODIFIER, OPACITY_DEAD_MODIFIER_NAME)
+	set_opacity()
+	await Utility.delay(2)
+	stats.remove_modifier(GhostStats.Stats.OPACITY, "dead")
+	set_opacity()
+	await Utility.delay(1)
+	sprite.shaded = true
 
 
 func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
