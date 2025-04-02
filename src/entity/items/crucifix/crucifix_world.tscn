@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bslonn3bn1m6s" path="res://src/entity/items/item_world.tscn" id="1_20v5o"]
 [ext_resource type="PackedScene" uid="uid://cdibgy57rubh6" path="res://src/entity/items/crucifix/crucifix_inventory.tscn" id="3_e25lq"]
 [ext_resource type="Texture2D" uid="uid://coa8lvqi23xya" path="res://src/entity/items/crucifix/crucifix.png" id="3_lw6l4"]
-[ext_resource type="Shader" path="res://src/entity/items/item_world_shader.gdshader" id="3_wp06e"]
+[ext_resource type="Shader" uid="uid://bqm7xmu54nr45" path="res://src/entity/items/item_world_shader.gdshader" id="3_wp06e"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3gjy4"]
 resource_local_to_scene = true

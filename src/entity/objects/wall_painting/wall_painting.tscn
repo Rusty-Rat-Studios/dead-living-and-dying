@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://bfmkrask6gxl3" path="res://src/possessable/attack/possessable_ranged.tscn" id="1_y53pr"]
 [ext_resource type="Script" uid="uid://db2v7j1wnkduq" path="res://src/common/sprite_backlight.gd" id="2_tux6f"]
 
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_p76ih"]
 size = Vector3(4, 5, 0.2)
 
