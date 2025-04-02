@@ -9,7 +9,7 @@ func _ready() -> void:
 	input_event = "use_consumable_item"
 	description = ("CONSUMABLE ITEM: Use with " + UIDevice.retrieve_icon_sized(input_event)
 		+ " Stun all ghosts regardless of where they are.")
-	texture = preload("res://src/entity/items/holy_water/holy_water.png")
+	texture = preload("res://src/entity/items/incense/incense.png")
 	count = 1
 
 
