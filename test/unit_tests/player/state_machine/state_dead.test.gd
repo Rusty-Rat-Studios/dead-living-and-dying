@@ -5,6 +5,8 @@ class TestPlayerEnterDeadState:
 	extends GutTest
 	
 	var StateDead: Script = load("res://src/player/state_machine/state_dead.gd")
+	var PlayerSpriteFramesTorso: SpriteFrames = load("res://src/player/player_sprite_frames_torso.tres")
+	var PlayerSpriteFramesLegs: SpriteFrames = load("res://src/player/player_sprite_frames_legs.tres")
 	var Hurtbox: Script = load("res://src/player/hurtbox.gd")
 	
 	var _state_dead: PlayerState
@@ -14,6 +16,10 @@ class TestPlayerEnterDeadState:
 		_state_dead = partial_double(StateDead).new()
 		_state_dead._parent = double(Player).new()
 		_state_dead._parent.player_stats = double(PlayerStats).new()
+		_state_dead._parent.sprite_torso = double(AnimatedSprite3D).new()
+		_state_dead._parent.sprite_legs = double(AnimatedSprite3D).new()
+		_state_dead._parent.sprite_torso.sprite_frames = PlayerSpriteFramesTorso
+		_state_dead._parent.sprite_legs.sprite_frames = PlayerSpriteFramesLegs
 		_state_dead._parent._corpse = double(Corpse).new()
 		_state_dead._parent._corpse_indicator = double(GPUParticles3D).new()
 		_state_dead._parent.hurtbox = double(Hurtbox).new()
@@ -37,7 +43,7 @@ class TestPlayerEnterDeadState:
 		
 		assert_called(_state_dead._parent.player_stats, "remove_stat_modifiers")
 		assert_call_count(_state_dead._parent.player_stats, "stat_update_add", 1, [PlayerStats.Stats.SPEED, StateDead.SPEED_MODIFIER, StateDead.DEAD_MODIFIER_NAME, -1])
-		assert_called(_state_dead._parent, "modulate_color")
+		assert_almost_eq(_state_dead._parent.sprite_torso.modulate.a, _state_dead._parent.OPACITY_DEAD, 0.01)
 		assert_called(_key_item, "drop")
 		assert_called(_state_dead, "move_to_shrine")
 		assert_eq(_state_dead._parent._corpse_indicator.emitting, true)
@@ -64,6 +70,8 @@ class TestPlayerExitDeadState:
 	extends GutTest
 	
 	var StateDead: Script = load("res://src/player/state_machine/state_dead.gd")
+	var PlayerSpriteFramesTorso: SpriteFrames = load("res://src/player/player_sprite_frames_torso.tres")
+	var PlayerSpriteFramesLegs: SpriteFrames = load("res://src/player/player_sprite_frames_legs.tres")
 	var Hurtbox: Script = load("res://src/player/hurtbox.gd")
 	
 	var _state_dead: PlayerState
@@ -72,6 +80,10 @@ class TestPlayerExitDeadState:
 		_state_dead = partial_double(StateDead).new()
 		_state_dead._parent = double(Player).new()
 		_state_dead._parent.player_stats = double(PlayerStats).new()
+		_state_dead._parent.sprite_torso = double(AnimatedSprite3D).new()
+		_state_dead._parent.sprite_legs = double(AnimatedSprite3D).new()
+		_state_dead._parent.sprite_torso.sprite_frames = PlayerSpriteFramesTorso
+		_state_dead._parent.sprite_legs.sprite_frames = PlayerSpriteFramesLegs
 		_state_dead._parent._corpse = double(Corpse).new()
 		_state_dead._parent._corpse_indicator = double(GPUParticles3D).new()
 		_state_dead._parent.hurtbox = double(Hurtbox).new()
@@ -100,7 +112,7 @@ class TestPlayerExitDeadState:
 		assert_called(_state_dead._parent.player_stats, "remove_stat_modifiers")
 		assert_eq(_state_dead.dead_light.light_energy, _state_dead.dead_light_energy_default)
 		assert_eq(_state_dead.attacked_modifier, 0.0)
-		assert_called(_state_dead._parent, "modulate_color", [Color(1, 1, 1, 1)])
+		assert_eq(_state_dead._parent.sprite_torso.modulate.a, 1.0)
 		assert_eq(_state_dead._parent.collision_layer, CollisionBit.PLAYER + CollisionBit.PHYSICAL)
 		assert_eq(_state_dead._parent.collision_mask, CollisionBit.WORLD)
 		assert_eq(_state_dead._parent.hurtbox.collision_mask, CollisionBit.PHYSICAL)
