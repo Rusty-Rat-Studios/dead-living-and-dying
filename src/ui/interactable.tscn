@@ -11,5 +11,6 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1.2, 0)
 transparency = 0.5
 cast_shadow = 0
 billboard = 1
+no_depth_test = true
 render_priority = 5
 texture = ExtResource("2_xo6ay")
