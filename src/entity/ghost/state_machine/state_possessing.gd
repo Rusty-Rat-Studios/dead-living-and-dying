@@ -154,7 +154,7 @@ func _attack() -> void:
 	if target_possessable:
 		# await necessary for some overloaded functions of inheritors
 		@warning_ignore("redundant_await")
-		await target_possessable.attack(PlayerHandler.get_player())
+		await target_possessable.attack(PlayerHandler.get_player(), _parent.stats.possession_attack_windup)
 		is_possessing = false
 		change_state(GhostStateMachine.States.WAITING)
 

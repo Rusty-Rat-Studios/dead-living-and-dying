@@ -12,7 +12,10 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	$ProgressBar.value = _cooldown_timer.time_left
+	if is_instance_valid(_cooldown_timer):
+		$ProgressBar.value = _cooldown_timer.time_left
+	else:
+		refresh()
 
 
 func _on_item_used(timer: Timer) -> void:
@@ -22,6 +25,11 @@ func _on_item_used(timer: Timer) -> void:
 	if not _cooldown_timer.timeout.is_connected(_on_cooldown_timer_timeout):
 		_cooldown_timer.timeout.connect(_on_cooldown_timer_timeout)
 	set_process(true)
+
+
+func refresh() -> void:
+	set_process(false)
+	$ProgressBar.value = $ProgressBar.min_value
 
 
 func _on_cooldown_timer_timeout() -> void:
