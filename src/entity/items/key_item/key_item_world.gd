@@ -89,11 +89,6 @@ func set_target(new_target: Room) -> void:
 	move_target = starting_position
 
 
-func reset() -> void:
-	super()
-	$Interactable.display_message("KEY ITEM")
-
-
 func pick_up() -> void:
 	# overloaded version of ItemWorld.pick_up() that does not queue_free() at the end
 	if inventory_resource == null:
@@ -111,12 +106,6 @@ func pick_up() -> void:
 	# set invisible instead of queue_free() to preserve starting position data
 	visible = false
 	set_process(false)
-
-
-func _on_body_exited(_body: Node3D) -> void:
-	# override function to display "key item" message again instead of hiding message
-	$Interactable.display_message("KEY ITEM")
-	$Interactable.enabled = false
 
 
 func _on_key_item_dropped() -> void:

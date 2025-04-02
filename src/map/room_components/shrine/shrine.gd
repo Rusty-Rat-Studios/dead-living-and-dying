@@ -1,8 +1,6 @@
 class_name Shrine
 extends StaticBody3D
 
-const TEXT_INTERACTABLE: String = "[E] Activate"
-
 const TEXTURE: Texture2D = preload("res://src/map/room_components/shrine/shrine.png")
 const TEXTURE_CONSUMED: Texture2D = preload("res://src/map/room_components/shrine/shrine_consumed.png")
 
@@ -46,7 +44,7 @@ func reset() -> void:
 		disable_effects()
 	
 	$Interactable.inputs = ["interact"]
-	$Interactable.hide_message()
+	$Interactable.hide()
 
 
 func enable_effects() -> void:
@@ -77,7 +75,7 @@ func activate() -> void:
 	enable_effects()
 	# remove input detection for interactable and hide message
 	$Interactable.inputs.clear()
-	$Interactable.hide_message()
+	$Interactable.hide()
 
 
 func consume() -> void:
@@ -94,14 +92,14 @@ func _on_body_entered(_body: Node3D) -> void:
 		and not activated 
 		and PlayerHandler.get_player_state() != PlayerStateMachine.States.DEAD):
 		# display interaction text
-		$Interactable.display_message(TEXT_INTERACTABLE)
+		$Interactable.show()
 		$Interactable.enabled = true
 
 
 func _on_body_exited(_body: Node3D) -> void:
 	# no guard check -> should always be non-interactable when player leaves
 	# regardless of shrine and player states
-	$Interactable.hide_message()
+	$Interactable.hide()
 	$Interactable.enabled = false
 
 

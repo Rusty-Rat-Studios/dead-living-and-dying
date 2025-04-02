@@ -16,7 +16,7 @@ func _ready() -> void:
 
 func reset() -> void:
 	$Interactable.inputs = ["interact"]
-	$Interactable.hide_message()
+	$Interactable.hide()
 	$Interactable.enabled = false
 	global_position = starting_position
 
@@ -59,13 +59,13 @@ func disable_interactable(duration: int) -> void:
 func _on_body_entered(_body: Node3D) -> void:
 	# no node check required as collision mask is layer PLAYER
 	if PlayerHandler.get_player_state() != PlayerStateMachine.States.DEAD:
-		$Interactable.display_message("[E] Pick Up")
+		$Interactable.show()
 		$Interactable.enabled = true
 
 
 func _on_body_exited(_body: Node3D) -> void:
 	# no node check required as collision mask is layer PLAYER
-	$Interactable.hide_message()
+	$Interactable.hide()
 	$Interactable.enabled = false
 
 

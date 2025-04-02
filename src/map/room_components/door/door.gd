@@ -43,7 +43,7 @@ func _ready() -> void:
 	parent_room.register_door(self)
 	
 	interactable.inputs = ["interact"]
-	interactable.hide_message()
+	interactable.hide()
 	interactable.input_detected.connect(_on_interaction)
 	
 	deactivate_effects(true)
@@ -93,7 +93,7 @@ func lock() -> void:
 	door_locked = true
 	if door_open:
 		close_door()
-	interactable.hide_message()
+	interactable.hide()
 	interactable.enabled = false
 	activate_effects()
 
@@ -101,7 +101,7 @@ func lock() -> void:
 func unlock() -> void:
 	door_locked = false
 	if $PlayerDetector.overlaps_body(PlayerHandler.get_player()):
-		interactable.display_message("[E] Open Door")
+		interactable.show()
 		interactable.enabled = true
 	deactivate_effects()
 
@@ -131,13 +131,13 @@ func deactivate_effects(instant: bool = false) -> void:
 func _on_body_entered(_body: Node3D) -> void:
 	# no node check required as collision mask is layer PLAYER
 	if not door_open and not door_locked:
-		interactable.display_message("[E] Open Door")
+		interactable.show()
 		interactable.enabled = true
 
 
 func _on_body_exited(_body: Node3D) -> void:
 	# no node check required as collision mask is layer PLAYER
-	interactable.hide_message()
+	interactable.hide()
 	interactable.enabled = false
 	# ensure door does not close until player is outside both door player detector ranges
 	if not linked_door.get_node("PlayerDetector").has_overlapping_bodies():
@@ -154,7 +154,7 @@ func _on_interaction(input_name: String) -> void:
 			if not linked_room.room_discovered:
 				linked_room.player_discovered_room.emit()
 			interactable.enabled = false
-			interactable.hide_message()
+			interactable.hide()
 
 
 func _on_player_state_changed(state: PlayerStateMachine.States) -> void:

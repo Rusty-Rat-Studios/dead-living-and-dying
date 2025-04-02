@@ -112,6 +112,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 1.1)
 shape = SubResource("BoxShape3D_xm1qk")
 
 [node name="Interactable" parent="." instance=ExtResource("4_53qlf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.3)
 
 [node name="ObjectBlocker" type="StaticBody3D" parent="."]
 collision_layer = 4
