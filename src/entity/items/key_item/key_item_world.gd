@@ -23,10 +23,3 @@ func _process(_delta: float) -> void:
 
 func reset() -> void:
 	super()
-	$Interactable.display_message("KEY ITEM")
-
-
-func _on_body_exited(_body: Node3D) -> void:
-	# override function to display "key item" message again instead of hiding message
-	$Interactable.display_message("KEY ITEM")
-	$Interactable.enabled = false
