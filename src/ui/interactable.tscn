@@ -6,15 +6,10 @@
 [node name="Interactable" type="Node3D"]
 script = ExtResource("1_x07wr")
 
-[node name="Label3D" type="Label3D" parent="."]
-billboard = 1
-no_depth_test = true
-render_priority = 1
-text = "UNITIALIZED
-INTERACTABLE"
-font_size = 64
-
 [node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
-billboard = 2
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 1.2, 0)
+transparency = 0.4
+cast_shadow = 0
+billboard = 1
+render_priority = 5
 texture = ExtResource("2_xo6ay")
