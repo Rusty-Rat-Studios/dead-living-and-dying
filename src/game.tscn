@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://jlav0m1ndqde"]
+[gd_scene load_steps=57 format=3 uid="uid://jlav0m1ndqde"]
 
 [ext_resource type="Script" uid="uid://br2ou0xf5p2mo" path="res://src/game.gd" id="1_77rk7"]
 [ext_resource type="PackedScene" uid="uid://bbow7knip3g6g" path="res://src/player/player.tscn" id="1_hu241"]
@@ -6,7 +6,9 @@
 [ext_resource type="Script" uid="uid://kgcxuhne3rbl" path="res://src/player/state_machine/state_dead.gd" id="6_bheuf"]
 [ext_resource type="Script" uid="uid://btdlvy02iwmn2" path="res://src/player/state_machine/state_living.gd" id="7_unc66"]
 [ext_resource type="Script" uid="uid://dk6tfo4i3solm" path="res://src/map/world_grid.gd" id="7_vaj68"]
+[ext_resource type="Script" uid="uid://b6py5yqiivmff" path="res://src/map/generator_settings.gd" id="8_0emiv"]
 [ext_resource type="Script" uid="uid://bfwa3mijk47us" path="res://src/player/state_machine/state_dying.gd" id="8_isvo6"]
+[ext_resource type="Resource" uid="uid://ds8en1xrhc0us" path="res://src/entity/entity_tables/item_entity_table.tres" id="8_m1wne"]
 [ext_resource type="PackedScene" uid="uid://yihpxsaeuqdi" path="res://src/entity/ghost/ghost.tscn" id="9_t4a6d"]
 [ext_resource type="PackedScene" uid="uid://te0dpapcosk4" path="res://src/map/rooms/room_minimap/basic_room_minimap.tscn" id="9_vaj68"]
 [ext_resource type="Script" uid="uid://dqhrw6rxew3fa" path="res://src/common/door_location.gd" id="9_xa8c5"]
@@ -37,8 +39,15 @@
 [ext_resource type="PackedScene" uid="uid://bmyu4uefeccim" path="res://src/entity/objects/cardboard_box/cardboard_box_open.tscn" id="32_3onxw"]
 [ext_resource type="PackedScene" uid="uid://qcl430tspnu1" path="res://src/entity/objects/cardboard_box/cardboard_box_closed.tscn" id="33_ou5k8"]
 [ext_resource type="PackedScene" uid="uid://dtv7i6ecsmj0f" path="res://src/entity/objects/cardboard_box/cardboard_boxes_stacked.tscn" id="34_4lake"]
-[ext_resource type="PackedScene" uid="uid://y5gvyod1654d" path="res://item_room.tscn" id="37_0ehnx"]
+[ext_resource type="PackedScene" uid="uid://y5gvyod1654d" path="res://src/map/rooms/item_room.tscn" id="37_0ehnx"]
 [ext_resource type="PackedScene" uid="uid://bxso5jmpfc7ao" path="res://src/entity/items/incense/incense_world.tscn" id="38_0ehnx"]
+
+[sub_resource type="Resource" id="Resource_m1wne"]
+script = ExtResource("8_0emiv")
+spread = 0.0
+min_rooms = 0
+item_entity_table = ExtResource("8_m1wne")
+metadata/_custom_type_script = "uid://b6py5yqiivmff"
 
 [sub_resource type="Resource" id="Resource_3y6bj"]
 script = ExtResource("9_xa8c5")
@@ -151,6 +160,7 @@ script = ExtResource("8_isvo6")
 
 [node name="WorldGrid" type="Node3D" parent="."]
 script = ExtResource("7_vaj68")
+generator_settings = SubResource("Resource_m1wne")
 
 [node name="RoomBottom" type="Node3D" parent="WorldGrid" groups=["rooms"]]
 script = ExtResource("10_uwref")
