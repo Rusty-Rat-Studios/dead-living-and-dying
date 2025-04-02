@@ -4,13 +4,14 @@ extends Node3D
 https://forum.godotengine.org/t/display-the-character-of-an-input-on-screen/4101
 '''
 
+# used to communicate input back to parent scene
+signal input_detected(event: InputEvent)
+
 const ICON_E: Texture2D = preload("res://src/ui/resources/control_icons/E.png")
 const ICON_X: Texture2D = preload("res://src/ui/resources/control_icons/button_xbox_digital_x_1.png")
 const ICON_E_SCALE: Vector3 = Vector3(2.5, 2.5, 2.5)
 const ICON_X_SCALE: Vector3 = Vector3(0.15, 0.15, 0.15)
 
-# used to communicate input back to parent scene
-signal input_detected(event: InputEvent)
 
 # allow multiple input actions for a single node, parsed in _input()
 # input types should be Input Map strings, e.g. "ui_accept" or "interact"
@@ -38,7 +39,7 @@ func _input(event: InputEvent) -> void:
 				return
 
 
-func display_message(message: String) -> void:
+func display_message(_message: String) -> void:
 	sprite.visible = true
 
 
