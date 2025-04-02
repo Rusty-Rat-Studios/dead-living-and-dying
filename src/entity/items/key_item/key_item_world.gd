@@ -7,7 +7,7 @@ var starting_room: Room
 var target_room: Room
 var movement_path: Array
 var move_target: Vector3
-var move_speed: float = 1
+var move_speed: float = 0.8
 
 
 func _ready() -> void:
