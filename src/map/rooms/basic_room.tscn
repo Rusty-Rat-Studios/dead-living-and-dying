@@ -1,11 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://dh8q75xrlxeaa"]
+[gd_scene load_steps=16 format=3 uid="uid://dh8q75xrlxeaa"]
 
 [ext_resource type="Script" uid="uid://bo0tyfrjfebc6" path="res://src/map/room_components/room.gd" id="1_5h3g7"]
 [ext_resource type="Script" uid="uid://dqhrw6rxew3fa" path="res://src/common/door_location.gd" id="2_dd2d1"]
 [ext_resource type="PackedScene" uid="uid://te0dpapcosk4" path="res://src/map/rooms/room_minimap/basic_room_minimap.tscn" id="2_koypu"]
 [ext_resource type="Script" uid="uid://bv4f3snq7u1u2" path="res://src/common/room_information.gd" id="3_koypu"]
 [ext_resource type="PackedScene" uid="uid://b3nn5u3a5o85j" path="res://src/map/room_components/floor/16x16_floor.tscn" id="4_h3kao"]
-[ext_resource type="PackedScene" uid="uid://bmevu5yvsxttw" path="res://src/entity/spawner.tscn" id="5_crvnh"]
 [ext_resource type="PackedScene" uid="uid://b6pd0nir4sadl" path="res://src/map/room_components/door/door_x16.tscn" id="6_pq5nb"]
 
 [sub_resource type="Resource" id="Resource_3y6bj"]
@@ -63,18 +62,6 @@ script = ExtResource("1_5h3g7")
 room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="." instance=ExtResource("4_h3kao")]
-
-[node name="Spawner" parent="." instance=ExtResource("5_crvnh")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.842, 0.5, -6.104)
-
-[node name="Spawner2" parent="." instance=ExtResource("5_crvnh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.842, 0.5, -6.104)
-
-[node name="Spawner3" parent="." instance=ExtResource("5_crvnh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.842, 0.5, 3.099)
-
-[node name="Spawner4" parent="." instance=ExtResource("5_crvnh")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.899, 0.5, 3.289)
 
 [node name="Door" parent="." instance=ExtResource("6_pq5nb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.95)
