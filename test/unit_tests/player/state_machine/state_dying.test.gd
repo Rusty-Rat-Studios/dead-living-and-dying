@@ -5,6 +5,8 @@ class TestPlayerEnterDyingState:
 	extends GutTest
 	
 	var StateDying: Script = load("res://src/player/state_machine/state_dying.gd")
+	var PlayerSpriteFramesTorso: SpriteFrames = load("res://src/player/player_sprite_frames_torso.tres")
+	var PlayerSpriteFramesLegs: SpriteFrames = load("res://src/player/player_sprite_frames_legs.tres")
 	var Stunbox: Script = load("res://src/player/stunbox.gd")
 	var DyingScreenEffect: Script = load("res://src/ui/dying_screen_effect.gd")
 	
@@ -14,6 +16,10 @@ class TestPlayerEnterDyingState:
 		_state_dying = StateDying.new()
 		_state_dying._parent = double(Player).new()
 		_state_dying._parent.player_stats = double(PlayerStats).new()
+		_state_dying._parent.sprite_torso = double(AnimatedSprite3D).new()
+		_state_dying._parent.sprite_legs = double(AnimatedSprite3D).new()
+		_state_dying._parent.sprite_torso.sprite_frames = PlayerSpriteFramesTorso
+		_state_dying._parent.sprite_legs.sprite_frames = PlayerSpriteFramesLegs
 		_state_dying._state_machine = double(PlayerStateMachine).new()
 		_state_dying._state_machine.current_state = PlayerStateMachine.States.DYING
 		_state_dying._parent.stunbox = double(Stunbox).new()
@@ -45,6 +51,8 @@ class TestPlayerExitDyingState:
 	extends GutTest
 	
 	var StateDying: Script = load("res://src/player/state_machine/state_dying.gd")
+	var PlayerSpriteFramesTorso: SpriteFrames = load("res://src/player/player_sprite_frames_torso.tres")
+	var PlayerSpriteFramesLegs: SpriteFrames = load("res://src/player/player_sprite_frames_legs.tres")
 	var Stunbox: Script = load("res://src/player/stunbox.gd")
 	var DyingScreenEffect: Script = load("res://src/ui/dying_screen_effect.gd")
 	
@@ -54,6 +62,10 @@ class TestPlayerExitDyingState:
 		_state_dying = StateDying.new()
 		_state_dying._parent = double(Player).new()
 		_state_dying._parent.player_stats = double(PlayerStats).new()
+		_state_dying._parent.sprite_torso = double(AnimatedSprite3D).new()
+		_state_dying._parent.sprite_legs = double(AnimatedSprite3D).new()
+		_state_dying._parent.sprite_torso.sprite_frames = PlayerSpriteFramesTorso
+		_state_dying._parent.sprite_legs.sprite_frames = PlayerSpriteFramesLegs
 		_state_dying._state_machine = double(PlayerStateMachine).new()
 		_state_dying._parent.stunbox = double(Stunbox).new()
 		_state_dying._parent.stunbox.collision_shape = double(CollisionShape3D).new()

@@ -7,7 +7,11 @@ func enter() -> void:
 	
 	_parent.sprite_torso.animation = "living"
 	_parent.sprite_legs.speed_scale = ANIMATION_SPEED_SCALE
-
+	
+	# ensure opacity is set correctly to full
+	_parent.sprite_torso.modulate.a = 1
+	_parent.sprite_legs.modulate.a = 1
+	
 	# apply inventory buffs to modified stats
 	_parent.inventory_update()
 	

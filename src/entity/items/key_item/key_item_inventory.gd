@@ -10,5 +10,5 @@ func _ready() -> void:
 
 
 func drop() -> void:
-	SignalBus.key_item_dropped.emit(self)
+	SignalBus.key_item_dropped.emit()
 	queue_free()
