@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://jlav0m1ndqde"]
+[gd_scene load_steps=52 format=3 uid="uid://jlav0m1ndqde"]
 
 [ext_resource type="Script" uid="uid://br2ou0xf5p2mo" path="res://src/game.gd" id="1_77rk7"]
 [ext_resource type="PackedScene" uid="uid://bbow7knip3g6g" path="res://src/player/player.tscn" id="1_hu241"]
@@ -37,6 +37,7 @@
 [ext_resource type="PackedScene" uid="uid://bmyu4uefeccim" path="res://src/entity/objects/cardboard_box/cardboard_box_open.tscn" id="32_3onxw"]
 [ext_resource type="PackedScene" uid="uid://qcl430tspnu1" path="res://src/entity/objects/cardboard_box/cardboard_box_closed.tscn" id="33_ou5k8"]
 [ext_resource type="PackedScene" uid="uid://dtv7i6ecsmj0f" path="res://src/entity/objects/cardboard_box/cardboard_boxes_stacked.tscn" id="34_4lake"]
+[ext_resource type="PackedScene" uid="uid://bxso5jmpfc7ao" path="res://src/entity/items/incense/incense_world.tscn" id="38_0ehnx"]
 
 [sub_resource type="Resource" id="Resource_3y6bj"]
 script = ExtResource("9_xa8c5")
@@ -405,6 +406,9 @@ monitor_for_transparency = true
 
 [node name="GameMenu" parent="UI" index="3"]
 show_how_to_play_on_start = false
+
+[node name="ItemWorld" parent="." instance=ExtResource("38_0ehnx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.91296, 1.25974, 4.13149)
 
 [editable path="WorldGrid/RoomBottom/Door"]
 [editable path="WorldGrid/RoomCenter/Door"]

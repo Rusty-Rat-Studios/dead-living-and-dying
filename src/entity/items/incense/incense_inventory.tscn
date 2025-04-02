@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bw1hxbsrld1r1"]
+
+[ext_resource type="Script" uid="uid://b7ngob83wca6o" path="res://src/entity/items/incense/incense_inventory.gd" id="1_26uis"]
+
+[node name="IncenseInventory" type="Node3D"]
+script = ExtResource("1_26uis")

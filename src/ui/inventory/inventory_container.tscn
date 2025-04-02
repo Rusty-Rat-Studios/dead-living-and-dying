@@ -41,9 +41,11 @@ theme_override_constants/separation = 10
 layout_mode = 2
 
 [node name="ConsumableSlot" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" instance=ExtResource("3_kgiru")]
+modulate = Color(0.729412, 0.729412, 0.729412, 1)
 layout_mode = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+modulate = Color(0.729412, 0.729412, 0.729412, 1)
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_vertical = 4

@@ -12,6 +12,6 @@ var texture: Texture2D
 func drop() -> void:
 	var world_item: ItemWorld = world_resource.instantiate()
 	get_node("/root/Game").add_child(world_item)
-	world_item.position = PlayerHandler.get_player().position + Vector3(0, -0.5, 0)
+	world_item.position = PlayerHandler.get_player().position + Vector3(0, -0.5, 0.01)
 	world_item.disable_interactable(DELAY_DURATION)
 	queue_free()
