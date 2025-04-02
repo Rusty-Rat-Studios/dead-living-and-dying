@@ -239,6 +239,9 @@ door_location = SubResource("Resource_au4ic")
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 7.95)
 door_location = SubResource("Resource_2m2ji")
 
+[node name="Interactable" parent="WorldGrid/RoomCenter/Door3" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
 [node name="WallWithDoorway" parent="WorldGrid/RoomCenter/Door3" index="5"]
 monitor_for_transparency = true
 
@@ -390,6 +393,9 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8.05, 
 [node name="Door" parent="WorldGrid/RoomTop" instance=ExtResource("19_vaj68")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 7.95)
 door_location = SubResource("Resource_4lake")
+
+[node name="Interactable" parent="WorldGrid/RoomTop/Door" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="WallWithDoorway" parent="WorldGrid/RoomTop/Door" index="5"]
 monitor_for_transparency = true

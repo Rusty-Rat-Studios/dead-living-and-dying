@@ -215,7 +215,7 @@ func _on_key_item_picked_up() -> void:
 	#gdlint:disable=max-line-length
 
 
-func _on_key_item_dropped(_key_item: KeyItemInventory) -> void:
+func _on_key_item_dropped() -> void:
 	stats.remove_modifier(GhostStats.Stats.SPEED, "key_item")
 	stats.remove_modifier(GhostStats.Stats.WINDUP_DURATION, "key_item")
 	stats.remove_modifier(GhostStats.Stats.POSSESSION_DECISION_TIME, "key_item")

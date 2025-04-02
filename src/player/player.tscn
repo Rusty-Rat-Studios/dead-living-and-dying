@@ -1,12 +1,9 @@
-[gd_scene load_steps=41 format=3 uid="uid://bbow7knip3g6g"]
+[gd_scene load_steps=27 format=3 uid="uid://bbow7knip3g6g"]
 
 [ext_resource type="Script" uid="uid://bvc3eclccrf0p" path="res://src/player/player.gd" id="1_ndccg"]
-[ext_resource type="Texture2D" uid="uid://bpcdo5v4oiwd2" path="res://src/player/caretaker_dead.png" id="2_2smqc"]
-[ext_resource type="Texture2D" uid="uid://br2qac2s846b1" path="res://src/player/caretaker_legs_spritesheet.png" id="2_wlj80"]
-[ext_resource type="Texture2D" uid="uid://ckrdaakxsf6o0" path="res://src/player/caretaker_no_legs_dying.png" id="4_6bm8s"]
+[ext_resource type="SpriteFrames" uid="uid://re7p8fjt08rp" path="res://src/player/player_sprite_frames_torso.tres" id="2_cwolq"]
+[ext_resource type="SpriteFrames" uid="uid://bco2hdiw75kek" path="res://src/player/player_sprite_frames_legs.tres" id="3_2smqc"]
 [ext_resource type="Script" uid="uid://v3pynygc6ya7" path="res://src/player/camera.gd" id="4_mmf56"]
-[ext_resource type="Texture2D" uid="uid://b6dsgsujyqk2o" path="res://src/player/caretaker_living.png" id="4_wlj80"]
-[ext_resource type="Texture2D" uid="uid://citwjgkhghbq4" path="res://src/player/caretaker_no_legs_living.png" id="5_hrerp"]
 [ext_resource type="Script" uid="uid://cs3pdh132h0y1" path="res://src/player/spotlight.gd" id="5_nwynq"]
 [ext_resource type="Script" uid="uid://xxlxp6iy7vgv" path="res://src/player/hurtbox.gd" id="6_ltudm"]
 [ext_resource type="Material" uid="uid://c3kjv3w8w3dws" path="res://src/ui/minimap/minimap_corpse_material.tres" id="7_2ieo8"]
@@ -19,112 +16,6 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uy1l0"]
 radius = 0.4
 height = 2.4
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_bh504"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_2smqc")
-}],
-"loop": true,
-"name": &"dead",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("4_6bm8s")
-}],
-"loop": true,
-"name": &"dying",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("5_hrerp")
-}],
-"loop": true,
-"name": &"living",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("4_wlj80")
-}],
-"loop": true,
-"name": &"living_legs",
-"speed": 5.0
-}]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_oyld2"]
-atlas = ExtResource("2_wlj80")
-region = Rect2(3200, 0, 400, 600)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vwsmr"]
-atlas = ExtResource("2_wlj80")
-region = Rect2(0, 0, 400, 600)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jcdrv"]
-atlas = ExtResource("2_wlj80")
-region = Rect2(400, 0, 400, 600)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hja65"]
-atlas = ExtResource("2_wlj80")
-region = Rect2(800, 0, 400, 600)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5shm8"]
-atlas = ExtResource("2_wlj80")
-region = Rect2(1200, 0, 400, 600)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5efpn"]
-atlas = ExtResource("2_wlj80")
-region = Rect2(1600, 0, 400, 600)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4uy46"]
-atlas = ExtResource("2_wlj80")
-region = Rect2(2000, 0, 400, 600)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_k60ra"]
-atlas = ExtResource("2_wlj80")
-region = Rect2(2400, 0, 400, 600)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_a4vah"]
-atlas = ExtResource("2_wlj80")
-region = Rect2(2800, 0, 400, 600)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_vwi60"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_oyld2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vwsmr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jcdrv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hja65")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5shm8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5efpn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4uy46")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_k60ra")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_a4vah")
-}],
-"loop": true,
-"name": &"walking",
-"speed": 5.0
-}]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3bb63"]
 radius = 0.804186
@@ -203,14 +94,14 @@ transform = Transform3D(1, 0, 0, 0, 0.766044, 0.642787, 0, -0.642787, 0.766044, 
 [node name="AnimatedSpriteTorso" type="AnimatedSprite3D" parent="RotationOffset"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
 billboard = 2
-sprite_frames = SubResource("SpriteFrames_bh504")
+sprite_frames = ExtResource("2_cwolq")
 animation = &"living"
 frame_progress = 0.876618
 
 [node name="AnimatedSpriteLegs" type="AnimatedSprite3D" parent="RotationOffset"]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, -0.001)
 billboard = 2
-sprite_frames = SubResource("SpriteFrames_vwi60")
+sprite_frames = ExtResource("3_2smqc")
 animation = &"walking"
 frame_progress = 0.868912
 speed_scale = 2.5

@@ -8,6 +8,9 @@ extends Node3D
 signal player_discovered_room
 
 const ICON_MINIMAP: Resource = preload("res://src/ui/minimap/icon_minimap.tscn")
+# used to delay making the room invisible after player dies
+# needed because visibility is only triggered by doors
+const RESPAWN_TIME: float = 2.0
 
 @export var spawn_room: bool = false
 @export var room_information: RoomInformation
@@ -94,8 +97,15 @@ func _on_player_entered_room(body: Node3D) -> void:
 func _on_player_exited_room(body: Node3D) -> void:
 	if body == PlayerHandler.get_player():
 		player_in_room = false
-		visible = false # TODO: Remove once all rooms have doors
 		SignalBus.player_exited_room.emit(self)
+	
+	# ensure room is invisible only if a player exits it and it has no open doors
+	var a_door_is_open: bool = false
+	for door: Door in doors.values():
+		if door.door_open:
+			a_door_is_open = true
+			break
+	visible = a_door_is_open
 
 
 func _on_player_discovered_room() -> void:
@@ -112,10 +122,16 @@ func _on_player_discovered_room() -> void:
 		room_icon.get_child(0).texture = room_information.room_icon
 
 
-func _on_key_item_dropped(key_item: KeyItemInventory) -> void:
-	if (player_in_room):
-		var key_item_world: KeyItemWorld = key_item.world_resource.instantiate()
-		add_child(key_item_world)
-		key_item_world.global_position = PlayerHandler.get_player().global_position
-		key_item_world.global_position.y = 1
+func _on_key_item_dropped() -> void:
+	if player_in_room:
+		var key_item: KeyItemWorld = KeyItemHandler.get_key_item()
+		# add key item as child of the player's current room
+		key_item.reparent(self)
+		key_item.visible = true
 		
+		# update key item position to be directly matching the player position
+		key_item.global_position = PlayerHandler.get_player().global_position
+		key_item.global_position.y = 1
+		
+		# update key item movement path with world-grid find_shortest_path algorithm
+		key_item.movement_path = get_parent().find_shortest_path(self, key_item.starting_room)
