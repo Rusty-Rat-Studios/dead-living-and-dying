@@ -56,7 +56,7 @@ func _ready() -> void:
 	SignalBus.key_item_dropped.connect(_on_key_item_dropped)
 	
 	$Interactable.inputs = ["interact"]
-	$Interactable.hide_message()
+	$Interactable.hide()
 	$Interactable.enabled = false
 	
 	_dialogue_stage = "intro"
@@ -69,19 +69,19 @@ func init(key_item: KeyItemInventory) -> void:
 
 
 func reset() -> void:
-	$Interactable.hide_message()
+	$Interactable.hide()
 	$Interactable.enabled = false
 	_dialogue_stage = "fetch"
 
 
 func _on_player_entered(_player: Player) -> void:
 	if PlayerHandler.get_player_state() != PlayerStateMachine.States.DEAD:
-		$Interactable.display_message("[E] Talk")
+		$Interactable.show()
 		$Interactable.enabled = true
 
 
 func _on_player_exited(_player: Player) -> void:
-	$Interactable.hide_message()
+	$Interactable.hide()
 	$Interactable.enabled = false
 
 
