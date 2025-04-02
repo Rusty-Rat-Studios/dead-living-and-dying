@@ -4,9 +4,10 @@ extends ItemWorld
 const MOVE_TARGET_THRESHOLD: float = 0.1
 
 var starting_room: Room
+var target_room: Room
 var movement_path: Array
 var move_target: Vector3
-var move_speed: float = 0.5
+var move_speed: float = 1
 
 
 func _ready() -> void:
@@ -30,7 +31,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	# slowly moves the key item towards its original position
 	# activated/deactivated when the key item is picked up or dropped
-	if (global_position - starting_position).length() < MOVE_TARGET_THRESHOLD:
+	if global_position.distance_squared_to(starting_position) < MOVE_TARGET_THRESHOLD:
 		set_process(false)
 		return
 
@@ -44,30 +45,34 @@ func _process(delta: float) -> void:
 		if next_target == null:
 			reparent(starting_room)
 		else:
-			reparent(next_target)
+			reparent(target_room)
 		set_target(next_target)
 	else:
-		global_position = global_position.lerp(move_target, move_speed * delta)
+		var direction: Vector3 = (move_target - global_position).normalized()
+		global_position += direction * move_speed * delta
 
 
-func set_target(target_room: Room) -> void:
+func set_target(new_target: Room) -> void:
 	# if target is self, move to center of room
 	var parent_room: Room = get_parent()
-	if target_room == null:
-		move_target = parent_room.global_position
+	if new_target == null:
+		move_target = starting_position
 		return
 	
 	# get current room's available doors
 	var doors: Array = parent_room.doors.values()
 	# match each door's linked room against the target room
 	for door: Door in doors:
-		if door.linked_room == target_room:
+		if door.linked_room == new_target:
 			# after a match, set door as target
 			move_target = door.global_position
+			target_room = new_target
 			return
 	
 	push_error("Key Item unable to find movement target")
-	move_target = self.global_position
+	reparent(starting_room)
+	global_position = starting_position
+	move_target = starting_position
 
 
 func reset() -> void:
