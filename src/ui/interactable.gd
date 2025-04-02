@@ -28,6 +28,9 @@ func _ready() -> void:
 	
 	# listen for device change and update sprite accordingly
 	UIDevice.icon_map_changed.connect(_on_icon_map_changed)
+	
+	# force-call the icon update function to retrieve proper icons on start
+	_on_icon_map_changed()
 
 
 func _input(event: InputEvent) -> void:
