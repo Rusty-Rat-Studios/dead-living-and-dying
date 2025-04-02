@@ -1,10 +1,12 @@
 class_name KeyItemWorld
 extends ItemWorld
 
+const MOVE_TARGET_THRESHOLD: float = 0.1
+
 var starting_room: Room
 var movement_path: Array
 var move_target: Vector3
-var move_speed: float = 2
+var move_speed: float = 0.5
 
 
 func _ready() -> void:
@@ -18,7 +20,7 @@ func _ready() -> void:
 	else:
 		starting_position = get_node("/root/Game").key_item_starting_position
 	
-	SignalBus.key_item_dropped.connect(_on_key_item_dropped)
+	SignalBus.key_item_dropped.connect(_on_key_item_dropped, CONNECT_DEFERRED)
 	
 	# reactivated when key item is dropped
 	set_process(false)
@@ -26,38 +28,37 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	# TODO:
 	# slowly moves the key item towards its original position
 	# activated/deactivated when the key item is picked up or dropped
-	var direction: Vector3 = move_target - global_position
-	# ensure ghost only moves in xz-plane and does not follow objects up into the air
-	direction.y = 0
+	if (global_position - starting_position).length() < MOVE_TARGET_THRESHOLD:
+		set_process(false)
+		return
+
 	# force target_pos onto y=1 plane to ensure ghost can "reach" targets
 	# at different heights - i.e. player which is at a lower height
 	move_target = Vector3(move_target.x, 1, move_target.z)
 	var distance_to_target: float = global_position.distance_squared_to(move_target)
 	
-	if distance_to_target < move_speed * delta:
+	if distance_to_target < MOVE_TARGET_THRESHOLD:
 		var next_target: Room = movement_path.pop_front()
-		if next_target != null:
-			# set target to next room
-			set_target(next_target)
+		if next_target == null:
+			reparent(starting_room)
 		else:
-			set_process(false)
+			reparent(next_target)
+		set_target(next_target)
 	else:
-		direction = direction.normalized()
-		global_position.lerp(direction, move_speed * delta)
+		global_position = global_position.lerp(move_target, move_speed * delta)
 
 
 func set_target(target_room: Room) -> void:
 	# if target is self, move to center of room
 	var parent_room: Room = get_parent()
-	if target_room == parent_room or target_room == null:
+	if target_room == null:
 		move_target = parent_room.global_position
 		return
 	
 	# get current room's available doors
-	var doors: Array[Door] = parent_room.doors.values()
+	var doors: Array = parent_room.doors.values()
 	# match each door's linked room against the target room
 	for door: Door in doors:
 		if door.linked_room == target_room:
@@ -87,7 +88,6 @@ func pick_up() -> void:
 	item_inventory.texture = $Sprite3D.texture
 	
 	SignalBus.item_picked_up.emit(item_inventory, false)
-	#queue_free()
 	visible = false
 	set_process(false)
 
@@ -99,5 +99,7 @@ func _on_body_exited(_body: Node3D) -> void:
 
 
 func _on_key_item_dropped() -> void:
-	set_process(true)
+	# delete current room from movement list
+	movement_path.pop_front()
 	set_target(movement_path.pop_front())
+	set_process(true)
