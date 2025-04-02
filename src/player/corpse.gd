@@ -69,6 +69,7 @@ func animate_fall() -> void:
 func animate_revive() -> void:
 	# force player direction to match corpse direction
 	PlayerHandler.get_player().sprite_torso.flip_h = sprite.flip_h
+	PlayerHandler.get_player().sprite_legs.flip_h = sprite.flip_h
 	
 	# inverse of fall animation
 	fall_tween = create_tween().set_ease(Tween.EASE_OUT).set_parallel()
