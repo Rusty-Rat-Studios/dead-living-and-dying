@@ -27,8 +27,8 @@ ShrineManager="*res://src/autoloads/shrine_manager.gd"
 RNG="*res://src/autoloads/rng.gd"
 SpawnerManager="*res://src/autoloads/spawner_manager.gd"
 UIDevice="*res://src/autoloads/ui_device.gd"
-DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
 KeyItemHandler="*res://src/autoloads/key_item_handler.gd"
+DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
 
 [debug]
 
