@@ -8,6 +8,9 @@ extends Node3D
 signal player_discovered_room
 
 const ICON_MINIMAP: Resource = preload("res://src/ui/minimap/icon_minimap.tscn")
+# used to delay making the room invisible after player dies
+# needed because visibility is only triggered by doors
+const RESPAWN_TIME: float = 2.0
 
 @export var spawn_room: bool = false
 @export var room_information: RoomInformation
@@ -95,6 +98,14 @@ func _on_player_exited_room(body: Node3D) -> void:
 	if body == PlayerHandler.get_player():
 		player_in_room = false
 		SignalBus.player_exited_room.emit(self)
+	
+	# ensure room is invisible only if a player exits it and it has no open doors
+	var a_door_is_open: bool = false
+	for door: Door in doors.values():
+		if door.door_open:
+			a_door_is_open = true
+			break
+	visible = a_door_is_open
 
 
 func _on_player_discovered_room() -> void:
