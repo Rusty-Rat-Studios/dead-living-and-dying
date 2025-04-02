@@ -1,11 +1,31 @@
-[gd_scene load_steps=4 format=3 uid="uid://8tfld0cdj22d"]
+[gd_scene load_steps=6 format=3 uid="uid://8tfld0cdj22d"]
 
 [ext_resource type="PackedScene" uid="uid://bslonn3bn1m6s" path="res://src/entity/items/item_world.tscn" id="1_20v5o"]
 [ext_resource type="PackedScene" uid="uid://cdibgy57rubh6" path="res://src/entity/items/crucifix/crucifix_inventory.tscn" id="3_e25lq"]
 [ext_resource type="Texture2D" uid="uid://coa8lvqi23xya" path="res://src/entity/items/crucifix/crucifix.png" id="3_lw6l4"]
+[ext_resource type="Shader" path="res://src/entity/items/item_world_shader.gdshader" id="3_wp06e"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3gjy4"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_wp06e")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("3_lw6l4")
+shader_parameter/alpha_scissor_threshold = 0.5
+shader_parameter/albedo_texture_size = Vector2i(160, 160)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
 
 [node name="CrucifixWorld" instance=ExtResource("1_20v5o")]
 inventory_resource = ExtResource("3_e25lq")
 
 [node name="Sprite3D" parent="." index="1"]
+material_overlay = SubResource("ShaderMaterial_3gjy4")
 texture = ExtResource("3_lw6l4")

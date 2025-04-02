@@ -1,11 +1,31 @@
-[gd_scene load_steps=4 format=3 uid="uid://d3qx8taq4i8mc"]
+[gd_scene load_steps=6 format=3 uid="uid://d3qx8taq4i8mc"]
 
 [ext_resource type="PackedScene" uid="uid://bslonn3bn1m6s" path="res://src/entity/items/item_world.tscn" id="1_lvrxx"]
 [ext_resource type="PackedScene" uid="uid://dlj3ytwttlkva" path="res://src/entity/items/looking_stone/looking_stone_inventory.tscn" id="2_twbqf"]
+[ext_resource type="Shader" uid="uid://bqm7xmu54nr45" path="res://src/entity/items/item_world_shader.gdshader" id="3_lnbg2"]
 [ext_resource type="Texture2D" uid="uid://c788v734aptuf" path="res://src/entity/items/looking_stone/looking_stone.png" id="3_novpw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wjryi"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_lnbg2")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("3_novpw")
+shader_parameter/alpha_scissor_threshold = 0.5
+shader_parameter/albedo_texture_size = Vector2i(160, 160)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
 
 [node name="LookingStoneWorld" instance=ExtResource("1_lvrxx")]
 inventory_resource = ExtResource("2_twbqf")
 
 [node name="Sprite3D" parent="." index="1"]
+material_overlay = SubResource("ShaderMaterial_wjryi")
 texture = ExtResource("3_novpw")

@@ -168,7 +168,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8.05, 
 default = true
 
 [node name="TeaWorld" parent="WorldGrid/RoomBottom" instance=ExtResource("21_lgjc2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5913, 0.587763, -6.3731)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5913, 0.806933, -6.3731)
 
 [node name="OldMan" parent="WorldGrid/RoomBottom" instance=ExtResource("15_3quv5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, -5)
