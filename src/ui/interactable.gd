@@ -39,14 +39,6 @@ func _input(event: InputEvent) -> void:
 				return
 
 
-func display_message(_message: String) -> void:
-	sprite.visible = true
-
-
-func hide_message() -> void:
-	sprite.visible = false
-
-
 func _on_icon_map_changed() -> void:
 	# update texture and scale according to current device icon map
 	# note we must adjust scale because the E texture is very small and the X texture is large
