@@ -8,6 +8,7 @@ font_size = 20
 font_color = Color(0, 0, 0, 1)
 
 [node name="ConsumableSlot" instance=ExtResource("1_m162s")]
+modulate = Color(0.298039, 0.298039, 0.298039, 1)
 script = ExtResource("2_l63gr")
 
 [node name="Label" type="Label" parent="MarginContainer" index="2"]
