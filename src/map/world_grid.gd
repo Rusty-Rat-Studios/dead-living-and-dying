@@ -140,9 +140,11 @@ func _hash_vector2(vector: Vector2) -> PackedByteArray:
 func build_room_graph() -> void:
 	for room_id: PackedByteArray in room_map.keys():
 		if not room_graph.has(room_map.retrieve_with_hash(room_id)):
+			# add each room as a key in the map
 			var room: Room = room_map.retrieve_with_hash(room_id)
-			var linked_rooms: Array[Room]
 			
+			# define all rooms linked to this room
+			var linked_rooms: Array[Room]
 			# get each door
 			for door_id: PackedByteArray in room.doors.keys():
 				var door: Door = room.doors.retrieve_with_hash(door_id)
@@ -150,19 +152,16 @@ func build_room_graph() -> void:
 				linked_rooms.append(door.linked_room)
 			
 			room_graph[room_map.retrieve_with_hash(room_id)] = linked_rooms
-	
-	print(room_graph)
 
 
 # Returns the shortest path as a set of rooms from the current room to the target room.
 func find_shortest_path(start_room: Room, end_room: Room) -> Array:
 	
 	if not room_graph.has(start_room) or not room_graph.has(end_room):
-		printerr("Start or end room not found in the graph.")
 		return []
 	
 	# array of array of rooms
-	var queue: Array[Array] = [[start_room]] # Queue of paths
+	var queue: Array[Array] = [[start_room]]
 	var visited: Dictionary[Room, bool] = {start_room: true}
 	
 	while not queue.is_empty():
@@ -180,4 +179,4 @@ func find_shortest_path(start_room: Room, end_room: Room) -> Array:
 					new_path.append(neighbor)
 					queue.append(new_path)
 	
-	return [] # No path found
+	return [] # no path found

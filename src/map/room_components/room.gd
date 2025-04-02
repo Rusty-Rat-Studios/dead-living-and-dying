@@ -114,9 +114,11 @@ func _on_player_discovered_room() -> void:
 func _on_key_item_dropped() -> void:
 	if player_in_room:
 		var key_item: KeyItemWorld = KeyItemHandler.get_key_item()
+		# add key item as child of the player's current room
 		key_item.reparent(self)
 		key_item.visible = true
 		
+		# update key item position to be directly matching the player position
 		key_item.global_position = PlayerHandler.get_player().global_position
 		key_item.global_position.y = 1
 		
