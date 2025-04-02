@@ -73,6 +73,7 @@ func _ready() -> void:
 	reveal.connect(_on_reveal)
 	# defer connection to allow state-specific logic to execute before changing states
 	hit.connect(_on_hit, CONNECT_DEFERRED)
+	SignalBus.hit.connect(_on_hit)
 
 
 func _physics_process(delta: float) -> void:
@@ -163,10 +164,12 @@ func _on_player_exited_room(room: Node3D) -> void:
 		player_in_room = false
 
 
-func _on_hit() -> void:
+func _on_hit(stun_modifier: float, stun_modifier_key: String) -> void:
 	if state_machine.current_state != state_machine.States.STUNNED:
+		stats.add_modifier(GhostStats.Stats.STUN_DURATION, stun_modifier, stun_modifier_key)
 		state_machine.change_state(state_machine.States.STUNNED)
 		$ParticleBurst.emitting = true
+		stats.remove_modifier(GhostStats.Stats.STUN_DURATION, stun_modifier_key)
 
 
 func _on_reveal() -> void:
@@ -212,7 +215,7 @@ func _on_key_item_picked_up() -> void:
 	#gdlint:disable=max-line-length
 
 
-func _on_key_item_dropped(_key_item: KeyItemInventory) -> void:
+func _on_key_item_dropped() -> void:
 	stats.remove_modifier(GhostStats.Stats.SPEED, "key_item")
 	stats.remove_modifier(GhostStats.Stats.WINDUP_DURATION, "key_item")
 	stats.remove_modifier(GhostStats.Stats.POSSESSION_DECISION_TIME, "key_item")

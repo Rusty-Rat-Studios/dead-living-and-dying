@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://clhkwjb5m4bxe"
-path.s3tc="res://.godot/imported/E.png-78476898f6f48495e30541a7e9c0e77d.s3tc.ctex"
+uid="uid://cgwxlup5xnwbe"
+path.s3tc="res://.godot/imported/incense.png-2217176d69abaa040bfac5fa20d2fef2.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://src/ui/resources/control_icons/E.png"
-dest_files=["res://.godot/imported/E.png-78476898f6f48495e30541a7e9c0e77d.s3tc.ctex"]
+source_file="res://src/entity/items/incense/incense.png"
+dest_files=["res://.godot/imported/incense.png-2217176d69abaa040bfac5fa20d2fef2.s3tc.ctex"]
 
 [params]
 

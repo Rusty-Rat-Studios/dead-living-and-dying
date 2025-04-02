@@ -1,14 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://cnbim08e5mqrn"]
+[gd_scene load_steps=3 format=3 uid="uid://cnbim08e5mqrn"]
 
 [ext_resource type="Script" uid="uid://dfd0jw1e7o2xv" path="res://src/ui/interactable.gd" id="1_x07wr"]
+[ext_resource type="Texture2D" uid="uid://clhkwjb5m4bxe" path="res://src/ui/resources/control_icons/E.png" id="2_xo6ay"]
 
 [node name="Interactable" type="Node3D"]
 script = ExtResource("1_x07wr")
 
-[node name="Label3D" type="Label3D" parent="."]
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 1.2, 0)
+transparency = 0.5
+cast_shadow = 0
 billboard = 1
 no_depth_test = true
-render_priority = 1
-text = "UNITIALIZED
-INTERACTABLE"
-font_size = 64
+render_priority = 5
+texture = ExtResource("2_xo6ay")

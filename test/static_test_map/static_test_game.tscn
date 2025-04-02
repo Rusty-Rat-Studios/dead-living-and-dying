@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://kpweub7m3k4n"]
+[gd_scene load_steps=85 format=3 uid="uid://kpweub7m3k4n"]
 
 [ext_resource type="Script" uid="uid://br2ou0xf5p2mo" path="res://src/game.gd" id="1_goqwn"]
 [ext_resource type="PackedScene" uid="uid://bbow7knip3g6g" path="res://src/player/player.tscn" id="2_2bptp"]
@@ -12,12 +12,12 @@
 [ext_resource type="PackedScene" uid="uid://te0dpapcosk4" path="res://src/map/rooms/room_minimap/basic_room_minimap.tscn" id="9_0g8nc"]
 [ext_resource type="PackedScene" uid="uid://bson3umirpot2" path="res://src/map/room_components/wall/wall.tscn" id="9_7nlrc"]
 [ext_resource type="Script" uid="uid://dqhrw6rxew3fa" path="res://src/common/door_location.gd" id="9_x122c"]
-[ext_resource type="PackedScene" uid="uid://fpivfcuv6s1r" path="res://src/map/room_components/wall/wall_with_doorway.tscn" id="10_ogha5"]
 [ext_resource type="Script" uid="uid://bv4f3snq7u1u2" path="res://src/common/room_information.gd" id="10_rxyol"]
 [ext_resource type="PackedScene" uid="uid://c176v8gdlci8v" path="res://src/old_man/old_man.tscn" id="11_6mutg"]
 [ext_resource type="PackedScene" uid="uid://3gsxuhfeo5qs" path="res://src/entity/objects/wall_painting/wall_painting.tscn" id="12_7d0il"]
 [ext_resource type="PackedScene" uid="uid://web8bdry114l" path="res://src/map/room_components/shrine/shrine.tscn" id="14_eaohd"]
 [ext_resource type="PackedScene" uid="uid://yihpxsaeuqdi" path="res://src/entity/ghost/ghost.tscn" id="15_b5bwo"]
+[ext_resource type="PackedScene" uid="uid://b6pd0nir4sadl" path="res://src/map/room_components/door/door_x16.tscn" id="16_0g8nc"]
 [ext_resource type="PackedScene" uid="uid://cko3wlfgl81ce" path="res://src/entity/objects/crate/crate.tscn" id="16_sppgp"]
 [ext_resource type="PackedScene" uid="uid://d3uaapt6yn0ed" path="res://src/entity/items/tea/tea_world.tscn" id="17_sxuq4"]
 [ext_resource type="PackedScene" uid="uid://bwfkis8dga70e" path="res://src/entity/items/key_item/key_item_world.tscn" id="18_hnnt0"]
@@ -49,6 +49,342 @@ script = ExtResource("10_rxyol")
 room_shape = Array[Vector2]([Vector2(0, 0)])
 possible_door_locations = Array[ExtResource("9_x122c")]([SubResource("Resource_3y6bj"), SubResource("Resource_b0qj2"), SubResource("Resource_8lq6k"), SubResource("Resource_8lnup")])
 minimap_component = ExtResource("9_0g8nc")
+
+[sub_resource type="Resource" id="Resource_g5p2y"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 0
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_1d0i0"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 2
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_0g8nc"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 3
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_32ofh"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 0
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_ebjij"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 1
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_4g7ym"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 1
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_x122c"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 0
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_s7aqh"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 1
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_nblah"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 2
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_k30h7"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 1
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_n3rut"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 2
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_u6gtf"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 3
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_jv247"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 2
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_n3emx"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 0
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_s8are"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 3
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_b3t3h"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 2
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_d47m8"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 3
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_aokng"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 0
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_1mm4f"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 0
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_w17of"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 0
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_pyt4l"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 3
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_qcnkf"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 1
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_msj83"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 3
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_ynata"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 1
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_fwnqd"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 2
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_dy3xw"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 0
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_18onm"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 1
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_hclq7"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 3
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_7gr0x"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 1
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_6lnc1"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 3
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_gqsrm"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 3
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_7xql1"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 1
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_1bnxf"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 0
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_84q5o"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 0
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_jvy2h"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 1
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_2gtq4"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 2
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_aadsb"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 1
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_fqnqv"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 3
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_kuvyp"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 2
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_66vmd"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 2
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_nrdwn"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 1
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_ben6m"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 3
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_paypg"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 2
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_12obq"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 3
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_i7kop"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 0
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_rxyol"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 2
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_xg3do"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 3
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_4a5dy"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 1
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_dsujm"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 1
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_qvutw"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 3
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_jysn7"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 2
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_rea42"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 0
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_s56qn"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 0
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_vgbmk"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 2
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_smsfs"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 3
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_pf48v"]
+script = ExtResource("9_x122c")
+location = Vector2(0, 0)
+direction = 1
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
 
 [node name="Game" type="Node3D" node_paths=PackedStringArray("old_man")]
 script = ExtResource("1_goqwn")
@@ -99,18 +435,21 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.05,
 [node name="WallWithoutDoor3" parent="WorldGrid/RoomStart" instance=ExtResource("9_7nlrc")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8.05, 0, 0)
 
-[node name="WallWithDoor" parent="WorldGrid/RoomStart" instance=ExtResource("10_ogha5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.05)
-monitor_for_transparency = true
-
 [node name="OldMan" parent="WorldGrid/RoomStart" instance=ExtResource("11_6mutg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, -6)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, -4)
 
 [node name="WallPainting" parent="WorldGrid/RoomStart" instance=ExtResource("12_7d0il")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.25348, 2, -7.85561)
 
 [node name="WallPainting2" parent="WorldGrid/RoomStart" instance=ExtResource("12_7d0il")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.26277, 2, -7.85561)
+
+[node name="Door" parent="WorldGrid/RoomStart" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.95)
+door_location = SubResource("Resource_g5p2y")
+
+[node name="WallWithDoorway" parent="WorldGrid/RoomStart/Door" index="5"]
+monitor_for_transparency = true
 
 [node name="Room" type="Node3D" parent="WorldGrid" groups=["rooms"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16)
@@ -119,24 +458,30 @@ room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room" instance=ExtResource("8_ncqhn")]
 
-[node name="WallWithDoor" parent="WorldGrid/Room" instance=ExtResource("10_ogha5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.05)
-monitor_for_transparency = true
-
-[node name="WallWithDoor2" parent="WorldGrid/Room" instance=ExtResource("10_ogha5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.05)
-monitor_for_transparency = true
-
-[node name="WallWithDoor3" parent="WorldGrid/Room" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.05, 0, 0)
-monitor_for_transparency = false
-
-[node name="WallWithDoor4" parent="WorldGrid/Room" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.05, 0, 0)
-monitor_for_transparency = false
-
 [node name="Shrine" parent="WorldGrid/Room" instance=ExtResource("14_eaohd")]
 default = true
+
+[node name="Door" parent="WorldGrid/Room" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 7.95)
+door_location = SubResource("Resource_1d0i0")
+
+[node name="WallWithDoorway" parent="WorldGrid/Room/Door" index="5"]
+monitor_for_transparency = true
+
+[node name="Door2" parent="WorldGrid/Room" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0, 0)
+door_location = SubResource("Resource_0g8nc")
+
+[node name="Door3" parent="WorldGrid/Room" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.95)
+door_location = SubResource("Resource_32ofh")
+
+[node name="WallWithDoorway" parent="WorldGrid/Room/Door3" index="5"]
+monitor_for_transparency = true
+
+[node name="Door4" parent="WorldGrid/Room" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8, 0, 0)
+door_location = SubResource("Resource_ebjij")
 
 [node name="Room5" type="Node3D" parent="WorldGrid" groups=["rooms"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -16)
@@ -144,14 +489,6 @@ script = ExtResource("7_d8xjy")
 room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room5" instance=ExtResource("8_ncqhn")]
-
-[node name="WallWithDoor5" parent="WorldGrid/Room5" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.0499992, 0, -8)
-monitor_for_transparency = true
-
-[node name="WallWithDoor4" parent="WorldGrid/Room5" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.05, 0, 0)
-monitor_for_transparency = false
 
 [node name="Ghost" parent="WorldGrid/Room5" instance=ExtResource("15_b5bwo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -193,20 +530,23 @@ monitor_for_transparency = true
 [node name="Wall3" parent="WorldGrid/Room5" instance=ExtResource("9_7nlrc")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -8, 0, 0)
 
+[node name="Door" parent="WorldGrid/Room5" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8, 0, 0)
+door_location = SubResource("Resource_4g7ym")
+
+[node name="Door2" parent="WorldGrid/Room5" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.95)
+door_location = SubResource("Resource_x122c")
+
+[node name="WallWithDoorway" parent="WorldGrid/Room5/Door2" index="5"]
+monitor_for_transparency = true
+
 [node name="Room6" type="Node3D" parent="WorldGrid" groups=["rooms"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, 0, -32)
 script = ExtResource("7_d8xjy")
 room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room6" instance=ExtResource("8_ncqhn")]
-
-[node name="WallWithDoor3" parent="WorldGrid/Room6" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.0499992, 0, 8)
-monitor_for_transparency = true
-
-[node name="WallWithDoor4" parent="WorldGrid/Room6" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.05, 0, 0)
-monitor_for_transparency = false
 
 [node name="Ghost" parent="WorldGrid/Room6" instance=ExtResource("15_b5bwo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -247,20 +587,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
 [node name="Wall2" parent="WorldGrid/Room6" instance=ExtResource("9_7nlrc")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0, 0)
 
+[node name="Door" parent="WorldGrid/Room6" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8, 0, 0)
+door_location = SubResource("Resource_s7aqh")
+
+[node name="Door2" parent="WorldGrid/Room6" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 7.95)
+door_location = SubResource("Resource_nblah")
+
+[node name="WallWithDoorway" parent="WorldGrid/Room6/Door2" index="5"]
+monitor_for_transparency = true
+
 [node name="Room24" type="Node3D" parent="WorldGrid" groups=["rooms"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -80)
 script = ExtResource("7_d8xjy")
 room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room24" instance=ExtResource("8_ncqhn")]
-
-[node name="WallWithDoor3" parent="WorldGrid/Room24" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.0499992, 0, 8)
-monitor_for_transparency = true
-
-[node name="WallWithDoor4" parent="WorldGrid/Room24" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.05, 0, 0)
-monitor_for_transparency = false
 
 [node name="Ghost" parent="WorldGrid/Room24" instance=ExtResource("15_b5bwo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -298,20 +641,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
 [node name="Wall2" parent="WorldGrid/Room24" instance=ExtResource("9_7nlrc")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0, 0)
 
+[node name="Door" parent="WorldGrid/Room24" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8, 0, 0)
+door_location = SubResource("Resource_k30h7")
+
+[node name="Door2" parent="WorldGrid/Room24" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 7.95)
+door_location = SubResource("Resource_n3rut")
+
+[node name="WallWithDoorway" parent="WorldGrid/Room24/Door2" index="5"]
+monitor_for_transparency = true
+
 [node name="Room10" type="Node3D" parent="WorldGrid" groups=["rooms"]]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 48, 0, -16)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, -16)
 script = ExtResource("7_d8xjy")
 room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room10" instance=ExtResource("8_ncqhn")]
-
-[node name="WallWithDoor3" parent="WorldGrid/Room10" instance=ExtResource("10_ogha5")]
-transform = Transform3D(1, 0, 1.06581e-14, 0, 1, 0, -1.06581e-14, 0, 1, -0.0499992, 0, 8)
-monitor_for_transparency = false
-
-[node name="WallWithDoor4" parent="WorldGrid/Room10" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.05, 0, 0)
-monitor_for_transparency = true
 
 [node name="Ghost" parent="WorldGrid/Room10" instance=ExtResource("15_b5bwo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -350,22 +696,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, -3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
 
 [node name="Wall2" parent="WorldGrid/Room10" instance=ExtResource("9_7nlrc")]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 8, 0, 0)
+
+[node name="Door" parent="WorldGrid/Room10" instance=ExtResource("16_0g8nc")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0, 0)
+door_location = SubResource("Resource_u6gtf")
+
+[node name="Door2" parent="WorldGrid/Room10" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 7.95)
+door_location = SubResource("Resource_jv247")
+
+[node name="WallWithDoorway" parent="WorldGrid/Room10/Door2" index="5"]
+monitor_for_transparency = true
 
 [node name="Room16" type="Node3D" parent="WorldGrid" groups=["rooms"]]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 48, 0, -48)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, -48)
 script = ExtResource("7_d8xjy")
 room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room16" instance=ExtResource("8_ncqhn")]
-
-[node name="WallWithDoor3" parent="WorldGrid/Room16" instance=ExtResource("10_ogha5")]
-transform = Transform3D(1, 0, 1.06581e-14, 0, 1, 0, -1.06581e-14, 0, 1, -0.0499992, 0, 8)
-monitor_for_transparency = true
-
-[node name="WallWithDoor4" parent="WorldGrid/Room16" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.05, 0, 0)
-monitor_for_transparency = false
 
 [node name="Ghost" parent="WorldGrid/Room16" instance=ExtResource("15_b5bwo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -401,26 +750,29 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, -3)
 
 [node name="Wall" parent="WorldGrid/Room16" instance=ExtResource("9_7nlrc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 8)
 monitor_for_transparency = true
 
 [node name="Wall2" parent="WorldGrid/Room16" instance=ExtResource("9_7nlrc")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8, 0, 0)
+
+[node name="Door" parent="WorldGrid/Room16" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.95)
+door_location = SubResource("Resource_n3emx")
+
+[node name="WallWithDoorway" parent="WorldGrid/Room16/Door" index="5"]
+monitor_for_transparency = true
+
+[node name="Door2" parent="WorldGrid/Room16" instance=ExtResource("16_0g8nc")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0, 0)
+door_location = SubResource("Resource_s8are")
 
 [node name="Room20" type="Node3D" parent="WorldGrid" groups=["rooms"]]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 48, 0, -80)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, -80)
 script = ExtResource("7_d8xjy")
 room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room20" instance=ExtResource("8_ncqhn")]
-
-[node name="WallWithDoor3" parent="WorldGrid/Room20" instance=ExtResource("10_ogha5")]
-transform = Transform3D(1, 0, 1.06581e-14, 0, 1, 0, -1.06581e-14, 0, 1, -0.0499992, 0, 8)
-monitor_for_transparency = false
-
-[node name="WallWithDoor4" parent="WorldGrid/Room20" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.05, 0, 0)
-monitor_for_transparency = true
 
 [node name="Crate4" parent="WorldGrid/Room20" instance=ExtResource("16_sppgp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 0)
@@ -438,10 +790,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, -3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
 
 [node name="Wall2" parent="WorldGrid/Room20" instance=ExtResource("9_7nlrc")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0, 0)
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 8, 0, 0)
 
 [node name="TeaWorld" parent="WorldGrid/Room20" instance=ExtResource("17_sxuq4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Door" parent="WorldGrid/Room20" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 7.95)
+door_location = SubResource("Resource_b3t3h")
+
+[node name="WallWithDoorway" parent="WorldGrid/Room20/Door" index="5"]
+monitor_for_transparency = true
+
+[node name="Door2" parent="WorldGrid/Room20" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0, 0)
+door_location = SubResource("Resource_d47m8")
 
 [node name="Room7" type="Node3D" parent="WorldGrid" groups=["rooms"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, 0, -16)
@@ -449,10 +812,6 @@ script = ExtResource("7_d8xjy")
 room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room7" instance=ExtResource("8_ncqhn")]
-
-[node name="WallWithDoor3" parent="WorldGrid/Room7" instance=ExtResource("10_ogha5")]
-transform = Transform3D(1, 0, 1.06581e-14, 0, 1, 0, -1.06581e-14, 0, 1, -0.0499992, 0, -8)
-monitor_for_transparency = true
 
 [node name="Wall" parent="WorldGrid/Room7" instance=ExtResource("9_7nlrc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
@@ -467,16 +826,16 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8, 0, 
 [node name="TeaWorld" parent="WorldGrid/Room7" instance=ExtResource("17_sxuq4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -2)
 
+[node name="Door" parent="WorldGrid/Room7" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.95)
+door_location = SubResource("Resource_aokng")
+
 [node name="Room25" type="Node3D" parent="WorldGrid" groups=["rooms"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -64)
 script = ExtResource("7_d8xjy")
 room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room25" instance=ExtResource("8_ncqhn")]
-
-[node name="WallWithDoor3" parent="WorldGrid/Room25" instance=ExtResource("10_ogha5")]
-transform = Transform3D(1, 0, 1.06581e-14, 0, 1, 0, -1.06581e-14, 0, 1, -0.0499992, 0, -8)
-monitor_for_transparency = true
 
 [node name="Wall" parent="WorldGrid/Room25" instance=ExtResource("9_7nlrc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
@@ -491,16 +850,19 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8, 0, 
 [node name="KeyItemWorld" parent="WorldGrid/Room25" instance=ExtResource("18_hnnt0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
+[node name="Door" parent="WorldGrid/Room25" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.95)
+door_location = SubResource("Resource_1mm4f")
+
+[node name="WallWithDoorway" parent="WorldGrid/Room25/Door" index="5"]
+monitor_for_transparency = true
+
 [node name="Room11" type="Node3D" parent="WorldGrid" groups=["rooms"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, 0)
 script = ExtResource("7_d8xjy")
 room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room11" instance=ExtResource("8_ncqhn")]
-
-[node name="WallWithDoor3" parent="WorldGrid/Room11" instance=ExtResource("10_ogha5")]
-transform = Transform3D(1, 0, 1.06581e-14, 0, 1, 0, -1.06581e-14, 0, 1, -0.0499992, 0, -8)
-monitor_for_transparency = true
 
 [node name="Wall" parent="WorldGrid/Room11" instance=ExtResource("9_7nlrc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
@@ -523,6 +885,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -4)
 [node name="ItemWorld" parent="WorldGrid/Room11" instance=ExtResource("19_lb8w8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -5)
 
+[node name="Door" parent="WorldGrid/Room11" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.95)
+door_location = SubResource("Resource_w17of")
+
+[node name="WallWithDoorway" parent="WorldGrid/Room11/Door" index="5"]
+monitor_for_transparency = true
+
 [node name="Room2" type="Node3D" parent="WorldGrid" groups=["rooms"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -16)
 script = ExtResource("7_d8xjy")
@@ -537,14 +906,6 @@ monitor_for_transparency = true
 [node name="Wall3" parent="WorldGrid/Room2" instance=ExtResource("9_7nlrc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
 
-[node name="WallWithDoor3" parent="WorldGrid/Room2" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.05, 0, 0)
-monitor_for_transparency = false
-
-[node name="WallWithDoor4" parent="WorldGrid/Room2" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.05, 0, 0)
-monitor_for_transparency = false
-
 [node name="Crate" parent="WorldGrid/Room2" instance=ExtResource("16_sppgp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
@@ -555,6 +916,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, -3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 2)
 
 [node name="Ghost" parent="WorldGrid/Room2" instance=ExtResource("15_b5bwo")]
+
+[node name="Door" parent="WorldGrid/Room2" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0, 0)
+door_location = SubResource("Resource_pyt4l")
+
+[node name="Door2" parent="WorldGrid/Room2" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8, 0, 0)
+door_location = SubResource("Resource_qcnkf")
 
 [node name="Room15" type="Node3D" parent="WorldGrid" groups=["rooms"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -48)
@@ -570,14 +939,6 @@ monitor_for_transparency = true
 [node name="Wall3" parent="WorldGrid/Room15" instance=ExtResource("9_7nlrc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
 
-[node name="WallWithDoor3" parent="WorldGrid/Room15" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.05, 0, 0)
-monitor_for_transparency = false
-
-[node name="WallWithDoor4" parent="WorldGrid/Room15" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.05, 0, 0)
-monitor_for_transparency = false
-
 [node name="Crate" parent="WorldGrid/Room15" instance=ExtResource("16_sppgp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
@@ -587,26 +948,26 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, -3)
 [node name="Crate3" parent="WorldGrid/Room15" instance=ExtResource("16_sppgp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 2)
 
+[node name="Door" parent="WorldGrid/Room15" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0, 0)
+door_location = SubResource("Resource_msj83")
+
+[node name="Door2" parent="WorldGrid/Room15" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8, 0, 0)
+door_location = SubResource("Resource_ynata")
+
 [node name="Room17" type="Node3D" parent="WorldGrid" groups=["rooms"]]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 48, 0, -64)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, -64)
 script = ExtResource("7_d8xjy")
 room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room17" instance=ExtResource("8_ncqhn")]
 
 [node name="Wall2" parent="WorldGrid/Room17" instance=ExtResource("9_7nlrc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8, 0, 0)
 
 [node name="Wall3" parent="WorldGrid/Room17" instance=ExtResource("9_7nlrc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
-
-[node name="WallWithDoor3" parent="WorldGrid/Room17" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.05, 0, 0)
-monitor_for_transparency = true
-
-[node name="WallWithDoor4" parent="WorldGrid/Room17" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.05, 0, 0)
-monitor_for_transparency = true
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0, 0)
 
 [node name="Crate" parent="WorldGrid/Room17" instance=ExtResource("16_sppgp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -621,6 +982,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 2)
 
 [node name="Ghost2" parent="WorldGrid/Room17" instance=ExtResource("15_b5bwo")]
 
+[node name="Door" parent="WorldGrid/Room17" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 7.95)
+door_location = SubResource("Resource_fwnqd")
+
+[node name="WallWithDoorway" parent="WorldGrid/Room17/Door" index="5"]
+monitor_for_transparency = true
+
+[node name="Door2" parent="WorldGrid/Room17" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.95)
+door_location = SubResource("Resource_dy3xw")
+
+[node name="WallWithDoorway" parent="WorldGrid/Room17/Door2" index="5"]
+monitor_for_transparency = true
+
 [node name="Room18" type="Node3D" parent="WorldGrid" groups=["rooms"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -80)
 script = ExtResource("7_d8xjy")
@@ -634,14 +1009,6 @@ monitor_for_transparency = true
 
 [node name="Wall3" parent="WorldGrid/Room18" instance=ExtResource("9_7nlrc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
-
-[node name="WallWithDoor3" parent="WorldGrid/Room18" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.05, 0, 0)
-monitor_for_transparency = false
-
-[node name="WallWithDoor4" parent="WorldGrid/Room18" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.05, 0, 0)
-monitor_for_transparency = false
 
 [node name="Crate" parent="WorldGrid/Room18" instance=ExtResource("16_sppgp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -660,6 +1027,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 2)
 
 [node name="Ghost4" parent="WorldGrid/Room18" instance=ExtResource("15_b5bwo")]
 
+[node name="Door" parent="WorldGrid/Room18" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8, 0, 0)
+door_location = SubResource("Resource_18onm")
+
+[node name="Door2" parent="WorldGrid/Room18" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0, 0)
+door_location = SubResource("Resource_hclq7")
+
 [node name="Room19" type="Node3D" parent="WorldGrid" groups=["rooms"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -80)
 script = ExtResource("7_d8xjy")
@@ -673,14 +1048,6 @@ monitor_for_transparency = true
 
 [node name="Wall3" parent="WorldGrid/Room19" instance=ExtResource("9_7nlrc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
-
-[node name="WallWithDoor3" parent="WorldGrid/Room19" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.05, 0, 0)
-monitor_for_transparency = false
-
-[node name="WallWithDoor4" parent="WorldGrid/Room19" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.05, 0, 0)
-monitor_for_transparency = false
 
 [node name="Crate" parent="WorldGrid/Room19" instance=ExtResource("16_sppgp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -697,24 +1064,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 2)
 
 [node name="Ghost3" parent="WorldGrid/Room19" instance=ExtResource("15_b5bwo")]
 
+[node name="Door" parent="WorldGrid/Room19" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8, 0, 0)
+door_location = SubResource("Resource_7gr0x")
+
+[node name="Door2" parent="WorldGrid/Room19" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0, 0)
+door_location = SubResource("Resource_6lnc1")
+
 [node name="Room3" type="Node3D" parent="WorldGrid" groups=["rooms"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -16)
 script = ExtResource("7_d8xjy")
 room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room3" instance=ExtResource("8_ncqhn")]
-
-[node name="WallWithDoor" parent="WorldGrid/Room3" instance=ExtResource("10_ogha5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.05)
-monitor_for_transparency = true
-
-[node name="WallWithDoor3" parent="WorldGrid/Room3" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.05, 0, 0)
-monitor_for_transparency = false
-
-[node name="WallWithDoor4" parent="WorldGrid/Room3" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.05, 0, 0)
-monitor_for_transparency = false
 
 [node name="Ghost" parent="WorldGrid/Room3" instance=ExtResource("15_b5bwo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -735,24 +1098,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 3)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
 monitor_for_transparency = true
 
+[node name="Door" parent="WorldGrid/Room3" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0, 0)
+door_location = SubResource("Resource_gqsrm")
+
+[node name="Door2" parent="WorldGrid/Room3" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8, 0, 0)
+door_location = SubResource("Resource_7xql1")
+
+[node name="Door3" parent="WorldGrid/Room3" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.95)
+door_location = SubResource("Resource_1bnxf")
+
+[node name="WallWithDoorway" parent="WorldGrid/Room3/Door3" index="5"]
+preview_transparent_material = true
+
 [node name="Room14" type="Node3D" parent="WorldGrid" groups=["rooms"]]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -48)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -48)
 script = ExtResource("7_d8xjy")
 room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room14" instance=ExtResource("8_ncqhn")]
-
-[node name="WallWithDoor" parent="WorldGrid/Room14" instance=ExtResource("10_ogha5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.05)
-monitor_for_transparency = false
-
-[node name="WallWithDoor3" parent="WorldGrid/Room14" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.05, 0, 0)
-monitor_for_transparency = true
-
-[node name="WallWithDoor4" parent="WorldGrid/Room14" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.05, 0, 0)
-monitor_for_transparency = true
 
 [node name="Ghost" parent="WorldGrid/Room14" instance=ExtResource("15_b5bwo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -770,26 +1136,32 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 1, -1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 3)
 
 [node name="Wall" parent="WorldGrid/Room14" instance=ExtResource("9_7nlrc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0, 0)
+
+[node name="Door" parent="WorldGrid/Room14" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.95)
+door_location = SubResource("Resource_84q5o")
+
+[node name="WallWithDoorway" parent="WorldGrid/Room14/Door" index="5"]
+monitor_for_transparency = true
+
+[node name="Door2" parent="WorldGrid/Room14" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8, 0, 0)
+door_location = SubResource("Resource_jvy2h")
+
+[node name="Door3" parent="WorldGrid/Room14" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 7.95)
+door_location = SubResource("Resource_2gtq4")
+
+[node name="WallWithDoorway" parent="WorldGrid/Room14/Door3" index="5"]
+monitor_for_transparency = true
 
 [node name="Room21" type="Node3D" parent="WorldGrid" groups=["rooms"]]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, -80)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -80)
 script = ExtResource("7_d8xjy")
 room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room21" instance=ExtResource("8_ncqhn")]
-
-[node name="WallWithDoor" parent="WorldGrid/Room21" instance=ExtResource("10_ogha5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.05)
-monitor_for_transparency = true
-
-[node name="WallWithDoor3" parent="WorldGrid/Room21" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.05, 0, 0)
-monitor_for_transparency = false
-
-[node name="WallWithDoor4" parent="WorldGrid/Room21" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.05, 0, 0)
-monitor_for_transparency = false
 
 [node name="Ghost" parent="WorldGrid/Room21" instance=ExtResource("15_b5bwo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -828,32 +1200,49 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, 1)
 
 [node name="Wall" parent="WorldGrid/Room21" instance=ExtResource("9_7nlrc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -8)
+
+[node name="Door" parent="WorldGrid/Room21" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8, 0, 0)
+door_location = SubResource("Resource_aadsb")
+
+[node name="Door2" parent="WorldGrid/Room21" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0, 0)
+door_location = SubResource("Resource_fqnqv")
+
+[node name="Door3" parent="WorldGrid/Room21" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 7.95)
+door_location = SubResource("Resource_kuvyp")
+
+[node name="WallWithDoorway" parent="WorldGrid/Room21/Door3" index="5"]
+monitor_for_transparency = true
 
 [node name="Room13" type="Node3D" parent="WorldGrid" groups=["rooms"]]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 32, 0, -48)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -48)
 script = ExtResource("7_d8xjy")
 room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room13" instance=ExtResource("8_ncqhn")]
 
-[node name="WallWithDoor" parent="WorldGrid/Room13" instance=ExtResource("10_ogha5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.05)
-monitor_for_transparency = true
-
-[node name="WallWithDoor3" parent="WorldGrid/Room13" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.05, 0, 0)
-monitor_for_transparency = false
-
-[node name="WallWithDoor4" parent="WorldGrid/Room13" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.05, 0, 0)
-monitor_for_transparency = false
-
 [node name="Wall" parent="WorldGrid/Room13" instance=ExtResource("9_7nlrc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
 
 [node name="Shrine" parent="WorldGrid/Room13" instance=ExtResource("14_eaohd")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="Door" parent="WorldGrid/Room13" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 7.95)
+door_location = SubResource("Resource_66vmd")
+
+[node name="WallWithDoorway" parent="WorldGrid/Room13/Door" index="5"]
+monitor_for_transparency = true
+
+[node name="Door2" parent="WorldGrid/Room13" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8, 0, 0)
+door_location = SubResource("Resource_nrdwn")
+
+[node name="Door3" parent="WorldGrid/Room13" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0, 0)
+door_location = SubResource("Resource_ben6m")
 
 [node name="Room4" type="Node3D" parent="WorldGrid" groups=["rooms"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -32)
@@ -861,18 +1250,6 @@ script = ExtResource("7_d8xjy")
 room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room4" instance=ExtResource("8_ncqhn")]
-
-[node name="WallWithDoor" parent="WorldGrid/Room4" instance=ExtResource("10_ogha5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.05)
-monitor_for_transparency = true
-
-[node name="WallWithDoor2" parent="WorldGrid/Room4" instance=ExtResource("10_ogha5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.05)
-monitor_for_transparency = true
-
-[node name="WallWithDoor3" parent="WorldGrid/Room4" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.05, 0, 0)
-monitor_for_transparency = false
 
 [node name="Crate" parent="WorldGrid/Room4" instance=ExtResource("16_sppgp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -901,24 +1278,31 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8, 0, 
 
 [node name="Ghost3" parent="WorldGrid/Room4" instance=ExtResource("15_b5bwo")]
 
+[node name="Door" parent="WorldGrid/Room4" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 7.95)
+door_location = SubResource("Resource_paypg")
+
+[node name="WallWithDoorway" parent="WorldGrid/Room4/Door" index="5"]
+preview_transparent_material = true
+monitor_for_transparency = true
+
+[node name="Door2" parent="WorldGrid/Room4" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0, 0)
+door_location = SubResource("Resource_12obq")
+
+[node name="Door3" parent="WorldGrid/Room4" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.95)
+door_location = SubResource("Resource_i7kop")
+
+[node name="WallWithDoorway" parent="WorldGrid/Room4/Door3" index="5"]
+monitor_for_transparency = true
+
 [node name="Room8" type="Node3D" parent="WorldGrid" groups=["rooms"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -32)
 script = ExtResource("7_d8xjy")
 room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room8" instance=ExtResource("8_ncqhn")]
-
-[node name="WallWithDoor2" parent="WorldGrid/Room8" instance=ExtResource("10_ogha5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.05)
-monitor_for_transparency = true
-
-[node name="WallWithDoor3" parent="WorldGrid/Room8" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.05, 0, 0)
-monitor_for_transparency = false
-
-[node name="WallWithDoor4" parent="WorldGrid/Room8" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.05, 0, 0)
-monitor_for_transparency = false
 
 [node name="Ghost" parent="WorldGrid/Room8" instance=ExtResource("15_b5bwo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -956,20 +1340,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, -1)
 [node name="Wall" parent="WorldGrid/Room8" instance=ExtResource("9_7nlrc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
 
+[node name="Door" parent="WorldGrid/Room8" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 7.95)
+door_location = SubResource("Resource_rxyol")
+
+[node name="WallWithDoorway" parent="WorldGrid/Room8/Door" index="5"]
+monitor_for_transparency = true
+
+[node name="Door2" parent="WorldGrid/Room8" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0, 0)
+door_location = SubResource("Resource_xg3do")
+
+[node name="Door3" parent="WorldGrid/Room8" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8, 0, 0)
+door_location = SubResource("Resource_4a5dy")
+
 [node name="Room9" type="Node3D" parent="WorldGrid" groups=["rooms"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, -32)
 script = ExtResource("7_d8xjy")
 room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room9" instance=ExtResource("8_ncqhn")]
-
-[node name="WallWithDoor3" parent="WorldGrid/Room9" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.05, 0, 0)
-monitor_for_transparency = false
-
-[node name="WallWithDoor4" parent="WorldGrid/Room9" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.05, 0, 0)
-monitor_for_transparency = false
 
 [node name="Ghost" parent="WorldGrid/Room9" instance=ExtResource("15_b5bwo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -984,20 +1375,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
 monitor_for_transparency = true
 
+[node name="Door" parent="WorldGrid/Room9" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8, 0, 0)
+door_location = SubResource("Resource_dsujm")
+
+[node name="Door2" parent="WorldGrid/Room9" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0, 0)
+door_location = SubResource("Resource_qvutw")
+
 [node name="Room12" type="Node3D" parent="WorldGrid" groups=["rooms"]]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 32, 0, -32)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 0, -32)
 script = ExtResource("7_d8xjy")
 room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room12" instance=ExtResource("8_ncqhn")]
-
-[node name="WallWithDoor3" parent="WorldGrid/Room12" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.05, 0, 0)
-monitor_for_transparency = true
-
-[node name="WallWithDoor4" parent="WorldGrid/Room12" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.05, 0, 0)
-monitor_for_transparency = true
 
 [node name="Ghost" parent="WorldGrid/Room12" instance=ExtResource("15_b5bwo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -1006,25 +1397,31 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="Wall" parent="WorldGrid/Room12" instance=ExtResource("9_7nlrc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0, 0)
 
 [node name="Wall2" parent="WorldGrid/Room12" instance=ExtResource("9_7nlrc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8, 0, 0)
+
+[node name="Door" parent="WorldGrid/Room12" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 7.95)
+door_location = SubResource("Resource_jysn7")
+
+[node name="WallWithDoorway" parent="WorldGrid/Room12/Door" index="5"]
+monitor_for_transparency = true
+
+[node name="Door2" parent="WorldGrid/Room12" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.95)
+door_location = SubResource("Resource_rea42")
+
+[node name="WallWithDoorway" parent="WorldGrid/Room12/Door2" index="5"]
+monitor_for_transparency = true
 
 [node name="Room22" type="Node3D" parent="WorldGrid" groups=["rooms"]]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -64)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -64)
 script = ExtResource("7_d8xjy")
 room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room22" instance=ExtResource("8_ncqhn")]
-
-[node name="WallWithDoor3" parent="WorldGrid/Room22" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.05, 0, 0)
-monitor_for_transparency = true
-
-[node name="WallWithDoor4" parent="WorldGrid/Room22" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.05, 0, 0)
-monitor_for_transparency = true
 
 [node name="Ghost" parent="WorldGrid/Room22" instance=ExtResource("15_b5bwo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -1033,25 +1430,31 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="Wall" parent="WorldGrid/Room22" instance=ExtResource("9_7nlrc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8, 0, 0)
 
 [node name="Wall2" parent="WorldGrid/Room22" instance=ExtResource("9_7nlrc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8, 0, 0)
+
+[node name="Door" parent="WorldGrid/Room22" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.95)
+door_location = SubResource("Resource_s56qn")
+
+[node name="WallWithDoorway" parent="WorldGrid/Room22/Door" index="5"]
+monitor_for_transparency = true
+
+[node name="Door2" parent="WorldGrid/Room22" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 7.95)
+door_location = SubResource("Resource_vgbmk")
+
+[node name="WallWithDoorway" parent="WorldGrid/Room22/Door2" index="5"]
+monitor_for_transparency = true
 
 [node name="Room23" type="Node3D" parent="WorldGrid" groups=["rooms"]]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -16, 0, -80)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -80)
 script = ExtResource("7_d8xjy")
 room_information = SubResource("Resource_eiksi")
 
 [node name="Floor" parent="WorldGrid/Room23" instance=ExtResource("8_ncqhn")]
-
-[node name="WallWithDoor3" parent="WorldGrid/Room23" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -8.05, 0, 0)
-monitor_for_transparency = false
-
-[node name="WallWithDoor4" parent="WorldGrid/Room23" instance=ExtResource("10_ogha5")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8.05, 0, 0)
-monitor_for_transparency = false
 
 [node name="Ghost" parent="WorldGrid/Room23" instance=ExtResource("15_b5bwo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -1066,86 +1469,41 @@ monitor_for_transparency = true
 [node name="Wall2" parent="WorldGrid/Room23" instance=ExtResource("9_7nlrc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
 
-[node name="OmniLight3D" type="OmniLight3D" parent="WorldGrid"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -9)
-light_color = Color(0.854902, 0.647059, 0.12549, 1)
-light_energy = 2.0
-omni_range = 2.0
+[node name="Door" parent="WorldGrid/Room23" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -8, 0, 0)
+door_location = SubResource("Resource_smsfs")
 
-[node name="OmniLight3D2" type="OmniLight3D" parent="WorldGrid"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -25)
-light_color = Color(0.854902, 0.647059, 0.12549, 1)
-light_energy = 2.0
-omni_range = 2.0
-
-[node name="OmniLight3D3" type="OmniLight3D" parent="WorldGrid"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 1, -25)
-light_color = Color(0.854902, 0.647059, 0.12549, 1)
-light_energy = 2.0
-omni_range = 2.0
-
-[node name="OmniLight3D4" type="OmniLight3D" parent="WorldGrid"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48, 1, -25)
-light_color = Color(0.854902, 0.647059, 0.12549, 1)
-light_energy = 2.0
-omni_range = 2.0
-
-[node name="OmniLight3D5" type="OmniLight3D" parent="WorldGrid"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 1, -73)
-light_color = Color(0.854902, 0.647059, 0.12549, 1)
-light_energy = 2.0
-omni_range = 2.0
-
-[node name="OmniLight3D6" type="OmniLight3D" parent="WorldGrid"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -73)
-light_color = Color(0.854902, 0.647059, 0.12549, 1)
-light_energy = 2.0
-omni_range = 2.0
-
-[node name="OmniLight3D7" type="OmniLight3D" parent="WorldGrid"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -57)
-light_color = Color(0.854902, 0.647059, 0.12549, 1)
-light_energy = 2.0
-omni_range = 2.0
-
-[node name="OmniLight3D8" type="OmniLight3D" parent="WorldGrid"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 1, -73)
-light_color = Color(0.854902, 0.647059, 0.12549, 1)
-light_energy = 2.0
-omni_range = 2.0
-
-[node name="OmniLight3D9" type="OmniLight3D" parent="WorldGrid"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 1, -57)
-light_color = Color(0.854902, 0.647059, 0.12549, 1)
-light_energy = 2.0
-omni_range = 2.0
-
-[node name="OmniLight3D10" type="OmniLight3D" parent="WorldGrid"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 1, -41)
-light_color = Color(0.854902, 0.647059, 0.12549, 1)
-light_energy = 2.0
-omni_range = 2.0
-
-[node name="OmniLight3D11" type="OmniLight3D" parent="WorldGrid"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 1, -25)
-light_color = Color(0.854902, 0.647059, 0.12549, 1)
-light_energy = 2.0
-omni_range = 2.0
-
-[node name="OmniLight3D12" type="OmniLight3D" parent="WorldGrid"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 1, -9)
-light_color = Color(0.854902, 0.647059, 0.12549, 1)
-light_energy = 2.0
-omni_range = 2.0
-
-[node name="OmniLight3D13" type="OmniLight3D" parent="WorldGrid"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -41)
-light_color = Color(0.854902, 0.647059, 0.12549, 1)
-light_energy = 2.0
-omni_range = 2.0
+[node name="Door2" parent="WorldGrid/Room23" instance=ExtResource("16_0g8nc")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8, 0, 0)
+door_location = SubResource("Resource_pf48v")
 
 [node name="MinimapObjects" type="Node3D" parent="."]
 
 [node name="UI" parent="." instance=ExtResource("23_i7kop")]
 
+[editable path="WorldGrid/RoomStart/Door"]
+[editable path="WorldGrid/Room/Door"]
+[editable path="WorldGrid/Room/Door3"]
+[editable path="WorldGrid/Room5/Door2"]
+[editable path="WorldGrid/Room6/Door2"]
+[editable path="WorldGrid/Room24/Door2"]
+[editable path="WorldGrid/Room10/Door2"]
+[editable path="WorldGrid/Room16/Door"]
+[editable path="WorldGrid/Room20/Door"]
+[editable path="WorldGrid/Room25/Door"]
+[editable path="WorldGrid/Room11/Door"]
+[editable path="WorldGrid/Room17/Door"]
+[editable path="WorldGrid/Room17/Door2"]
+[editable path="WorldGrid/Room3/Door3"]
+[editable path="WorldGrid/Room14/Door"]
+[editable path="WorldGrid/Room14/Door3"]
+[editable path="WorldGrid/Room21/Door3"]
+[editable path="WorldGrid/Room13/Door"]
+[editable path="WorldGrid/Room4/Door"]
+[editable path="WorldGrid/Room4/Door3"]
+[editable path="WorldGrid/Room8/Door"]
+[editable path="WorldGrid/Room12/Door"]
+[editable path="WorldGrid/Room12/Door2"]
+[editable path="WorldGrid/Room22/Door"]
+[editable path="WorldGrid/Room22/Door2"]
 [editable path="UI"]

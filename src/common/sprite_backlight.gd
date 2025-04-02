@@ -4,7 +4,7 @@ var material: StandardMaterial3D = StandardMaterial3D.new()
 
 
 func _ready() -> void:
-	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA_SCISSOR
 	material.backlight_enabled = true
 	material.backlight = Color.WHITE
 	material.billboard_mode = StandardMaterial3D.BILLBOARD_FIXED_Y
@@ -13,6 +13,8 @@ func _ready() -> void:
 	
 	material.albedo_texture = texture
 	material_override = material
+	
+	cast_shadow =GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 
 
 func replace_texture(new_texture: Texture2D) -> void:

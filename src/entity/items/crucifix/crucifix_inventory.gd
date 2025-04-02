@@ -3,6 +3,7 @@ extends DefenseItemInventory
 const BASE_COOLDOWN_DURATION: float = 5
 const BASE_ACTIVE_DURATION: float = 1.5
 const BASE_RADIUS: float = 2
+const STUN_MODIFER: float = 0.5
 
 var player: Node = PlayerHandler.get_player()
 
@@ -52,7 +53,6 @@ func use() -> void:
 	$CooldownTimer.wait_time = BASE_COOLDOWN_DURATION / player.player_stats.cooldown_reduction
 	$CooldownTimer.start()
 	cooldown_active = true
-	
 	item_used.emit($CooldownTimer)
 
 
@@ -69,7 +69,7 @@ func _on_cooldown_timer_timeout() -> void:
 
 func _on_body_entered(body: Node3D) -> void:
 	if body is Ghost:
-		body.hit.emit()
+		body.hit.emit(STUN_MODIFER, display_name)
 
 
 func _on_body_entered2(body: Node3D) -> void:

@@ -132,6 +132,6 @@ func _on_key_item_picked_up() -> void:
 	player_stats.stat_update_add(PlayerStats.Stats.LIGHT_ENERGY, -0.2, "key_item")
 
 
-func _on_key_item_dropped(_key_item: KeyItemInventory) -> void:
+func _on_key_item_dropped() -> void:
 	player_stats.stat_update_remove(PlayerStats.Stats.LIGHT_OMNI_RANGE, "key_item")
 	player_stats.stat_update_remove(PlayerStats.Stats.LIGHT_ENERGY, "key_item")

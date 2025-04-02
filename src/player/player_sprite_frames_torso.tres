@@ -1,0 +1,41 @@
+[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://re7p8fjt08rp"]
+
+[ext_resource type="Texture2D" uid="uid://bpcdo5v4oiwd2" path="res://src/player/caretaker_dead.png" id="1_nxi8x"]
+[ext_resource type="Texture2D" uid="uid://ckrdaakxsf6o0" path="res://src/player/caretaker_no_legs_dying.png" id="2_tyecb"]
+[ext_resource type="Texture2D" uid="uid://citwjgkhghbq4" path="res://src/player/caretaker_no_legs_living.png" id="3_i65hp"]
+[ext_resource type="Texture2D" uid="uid://b6dsgsujyqk2o" path="res://src/player/caretaker_living.png" id="4_rk3gc"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_nxi8x")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_tyecb")
+}],
+"loop": true,
+"name": &"dying",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_i65hp")
+}],
+"loop": true,
+"name": &"living",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_rk3gc")
+}],
+"loop": true,
+"name": &"living_legs",
+"speed": 5.0
+}]
