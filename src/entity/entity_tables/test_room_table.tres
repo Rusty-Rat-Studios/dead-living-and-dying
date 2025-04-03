@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EntityTable" load_steps=19 format=3 uid="uid://brngxo180e7qn"]
+[gd_resource type="Resource" script_class="EntityTable" load_steps=21 format=3 uid="uid://brngxo180e7qn"]
 
 [ext_resource type="Script" uid="uid://dt04phs8a5k3h" path="res://src/entity/entity_table_entry.gd" id="1_v674j"]
 [ext_resource type="PackedScene" uid="uid://dh8q75xrlxeaa" path="res://src/map/rooms/basic_room.tscn" id="2_3hsld"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bfbveo3pc6kfq" path="res://src/map/rooms/hallway_straight_north_south_room.tscn" id="7_ucrp2"]
 [ext_resource type="PackedScene" uid="uid://dvfm52rrn70uh" path="res://src/map/rooms/hallway_straight_east_west_room.tscn" id="8_74bs4"]
 [ext_resource type="PackedScene" uid="uid://d142i6jit8s2f" path="res://src/map/rooms/shrine_room.tscn" id="9_mqgww"]
+[ext_resource type="PackedScene" uid="uid://y5gvyod1654d" path="res://src/map/rooms/item_room.tscn" id="10_waavr"]
 
 [sub_resource type="Resource" id="Resource_b5ttb"]
 script = ExtResource("1_v674j")
@@ -83,6 +84,15 @@ max_spawn = -1
 min_spawn = -1
 metadata/_custom_type_script = "uid://dt04phs8a5k3h"
 
+[sub_resource type="Resource" id="Resource_mtfob"]
+script = ExtResource("1_v674j")
+entity = ExtResource("10_waavr")
+base_chance = 1.0
+chance_change = 0.0
+max_spawn = -1
+min_spawn = 2
+metadata/_custom_type_script = "uid://dt04phs8a5k3h"
+
 [resource]
 script = ExtResource("2_pws74")
-entities = Array[ExtResource("1_v674j")]([SubResource("Resource_b5ttb"), SubResource("Resource_ab0a5"), SubResource("Resource_xjnb4"), SubResource("Resource_ylr8c"), SubResource("Resource_2gvgd"), SubResource("Resource_s0rfh"), SubResource("Resource_waavr"), SubResource("Resource_ib33g")])
+entities = Array[ExtResource("1_v674j")]([SubResource("Resource_b5ttb"), SubResource("Resource_ab0a5"), SubResource("Resource_xjnb4"), SubResource("Resource_ylr8c"), SubResource("Resource_2gvgd"), SubResource("Resource_s0rfh"), SubResource("Resource_waavr"), SubResource("Resource_ib33g"), SubResource("Resource_mtfob")])
