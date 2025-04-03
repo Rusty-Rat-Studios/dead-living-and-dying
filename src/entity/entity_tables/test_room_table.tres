@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EntityTable" load_steps=35 format=3 uid="uid://brngxo180e7qn"]
+[gd_resource type="Resource" script_class="EntityTable" load_steps=37 format=3 uid="uid://brngxo180e7qn"]
 
 [ext_resource type="Script" uid="uid://dt04phs8a5k3h" path="res://src/entity/entity_table_entry.gd" id="1_v674j"]
 [ext_resource type="PackedScene" uid="uid://dh8q75xrlxeaa" path="res://src/map/rooms/basic_room.tscn" id="2_3hsld"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://ci2g32k1gulx5" path="res://src/map/rooms/living_room_1.tscn" id="15_ib33g"]
 [ext_resource type="PackedScene" uid="uid://c2d7uceohqesx" path="res://src/map/rooms/living_room_2.tscn" id="16_b2xe6"]
 [ext_resource type="PackedScene" uid="uid://b8t221jgqbuth" path="res://src/map/rooms/library_room_1.tscn" id="17_b2xe6"]
+[ext_resource type="PackedScene" uid="uid://bitlsagdxtmht" path="res://src/map/rooms/library_room_2.tscn" id="18_tyhfv"]
 
 [sub_resource type="Resource" id="Resource_b5ttb"]
 script = ExtResource("1_v674j")
@@ -103,7 +104,7 @@ metadata/_custom_type_script = "uid://dt04phs8a5k3h"
 [sub_resource type="Resource" id="Resource_4wgnf"]
 script = ExtResource("1_v674j")
 entity = ExtResource("11_mtfob")
-base_chance = 0.75
+base_chance = 1.0
 chance_change = 0.0
 max_spawn = -1
 min_spawn = -1
@@ -112,7 +113,7 @@ metadata/_custom_type_script = "uid://dt04phs8a5k3h"
 [sub_resource type="Resource" id="Resource_ucrp2"]
 script = ExtResource("1_v674j")
 entity = ExtResource("12_4wgnf")
-base_chance = 0.75
+base_chance = 1.0
 chance_change = 0.0
 max_spawn = -1
 min_spawn = -1
@@ -163,6 +164,15 @@ max_spawn = -1
 min_spawn = -1
 metadata/_custom_type_script = "uid://dt04phs8a5k3h"
 
+[sub_resource type="Resource" id="Resource_tq0so"]
+script = ExtResource("1_v674j")
+entity = ExtResource("18_tyhfv")
+base_chance = 1.0
+chance_change = 0.0
+max_spawn = -1
+min_spawn = -1
+metadata/_custom_type_script = "uid://dt04phs8a5k3h"
+
 [resource]
 script = ExtResource("2_pws74")
-entities = Array[ExtResource("1_v674j")]([SubResource("Resource_b5ttb"), SubResource("Resource_ab0a5"), SubResource("Resource_xjnb4"), SubResource("Resource_ylr8c"), SubResource("Resource_2gvgd"), SubResource("Resource_s0rfh"), SubResource("Resource_waavr"), SubResource("Resource_ib33g"), SubResource("Resource_mtfob"), SubResource("Resource_4wgnf"), SubResource("Resource_ucrp2"), SubResource("Resource_b2xe6"), SubResource("Resource_tyhfv"), SubResource("Resource_5ur83"), SubResource("Resource_tp66j"), SubResource("Resource_jdffx")])
+entities = Array[ExtResource("1_v674j")]([SubResource("Resource_b5ttb"), SubResource("Resource_ab0a5"), SubResource("Resource_xjnb4"), SubResource("Resource_ylr8c"), SubResource("Resource_2gvgd"), SubResource("Resource_s0rfh"), SubResource("Resource_waavr"), SubResource("Resource_ib33g"), SubResource("Resource_mtfob"), SubResource("Resource_4wgnf"), SubResource("Resource_ucrp2"), SubResource("Resource_b2xe6"), SubResource("Resource_tyhfv"), SubResource("Resource_5ur83"), SubResource("Resource_tp66j"), SubResource("Resource_jdffx"), SubResource("Resource_tq0so")])
