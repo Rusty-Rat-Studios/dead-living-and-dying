@@ -72,10 +72,6 @@ func enter() -> void:
 	SignalBus.player_escaped.connect(_on_player_escaped)
 	SignalBus.player_revived.connect(_on_player_revived)
 	SignalBus.player_exited_room.connect(_on_player_exited_room)
-	
-	# disable player light
-	_parent.light_omni.visible = false
-	_parent.light_spot.visible = false
 
 
 func exit() -> void:
@@ -149,6 +145,10 @@ func move_to_shrine() -> void:
 	_parent._physics_process(get_physics_process_delta_time())
 	# activate corpse light after fade-out to avoid "popping-in" if corpse visible on respawn
 	_parent._corpse.activate()
+	
+	# disable player light
+	_parent.light_omni.visible = false
+	_parent.light_spot.visible = false
 	
 	# fade visibility back in
 	await black_screen.fade_out(RESPAWN_TIME / 2)
