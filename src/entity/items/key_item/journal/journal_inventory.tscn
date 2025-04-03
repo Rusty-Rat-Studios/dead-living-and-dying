@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://com2asaifeg5t"]
+
+[ext_resource type="Script" uid="uid://cp30pt413g0sq" path="res://src/entity/items/key_item/journal/journal_inventory.gd" id="1_3sqfe"]
+
+[node name="JournalInventory" type="Node3D"]
+script = ExtResource("1_3sqfe")
