@@ -1,6 +1,6 @@
 [gd_scene load_steps=31 format=3 uid="uid://d142i6jit8s2f"]
 
-[ext_resource type="Script" uid="uid://bo0tyfrjfebc6" path="res://src/map/room_components/room.gd" id="1_3kabm"]
+[ext_resource type="Script" uid="uid://b7vp3upyt16rh" path="res://src/map/rooms/shrine_room.gd" id="1_uuedo"]
 [ext_resource type="PackedScene" uid="uid://b4teav5cf7dm4" path="res://src/map/room_components/floor/floor_collision_shape.tscn" id="2_0v0cg"]
 [ext_resource type="PackedScene" uid="uid://te0dpapcosk4" path="res://src/map/rooms/room_minimap/basic_room_minimap.tscn" id="2_fi0hv"]
 [ext_resource type="Script" uid="uid://bv4f3snq7u1u2" path="res://src/common/room_information.gd" id="4_1kr6n"]
@@ -120,7 +120,7 @@ material = SubResource("StandardMaterial3D_uuedo")
 curve = SubResource("Curve_w6w2w")
 
 [node name="ShrineRoom" type="Node3D" groups=["rooms"]]
-script = ExtResource("1_3kabm")
+script = ExtResource("1_uuedo")
 room_information = SubResource("Resource_ownp1")
 
 [node name="Floor" type="StaticBody3D" parent="."]

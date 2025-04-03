@@ -49,8 +49,8 @@ func enter() -> void:
 	
 	# modulate player color and opacity to appear ghostly
 	_parent.sprite_torso.modulate.a = _parent.OPACITY_DEAD
-	# stop footsteps sound effects
-	_parent.footsteps_sfx.stop()
+	# mute footsteps sound effects
+	_parent.footsteps_sfx.max_db = -100
 	
 	# drop key item if player is carrying it
 	var key_item: KeyItemInventory = _parent.get_key_item_or_null()
@@ -108,8 +108,8 @@ func exit() -> void:
 	SignalBus.player_revived.disconnect(_on_player_revived)
 	SignalBus.player_exited_room.disconnect(_on_player_exited_room)
 	
-	# restart footsteps sound effects
-	_parent.footsteps_sfx.play()
+	# unmute footsteps sound effects
+	_parent.footsteps_sfx.max_db = 0
 
 
 func process_state() -> void:
