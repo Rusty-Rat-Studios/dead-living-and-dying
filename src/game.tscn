@@ -26,7 +26,6 @@
 [ext_resource type="PackedScene" uid="uid://dxrbbho8wlerh" path="res://src/entity/items/lamp_oil/lamp_oil_world.tscn" id="23_3haxr"]
 [ext_resource type="PackedScene" uid="uid://b58p4qke66th5" path="res://src/entity/ghost/boss/ghost_boss.tscn" id="23_36jdj"]
 [ext_resource type="PackedScene" uid="uid://cp7202hwhpcd5" path="res://src/ui/ui.tscn" id="23_qhcbd"]
-[ext_resource type="PackedScene" uid="uid://dkklkw4dknru7" path="res://src/entity/items/key_item/pipe/pipe_world.tscn" id="24_0ehnx"]
 [ext_resource type="PackedScene" uid="uid://bsy7ilicbox53" path="res://src/entity/items/holy_water/holy_water_world.tscn" id="24_f1jbl"]
 [ext_resource type="PackedScene" uid="uid://k5kxbl8tsn6d" path="res://src/entity/items/carrot/carrot_world.tscn" id="27_xa8c5"]
 [ext_resource type="PackedScene" uid="uid://c3wmqi8pl2yas" path="res://src/entity/objects/wall_sconce/wall_sconce_forward.tscn" id="28_rbnx6"]
@@ -38,6 +37,7 @@
 [ext_resource type="PackedScene" uid="uid://qcl430tspnu1" path="res://src/entity/objects/cardboard_box/cardboard_box_closed.tscn" id="33_ou5k8"]
 [ext_resource type="PackedScene" uid="uid://dtv7i6ecsmj0f" path="res://src/entity/objects/cardboard_box/cardboard_boxes_stacked.tscn" id="34_4lake"]
 [ext_resource type="PackedScene" uid="uid://bxso5jmpfc7ao" path="res://src/entity/items/incense/incense_world.tscn" id="38_0ehnx"]
+[ext_resource type="PackedScene" uid="uid://dg0be86g5cpxb" path="res://src/entity/items/key_item/glasses/glasses_world.tscn" id="39_s8pfy"]
 
 [sub_resource type="Resource" id="Resource_3y6bj"]
 script = ExtResource("9_xa8c5")
@@ -207,9 +207,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16)
 script = ExtResource("10_uwref")
 room_information = SubResource("Resource_eiksi")
 
-[node name="PipeWorld" parent="WorldGrid/RoomCenter" instance=ExtResource("24_0ehnx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.857831, 1.25974, 2.70244)
-
 [node name="Floor" parent="WorldGrid/RoomCenter" instance=ExtResource("10_44xgk")]
 
 [node name="GhostCenter" parent="WorldGrid/RoomCenter" instance=ExtResource("9_t4a6d")]
@@ -254,6 +251,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.33971, 0.88915, -7.80321)
 
 [node name="WallSconceForward2" parent="WorldGrid/RoomCenter" instance=ExtResource("28_rbnx6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.66029, 0.88915, -7.80321)
+
+[node name="GlassesWorld" parent="WorldGrid/RoomCenter" instance=ExtResource("39_s8pfy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.92398, 1.25974, 4.0008)
 
 [node name="RoomLeft" type="Node3D" parent="WorldGrid" groups=["rooms"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, -16)
