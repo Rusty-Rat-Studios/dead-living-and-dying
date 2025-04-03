@@ -1,8 +1,40 @@
-[gd_scene load_steps=2 format=3 uid="uid://fkni2pxbveep"]
+[gd_scene load_steps=11 format=3 uid="uid://fkni2pxbveep"]
 
 [ext_resource type="PackedScene" uid="uid://y5gvyod1654d" path="res://src/map/rooms/item_room.tscn" id="1_5gmmo"]
+[ext_resource type="PackedScene" uid="uid://te0dpapcosk4" path="res://src/map/rooms/room_minimap/basic_room_minimap.tscn" id="2_dxck4"]
+[ext_resource type="Script" uid="uid://dqhrw6rxew3fa" path="res://src/common/door_location.gd" id="3_idgj3"]
+[ext_resource type="Texture2D" uid="uid://bqgf7f7e53g7v" path="res://src/ui/minimap/star_icon.png" id="4_dxck4"]
+[ext_resource type="Script" uid="uid://bv4f3snq7u1u2" path="res://src/common/room_information.gd" id="5_ixh1f"]
+
+[sub_resource type="Resource" id="Resource_3y6bj"]
+script = ExtResource("3_idgj3")
+location = Vector2(0, 0)
+direction = 0
+
+[sub_resource type="Resource" id="Resource_b0qj2"]
+script = ExtResource("3_idgj3")
+location = Vector2(0, 0)
+direction = 1
+
+[sub_resource type="Resource" id="Resource_8lq6k"]
+script = ExtResource("3_idgj3")
+location = Vector2(0, 0)
+direction = 2
+
+[sub_resource type="Resource" id="Resource_8lnup"]
+script = ExtResource("3_idgj3")
+location = Vector2(0, 0)
+direction = 3
+
+[sub_resource type="Resource" id="Resource_pa0wg"]
+script = ExtResource("5_ixh1f")
+room_shape = Array[Vector2]([Vector2(0, 0)])
+possible_door_locations = Array[ExtResource("3_idgj3")]([SubResource("Resource_3y6bj"), SubResource("Resource_b0qj2"), SubResource("Resource_8lq6k"), SubResource("Resource_8lnup")])
+minimap_component = ExtResource("2_dxck4")
+room_icon = ExtResource("4_dxck4")
 
 [node name="ItemRoom" instance=ExtResource("1_5gmmo")]
+room_information = SubResource("Resource_pa0wg")
 
 [node name="Spawner" parent="." index="8"]
 spawner_type = 2

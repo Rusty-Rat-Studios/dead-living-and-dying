@@ -67,6 +67,9 @@ monitor_for_transparency = true
 [node name="WallSconceForward2" parent="." instance=ExtResource("7_y2f2j")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.735, 1.29541, -7.814)
 
+[node name="Ignitable" parent="WallSconceForward2" index="0"]
+begin_lit_chance = 1.0
+
 [node name="WallSconceSide" parent="." instance=ExtResource("8_81uvg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.69263, 1.55735, -3.17865)
 
@@ -138,6 +141,7 @@ begin_lit_chance = 1.0
 transform = Transform3D(0.880783, 0, -0.47352, 0, 1, 0, 0.47352, 0, 0.880783, 5.47663, 1.3386, -5.52634)
 
 [editable path="Door"]
+[editable path="WallSconceForward2"]
 [editable path="WallSconceSide"]
 [editable path="WallSconceSide2"]
 [editable path="WallSconceSide3"]
