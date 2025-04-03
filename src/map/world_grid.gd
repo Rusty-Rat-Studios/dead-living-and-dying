@@ -87,10 +87,14 @@ func _init_all_rooms() -> void:
 
 func _spawn_entities() -> void:
 	if generator_settings != null:
-		SpawnerManager.spawn(Spawner.SpawnerType.ENEMY, generator_settings.enemy_entity_table)
-		SpawnerManager.spawn(Spawner.SpawnerType.ITEM, generator_settings.enemy_entity_table)
-		SpawnerManager.spawn(Spawner.SpawnerType.KEY_ITEM, generator_settings.enemy_entity_table)
-		SpawnerManager.spawn(Spawner.SpawnerType.BOSS, generator_settings.enemy_entity_table)
+		if generator_settings.enemy_entity_table != null:
+			SpawnerManager.spawn(Spawner.SpawnerType.ENEMY, generator_settings.enemy_entity_table)
+		if generator_settings.item_entity_table != null:
+			SpawnerManager.spawn(Spawner.SpawnerType.ITEM, generator_settings.item_entity_table)
+		if generator_settings.key_item_entity_table != null:
+			SpawnerManager.spawn(Spawner.SpawnerType.KEY_ITEM, generator_settings.key_item_entity_table)
+		if generator_settings.boss_entity_table != null:
+			SpawnerManager.spawn(Spawner.SpawnerType.BOSS, generator_settings.boss_entity_table)
 
 
 # Returns the occupied_grid and door_grid of a room

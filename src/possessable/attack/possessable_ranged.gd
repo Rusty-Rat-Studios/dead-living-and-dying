@@ -1,14 +1,37 @@
 class_name PossessableRanged
 extends PossessableAttack
 
-@onready var projectile_scene: PackedScene = preload("res://src/possessable/attack/projectile.tscn")
+signal max_projectiles_shot
+
+@export var projectile_scene: PackedScene
+@export var max_attack_amount: int = -1
+
+var attack_amount: int = 0
+
+
+func _ready() -> void:
+	super()
+
 
 func attack(target: Node3D, _attack_windup: float) -> void:
 	if player_in_range and room.player_in_room:
-		# disable player detection
-		$AttackRange.collision_mask = 0
+		_on_projectile_shot()
 		
-		# shoot projectile at target
 		var projectile: Projectile = projectile_scene.instantiate()
-		add_child(projectile)
-		projectile.shoot(target.global_position)
+		
+		# ensure projectile cannot collide with its spawner
+		projectile.add_collision_exception_with(self)
+		
+		room.add_child(projectile)
+		
+		projectile.global_position = global_position
+		projectile.shoot(target.global_position) # shoot projectile at target
+		
+	depossess(true)
+
+
+func _on_projectile_shot() -> void:
+	attack_amount += 1
+	if max_attack_amount != -1 and attack_amount >= max_attack_amount:
+		max_projectiles_shot.emit()
+		room.call_deferred("remove_possessable", self)

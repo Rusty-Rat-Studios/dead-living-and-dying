@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bfbveo3pc6kfq"]
+[gd_scene load_steps=19 format=3 uid="uid://bfbveo3pc6kfq"]
 
 [ext_resource type="Script" uid="uid://bo0tyfrjfebc6" path="res://src/map/room_components/room.gd" id="1_ehouu"]
 [ext_resource type="PackedScene" uid="uid://1wjbi5kgqfip" path="res://src/map/rooms/room_minimap/hallway_straight_north_south_room_minimap.tscn" id="2_2y38q"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://bson3umirpot2" path="res://src/map/room_components/wall/wall.tscn" id="5_tb1ad"]
 [ext_resource type="PackedScene" uid="uid://bjca8n1kvkwg0" path="res://src/map/room_components/door/door_x4.tscn" id="6_av22d"]
 [ext_resource type="Script" uid="uid://dqhrw6rxew3fa" path="res://src/common/door_location.gd" id="7_3jj17"]
+[ext_resource type="PackedScene" uid="uid://cjgov4f5bnaae" path="res://src/entity/objects/wall_sconce/wall_sconce_side_left.tscn" id="10_ayc4g"]
+[ext_resource type="PackedScene" uid="uid://cmxmbgqr3v5cn" path="res://src/entity/objects/wall_sconce/wall_sconce_side_right.tscn" id="11_srrb5"]
 
 [sub_resource type="Resource" id="Resource_av22d"]
 script = ExtResource("7_3jj17")
@@ -83,6 +85,12 @@ door_location = SubResource("Resource_evpxx")
 
 [node name="WallWithDoorwayX4" parent="Door2" index="5"]
 monitor_for_transparency = true
+
+[node name="WallSconceSide" parent="." instance=ExtResource("10_ayc4g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.69033, 1.58312, 4.79095)
+
+[node name="WallSconceSide2" parent="." instance=ExtResource("11_srrb5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.71589, 1.54644, -4.89448)
 
 [editable path="Door"]
 [editable path="Door2"]

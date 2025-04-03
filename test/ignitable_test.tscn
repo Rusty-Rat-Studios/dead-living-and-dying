@@ -5,9 +5,10 @@
 [ext_resource type="PackedScene" uid="uid://yihpxsaeuqdi" path="res://src/entity/ghost/ghost.tscn" id="3_xn4go"]
 [ext_resource type="PackedScene" uid="uid://cmxmbgqr3v5cn" path="res://src/entity/objects/wall_sconce/wall_sconce_side_right.tscn" id="4_m0fsn"]
 [ext_resource type="PackedScene" uid="uid://cjgov4f5bnaae" path="res://src/entity/objects/wall_sconce/wall_sconce_side_left.tscn" id="5_d42b0"]
-[ext_resource type="PackedScene" uid="uid://bgt18op8lbbdh" path="res://src/entity/objects/fireplace/Fireplace.tscn" id="6_1r60d"]
+[ext_resource type="PackedScene" uid="uid://bgt18op8lbbdh" path="res://src/entity/objects/fireplace/fireplace.tscn" id="6_1r60d"]
 [ext_resource type="PackedScene" uid="uid://dwfaytjbaixjo" path="res://src/entity/objects/candle_holder/candle_holder.tscn" id="7_7p0nl"]
 [ext_resource type="PackedScene" uid="uid://ba8noy4dlieb0" path="res://src/entity/objects/candelabra/candelabra.tscn" id="8_7vegu"]
+
 
 [node name="Game" instance=ExtResource("1_oew4q")]
 

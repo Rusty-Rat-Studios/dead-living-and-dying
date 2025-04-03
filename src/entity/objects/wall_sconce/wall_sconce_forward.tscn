@@ -4,7 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://cayu4pck568xm" path="res://src/entity/objects/wall_sconce/wall_sconce_forward.png" id="2_kvhos"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q4pcj"]
-transparency = 1
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
 albedo_texture = ExtResource("2_kvhos")
 backlight_enabled = true
 backlight = Color(1, 1, 1, 1)
@@ -78,12 +80,14 @@ size = Vector2(0.1, 0.1)
 
 [node name="Ignitable" parent="." node_paths=PackedStringArray("player_detector", "fire") instance=ExtResource("1_q4pcj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.015, 0.165, 0)
+begin_lit_chance = 0.5
 player_detector = NodePath("../Area3D")
 fire = NodePath("../FireParticles")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(0.37, 0, 0, 0, 0.37, 0, 0, 0, 0.37, 0, 1.01282, 0)
 material_override = SubResource("StandardMaterial3D_q4pcj")
+cast_shadow = 0
 texture = ExtResource("2_kvhos")
 
 [node name="Area3D" type="Area3D" parent="."]

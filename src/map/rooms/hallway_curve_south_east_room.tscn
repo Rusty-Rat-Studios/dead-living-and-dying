@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://52e5qhbv4ogi"]
+[gd_scene load_steps=37 format=3 uid="uid://52e5qhbv4ogi"]
 
 [ext_resource type="Script" uid="uid://bo0tyfrjfebc6" path="res://src/map/room_components/room.gd" id="1_5dcub"]
 [ext_resource type="PackedScene" uid="uid://b4teav5cf7dm4" path="res://src/map/room_components/floor/floor_collision_shape.tscn" id="1_cmlby"]
@@ -11,6 +11,8 @@
 [ext_resource type="Shader" uid="uid://bgy36jmkglwva" path="res://src/map/room_components/wall/transparent_wall_shader.gdshader" id="8_rlp8l"]
 [ext_resource type="Texture2D" uid="uid://c6fjrr2bcg8tw" path="res://src/map/tileset-dhassa/wall2.png" id="9_sur65"]
 [ext_resource type="PackedScene" uid="uid://bjca8n1kvkwg0" path="res://src/map/room_components/door/door_x4.tscn" id="10_m4gqc"]
+[ext_resource type="PackedScene" uid="uid://bmyu4uefeccim" path="res://src/entity/objects/cardboard_box/cardboard_box_open.tscn" id="12_6j6v0"]
+[ext_resource type="PackedScene" uid="uid://bmevu5yvsxttw" path="res://src/entity/spawner.tscn" id="13_jdyaw"]
 
 [sub_resource type="Resource" id="Resource_tjnql"]
 script = ExtResource("2_ae4p6")
@@ -258,6 +260,12 @@ monitor_for_transparency = true
 [node name="Door2" parent="." instance=ExtResource("10_m4gqc")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7.95, 0, 0)
 door_location = SubResource("Resource_ttlqc")
+
+[node name="CardboardBoxOpen" parent="." instance=ExtResource("12_6j6v0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.509309, 0.783511, 0.125311)
+
+[node name="Spawner" parent="." instance=ExtResource("13_jdyaw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.10437, 2.35597)
 
 [editable path="Floor/hallway_L_curve_floor_rotated"]
 [editable path="Wall"]

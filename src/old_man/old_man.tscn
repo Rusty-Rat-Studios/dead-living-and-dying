@@ -22,7 +22,6 @@ shape = SubResource("BoxShape3D_h1b4u")
 [node name="Interactable" parent="." instance=ExtResource("1_k23bc")]
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-billboard = 2
 shaded = true
 texture = ExtResource("3_h1b4u")
 script = ExtResource("4_6tbt5")

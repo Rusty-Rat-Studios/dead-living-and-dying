@@ -1,0 +1,79 @@
+[gd_resource type="Resource" script_class="EntityTable" load_steps=17 format=3 uid="uid://ds8en1xrhc0us"]
+
+[ext_resource type="Script" uid="uid://dt04phs8a5k3h" path="res://src/entity/entity_table_entry.gd" id="1_87xmk"]
+[ext_resource type="Script" uid="uid://caxs80c62syve" path="res://src/entity/entity_table.gd" id="2_t7jns"]
+[ext_resource type="PackedScene" uid="uid://k5kxbl8tsn6d" path="res://src/entity/items/carrot/carrot_world.tscn" id="2_xty5m"]
+[ext_resource type="PackedScene" uid="uid://bsy7ilicbox53" path="res://src/entity/items/holy_water/holy_water_world.tscn" id="3_sjvv1"]
+[ext_resource type="PackedScene" uid="uid://bxso5jmpfc7ao" path="res://src/entity/items/incense/incense_world.tscn" id="4_8msia"]
+[ext_resource type="PackedScene" uid="uid://dxrbbho8wlerh" path="res://src/entity/items/lamp_oil/lamp_oil_world.tscn" id="5_farjl"]
+[ext_resource type="PackedScene" uid="uid://d3qx8taq4i8mc" path="res://src/entity/items/looking_stone/looking_stone_world.tscn" id="6_smdpk"]
+[ext_resource type="PackedScene" uid="uid://80yawtiqgmqy" path="res://src/entity/items/rosary/rosary_world.tscn" id="7_rt720"]
+[ext_resource type="PackedScene" uid="uid://d3uaapt6yn0ed" path="res://src/entity/items/tea/tea_world.tscn" id="8_npasu"]
+
+[sub_resource type="Resource" id="Resource_3nkje"]
+script = ExtResource("1_87xmk")
+entity = ExtResource("2_xty5m")
+base_chance = 1.0
+chance_change = 0.0
+max_spawn = -1
+min_spawn = -1
+metadata/_custom_type_script = "uid://dt04phs8a5k3h"
+
+[sub_resource type="Resource" id="Resource_l3klb"]
+script = ExtResource("1_87xmk")
+entity = ExtResource("3_sjvv1")
+base_chance = 1.0
+chance_change = 0.0
+max_spawn = -1
+min_spawn = -1
+metadata/_custom_type_script = "uid://dt04phs8a5k3h"
+
+[sub_resource type="Resource" id="Resource_5mnpg"]
+script = ExtResource("1_87xmk")
+entity = ExtResource("4_8msia")
+base_chance = 1.0
+chance_change = 0.0
+max_spawn = -1
+min_spawn = -1
+metadata/_custom_type_script = "uid://dt04phs8a5k3h"
+
+[sub_resource type="Resource" id="Resource_03wcs"]
+script = ExtResource("1_87xmk")
+entity = ExtResource("5_farjl")
+base_chance = 1.0
+chance_change = 0.0
+max_spawn = -1
+min_spawn = -1
+metadata/_custom_type_script = "uid://dt04phs8a5k3h"
+
+[sub_resource type="Resource" id="Resource_sj6au"]
+script = ExtResource("1_87xmk")
+entity = ExtResource("6_smdpk")
+base_chance = 1.0
+chance_change = 0.0
+max_spawn = -1
+min_spawn = -1
+metadata/_custom_type_script = "uid://dt04phs8a5k3h"
+
+[sub_resource type="Resource" id="Resource_dwt22"]
+script = ExtResource("1_87xmk")
+entity = ExtResource("7_rt720")
+base_chance = 1.0
+chance_change = 0.0
+max_spawn = -1
+min_spawn = -1
+metadata/_custom_type_script = "uid://dt04phs8a5k3h"
+
+[sub_resource type="Resource" id="Resource_grl0i"]
+script = ExtResource("1_87xmk")
+entity = ExtResource("8_npasu")
+base_chance = 1.0
+chance_change = 0.0
+max_spawn = -1
+min_spawn = -1
+metadata/_custom_type_script = "uid://dt04phs8a5k3h"
+
+[resource]
+script = ExtResource("2_t7jns")
+entities = Array[ExtResource("1_87xmk")]([SubResource("Resource_3nkje"), SubResource("Resource_l3klb"), SubResource("Resource_5mnpg"), SubResource("Resource_03wcs"), SubResource("Resource_sj6au"), SubResource("Resource_dwt22"), SubResource("Resource_grl0i")])
+metadata/_custom_type_script = "uid://caxs80c62syve"
