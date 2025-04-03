@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cf4en3dt6a7vn"]
+[gd_scene load_steps=8 format=3 uid="uid://cf4en3dt6a7vn"]
 
 [ext_resource type="Texture2D" uid="uid://n5cif4rrv2q7" path="res://src/entity/objects/sword_plaque/plaque-sword.png" id="1_7a2s4"]
+[ext_resource type="Script" uid="uid://bachecx3avsu4" path="res://src/entity/objects/sword_plaque/sword_plaque.gd" id="1_44kp3"]
+[ext_resource type="Texture2D" uid="uid://drcjwh1tltmrc" path="res://src/entity/objects/sword_plaque/plaque.png" id="2_6x11x"]
 [ext_resource type="PackedScene" uid="uid://bfmkrask6gxl3" path="res://src/possessable/attack/possessable_ranged.tscn" id="2_s7ilk"]
 [ext_resource type="PackedScene" uid="uid://dgb2u8e4hufuu" path="res://src/entity/objects/sword_plaque/sword_projectile.tscn" id="3_s7ilk"]
 
@@ -13,7 +15,19 @@ backlight_enabled = true
 backlight = Color(1, 1, 1, 1)
 backlight_texture = ExtResource("1_7a2s4")
 
-[node name="SwordPlaque" type="Node3D"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_44kp3"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("2_6x11x")
+backlight_enabled = true
+backlight = Color(1, 1, 1, 1)
+backlight_texture = ExtResource("2_6x11x")
+
+[node name="SwordPlaque" type="Node3D" node_paths=PackedStringArray("with_sword_sprite", "blank_sprite")]
+script = ExtResource("1_44kp3")
+with_sword_sprite = NodePath("Sprite3D")
+blank_sprite = NodePath("Sprite3D2")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
@@ -21,5 +35,13 @@ material_override = SubResource("StandardMaterial3D_6x11x")
 cast_shadow = 0
 texture = ExtResource("1_7a2s4")
 
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_44kp3")
+cast_shadow = 0
+texture = ExtResource("2_6x11x")
+
 [node name="PossessableRanged" parent="." instance=ExtResource("2_s7ilk")]
 projectile_scene = ExtResource("3_s7ilk")
+attack_once = true

@@ -17,3 +17,4 @@ texture = ExtResource("1_hxpws")
 script = ExtResource("2_tux6f")
 
 [node name="PossessableRanged" parent="." instance=ExtResource("1_y53pr")]
+attack_once = false
