@@ -1,0 +1,55 @@
+[gd_scene load_steps=7 format=3 uid="uid://b8t221jgqbuth"]
+
+[ext_resource type="PackedScene" uid="uid://dh8q75xrlxeaa" path="res://src/map/rooms/basic_room.tscn" id="1_p1a7p"]
+[ext_resource type="PackedScene" uid="uid://tkfqwci150w5" path="res://src/entity/objects/bookshelf/bookshelf.tscn" id="2_l7r8q"]
+[ext_resource type="PackedScene" uid="uid://3gsxuhfeo5qs" path="res://src/entity/objects/wall_painting/wall_painting.tscn" id="3_njk7g"]
+[ext_resource type="PackedScene" uid="uid://ba8noy4dlieb0" path="res://src/entity/objects/candelabra/candelabra.tscn" id="4_tn8rg"]
+[ext_resource type="PackedScene" uid="uid://cgof4qu7gkleu" path="res://src/entity/objects/vase/vase.tscn" id="5_pfnco"]
+[ext_resource type="PackedScene" uid="uid://bmevu5yvsxttw" path="res://src/entity/spawner.tscn" id="6_q3xbw"]
+
+[node name="LibraryRoom1" instance=ExtResource("1_p1a7p")]
+
+[node name="Bookshelf" parent="." index="11" instance=ExtResource("2_l7r8q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.10348, 1.34124, -4.4232)
+
+[node name="Bookshelf2" parent="." index="12" instance=ExtResource("2_l7r8q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.37221, 1.34124, -4.4232)
+
+[node name="Bookshelf3" parent="." index="13" instance=ExtResource("2_l7r8q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.221491, 1.34124, 0.231706)
+
+[node name="Bookshelf4" parent="." index="14" instance=ExtResource("2_l7r8q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.95276, 1.34124, 0.231706)
+
+[node name="Bookshelf5" parent="." index="15" instance=ExtResource("2_l7r8q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.87245, 1.34124, 4.2694)
+
+[node name="Bookshelf6" parent="." index="16" instance=ExtResource("2_l7r8q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.141184, 1.34124, 4.2694)
+
+[node name="WallPainting" parent="." index="17" instance=ExtResource("3_njk7g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.17847, 2.02543, -7.89464)
+
+[node name="WallPainting2" parent="." index="18" instance=ExtResource("3_njk7g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.21639, 2.02543, -7.89464)
+
+[node name="Candelabra" parent="." index="19" instance=ExtResource("4_tn8rg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.69809, 1.18008, -0.335033)
+
+[node name="Vase" parent="." index="20" instance=ExtResource("5_pfnco")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.528008, 0.704653, -4.43685)
+
+[node name="Vase2" parent="." index="21" instance=ExtResource("5_pfnco")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.88392, 0.704653, 4.23796)
+
+[node name="Spawner" parent="." index="22" instance=ExtResource("6_q3xbw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.20096, 0.805052, 2.9699)
+
+[node name="Spawner2" parent="." index="23" instance=ExtResource("6_q3xbw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.92168, 0.805052, -4.27797)
+
+[node name="Spawner3" parent="." index="24" instance=ExtResource("6_q3xbw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.08586, 0.805052, 1.8131)
+
+[editable path="Door"]
+[editable path="Door4"]
