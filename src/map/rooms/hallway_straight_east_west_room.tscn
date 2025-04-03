@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dvfm52rrn70uh"]
+[gd_scene load_steps=18 format=3 uid="uid://dvfm52rrn70uh"]
 
 [ext_resource type="Script" uid="uid://bo0tyfrjfebc6" path="res://src/map/room_components/room.gd" id="1_hq34h"]
 [ext_resource type="Script" uid="uid://dqhrw6rxew3fa" path="res://src/common/door_location.gd" id="2_5egyf"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bqsc7pbjuxsmh" path="res://src/map/room_components/floor/player_detector.tscn" id="6_bxsla"]
 [ext_resource type="PackedScene" uid="uid://bson3umirpot2" path="res://src/map/room_components/wall/wall.tscn" id="7_8hdlq"]
 [ext_resource type="PackedScene" uid="uid://bjca8n1kvkwg0" path="res://src/map/room_components/door/door_x4.tscn" id="8_wsqo5"]
+[ext_resource type="PackedScene" uid="uid://c3wmqi8pl2yas" path="res://src/entity/objects/wall_sconce/wall_sconce_forward.tscn" id="10_5octf"]
 
 [sub_resource type="Resource" id="Resource_8cg03"]
 script = ExtResource("2_5egyf")
@@ -78,3 +79,9 @@ door_location = SubResource("Resource_phrcd")
 [node name="Door2" parent="." instance=ExtResource("8_wsqo5")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7.95, 0, 0)
 door_location = SubResource("Resource_x5hmn")
+
+[node name="WallSconceForward" parent="." instance=ExtResource("10_5octf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.22089, 1.44628, -1.80732)
+
+[node name="WallSconceForward2" parent="." instance=ExtResource("10_5octf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.30325, 1.44628, -1.80732)
