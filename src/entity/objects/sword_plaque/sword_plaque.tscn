@@ -24,10 +24,10 @@ backlight_enabled = true
 backlight = Color(1, 1, 1, 1)
 backlight_texture = ExtResource("2_6x11x")
 
-[node name="SwordPlaque" type="Node3D" node_paths=PackedStringArray("with_sword_sprite", "blank_sprite")]
+[node name="SwordPlaque" type="Node3D" node_paths=PackedStringArray("full_sprite", "empty_sprite")]
 script = ExtResource("1_44kp3")
-with_sword_sprite = NodePath("Sprite3D")
-blank_sprite = NodePath("Sprite3D2")
+full_sprite = NodePath("Sprite3D")
+empty_sprite = NodePath("Sprite3D2")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
@@ -44,4 +44,4 @@ texture = ExtResource("2_6x11x")
 
 [node name="PossessableRanged" parent="." instance=ExtResource("2_s7ilk")]
 projectile_scene = ExtResource("3_s7ilk")
-attack_once = true
+max_attack_amount = 1
