@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bq2dwqp4q6dn1"]
+[gd_scene load_steps=12 format=3 uid="uid://bq2dwqp4q6dn1"]
 
 [ext_resource type="Script" uid="uid://br2ou0xf5p2mo" path="res://src/game.gd" id="1_xwopn"]
 [ext_resource type="PackedScene" uid="uid://bbow7knip3g6g" path="res://src/player/player.tscn" id="2_xkdfq"]
@@ -8,8 +8,9 @@
 [ext_resource type="Script" uid="uid://bfwa3mijk47us" path="res://src/player/state_machine/state_dying.gd" id="6_xupbb"]
 [ext_resource type="Script" uid="uid://dk6tfo4i3solm" path="res://src/map/world_grid.gd" id="7_24rg8"]
 [ext_resource type="Resource" uid="uid://dsyevsmxrh8f5" path="res://src/map/test_generator_settings.tres" id="8_5e71u"]
+[ext_resource type="PackedScene" uid="uid://cpudmguey5gcy" path="res://src/map/rooms/old_man_room.tscn" id="9_8yir0"]
+[ext_resource type="PackedScene" uid="uid://d142i6jit8s2f" path="res://src/map/rooms/shrine_room.tscn" id="10_e1b6l"]
 [ext_resource type="PackedScene" uid="uid://cp7202hwhpcd5" path="res://src/ui/ui.tscn" id="11_8yir0"]
-[ext_resource type="PackedScene" uid="uid://dh8q75xrlxeaa" path="res://src/map/rooms/basic_room.tscn" id="14_emhx3"]
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_xwopn")
@@ -44,8 +45,15 @@ script = ExtResource("6_xupbb")
 script = ExtResource("7_24rg8")
 generator_settings = ExtResource("8_5e71u")
 
-[node name="BasicRoom" parent="WorldGrid" instance=ExtResource("14_emhx3")]
+[node name="OldManRoom" parent="WorldGrid" instance=ExtResource("9_8yir0")]
 spawn_room = true
+
+[node name="ShrineRoom" parent="WorldGrid" instance=ExtResource("10_e1b6l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -16)
+spawn_room = true
+
+[node name="Shrine" parent="WorldGrid/ShrineRoom" index="5"]
+default = true
 
 [node name="MinimapObjects" type="Node3D" parent="."]
 
@@ -54,4 +62,18 @@ spawn_room = true
 [node name="GameMenu" parent="UI" index="3"]
 show_how_to_play_on_start = false
 
+[editable path="WorldGrid/ShrineRoom"]
+[editable path="WorldGrid/ShrineRoom/Door"]
+[editable path="WorldGrid/ShrineRoom/Door/WallWithDoorway"]
+[editable path="WorldGrid/ShrineRoom/Door/WallWithDoorway/wall_with_doorway"]
+[editable path="WorldGrid/ShrineRoom/Door2"]
+[editable path="WorldGrid/ShrineRoom/Door2/WallWithDoorway"]
+[editable path="WorldGrid/ShrineRoom/Door2/WallWithDoorway/wall_with_doorway"]
+[editable path="WorldGrid/ShrineRoom/Door3"]
+[editable path="WorldGrid/ShrineRoom/Door3/WallWithDoorway"]
+[editable path="WorldGrid/ShrineRoom/Door3/WallWithDoorway/wall_with_doorway"]
+[editable path="WorldGrid/ShrineRoom/Door4"]
+[editable path="WorldGrid/ShrineRoom/Door4/WallWithDoorway"]
+[editable path="WorldGrid/ShrineRoom/Door4/WallWithDoorway/wall_with_doorway"]
+[editable path="WorldGrid/ShrineRoom/Shrine"]
 [editable path="UI"]

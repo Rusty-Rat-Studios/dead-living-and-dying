@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://db2v7j1wnkduq" path="res://src/common/sprite_backlight.gd" id="4_6tbt5"]
 [ext_resource type="PackedScene" uid="uid://bp0ydphecs3iv" path="res://src/common/shadow.tscn" id="4_8mfuk"]
 
-
 [sub_resource type="SphereShape3D" id="SphereShape3D_tlkjy"]
 radius = 0.6
 
@@ -23,7 +22,6 @@ shape = SubResource("SphereShape3D_tlkjy")
 [node name="Interactable" parent="." instance=ExtResource("1_k23bc")]
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-billboard = 2
 shaded = true
 texture = ExtResource("3_jfj5u")
 script = ExtResource("4_6tbt5")

@@ -1,0 +1,145 @@
+[gd_scene load_steps=23 format=3 uid="uid://cpudmguey5gcy"]
+
+[ext_resource type="Script" uid="uid://bo0tyfrjfebc6" path="res://src/map/room_components/room.gd" id="1_gll72"]
+[ext_resource type="PackedScene" uid="uid://te0dpapcosk4" path="res://src/map/rooms/room_minimap/basic_room_minimap.tscn" id="2_winw3"]
+[ext_resource type="Script" uid="uid://dqhrw6rxew3fa" path="res://src/common/door_location.gd" id="3_vb84m"]
+[ext_resource type="Script" uid="uid://bv4f3snq7u1u2" path="res://src/common/room_information.gd" id="4_wkm7r"]
+[ext_resource type="PackedScene" uid="uid://b3nn5u3a5o85j" path="res://src/map/room_components/floor/16x16_floor.tscn" id="5_7bu5u"]
+[ext_resource type="PackedScene" uid="uid://b6pd0nir4sadl" path="res://src/map/room_components/door/door_x16.tscn" id="6_k20dg"]
+[ext_resource type="PackedScene" uid="uid://bson3umirpot2" path="res://src/map/room_components/wall/wall.tscn" id="7_ck8d0"]
+[ext_resource type="PackedScene" uid="uid://c3wmqi8pl2yas" path="res://src/entity/objects/wall_sconce/wall_sconce_forward.tscn" id="7_y2f2j"]
+[ext_resource type="PackedScene" uid="uid://cjgov4f5bnaae" path="res://src/entity/objects/wall_sconce/wall_sconce_side_left.tscn" id="8_81uvg"]
+[ext_resource type="PackedScene" uid="uid://cmxmbgqr3v5cn" path="res://src/entity/objects/wall_sconce/wall_sconce_side_right.tscn" id="9_qu0tq"]
+[ext_resource type="PackedScene" uid="uid://bgt18op8lbbdh" path="res://src/entity/objects/fireplace/Fireplace.tscn" id="10_pny6e"]
+[ext_resource type="PackedScene" uid="uid://c176v8gdlci8v" path="res://src/old_man/old_man.tscn" id="11_gll72"]
+[ext_resource type="PackedScene" uid="uid://3gsxuhfeo5qs" path="res://src/entity/objects/wall_painting/wall_painting.tscn" id="11_psrpv"]
+[ext_resource type="PackedScene" uid="uid://bhpg6bla1mtvu" path="res://src/entity/objects/potted_plant/potted_plant.tscn" id="15_p6tgw"]
+[ext_resource type="PackedScene" uid="uid://ba8noy4dlieb0" path="res://src/entity/objects/candelabra/candelabra.tscn" id="15_winw3"]
+[ext_resource type="PackedScene" uid="uid://tkfqwci150w5" path="res://src/entity/objects/bookshelf/bookshelf.tscn" id="16_winw3"]
+
+[sub_resource type="Resource" id="Resource_3y6bj"]
+script = ExtResource("3_vb84m")
+location = Vector2(0, 0)
+direction = 0
+
+[sub_resource type="Resource" id="Resource_b0qj2"]
+script = ExtResource("3_vb84m")
+location = Vector2(0, 0)
+direction = 1
+
+[sub_resource type="Resource" id="Resource_8lq6k"]
+script = ExtResource("3_vb84m")
+location = Vector2(0, 0)
+direction = 2
+
+[sub_resource type="Resource" id="Resource_8lnup"]
+script = ExtResource("3_vb84m")
+location = Vector2(0, 0)
+direction = 3
+
+[sub_resource type="Resource" id="Resource_hj2hw"]
+script = ExtResource("4_wkm7r")
+room_shape = Array[Vector2]([Vector2(0, 0), Vector2(-1, 0), Vector2(1, 0), Vector2(0, 1)])
+possible_door_locations = Array[ExtResource("3_vb84m")]([SubResource("Resource_3y6bj"), SubResource("Resource_b0qj2"), SubResource("Resource_8lq6k"), SubResource("Resource_8lnup")])
+minimap_component = ExtResource("2_winw3")
+
+[sub_resource type="Resource" id="Resource_yemrt"]
+script = ExtResource("3_vb84m")
+location = Vector2(0, 0)
+direction = 0
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[node name="OldManRoom" type="Node3D" groups=["rooms"]]
+script = ExtResource("1_gll72")
+room_information = SubResource("Resource_hj2hw")
+
+[node name="Floor" parent="." instance=ExtResource("5_7bu5u")]
+
+[node name="Door" parent="." instance=ExtResource("6_k20dg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.95)
+door_location = SubResource("Resource_yemrt")
+
+[node name="WallWithDoorway" parent="Door" index="5"]
+monitor_for_transparency = true
+
+[node name="WallSconceForward2" parent="." instance=ExtResource("7_y2f2j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.735, 1.29541, -7.814)
+
+[node name="WallSconceSide" parent="." instance=ExtResource("8_81uvg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.69263, 1.55735, -3.17865)
+
+[node name="Ignitable" parent="WallSconceSide" index="0"]
+begin_lit_chance = 1.0
+
+[node name="WallSconceSide2" parent="." instance=ExtResource("8_81uvg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.69263, 1.55735, 3.23524)
+
+[node name="Ignitable" parent="WallSconceSide2" index="0"]
+begin_lit_chance = 1.0
+
+[node name="WallSconceSide3" parent="." instance=ExtResource("9_qu0tq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.66967, 1.4748, 3.14185)
+
+[node name="Ignitable" parent="WallSconceSide3" index="0"]
+begin_lit_chance = 1.0
+
+[node name="WallSconceSide4" parent="." instance=ExtResource("9_qu0tq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.66967, 1.4748, -3.42135)
+
+[node name="Ignitable" parent="WallSconceSide4" index="0"]
+begin_lit_chance = 1.0
+
+[node name="Wall" parent="." instance=ExtResource("7_ck8d0")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.95, 0, 0)
+
+[node name="Wall2" parent="." instance=ExtResource("7_ck8d0")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7.95, 0, 0)
+
+[node name="Wall3" parent="." instance=ExtResource("7_ck8d0")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 7.95)
+monitor_for_transparency = true
+
+[node name="OldMan" parent="." instance=ExtResource("11_gll72")]
+transform = Transform3D(0.846249, 0, 0.532788, 0, 1, 0, -0.532788, 0, 0.846249, -4.93788, 0.826411, -4.97464)
+
+[node name="Fireplace" parent="." instance=ExtResource("10_pny6e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.76704, 1.39294, -7.84517)
+
+[node name="Ignitable" parent="Fireplace" index="0"]
+begin_lit_chance = 1.0
+
+[node name="WallPainting" parent="." instance=ExtResource("11_psrpv")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.87921, 2.17795, 0)
+
+[node name="WallPainting2" parent="." instance=ExtResource("11_psrpv")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7.88926, 2.17795, 0)
+
+[node name="PottedPlant" parent="." instance=ExtResource("15_p6tgw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.92437, 1.17023, -7.5479)
+
+[node name="PottedPlant2" parent="." instance=ExtResource("15_p6tgw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.99774, 1.17023, -7.5479)
+
+[node name="Candelabra" parent="." instance=ExtResource("15_winw3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.35, 1.156, 0)
+
+[node name="Ignitable" parent="Candelabra" index="2"]
+begin_lit_chance = 1.0
+
+[node name="Candelabra2" parent="." instance=ExtResource("15_winw3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.01616, 1.156, 0)
+
+[node name="Ignitable" parent="Candelabra2" index="2"]
+begin_lit_chance = 1.0
+
+[node name="Bookshelf" parent="." instance=ExtResource("16_winw3")]
+transform = Transform3D(0.880783, 0, -0.47352, 0, 1, 0, 0.47352, 0, 0.880783, 5.47663, 1.3386, -5.52634)
+
+[editable path="Door"]
+[editable path="WallSconceSide"]
+[editable path="WallSconceSide2"]
+[editable path="WallSconceSide3"]
+[editable path="WallSconceSide4"]
+[editable path="Fireplace"]
+[editable path="Candelabra"]
+[editable path="Candelabra2"]
