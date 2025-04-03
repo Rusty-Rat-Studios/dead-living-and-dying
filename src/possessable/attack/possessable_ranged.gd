@@ -16,10 +16,15 @@ func attack(target: Node3D, _attack_windup: float) -> void:
 	if player_in_range and room.player_in_room:
 		projectile_shot.emit()
 		
-		# shoot projectile at target
 		var projectile: Projectile = projectile_scene.instantiate()
-		add_child(projectile)
-		projectile.shoot(target.global_position)
+		
+		# ensure projectile cannot collide with its spawner
+		projectile.add_collision_exception_with(self)
+		
+		room.add_child(projectile)
+		
+		projectile.global_position = global_position
+		projectile.shoot(target.global_position) # shoot projectile at target
 		
 	depossess(true)
 

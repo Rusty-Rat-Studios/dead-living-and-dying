@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://cf4en3dt6a7vn"]
 
 [ext_resource type="Texture2D" uid="uid://n5cif4rrv2q7" path="res://src/entity/objects/sword_plaque/plaque-sword.png" id="1_7a2s4"]
-[ext_resource type="Script" uid="uid://bachecx3avsu4" path="res://src/entity/objects/sword_plaque/sword_plaque.gd" id="1_44kp3"]
+[ext_resource type="Script" uid="uid://bachecx3avsu4" path="res://src/possessable/attack/possessable_ranged_object.gd" id="1_44kp3"]
 [ext_resource type="Texture2D" uid="uid://drcjwh1tltmrc" path="res://src/entity/objects/sword_plaque/plaque.png" id="2_6x11x"]
 [ext_resource type="PackedScene" uid="uid://bfmkrask6gxl3" path="res://src/possessable/attack/possessable_ranged.tscn" id="2_s7ilk"]
 [ext_resource type="PackedScene" uid="uid://dgb2u8e4hufuu" path="res://src/entity/objects/sword_plaque/sword_projectile.tscn" id="3_s7ilk"]

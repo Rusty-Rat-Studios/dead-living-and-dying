@@ -10,8 +10,6 @@ const COLLISION_DELAY: float = 0.1
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
-	# ensure projectile cannot collide with its parent
-	add_collision_exception_with(get_parent())
 
 
 func shoot(target: Vector3) -> void:
@@ -24,8 +22,13 @@ func shoot(target: Vector3) -> void:
 	collision_shape.disabled = false
 
 
+func perform_post_throw_action() -> void:
+	# regardless of collision layer, delete projectile on contact
+	queue_free()
+
+
 func _on_body_entered(body: Node3D) -> void:
 	if body == PlayerHandler.get_player():
 		SignalBus.player_hurt.emit(self)
-	# regardless of collision layer, delete projectile on contact
-	queue_free()
+	
+	perform_post_throw_action()
