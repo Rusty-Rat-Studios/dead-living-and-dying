@@ -1,7 +1,7 @@
 class_name PossessableRanged
 extends PossessableAttack
 
-@onready var projectile_scene: PackedScene = preload("res://src/possessable/attack/projectile.tscn")
+@export var projectile_scene: PackedScene
 
 func attack(target: Node3D, _attack_windup: float) -> void:
 	if player_in_range and room.player_in_room:
