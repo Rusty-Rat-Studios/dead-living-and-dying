@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dh8q75xrlxeaa"]
+[gd_scene load_steps=19 format=3 uid="uid://dh8q75xrlxeaa"]
 
 [ext_resource type="Script" uid="uid://bo0tyfrjfebc6" path="res://src/map/room_components/room.gd" id="1_5h3g7"]
 [ext_resource type="Script" uid="uid://dqhrw6rxew3fa" path="res://src/common/door_location.gd" id="2_dd2d1"]
@@ -6,6 +6,9 @@
 [ext_resource type="Script" uid="uid://bv4f3snq7u1u2" path="res://src/common/room_information.gd" id="3_koypu"]
 [ext_resource type="PackedScene" uid="uid://b3nn5u3a5o85j" path="res://src/map/room_components/floor/16x16_floor.tscn" id="4_h3kao"]
 [ext_resource type="PackedScene" uid="uid://b6pd0nir4sadl" path="res://src/map/room_components/door/door_x16.tscn" id="6_pq5nb"]
+[ext_resource type="PackedScene" uid="uid://c3wmqi8pl2yas" path="res://src/entity/objects/wall_sconce/wall_sconce_forward.tscn" id="7_m5xcn"]
+[ext_resource type="PackedScene" uid="uid://cjgov4f5bnaae" path="res://src/entity/objects/wall_sconce/wall_sconce_side_left.tscn" id="8_3pebv"]
+[ext_resource type="PackedScene" uid="uid://cmxmbgqr3v5cn" path="res://src/entity/objects/wall_sconce/wall_sconce_side_right.tscn" id="9_uttya"]
 
 [sub_resource type="Resource" id="Resource_3y6bj"]
 script = ExtResource("2_dd2d1")
@@ -84,6 +87,24 @@ door_location = SubResource("Resource_3pebv")
 
 [node name="WallWithDoorway" parent="Door4" index="5"]
 monitor_for_transparency = true
+
+[node name="WallSconceForward" parent="." instance=ExtResource("7_m5xcn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.815, 1.295, -7.814)
+
+[node name="WallSconceForward2" parent="." instance=ExtResource("7_m5xcn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.735, 1.29541, -7.814)
+
+[node name="WallSconceSide" parent="." instance=ExtResource("8_3pebv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.69263, 1.55735, -3.17865)
+
+[node name="WallSconceSide2" parent="." instance=ExtResource("8_3pebv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.69263, 1.55735, 3.23524)
+
+[node name="WallSconceSide3" parent="." instance=ExtResource("9_uttya")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.66967, 1.4748, 3.14185)
+
+[node name="WallSconceSide4" parent="." instance=ExtResource("9_uttya")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.66967, 1.4748, -3.42135)
 
 [editable path="Door"]
 [editable path="Door4"]

@@ -1,51 +1,30 @@
-[gd_scene load_steps=8 format=3 uid="uid://y5gvyod1654d"]
+[gd_scene load_steps=5 format=3 uid="uid://y5gvyod1654d"]
 
 [ext_resource type="PackedScene" uid="uid://dh8q75xrlxeaa" path="res://src/map/rooms/basic_room.tscn" id="1_bm0gd"]
 [ext_resource type="PackedScene" uid="uid://bp05mcvqsk6vw" path="res://src/entity/objects/pedestal/pedestal.tscn" id="2_wecdk"]
-[ext_resource type="PackedScene" uid="uid://c3wmqi8pl2yas" path="res://src/entity/objects/wall_sconce/wall_sconce_forward.tscn" id="4_eblvi"]
 [ext_resource type="PackedScene" uid="uid://bmevu5yvsxttw" path="res://src/entity/spawner.tscn" id="5_hkojj"]
 [ext_resource type="PackedScene" uid="uid://ba8noy4dlieb0" path="res://src/entity/objects/candelabra/candelabra.tscn" id="5_tbbkd"]
-[ext_resource type="PackedScene" uid="uid://cjgov4f5bnaae" path="res://src/entity/objects/wall_sconce/wall_sconce_side_left.tscn" id="6_w2lxf"]
-[ext_resource type="PackedScene" uid="uid://cmxmbgqr3v5cn" path="res://src/entity/objects/wall_sconce/wall_sconce_side_right.tscn" id="7_dyukg"]
 
 [node name="ItemRoom" instance=ExtResource("1_bm0gd")]
 
 [node name="Pedestal" parent="." index="5" instance=ExtResource("2_wecdk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.690833, 0)
 
-[node name="WallSconceForward" parent="." index="6" instance=ExtResource("4_eblvi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.815, 1.295, -7.814)
-
-[node name="WallSconceForward2" parent="." index="7" instance=ExtResource("4_eblvi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.735, 1.29541, -7.814)
-
-[node name="Candelabra" parent="." index="8" instance=ExtResource("5_tbbkd")]
+[node name="Candelabra" parent="." index="6" instance=ExtResource("5_tbbkd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.20435, 1.18252, 0)
 
 [node name="Ignitable" parent="Candelabra" index="2"]
 begin_lit_chance = 1.0
 
-[node name="Candelabra2" parent="." index="9" instance=ExtResource("5_tbbkd")]
+[node name="Candelabra2" parent="." index="7" instance=ExtResource("5_tbbkd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.42217, 1.18252, 0)
 
 [node name="Ignitable" parent="Candelabra2" index="2"]
 begin_lit_chance = 1.0
 
-[node name="Spawner" parent="." index="10" instance=ExtResource("5_hkojj")]
+[node name="Spawner" parent="." index="8" instance=ExtResource("5_hkojj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.52863, 0)
 spawner_type = 1
-
-[node name="WallSconceSide" parent="." index="11" instance=ExtResource("6_w2lxf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.69263, 1.55735, -3.17865)
-
-[node name="WallSconceSide2" parent="." index="12" instance=ExtResource("6_w2lxf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.69263, 1.55735, 3.23524)
-
-[node name="WallSconceSide3" parent="." index="13" instance=ExtResource("7_dyukg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.66967, 1.4748, 3.14185)
-
-[node name="WallSconceSide4" parent="." index="14" instance=ExtResource("7_dyukg")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.66967, 1.4748, -3.42135)
 
 [editable path="Door"]
 [editable path="Door4"]
