@@ -21,6 +21,8 @@ const FLOAT_HEIGHT: float = 4
 # how much the shake animation moves in x or y dimensions
 const ATTACK_SHAKE_MAGNITUDE: Vector2 = Vector2(1, 0.5)
 
+const HITBOX_COLLISION_SHAPE_EXPANSION_FACTOR: float = 1.2
+
 # for timing float effect oscillation
 @onready var float_time_offset: float = 0.0
 @onready var base_height: float = parent.position.y
@@ -40,10 +42,10 @@ func _ready() -> void:
 	# to guarantee hitbox collision is detected before physics collision
 	hitbox_collision_shape.shape = parent.get_node("CollisionShape3D").shape.duplicate()
 	if hitbox_collision_shape.shape is CylinderShape3D:
-		hitbox_collision_shape.shape.height *= 1.1
-		hitbox_collision_shape.shape.radius *= 1.1
+		hitbox_collision_shape.shape.height *= HITBOX_COLLISION_SHAPE_EXPANSION_FACTOR
+		hitbox_collision_shape.shape.radius *= HITBOX_COLLISION_SHAPE_EXPANSION_FACTOR
 	elif hitbox_collision_shape.shape is BoxShape3D:
-		hitbox_collision_shape.shape.size *= 1.1
+		hitbox_collision_shape.shape.size *= HITBOX_COLLISION_SHAPE_EXPANSION_FACTOR
 	else:
 		push_error("ERROR: possessable throwable initialized as child of non-supported collision shape.",
 			"Throwable objects must have a CylinderShape3D or BoxShape3D collision shape.")
