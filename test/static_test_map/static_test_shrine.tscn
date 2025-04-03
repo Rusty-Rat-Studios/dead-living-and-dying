@@ -1,0 +1,80 @@
+[gd_scene load_steps=11 format=3 uid="uid://c73ikffjb5lng"]
+
+[ext_resource type="Script" uid="uid://br2ou0xf5p2mo" path="res://src/game.gd" id="1_bhcoy"]
+[ext_resource type="PackedScene" uid="uid://bbow7knip3g6g" path="res://src/player/player.tscn" id="2_2askg"]
+[ext_resource type="Script" uid="uid://d27rd5rlvycvc" path="res://src/player/state_machine/player_state_machine.gd" id="3_xhs2e"]
+[ext_resource type="Script" uid="uid://kgcxuhne3rbl" path="res://src/player/state_machine/state_dead.gd" id="4_78qyr"]
+[ext_resource type="Script" uid="uid://btdlvy02iwmn2" path="res://src/player/state_machine/state_living.gd" id="5_fsqya"]
+[ext_resource type="Script" uid="uid://bfwa3mijk47us" path="res://src/player/state_machine/state_dying.gd" id="6_g176y"]
+[ext_resource type="Script" uid="uid://dk6tfo4i3solm" path="res://src/map/world_grid.gd" id="7_j7q8e"]
+[ext_resource type="PackedScene" uid="uid://d142i6jit8s2f" path="res://src/map/rooms/shrine_room.tscn" id="8_kasbi"]
+[ext_resource type="PackedScene" uid="uid://dh8q75xrlxeaa" path="res://src/map/rooms/basic_room.tscn" id="9_n2ncc"]
+[ext_resource type="PackedScene" uid="uid://cp7202hwhpcd5" path="res://src/ui/ui.tscn" id="16_svx60"]
+
+[node name="Game" type="Node3D"]
+script = ExtResource("1_bhcoy")
+
+[node name="Player" parent="." instance=ExtResource("2_2askg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 3)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.830566, 0.486173, -0.271654, -0.492404, -0.413176, 0.766044, 0.260189, 0.770014, 0.582563, 0, 10, 0)
+visible = false
+light_color = Color(0.294118, 0.294118, 0.356863, 1)
+
+[node name="DebugLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.830566, 0.486173, -0.271654, -0.492404, -0.413176, 0.766044, 0.260189, 0.770014, 0.582563, 0, 10, 0)
+visible = false
+light_color = Color(0.29219, 0.29219, 0.29219, 1)
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("3_xhs2e")
+
+[node name="Dead" type="Node" parent="StateMachine"]
+script = ExtResource("4_78qyr")
+
+[node name="Living" type="Node" parent="StateMachine"]
+script = ExtResource("5_fsqya")
+
+[node name="Dying" type="Node" parent="StateMachine"]
+script = ExtResource("6_g176y")
+
+[node name="WorldGrid" type="Node3D" parent="."]
+script = ExtResource("7_j7q8e")
+
+[node name="ShrineRoom" parent="WorldGrid" instance=ExtResource("8_kasbi")]
+spawn_room = true
+
+[node name="Shrine" parent="WorldGrid/ShrineRoom" index="5"]
+default = true
+
+[node name="BasicRoom" parent="WorldGrid" instance=ExtResource("9_n2ncc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 16)
+spawn_room = true
+
+[node name="BasicRoom2" parent="WorldGrid" instance=ExtResource("9_n2ncc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 16)
+spawn_room = true
+
+[node name="MinimapObjects" type="Node3D" parent="."]
+
+[node name="UI" parent="." instance=ExtResource("16_svx60")]
+
+[node name="GameMenu" parent="UI" index="3"]
+show_how_to_play_on_start = false
+
+[editable path="WorldGrid/ShrineRoom"]
+[editable path="WorldGrid/ShrineRoom/Door"]
+[editable path="WorldGrid/ShrineRoom/Door/WallWithDoorway"]
+[editable path="WorldGrid/ShrineRoom/Door/WallWithDoorway/wall_with_doorway"]
+[editable path="WorldGrid/ShrineRoom/Door2"]
+[editable path="WorldGrid/ShrineRoom/Door2/WallWithDoorway"]
+[editable path="WorldGrid/ShrineRoom/Door2/WallWithDoorway/wall_with_doorway"]
+[editable path="WorldGrid/ShrineRoom/Door3"]
+[editable path="WorldGrid/ShrineRoom/Door3/WallWithDoorway"]
+[editable path="WorldGrid/ShrineRoom/Door3/WallWithDoorway/wall_with_doorway"]
+[editable path="WorldGrid/ShrineRoom/Door4"]
+[editable path="WorldGrid/ShrineRoom/Door4/WallWithDoorway"]
+[editable path="WorldGrid/ShrineRoom/Door4/WallWithDoorway/wall_with_doorway"]
+[editable path="WorldGrid/ShrineRoom/Shrine"]
+[editable path="UI"]
