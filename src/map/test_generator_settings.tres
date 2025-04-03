@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="GeneratorSettings" load_steps=6 format=3 uid="uid://dsyevsmxrh8f5"]
+[gd_resource type="Resource" script_class="GeneratorSettings" load_steps=7 format=3 uid="uid://dsyevsmxrh8f5"]
 
 [ext_resource type="Resource" uid="uid://bd77sq4oqgbc3" path="res://src/entity/entity_tables/boss_entity_table.tres" id="1_57c5x"]
 [ext_resource type="Resource" uid="uid://cinkoxiqgkewm" path="res://src/entity/entity_tables/enemy_entity_table.tres" id="2_pa43p"]
 [ext_resource type="Resource" uid="uid://ds8en1xrhc0us" path="res://src/entity/entity_tables/item_entity_table.tres" id="3_b6rhl"]
-[ext_resource type="Resource" uid="uid://brngxo180e7qn" path="res://src/entity/entity_tables/test_room_table.tres" id="4_d0emk"]
+[ext_resource type="Resource" uid="uid://brngxo180e7qn" path="res://src/entity/entity_tables/room_table.tres" id="4_d0emk"]
+[ext_resource type="Resource" uid="uid://b5yfv83s10cvx" path="res://src/entity/entity_tables/key_item_entity_table.tres" id="4_pa43p"]
 [ext_resource type="Script" uid="uid://b6py5yqiivmff" path="res://src/map/generator_settings.gd" id="5_yvpcd"]
 
 [resource]
@@ -13,5 +14,6 @@ min_rooms = 30
 room_table = ExtResource("4_d0emk")
 enemy_entity_table = ExtResource("2_pa43p")
 item_entity_table = ExtResource("3_b6rhl")
+key_item_entity_table = ExtResource("4_pa43p")
 boss_entity_table = ExtResource("1_57c5x")
 metadata/_custom_type_script = "uid://b6py5yqiivmff"

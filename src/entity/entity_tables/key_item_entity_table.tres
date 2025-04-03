@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="EntityTable" load_steps=9 format=3 uid="uid://b5yfv83s10cvx"]
+
+[ext_resource type="Script" uid="uid://dt04phs8a5k3h" path="res://src/entity/entity_table_entry.gd" id="1_cgxxp"]
+[ext_resource type="Script" uid="uid://caxs80c62syve" path="res://src/entity/entity_table.gd" id="2_e8vst"]
+[ext_resource type="PackedScene" uid="uid://dkklkw4dknru7" path="res://src/entity/items/key_item/pipe/pipe_world.tscn" id="2_jl604"]
+[ext_resource type="PackedScene" uid="uid://dg0be86g5cpxb" path="res://src/entity/items/key_item/glasses/glasses_world.tscn" id="3_sass8"]
+[ext_resource type="PackedScene" uid="uid://car0tdk0esgiu" path="res://src/entity/items/key_item/journal/journal_world.tscn" id="4_5n6g3"]
+
+[sub_resource type="Resource" id="Resource_c7fpv"]
+script = ExtResource("1_cgxxp")
+entity = ExtResource("2_jl604")
+base_chance = 1.0
+chance_change = 0.0
+max_spawn = -1
+min_spawn = -1
+metadata/_custom_type_script = "uid://dt04phs8a5k3h"
+
+[sub_resource type="Resource" id="Resource_f2pdh"]
+script = ExtResource("1_cgxxp")
+entity = ExtResource("3_sass8")
+base_chance = 1.0
+chance_change = 0.0
+max_spawn = -1
+min_spawn = -1
+metadata/_custom_type_script = "uid://dt04phs8a5k3h"
+
+[sub_resource type="Resource" id="Resource_7jmyp"]
+script = ExtResource("1_cgxxp")
+entity = ExtResource("4_5n6g3")
+base_chance = 1.0
+chance_change = 0.0
+max_spawn = -1
+min_spawn = -1
+metadata/_custom_type_script = "uid://dt04phs8a5k3h"
+
+[resource]
+script = ExtResource("2_e8vst")
+entities = Array[ExtResource("1_cgxxp")]([SubResource("Resource_c7fpv"), SubResource("Resource_f2pdh"), SubResource("Resource_7jmyp")])
+metadata/_custom_type_script = "uid://caxs80c62syve"
