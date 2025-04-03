@@ -7,7 +7,6 @@ func _ready() -> void:
 	material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA_SCISSOR
 	material.backlight_enabled = true
 	material.backlight = Color.WHITE
-	material.billboard_mode = StandardMaterial3D.BILLBOARD_FIXED_Y
 	material.specular_mode = StandardMaterial3D.SPECULAR_DISABLED
 	material.uv1_scale = scale
 	
