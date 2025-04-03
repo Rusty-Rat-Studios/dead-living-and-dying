@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://fkni2pxbveep"]
+
+[ext_resource type="PackedScene" uid="uid://y5gvyod1654d" path="res://src/map/rooms/item_room.tscn" id="1_5gmmo"]
+
+[node name="ItemRoom" instance=ExtResource("1_5gmmo")]
+
+[node name="Spawner" parent="." index="8"]
+spawner_type = 2
+
+[editable path="Door"]
+[editable path="Door4"]
+[editable path="Candelabra"]
+[editable path="Candelabra2"]
