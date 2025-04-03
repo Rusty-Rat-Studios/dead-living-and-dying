@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://vilku1d4228j"]
+[gd_scene load_steps=8 format=3 uid="uid://vilku1d4228j"]
 
 [ext_resource type="PackedScene" uid="uid://dh8q75xrlxeaa" path="res://src/map/rooms/basic_room.tscn" id="1_vpnrl"]
 [ext_resource type="PackedScene" uid="uid://bhpg6bla1mtvu" path="res://src/entity/objects/potted_plant/potted_plant.tscn" id="2_2yfdj"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bjw1p41vnaeve" path="res://src/entity/objects/table/table_and_chairs.tscn" id="4_gx41s"]
 [ext_resource type="PackedScene" uid="uid://bmevu5yvsxttw" path="res://src/entity/spawner.tscn" id="5_spelr"]
 [ext_resource type="PackedScene" uid="uid://3gsxuhfeo5qs" path="res://src/entity/objects/wall_painting/wall_painting.tscn" id="6_2yfdj"]
+[ext_resource type="PackedScene" uid="uid://cgof4qu7gkleu" path="res://src/entity/objects/vase/vase.tscn" id="7_jdnd0"]
 
 [node name="DiningRoom2" instance=ExtResource("1_vpnrl")]
 
@@ -56,6 +57,18 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7.8918
 
 [node name="WallPainting4" parent="." index="26" instance=ExtResource("6_2yfdj")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7.85632, 2.03325, -5.38604)
+
+[node name="Vase" parent="." index="27" instance=ExtResource("7_jdnd0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.41723, 0.736195, 5.53648)
+
+[node name="Vase2" parent="." index="28" instance=ExtResource("7_jdnd0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.99329, 0.736195, -1.52434)
+
+[node name="Vase4" parent="." index="29" instance=ExtResource("7_jdnd0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.75835, 0.736195, 1.91802)
+
+[node name="Vase5" parent="." index="30" instance=ExtResource("7_jdnd0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.561695, 0.736194, 0.910723)
 
 [editable path="Door"]
 [editable path="Door4"]
