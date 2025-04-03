@@ -6,8 +6,8 @@
 [ext_resource type="Script" uid="uid://db2v7j1wnkduq" path="res://src/common/sprite_backlight.gd" id="4_6tbt5"]
 [ext_resource type="PackedScene" uid="uid://bp0ydphecs3iv" path="res://src/common/shadow.tscn" id="4_8mfuk"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_tlkjy"]
-radius = 0.6
+[sub_resource type="BoxShape3D" id="BoxShape3D_h1b4u"]
+size = Vector3(2.185, 2.305, 0.5)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_i62q5"]
 radius = 2.2
@@ -17,7 +17,7 @@ script = ExtResource("1_kf68j")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.145691)
-shape = SubResource("SphereShape3D_tlkjy")
+shape = SubResource("BoxShape3D_h1b4u")
 
 [node name="Interactable" parent="." instance=ExtResource("1_k23bc")]
 
