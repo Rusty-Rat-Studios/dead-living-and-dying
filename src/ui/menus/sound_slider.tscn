@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://lapycnexlmuf"]
+
+[ext_resource type="Script" uid="uid://bwmr3wg5tgso7" path="res://src/ui/menus/sound_slider.gd" id="1_4tw2b"]
+[ext_resource type="Theme" uid="uid://casdoijkjemc2" path="res://src/ui/resources/menu_theme.tres" id="2_th6ls"]
+
+[node name="SoundSlider" type="HBoxContainer"]
+theme_override_constants/separation = 24
+script = ExtResource("1_4tw2b")
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme = ExtResource("2_th6ls")
+theme_override_font_sizes/font_size = 24
+text = "DEFAULT_LABEL"
+horizontal_alignment = 2
+
+[node name="HSlider" type="HSlider" parent="."]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_vertical = 1
+min_value = -30.0
+max_value = 0.0
+rounded = true
