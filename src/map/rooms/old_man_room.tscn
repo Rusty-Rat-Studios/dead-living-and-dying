@@ -105,7 +105,7 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 
 monitor_for_transparency = true
 
 [node name="OldMan" parent="." instance=ExtResource("11_gll72")]
-transform = Transform3D(0.846249, 0, 0.532788, 0, 1, 0, -0.532788, 0, 0.846249, -4.93788, 0.826411, -4.97464)
+transform = Transform3D(0.846249, 0, 0.532788, 0, 1, 0, -0.532788, 0, 0.846249, -4.93788, 1.1345, -4.97464)
 
 [node name="Fireplace" parent="." instance=ExtResource("10_pny6e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.76704, 1.39294, -7.84517)
