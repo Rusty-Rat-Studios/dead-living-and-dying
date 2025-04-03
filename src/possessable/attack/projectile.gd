@@ -26,6 +26,6 @@ func shoot(target: Vector3) -> void:
 
 func _on_body_entered(body: Node3D) -> void:
 	if body == PlayerHandler.get_player():
-		SignalBus.player_hurt.emit()
+		SignalBus.player_hurt.emit(self)
 	# regardless of collision layer, delete projectile on contact
 	queue_free()
