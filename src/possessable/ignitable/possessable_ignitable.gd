@@ -1,6 +1,6 @@
 extends Possessable
 
-@export var begin_lit: bool = false
+@export_range(0, 1, 0.001) var begin_lit_chance: float = 0.5
 @export var player_detector: Area3D
 @export var fire: GPUParticles3D
 var lit: bool = false
@@ -18,7 +18,7 @@ func reset() -> void:
 	$Interactable.inputs = ["interact"]
 	$Interactable.hide()
 	$Interactable.enabled = false
-	if(begin_lit):
+	if(RNG.rng.randf() < begin_lit_chance):
 		ignite()
 	else:
 		snuff()

@@ -95,6 +95,7 @@ shape = SubResource("CylinderShape3D_3vsn4")
 
 [node name="Ignitable" parent="." node_paths=PackedStringArray("player_detector", "fire") instance=ExtResource("2_ha5tx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.544699, 0)
+begin_lit_chance = 0.5
 player_detector = NodePath("../Area3D")
 fire = NodePath("../FireParticles")
 

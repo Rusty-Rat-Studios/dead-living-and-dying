@@ -16,66 +16,38 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.690833, 0)
 [node name="WallSconceForward" parent="." index="6" instance=ExtResource("4_eblvi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.815, 1.295, -7.814)
 
-[node name="Ignitable" parent="WallSconceForward" index="0"]
-begin_lit = true
-
 [node name="WallSconceForward2" parent="." index="7" instance=ExtResource("4_eblvi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.735, 1.29541, -7.814)
 
-[node name="Ignitable" parent="WallSconceForward2" index="0"]
-begin_lit = true
-
-[node name="OmniLight3D" type="OmniLight3D" parent="." index="8"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.922644, 0)
-visible = false
-
-[node name="Candelabra" parent="." index="9" instance=ExtResource("5_tbbkd")]
+[node name="Candelabra" parent="." index="8" instance=ExtResource("5_tbbkd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.20435, 1.18252, 0)
 
 [node name="Ignitable" parent="Candelabra" index="2"]
-begin_lit = true
+begin_lit_chance = 1.0
 
-[node name="Candelabra2" parent="." index="10" instance=ExtResource("5_tbbkd")]
+[node name="Candelabra2" parent="." index="9" instance=ExtResource("5_tbbkd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.42217, 1.18252, 0)
 
 [node name="Ignitable" parent="Candelabra2" index="2"]
-begin_lit = true
+begin_lit_chance = 1.0
 
-[node name="Spawner" parent="." index="11" instance=ExtResource("5_hkojj")]
+[node name="Spawner" parent="." index="10" instance=ExtResource("5_hkojj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.52863, 0)
 spawner_type = 1
 
-[node name="WallSconceSide" parent="." index="12" instance=ExtResource("6_w2lxf")]
+[node name="WallSconceSide" parent="." index="11" instance=ExtResource("6_w2lxf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.69263, 1.55735, -3.17865)
 
-[node name="Ignitable" parent="WallSconceSide" index="0"]
-begin_lit = true
-
-[node name="WallSconceSide2" parent="." index="13" instance=ExtResource("6_w2lxf")]
+[node name="WallSconceSide2" parent="." index="12" instance=ExtResource("6_w2lxf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.69263, 1.55735, 3.23524)
 
-[node name="Ignitable" parent="WallSconceSide2" index="0"]
-begin_lit = true
-
-[node name="WallSconceSide3" parent="." index="14" instance=ExtResource("7_dyukg")]
+[node name="WallSconceSide3" parent="." index="13" instance=ExtResource("7_dyukg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.66967, 1.4748, 3.14185)
 
-[node name="Ignitable" parent="WallSconceSide3" index="0"]
-begin_lit = true
-
-[node name="WallSconceSide4" parent="." index="15" instance=ExtResource("7_dyukg")]
+[node name="WallSconceSide4" parent="." index="14" instance=ExtResource("7_dyukg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.66967, 1.4748, -3.42135)
-
-[node name="Ignitable" parent="WallSconceSide4" index="0"]
-begin_lit = true
 
 [editable path="Door"]
 [editable path="Door4"]
-[editable path="WallSconceForward"]
-[editable path="WallSconceForward2"]
 [editable path="Candelabra"]
 [editable path="Candelabra2"]
-[editable path="WallSconceSide"]
-[editable path="WallSconceSide2"]
-[editable path="WallSconceSide3"]
-[editable path="WallSconceSide4"]
