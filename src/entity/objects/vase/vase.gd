@@ -21,7 +21,7 @@ func _on_thrown() -> void:
 	break_after_throw_timer.start()
 
 
-func _on_body_entered(body: Node3D) -> void:
+func _on_body_entered(_body: Node3D) -> void:
 	stop_monitoring()
 	print("BREAK!")
 	
