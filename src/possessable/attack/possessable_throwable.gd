@@ -1,6 +1,8 @@
 class_name PossessableThrowable
 extends PossessableAttack
 
+signal thrown
+
 # impulse strength used to throw the object
 const THROW_FORCE: float = 15.0
 # speed threshold for enabling/disabling hurtbox
@@ -113,6 +115,7 @@ func attack(target: Node3D, attack_windup: float) -> void:
 			# VIOLENTLY LAUNCH SELF TOWARDS PLAYER \m/
 			get_parent().collision_layer = CollisionBit.PHYSICAL + CollisionBit.POSSESABLE
 			parent.apply_impulse(global_position.direction_to(target.global_position) * THROW_FORCE)
+			thrown.emit()
 	
 	# do not disable effects until hurtbox is disabled
 	depossess(false)
