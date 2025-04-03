@@ -196,6 +196,7 @@ mesh = SubResource("CylinderMesh_2ieo8")
 
 [node name="Footsteps" type="AudioStreamPlayer3D" parent="Sounds" groups=["sfx"]]
 stream = ExtResource("13_2smqc")
+autoplay = true
 parameters/looping = true
 script = ExtResource("14_wlj80")
 

@@ -81,7 +81,7 @@ alignment = 1
 
 [node name="SoundSliderMaster" parent="MarginContainer/CenterContainer/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_hp7vs")]
 layout_mode = 2
-master = true
+sound_group = "master"
 
 [node name="SoundSliderAmbient" parent="MarginContainer/CenterContainer/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_hp7vs")]
 layout_mode = 2
