@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8abpivk4v3s2"]
+[gd_scene load_steps=7 format=3 uid="uid://b8abpivk4v3s2"]
 
 [ext_resource type="PackedScene" uid="uid://dh8q75xrlxeaa" path="res://src/map/rooms/basic_room.tscn" id="1_bcvw5"]
 [ext_resource type="PackedScene" uid="uid://duyse8sywgror" path="res://src/entity/objects/table/table.tscn" id="2_3i7oo"]
 [ext_resource type="PackedScene" uid="uid://bjw1p41vnaeve" path="res://src/entity/objects/table/table_and_chairs.tscn" id="3_g22gl"]
 [ext_resource type="PackedScene" uid="uid://bmevu5yvsxttw" path="res://src/entity/spawner.tscn" id="4_vth8b"]
 [ext_resource type="PackedScene" uid="uid://dwfaytjbaixjo" path="res://src/entity/objects/candle_holder/candle_holder.tscn" id="5_3i7oo"]
+[ext_resource type="PackedScene" uid="uid://3gsxuhfeo5qs" path="res://src/entity/objects/wall_painting/wall_painting.tscn" id="6_g22gl"]
 
 [node name="DiningRoom1" instance=ExtResource("1_bcvw5")]
 
@@ -67,6 +68,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.54027, 2.10308, -4.00901)
 
 [node name="CandleHolder9" parent="." index="30" instance=ExtResource("5_3i7oo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.54027, 1.95215, -0.0715622)
+
+[node name="WallPainting" parent="." index="31" instance=ExtResource("6_g22gl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.18626, 1.98945, -7.89013)
+
+[node name="WallPainting2" parent="." index="32" instance=ExtResource("6_g22gl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.20222, 1.98945, -7.89013)
 
 [editable path="Door"]
 [editable path="Door4"]
