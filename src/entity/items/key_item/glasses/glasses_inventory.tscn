@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bi86i2xjjeu08"]
+
+[ext_resource type="Script" uid="uid://bh4jj3oubfgp7" path="res://src/entity/items/key_item/glasses/glasses_inventory.gd" id="1_cwok3"]
+
+[node name="GlassesInventory" type="Node3D"]
+script = ExtResource("1_cwok3")

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://da57mmw56bv7h"]
+
+[ext_resource type="Script" uid="uid://dbaxdwprtbtk2" path="res://src/entity/items/key_item/pipe/pipe_inventory.gd" id="1_cswc5"]
+
+[node name="PipeInventory" type="Node3D"]
+script = ExtResource("1_cswc5")
