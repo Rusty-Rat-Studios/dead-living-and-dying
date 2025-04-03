@@ -103,7 +103,7 @@ func pick_up() -> void:
 	item_inventory.texture = $Sprite3D.texture
 	
 	# play spooky sound effect; skip silent leadup
-	$PickupSting.play(0.2)
+	AudioManager.play_modulated($PickupSting, 0.2)
 	
 	SignalBus.item_picked_up.emit(item_inventory, false)
 	# set invisible instead of queue_free() to preserve starting position data
