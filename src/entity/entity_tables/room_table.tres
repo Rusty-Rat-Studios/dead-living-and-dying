@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="EntityTable" load_steps=39 format=3 uid="uid://brngxo180e7qn"]
+[gd_resource type="Resource" script_class="EntityTable" load_steps=41 format=3 uid="uid://brngxo180e7qn"]
 
 [ext_resource type="Script" uid="uid://dt04phs8a5k3h" path="res://src/entity/entity_table_entry.gd" id="1_pliob"]
 [ext_resource type="PackedScene" uid="uid://dh8q75xrlxeaa" path="res://src/map/rooms/basic_room.tscn" id="2_lrffa"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://bitlsagdxtmht" path="res://src/map/rooms/library_room_2.tscn" id="18_kc0fn"]
 [ext_resource type="PackedScene" uid="uid://fkni2pxbveep" path="res://src/map/rooms/key_item_room.tscn" id="19_ehd6k"]
 [ext_resource type="Script" uid="uid://caxs80c62syve" path="res://src/entity/entity_table.gd" id="20_1v4xr"]
+[ext_resource type="PackedScene" uid="uid://dcyocjg2x2gk" path="res://src/map/rooms/boss_ghost_room.tscn" id="20_lrffa"]
 
 [sub_resource type="Resource" id="Resource_b5ttb"]
 script = ExtResource("1_pliob")
@@ -183,6 +184,15 @@ max_spawn = 1
 min_spawn = 1
 metadata/_custom_type_script = "uid://dt04phs8a5k3h"
 
+[sub_resource type="Resource" id="Resource_3ta5i"]
+script = ExtResource("1_pliob")
+entity = ExtResource("20_lrffa")
+base_chance = 1.0
+chance_change = 0.0
+max_spawn = 1
+min_spawn = 1
+metadata/_custom_type_script = "uid://dt04phs8a5k3h"
+
 [resource]
 script = ExtResource("20_1v4xr")
-entities = Array[ExtResource("1_pliob")]([SubResource("Resource_b5ttb"), SubResource("Resource_ab0a5"), SubResource("Resource_xjnb4"), SubResource("Resource_ylr8c"), SubResource("Resource_2gvgd"), SubResource("Resource_s0rfh"), SubResource("Resource_waavr"), SubResource("Resource_ib33g"), SubResource("Resource_mtfob"), SubResource("Resource_4wgnf"), SubResource("Resource_ucrp2"), SubResource("Resource_b2xe6"), SubResource("Resource_tyhfv"), SubResource("Resource_5ur83"), SubResource("Resource_tp66j"), SubResource("Resource_jdffx"), SubResource("Resource_tq0so"), SubResource("Resource_fdobi")])
+entities = Array[ExtResource("1_pliob")]([SubResource("Resource_b5ttb"), SubResource("Resource_ab0a5"), SubResource("Resource_xjnb4"), SubResource("Resource_ylr8c"), SubResource("Resource_2gvgd"), SubResource("Resource_s0rfh"), SubResource("Resource_waavr"), SubResource("Resource_ib33g"), SubResource("Resource_mtfob"), SubResource("Resource_4wgnf"), SubResource("Resource_ucrp2"), SubResource("Resource_b2xe6"), SubResource("Resource_tyhfv"), SubResource("Resource_5ur83"), SubResource("Resource_tp66j"), SubResource("Resource_jdffx"), SubResource("Resource_tq0so"), SubResource("Resource_fdobi"), SubResource("Resource_3ta5i")])

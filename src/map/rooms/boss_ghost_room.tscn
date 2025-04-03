@@ -1,0 +1,167 @@
+[gd_scene load_steps=25 format=3 uid="uid://dcyocjg2x2gk"]
+
+[ext_resource type="Script" uid="uid://bo0tyfrjfebc6" path="res://src/map/room_components/room.gd" id="1_xwe0j"]
+[ext_resource type="PackedScene" uid="uid://te0dpapcosk4" path="res://src/map/rooms/room_minimap/basic_room_minimap.tscn" id="2_ghoaw"]
+[ext_resource type="Script" uid="uid://dqhrw6rxew3fa" path="res://src/common/door_location.gd" id="3_7aldj"]
+[ext_resource type="Texture2D" uid="uid://bgxlrk6d7mo0y" path="res://src/ui/minimap/boss_icon.png" id="4_ghoaw"]
+[ext_resource type="Script" uid="uid://bv4f3snq7u1u2" path="res://src/common/room_information.gd" id="4_gvcu0"]
+[ext_resource type="PackedScene" uid="uid://b3nn5u3a5o85j" path="res://src/map/room_components/floor/16x16_floor.tscn" id="5_n3d8w"]
+[ext_resource type="PackedScene" uid="uid://b6pd0nir4sadl" path="res://src/map/room_components/door/door_x16.tscn" id="6_03mgk"]
+[ext_resource type="PackedScene" uid="uid://c3wmqi8pl2yas" path="res://src/entity/objects/wall_sconce/wall_sconce_forward.tscn" id="7_afxyh"]
+[ext_resource type="PackedScene" uid="uid://cjgov4f5bnaae" path="res://src/entity/objects/wall_sconce/wall_sconce_side_left.tscn" id="8_bwyca"]
+[ext_resource type="PackedScene" uid="uid://cmxmbgqr3v5cn" path="res://src/entity/objects/wall_sconce/wall_sconce_side_right.tscn" id="9_iv65j"]
+[ext_resource type="PackedScene" uid="uid://bmevu5yvsxttw" path="res://src/entity/spawner.tscn" id="10_rwa0l"]
+[ext_resource type="PackedScene" uid="uid://cf4en3dt6a7vn" path="res://src/entity/objects/sword_plaque/sword_plaque.tscn" id="11_cn5g3"]
+[ext_resource type="PackedScene" uid="uid://3gsxuhfeo5qs" path="res://src/entity/objects/wall_painting/wall_painting.tscn" id="12_4h1vc"]
+[ext_resource type="PackedScene" uid="uid://cgof4qu7gkleu" path="res://src/entity/objects/vase/vase.tscn" id="13_dnv1g"]
+[ext_resource type="PackedScene" uid="uid://tkfqwci150w5" path="res://src/entity/objects/bookshelf/bookshelf.tscn" id="14_w78oj"]
+
+[sub_resource type="Resource" id="Resource_3y6bj"]
+script = ExtResource("3_7aldj")
+location = Vector2(0, 0)
+direction = 0
+
+[sub_resource type="Resource" id="Resource_b0qj2"]
+script = ExtResource("3_7aldj")
+location = Vector2(0, 0)
+direction = 1
+
+[sub_resource type="Resource" id="Resource_8lq6k"]
+script = ExtResource("3_7aldj")
+location = Vector2(0, 0)
+direction = 2
+
+[sub_resource type="Resource" id="Resource_8lnup"]
+script = ExtResource("3_7aldj")
+location = Vector2(0, 0)
+direction = 3
+
+[sub_resource type="Resource" id="Resource_7aldj"]
+script = ExtResource("4_gvcu0")
+room_shape = Array[Vector2]([Vector2(0, 0)])
+possible_door_locations = Array[ExtResource("3_7aldj")]([SubResource("Resource_3y6bj"), SubResource("Resource_b0qj2"), SubResource("Resource_8lq6k"), SubResource("Resource_8lnup")])
+minimap_component = ExtResource("2_ghoaw")
+room_icon = ExtResource("4_ghoaw")
+
+[sub_resource type="Resource" id="Resource_yemrt"]
+script = ExtResource("3_7aldj")
+location = Vector2(0, 0)
+direction = 0
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_5j2dc"]
+script = ExtResource("3_7aldj")
+location = Vector2(0, 0)
+direction = 1
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_m5xcn"]
+script = ExtResource("3_7aldj")
+location = Vector2(0, 0)
+direction = 3
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[sub_resource type="Resource" id="Resource_3pebv"]
+script = ExtResource("3_7aldj")
+location = Vector2(0, 0)
+direction = 2
+metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
+
+[node name="BossGhostRoom" type="Node3D" groups=["rooms"]]
+script = ExtResource("1_xwe0j")
+room_information = SubResource("Resource_7aldj")
+
+[node name="Floor" parent="." instance=ExtResource("5_n3d8w")]
+
+[node name="Door" parent="." instance=ExtResource("6_03mgk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.95)
+door_location = SubResource("Resource_yemrt")
+
+[node name="WallWithDoorway" parent="Door" index="5"]
+monitor_for_transparency = true
+
+[node name="Door2" parent="." instance=ExtResource("6_03mgk")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7.95, 0, 0)
+door_location = SubResource("Resource_5j2dc")
+
+[node name="Door3" parent="." instance=ExtResource("6_03mgk")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.95, 0, 0)
+door_location = SubResource("Resource_m5xcn")
+
+[node name="Door4" parent="." instance=ExtResource("6_03mgk")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 7.95)
+door_location = SubResource("Resource_3pebv")
+
+[node name="WallWithDoorway" parent="Door4" index="5"]
+monitor_for_transparency = true
+
+[node name="WallSconceForward" parent="." instance=ExtResource("7_afxyh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.815, 1.295, -7.814)
+
+[node name="WallSconceForward2" parent="." instance=ExtResource("7_afxyh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.735, 1.29541, -7.814)
+
+[node name="WallSconceSide" parent="." instance=ExtResource("8_bwyca")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.69263, 1.55735, -3.17865)
+
+[node name="WallSconceSide4" parent="." instance=ExtResource("9_iv65j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.66967, 1.4748, -3.42135)
+
+[node name="Spawner" parent="." instance=ExtResource("10_rwa0l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.10211, 0.947784, -4.63414)
+
+[node name="Spawner2" parent="." instance=ExtResource("10_rwa0l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.373224, 0.947784, -4.29799)
+
+[node name="Spawner3" parent="." instance=ExtResource("10_rwa0l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.23824, 0.947784, -4.08757)
+
+[node name="Spawner4" parent="." instance=ExtResource("10_rwa0l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.26457, 0.947784, 3.14599)
+
+[node name="Spawner5" parent="." instance=ExtResource("10_rwa0l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.282005, 0.947785, 3.22653)
+
+[node name="Spawner6" parent="." instance=ExtResource("10_rwa0l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.69722, 0.947785, 2.6824)
+
+[node name="Spawner7" parent="." instance=ExtResource("10_rwa0l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.24862, 0.947784, -0.611035)
+spawner_type = 3
+
+[node name="SwordPlaque" parent="." instance=ExtResource("11_cn5g3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.23574, 2.00154, -7.89412)
+
+[node name="SwordPlaque2" parent="." instance=ExtResource("11_cn5g3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.14074, 2.00154, -7.89412)
+
+[node name="WallPainting" parent="." instance=ExtResource("12_4h1vc")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.89353, 2.33824, 3.17803)
+
+[node name="WallPainting2" parent="." instance=ExtResource("12_4h1vc")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7.89057, 2.33824, 3.17803)
+
+[node name="Vase" parent="." instance=ExtResource("13_dnv1g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1785, 0.71305, -2.51073)
+
+[node name="Vase2" parent="." instance=ExtResource("13_dnv1g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.34691, 0.71305, -2.4434)
+
+[node name="Vase3" parent="." instance=ExtResource("13_dnv1g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.27174, 0.71305, 1.52122)
+
+[node name="Vase4" parent="." instance=ExtResource("13_dnv1g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.01296, 0.71305, 1.42022)
+
+[node name="Bookshelf" parent="." instance=ExtResource("14_w78oj")]
+transform = Transform3D(0.833674, 0, -0.552257, 0, 1, 0, 0.552257, 0, 0.833674, 6.2063, 1.33814, -6.18107)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.53259, 0)
+light_color = Color(0.574863, 1.43189e-06, 5.29438e-07, 1)
+light_energy = 0.5
+omni_range = 12.171
+omni_attenuation = 0.0
+
+[editable path="Door"]
+[editable path="Door4"]
