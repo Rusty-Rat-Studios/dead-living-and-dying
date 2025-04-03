@@ -1,8 +1,9 @@
-[gd_scene load_steps=23 format=3 uid="uid://cpudmguey5gcy"]
+[gd_scene load_steps=24 format=3 uid="uid://cpudmguey5gcy"]
 
 [ext_resource type="Script" uid="uid://bo0tyfrjfebc6" path="res://src/map/room_components/room.gd" id="1_gll72"]
 [ext_resource type="PackedScene" uid="uid://te0dpapcosk4" path="res://src/map/rooms/room_minimap/basic_room_minimap.tscn" id="2_winw3"]
 [ext_resource type="Script" uid="uid://dqhrw6rxew3fa" path="res://src/common/door_location.gd" id="3_vb84m"]
+[ext_resource type="Texture2D" uid="uid://diioxrqi1phl4" path="res://src/ui/minimap/old_man_icon.png" id="4_vb84m"]
 [ext_resource type="Script" uid="uid://bv4f3snq7u1u2" path="res://src/common/room_information.gd" id="4_wkm7r"]
 [ext_resource type="PackedScene" uid="uid://b3nn5u3a5o85j" path="res://src/map/room_components/floor/16x16_floor.tscn" id="5_7bu5u"]
 [ext_resource type="PackedScene" uid="uid://b6pd0nir4sadl" path="res://src/map/room_components/door/door_x16.tscn" id="6_k20dg"]
@@ -42,6 +43,7 @@ script = ExtResource("4_wkm7r")
 room_shape = Array[Vector2]([Vector2(0, 0), Vector2(-1, 0), Vector2(1, 0), Vector2(0, 1)])
 possible_door_locations = Array[ExtResource("3_vb84m")]([SubResource("Resource_3y6bj"), SubResource("Resource_b0qj2"), SubResource("Resource_8lq6k"), SubResource("Resource_8lnup")])
 minimap_component = ExtResource("2_winw3")
+room_icon = ExtResource("4_vb84m")
 
 [sub_resource type="Resource" id="Resource_yemrt"]
 script = ExtResource("3_vb84m")
