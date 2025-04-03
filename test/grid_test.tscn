@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bq2dwqp4q6dn1"]
+[gd_scene load_steps=11 format=3 uid="uid://bq2dwqp4q6dn1"]
 
 [ext_resource type="Script" uid="uid://br2ou0xf5p2mo" path="res://src/game.gd" id="1_xwopn"]
 [ext_resource type="PackedScene" uid="uid://bbow7knip3g6g" path="res://src/player/player.tscn" id="2_xkdfq"]
@@ -7,21 +7,9 @@
 [ext_resource type="Script" uid="uid://btdlvy02iwmn2" path="res://src/player/state_machine/state_living.gd" id="5_7fl8v"]
 [ext_resource type="Script" uid="uid://bfwa3mijk47us" path="res://src/player/state_machine/state_dying.gd" id="6_xupbb"]
 [ext_resource type="Script" uid="uid://dk6tfo4i3solm" path="res://src/map/world_grid.gd" id="7_24rg8"]
-[ext_resource type="Resource" uid="uid://brngxo180e7qn" path="res://src/entity/entity_tables/test_room_table.tres" id="8_5fe06"]
-[ext_resource type="Resource" uid="uid://ds8en1xrhc0us" path="res://src/entity/entity_tables/item_entity_table.tres" id="9_5fe06"]
-[ext_resource type="Resource" uid="uid://cinkoxiqgkewm" path="res://src/entity/entity_tables/test_entity_table.tres" id="9_kn4o2"]
-[ext_resource type="Script" uid="uid://b6py5yqiivmff" path="res://src/map/generator_settings.gd" id="10_e1b6l"]
+[ext_resource type="Resource" uid="uid://dsyevsmxrh8f5" path="res://src/map/test_generator_settings.tres" id="8_5e71u"]
 [ext_resource type="PackedScene" uid="uid://cp7202hwhpcd5" path="res://src/ui/ui.tscn" id="11_8yir0"]
 [ext_resource type="PackedScene" uid="uid://dh8q75xrlxeaa" path="res://src/map/rooms/basic_room.tscn" id="14_emhx3"]
-
-[sub_resource type="Resource" id="Resource_5fe06"]
-script = ExtResource("10_e1b6l")
-spread = 0.0
-min_rooms = 25
-room_table = ExtResource("8_5fe06")
-enemy_entity_table = ExtResource("9_kn4o2")
-item_entity_table = ExtResource("9_5fe06")
-metadata/_custom_type_script = "uid://b6py5yqiivmff"
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_xwopn")
@@ -54,7 +42,7 @@ script = ExtResource("6_xupbb")
 
 [node name="WorldGrid" type="Node3D" parent="."]
 script = ExtResource("7_24rg8")
-generator_settings = SubResource("Resource_5fe06")
+generator_settings = ExtResource("8_5e71u")
 
 [node name="BasicRoom" parent="WorldGrid" instance=ExtResource("14_emhx3")]
 spawn_room = true
