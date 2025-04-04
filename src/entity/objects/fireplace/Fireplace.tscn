@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://bgt18op8lbbdh"]
+[gd_scene load_steps=16 format=3 uid="uid://bgt18op8lbbdh"]
 
 [ext_resource type="PackedScene" uid="uid://u73u0x8ln3pf" path="res://src/possessable/ignitable/possessable_ignitable.tscn" id="1_ov4wt"]
 [ext_resource type="Texture2D" uid="uid://b758ybwludn6j" path="res://src/entity/objects/fireplace/fireplace.png" id="2_3lloo"]
+[ext_resource type="AudioStream" uid="uid://8o1m3m4g02kj" path="res://src/sound/objects/fire.mp3" id="3_cipfu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_066gb"]
 render_priority = -1
@@ -123,3 +124,15 @@ omni_range = 15.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_ggy6r")
+
+[node name="Fire" type="AudioStreamPlayer3D" parent="."]
+process_mode = 3
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+stream = ExtResource("3_cipfu")
+attenuation_model = 2
+autoplay = true
+max_distance = 30.0
+emission_angle_enabled = true
+emission_angle_degrees = 90.0
+attenuation_filter_db = -32.0
+parameters/looping = true
