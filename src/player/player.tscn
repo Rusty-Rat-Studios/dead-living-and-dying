@@ -201,6 +201,7 @@ mesh = SubResource("CylinderMesh_2ieo8")
 [node name="Footsteps" type="AudioStreamPlayer3D" parent="Sounds" groups=["sfx"]]
 stream = ExtResource("13_2smqc")
 autoplay = true
+bus = &"SFX"
 parameters/looping = true
 script = ExtResource("14_wlj80")
 
@@ -209,13 +210,17 @@ current = true
 
 [node name="Breathing" type="AudioStreamPlayer3D" parent="Sounds" groups=["sfx"]]
 max_db = -15.0
+bus = &"SFX"
 script = ExtResource("14_rl62b")
 
 [node name="Death" type="AudioStreamPlayer3D" parent="Sounds" groups=["sfx"]]
 stream = ExtResource("16_6bm8s")
+bus = &"SFX"
 
 [node name="Revive" type="AudioStreamPlayer3D" parent="Sounds" groups=["sfx"]]
 stream = ExtResource("17_hrerp")
+bus = &"SFX"
 
 [node name="Ambience" type="AudioStreamPlayer3D" parent="Sounds" groups=["ambient"]]
+bus = &"Ambience"
 script = ExtResource("18_oyld2")

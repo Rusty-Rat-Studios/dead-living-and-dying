@@ -132,6 +132,7 @@ one_shot = true
 [node name="GhostSFX" type="AudioStreamPlayer3D" parent="Sounds" groups=["sfx"]]
 stream = ExtResource("11_cker6")
 max_db = -3.502
+bus = &"SFX"
 script = ExtResource("10_n16t3")
 
 [node name="PlayerSoundDetector" type="Area3D" parent="Sounds"]

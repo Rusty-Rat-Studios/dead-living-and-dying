@@ -254,6 +254,7 @@ unit_size = 7.0
 max_db = 0.0
 autoplay = true
 panning_strength = 0.0
+bus = &"Ambience"
 parameters/looping = true
 
 [node name="PlayerSoundDetector" type="Area3D" parent="Sounds"]

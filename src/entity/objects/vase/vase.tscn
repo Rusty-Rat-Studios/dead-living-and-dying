@@ -46,3 +46,4 @@ one_shot = true
 
 [node name="Break" type="AudioStreamPlayer3D" parent="." groups=["sfx"]]
 stream = ExtResource("5_4whso")
+bus = &"SFX"

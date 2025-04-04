@@ -132,6 +132,7 @@ stream = ExtResource("3_cipfu")
 attenuation_model = 2
 autoplay = true
 max_distance = 30.0
+bus = &"Ambience"
 emission_angle_enabled = true
 emission_angle_degrees = 90.0
 emission_angle_filter_attenuation_db = -24.0

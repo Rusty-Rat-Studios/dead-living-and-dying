@@ -35,3 +35,4 @@ texture = ExtResource("4_87jnh")
 
 [node name="PickupSting" type="AudioStreamPlayer3D" parent="." index="4"]
 stream = ExtResource("6_t6cop")
+bus = &"SFX"
