@@ -120,7 +120,8 @@ func _get_required_doors_grid() -> Array[DoorLocation]:
 # It will randomly pick rooms from the weighted_room_dict and if it fails in placing one,
 # it will be removed from the weighted_room_dict (for this iteration). If all rooms are
 # removed from the weighted_room_dict, then the function returns 'invalid'
-func _get_valid_room(grid: WorldGrid, target_door: DoorLocation, room_door_dir: DoorLocation.Direction) -> Dictionary[String, Variant]:
+func _get_valid_room(grid: WorldGrid, target_door: DoorLocation, 
+	room_door_dir: DoorLocation.Direction) -> Dictionary[String, Variant]:
 	var weighted_room_dict: Dictionary[Variant, float] 
 	weighted_room_dict.assign(room_table.get_choices_dictionary())
 	
@@ -193,7 +194,8 @@ func _get_valid_room_placement_at_doors(grid: WorldGrid, room_information: RoomI
 
 
 # Returns all the door locations of a room facing a specific direction
-func _get_door_locations_facing(room_information: RoomInformation, dir: DoorLocation.Direction) -> Array[DoorLocation]:
+func _get_door_locations_facing(room_information: RoomInformation, 
+	dir: DoorLocation.Direction) -> Array[DoorLocation]:
 	return room_information.possible_door_locations.filter(
 		func(value: DoorLocation) -> bool: 
 			return value.direction == dir
