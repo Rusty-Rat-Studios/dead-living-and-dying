@@ -56,6 +56,17 @@ func reset() -> void:
 	_corpse.reset()
 
 
+func reset_state() -> void:
+	hurtbox.reset()
+	_state_machine.reset()
+	camera.reset()
+	_corpse.reset()
+
+
+func reset_position() -> void:
+	position = starting_position
+
+
 func _physics_process(delta: float) -> void:
 	handle_movement(delta) 
 	# Set Player position for shaders

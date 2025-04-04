@@ -16,5 +16,10 @@ func reset_shrines() -> void:
 		shrine.reset()
 
 
-func clear_shrines_list() -> void:
-	shrines.clear()
+func clear_shrines_list(include_default: bool = false) -> void:
+	if include_default:
+		shrines.clear()
+	else:
+		for shrine: Shrine in shrines:
+			if not shrine.default:
+				shrines.erase(shrine)

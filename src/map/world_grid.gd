@@ -70,7 +70,8 @@ func get_rooms_of_type(room_type: Room.RoomType) -> Array[Room]:
 func clear() -> void:
 	for node: Node in get_children():
 		if node is Room:
-			node.queue_free()
+			if not (node as Room).spawn_room:
+				node.queue_free()
 	room_map.clear()
 
 

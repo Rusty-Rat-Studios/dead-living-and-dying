@@ -11,6 +11,8 @@ extends Node3D
 @onready var player: Player = $Player
 @onready var light_directional: DirectionalLight3D = $DirectionalLight3D
 
+@onready var world_grid: WorldGrid = $WorldGrid
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -35,9 +37,12 @@ func reset() -> void:
 	Utility.call_for_each(find_children("Ghost*", "Ghost"), "reset")
 	Utility.call_for_each(find_children("*", "Possessable"), "reset")
 	ShrineManager.reset_shrines()
+	ShrineManager.clear_shrines_list(false)
 	Utility.call_for_each(find_children("*Item*", "Item"), "reset")
 	
-	player.reset()
+	world_grid.clear()
+	
+	player.reset_state()
 	if old_man:
 		old_man.reset()
 	
@@ -46,6 +51,8 @@ func reset() -> void:
 		child.queue_free()
 	
 	get_tree().call_group("rooms", "reset")
+	
+	world_grid.setup_grid()
 
 
 func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
