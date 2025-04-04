@@ -212,6 +212,7 @@ current = true
 max_db = -15.0
 bus = &"Sfx"
 script = ExtResource("14_rl62b")
+audio_folder_path = "res://src/sound/sfx/breath"
 
 [node name="Death" type="AudioStreamPlayer3D" parent="Sounds" groups=["sfx"]]
 stream = ExtResource("16_6bm8s")

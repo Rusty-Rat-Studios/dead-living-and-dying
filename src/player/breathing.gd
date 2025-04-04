@@ -7,7 +7,6 @@ var delay_timer: Timer = Timer.new()
 
 
 func _ready() -> void:
-	audio_folder_path = "res://src/sound/sfx/breath"
 	super()
 	
 	delay_timer.wait_time = RNG.rng.randf_range(DELAY_TIME_MIN, DELAY_TIME_MAX)

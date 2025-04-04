@@ -1,7 +1,7 @@
 class_name AudioStreamMultiple
 extends AudioStreamPlayer3D
 
-var audio_folder_path: String
+@export var audio_folder_path: String
 var audio_clips: Array[AudioStream]
 
 
