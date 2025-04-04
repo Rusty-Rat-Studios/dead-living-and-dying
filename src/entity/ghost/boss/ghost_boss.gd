@@ -37,8 +37,11 @@ func _process(_delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action("trigger_boss_event"):
-		start_event()
+	if event.is_action_pressed("trigger_boss_event"):
+		if event_active:
+			stop_event()
+		else:
+			start_event()
 
 
 func start_event() -> void:
