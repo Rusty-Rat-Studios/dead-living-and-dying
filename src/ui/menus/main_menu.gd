@@ -2,7 +2,7 @@ extends Control
 
 @export var skip_to_game: bool = false
 
-@onready var game_scene: PackedScene = load("res://test/static_test_map/static_test_game.tscn")
+@onready var game_scene: PackedScene = load("res://test/grid_test.tscn")
 @onready var how_to_scene: PackedScene = load("res://src/ui/menus/how_to_play.tscn")
 @onready var buttons: VBoxContainer = $MarginContainer/MarginContainer/VBoxContainer/VBoxButtons
 

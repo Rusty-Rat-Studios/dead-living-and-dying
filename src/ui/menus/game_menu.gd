@@ -6,6 +6,7 @@ const GAME_OVER_DELAY: float = 2.0
 @export var disable_popup: bool = false
 @export var show_how_to_play_on_start: bool = false
 
+@onready var main_menu: PackedScene = preload("res://src/ui/menus/main_menu.tscn")
 @onready var buttons: VBoxContainer = $PanelContainer/MarginContainer/VBoxContainer/VBoxButtons
 @onready var message: Label = $PanelContainer/MarginContainer/VBoxContainer/Message
 
@@ -67,8 +68,9 @@ func _on_game_over() -> void:
 		buttons.show()
 		resume()
 	
-	get_node("/root/Game").reset()
+	get_tree().call_deferred("change_scene_to_packed", main_menu)
 
 
 func _on_level_complete() -> void:
 	print("Level complete!")
+	get_node('/root/Game').reset()
