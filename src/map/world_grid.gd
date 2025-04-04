@@ -32,6 +32,7 @@ func setup_grid() -> void:
 			occupied_and_door_grids.get('door_grid')
 		)
 		generator.generate_grid(self)
+		print("Spawned a total of ", number_of_rooms, " rooms")
 	_init_all_rooms()
 	_spawn_entities()
 
@@ -52,6 +53,15 @@ func add_room(room: Room, grid_location: Vector2, add_to_tree: bool = true) -> v
 # If grid_location exists in the HashMap return room, otherwise returns null
 func get_room_at_location(grid_location: Vector2) -> Room:
 	return room_map.retrieve_with_hash(_hash_vector2(grid_location))
+
+
+func get_rooms_of_type(room_type: Room.RoomType) -> Array[Room]:
+	var rooms_of_type: Array[Room]
+	rooms_of_type.assign(room_map.values().filter(
+		func(room: Room) -> bool:
+			return room.room_information.room_type == room_type
+	))
+	return rooms_of_type
 
 
 func clear() -> void:

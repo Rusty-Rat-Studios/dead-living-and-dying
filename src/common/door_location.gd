@@ -10,14 +10,14 @@ enum Direction { NORTH, EAST, SOUTH, WEST }
 @export var required: bool = false
 
 
-func _init(_location:Vector2=Vector2(0,0), _direction:Direction=Direction.NORTH) -> void:
+func _init(_location:Vector2=Vector2(0,0), _direction:Direction=Direction.NORTH, _required:bool=false) -> void:
 	location = _location
 	direction = _direction
-	required = false
+	required = _required
 
 
 func translate(new_origin: Vector2) -> DoorLocation:
-	return DoorLocation.new(self.location + new_origin, self.direction)
+	return DoorLocation.new(self.location + new_origin, self.direction, self.required)
 
 
 func hash() -> PackedByteArray:
