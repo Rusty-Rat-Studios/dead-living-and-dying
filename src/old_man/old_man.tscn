@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://c176v8gdlci8v"]
+[gd_scene load_steps=9 format=3 uid="uid://c176v8gdlci8v"]
 
 [ext_resource type="PackedScene" uid="uid://cnbim08e5mqrn" path="res://src/ui/interactable.tscn" id="1_k23bc"]
 [ext_resource type="Script" uid="uid://cjc1yby2mdkot" path="res://src/old_man/old_man.gd" id="1_kf68j"]
 [ext_resource type="Texture2D" uid="uid://cqkrkcdafpobb" path="res://src/old_man/old_man_world.png" id="3_h1b4u"]
 [ext_resource type="Script" uid="uid://db2v7j1wnkduq" path="res://src/common/sprite_backlight.gd" id="4_6tbt5"]
 [ext_resource type="PackedScene" uid="uid://bp0ydphecs3iv" path="res://src/common/shadow.tscn" id="4_8mfuk"]
+[ext_resource type="Script" uid="uid://dh2ex5oiofoju" path="res://src/old_man/speech.gd" id="6_jpdi7"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_h1b4u"]
 size = Vector3(2.185, 2.305, 0.5)
@@ -45,3 +46,7 @@ light_color = Color(0.854902, 0.745098, 0.184314, 1)
 light_energy = 0.2
 shadow_enabled = true
 omni_range = 10.0
+
+[node name="Speech" type="AudioStreamPlayer3D" parent="."]
+process_mode = 3
+script = ExtResource("6_jpdi7")

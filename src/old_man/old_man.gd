@@ -88,12 +88,14 @@ func _on_player_exited(_player: Player) -> void:
 func _on_interaction(input_name: String) -> void:
 	if input_name == "interact":
 		dialogue_popup.show_dialogue(dialogue[_dialogue_stage])
+		$Speech.play_random_sound()
 	#if input_name == "interact" and player_has_key_item:
 	#	SignalBus.level_complete.emit()
 
 
 func _on_response_selected(next_stage: String) -> void:
 	_dialogue_stage = next_stage
+	$Speech.play_random_sound(true)
 	
 	match _dialogue_stage:
 		"crucifix":
