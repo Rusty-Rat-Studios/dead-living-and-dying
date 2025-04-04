@@ -17,6 +17,8 @@ height = 2.67
 radius = 0.43
 
 [node name="PottedPlant" type="StaticBody3D"]
+collision_layer = 4
+collision_mask = 4
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1.38, 0, 0, 0, 1.38, 0, 0, 0, 1.38, 0, 0, 0)

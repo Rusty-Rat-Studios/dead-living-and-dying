@@ -17,6 +17,8 @@ backlight_texture = ExtResource("1_7hfka")
 size = Vector3(3.49, 3.055, 1.07)
 
 [node name="TableAndChairs" type="StaticBody3D"]
+collision_layer = 4
+collision_mask = 4
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1.225, 0, 0, 0, 1.225, 0, 0, 0, 1.225, 0, 0, 0)
