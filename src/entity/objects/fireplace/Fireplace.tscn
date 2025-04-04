@@ -134,5 +134,6 @@ autoplay = true
 max_distance = 30.0
 emission_angle_enabled = true
 emission_angle_degrees = 90.0
+emission_angle_filter_attenuation_db = -24.0
 attenuation_filter_db = -32.0
 parameters/looping = true
