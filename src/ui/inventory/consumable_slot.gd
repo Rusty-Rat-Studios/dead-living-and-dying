@@ -13,7 +13,7 @@ func _ready() -> void:
 	$MarginIcon/IconLabel.init("use_consumable_item")
 
 
-func _on_item_picked_up(item_inventory: ItemInventory, current_consumable: bool = false) -> void:
+func _on_item_picked_up(item_inventory: ItemInventory, current_consumable: bool = false, _current_count: int = 0) -> void:
 	if item_inventory is ConsumableItemInventory and current_consumable == false:
 		_item_inventory = item_inventory
 		# update UI image to match item
@@ -27,7 +27,7 @@ func _on_item_picked_up(item_inventory: ItemInventory, current_consumable: bool 
 	elif item_inventory is ConsumableItemInventory and current_consumable == true:
 		texture_rect.texture = _item_inventory.texture
 		color_rect.visible = true
-		count += 1
+		count = item_inventory.MAX_COUNT
 		label.text = str(count)
 
 

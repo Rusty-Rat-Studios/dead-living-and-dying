@@ -2,6 +2,7 @@ extends ConsumableItemInventory
 
 const BASE_ACTIVE_DURATION: float = 3
 const CONSUMABLE_ID: int = 0
+const MAX_COUNT: float = 3
 
 var player: Node = PlayerHandler.get_player()
 var active: bool = false
@@ -13,7 +14,7 @@ func _ready() -> void:
 	description = ("CONSUMABLE ITEM: Use with " + UIDevice.retrieve_icon_sized(input_event)
 		+ " to become invulnerable for a short duration.")
 	texture = preload("res://src/entity/items/holy_water/holy_water.png")
-	count = 1
+	count = MAX_COUNT
 	
 	$ActiveTimer.wait_time = BASE_ACTIVE_DURATION
 	$ActiveTimer.timeout.connect(_on_active_timer_timeout)

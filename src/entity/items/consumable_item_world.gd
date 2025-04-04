@@ -1,11 +1,11 @@
-class_name ItemWorld
+class_name ConsumableItemWorld
 extends Node3D
 
 # to be set by inheritors as a reference to their in-world partner version
 @export var inventory_resource: Resource
 # save starting position to reset to on game over
 @onready var starting_position: Vector3 = global_position
-
+var count: int = 3
 
 func _ready() -> void:
 	$PlayerDetector.body_entered.connect(_on_body_entered)
@@ -33,20 +33,16 @@ func pick_up() -> void:
 	var player: Node = PlayerHandler.get_player()
 	var current_consumable: bool = false
 	item_inventory.texture = $Sprite3D.texture
-	if item_inventory is not PassiveItemInventory and item_inventory is not ConsumableItemInventory:
-		for n: Node in player.get_node("Inventory").get_children():
-			if n is ActiveItemInventory and item_inventory is ActiveItemInventory:
-				n.drop()
-			if n is DefenseItemInventory and item_inventory is DefenseItemInventory:
-				n.drop()
-	if item_inventory is ConsumableItemInventory:
-		for n: Node in player.get_node("Inventory").get_children():
-			if n is ConsumableItemInventory and n.CONSUMABLE_ID == item_inventory.CONSUMABLE_ID:
-				current_consumable = true
+	for n: Node in player.get_node("Inventory").get_children():
+		if n is ConsumableItemInventory and n.CONSUMABLE_ID == item_inventory.CONSUMABLE_ID:
+			current_consumable = true
+			if !count or n.count + count >= n.MAX_COUNT:
 				n.count = n.MAX_COUNT
-			elif n is ConsumableItemInventory:
-				n.drop()
-	SignalBus.item_picked_up.emit(item_inventory, current_consumable)
+			else:
+				n.count += count
+		elif n is ConsumableItemInventory:
+			n.drop()
+	SignalBus.item_picked_up.emit(item_inventory, current_consumable, self.count)
 	queue_free()
 
 
