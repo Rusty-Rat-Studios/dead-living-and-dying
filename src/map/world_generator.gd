@@ -51,8 +51,8 @@ func generate_grid(grid: WorldGrid) -> void:
 		# Decrease chance of rooms with required doors after room gen is almost complete
 		if (not lowered_chance_of_required_doors and 
 			room_table.are_constraints_met() and grid.number_of_rooms >= min_rooms):
-			print("Room generation waiting on required_door_grid, \
-lowering chance of required_doors being picked...")
+			#gdlint:ignore=max-line-length
+			push_warning("Room generation waiting on required_door_grid, lowering chance of required_doors being picked...")
 			lowered_chance_of_required_doors = true
 			for entity_table_entry: EntityTableEntry in room_table.entities:
 				var room: Room = entity_table_entry.get_entity().instantiate()
@@ -66,8 +66,8 @@ lowering chance of required_doors being picked...")
 		
 		# Decrease chance of rooms without constraints after min_rooms amount hit
 		if grid.number_of_rooms >= min_rooms:
-			print("Room generation waiting on constraints, \
-lowering chance of non-constrained rooms being picked...")
+			#gdlint:ignore=max-line-length
+			print("Room generation waiting on constraints, lowering chance of non-constrained rooms being picked...")
 			for entity_table_entry: EntityTableEntry in room_table.entities:
 				if entity_table_entry.is_within_constraints():
 					entity_table_entry.base_chance *= ENTITY_NON_CONSTRAINT_CHANCE_REDUCTION
