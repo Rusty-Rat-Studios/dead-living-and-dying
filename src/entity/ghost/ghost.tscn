@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://yihpxsaeuqdi"]
+[gd_scene load_steps=20 format=3 uid="uid://yihpxsaeuqdi"]
 
 [ext_resource type="Script" uid="uid://bhwqa6bloe8me" path="res://src/entity/ghost/ghost.gd" id="1_vr82v"]
 [ext_resource type="SpriteFrames" uid="uid://bygn7dpqwa3pk" path="res://src/entity/ghost/ghost_sprite_frames.tres" id="2_8v45s"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" uid="uid://dnejv78e6bqw6" path="res://src/entity/ghost/state_machine/state_stunned.gd" id="7_yplap"]
 [ext_resource type="Script" uid="uid://bwxdjfnmqcqlx" path="res://src/entity/ghost/state_machine/state_attacking.gd" id="8_a4kr4"]
 [ext_resource type="Script" uid="uid://2ngv1mk144l5" path="res://src/entity/ghost/state_machine/state_moving.gd" id="9_cmmm8"]
-[ext_resource type="Script" uid="uid://ch1jcgwd6neni" path="res://src/entity/ghost/ghost_sounds.gd" id="10_8qh43"]
 [ext_resource type="Script" uid="uid://byol6wcxqtshl" path="res://src/entity/ghost/ghost_sfx.gd" id="10_n16t3"]
 [ext_resource type="AudioStream" uid="uid://dbdul01turlyv" path="res://src/sound/ghost/wheeze/ghost_wheeze2.mp3" id="11_cker6"]
 
@@ -129,7 +128,6 @@ wait_time = 6.0
 one_shot = true
 
 [node name="Sounds" type="Node3D" parent="."]
-script = ExtResource("10_8qh43")
 
 [node name="GhostSFX" type="AudioStreamPlayer3D" parent="Sounds"]
 stream = ExtResource("11_cker6")

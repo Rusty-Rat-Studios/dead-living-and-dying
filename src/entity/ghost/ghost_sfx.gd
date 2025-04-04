@@ -87,6 +87,8 @@ func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
 		PlayerStateMachine.States.LIVING:
 			player_dead = false
 			max_db = MAX_DB_QUIET # quieter when player is living
+			# halt any sound effects
+			stop()
 		PlayerStateMachine.States.DYING:
 			max_db = MAX_DB_NORMAL # louder when player is dying
 		PlayerStateMachine.States.DEAD:
