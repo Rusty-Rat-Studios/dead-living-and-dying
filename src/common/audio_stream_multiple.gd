@@ -40,9 +40,9 @@ func get_random_audio_clip() -> AudioStream:
 	return audio_clips[random_index]
 
 
-func play_random_sound() -> void:
+func play_random_sound(interrupt: bool = false) -> void:
 	# check if audio already playing - don't interrupt self
-	if playing:
+	if playing and not interrupt:
 		return
 	var random_clip: AudioStream = get_random_audio_clip()
 	if random_clip != null:
