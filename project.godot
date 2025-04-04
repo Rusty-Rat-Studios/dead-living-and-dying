@@ -54,8 +54,8 @@ import/blender/enabled=false
 
 ghosts=""
 rooms=""
-ambient=""
 sfx=""
+ambience=""
 
 [input]
 

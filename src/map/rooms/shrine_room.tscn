@@ -246,7 +246,7 @@ omni_attenuation = 0.0
 
 [node name="Sounds" type="Node3D" parent="."]
 
-[node name="Rain" type="AudioStreamPlayer3D" parent="Sounds" groups=["ambient"]]
+[node name="Rain" type="AudioStreamPlayer3D" parent="Sounds" groups=["ambience"]]
 process_mode = 3
 stream = ExtResource("14_yr7ka")
 attenuation_model = 1
