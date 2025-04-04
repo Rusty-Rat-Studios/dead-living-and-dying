@@ -40,6 +40,8 @@ metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
 
 [sub_resource type="Resource" id="Resource_ownp1"]
 script = ExtResource("4_1kr6n")
+room_type = 2
+min_room_spawn_grid_distance = 3
 room_shape = Array[Vector2]([Vector2(0, 0)])
 possible_door_locations = Array[ExtResource("6_6gi6o")]([SubResource("Resource_6gi6o"), SubResource("Resource_w6w2w"), SubResource("Resource_uuedo"), SubResource("Resource_rplmb")])
 minimap_component = ExtResource("2_fi0hv")

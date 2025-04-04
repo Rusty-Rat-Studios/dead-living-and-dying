@@ -40,6 +40,8 @@ direction = 3
 
 [sub_resource type="Resource" id="Resource_hj2hw"]
 script = ExtResource("4_wkm7r")
+room_type = 0
+min_room_spawn_grid_distance = 0
 room_shape = Array[Vector2]([Vector2(0, 0), Vector2(-1, 0), Vector2(1, 0), Vector2(0, 1)])
 possible_door_locations = Array[ExtResource("3_vb84m")]([SubResource("Resource_3y6bj"), SubResource("Resource_b0qj2"), SubResource("Resource_8lq6k"), SubResource("Resource_8lnup")])
 minimap_component = ExtResource("2_winw3")
