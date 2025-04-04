@@ -78,10 +78,11 @@ func generate_grid(grid: WorldGrid) -> void:
 			target_door = RNG.random_from_list(required_doors_grid)
 		else:
 			var weighted_door_grid: Dictionary[Variant, float] = {}
+			print(door_grid)
 			for door_location: DoorLocation in door_grid:
 				var dist: float = door_location.invert().location.length() ** spread
 				weighted_door_grid[door_location] = dist
-				target_door = RNG.weighted_random(weighted_door_grid)
+			target_door = RNG.weighted_random(weighted_door_grid)
 		
 		var room_door_dir: DoorLocation.Direction = target_door.invert().direction # Direction of required connecting door
 		
@@ -238,7 +239,7 @@ func _does_room_have_required_door_that_will_be_blocked(room_door_grid: Array[Do
 func _does_room_fail_dist_constraints(grid: WorldGrid, room_information: RoomInformation, 
 	room_pos: Vector2) -> bool:
 	# Check distance to origin
-	var dist_to_origin: int = room_pos.x + room_pos.y
+	var dist_to_origin: int = abs(room_pos.x) + abs(room_pos.y)
 	if dist_to_origin < room_information.min_room_spawn_grid_distance:
 		print("Room would be too close to origin...")
 		return true
