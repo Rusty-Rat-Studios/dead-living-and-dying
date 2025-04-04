@@ -8,7 +8,8 @@ func _ready() -> void:
 	$MarginIcon/IconLabel.init(_input_event)
 
 
-func _on_item_picked_up(item_inventory: ItemInventory, _current_consumable: bool = false, _current_count: int = 0) -> void:
+func _on_item_picked_up(item_inventory: ItemInventory, _current_consumable: bool = false,
+						_current_count: int = 0) -> void:
 	if item_inventory is DefenseItemInventory:
 		_item_inventory = item_inventory
 		# update UI image to match item
