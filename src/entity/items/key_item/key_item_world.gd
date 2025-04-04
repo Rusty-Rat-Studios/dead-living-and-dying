@@ -108,6 +108,7 @@ func pick_up() -> void:
 	SignalBus.item_picked_up.emit(item_inventory, false)
 	# set invisible instead of queue_free() to preserve starting position data
 	visible = false
+	$Interactable.enabled = false
 	set_process(false)
 
 
