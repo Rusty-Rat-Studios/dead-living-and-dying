@@ -33,8 +33,8 @@ func _init(generator_settings: GeneratorSettings, initial_occupied_grid: Array[V
 #        (removing and pairs that connect), add room to grid, loop until complete
 func generate_grid(grid: WorldGrid) -> void:
 	var fails: int = 0
-	var lowered_chance_of_required_doors: bool = false
-	var lowered_chance_of_non_constrained_rooms: bool = false
+	# var lowered_chance_of_required_doors: bool = false
+	# var lowered_chance_of_non_constrained_rooms: bool = false
 	
 	while(fails < GENERATOR_ATTEMPTS):
 		var required_doors_grid: Array[DoorLocation] = _get_required_doors_grid()
