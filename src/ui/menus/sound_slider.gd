@@ -1,12 +1,11 @@
 extends HBoxContainer
 
-var MASTER_BUS: int = AudioServer.get_bus_index("Master")
-
 @export var sound_group: String = ""
+
+var master_bus: int = AudioServer.get_bus_index("Master")
 
 
 func _ready() -> void:
-	pass
 	AudioManager.register_sound_group(sound_group, 0)
 	$Label.text = sound_group.capitalize()
 	# get and apply any existing setting changes
@@ -21,9 +20,9 @@ func _ready() -> void:
 
 
 func _on_master_value_changed(value: float) -> void:
-	AudioServer.set_bus_volume_db(MASTER_BUS, value)
+	AudioServer.set_bus_volume_db(master_bus, value)
 	AudioManager.set_db_value(sound_group, value)
-	print("master volume set to: ", AudioServer.get_bus_volume_db(MASTER_BUS), "db")
+	print("master volume set to: ", AudioServer.get_bus_volume_db(master_bus), "db")
 
 
 func _on_value_changed(value: float) -> void:

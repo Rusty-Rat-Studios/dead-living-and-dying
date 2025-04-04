@@ -28,9 +28,9 @@ func _on_player_exited_room(body: Node3D) -> void:
 	body.footsteps_sfx.play()
 
 
-func _on_player_entered_sfx_range(body: Node3D) -> void:
+func _on_player_entered_sfx_range(_body: Node3D) -> void:
 	rain_sfx.stream_paused = false
 
 
-func _on_player_exited_sfx_range(body: Node3D) -> void:
+func _on_player_exited_sfx_range(_body: Node3D) -> void:
 	rain_sfx.stream_paused = true
