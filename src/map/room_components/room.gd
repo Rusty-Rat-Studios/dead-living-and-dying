@@ -7,6 +7,8 @@ extends Node3D
 
 signal player_discovered_room
 
+enum RoomType { BASIC, ITEM, SHRINE }
+
 const ICON_MINIMAP: Resource = preload("res://src/ui/minimap/icon_minimap.tscn")
 # used to delay making the room invisible after player dies
 # needed because visibility is only triggered by doors

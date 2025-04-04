@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bson3umirpot2" path="res://src/map/room_components/wall/wall.tscn" id="7_sd2am"]
 [ext_resource type="PackedScene" uid="uid://cjgov4f5bnaae" path="res://src/entity/objects/wall_sconce/wall_sconce_side_left.tscn" id="8_frmnu"]
 [ext_resource type="PackedScene" uid="uid://cmxmbgqr3v5cn" path="res://src/entity/objects/wall_sconce/wall_sconce_side_right.tscn" id="9_h2fkp"]
-[ext_resource type="PackedScene" uid="uid://bgt18op8lbbdh" path="res://src/entity/objects/fireplace/fireplace.tscn" id="10_xf752"]
+[ext_resource type="PackedScene" uid="uid://bgt18op8lbbdh" path="res://src/entity/objects/fireplace/Fireplace.tscn" id="10_xf752"]
 [ext_resource type="PackedScene" uid="uid://3gsxuhfeo5qs" path="res://src/entity/objects/wall_painting/wall_painting.tscn" id="11_u4e2a"]
 [ext_resource type="PackedScene" uid="uid://cgof4qu7gkleu" path="res://src/entity/objects/vase/vase.tscn" id="12_hd618"]
 [ext_resource type="PackedScene" uid="uid://duyse8sywgror" path="res://src/entity/objects/table/table.tscn" id="13_vlhim"]
@@ -20,22 +20,27 @@
 script = ExtResource("3_lpx8b")
 location = Vector2(0, 0)
 direction = 1
+required = false
 metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
 
 [sub_resource type="Resource" id="Resource_2tvle"]
 script = ExtResource("3_lpx8b")
 location = Vector2(0, 0)
 direction = 2
+required = false
 metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
 
 [sub_resource type="Resource" id="Resource_225de"]
 script = ExtResource("3_lpx8b")
 location = Vector2(0, 0)
 direction = 3
+required = false
 metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
 
 [sub_resource type="Resource" id="Resource_6a8mh"]
 script = ExtResource("4_hj63j")
+room_type = 0
+min_room_spawn_grid_distance = 0
 room_shape = Array[Vector2]([Vector2(0, 0)])
 possible_door_locations = Array[ExtResource("3_lpx8b")]([SubResource("Resource_m7ak1"), SubResource("Resource_2tvle"), SubResource("Resource_225de")])
 minimap_component = ExtResource("2_sqyef")
@@ -45,18 +50,21 @@ metadata/_custom_type_script = "uid://bv4f3snq7u1u2"
 script = ExtResource("3_lpx8b")
 location = Vector2(0, 0)
 direction = 1
+required = false
 metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
 
 [sub_resource type="Resource" id="Resource_c0yy7"]
 script = ExtResource("3_lpx8b")
 location = Vector2(0, 0)
 direction = 3
+required = false
 metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
 
 [sub_resource type="Resource" id="Resource_uly55"]
 script = ExtResource("3_lpx8b")
 location = Vector2(0, 0)
 direction = 2
+required = false
 metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
 
 [node name="LivingRoom1" type="Node3D" groups=["rooms"]]
