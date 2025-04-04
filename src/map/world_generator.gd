@@ -47,30 +47,31 @@ func generate_grid(grid: WorldGrid) -> void:
 			push_error("ERROR: Room generation failed, ¯\\_(ツ)_/¯ Ran out of doors")
 			return
 		
+		# THE FOLLOWING CODE IS PROBABLY NOT NEEDED BUT WILL BE LEFT IN FOR REFERENCE
 		# Decrease chance of rooms with required doors after room gen is almost complete
-		if (not lowered_chance_of_required_doors and 
-			room_table.are_constraints_met() and grid.number_of_rooms >= min_rooms):
-			push_warning("Room generation waiting on required_door_grid, 
-				lowering chance of required_doors being picked...")
-			lowered_chance_of_required_doors = true
-			for entity_table_entry: EntityTableEntry in room_table.entities:
-				var room: Room = entity_table_entry.get_entity().instantiate()
-				var room_has_required_doors: bool = room.room_information.possible_door_locations.any(
-					func(possible_door_location: DoorLocation) -> bool:
-						return possible_door_location.required
-				)
-				room.free()
-				if room_has_required_doors:
-					entity_table_entry.base_chance = 0
-		
-		# Decrease chance of rooms without constraints after min_rooms amount hit
-		if not lowered_chance_of_non_constrained_rooms and grid.number_of_rooms >= min_rooms:
-			push_warning("Room generation waiting on constraints, 
-				lowering chance of non-constrained rooms being picked...")
-			lowered_chance_of_non_constrained_rooms = true
-			for entity_table_entry: EntityTableEntry in room_table.entities:
-				if entity_table_entry.is_within_constraints():
-					entity_table_entry.base_chance = 0
+		#if (not lowered_chance_of_required_doors and 
+			#room_table.are_constraints_met() and grid.number_of_rooms >= min_rooms):
+			#push_warning("Room generation waiting on required_door_grid, 
+				#lowering chance of required_doors being picked...")
+			#lowered_chance_of_required_doors = true
+			#for entity_table_entry: EntityTableEntry in room_table.entities:
+				#var room: Room = entity_table_entry.get_entity().instantiate()
+				#var room_has_required_doors: bool = room.room_information.possible_door_locations.any(
+					#func(possible_door_location: DoorLocation) -> bool:
+						#return possible_door_location.required
+				#)
+				#room.free()
+				#if room_has_required_doors:
+					#entity_table_entry.base_chance = 0
+		#
+		## Decrease chance of rooms without constraints after min_rooms amount hit
+		#if not lowered_chance_of_non_constrained_rooms and grid.number_of_rooms >= min_rooms:
+			#push_warning("Room generation waiting on constraints, 
+				#lowering chance of non-constrained rooms being picked...")
+			#lowered_chance_of_non_constrained_rooms = true
+			#for entity_table_entry: EntityTableEntry in room_table.entities:
+				#if entity_table_entry.is_within_constraints():
+					#entity_table_entry.base_chance = 0
 		
 		var target_door: DoorLocation
 		
@@ -78,7 +79,6 @@ func generate_grid(grid: WorldGrid) -> void:
 			target_door = RNG.random_from_list(required_doors_grid)
 		else:
 			var weighted_door_grid: Dictionary[Variant, float] = {}
-			print(door_grid)
 			for door_location: DoorLocation in door_grid:
 				var dist: float = door_location.invert().location.length() ** spread
 				weighted_door_grid[door_location] = dist
@@ -225,14 +225,15 @@ func _does_room_block_required_door(required_doors_grid: Array[DoorLocation],
 
 func _does_room_have_required_door_that_will_be_blocked(room_door_grid: Array[DoorLocation]) -> bool:
 	for room_door: DoorLocation in room_door_grid:
-		if room_door.required:
-			var matching_door_in_door_grid: bool = door_grid.any(
-				func(door_location: DoorLocation) -> bool:
-					return door_location.invert().equals(room_door)
-			)
-			if not matching_door_in_door_grid:
-				print("Room would block its own required door...")
-				return true
+		if room_door.invert().location in occupied_grid:
+			if room_door.required:
+				var matching_door_in_door_grid: bool = door_grid.any(
+					func(door_location: DoorLocation) -> bool:
+						return door_location.invert().equals(room_door)
+				)
+				if not matching_door_in_door_grid:
+					print("Room would block its own required door...")
+					return true
 	return false
 
 
