@@ -71,7 +71,6 @@ func _convert_to_wall() -> void:
 
 
 func open_door() -> void:
-	print("opening door")
 	door_open = true
 	door_material.albedo_texture = DOOR_TEXTURE_OPEN
 	

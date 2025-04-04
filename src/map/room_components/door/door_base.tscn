@@ -104,6 +104,7 @@ skeleton = NodePath("")
 shape = SubResource("BoxShape3D_r0x2q")
 
 [node name="PlayerDetector" type="Area3D" parent="."]
+collision_layer = 0
 collision_mask = 2
 monitorable = false
 
@@ -115,8 +116,8 @@ shape = SubResource("BoxShape3D_xm1qk")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.3)
 
 [node name="ObjectBlocker" type="StaticBody3D" parent="."]
-collision_layer = 4
-collision_mask = 4
+collision_layer = 64
+collision_mask = 64
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ObjectBlocker"]
 shape = SubResource("BoxShape3D_r0x2q")
