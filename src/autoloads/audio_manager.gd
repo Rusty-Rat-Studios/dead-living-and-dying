@@ -1,6 +1,6 @@
 extends Node
 
-const PITCH_MAX_STEP: float = 0.05
+const PITCH_MAX_STEP: float = 0.1
 
 
 func play_modulated(audio_player: AudioStreamPlayer3D, from_position: float = 0) -> void:
