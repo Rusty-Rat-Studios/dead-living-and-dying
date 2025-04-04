@@ -9,7 +9,7 @@ func _ready() -> void:
 
 
 func _on_item_picked_up(item_inventory: ItemInventory, _current_consumable: bool = false,
-						 _current_count: int = 0) -> void:
+						_current_count: int = 0) -> void:
 	if item_inventory is not PassiveItemInventory:
 		return
 	

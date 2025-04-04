@@ -3,9 +3,10 @@ extends Node3D
 
 # to be set by inheritors as a reference to their in-world partner version
 @export var inventory_resource: Resource
+# for keeping track of count on dropped items
+var count: int = 3
 # save starting position to reset to on game over
 @onready var starting_position: Vector3 = global_position
-var count: int = 3
 
 func _ready() -> void:
 	$PlayerDetector.body_entered.connect(_on_body_entered)
