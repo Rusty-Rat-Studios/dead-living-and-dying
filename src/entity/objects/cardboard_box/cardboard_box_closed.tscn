@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://qcl430tspnu1"]
+[gd_scene load_steps=8 format=3 uid="uid://qcl430tspnu1"]
 
 [ext_resource type="Texture2D" uid="uid://b7j05vvmkkmoh" path="res://src/entity/objects/cardboard_box/cardboard_box_closed.png" id="1_nxpag"]
+[ext_resource type="Script" uid="uid://cdwwf8lwlkhji" path="res://src/entity/objects/cardboard_box/cardboard_box.gd" id="1_wrjoj"]
 [ext_resource type="PackedScene" uid="uid://c1hur2s8mgagv" path="res://src/possessable/attack/possessable_throwable.tscn" id="2_rls8x"]
 [ext_resource type="PackedScene" uid="uid://bp0ydphecs3iv" path="res://src/common/shadow.tscn" id="3_lxs6y"]
+[ext_resource type="Script" uid="uid://cvfyn8cawdx1" path="res://src/common/audio_stream_multiple.gd" id="5_rklib"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_msvpq"]
 transparency = 2
@@ -21,6 +23,9 @@ radius = 0.6
 collision_layer = 64
 collision_mask = 69
 lock_rotation = true
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_wrjoj")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 material_override = SubResource("StandardMaterial3D_msvpq")
@@ -36,3 +41,9 @@ monitoring = true
 [node name="Shadow" parent="." instance=ExtResource("3_lxs6y")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.377279, -0.280616)
 size = Vector3(1.25, 1.25, 1.25)
+
+[node name="Hit" type="AudioStreamPlayer3D" parent="."]
+attenuation_model = 2
+script = ExtResource("5_rklib")
+audio_folder_path = "res://src/sound/objects/hit/"
+metadata/_custom_type_script = "uid://cvfyn8cawdx1"
