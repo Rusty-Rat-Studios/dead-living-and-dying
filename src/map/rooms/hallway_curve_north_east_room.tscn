@@ -19,16 +19,20 @@
 script = ExtResource("3_iysre")
 location = Vector2(0, 0)
 direction = 0
+required = true
 metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
 
 [sub_resource type="Resource" id="Resource_5iay2"]
 script = ExtResource("3_iysre")
 location = Vector2(0, 0)
 direction = 1
+required = true
 metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
 
 [sub_resource type="Resource" id="Resource_f2gtf"]
 script = ExtResource("4_ibenf")
+room_type = 0
+min_room_spawn_grid_distance = 0
 room_shape = Array[Vector2]([Vector2(0, 0)])
 possible_door_locations = Array[ExtResource("3_iysre")]([SubResource("Resource_c0xd4"), SubResource("Resource_5iay2")])
 minimap_component = ExtResource("2_dd6r4")
@@ -146,12 +150,14 @@ size = Vector3(2.975, 5, 0.1)
 script = ExtResource("3_iysre")
 location = Vector2(0, 0)
 direction = 0
+required = false
 metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
 
 [sub_resource type="Resource" id="Resource_pk4tg"]
 script = ExtResource("3_iysre")
 location = Vector2(0, 0)
 direction = 1
+required = false
 metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
 
 [node name="HallwayCurveNorthEast" type="Node3D" groups=["rooms"]]

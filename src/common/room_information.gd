@@ -5,6 +5,8 @@ extends Resource
 # would need to be crafted for every type of room (simple square, hallway, shrine, 
 # etc). This is to be used both by the WorldGrid/LevelGenerator and the room itself.
 
+@export var room_type: Room.RoomType = Room.RoomType.BASIC
+@export var min_room_spawn_grid_distance: int = 0
 @export var room_shape: Array[Vector2]
 @export var possible_door_locations: Array[DoorLocation]
 @export var minimap_component: Resource
