@@ -41,6 +41,8 @@ func generate_grid(grid: WorldGrid) -> void:
 			push_error("ERROR: Room generation failed, ¯\\_(ツ)_/¯ Ran out of doors")
 			return
 		
+		var required_doors_grid: Array[DoorLocation] = _get_required_doors_grid()
+		
 		var weighted_door_grid: Dictionary[Variant, float] = {}
 		for door_location: DoorLocation in door_grid:
 			var dist: float = door_location.invert().location.length() ** spread
@@ -68,6 +70,10 @@ func generate_grid(grid: WorldGrid) -> void:
 	
 	push_error("ERROR: Generator exceeded GENERATOR_ATTEMPTS")
 	return
+
+
+func _get_required_doors_grid() -> Array[DoorLocation]:
+	
 
 
 # This function attempts to find a valid room and room placement at a given door location

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cpudmguey5gcy"]
+[gd_scene load_steps=21 format=3 uid="uid://cpudmguey5gcy"]
 
 [ext_resource type="Script" uid="uid://bo0tyfrjfebc6" path="res://src/map/room_components/room.gd" id="1_gll72"]
 [ext_resource type="PackedScene" uid="uid://te0dpapcosk4" path="res://src/map/rooms/room_minimap/basic_room_minimap.tscn" id="2_winw3"]
@@ -22,28 +22,14 @@
 script = ExtResource("3_vb84m")
 location = Vector2(0, 0)
 direction = 0
-
-[sub_resource type="Resource" id="Resource_b0qj2"]
-script = ExtResource("3_vb84m")
-location = Vector2(0, 0)
-direction = 1
-
-[sub_resource type="Resource" id="Resource_8lq6k"]
-script = ExtResource("3_vb84m")
-location = Vector2(0, 0)
-direction = 2
-
-[sub_resource type="Resource" id="Resource_8lnup"]
-script = ExtResource("3_vb84m")
-location = Vector2(0, 0)
-direction = 3
+required = true
 
 [sub_resource type="Resource" id="Resource_hj2hw"]
 script = ExtResource("4_wkm7r")
 room_type = 0
 min_room_spawn_grid_distance = 0
 room_shape = Array[Vector2]([Vector2(0, 0), Vector2(-1, 0), Vector2(1, 0), Vector2(0, 1)])
-possible_door_locations = Array[ExtResource("3_vb84m")]([SubResource("Resource_3y6bj"), SubResource("Resource_b0qj2"), SubResource("Resource_8lq6k"), SubResource("Resource_8lnup")])
+possible_door_locations = Array[ExtResource("3_vb84m")]([SubResource("Resource_3y6bj")])
 minimap_component = ExtResource("2_winw3")
 room_icon = ExtResource("4_vb84m")
 
@@ -51,6 +37,7 @@ room_icon = ExtResource("4_vb84m")
 script = ExtResource("3_vb84m")
 location = Vector2(0, 0)
 direction = 0
+required = false
 metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
 
 [node name="OldManRoom" type="Node3D" groups=["rooms"]]
@@ -62,7 +49,6 @@ room_information = SubResource("Resource_hj2hw")
 [node name="Door" parent="." instance=ExtResource("6_k20dg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.95)
 door_location = SubResource("Resource_yemrt")
-required_door = true
 
 [node name="WallWithDoorway" parent="Door" index="5"]
 monitor_for_transparency = true

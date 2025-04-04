@@ -10,21 +10,25 @@
 script = ExtResource("3_idgj3")
 location = Vector2(0, 0)
 direction = 0
+required = false
 
 [sub_resource type="Resource" id="Resource_b0qj2"]
 script = ExtResource("3_idgj3")
 location = Vector2(0, 0)
 direction = 1
+required = false
 
 [sub_resource type="Resource" id="Resource_8lq6k"]
 script = ExtResource("3_idgj3")
 location = Vector2(0, 0)
 direction = 2
+required = false
 
 [sub_resource type="Resource" id="Resource_8lnup"]
 script = ExtResource("3_idgj3")
 location = Vector2(0, 0)
 direction = 3
+required = false
 
 [sub_resource type="Resource" id="Resource_pa0wg"]
 script = ExtResource("5_ixh1f")

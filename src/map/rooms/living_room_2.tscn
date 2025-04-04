@@ -21,18 +21,21 @@
 script = ExtResource("3_3pw7q")
 location = Vector2(0, 0)
 direction = 1
+required = false
 metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
 
 [sub_resource type="Resource" id="Resource_2tvle"]
 script = ExtResource("3_3pw7q")
 location = Vector2(0, 0)
 direction = 2
+required = false
 metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
 
 [sub_resource type="Resource" id="Resource_225de"]
 script = ExtResource("3_3pw7q")
 location = Vector2(0, 0)
 direction = 3
+required = false
 metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
 
 [sub_resource type="Resource" id="Resource_6a8mh"]
@@ -48,18 +51,21 @@ metadata/_custom_type_script = "uid://bv4f3snq7u1u2"
 script = ExtResource("3_3pw7q")
 location = Vector2(0, 0)
 direction = 1
+required = false
 metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
 
 [sub_resource type="Resource" id="Resource_c0yy7"]
 script = ExtResource("3_3pw7q")
 location = Vector2(0, 0)
 direction = 3
+required = false
 metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
 
 [sub_resource type="Resource" id="Resource_uly55"]
 script = ExtResource("3_3pw7q")
 location = Vector2(0, 0)
 direction = 2
+required = false
 metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
 
 [node name="LivingRoom2" type="Node3D" groups=["rooms"]]

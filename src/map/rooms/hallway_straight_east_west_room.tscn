@@ -16,12 +16,14 @@
 script = ExtResource("2_5egyf")
 location = Vector2(0, 0)
 direction = 1
+required = true
 metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
 
 [sub_resource type="Resource" id="Resource_gjv6k"]
 script = ExtResource("2_5egyf")
 location = Vector2(0, 0)
 direction = 3
+required = true
 metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
 
 [sub_resource type="Resource" id="Resource_kk8hp"]
@@ -45,12 +47,14 @@ size = Vector2(16, 4)
 script = ExtResource("2_5egyf")
 location = Vector2(0, 0)
 direction = 3
+required = false
 metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
 
 [sub_resource type="Resource" id="Resource_x5hmn"]
 script = ExtResource("2_5egyf")
 location = Vector2(0, 0)
 direction = 1
+required = false
 metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
 
 [node name="HallwayStraightEastWest" type="Node3D" groups=["rooms"]]
@@ -78,12 +82,10 @@ monitor_for_transparency = true
 [node name="Door" parent="." instance=ExtResource("8_wsqo5")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.95, 0, 0)
 door_location = SubResource("Resource_phrcd")
-required_door = true
 
 [node name="Door2" parent="." instance=ExtResource("8_wsqo5")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7.95, 0, 0)
 door_location = SubResource("Resource_x5hmn")
-required_door = true
 
 [node name="WallSconceForward" parent="." instance=ExtResource("10_5octf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.22089, 1.44628, -1.80732)

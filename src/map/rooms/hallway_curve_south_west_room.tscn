@@ -19,12 +19,14 @@
 script = ExtResource("3_x6o5c")
 location = Vector2(0, 0)
 direction = 3
+required = true
 metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
 
 [sub_resource type="Resource" id="Resource_8u8l4"]
 script = ExtResource("3_x6o5c")
 location = Vector2(0, 0)
 direction = 2
+required = true
 metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
 
 [sub_resource type="Resource" id="Resource_5herb"]
@@ -101,12 +103,14 @@ size = Vector3(2.83, 5, 0.1)
 script = ExtResource("3_x6o5c")
 location = Vector2(0, 0)
 direction = 2
+required = false
 metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
 
 [sub_resource type="Resource" id="Resource_7eu7n"]
 script = ExtResource("3_x6o5c")
 location = Vector2(0, 0)
 direction = 3
+required = false
 metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
 
 [node name="HallwayCurveSouthWest" type="Node3D" groups=["rooms"]]
@@ -210,7 +214,6 @@ polygon = PackedVector2Array(-1.415, 0, -1.415, 5, 1.415, 5, 1.415, 0)
 [node name="Door" parent="." instance=ExtResource("11_7eu7n")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 7.95)
 door_location = SubResource("Resource_x6o5c")
-required_door = true
 
 [node name="WallWithDoorwayX4" parent="Door" index="5"]
 monitor_for_transparency = true
@@ -218,7 +221,6 @@ monitor_for_transparency = true
 [node name="Door2" parent="." instance=ExtResource("11_7eu7n")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.95, 0, 0)
 door_location = SubResource("Resource_7eu7n")
-required_door = true
 
 [node name="PottedPlant" parent="." instance=ExtResource("12_hxh8m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.65423, 1.36037, -0.756205)

@@ -11,7 +11,6 @@ const MINIMAP_COMPONENT: Resource = preload("res://src/map/room_components/door/
 @export var wall_with_doorway: Wall
 @export var wall_scene: PackedScene
 @export var door_location: DoorLocation
-@export var required_door: bool = false
 
 var linked_door: Door = null
 var linked_room: Room = null
