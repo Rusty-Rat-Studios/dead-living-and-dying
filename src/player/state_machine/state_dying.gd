@@ -7,7 +7,17 @@ const LIGHT_OMNI_RANGE_MODIFIER: float = -1.5
 const LIGHT_SPOT_RANGE_MODIFIER: float = -3
 const NAME: String = "dying"
 
+var breathing_sfx: AudioStreamPlayer3D
+var ambience: AudioStreamPlayer3D
+
 @onready var screen_effect: TextureRect = get_node("/root/Game/UI/DyingScreenEffect")
+
+
+func init(parent: CharacterBody3D, state_machine: StateMachine) -> void:
+	super(parent, state_machine)
+	
+	breathing_sfx = _parent.get_node("Sounds/Breathing")
+	ambience = _parent.get_node("Sounds/Ambience")
 
 
 func enter() -> void:
@@ -30,6 +40,8 @@ func enter() -> void:
 	_parent.stunbox.stun()
 	# enable "dying" screen effect
 	screen_effect.enable()
+	# enable random breathing sounds
+	breathing_sfx.enable()
 
 
 func exit() -> void:
@@ -40,6 +52,7 @@ func exit() -> void:
 	_parent.stunbox.restore_instantly()
 	
 	screen_effect.disable()
+	breathing_sfx.disable()
 
 
 func process_state() -> void:

@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://dxnykiuxu0oui" path="res://src/ui/resources/how_to_play_possession2.png" id="5_8bc4e"]
 [ext_resource type="Theme" uid="uid://casdoijkjemc2" path="res://src/ui/resources/menu_theme.tres" id="5_8m8i8"]
 
-
 [node name="HowToPlay" type="Window"]
 gui_embed_subwindows = true
 initial_position = 2
