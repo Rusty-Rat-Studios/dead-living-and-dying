@@ -1,6 +1,8 @@
 class_name WorldGrid
 extends Node3D
 
+signal finished_generation
+
 # This class is the authority on everything room related. It handles instantiation, 
 # initialization, and storing the location of the rooms. Other classes call this
 # class to ask about the state of the WorldGrid.
@@ -19,7 +21,6 @@ var room_graph: Dictionary[Room, Array]
 
 func _ready() -> void:
 	setup_grid()
-	build_room_graph()
 
 
 func setup_grid() -> void:
@@ -35,6 +36,8 @@ func setup_grid() -> void:
 		print("Spawned a total of ", number_of_rooms, " rooms")
 	_init_all_rooms()
 	_spawn_entities()
+	build_room_graph()
+	finished_generation.emit()
 
 
 func add_room(room: Room, grid_location: Vector2, add_to_tree: bool = true) -> void:
@@ -152,6 +155,7 @@ func _hash_vector2(vector: Vector2) -> PackedByteArray:
 
 # constructs a graph (nodes == rooms, edges == connected rooms/doors) of the map
 func build_room_graph() -> void:
+	room_graph.clear()
 	for room_id: PackedByteArray in room_map.keys():
 		if not room_graph.has(room_map.retrieve_with_hash(room_id)):
 			# add each room as a key in the map
