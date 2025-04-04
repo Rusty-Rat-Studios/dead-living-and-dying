@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bbow7knip3g6g"]
+[gd_scene load_steps=33 format=3 uid="uid://bbow7knip3g6g"]
 
 [ext_resource type="Script" uid="uid://bvc3eclccrf0p" path="res://src/player/player.gd" id="1_ndccg"]
 [ext_resource type="SpriteFrames" uid="uid://re7p8fjt08rp" path="res://src/player/player_sprite_frames_torso.tres" id="2_cwolq"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://b5w71c32y1a4n" path="res://src/player/footsteps.gd" id="14_wlj80"]
 [ext_resource type="AudioStream" uid="uid://cr828h53a7hdv" path="res://src/sound/sfx/caretaker-scream.mp3" id="16_6bm8s"]
 [ext_resource type="AudioStream" uid="uid://rfjb0o14heht" path="res://src/sound/sfx/caretaker_revive.mp3" id="17_hrerp"]
+[ext_resource type="Script" uid="uid://co7i5mnv4btpu" path="res://src/player/ambience.gd" id="18_oyld2"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uy1l0"]
 radius = 0.4
@@ -216,4 +217,5 @@ stream = ExtResource("16_6bm8s")
 [node name="Revive" type="AudioStreamPlayer3D" parent="Sounds" groups=["sfx"]]
 stream = ExtResource("17_hrerp")
 
-[node name="DeathAmbience" type="AudioStreamPlayer3D" parent="Sounds" groups=["ambient"]]
+[node name="Ambience" type="AudioStreamPlayer3D" parent="Sounds" groups=["ambient"]]
+script = ExtResource("18_oyld2")

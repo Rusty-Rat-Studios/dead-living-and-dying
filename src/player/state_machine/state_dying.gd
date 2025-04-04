@@ -8,6 +8,7 @@ const LIGHT_SPOT_RANGE_MODIFIER: float = -3
 const NAME: String = "dying"
 
 var breathing_sfx: AudioStreamPlayer3D
+var ambience: AudioStreamPlayer3D
 
 @onready var screen_effect: TextureRect = get_node("/root/Game/UI/DyingScreenEffect")
 
@@ -16,6 +17,7 @@ func init(parent: CharacterBody3D, state_machine: StateMachine) -> void:
 	super(parent, state_machine)
 	
 	breathing_sfx = _parent.get_node("Sounds/Breathing")
+	ambience = _parent.get_node("Sounds/Ambience")
 
 
 func enter() -> void:
