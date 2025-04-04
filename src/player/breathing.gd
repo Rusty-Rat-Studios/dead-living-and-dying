@@ -61,7 +61,7 @@ func play_random_sound() -> void:
 	var random_clip: AudioStream = get_random_audio_clip()
 	if random_clip != null:
 		stream = random_clip
-		play()
+		AudioManager.play_modulated(self)
 
 
 func _on_delay_timer_timeout() -> void:
