@@ -33,7 +33,9 @@ func generate_grid(grid: WorldGrid) -> void:
 	var fails: int = 0
 	
 	while(fails < GENERATOR_ATTEMPTS):
-		if room_table.are_constraints_met() and grid.number_of_rooms >= min_rooms:
+		var required_doors_grid: Array[DoorLocation] = _get_required_doors_grid()
+		
+		if room_table.are_constraints_met() and grid.number_of_rooms >= min_rooms and required_doors_grid.size() == 0:
 			print("All constraints met. Room generation complete")
 			return
 		
@@ -41,14 +43,17 @@ func generate_grid(grid: WorldGrid) -> void:
 			push_error("ERROR: Room generation failed, ¯\\_(ツ)_/¯ Ran out of doors")
 			return
 		
-		var required_doors_grid: Array[DoorLocation] = _get_required_doors_grid()
+		var target_door: DoorLocation
 		
-		var weighted_door_grid: Dictionary[Variant, float] = {}
-		for door_location: DoorLocation in door_grid:
-			var dist: float = door_location.invert().location.length() ** spread
-			weighted_door_grid[door_location] = dist
+		if required_doors_grid.size() > 0:
+			target_door = RNG.random_from_list(required_doors_grid)
+		else:
+			var weighted_door_grid: Dictionary[Variant, float] = {}
+			for door_location: DoorLocation in door_grid:
+				var dist: float = door_location.invert().location.length() ** spread
+				weighted_door_grid[door_location] = dist
+				target_door = RNG.weighted_random(weighted_door_grid)
 		
-		var target_door: DoorLocation = RNG.weighted_random(weighted_door_grid)
 		var room_door_dir: DoorLocation.Direction = target_door.invert().direction # Direction of required connecting door
 		
 		print("Selected door %s, needing direction %s" % [target_door.string(), DoorLocation.Direction.keys()[room_door_dir]])
@@ -72,8 +77,12 @@ func generate_grid(grid: WorldGrid) -> void:
 	return
 
 
+# Returns a list of DoorLocations with the 'required' flag set
 func _get_required_doors_grid() -> Array[DoorLocation]:
-	
+	return door_grid.filter(
+		func(door_location: DoorLocation) -> bool:
+			return door_location.required
+	)
 
 
 # This function attempts to find a valid room and room placement at a given door location
@@ -123,6 +132,7 @@ func _get_valid_room(target_door: DoorLocation, room_door_dir: DoorLocation.Dire
 # If no doors are valid, returns { 'invalid': true }
 func _get_valid_room_placement_at_doors(room_information: RoomInformation, room_location: Vector2, 
 	valid_room_doors: Array[DoorLocation]) -> Dictionary[String, Variant]:
+	var required_doors_grid: Array[DoorLocation] = _get_required_doors_grid()
 	while valid_room_doors.size() > 0:
 		var random_valid_room_door: DoorLocation = RNG.random_from_list(valid_room_doors)
 		valid_room_doors.erase(random_valid_room_door)
@@ -134,6 +144,8 @@ func _get_valid_room_placement_at_doors(room_information: RoomInformation, room_
 		var room_door_grid: Array[DoorLocation]
 		room_door_grid.assign(room_occupied_and_door_grids.get('door_grid'))
 		if _does_room_overlap_existing(room_occupied_grid):
+			continue
+		if _does_room_block_required_door(required_doors_grid, room_occupied_grid, room_door_grid):
 			continue
 		return {
 			'room_pos': room_pos,
@@ -154,3 +166,17 @@ func _get_door_locations_facing(room_information: RoomInformation, dir: DoorLoca
 # Returns true if room_occupied_grid overlaps any grid squares in occupied_grid
 func _does_room_overlap_existing(room_occupied_grid: Array[Vector2]) -> bool:
 	return room_occupied_grid.any(func(value: Vector2) -> bool: return value in occupied_grid)
+
+
+# Return true if there is a door in required_doors_grid which would connect to
+# a location in room_occupied_grid except there is no connecting door in
+# room_door_grid. Otherwise returns false
+func _does_room_block_required_door(required_doors_grid: Array[DoorLocation], 
+	room_occupied_grid: Array[Vector2], room_door_grid: Array[DoorLocation]) -> bool:
+	for required_door: DoorLocation in required_doors_grid:
+		var connecting_door: DoorLocation = required_door.invert()
+		if connecting_door.location in room_occupied_grid:
+			if connecting_door not in room_door_grid:
+				print("Room would block requried_door...")
+				return true
+	return false
