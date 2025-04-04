@@ -17,7 +17,7 @@ backlight_texture = ExtResource("1_wsia0")
 size = Vector3(3.26, 0.455, 0.285)
 
 [node name="SwordProjectile" type="RigidBody3D"]
-collision_layer = 4
+collision_layer = 36
 collision_mask = 7
 axis_lock_angular_x = true
 axis_lock_angular_z = true
