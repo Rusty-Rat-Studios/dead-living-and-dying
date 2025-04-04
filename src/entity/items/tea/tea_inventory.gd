@@ -1,6 +1,6 @@
 extends PassiveItemInventory
 
-const SPEED_MODIFIER: float = 0.65
+const SPEED_MODIFIER: float = 0.4
 const NAME: String = "tea"
 
 
