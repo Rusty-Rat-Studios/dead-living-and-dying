@@ -13,26 +13,30 @@
 script = ExtResource("3_d4j16")
 location = Vector2(0, 0)
 direction = 0
+required = false
 
 [sub_resource type="Resource" id="Resource_b0qj2"]
 script = ExtResource("3_d4j16")
 location = Vector2(0, 0)
 direction = 1
+required = false
 
 [sub_resource type="Resource" id="Resource_8lq6k"]
 script = ExtResource("3_d4j16")
 location = Vector2(0, 0)
 direction = 2
+required = false
 
 [sub_resource type="Resource" id="Resource_8lnup"]
 script = ExtResource("3_d4j16")
 location = Vector2(0, 0)
 direction = 3
+required = false
 
 [sub_resource type="Resource" id="Resource_aau2g"]
 script = ExtResource("5_8vfoq")
 room_type = 1
-min_room_spawn_grid_distance = 7
+min_room_spawn_grid_distance = 3
 room_shape = Array[Vector2]([Vector2(0, 0)])
 possible_door_locations = Array[ExtResource("3_d4j16")]([SubResource("Resource_3y6bj"), SubResource("Resource_b0qj2"), SubResource("Resource_8lq6k"), SubResource("Resource_8lnup")])
 minimap_component = ExtResource("2_wgk6c")
