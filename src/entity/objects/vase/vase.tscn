@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cgof4qu7gkleu"]
+[gd_scene load_steps=8 format=3 uid="uid://cgof4qu7gkleu"]
 
 [ext_resource type="Script" uid="uid://doulwg8qih5gk" path="res://src/entity/objects/vase/vase.gd" id="1_1u4px"]
 [ext_resource type="Texture2D" uid="uid://w78xo3qyqtrr" path="res://src/entity/objects/vase/vase.png" id="1_88eoo"]
 [ext_resource type="PackedScene" uid="uid://c1hur2s8mgagv" path="res://src/possessable/attack/possessable_throwable.tscn" id="2_1u4px"]
 [ext_resource type="PackedScene" uid="uid://bp0ydphecs3iv" path="res://src/common/shadow.tscn" id="3_4whso"]
+[ext_resource type="AudioStream" uid="uid://dhn3rgrum6go1" path="res://src/sound/objects/glass_break.mp3" id="5_4whso"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3csb0"]
 transparency = 2
@@ -42,3 +43,6 @@ size = Vector3(1.25, 1.25, 1.25)
 
 [node name="BreakAfterThrowTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="Break" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_4whso")
