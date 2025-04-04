@@ -19,4 +19,3 @@ texture = ExtResource("1_jpt7q")
 script = ExtResource("2_tux6f")
 
 [node name="PossessableRanged" parent="." instance=ExtResource("1_y53pr")]
-max_attack_amount = -1
