@@ -103,6 +103,8 @@ particles_anim_loop = false
 material = SubResource("StandardMaterial3D_386sf")
 
 [node name="Shrine" type="StaticBody3D"]
+collision_layer = 4
+collision_mask = 4
 script = ExtResource("1_fbitt")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -114,7 +116,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.5)
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.35, 0)
-billboard = 2
 shaded = true
 texture = ExtResource("3_fitia")
 script = ExtResource("4_hscdd")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://ohg7gvmagx2q"]
+[gd_scene load_steps=36 format=3 uid="uid://ohg7gvmagx2q"]
 
 [ext_resource type="Script" uid="uid://bo0tyfrjfebc6" path="res://src/map/room_components/room.gd" id="1_afm0g"]
 [ext_resource type="PackedScene" uid="uid://b4teav5cf7dm4" path="res://src/map/room_components/floor/floor_collision_shape.tscn" id="2_i3sfy"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://c6fjrr2bcg8tw" path="res://src/map/tileset-dhassa/wall2.png" id="7_lrr2c"]
 [ext_resource type="PackedScene" uid="uid://bjca8n1kvkwg0" path="res://src/map/room_components/door/door_x4.tscn" id="8_uctod"]
 [ext_resource type="Script" uid="uid://dqhrw6rxew3fa" path="res://src/common/door_location.gd" id="9_mfrt5"]
+[ext_resource type="PackedScene" uid="uid://ba8noy4dlieb0" path="res://src/entity/objects/candelabra/candelabra.tscn" id="12_8cgwk"]
 
 [sub_resource type="Resource" id="Resource_mfrt5"]
 script = ExtResource("9_mfrt5")
@@ -258,6 +259,9 @@ monitor_for_transparency = true
 [node name="Door2" parent="." instance=ExtResource("8_uctod")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.95, 0, 0)
 door_location = SubResource("Resource_c5207")
+
+[node name="Candelabra" parent="." instance=ExtResource("12_8cgwk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.44485, 1.19401, -2.38931)
 
 [editable path="Floor/hallway_L_curve_floor_rotated"]
 [editable path="Wall"]

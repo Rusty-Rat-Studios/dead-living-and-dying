@@ -1,0 +1,56 @@
+[gd_scene load_steps=9 format=3 uid="uid://tkfqwci150w5"]
+
+[ext_resource type="Script" uid="uid://bachecx3avsu4" path="res://src/possessable/attack/possessable_ranged_object.gd" id="1_83afa"]
+[ext_resource type="Texture2D" uid="uid://d1fyky18cvxpq" path="res://src/entity/objects/bookshelf/bookshelf-empty.png" id="1_u22rb"]
+[ext_resource type="Texture2D" uid="uid://dbiq830ea3kqm" path="res://src/entity/objects/bookshelf/bookshelf-full.png" id="2_kuhdl"]
+[ext_resource type="PackedScene" uid="uid://bfmkrask6gxl3" path="res://src/possessable/attack/possessable_ranged.tscn" id="4_0yrja"]
+[ext_resource type="PackedScene" uid="uid://mc45ycabkv3i" path="res://src/entity/objects/bookshelf/book_projectile.tscn" id="5_0yrja"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kuhdl"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("1_u22rb")
+backlight_enabled = true
+backlight = Color(1, 1, 1, 1)
+backlight_texture = ExtResource("1_u22rb")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ohwl"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("2_kuhdl")
+backlight_enabled = true
+backlight = Color(1, 1, 1, 1)
+backlight_texture = ExtResource("2_kuhdl")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0ohwl"]
+size = Vector3(2.745, 2.72, 0.65)
+
+[node name="Bookshelf" type="StaticBody3D" node_paths=PackedStringArray("full_sprite", "empty_sprite")]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_83afa")
+full_sprite = NodePath("Sprite3D2")
+empty_sprite = NodePath("Sprite3D")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+visible = false
+material_override = SubResource("StandardMaterial3D_kuhdl")
+cast_shadow = 0
+texture = ExtResource("1_u22rb")
+
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_0ohwl")
+cast_shadow = 0
+texture = ExtResource("2_kuhdl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.035, 0, -0.115)
+shape = SubResource("BoxShape3D_0ohwl")
+
+[node name="PossessableRanged" parent="." instance=ExtResource("4_0yrja")]
+projectile_scene = ExtResource("5_0yrja")
+max_attack_amount = 3

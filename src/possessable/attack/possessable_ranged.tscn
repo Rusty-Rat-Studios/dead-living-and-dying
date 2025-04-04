@@ -1,14 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://bfmkrask6gxl3"]
+[gd_scene load_steps=5 format=3 uid="uid://bfmkrask6gxl3"]
 
 [ext_resource type="PackedScene" uid="uid://custksxq8jvgd" path="res://src/possessable/attack/possessable_attack.tscn" id="1_hp16e"]
 [ext_resource type="Script" uid="uid://bhci020j8hkra" path="res://src/possessable/attack/possessable_ranged.gd" id="2_c086f"]
-
+[ext_resource type="PackedScene" uid="uid://coj6qdyyipcvi" path="res://src/possessable/attack/projectile.tscn" id="3_mu4hm"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jxkqj"]
 radius = 8.0
 
 [node name="PossessableRanged" instance=ExtResource("1_hp16e")]
 script = ExtResource("2_c086f")
+projectile_scene = ExtResource("3_mu4hm")
+max_attack_amount = -1
 
 [node name="CollisionShape3D" parent="AttackRange" index="0"]
 shape = SubResource("SphereShape3D_jxkqj")

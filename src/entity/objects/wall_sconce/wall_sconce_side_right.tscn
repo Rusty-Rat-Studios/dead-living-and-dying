@@ -4,7 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://dqd6j73pev2vo" path="res://src/entity/objects/wall_sconce/wall_sconce_side.png" id="2_0h4p3"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i5du1"]
-transparency = 1
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
 albedo_texture = ExtResource("2_0h4p3")
 backlight_enabled = true
 backlight = Color(1, 1, 1, 1)
@@ -77,12 +79,14 @@ size = Vector2(0.1, 0.1)
 [node name="WallSconceSide" type="Node3D"]
 
 [node name="Ignitable" parent="." node_paths=PackedStringArray("player_detector", "fire") instance=ExtResource("1_kw2xp")]
+begin_lit_chance = 0.5
 player_detector = NodePath("../Area3D")
 fire = NodePath("../FireParticles")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(0.565, 0, 0, 0, 0.565, 0, 0, 0, 0.565, 0, 1.00162, 0)
 material_override = SubResource("StandardMaterial3D_i5du1")
+cast_shadow = 0
 texture = ExtResource("2_0h4p3")
 
 [node name="Area3D" type="Area3D" parent="."]

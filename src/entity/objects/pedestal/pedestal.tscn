@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://bp05mcvqsk6vw"]
+
+[ext_resource type="Texture2D" uid="uid://u8ixpalnibbk" path="res://src/entity/objects/pedestal/pedestal.png" id="1_vtgli"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rgxif"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("1_vtgli")
+backlight_enabled = true
+backlight = Color(1, 1, 1, 1)
+backlight_texture = ExtResource("1_vtgli")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rsqse"]
+size = Vector3(2.115, 1, 0.34)
+
+[node name="Pedestal" type="StaticBody3D"]
+collision_layer = 4
+collision_mask = 4
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+material_override = SubResource("StandardMaterial3D_rgxif")
+cast_shadow = 0
+texture = ExtResource("1_vtgli")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.28, -0.065)
+shape = SubResource("BoxShape3D_rsqse")

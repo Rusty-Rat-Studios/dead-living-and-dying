@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dskoq14673ixv"]
+[gd_scene load_steps=32 format=3 uid="uid://dskoq14673ixv"]
 
 [ext_resource type="Script" uid="uid://bo0tyfrjfebc6" path="res://src/map/room_components/room.gd" id="1_m24bv"]
 [ext_resource type="PackedScene" uid="uid://bwr5n122fnh00" path="res://src/map/rooms/room_minimap/hallway_curve_south_west_room_minimap.tscn" id="2_7eu7n"]
@@ -11,6 +11,9 @@
 [ext_resource type="Shader" uid="uid://bgy36jmkglwva" path="res://src/map/room_components/wall/transparent_wall_shader.gdshader" id="9_qnben"]
 [ext_resource type="Texture2D" uid="uid://c6fjrr2bcg8tw" path="res://src/map/tileset-dhassa/wall2.png" id="10_vsqhh"]
 [ext_resource type="PackedScene" uid="uid://bjca8n1kvkwg0" path="res://src/map/room_components/door/door_x4.tscn" id="11_7eu7n"]
+[ext_resource type="PackedScene" uid="uid://bhpg6bla1mtvu" path="res://src/entity/objects/potted_plant/potted_plant.tscn" id="12_hxh8m"]
+[ext_resource type="PackedScene" uid="uid://bmevu5yvsxttw" path="res://src/entity/spawner.tscn" id="13_g4tdd"]
+[ext_resource type="PackedScene" uid="uid://c3wmqi8pl2yas" path="res://src/entity/objects/wall_sconce/wall_sconce_forward.tscn" id="14_g4tdd"]
 
 [sub_resource type="Resource" id="Resource_ncutf"]
 script = ExtResource("3_x6o5c")
@@ -212,6 +215,15 @@ monitor_for_transparency = true
 [node name="Door2" parent="." instance=ExtResource("11_7eu7n")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.95, 0, 0)
 door_location = SubResource("Resource_7eu7n")
+
+[node name="PottedPlant" parent="." instance=ExtResource("12_hxh8m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.65423, 1.36037, -0.756205)
+
+[node name="Spawner" parent="." instance=ExtResource("13_g4tdd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.815316, 1.9991)
+
+[node name="WallSconceForward" parent="." instance=ExtResource("14_g4tdd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.51744, 1.43263, -1.91637)
 
 [editable path="Floor/hallway_L_curve_floor"]
 [editable path="Wall"]

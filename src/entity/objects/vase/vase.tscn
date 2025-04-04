@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://cgof4qu7gkleu"]
+
+[ext_resource type="Script" uid="uid://doulwg8qih5gk" path="res://src/entity/objects/vase/vase.gd" id="1_1u4px"]
+[ext_resource type="Texture2D" uid="uid://w78xo3qyqtrr" path="res://src/entity/objects/vase/vase.png" id="1_88eoo"]
+[ext_resource type="PackedScene" uid="uid://c1hur2s8mgagv" path="res://src/possessable/attack/possessable_throwable.tscn" id="2_1u4px"]
+[ext_resource type="PackedScene" uid="uid://bp0ydphecs3iv" path="res://src/common/shadow.tscn" id="3_4whso"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3csb0"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("1_88eoo")
+backlight_enabled = true
+backlight = Color(1, 1, 1, 1)
+backlight_texture = ExtResource("1_88eoo")
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_emalr"]
+height = 1.485
+radius = 0.34
+
+[node name="Vase" type="RigidBody3D"]
+collision_layer = 64
+collision_mask = 69
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+script = ExtResource("1_1u4px")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+material_override = SubResource("StandardMaterial3D_3csb0")
+cast_shadow = 0
+texture = ExtResource("1_88eoo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.055, 0, 0)
+shape = SubResource("CylinderShape3D_emalr")
+
+[node name="Throwable" parent="." instance=ExtResource("2_1u4px")]
+
+[node name="Shadow" parent="." instance=ExtResource("3_4whso")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.373734, 0)
+size = Vector3(1.25, 1.25, 1.25)
+
+[node name="BreakAfterThrowTimer" type="Timer" parent="."]
+one_shot = true

@@ -17,6 +17,8 @@ backlight_texture = ExtResource("1_11kil")
 size = Vector3(2.44, 2.185, 0.83)
 
 [node name="Table" type="StaticBody3D"]
+collision_layer = 4
+collision_mask = 4
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(1.365, 0, 0, 0, 1.365, 0, 0, 0, 1.365, 0, 0, 0)

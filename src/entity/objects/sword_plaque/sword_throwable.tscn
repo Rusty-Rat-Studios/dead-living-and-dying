@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://brn1l5npq2edm"]
+
+[ext_resource type="Texture2D" uid="uid://bhpoxv3r1b1gp" path="res://src/entity/objects/sword_plaque/sword.png" id="1_7t23y"]
+[ext_resource type="PackedScene" uid="uid://c1hur2s8mgagv" path="res://src/possessable/attack/possessable_throwable.tscn" id="2_t8oeu"]
+[ext_resource type="PackedScene" uid="uid://bp0ydphecs3iv" path="res://src/common/shadow.tscn" id="3_t8oeu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wakb0"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("1_7t23y")
+backlight_enabled = true
+backlight = Color(1, 1, 1, 1)
+backlight_texture = ExtResource("1_7t23y")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_c873p"]
+size = Vector3(3.26, 0.455, 0.285)
+
+[node name="SwordThrowable" type="RigidBody3D"]
+collision_layer = 64
+collision_mask = 69
+axis_lock_angular_x = true
+axis_lock_angular_z = true
+max_contacts_reported = 1
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(-2.18557e-08, -0.5, -2.18557e-08, 0, -2.18557e-08, 0.5, -0.5, 2.18557e-08, 9.55343e-16, 0.085, 0, 0)
+material_override = SubResource("StandardMaterial3D_wakb0")
+cast_shadow = 0
+texture = ExtResource("1_7t23y")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-2.18557e-08, -0.5, -2.18557e-08, 0, -2.18557e-08, 0.5, -0.5, 2.18557e-08, 9.55343e-16, -0.0171488, 0.0036888, 0.153935)
+shape = SubResource("BoxShape3D_c873p")
+
+[node name="Throwable" parent="." instance=ExtResource("2_t8oeu")]
+
+[node name="Shadow" parent="." instance=ExtResource("3_t8oeu")]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)

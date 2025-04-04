@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://qny2sxnr0u8t" path="res://src/possessable/attack/projectile.gd" id="1_is2ed"]
 
-
 [sub_resource type="SphereShape3D" id="SphereShape3D_2ag17"]
 radius = 0.1
 
@@ -11,7 +10,7 @@ radius = 0.1
 height = 0.2
 
 [node name="Projectile" type="RigidBody3D"]
-collision_layer = 4
+collision_layer = 160
 collision_mask = 7
 gravity_scale = 0.0
 contact_monitor = true

@@ -12,9 +12,9 @@ enum Stats {
 	AREA_SIZE
 }
 
-# player base stats
+# player base statsa
 # additive
-const BASE_SPEED: float = 4.5
+const BASE_SPEED: float = 3.8
 
 # multipicative
 const BASE_COOLDOWN_REDUCTION: float = 1.0

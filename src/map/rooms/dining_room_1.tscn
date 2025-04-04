@@ -1,0 +1,83 @@
+[gd_scene load_steps=8 format=3 uid="uid://b8abpivk4v3s2"]
+
+[ext_resource type="PackedScene" uid="uid://dh8q75xrlxeaa" path="res://src/map/rooms/basic_room.tscn" id="1_bcvw5"]
+[ext_resource type="PackedScene" uid="uid://duyse8sywgror" path="res://src/entity/objects/table/table.tscn" id="2_3i7oo"]
+[ext_resource type="PackedScene" uid="uid://bjw1p41vnaeve" path="res://src/entity/objects/table/table_and_chairs.tscn" id="3_g22gl"]
+[ext_resource type="PackedScene" uid="uid://bmevu5yvsxttw" path="res://src/entity/spawner.tscn" id="4_vth8b"]
+[ext_resource type="PackedScene" uid="uid://dwfaytjbaixjo" path="res://src/entity/objects/candle_holder/candle_holder.tscn" id="5_3i7oo"]
+[ext_resource type="PackedScene" uid="uid://3gsxuhfeo5qs" path="res://src/entity/objects/wall_painting/wall_painting.tscn" id="6_g22gl"]
+[ext_resource type="PackedScene" uid="uid://cgof4qu7gkleu" path="res://src/entity/objects/vase/vase.tscn" id="7_vth8b"]
+
+[node name="DiningRoom1" instance=ExtResource("1_bcvw5")]
+
+[node name="Table" parent="." index="11" instance=ExtResource("2_3i7oo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.62425, 1.10831, -0.10456)
+
+[node name="Table2" parent="." index="12" instance=ExtResource("2_3i7oo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.44679, 1.10831, -5.13361)
+
+[node name="Table4" parent="." index="13" instance=ExtResource("2_3i7oo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.06252, 1.10831, 3.72291)
+
+[node name="Table5" parent="." index="14" instance=ExtResource("2_3i7oo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.67401, 1.10831, 5.66468)
+
+[node name="TableAndChairs" parent="." index="15" instance=ExtResource("3_g22gl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.54203, 1.31631, -4.05074)
+
+[node name="TableAndChairs2" parent="." index="16" instance=ExtResource("3_g22gl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.572418, 1.31631, 2.26859)
+
+[node name="TableAndChairs3" parent="." index="17" instance=ExtResource("3_g22gl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.45319, 1.31631, -0.457681)
+
+[node name="TableAndChairs4" parent="." index="18" instance=ExtResource("3_g22gl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8845, 1.31631, 3.72313)
+
+[node name="Spawner" parent="." index="19" instance=ExtResource("4_vth8b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.53113, 1.07217, 1.04774)
+
+[node name="Spawner2" parent="." index="20" instance=ExtResource("4_vth8b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.58895, 1.07217, -3.62206)
+
+[node name="CandleHolder" parent="." index="21" instance=ExtResource("5_3i7oo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.464527, 2.1166, 2.34569)
+
+[node name="CandleHolder2" parent="." index="22" instance=ExtResource("5_3i7oo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.82892, 2.1166, 3.83056)
+
+[node name="CandleHolder3" parent="." index="23" instance=ExtResource("5_3i7oo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.65933, 2.00165, 5.68796)
+
+[node name="CandleHolder4" parent="." index="24" instance=ExtResource("5_3i7oo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7241, 2.1166, 3.96145)
+
+[node name="CandleHolder5" parent="." index="25" instance=ExtResource("5_3i7oo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.52632, 2.1166, -0.43167)
+
+[node name="CandleHolder7" parent="." index="26" instance=ExtResource("5_3i7oo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.33207, 1.95935, -5.08705)
+
+[node name="CandleHolder8" parent="." index="27" instance=ExtResource("5_3i7oo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.54027, 2.10308, -4.00901)
+
+[node name="CandleHolder9" parent="." index="28" instance=ExtResource("5_3i7oo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.54027, 1.95215, -0.0715622)
+
+[node name="WallPainting" parent="." index="29" instance=ExtResource("6_g22gl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.18626, 1.98945, -7.89013)
+
+[node name="WallPainting2" parent="." index="30" instance=ExtResource("6_g22gl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.20222, 1.98945, -7.89013)
+
+[node name="Vase" parent="." index="31" instance=ExtResource("7_vth8b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.59583, 0.711161, 5.8104)
+
+[node name="Vase2" parent="." index="32" instance=ExtResource("7_vth8b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.84438, 0.71116, -3.3545)
+
+[node name="Vase3" parent="." index="33" instance=ExtResource("7_vth8b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.10666, 0.71116, -6.76003)
+
+[editable path="Door"]
+[editable path="Door4"]

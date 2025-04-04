@@ -120,7 +120,10 @@ func modulate_color(c: Color) -> void:
 
 
 func get_key_item_or_null() -> KeyItemInventory:
-	return get_node_or_null("Inventory/KeyItemInventory")
+	for inventory_item: Node3D in get_node("Inventory").get_children():
+		if inventory_item is KeyItemInventory:
+			return inventory_item
+	return null
 
 
 func _on_item_picked_up(item: ItemInventory, current_consumable: bool = false) -> void:

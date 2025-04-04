@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="EntityTable" load_steps=5 format=3 uid="uid://bd77sq4oqgbc3"]
+
+[ext_resource type="Script" uid="uid://dt04phs8a5k3h" path="res://src/entity/entity_table_entry.gd" id="1_8crvv"]
+[ext_resource type="PackedScene" uid="uid://b58p4qke66th5" path="res://src/entity/ghost/boss/ghost_boss.tscn" id="2_d16ks"]
+[ext_resource type="Script" uid="uid://caxs80c62syve" path="res://src/entity/entity_table.gd" id="2_yorrp"]
+
+[sub_resource type="Resource" id="Resource_2xih2"]
+script = ExtResource("1_8crvv")
+entity = ExtResource("2_d16ks")
+base_chance = 1.0
+chance_change = 0.0
+max_spawn = -1
+min_spawn = -1
+metadata/_custom_type_script = "uid://dt04phs8a5k3h"
+
+[resource]
+script = ExtResource("2_yorrp")
+entities = Array[ExtResource("1_8crvv")]([SubResource("Resource_2xih2")])
+metadata/_custom_type_script = "uid://caxs80c62syve"

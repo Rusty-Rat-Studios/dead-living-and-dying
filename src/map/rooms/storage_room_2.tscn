@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=3 uid="uid://bvcdnl6aj02ei"]
+
+[ext_resource type="PackedScene" uid="uid://dh8q75xrlxeaa" path="res://src/map/rooms/basic_room.tscn" id="1_6f0gm"]
+[ext_resource type="PackedScene" uid="uid://3gsxuhfeo5qs" path="res://src/entity/objects/wall_painting/wall_painting.tscn" id="2_5v773"]
+[ext_resource type="PackedScene" uid="uid://qcl430tspnu1" path="res://src/entity/objects/cardboard_box/cardboard_box_closed.tscn" id="3_ws5qg"]
+[ext_resource type="PackedScene" uid="uid://dtv7i6ecsmj0f" path="res://src/entity/objects/cardboard_box/cardboard_boxes_stacked.tscn" id="4_mwl76"]
+[ext_resource type="PackedScene" uid="uid://bmyu4uefeccim" path="res://src/entity/objects/cardboard_box/cardboard_box_open.tscn" id="5_oqv26"]
+[ext_resource type="PackedScene" uid="uid://bmevu5yvsxttw" path="res://src/entity/spawner.tscn" id="6_ywu4y"]
+
+[node name="StorageRoom2" instance=ExtResource("1_6f0gm")]
+
+[node name="WallPainting" parent="." index="11" instance=ExtResource("2_5v773")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.87063, 2.03325, -5.38615)
+
+[node name="WallPainting2" parent="." index="12" instance=ExtResource("2_5v773")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.87063, 2.03325, 5.48853)
+
+[node name="WallPainting3" parent="." index="13" instance=ExtResource("2_5v773")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7.89186, 2.03325, 5.48842)
+
+[node name="WallPainting4" parent="." index="14" instance=ExtResource("2_5v773")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7.85632, 2.03325, -5.38604)
+
+[node name="CardboardBoxClosed" parent="." index="15" instance=ExtResource("3_ws5qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.49957, 0.817996, -2.52286)
+
+[node name="CardboardBoxClosed2" parent="." index="16" instance=ExtResource("3_ws5qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4439, 0.817995, 1.42618)
+
+[node name="CardboardBoxClosed3" parent="." index="17" instance=ExtResource("3_ws5qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.92167, 0.817995, 2.96341)
+
+[node name="CardboardBoxClosed4" parent="." index="18" instance=ExtResource("3_ws5qg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.92167, 0.817995, -0.0365884)
+
+[node name="CardboardBoxesStacked" parent="." index="19" instance=ExtResource("4_mwl76")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.43086, 1.36023, -4.32042)
+
+[node name="CardboardBoxesStacked2" parent="." index="20" instance=ExtResource("4_mwl76")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.285068, 1.36023, -0.131806)
+
+[node name="CardboardBoxesStacked3" parent="." index="21" instance=ExtResource("4_mwl76")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.53667, 1.36023, 4.32809)
+
+[node name="CardboardBoxOpen" parent="." index="22" instance=ExtResource("5_oqv26")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.63515, 0.761082, -5.54174)
+
+[node name="CardboardBoxOpen2" parent="." index="23" instance=ExtResource("5_oqv26")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.76549, 0.761083, 3.98857)
+
+[node name="CardboardBoxOpen3" parent="." index="24" instance=ExtResource("5_oqv26")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.929097, 0.761083, 4.1725)
+
+[node name="CardboardBoxOpen4" parent="." index="25" instance=ExtResource("5_oqv26")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.01912, 0.761083, -1.86497)
+
+[node name="CardboardBoxOpen5" parent="." index="26" instance=ExtResource("5_oqv26")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.88928, 0.761083, 6.27256)
+
+[node name="CardboardBoxOpen6" parent="." index="27" instance=ExtResource("5_oqv26")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.02863, 0.761083, 6.65149)
+
+[node name="Spawner" parent="." index="28" instance=ExtResource("6_ywu4y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.568742, 1.18301, -4.26579)
+
+[node name="Spawner2" parent="." index="29" instance=ExtResource("6_ywu4y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.41379, 1.18301, 2.17299)
+
+[node name="Spawner3" parent="." index="30" instance=ExtResource("6_ywu4y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.10963, 1.18301, 5.56)
+
+[editable path="Door"]
+[editable path="Door4"]
