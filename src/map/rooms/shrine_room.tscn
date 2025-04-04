@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://c6rcol647a7p4" path="res://src/map/room_components/wall/outside_wall.tscn" id="9_w6w2w"]
 [ext_resource type="Texture2D" uid="uid://m535shlqnuux" path="res://src/map/tileset-dhassa/wall3.png" id="10_yr7ka"]
 [ext_resource type="PackedScene" uid="uid://web8bdry114l" path="res://src/map/room_components/shrine/shrine.tscn" id="11_8hnx1"]
-[ext_resource type="AudioStream" uid="uid://cqtkbnhhxwvla" path="res://src/sound/ambient/rain.mp3" id="14_yr7ka"]
+[ext_resource type="AudioStream" uid="uid://cqtkbnhhxwvla" path="res://src/sound/ambience/rain.mp3" id="14_yr7ka"]
 
 [sub_resource type="Resource" id="Resource_6gi6o"]
 script = ExtResource("6_6gi6o")
