@@ -23,7 +23,11 @@ var attacked_modifier: float = 0
 # tracks all ghosts currently contacting/attacking player
 var attacking_ghosts: Array[Ghost] = []
 
-var dead_light_energy_default: float 
+var dead_light_energy_default: float
+
+# used to play death and revive sound
+var death_sfx: AudioStreamPlayer3D
+var revive_sfx: AudioStreamPlayer3D
 
 @onready var dead_light: DirectionalLight3D = get_tree().root.get_node("Game/DirectionalLight3D")
 @onready var attacked_increment_timer: Timer = Timer.new()
@@ -36,6 +40,9 @@ func init(parent: CharacterBody3D, state_machine: StateMachine) -> void:
 	attacked_increment_timer.timeout.connect(_on_attacked_increment_timer_timeout)
 	
 	dead_light_energy_default = dead_light.light_energy
+	
+	death_sfx = _parent.get_node("Sounds/Death")
+	revive_sfx = _parent.get_node("Sounds/Revive")
 
 
 func enter() -> void:
@@ -51,6 +58,8 @@ func enter() -> void:
 	_parent.sprite_torso.modulate.a = _parent.OPACITY_DEAD
 	# mute footsteps sound effects
 	_parent.footsteps_sfx.max_db = -100
+	# play death sound
+	AudioManager.play_modulated(death_sfx)
 	
 	# drop key item if player is carrying it
 	var key_item: KeyItemInventory = _parent.get_key_item_or_null()
@@ -183,11 +192,17 @@ func _on_player_revived() -> void:
 	# disable movement and camera lag for revive duration
 	_parent.camera.disable()
 	_parent.set_physics_process(false)
+	
 	# prevent ghosts from continuing to attack while reviving
 	if not attacked_increment_timer.is_stopped():
 		attacked_modifier = 0
 		attacked_increment_timer.stop()
 	create_tween().tween_property(_parent, "global_position", _parent._corpse.global_position, 0.3)
+	
+	# play revive sound
+	AudioManager.play_modulated(revive_sfx)
+	
+	# wait for corpse revive animation to finish
 	await _parent._corpse.animate_revive()
 	
 	# re-enable player control
