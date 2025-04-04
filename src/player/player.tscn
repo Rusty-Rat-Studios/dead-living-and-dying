@@ -13,8 +13,8 @@
 [ext_resource type="Material" uid="uid://dr3yoxb5o7j2u" path="res://src/ui/minimap/minimap_player_material.tres" id="10_8t03j"]
 [ext_resource type="PackedScene" uid="uid://bp0ydphecs3iv" path="res://src/common/shadow.tscn" id="11_7sgie"]
 [ext_resource type="AudioStream" uid="uid://cecjxemmw1rtg" path="res://src/sound/sfx/footsteps-wood.mp3" id="13_2smqc"]
-[ext_resource type="Script" path="res://src/player/breathing.gd" id="14_rl62b"]
-[ext_resource type="Script" path="res://src/player/footsteps.gd" id="14_wlj80"]
+[ext_resource type="Script" uid="uid://beec1wyh04yj" path="res://src/player/breathing.gd" id="14_rl62b"]
+[ext_resource type="Script" uid="uid://b5w71c32y1a4n" path="res://src/player/footsteps.gd" id="14_wlj80"]
 [ext_resource type="AudioStream" uid="uid://cr828h53a7hdv" path="res://src/sound/sfx/caretaker-scream.mp3" id="16_6bm8s"]
 [ext_resource type="AudioStream" uid="uid://rfjb0o14heht" path="res://src/sound/sfx/caretaker_revive.mp3" id="17_hrerp"]
 
