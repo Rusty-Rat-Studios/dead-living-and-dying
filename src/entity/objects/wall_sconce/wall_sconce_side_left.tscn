@@ -4,9 +4,6 @@
 
 [node name="WallSconceSide" instance=ExtResource("1_i3xhn")]
 
-[node name="Ignitable" parent="." index="0"]
-begin_lit_chance = 0.5
-
 [node name="Sprite3D" parent="." index="1"]
 flip_h = true
 

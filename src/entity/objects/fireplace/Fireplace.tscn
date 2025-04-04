@@ -82,6 +82,8 @@ size = Vector2(0.75, 0.75)
 size = Vector3(3.5, 3, 0.6)
 
 [node name="Fireplace" type="StaticBody3D"]
+collision_layer = 4
+collision_mask = 4
 
 [node name="Ignitable" parent="." node_paths=PackedStringArray("player_detector", "fire") instance=ExtResource("1_ov4wt")]
 begin_lit_chance = 0.5

@@ -94,7 +94,7 @@ func exit() -> void:
 	
 	# change collision layers out of spirit plane into physical plane
 	_parent.collision_layer = CollisionBit.PLAYER + CollisionBit.PHYSICAL
-	_parent.collision_mask = CollisionBit.WORLD
+	_parent.collision_mask = CollisionBit.WORLD + CollisionBit.PHYSICAL
 	_parent.hurtbox.collision_mask = CollisionBit.PHYSICAL
 	
 	# deactivate corpse indicator particle emission
