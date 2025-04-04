@@ -28,6 +28,8 @@ backlight_texture = ExtResource("2_kuhdl")
 size = Vector3(2.745, 2.72, 0.65)
 
 [node name="Bookshelf" type="StaticBody3D" node_paths=PackedStringArray("full_sprite", "empty_sprite")]
+collision_layer = 4
+collision_mask = 4
 script = ExtResource("1_83afa")
 full_sprite = NodePath("Sprite3D2")
 empty_sprite = NodePath("Sprite3D")

@@ -16,6 +16,8 @@ backlight_texture = ExtResource("1_mj8ce")
 size = Vector3(3.8, 2.39, 1.105)
 
 [node name="CardboardBoxesStacked" type="StaticBody3D"]
+collision_layer = 4
+collision_mask = 4
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
 material_override = SubResource("StandardMaterial3D_cs4cu")

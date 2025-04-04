@@ -13,6 +13,8 @@ size = Vector3(2.185, 2.305, 0.5)
 radius = 2.2
 
 [node name="OldMan" type="StaticBody3D"]
+collision_layer = 4
+collision_mask = 4
 script = ExtResource("1_kf68j")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

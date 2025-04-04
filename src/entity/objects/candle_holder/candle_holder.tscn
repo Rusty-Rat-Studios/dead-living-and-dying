@@ -80,6 +80,7 @@ size = Vector2(0.1, 0.1)
 [node name="CandleHolder" type="Node3D"]
 
 [node name="Ignitable" parent="." node_paths=PackedStringArray("player_detector", "fire") instance=ExtResource("1_wj1sk")]
+begin_lit_chance = 0.5
 player_detector = NodePath("../Area3D")
 fire = NodePath("../FireParticles")
 

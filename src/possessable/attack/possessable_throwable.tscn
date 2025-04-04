@@ -14,7 +14,7 @@ script = ExtResource("2_fk2mr")
 amount = 32
 
 [node name="Hitbox" type="Area3D" parent="." index="3"]
-collision_layer = 4
+collision_layer = 128
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="0"]
