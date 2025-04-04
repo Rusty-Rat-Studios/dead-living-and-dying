@@ -2,6 +2,7 @@ class_name WorldGenerator
 extends Object
 
 const GENERATOR_ATTEMPTS: int = 20 # Number of consecutive failed attempts before error 
+const ENTITY_NON_CONSTRAINT_CHANCE_REDUCTION: float = 0.8
 
 var room_table: EntityTable
 var spread: float
@@ -33,8 +34,7 @@ func _init(generator_settings: GeneratorSettings, initial_occupied_grid: Array[V
 #        (removing and pairs that connect), add room to grid, loop until complete
 func generate_grid(grid: WorldGrid) -> void:
 	var fails: int = 0
-	# var lowered_chance_of_required_doors: bool = false
-	# var lowered_chance_of_non_constrained_rooms: bool = false
+	var lowered_chance_of_required_doors: bool = false
 	
 	while(fails < GENERATOR_ATTEMPTS):
 		var required_doors_grid: Array[DoorLocation] = _get_required_doors_grid()
@@ -49,29 +49,28 @@ func generate_grid(grid: WorldGrid) -> void:
 		
 		# THE FOLLOWING CODE IS PROBABLY NOT NEEDED BUT WILL BE LEFT IN FOR REFERENCE
 		# Decrease chance of rooms with required doors after room gen is almost complete
-		#if (not lowered_chance_of_required_doors and 
-			#room_table.are_constraints_met() and grid.number_of_rooms >= min_rooms):
-			#push_warning("Room generation waiting on required_door_grid, 
-				#lowering chance of required_doors being picked...")
-			#lowered_chance_of_required_doors = true
-			#for entity_table_entry: EntityTableEntry in room_table.entities:
-				#var room: Room = entity_table_entry.get_entity().instantiate()
-				#var room_has_required_doors: bool = room.room_information.possible_door_locations.any(
-					#func(possible_door_location: DoorLocation) -> bool:
-						#return possible_door_location.required
-				#)
-				#room.free()
-				#if room_has_required_doors:
-					#entity_table_entry.base_chance = 0
-		#
-		## Decrease chance of rooms without constraints after min_rooms amount hit
-		#if not lowered_chance_of_non_constrained_rooms and grid.number_of_rooms >= min_rooms:
-			#push_warning("Room generation waiting on constraints, 
-				#lowering chance of non-constrained rooms being picked...")
-			#lowered_chance_of_non_constrained_rooms = true
-			#for entity_table_entry: EntityTableEntry in room_table.entities:
-				#if entity_table_entry.is_within_constraints():
-					#entity_table_entry.base_chance = 0
+		if (not lowered_chance_of_required_doors and 
+			room_table.are_constraints_met() and grid.number_of_rooms >= min_rooms):
+			push_warning("Room generation waiting on required_door_grid, \
+				lowering chance of required_doors being picked...")
+			lowered_chance_of_required_doors = true
+			for entity_table_entry: EntityTableEntry in room_table.entities:
+				var room: Room = entity_table_entry.get_entity().instantiate()
+				var room_has_required_doors: bool = room.room_information.possible_door_locations.any(
+					func(possible_door_location: DoorLocation) -> bool:
+						return possible_door_location.required
+				)
+				room.free()
+				if room_has_required_doors:
+					entity_table_entry.base_chance = 0
+		
+		# Decrease chance of rooms without constraints after min_rooms amount hit
+		if grid.number_of_rooms >= min_rooms:
+			print("Room generation waiting on constraints, \
+				lowering chance of non-constrained rooms being picked...")
+			for entity_table_entry: EntityTableEntry in room_table.entities:
+				if entity_table_entry.is_within_constraints():
+					entity_table_entry.base_chance *= ENTITY_NON_CONSTRAINT_CHANCE_REDUCTION
 		
 		var target_door: DoorLocation
 		
