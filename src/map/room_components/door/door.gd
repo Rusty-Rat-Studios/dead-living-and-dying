@@ -162,6 +162,8 @@ func _on_body_exited(_body: Node3D) -> void:
 
 func _on_interaction(input_name: String) -> void:
 	if input_name == "interact":
+		if door_open:
+			return
 		if not (door_open or door_locked):
 			open_door()
 			linked_door.open_door()
