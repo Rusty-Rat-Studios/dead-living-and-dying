@@ -210,6 +210,7 @@ polygon = PackedVector2Array(-1.415, 0, -1.415, 5, 1.415, 5, 1.415, 0)
 [node name="Door" parent="." instance=ExtResource("11_7eu7n")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 7.95)
 door_location = SubResource("Resource_x6o5c")
+required_door = true
 
 [node name="WallWithDoorwayX4" parent="Door" index="5"]
 monitor_for_transparency = true
@@ -217,6 +218,7 @@ monitor_for_transparency = true
 [node name="Door2" parent="." instance=ExtResource("11_7eu7n")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.95, 0, 0)
 door_location = SubResource("Resource_7eu7n")
+required_door = true
 
 [node name="PottedPlant" parent="." instance=ExtResource("12_hxh8m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.65423, 1.36037, -0.756205)

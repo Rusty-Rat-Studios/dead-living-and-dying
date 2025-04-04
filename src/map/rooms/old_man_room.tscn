@@ -62,6 +62,7 @@ room_information = SubResource("Resource_hj2hw")
 [node name="Door" parent="." instance=ExtResource("6_k20dg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.95)
 door_location = SubResource("Resource_yemrt")
+required_door = true
 
 [node name="WallWithDoorway" parent="Door" index="5"]
 monitor_for_transparency = true
