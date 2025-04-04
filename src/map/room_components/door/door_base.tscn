@@ -136,4 +136,4 @@ light_color = Color(0.823529, 0.309804, 0.152941, 1)
 light_energy = 2.0
 spot_angle = 60.0
 
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="." groups=["sfx"]]

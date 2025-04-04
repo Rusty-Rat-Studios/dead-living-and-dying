@@ -129,7 +129,7 @@ one_shot = true
 
 [node name="Sounds" type="Node3D" parent="."]
 
-[node name="GhostSFX" type="AudioStreamPlayer3D" parent="Sounds"]
+[node name="GhostSFX" type="AudioStreamPlayer3D" parent="Sounds" groups=["sfx"]]
 stream = ExtResource("11_cker6")
 max_db = -3.502
 script = ExtResource("10_n16t3")
