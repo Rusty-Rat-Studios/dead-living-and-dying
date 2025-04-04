@@ -1,5 +1,7 @@
 extends Possessable
 
+signal changed(lit: bool)
+
 const SFX_IGNITE: AudioStream = preload("res://src/sound/objects/ignitable/match-strike.mp3")
 const SFX_SNUFF: AudioStream = preload("res://src/sound/objects/ignitable/blow_out.mp3")
 
@@ -25,10 +27,8 @@ func reset() -> void:
 	$Interactable.enabled = false
 	if(RNG.rng.randf() < begin_lit_chance):
 		ignite()
-		sfx.stream = SFX_SNUFF
 	else:
 		snuff()
-		sfx.stream = SFX_IGNITE
 
 
 func attack(_target: Node3D, _attack_windup: float) -> void:
@@ -49,6 +49,7 @@ func ignite() -> void:
 	if not sfx.stream == SFX_IGNITE:
 		sfx.stream = SFX_IGNITE
 	AudioManager.play_modulated(sfx)
+	changed.emit(lit)
 
 
 func snuff() -> void:
@@ -58,6 +59,7 @@ func snuff() -> void:
 	if not sfx.stream == SFX_SNUFF:
 		sfx.stream = SFX_SNUFF
 	AudioManager.play_modulated(sfx)
+	changed.emit(lit)
 
 
 func _on_interaction(input_name: String) -> void:

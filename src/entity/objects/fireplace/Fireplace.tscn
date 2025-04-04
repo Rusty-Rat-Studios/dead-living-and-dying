@@ -1,5 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://bgt18op8lbbdh"]
+[gd_scene load_steps=17 format=3 uid="uid://bgt18op8lbbdh"]
 
+[ext_resource type="Script" uid="uid://beulyqm2eclxc" path="res://src/entity/objects/fireplace/fireplace.gd" id="1_cfwtk"]
 [ext_resource type="PackedScene" uid="uid://u73u0x8ln3pf" path="res://src/possessable/ignitable/possessable_ignitable.tscn" id="1_ov4wt"]
 [ext_resource type="Texture2D" uid="uid://b758ybwludn6j" path="res://src/entity/objects/fireplace/fireplace.png" id="2_3lloo"]
 [ext_resource type="AudioStream" uid="uid://8o1m3m4g02kj" path="res://src/sound/objects/fire.mp3" id="3_cipfu"]
@@ -85,9 +86,9 @@ size = Vector3(3.5, 3, 0.6)
 [node name="Fireplace" type="StaticBody3D"]
 collision_layer = 4
 collision_mask = 4
+script = ExtResource("1_cfwtk")
 
 [node name="Ignitable" parent="." node_paths=PackedStringArray("player_detector", "fire") instance=ExtResource("1_ov4wt")]
-begin_lit_chance = 0.5
 player_detector = NodePath("../Area3D")
 fire = NodePath("../FireParticles")
 
@@ -130,7 +131,6 @@ process_mode = 3
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 stream = ExtResource("3_cipfu")
 attenuation_model = 2
-autoplay = true
 max_distance = 30.0
 bus = &"Ambience"
 emission_angle_enabled = true
