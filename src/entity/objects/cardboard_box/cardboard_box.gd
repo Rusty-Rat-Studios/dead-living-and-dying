@@ -8,5 +8,4 @@ func _ready() -> void:
 
 
 func _on_body_entered(_body: Node3D) -> void:
-	print("cardboard box detected collision")
 	hit_sfx.play_random_sound()
