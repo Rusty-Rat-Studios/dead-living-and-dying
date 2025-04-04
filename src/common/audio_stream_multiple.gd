@@ -15,7 +15,7 @@ func init_audio_clips() -> void:
 	if dir_access == null:
 		printerr("Could not open directory:", audio_folder_path)
 		return
-
+	
 	dir_access.list_dir_begin()
 	var file_name: String = dir_access.get_next()
 	while file_name != "":
@@ -27,7 +27,7 @@ func init_audio_clips() -> void:
 			else:
 				printerr("Failed to load audio file:", full_path)
 		file_name = dir_access.get_next()
-
+	
 	dir_access.list_dir_end()
 	print("Loaded", audio_clips.size(), "audio clips from:", audio_folder_path)
 
