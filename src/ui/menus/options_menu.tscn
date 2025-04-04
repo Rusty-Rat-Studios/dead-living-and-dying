@@ -85,7 +85,7 @@ sound_group = "master"
 
 [node name="SoundSliderAmbient" parent="MarginContainer/CenterContainer/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_hp7vs")]
 layout_mode = 2
-sound_group = "ambient"
+sound_group = "ambience"
 
 [node name="SoundSliderSFX" parent="MarginContainer/CenterContainer/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_hp7vs")]
 layout_mode = 2
