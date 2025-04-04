@@ -229,6 +229,6 @@ func _on_attack_delay_increment_timer_timeout() -> void:
 		can_attack = true
 
 
-func _on_hit() -> void:
+func _on_hit(_stun_modifier: float, _stun_modifier_key: String) -> void:
 	if is_possessing:
 		target_possessable.exorcised.emit()
