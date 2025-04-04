@@ -92,6 +92,7 @@ func _on_player_entered_room(body: Node3D) -> void:
 		player_in_room = true
 		visible = true
 		SignalBus.player_entered_room.emit(self)
+		PlayerHandler.register_current_room(self)
 		if not room_discovered:
 			player_discovered_room.emit()
 

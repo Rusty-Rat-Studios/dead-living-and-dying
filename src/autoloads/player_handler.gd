@@ -1,15 +1,24 @@
 extends Node
 
 var _player: Player
+var _current_room: Room
 
 # needed when loading the game scene
 func register_player(player: Player) -> void:
 	_player = player
 
 
+func register_current_room(current_room: Room) -> void:
+	_current_room = current_room
+
+
 # globally access to Player node
 func get_player() -> Player:
 	return _player
+
+
+func get_current_room() -> Room:
+	return _current_room
 
 
 # globally access player state
