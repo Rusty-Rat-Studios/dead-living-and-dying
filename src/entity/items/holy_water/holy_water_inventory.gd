@@ -14,7 +14,6 @@ func _ready() -> void:
 	description = ("CONSUMABLE ITEM: Use with " + UIDevice.retrieve_icon_sized(input_event)
 		+ " to become invulnerable for a short duration.")
 	texture = preload("res://src/entity/items/holy_water/holy_water.png")
-	count = MAX_COUNT
 	
 	$ActiveTimer.wait_time = BASE_ACTIVE_DURATION
 	$ActiveTimer.timeout.connect(_on_active_timer_timeout)

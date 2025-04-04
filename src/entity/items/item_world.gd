@@ -33,18 +33,11 @@ func pick_up() -> void:
 	var player: Node = PlayerHandler.get_player()
 	var current_consumable: bool = false
 	item_inventory.texture = $Sprite3D.texture
-	if item_inventory is not PassiveItemInventory and item_inventory is not ConsumableItemInventory:
+	if item_inventory is not PassiveItemInventory:
 		for n: Node in player.get_node("Inventory").get_children():
 			if n is ActiveItemInventory and item_inventory is ActiveItemInventory:
 				n.drop()
 			if n is DefenseItemInventory and item_inventory is DefenseItemInventory:
-				n.drop()
-	if item_inventory is ConsumableItemInventory:
-		for n: Node in player.get_node("Inventory").get_children():
-			if n is ConsumableItemInventory and n.CONSUMABLE_ID == item_inventory.CONSUMABLE_ID:
-				current_consumable = true
-				n.count = n.MAX_COUNT
-			elif n is ConsumableItemInventory:
 				n.drop()
 	SignalBus.item_picked_up.emit(item_inventory, current_consumable)
 	queue_free()

@@ -2,7 +2,7 @@ extends ConsumableItemInventory
 
 const CONSUMABLE_ID: int = 1
 const STUN_MODIFER: float = 3
-const MAX_COUNT: float = 2
+const MAX_COUNT: float = 3
 
 func _ready() -> void:
 	world_resource = load("res://src/entity/items/incense/incense_world.tscn")
@@ -11,7 +11,6 @@ func _ready() -> void:
 	description = ("CONSUMABLE ITEM: Use with " + UIDevice.retrieve_icon_sized(input_event)
 		+ " Stun all ghosts regardless of where they are.")
 	texture = preload("res://src/entity/items/incense/incense.png")
-	count = MAX_COUNT
 
 
 func _unhandled_input(event: InputEvent) -> void:
