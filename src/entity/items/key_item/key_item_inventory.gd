@@ -18,6 +18,7 @@ func drop() -> void:
 	key_item.global_position.y = 1
 	
 	# update key item movement path with world-grid find_shortest_path algorithm
+	#gdlint:ignore=max-line-length
 	key_item.movement_path = PlayerHandler.get_current_room().get_parent().find_shortest_path(key_item.get_parent(), key_item.starting_room)
 	SignalBus.key_item_dropped.emit()
 	queue_free()
