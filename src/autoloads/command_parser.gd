@@ -6,6 +6,7 @@ extends Node
 	"debuglight": preload("res://src/ui/commands/command_debuglight.gd").new(),
 	"ghostopacity": preload("res://src/ui/commands/command_ghostopacity.gd").new(),
 	"reset": preload("res://src/ui/commands/command_reset.gd").new(),
+	"win": preload("res://src/ui/commands/command_win.gd").new(),
 }
 
 
