@@ -25,12 +25,12 @@ enum Stats {
 const BASE_SPEED: float = 4.0
 const BASE_OPACITY: float = 0.0
 # state attacking
-const BASE_ATTACK_DELAY: float = 0.3
+const BASE_ATTACK_DELAY: float = 0.0
 const BASE_WINDUP_DURATION: float = 1.0
 # state possessing
 const BASE_POSSESSION_DECISION_TIME: float = 1.0
 const BASE_POSSESSION_ATTACK_CHANCE: float = 0.7
-const BASE_POSSESSION_ATTACK_WINDUP: float = 2.0
+const BASE_POSSESSION_ATTACK_WINDUP: float = 1.75
 const BASE_DEPOSSESS_CHANCE: float = 0.1
 const BASE_POSSESSION_WAIT_CHANCE: float = 0.2
 # state stunned

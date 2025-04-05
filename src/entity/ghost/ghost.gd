@@ -211,7 +211,7 @@ func _on_player_state_changed(state: PlayerStateMachine.States) -> void:
 func _on_key_item_picked_up() -> void:
 	#gdlint:disable=max-line-length
 	stats.add_modifier(GhostStats.Stats.SPEED, 0.5, "key_item") # move faster
-	stats.add_modifier(GhostStats.Stats.WINDUP_DURATION, -0.5, "key_item") # shorter delay to attack
+	stats.add_modifier(GhostStats.Stats.WINDUP_DURATION, -0.25, "key_item") # shorter delay to attack
 	stats.add_modifier(GhostStats.Stats.POSSESSION_DECISION_TIME, -0.5, "key_item") # shorter decision time
 	stats.add_modifier(GhostStats.Stats.STATE_POSSESSING_CHANCE, 0.4, "key_item") # higher chance to possess
 	stats.add_modifier(GhostStats.Stats.DEPOSSESS_CHANCE, -0.1, "key_item") # remove chance to depossess
