@@ -31,10 +31,16 @@ func _ready() -> void:
 	reset()
 
 
+func init() -> void:
+	respawn_point = $RespawnPoint.global_position
+
+
 # TEMPORARY - to be removed once map generation complete
 func reset() -> void:
 	consumed = false
 	$Sprite3D.replace_texture(TEXTURE)
+	
+	respawn_point = $RespawnPoint.global_position
 	
 	if default:
 		activated = true
