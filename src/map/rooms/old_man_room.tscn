@@ -1,6 +1,6 @@
 [gd_scene load_steps=21 format=3 uid="uid://cpudmguey5gcy"]
 
-[ext_resource type="Script" uid="uid://bo0tyfrjfebc6" path="res://src/map/room_components/room.gd" id="1_gll72"]
+[ext_resource type="Script" uid="uid://b2neeedprnc1" path="res://src/map/rooms/old_man_room.gd" id="1_vb84m"]
 [ext_resource type="PackedScene" uid="uid://te0dpapcosk4" path="res://src/map/rooms/room_minimap/basic_room_minimap.tscn" id="2_winw3"]
 [ext_resource type="Script" uid="uid://dqhrw6rxew3fa" path="res://src/common/door_location.gd" id="3_vb84m"]
 [ext_resource type="Texture2D" uid="uid://diioxrqi1phl4" path="res://src/ui/minimap/old_man_icon.png" id="4_vb84m"]
@@ -41,7 +41,7 @@ required = false
 metadata/_custom_type_script = "uid://dqhrw6rxew3fa"
 
 [node name="OldManRoom" type="Node3D" groups=["rooms"]]
-script = ExtResource("1_gll72")
+script = ExtResource("1_vb84m")
 room_information = SubResource("Resource_hj2hw")
 
 [node name="Floor" parent="." instance=ExtResource("5_7bu5u")]

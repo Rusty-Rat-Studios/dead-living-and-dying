@@ -65,6 +65,11 @@ func find_target_door() -> bool:
 	if doors.is_empty():
 		return false
 	
+	# remove old man room from list of doors
+	for door: Door in doors:
+		if door.linked_room is OldManRoom:
+			doors.remove_at(doors.find(door))
+	
 	# pick random door
 	target_door = RNG.random_from_list(doors)
 	target_room = target_door.linked_door.get_parent()
