@@ -104,6 +104,7 @@ func _on_response_selected(next_stage: String) -> void:
 		"crucifix":
 			var crucifix: ItemWorld = crucifix_scene.instantiate()
 			crucifix.pick_up()
+		"fetch":
 			# unlock the door so the player can leave
 			_door.unlock()
 		"return_success":
