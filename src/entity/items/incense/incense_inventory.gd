@@ -24,3 +24,5 @@ func use() -> void:
 	SignalBus.hit.emit(STUN_MODIFER, display_name)
 	count -= 1
 	item_used.emit()
+	if (count <= 0):
+		queue_free()
