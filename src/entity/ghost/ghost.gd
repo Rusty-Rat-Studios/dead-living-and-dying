@@ -7,6 +7,8 @@ signal reveal
 # i.e. moving through a door
 signal target_reached
 
+const MOVEMENT_TARGET_THRESHOLD: float = 0.1
+
 const ATTACK_DELAY: float = 0.3
 # time to tween light visibility when ghost starts/stops moving
 const LIGHT_FADE_DURATION: float = 0.3
@@ -119,7 +121,7 @@ func move_to_target(delta: float) -> void:
 	target_pos = Vector3(target_pos.x, 1, target_pos.z)
 	var distance_to_target: float = global_position.distance_squared_to(target_pos)
 	
-	if distance_to_target < stats.speed * delta:
+	if distance_to_target < MOVEMENT_TARGET_THRESHOLD:
 		_stop_at_target_and_emit()
 	else:
 		at_target = false
