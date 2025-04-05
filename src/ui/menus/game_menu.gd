@@ -1,13 +1,11 @@
 extends Control
 
-# time that the game waits before continuing on game over
-const GAME_OVER_DELAY: float = 2.0
-
 @export var disable_popup: bool = false
 @export var show_how_to_play_on_start: bool = false
 
 @onready var buttons: VBoxContainer = $PanelContainer/MarginContainer/VBoxContainer/VBoxButtons
 @onready var message: Label = $PanelContainer/MarginContainer/VBoxContainer/Message
+
 
 func _ready() -> void:
 	if show_how_to_play_on_start:
@@ -20,7 +18,6 @@ func _ready() -> void:
 	buttons.get_node("ButtonOptions").pressed.connect(_on_options_pressed)
 	buttons.get_node("ButtonHow").pressed.connect(_on_how_pressed)
 	buttons.get_node("ButtonQuit").pressed.connect(_on_quit_pressed)
-	SignalBus.game_over.connect(_on_game_over)
 	SignalBus.level_complete.connect(_on_level_complete)
 
 
@@ -58,21 +55,6 @@ func _on_how_pressed() -> void:
 func _on_quit_pressed() -> void:
 	# close the application
 	get_tree().quit()
-
-
-func _on_game_over() -> void:
-	if not disable_popup:
-		pause()
-		buttons.hide()
-		message.text = "Game Over"
-		message.show()
-		await Utility.delay(GAME_OVER_DELAY)
-		message.hide()
-		message.text = ""
-		buttons.show()
-		resume()
-	
-	get_node("/root/Game").reset()
 
 
 func _on_level_complete() -> void:

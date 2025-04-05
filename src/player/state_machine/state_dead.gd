@@ -251,6 +251,11 @@ func _on_attacked_increment_timer_timeout() -> void:
 	
 	if dead_light.light_energy <= 0:
 		# full effect has applied - game over
+		var black_screen: TextureRect = get_tree().root.get_node("Game/UI/DeadScreenEffect")
+		black_screen.fade_in(RESPAWN_TIME)
 		SignalBus.game_over.emit()
-		dead_light.light_energy = dead_light_energy_default
+		
+		# player hurt signal restarts attacked_increment_timer
+		SignalBus.player_hurt.disconnect(_on_player_hurt)
 		attacked_increment_timer.stop()
+		
