@@ -84,7 +84,7 @@ func _ready() -> void:
 	player_sound_detector.body_entered.connect(_on_body_entered)
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	# handle state-specific actions (i.e. updating movement target)
 	# before handling movement
 	state_machine.process_current_state()
