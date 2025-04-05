@@ -8,7 +8,9 @@ func register_shrine(shrine: Shrine) -> void:
 
 
 func get_active_shrines() -> Array[Shrine]:
-	return shrines.filter(func(shrine: Shrine) -> bool: return shrine.activated)
+	var active_shrines: Array[Shrine]
+	active_shrines.assign(shrines.filter(func(shrine: Shrine) -> bool: return shrine.activated))
+	return active_shrines
 
 
 func reset_shrines() -> void:
