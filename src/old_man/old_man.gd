@@ -70,9 +70,6 @@ func reset() -> void:
 	$Interactable.hide()
 	$Interactable.enabled = false
 	
-	# lock door so player can't leave before speaking to old man
-	_door.lock(false)
-	
 	_dialogue_stage = "fetch"
 
 
