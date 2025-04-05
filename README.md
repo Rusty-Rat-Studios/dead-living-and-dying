@@ -35,9 +35,9 @@ Here you'll find the links to all our documentation.
 
 ### Game Development
 
-Jacob Meyer
-Quinn Maloney
-Cameron Oehler
+- Jacob Meyer
+- Quinn Maloney
+- Cameron Oehler
 
 ### Art
 
