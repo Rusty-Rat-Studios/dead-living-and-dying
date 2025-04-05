@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c1hur2s8mgagv"]
+[gd_scene load_steps=5 format=3 uid="uid://c1hur2s8mgagv"]
 
 [ext_resource type="PackedScene" uid="uid://custksxq8jvgd" path="res://src/possessable/attack/possessable_attack.tscn" id="1_5pall"]
 [ext_resource type="Script" uid="uid://mv0d020angfh" path="res://src/possessable/attack/possessable_throwable.gd" id="2_fk2mr"]
+[ext_resource type="Script" uid="uid://cvfyn8cawdx1" path="res://src/common/audio_stream_multiple.gd" id="3_vwu6l"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ajii3"]
 height = 1.6
@@ -20,3 +21,8 @@ collision_mask = 0
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox" index="0"]
 shape = SubResource("CylinderShape3D_ajii3")
 disabled = true
+
+[node name="Throw" type="AudioStreamPlayer3D" parent="." index="5"]
+script = ExtResource("3_vwu6l")
+audio_folder_path = "res://src/sound/objects/throw/"
+metadata/_custom_type_script = "uid://cvfyn8cawdx1"

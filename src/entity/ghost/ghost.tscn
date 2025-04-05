@@ -134,6 +134,7 @@ stream = ExtResource("11_cker6")
 max_db = -3.502
 bus = &"Sfx"
 script = ExtResource("10_n16t3")
+audio_folder_path = "res://src/sound/ghost/wheeze"
 
 [node name="PlayerSoundDetector" type="Area3D" parent="Sounds"]
 collision_layer = 0

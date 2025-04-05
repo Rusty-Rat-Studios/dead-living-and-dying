@@ -6,6 +6,10 @@
 
 [node name="Ignitable" instance=ExtResource("1_3g5ak")]
 script = ExtResource("2_12x63")
-begin_lit = false
+begin_lit_chance = 0.5
 
 [node name="Interactable" parent="." index="2" instance=ExtResource("3_uxt81")]
+
+[node name="SFX" type="AudioStreamPlayer3D" parent="." index="3"]
+attenuation_model = 2
+unit_size = 2.0

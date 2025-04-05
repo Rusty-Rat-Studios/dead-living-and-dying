@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bfmkrask6gxl3"]
+[gd_scene load_steps=6 format=3 uid="uid://bfmkrask6gxl3"]
 
 [ext_resource type="PackedScene" uid="uid://custksxq8jvgd" path="res://src/possessable/attack/possessable_attack.tscn" id="1_hp16e"]
 [ext_resource type="Script" uid="uid://bhci020j8hkra" path="res://src/possessable/attack/possessable_ranged.gd" id="2_c086f"]
 [ext_resource type="PackedScene" uid="uid://coj6qdyyipcvi" path="res://src/possessable/attack/projectile.tscn" id="3_mu4hm"]
+[ext_resource type="Script" uid="uid://cvfyn8cawdx1" path="res://src/common/audio_stream_multiple.gd" id="4_kb2n3"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jxkqj"]
 radius = 8.0
@@ -14,3 +15,8 @@ max_attack_amount = -1
 
 [node name="CollisionShape3D" parent="AttackRange" index="0"]
 shape = SubResource("SphereShape3D_jxkqj")
+
+[node name="Shoot" type="AudioStreamPlayer3D" parent="." index="4"]
+script = ExtResource("4_kb2n3")
+audio_folder_path = "res://src/sound/objects/throw/"
+metadata/_custom_type_script = "uid://cvfyn8cawdx1"

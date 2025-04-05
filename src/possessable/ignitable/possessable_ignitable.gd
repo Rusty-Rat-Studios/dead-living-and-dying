@@ -1,9 +1,16 @@
 extends Possessable
 
+signal changed(lit: bool)
+
+const SFX_IGNITE: AudioStream = preload("res://src/sound/objects/ignitable/match-strike.mp3")
+const SFX_SNUFF: AudioStream = preload("res://src/sound/objects/ignitable/blow_out.mp3")
+
 @export_range(0, 1, 0.001) var begin_lit_chance: float = 0.5
 @export var player_detector: Area3D
 @export var fire: GPUParticles3D
 var lit: bool = false
+
+@onready var sfx: AudioStreamPlayer3D = $SFX
 
 
 func _ready() -> void:
@@ -39,12 +46,20 @@ func ignite() -> void:
 	lit = true
 	fire.emitting = true
 	fire.visible = true
+	if not sfx.stream == SFX_IGNITE:
+		sfx.stream = SFX_IGNITE
+	AudioManager.play_modulated(sfx)
+	changed.emit(lit)
 
 
 func snuff() -> void:
 	lit = false
 	fire.emitting = false
 	fire.visible = false
+	if not sfx.stream == SFX_SNUFF:
+		sfx.stream = SFX_SNUFF
+	AudioManager.play_modulated(sfx)
+	changed.emit(lit)
 
 
 func _on_interaction(input_name: String) -> void:

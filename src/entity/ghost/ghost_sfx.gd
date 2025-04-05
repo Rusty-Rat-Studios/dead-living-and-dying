@@ -13,21 +13,12 @@ var player_dead: bool = false
 
 
 func _ready() -> void:
-	audio_folder_path = "res://src/sound/ghost/wheeze"
 	super()
 	
 	# initialize max_db to state living condition
 	max_db = MAX_DB_QUIET
 	# reduce volume if living; increase if dying; disable if dead
 	SignalBus.player_state_changed.connect(_on_player_state_changed)
-
-
-func get_random_audio_clip() -> AudioStream:
-	if audio_clips.is_empty():
-		printerr("No audio clips loaded.")
-		return null
-	var random_index: int = RNG.rng.randi() % audio_clips.size()
-	return audio_clips[random_index]
 
 
 func play_sound() -> void:
