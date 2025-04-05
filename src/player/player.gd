@@ -126,12 +126,14 @@ func get_key_item_or_null() -> KeyItemInventory:
 	return null
 
 
-func _on_item_picked_up(item: ItemInventory, current_consumable: bool = false) -> void:
+func _on_item_picked_up(item: ItemInventory, current_consumable: bool = false, passed_count:int = 0) -> void:
 	if item is KeyItemInventory:
 		SignalBus.key_item_picked_up.emit()
 		print("player detected key item pickup")
 	if current_consumable == false:
 		$Inventory.add_child(item)
+		if item is ConsumableItemInventory:
+			item.count = passed_count
 	# ensure item position is directly on player
 	item.position = Vector3.ZERO
 

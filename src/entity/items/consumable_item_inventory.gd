@@ -2,6 +2,7 @@ class_name ConsumableItemInventory
 extends ItemInventory
 
 signal item_used(cooldown_timer: Timer)
+signal count_update(count: int)
 
 var count: int
 
@@ -11,9 +12,13 @@ func use() -> void:
 
 
 func drop() -> void:
-	for i: int in range(count):
-		var world_item: ItemWorld = world_resource.instantiate()
-		get_node("/root/Game").add_child(world_item)
-		world_item.position = PlayerHandler.get_player().position + Vector3(0, -0.5, 0.01)
-		world_item.disable_interactable(DELAY_DURATION)
+	var world_item: ConsumableItemWorld = world_resource.instantiate()
+	get_node("/root/Game").add_child(world_item)
+	world_item.count = count
+	world_item.position = PlayerHandler.get_player().position + Vector3(0, -0.5, 0.01)
+	world_item.disable_interactable(DELAY_DURATION)
 	queue_free()
+
+
+func ui_update()-> void:
+	count_update.emit(count)

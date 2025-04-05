@@ -13,7 +13,8 @@ func _ready() -> void:
 	$MarginIcon/IconLabel.init("use_consumable_item")
 
 
-func _on_item_picked_up(item_inventory: ItemInventory, current_consumable: bool = false) -> void:
+func _on_item_picked_up(item_inventory: ItemInventory, current_consumable: bool = false,
+						_current_count: int = 0) -> void:
 	if item_inventory is ConsumableItemInventory and current_consumable == false:
 		_item_inventory = item_inventory
 		# update UI image to match item
@@ -24,10 +25,11 @@ func _on_item_picked_up(item_inventory: ItemInventory, current_consumable: bool 
 		
 		# function implemented in cooldown_slot.gd
 		_item_inventory.item_used.connect(_on_item_used)
+		_item_inventory.count_update.connect(_on_count_update)
 	elif item_inventory is ConsumableItemInventory and current_consumable == true:
 		texture_rect.texture = _item_inventory.texture
 		color_rect.visible = true
-		count += 1
+		count = item_inventory.MAX_COUNT
 		label.text = str(count)
 
 
@@ -39,3 +41,8 @@ func _on_item_used() -> void:
 		label.text = ""
 	else:
 		label.text = str(count)
+
+
+func _on_count_update(new_count: int) -> void:
+	count = new_count
+	label.text = str(count)
