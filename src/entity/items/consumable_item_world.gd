@@ -30,7 +30,7 @@ func pick_up() -> void:
 			if count == 0:
 				queue_free()
 			return
-		else:
+		elif n is ConsumableItemInventory:
 			n.drop()
 	SignalBus.item_picked_up.emit(item_inventory, current_consumable, count)
 	queue_free()
