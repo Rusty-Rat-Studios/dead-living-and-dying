@@ -1,6 +1,6 @@
 extends Control
 
-const SCENE_SWITCH_DELAY: float = 3
+const SCENE_SWITCH_DELAY: float = 2
 const FADE_IN_TIME: float = 2
 
 var fade_in: Tween
