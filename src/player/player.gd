@@ -34,6 +34,7 @@ func _ready() -> void:
 	SignalBus.item_picked_up.connect(_on_item_picked_up)
 	SignalBus.key_item_dropped.connect(_on_key_item_dropped)
 	SignalBus.key_item_picked_up.connect(_on_key_item_picked_up)
+	SignalBus.level_complete.connect(_on_level_complete)
 
 
 func _process(_delta: float) -> void:
@@ -149,3 +150,10 @@ func _on_key_item_picked_up() -> void:
 func _on_key_item_dropped() -> void:
 	player_stats.stat_update_remove(PlayerStats.Stats.LIGHT_OMNI_RANGE, "key_item")
 	player_stats.stat_update_remove(PlayerStats.Stats.LIGHT_ENERGY, "key_item")
+
+
+func _on_level_complete() -> void:
+	for item: Node3D in $Inventory.get_children():
+		if item is KeyItemInventory:
+			item.queue_free()
+			return
