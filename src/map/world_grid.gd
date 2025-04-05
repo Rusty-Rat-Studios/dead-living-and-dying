@@ -11,6 +11,9 @@ const GRID_SCALE: float = 16 # Size of each grid square in editor units
 
 @export var generator_settings: GeneratorSettings = null
 
+@onready var shrine_room_scene: PackedScene = preload("res://src/map/rooms/shrine_room.tscn")
+
+var generator_settings_original: GeneratorSettings
 var number_of_rooms: int = 0
 var room_map: HashMap = HashMap.new()
 # adjacency list of each room's connected rooms
@@ -20,10 +23,16 @@ var room_graph: Dictionary[Room, Array]
 
 
 func _ready() -> void:
+	if generator_settings != null:
+		generator_settings_original = generator_settings.deep_copy()
+	else:
+		generator_settings_original = null
 	setup_grid()
 
 
 func setup_grid() -> void:
+	_autoplace_shrine_room(Vector2(0, -1))
+	
 	var occupied_and_door_grids: Dictionary[String, Array] = _load_grid_with_current_scene()
 	
 	if generator_settings != null and generator_settings.room_table != null:
@@ -34,6 +43,7 @@ func setup_grid() -> void:
 		)
 		generator.generate_grid(self)
 		print("Spawned a total of ", number_of_rooms, " rooms")
+		generator.free()
 	_init_all_rooms()
 	_spawn_entities()
 	build_room_graph()
@@ -67,18 +77,31 @@ func get_rooms_of_type(room_type: Room.RoomType) -> Array[Room]:
 	return rooms_of_type
 
 
+func reset() -> void:
+	number_of_rooms = 0
+	generator_settings = generator_settings_original.deep_copy()
+	clear()
+
+
 func clear() -> void:
 	for node: Node in get_children():
 		if node is Room:
 			if not (node as Room).spawn_room:
-				node.queue_free()
+				node.free()
 	room_map.clear()
+
+
+func _autoplace_shrine_room(shrine_room_grid_loc: Vector2) -> void:
+	var shrine_room: Room = shrine_room_scene.instantiate()
+	(shrine_room.get_node("Shrine") as Shrine).default = true
+	add_child(shrine_room)
+	shrine_room.global_position = Vector3(shrine_room_grid_loc.x * GRID_SCALE, 0, shrine_room_grid_loc.y * GRID_SCALE)
 
 
 func _load_grid_with_current_scene() -> Dictionary[String, Array]:
 	var occupied_grid: Array[Vector2] = []
 	var door_grid: Array[DoorLocation] = []
-	for room: Room in find_children("*", "Room"):
+	for room: Room in get_tree().get_nodes_in_group("rooms"):
 		var grid_location: Vector2 = (
 			Vector2(room.global_position.x, room.global_position.z)/GRID_SCALE
 			).round()

@@ -39,7 +39,7 @@ possible_door_locations = Array[ExtResource("3_idgj3")]([SubResource("Resource_3
 minimap_component = ExtResource("2_dxck4")
 room_icon = ExtResource("4_dxck4")
 
-[node name="ItemRoom" instance=ExtResource("1_5gmmo")]
+[node name="KeyItemRoom" instance=ExtResource("1_5gmmo")]
 room_information = SubResource("Resource_pa0wg")
 
 [node name="Spawner" parent="." index="8"]

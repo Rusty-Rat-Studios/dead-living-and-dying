@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://car0tdk0esgiu" path="res://src/entity/items/key_item/journal/journal_world.tscn" id="4_5n6g3"]
 
 [sub_resource type="Resource" id="Resource_c7fpv"]
+resource_local_to_scene = true
 script = ExtResource("1_cgxxp")
 entity = ExtResource("2_jl604")
 base_chance = 1.0
@@ -16,6 +17,7 @@ min_spawn = -1
 metadata/_custom_type_script = "uid://dt04phs8a5k3h"
 
 [sub_resource type="Resource" id="Resource_f2pdh"]
+resource_local_to_scene = true
 script = ExtResource("1_cgxxp")
 entity = ExtResource("3_sass8")
 base_chance = 1.0
@@ -25,6 +27,7 @@ min_spawn = -1
 metadata/_custom_type_script = "uid://dt04phs8a5k3h"
 
 [sub_resource type="Resource" id="Resource_7jmyp"]
+resource_local_to_scene = true
 script = ExtResource("1_cgxxp")
 entity = ExtResource("4_5n6g3")
 base_chance = 1.0
@@ -34,6 +37,7 @@ min_spawn = -1
 metadata/_custom_type_script = "uid://dt04phs8a5k3h"
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("2_e8vst")
 entities = Array[ExtResource("1_cgxxp")]([SubResource("Resource_c7fpv"), SubResource("Resource_f2pdh"), SubResource("Resource_7jmyp")])
 metadata/_custom_type_script = "uid://caxs80c62syve"

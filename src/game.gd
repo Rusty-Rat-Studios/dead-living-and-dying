@@ -36,11 +36,10 @@ func reset() -> void:
 	# reset all ghosts, possessables, shrines, and items
 	Utility.call_for_each(find_children("Ghost*", "Ghost"), "reset")
 	Utility.call_for_each(find_children("*", "Possessable"), "reset")
-	ShrineManager.reset_shrines()
-	ShrineManager.clear_shrines_list(false)
+	ShrineManager.clear_shrines_list(true)
 	Utility.call_for_each(find_children("*Item*", "Item"), "reset")
 	
-	world_grid.clear()
+	SpawnerManager.reset()
 	
 	player.reset_state()
 	if old_man:
@@ -48,11 +47,15 @@ func reset() -> void:
 	
 	# Clear the minimap
 	for child: Node3D in $MinimapObjects.get_children():
-		child.queue_free()
+		child.free()
 	
 	get_tree().call_group("rooms", "reset")
 	
-	world_grid.setup_grid()
+	world_grid.reset()
+	
+	key_item_starting_position = Vector3.ZERO
+	
+	world_grid.call_deferred("setup_grid")
 
 
 func _on_player_state_changed(state: PlayerStateMachine.States) -> void:

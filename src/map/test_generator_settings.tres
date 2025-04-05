@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://b6py5yqiivmff" path="res://src/map/generator_settings.gd" id="5_yvpcd"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("5_yvpcd")
 spread = 0.0
 min_rooms = 27
