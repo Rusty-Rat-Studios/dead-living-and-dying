@@ -13,9 +13,9 @@ func use() -> void:
 
 func drop() -> void:
 	var world_item: ConsumableItemWorld = world_resource.instantiate()
-	get_node("/root/Game").add_child(world_item)
+	PlayerHandler.get_current_room().add_child(world_item)
 	world_item.count = count
-	world_item.position = PlayerHandler.get_player().position + Vector3(0, -0.5, 0.01)
+	world_item.global_position = PlayerHandler.get_player().global_position + Vector3(0, -0.5, 0.01)
 	world_item.disable_interactable(DELAY_DURATION)
 	queue_free()
 
