@@ -101,12 +101,13 @@ func close_door() -> void:
 		AudioManager.play_modulated(door_sfx)
 
 
-func lock() -> void:
+func lock(activate_effects: bool = true) -> void:
 	door_locked = true
 	if door_open:
 		close_door()
 	interactable.hide()
-	activate_effects()
+	if activate_effects:
+		activate_effects()
 
 
 func unlock() -> void:
