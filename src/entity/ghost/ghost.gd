@@ -88,7 +88,7 @@ func _physics_process(delta: float) -> void:
 	# handle state-specific actions (i.e. updating movement target)
 	# before handling movement
 	state_machine.process_current_state()
-	move_to_target(delta)
+	move_to_target()
 
 
 func reset() -> void:
@@ -112,7 +112,7 @@ func set_target(target_global: Vector3) -> void:
 	movement_timeout_timer.start()
 
 
-func move_to_target(delta: float) -> void:
+func move_to_target() -> void:
 	var direction: Vector3 = target_pos - global_position
 	# ensure ghost only moves in xz-plane and does not follow objects up into the air
 	direction.y = 0
