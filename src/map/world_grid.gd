@@ -11,8 +11,6 @@ const GRID_SCALE: float = 16 # Size of each grid square in editor units
 
 @export var generator_settings: GeneratorSettings = null
 
-@onready var shrine_room_scene: PackedScene = preload("res://src/map/rooms/shrine_room.tscn")
-
 var generator_settings_original: GeneratorSettings
 var number_of_rooms: int = 0
 var room_map: HashMap = HashMap.new()
@@ -20,6 +18,8 @@ var room_map: HashMap = HashMap.new()
 # key == room node
 # value == array of connected room nodes
 var room_graph: Dictionary[Room, Array]
+
+@onready var shrine_room_scene: PackedScene = preload("res://src/map/rooms/shrine_room.tscn")
 
 
 func _ready() -> void:
