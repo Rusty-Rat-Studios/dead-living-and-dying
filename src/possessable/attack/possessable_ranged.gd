@@ -8,6 +8,8 @@ signal max_projectiles_shot
 
 var attack_amount: int = 0
 
+@onready var shoot_sfx: AudioStreamMultiple = $Shoot
+
 
 func _ready() -> void:
 	super()
@@ -26,6 +28,8 @@ func attack(target: Node3D, _attack_windup: float) -> void:
 		
 		projectile.global_position = global_position
 		projectile.shoot(target.global_position) # shoot projectile at target
+		
+		shoot_sfx.play_random_sound()
 		
 	depossess(true)
 

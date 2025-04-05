@@ -1,0 +1,101 @@
+[gd_scene load_steps=8 format=3 uid="uid://c3r030661il6l"]
+
+[ext_resource type="FontFile" uid="uid://bvx6yxwpx1rfq" path="res://src/ui/resources/princess_sofia_font/PrincessSofia-Regular.ttf" id="1_3adbx"]
+[ext_resource type="Script" uid="uid://jvjcs3jygs4i" path="res://src/ui/menus/options_menu.gd" id="1_3ghqk"]
+[ext_resource type="PackedScene" uid="uid://lapycnexlmuf" path="res://src/ui/menus/sound_slider.tscn" id="2_hp7vs"]
+[ext_resource type="Theme" uid="uid://casdoijkjemc2" path="res://src/ui/resources/menu_theme.tres" id="3_hp7vs"]
+
+[sub_resource type="Gradient" id="Gradient_itrtq"]
+offsets = PackedFloat32Array(0.576389, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ytrdg"]
+gradient = SubResource("Gradient_itrtq")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bfq6f"]
+texture = SubResource("GradientTexture2D_ytrdg")
+
+[node name="OptionsMenu" type="Window"]
+gui_embed_subwindows = true
+initial_position = 2
+size = Vector2i(687, 518)
+wrap_controls = true
+exclusive = true
+borderless = true
+always_on_top = true
+popup_window = true
+extend_to_title = true
+script = ExtResource("1_3ghqk")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer"]
+layout_mode = 2
+color = Color(0.133333, 0.133333, 0.133333, 1)
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_bfq6f")
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/CenterContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Label" type="Label" parent="MarginContainer/CenterContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_3adbx")
+theme_override_font_sizes/font_size = 56
+text = "Options"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/CenterContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="SoundSliderMaster" parent="MarginContainer/CenterContainer/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_hp7vs")]
+layout_mode = 2
+sound_group = "master"
+
+[node name="SoundSliderAmbient" parent="MarginContainer/CenterContainer/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_hp7vs")]
+layout_mode = 2
+sound_group = "ambience"
+
+[node name="SoundSliderSFX" parent="MarginContainer/CenterContainer/MarginContainer/VBoxContainer/VBoxContainer" instance=ExtResource("2_hp7vs")]
+layout_mode = 2
+sound_group = "sfx"
+
+[node name="Button" type="Button" parent="MarginContainer/CenterContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(120, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme = ExtResource("3_hp7vs")
+theme_override_font_sizes/font_size = 26
+text = "Close"

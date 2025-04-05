@@ -1,14 +1,11 @@
 extends Control
 
-# time that the game waits before continuing on game over
-const GAME_OVER_DELAY: float = 2.0
-
 @export var disable_popup: bool = false
 @export var show_how_to_play_on_start: bool = false
 
-@onready var main_menu: PackedScene = preload("res://src/ui/menus/main_menu.tscn")
 @onready var buttons: VBoxContainer = $PanelContainer/MarginContainer/VBoxContainer/VBoxButtons
 @onready var message: Label = $PanelContainer/MarginContainer/VBoxContainer/Message
+
 
 func _ready() -> void:
 	if show_how_to_play_on_start:
@@ -18,9 +15,9 @@ func _ready() -> void:
 		$HowToPlay.close_requested.connect(func() -> void: resume(), CONNECT_ONE_SHOT)
 	
 	buttons.get_node("ButtonContinue").pressed.connect(_on_continue_pressed)
+	buttons.get_node("ButtonOptions").pressed.connect(_on_options_pressed)
 	buttons.get_node("ButtonHow").pressed.connect(_on_how_pressed)
 	buttons.get_node("ButtonQuit").pressed.connect(_on_quit_pressed)
-	SignalBus.game_over.connect(_on_game_over)
 	SignalBus.level_complete.connect(_on_level_complete)
 
 
@@ -47,6 +44,10 @@ func _on_continue_pressed() -> void:
 	resume()
 
 
+func _on_options_pressed() -> void:
+	$OptionsMenu.show()
+
+
 func _on_how_pressed() -> void:
 	$HowToPlay.show()
 
@@ -54,23 +55,6 @@ func _on_how_pressed() -> void:
 func _on_quit_pressed() -> void:
 	# close the application
 	get_tree().quit()
-
-
-func _on_game_over() -> void:
-	if not disable_popup:
-		pause()
-		buttons.hide()
-		message.text = "Game Over"
-		message.show()
-		await Utility.delay(GAME_OVER_DELAY)
-		message.hide()
-		message.text = ""
-		buttons.show()
-		resume()
-	
-	SpawnerManager.reset()
-	ShrineManager.clear_shrines_list(true)
-	get_tree().call_deferred("change_scene_to_packed", main_menu)
 
 
 func _on_level_complete() -> void:

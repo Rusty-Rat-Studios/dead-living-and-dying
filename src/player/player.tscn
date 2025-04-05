@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bbow7knip3g6g"]
+[gd_scene load_steps=34 format=3 uid="uid://bbow7knip3g6g"]
 
 [ext_resource type="Script" uid="uid://bvc3eclccrf0p" path="res://src/player/player.gd" id="1_ndccg"]
 [ext_resource type="SpriteFrames" uid="uid://re7p8fjt08rp" path="res://src/player/player_sprite_frames_torso.tres" id="2_cwolq"]
@@ -12,6 +12,13 @@
 [ext_resource type="Script" uid="uid://dv0uf7xxo7jdj" path="res://src/player/inventory.gd" id="9_qaadw"]
 [ext_resource type="Material" uid="uid://dr3yoxb5o7j2u" path="res://src/ui/minimap/minimap_player_material.tres" id="10_8t03j"]
 [ext_resource type="PackedScene" uid="uid://bp0ydphecs3iv" path="res://src/common/shadow.tscn" id="11_7sgie"]
+[ext_resource type="AudioStream" uid="uid://cecjxemmw1rtg" path="res://src/sound/sfx/footsteps-wood.mp3" id="13_2smqc"]
+[ext_resource type="Script" uid="uid://beec1wyh04yj" path="res://src/player/breathing.gd" id="14_rl62b"]
+[ext_resource type="Script" uid="uid://b5w71c32y1a4n" path="res://src/player/footsteps.gd" id="14_wlj80"]
+[ext_resource type="AudioStream" uid="uid://cr828h53a7hdv" path="res://src/sound/sfx/caretaker-scream.mp3" id="16_6bm8s"]
+[ext_resource type="AudioStream" uid="uid://rfjb0o14heht" path="res://src/sound/sfx/caretaker_revive.mp3" id="17_hrerp"]
+[ext_resource type="Script" uid="uid://co7i5mnv4btpu" path="res://src/player/ambience.gd" id="18_oyld2"]
+[ext_resource type="AudioStream" uid="uid://5paani5b2irh" path="res://src/sound/sfx/caretaker_hurt.mp3" id="19_vwsmr"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_uy1l0"]
 radius = 0.4
@@ -189,3 +196,36 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
 layers = 512
 mesh = SubResource("CylinderMesh_2ieo8")
+
+[node name="Sounds" type="Node3D" parent="."]
+
+[node name="Footsteps" type="AudioStreamPlayer3D" parent="Sounds" groups=["sfx"]]
+stream = ExtResource("13_2smqc")
+autoplay = true
+bus = &"Sfx"
+parameters/looping = true
+script = ExtResource("14_wlj80")
+
+[node name="AudioListener3D" type="AudioListener3D" parent="Sounds"]
+current = true
+
+[node name="Breathing" type="AudioStreamPlayer3D" parent="Sounds" groups=["sfx"]]
+max_db = -15.0
+bus = &"Sfx"
+script = ExtResource("14_rl62b")
+audio_folder_path = "res://src/sound/sfx/breath"
+
+[node name="Death" type="AudioStreamPlayer3D" parent="Sounds" groups=["sfx"]]
+stream = ExtResource("16_6bm8s")
+bus = &"Sfx"
+
+[node name="Revive" type="AudioStreamPlayer3D" parent="Sounds" groups=["sfx"]]
+stream = ExtResource("17_hrerp")
+bus = &"Sfx"
+
+[node name="Ambience" type="AudioStreamPlayer3D" parent="Sounds" groups=["ambient"]]
+bus = &"Ambience"
+script = ExtResource("18_oyld2")
+
+[node name="Hurt" type="AudioStreamPlayer3D" parent="Sounds"]
+stream = ExtResource("19_vwsmr")

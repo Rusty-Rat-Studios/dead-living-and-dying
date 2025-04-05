@@ -19,6 +19,8 @@ var _state_machine: PlayerStateMachine
 # enabled/disabled by state DYING to allow ghost stun-attacks to hit
 @onready var stunbox: Area3D = $Stunbox
 
+@onready var footsteps_sfx: AudioStreamPlayer3D = $Sounds/Footsteps
+
 # store initial position to return to when calling reset()
 @onready var starting_position: Vector3 = position
 # used to track player corpse - handled by DEAD state
@@ -30,6 +32,8 @@ func _ready() -> void:
 	PlayerHandler.register_player(self)
 	
 	light_omni.light_color = Color("GOLDENROD")
+	
+	footsteps_sfx.stream_paused = true
 	
 	SignalBus.item_picked_up.connect(_on_item_picked_up)
 	SignalBus.key_item_dropped.connect(_on_key_item_dropped)
@@ -105,8 +109,10 @@ func handle_movement(delta: float) -> void:
 	
 	if velocity.length() > 0.01:
 		sprite_legs.play()
+		footsteps_sfx.stream_paused = false
 	else:
 		sprite_legs.pause()
+		footsteps_sfx.stream_paused = true
 	
 	move_and_slide()
 
@@ -132,12 +138,14 @@ func get_key_item_or_null() -> KeyItemInventory:
 	return null
 
 
-func _on_item_picked_up(item: ItemInventory, current_consumable: bool = false) -> void:
+func _on_item_picked_up(item: ItemInventory, current_consumable: bool = false, passed_count:int = 0) -> void:
 	if item is KeyItemInventory:
 		SignalBus.key_item_picked_up.emit()
 		print("player detected key item pickup")
 	if current_consumable == false:
 		$Inventory.add_child(item)
+		if item is ConsumableItemInventory:
+			item.count = passed_count
 	# ensure item position is directly on player
 	item.position = Vector3.ZERO
 

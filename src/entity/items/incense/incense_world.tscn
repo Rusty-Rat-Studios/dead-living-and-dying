@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bxso5jmpfc7ao"]
+[gd_scene load_steps=7 format=3 uid="uid://bxso5jmpfc7ao"]
 
 [ext_resource type="PackedScene" uid="uid://bslonn3bn1m6s" path="res://src/entity/items/item_world.tscn" id="1_xiqbb"]
+[ext_resource type="Script" uid="uid://drjifxyyaj5np" path="res://src/entity/items/consumable_item_world.gd" id="2_025bu"]
 [ext_resource type="PackedScene" uid="uid://bw1hxbsrld1r1" path="res://src/entity/items/incense/incense_inventory.tscn" id="2_f4khp"]
-[ext_resource type="Shader" path="res://src/entity/items/item_world_shader.gdshader" id="3_025bu"]
+[ext_resource type="Shader" uid="uid://bqm7xmu54nr45" path="res://src/entity/items/item_world_shader.gdshader" id="3_025bu"]
 [ext_resource type="Texture2D" uid="uid://cgwxlup5xnwbe" path="res://src/entity/items/incense/incense.png" id="4_taim7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5juc4"]
@@ -24,6 +25,7 @@ shader_parameter/uv2_scale = Vector3(1, 1, 1)
 shader_parameter/uv2_offset = Vector3(0, 0, 0)
 
 [node name="IncenseWorld" instance=ExtResource("1_xiqbb")]
+script = ExtResource("2_025bu")
 inventory_resource = ExtResource("2_f4khp")
 
 [node name="Sprite3D" parent="." index="1"]

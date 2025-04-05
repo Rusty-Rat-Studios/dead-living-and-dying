@@ -1,6 +1,6 @@
-[gd_scene load_steps=31 format=3 uid="uid://d142i6jit8s2f"]
+[gd_scene load_steps=33 format=3 uid="uid://d142i6jit8s2f"]
 
-[ext_resource type="Script" uid="uid://bo0tyfrjfebc6" path="res://src/map/room_components/room.gd" id="1_3kabm"]
+[ext_resource type="Script" uid="uid://b7vp3upyt16rh" path="res://src/map/rooms/shrine_room.gd" id="1_uuedo"]
 [ext_resource type="PackedScene" uid="uid://b4teav5cf7dm4" path="res://src/map/room_components/floor/floor_collision_shape.tscn" id="2_0v0cg"]
 [ext_resource type="PackedScene" uid="uid://te0dpapcosk4" path="res://src/map/rooms/room_minimap/basic_room_minimap.tscn" id="2_fi0hv"]
 [ext_resource type="Script" uid="uid://bv4f3snq7u1u2" path="res://src/common/room_information.gd" id="4_1kr6n"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://c6rcol647a7p4" path="res://src/map/room_components/wall/outside_wall.tscn" id="9_w6w2w"]
 [ext_resource type="Texture2D" uid="uid://m535shlqnuux" path="res://src/map/tileset-dhassa/wall3.png" id="10_yr7ka"]
 [ext_resource type="PackedScene" uid="uid://web8bdry114l" path="res://src/map/room_components/shrine/shrine.tscn" id="11_8hnx1"]
+[ext_resource type="AudioStream" uid="uid://cqtkbnhhxwvla" path="res://src/sound/ambience/rain.mp3" id="14_yr7ka"]
 
 [sub_resource type="Resource" id="Resource_6gi6o"]
 script = ExtResource("6_6gi6o")
@@ -129,8 +130,12 @@ use_particle_trails = true
 material = SubResource("StandardMaterial3D_uuedo")
 curve = SubResource("Curve_w6w2w")
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_yr7ka"]
+height = 10.0
+radius = 15.0
+
 [node name="ShrineRoom" type="Node3D" groups=["rooms"]]
-script = ExtResource("1_3kabm")
+script = ExtResource("1_uuedo")
 room_information = SubResource("Resource_ownp1")
 
 [node name="Floor" type="StaticBody3D" parent="."]
@@ -238,6 +243,28 @@ light_size = 0.5
 light_cull_mask = 4293918724
 omni_range = 14.0
 omni_attenuation = 0.0
+
+[node name="Sounds" type="Node3D" parent="."]
+
+[node name="Rain" type="AudioStreamPlayer3D" parent="Sounds" groups=["ambience"]]
+process_mode = 3
+stream = ExtResource("14_yr7ka")
+attenuation_model = 1
+unit_size = 7.0
+max_db = 0.0
+autoplay = true
+panning_strength = 0.0
+bus = &"Ambience"
+parameters/looping = true
+
+[node name="PlayerSoundDetector" type="Area3D" parent="Sounds"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sounds/PlayerSoundDetector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
+shape = SubResource("CylinderShape3D_yr7ka")
 
 [editable path="Door"]
 [editable path="Door/WallWithDoorway"]

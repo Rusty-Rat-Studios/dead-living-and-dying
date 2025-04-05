@@ -8,6 +8,10 @@ const LIGHT_ENERGY: float = 2.0
 const TWEEN_DURATION: float = 0.6
 const MINIMAP_COMPONENT: Resource = preload("res://src/map/room_components/door/door_minimap.tscn")
 
+const SFX_OPEN: AudioStream = preload("res://src/sound/sfx/door_open.mp3")
+const SFX_CLOSE: AudioStream = preload("res://src/sound/sfx/door_close.mp3")
+const SFX_LOCKED: AudioStream = preload("res://src/sound/sfx/door_locked.mp3")
+
 @export var wall_with_doorway: Wall
 @export var wall_scene: PackedScene
 @export var door_location: DoorLocation
@@ -27,6 +31,7 @@ var light_tween: Tween
 @onready var door_collision_shape: CollisionShape3D = $StaticBody3D/CollisionShape3D
 @onready var detector_collision_shape: CollisionShape3D = $PlayerDetector/CollisionShape3D
 @onready var interactable: Interactable = $Interactable
+@onready var door_sfx: AudioStreamPlayer3D = $AudioStreamPlayer3D
 
 
 func _ready() -> void:
@@ -75,6 +80,10 @@ func open_door() -> void:
 	door_material.albedo_texture = DOOR_TEXTURE_OPEN
 	
 	door_collision_shape.set_deferred("disabled", true)
+	
+	door_sfx.stream = SFX_OPEN
+	if not linked_door.door_sfx.playing:
+		AudioManager.play_modulated(door_sfx)
 
 
 func close_door() -> void:
@@ -86,15 +95,19 @@ func close_door() -> void:
 	
 	if not player_dead:
 		door_collision_shape.set_deferred("disabled", false)
+	
+	door_sfx.stream = SFX_CLOSE
+	if not linked_door.door_sfx.playing:
+		AudioManager.play_modulated(door_sfx)
 
 
-func lock() -> void:
+func lock(activate_effects: bool = true) -> void:
 	door_locked = true
 	if door_open:
 		close_door()
 	interactable.hide()
-	interactable.enabled = false
-	activate_effects()
+	if activate_effects:
+		activate_effects()
 
 
 func unlock() -> void:
@@ -131,7 +144,9 @@ func _on_body_entered(_body: Node3D) -> void:
 	# no node check required as collision mask is layer PLAYER
 	if not door_open and not door_locked:
 		interactable.show()
-		interactable.enabled = true
+	
+	# always allow interaction even if locked -> do not show prompt if locked
+	interactable.enabled = true
 
 
 func _on_body_exited(_body: Node3D) -> void:
@@ -140,20 +155,28 @@ func _on_body_exited(_body: Node3D) -> void:
 	interactable.enabled = false
 	# ensure door does not close until player is outside both door player detector ranges
 	if not linked_door.get_node("PlayerDetector").has_overlapping_bodies():
-		close_door()
-		linked_door.close_door()
+		if door_open:
+			close_door()
+		if linked_door.door_open:
+			linked_door.close_door()
 
 
 func _on_interaction(input_name: String) -> void:
 	if input_name == "interact":
-		if not door_open:
+		if door_open:
+			return
+		if not (door_open or door_locked):
 			open_door()
 			linked_door.open_door()
 			linked_room.visible = true
 			if not linked_room.room_discovered:
 				linked_room.player_discovered_room.emit()
-			interactable.enabled = false
 			interactable.hide()
+		else:
+			if door_sfx.stream != SFX_LOCKED:
+				door_sfx.stream = SFX_LOCKED
+			if not door_sfx.playing:
+				AudioManager.play_modulated(door_sfx)
 
 
 func _on_player_state_changed(state: PlayerStateMachine.States) -> void:

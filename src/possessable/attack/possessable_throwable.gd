@@ -32,6 +32,8 @@ const HITBOX_COLLISION_SHAPE_EXPANSION_FACTOR: float = 1.2
 # used to animate sprite for attack
 @onready var sprite_shaker: SpriteShaker = SpriteShaker.new()
 
+@onready var throw_sfx: AudioStreamMultiple = $Throw
+
 func _ready() -> void:
 	super()
 	
@@ -121,6 +123,7 @@ func attack(target: Node3D, attack_windup: float) -> void:
 			parent.collision_layer = CollisionBit.POSSESABLE + CollisionBit.OBJECT_BLOCKER
 			parent.apply_impulse(global_position.direction_to(target.global_position) * THROW_FORCE)
 			thrown.emit()
+			throw_sfx.play_random_sound()
 	
 	# do not disable effects until hurtbox is disabled
 	depossess(false)

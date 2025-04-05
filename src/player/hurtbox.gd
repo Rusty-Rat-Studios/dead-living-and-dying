@@ -15,6 +15,9 @@ const OPACITY_FLASH: float = 0.2
 @onready var sprite_torso: AnimatedSprite3D = get_parent().get_node("RotationOffset/AnimatedSpriteTorso")
 @onready var sprite_legs: AnimatedSprite3D = get_parent().get_node("RotationOffset/AnimatedSpriteLegs")
 
+@onready var hurt_sfx: AudioStreamPlayer3D = get_parent().get_node("Sounds/Hurt")
+
+
 func _ready() -> void:
 	$HitCooldown.wait_time = HIT_COOLDOWN
 	$HitFlash.wait_time = HIT_FLASH_SPEED
@@ -45,6 +48,8 @@ func activate_hit_cooldown(flash: bool = true, duration: float = HIT_COOLDOWN) -
 	if flash:
 		hit_flash = true
 		$HitFlash.start()
+		
+		AudioManager.play_modulated(hurt_sfx)
 
 
 func _on_enemy_area_entered(area: Area3D) -> void:

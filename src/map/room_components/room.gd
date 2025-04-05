@@ -30,7 +30,6 @@ func _ready() -> void:
 	$Floor/PlayerDetector.body_entered.connect(_on_player_entered_room)
 	$Floor/PlayerDetector.body_exited.connect(_on_player_exited_room)
 	player_discovered_room.connect(_on_player_discovered_room)
-	SignalBus.key_item_dropped.connect(_on_key_item_dropped)
 	visible = false
 
 
@@ -92,8 +91,12 @@ func _on_player_entered_room(body: Node3D) -> void:
 		player_in_room = true
 		visible = true
 		SignalBus.player_entered_room.emit(self)
+		PlayerHandler.register_current_room(self)
 		if not room_discovered:
 			player_discovered_room.emit()
+		
+		if body.footsteps_sfx.stream != body.footsteps_sfx.FOOTSTEPS_WOOD:
+			body.footsteps_sfx.stream = body.footsteps_sfx.FOOTSTEPS_WOOD
 
 
 func _on_player_exited_room(body: Node3D) -> void:
@@ -122,18 +125,3 @@ func _on_player_discovered_room() -> void:
 		$/root/Game/MinimapObjects.add_child(room_icon)
 		room_icon.global_position = global_position
 		room_icon.get_child(0).texture = room_information.room_icon
-
-
-func _on_key_item_dropped() -> void:
-	if player_in_room:
-		var key_item: KeyItemWorld = KeyItemHandler.get_key_item()
-		# add key item as child of the player's current room
-		key_item.reparent(self)
-		key_item.visible = true
-		
-		# update key item position to be directly matching the player position
-		key_item.global_position = PlayerHandler.get_player().global_position
-		key_item.global_position.y = 1
-		
-		# update key item movement path with world-grid find_shortest_path algorithm
-		key_item.movement_path = get_parent().find_shortest_path(self, key_item.starting_room)
