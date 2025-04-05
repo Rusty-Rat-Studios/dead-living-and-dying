@@ -10,7 +10,7 @@ func _ready() -> void:
 func drop() -> void:
 	var key_item: KeyItemWorld = KeyItemHandler.get_key_item()
 	# add key item as child of the player's current room
-	PlayerHandler.get_current_room().add_child(key_item)
+	key_item.reparent(PlayerHandler.get_current_room())
 	key_item.visible = true
 	
 	# update key item position to be directly matching the player position
