@@ -100,6 +100,18 @@ func _on_target_reached() -> void:
 			_parent.set_target(target_door.global_position)
 			state = DoorStates.AT
 		DoorStates.AT:
+			# if target room is shrine room, teleport to adjancent room
+			# and update 
+			if target_room is ShrineRoom:
+				# temporarily set current room to the shrine room
+				_parent.current_room = target_room
+				# find a target door out of the shrine room
+				find_target_door()
+				# teleport ghost to the shrine room
+				_parent.global_position = target_door.global_position
+				_parent.global_position.y = 1
+				# now the following code will update the room to the far side of the shrine room
+			
 			# transition to next room
 			_parent.current_room = target_room
 			_parent.reparent(_parent.current_room)
