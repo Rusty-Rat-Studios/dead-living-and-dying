@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://bsav5uyfnrko1" path="res://src/ui/debug_console.gd" id="1_n82hb"]
 
-
 [node name="DebugConsole" type="Control"]
 layout_mode = 3
 anchors_preset = 12
