@@ -68,6 +68,8 @@ func _on_game_over() -> void:
 		buttons.show()
 		resume()
 	
+	SpawnerManager.reset()
+	ShrineManager.clear_shrines_list(true)
 	get_tree().call_deferred("change_scene_to_packed", main_menu)
 
 
