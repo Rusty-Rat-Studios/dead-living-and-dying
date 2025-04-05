@@ -29,4 +29,6 @@ func _on_game_over() -> void:
 
 
 func _on_scene_switch_timeout() -> void:
-	get_tree().change_scene_to_packed(main_menu_scene)
+	SpawnerManager.reset()
+	ShrineManager.clear_shrines_list(true)
+	get_tree().call_deferred("change_scene_to_packed", main_menu_scene)

@@ -42,8 +42,6 @@ func reset() -> void:
 	SpawnerManager.reset()
 	
 	player.reset_state()
-	if old_man:
-		old_man.reset()
 	
 	# Clear the minimap
 	for child: Node3D in $MinimapObjects.get_children():
@@ -55,7 +53,10 @@ func reset() -> void:
 	
 	key_item_starting_position = Vector3.ZERO
 	
-	world_grid.call_deferred("setup_grid")
+	world_grid.setup_grid()
+	
+	if old_man:
+		old_man.reset()
 
 
 func _on_player_state_changed(state: PlayerStateMachine.States) -> void:

@@ -18,6 +18,7 @@ func _ready() -> void:
 	
 	SignalBus.key_item_picked_up.connect(_on_key_item_picked_up)
 	SignalBus.key_item_dropped.connect(_on_key_item_dropped)
+	SignalBus.level_complete.connect(_on_level_complete)
 	
 	hide()
 
@@ -106,4 +107,8 @@ func _on_key_item_picked_up() -> void:
 
 
 func _on_key_item_dropped() -> void:
+	player_has_key_item = false
+
+
+func _on_level_complete() -> void:
 	player_has_key_item = false
