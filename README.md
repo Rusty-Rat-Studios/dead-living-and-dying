@@ -41,11 +41,11 @@ Cameron Oehler
 
 ### Art
 
-Kiya Steadman - player and ghost model
-Cameron Oehler - various sprites
-Jacob Meyer - various sprites
-Quinn Maloney - various sprites
-Dhassa -  map assets (walls, floors, doors, etc)
+- Kiya Steadman - player and ghost model
+- Cameron Oehler - various sprites
+- Jacob Meyer - various sprites
+- Quinn Maloney - various sprites
+- Dhassa -  map assets (walls, floors, doors, etc)
 
 ### Sound
 
