@@ -11,8 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://cpudmguey5gcy" path="res://src/map/rooms/old_man_room.tscn" id="9_8yir0"]
 [ext_resource type="PackedScene" uid="uid://cp7202hwhpcd5" path="res://src/ui/ui.tscn" id="11_8yir0"]
 
-[node name="Game" type="Node3D"]
+[node name="Game" type="Node3D" node_paths=PackedStringArray("old_man")]
 script = ExtResource("1_xwopn")
+old_man = NodePath("WorldGrid/OldManRoom/OldMan")
 
 [node name="Player" parent="." instance=ExtResource("2_xkdfq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -54,4 +55,14 @@ spawn_room = true
 [node name="GameMenu" parent="UI" index="3"]
 show_how_to_play_on_start = false
 
+[editable path="WorldGrid/OldManRoom"]
+[editable path="WorldGrid/OldManRoom/Door"]
+[editable path="WorldGrid/OldManRoom/WallSconceForward2"]
+[editable path="WorldGrid/OldManRoom/WallSconceSide"]
+[editable path="WorldGrid/OldManRoom/WallSconceSide2"]
+[editable path="WorldGrid/OldManRoom/WallSconceSide3"]
+[editable path="WorldGrid/OldManRoom/WallSconceSide4"]
+[editable path="WorldGrid/OldManRoom/Fireplace"]
+[editable path="WorldGrid/OldManRoom/Candelabra"]
+[editable path="WorldGrid/OldManRoom/Candelabra2"]
 [editable path="UI"]

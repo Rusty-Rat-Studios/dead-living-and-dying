@@ -16,8 +16,6 @@ func _ready() -> void:
 	old_man_dialogue = dialogue_container.get_node("OldManDialogue")
 	player_responses = dialogue_container.get_node("Responses")
 	
-	key_item_title = KeyItemHandler.get_display_name()
-	
 	SignalBus.key_item_picked_up.connect(_on_key_item_picked_up)
 	SignalBus.key_item_dropped.connect(_on_key_item_dropped)
 	
@@ -27,6 +25,8 @@ func _ready() -> void:
 func show_dialogue(dialogue: Dictionary) -> void:
 	visible = true
 	get_tree().paused = true
+	
+	key_item_title = KeyItemHandler.get_display_name()
 	
 	old_man_dialogue.text = dialogue["prompt"].replace("KEY_ITEM", key_item_title)
 	
