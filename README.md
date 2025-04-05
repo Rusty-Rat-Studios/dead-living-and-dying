@@ -19,7 +19,7 @@ Here you'll find the links to all our documentation.
 - [Roadmap](./doc/Revised-Road-Map.pdf)
 - [Business Case](./doc/Business-Case.pdf)
 - [Implementation Details](./doc/Implementation-Details.pdf)
-- [Narrative Structure](./doc/Narrative-Structure)
+- [Narrative Structure](./doc/Narrative-Structure.pdf)
 - [AI Integrity Statement](./doc/AI-Integrity-Statement.pdf)
 - [Security Considerations](./doc/Security-Considerations.pdf)
 
