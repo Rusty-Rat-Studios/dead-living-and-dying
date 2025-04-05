@@ -30,7 +30,7 @@ func pick_up() -> void:
 			if count == 0:
 				queue_free()
 			return
-		elif n is ConsumableItemInventory:
+		if n is ConsumableItemInventory and not n.CONSUMABLE_ID == item_inventory.CONSUMABLE_ID:
 			n.drop()
 	SignalBus.item_picked_up.emit(item_inventory, current_consumable, count)
 	queue_free()
