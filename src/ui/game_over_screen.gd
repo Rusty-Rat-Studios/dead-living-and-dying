@@ -10,6 +10,7 @@ var fade_in: Tween
 
 
 func _ready() -> void:
+	visible = false
 	modulate.a = 0
 	
 	scene_switch_timer.wait_time = SCENE_SWITCH_DELAY
@@ -20,6 +21,7 @@ func _ready() -> void:
 
 
 func _on_game_over() -> void:
+	visible = true
 	fade_in = create_tween()
 	fade_in.tween_property(self, "modulate:a", 1, FADE_IN_TIME)
 	await fade_in.finished

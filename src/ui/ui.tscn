@@ -43,17 +43,20 @@ script = ExtResource("4_bi8hs")
 offset_top = -142.0
 offset_right = 282.0
 
-[node name="GameMenu" parent="." instance=ExtResource("6_x7jpl")]
-visible = false
+[node name="Minimap" parent="." instance=ExtResource("9_pa1oa")]
+
+[node name="GameOverScreen" parent="." instance=ExtResource("11_l5owu")]
+mouse_filter = 1
 
 [node name="DebugConsole" parent="." instance=ExtResource("7_os0ka")]
 process_mode = 3
 visible = false
 
 [node name="ItemPopup" parent="." instance=ExtResource("8_diyc5")]
-
-[node name="Minimap" parent="." instance=ExtResource("9_pa1oa")]
+offset_right = 421.0
+offset_bottom = 133.0
 
 [node name="DialoguePopup" parent="." instance=ExtResource("10_1mh4k")]
 
-[node name="GameOverScreen" parent="." instance=ExtResource("11_l5owu")]
+[node name="GameMenu" parent="." instance=ExtResource("6_x7jpl")]
+visible = false

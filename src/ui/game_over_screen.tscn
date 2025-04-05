@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://yg1f6tea1m18" path="res://src/ui/resources/main_menu_border.png" id="4_qssuw"]
 
 [node name="GameOverScreen" instance=ExtResource("1_yh765")]
-top_level = true
+mouse_filter = 2
 script = ExtResource("2_fi6o4")
 
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer" index="0"]
