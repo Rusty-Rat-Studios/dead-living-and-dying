@@ -30,9 +30,8 @@ var dialogue: Dictionary[String, Dictionary] = {
 		"next_stage": "return_success"
 	},
 	"return_success": {
-		"prompt": "Oh how wonderful, thank you very much! Here, I found this while you were gone\n" +
-		"and I think you should have it. Go on, take it.",
-		"responses": ["Thank you!EXIT"]
+		"prompt": "Oh how wonderful, thank you very much!",
+		"responses": ["Your welcome!EXIT"]
 	}
 }
 
