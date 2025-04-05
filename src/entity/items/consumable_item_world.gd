@@ -34,3 +34,4 @@ func pick_up() -> void:
 			n.drop()
 	SignalBus.item_picked_up.emit(item_inventory, current_consumable, count)
 	queue_free()
+	return
