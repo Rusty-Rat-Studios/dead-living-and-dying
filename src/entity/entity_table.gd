@@ -47,3 +47,11 @@ func count_max_entities() -> int:
 				return accum
 			return accum + entity.max_spawn
 	, 0)
+
+
+func deep_copy() -> EntityTable:
+	var copy: EntityTable = duplicate(true)
+	copy.entities = []
+	for entity_table_entry: EntityTableEntry in entities:
+		copy.entities.append(entity_table_entry.duplicate(true))
+	return copy

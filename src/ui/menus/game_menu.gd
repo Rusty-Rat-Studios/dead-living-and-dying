@@ -59,3 +59,4 @@ func _on_quit_pressed() -> void:
 
 func _on_level_complete() -> void:
 	print("Level complete!")
+	get_node('/root/Game').reset()

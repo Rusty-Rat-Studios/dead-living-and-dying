@@ -20,3 +20,7 @@ func get_spawners(type: Spawner.SpawnerType) -> Array:
 func spawn(type: Spawner.SpawnerType, entity_table: EntityTable) -> void:
 	for spawner: Spawner in get_spawners(type):
 		spawner.spawn(entity_table.get_random_entity())
+
+
+func reset() -> void:
+	_spawners.clear()

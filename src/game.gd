@@ -11,6 +11,8 @@ extends Node3D
 @onready var player: Player = $Player
 @onready var light_directional: DirectionalLight3D = $DirectionalLight3D
 
+@onready var world_grid: WorldGrid = $WorldGrid
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -34,18 +36,27 @@ func reset() -> void:
 	# reset all ghosts, possessables, shrines, and items
 	Utility.call_for_each(find_children("Ghost*", "Ghost"), "reset")
 	Utility.call_for_each(find_children("*", "Possessable"), "reset")
-	ShrineManager.reset_shrines()
+	ShrineManager.clear_shrines_list(true)
 	Utility.call_for_each(find_children("*Item*", "Item"), "reset")
 	
-	player.reset()
-	if old_man:
-		old_man.reset()
+	SpawnerManager.reset()
+	
+	player.reset_state()
 	
 	# Clear the minimap
 	for child: Node3D in $MinimapObjects.get_children():
-		child.queue_free()
+		child.free()
 	
 	get_tree().call_group("rooms", "reset")
+	
+	world_grid.reset()
+	
+	key_item_starting_position = Vector3.ZERO
+	
+	world_grid.setup_grid()
+	
+	if old_man:
+		old_man.reset()
 
 
 func _on_player_state_changed(state: PlayerStateMachine.States) -> void:

@@ -11,3 +11,13 @@ extends Resource
 @export var item_entity_table: EntityTable = null
 @export var key_item_entity_table: EntityTable = null
 @export var boss_entity_table: EntityTable = null
+
+
+func deep_copy() -> GeneratorSettings:
+	var copy: GeneratorSettings = duplicate()
+	copy.room_table = room_table.deep_copy()
+	copy.enemy_entity_table = enemy_entity_table.deep_copy()
+	copy.item_entity_table = item_entity_table.deep_copy()
+	copy.key_item_entity_table = key_item_entity_table.deep_copy()
+	copy.boss_entity_table = boss_entity_table.deep_copy()
+	return copy

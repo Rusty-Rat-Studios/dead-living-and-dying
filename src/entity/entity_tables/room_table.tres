@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://dcyocjg2x2gk" path="res://src/map/rooms/boss_ghost_room.tscn" id="20_lrffa"]
 
 [sub_resource type="Resource" id="Resource_b5ttb"]
+resource_local_to_scene = true
 script = ExtResource("1_pliob")
 entity = ExtResource("2_lrffa")
 base_chance = 1.0
@@ -32,6 +33,7 @@ min_spawn = -1
 metadata/_custom_type_script = "uid://dt04phs8a5k3h"
 
 [sub_resource type="Resource" id="Resource_ab0a5"]
+resource_local_to_scene = true
 script = ExtResource("1_pliob")
 entity = ExtResource("3_3ta5i")
 base_chance = 1.0
@@ -41,6 +43,7 @@ min_spawn = -1
 metadata/_custom_type_script = "uid://dt04phs8a5k3h"
 
 [sub_resource type="Resource" id="Resource_xjnb4"]
+resource_local_to_scene = true
 script = ExtResource("1_pliob")
 entity = ExtResource("4_e8d1d")
 base_chance = 1.0
@@ -50,6 +53,7 @@ min_spawn = -1
 metadata/_custom_type_script = "uid://dt04phs8a5k3h"
 
 [sub_resource type="Resource" id="Resource_ylr8c"]
+resource_local_to_scene = true
 script = ExtResource("1_pliob")
 entity = ExtResource("5_mcrx7")
 base_chance = 1.0
@@ -59,6 +63,7 @@ min_spawn = -1
 metadata/_custom_type_script = "uid://dt04phs8a5k3h"
 
 [sub_resource type="Resource" id="Resource_2gvgd"]
+resource_local_to_scene = true
 script = ExtResource("1_pliob")
 entity = ExtResource("6_7bq5n")
 base_chance = 1.0
@@ -68,6 +73,7 @@ min_spawn = -1
 metadata/_custom_type_script = "uid://dt04phs8a5k3h"
 
 [sub_resource type="Resource" id="Resource_s0rfh"]
+resource_local_to_scene = true
 script = ExtResource("1_pliob")
 entity = ExtResource("7_lj20f")
 base_chance = 1.0
@@ -77,6 +83,7 @@ min_spawn = -1
 metadata/_custom_type_script = "uid://dt04phs8a5k3h"
 
 [sub_resource type="Resource" id="Resource_waavr"]
+resource_local_to_scene = true
 script = ExtResource("1_pliob")
 entity = ExtResource("8_w60i0")
 base_chance = 1.0
@@ -86,6 +93,7 @@ min_spawn = -1
 metadata/_custom_type_script = "uid://dt04phs8a5k3h"
 
 [sub_resource type="Resource" id="Resource_ib33g"]
+resource_local_to_scene = true
 script = ExtResource("1_pliob")
 entity = ExtResource("9_e2hxy")
 base_chance = 0.75
@@ -95,6 +103,7 @@ min_spawn = 2
 metadata/_custom_type_script = "uid://dt04phs8a5k3h"
 
 [sub_resource type="Resource" id="Resource_mtfob"]
+resource_local_to_scene = true
 script = ExtResource("1_pliob")
 entity = ExtResource("10_ujvwy")
 base_chance = 1.0
@@ -104,6 +113,7 @@ min_spawn = 2
 metadata/_custom_type_script = "uid://dt04phs8a5k3h"
 
 [sub_resource type="Resource" id="Resource_4wgnf"]
+resource_local_to_scene = true
 script = ExtResource("1_pliob")
 entity = ExtResource("11_kxnck")
 base_chance = 1.0
@@ -113,6 +123,7 @@ min_spawn = -1
 metadata/_custom_type_script = "uid://dt04phs8a5k3h"
 
 [sub_resource type="Resource" id="Resource_ucrp2"]
+resource_local_to_scene = true
 script = ExtResource("1_pliob")
 entity = ExtResource("12_fo4er")
 base_chance = 1.0
@@ -122,6 +133,7 @@ min_spawn = -1
 metadata/_custom_type_script = "uid://dt04phs8a5k3h"
 
 [sub_resource type="Resource" id="Resource_b2xe6"]
+resource_local_to_scene = true
 script = ExtResource("1_pliob")
 entity = ExtResource("13_nmnii")
 base_chance = 1.0
@@ -131,6 +143,7 @@ min_spawn = -1
 metadata/_custom_type_script = "uid://dt04phs8a5k3h"
 
 [sub_resource type="Resource" id="Resource_tyhfv"]
+resource_local_to_scene = true
 script = ExtResource("1_pliob")
 entity = ExtResource("14_b2v4p")
 base_chance = 1.0
@@ -140,6 +153,7 @@ min_spawn = -1
 metadata/_custom_type_script = "uid://dt04phs8a5k3h"
 
 [sub_resource type="Resource" id="Resource_5ur83"]
+resource_local_to_scene = true
 script = ExtResource("1_pliob")
 entity = ExtResource("15_003gy")
 base_chance = 1.0
@@ -149,6 +163,7 @@ min_spawn = -1
 metadata/_custom_type_script = "uid://dt04phs8a5k3h"
 
 [sub_resource type="Resource" id="Resource_tp66j"]
+resource_local_to_scene = true
 script = ExtResource("1_pliob")
 entity = ExtResource("16_ihbo8")
 base_chance = 1.0
@@ -158,6 +173,7 @@ min_spawn = -1
 metadata/_custom_type_script = "uid://dt04phs8a5k3h"
 
 [sub_resource type="Resource" id="Resource_jdffx"]
+resource_local_to_scene = true
 script = ExtResource("1_pliob")
 entity = ExtResource("17_1m13h")
 base_chance = 1.0
@@ -167,6 +183,7 @@ min_spawn = -1
 metadata/_custom_type_script = "uid://dt04phs8a5k3h"
 
 [sub_resource type="Resource" id="Resource_tq0so"]
+resource_local_to_scene = true
 script = ExtResource("1_pliob")
 entity = ExtResource("18_kc0fn")
 base_chance = 1.0
@@ -176,6 +193,7 @@ min_spawn = -1
 metadata/_custom_type_script = "uid://dt04phs8a5k3h"
 
 [sub_resource type="Resource" id="Resource_fdobi"]
+resource_local_to_scene = true
 script = ExtResource("1_pliob")
 entity = ExtResource("19_ehd6k")
 base_chance = 1.0
@@ -185,6 +203,7 @@ min_spawn = 1
 metadata/_custom_type_script = "uid://dt04phs8a5k3h"
 
 [sub_resource type="Resource" id="Resource_3ta5i"]
+resource_local_to_scene = true
 script = ExtResource("1_pliob")
 entity = ExtResource("20_lrffa")
 base_chance = 1.0
@@ -194,5 +213,6 @@ min_spawn = 1
 metadata/_custom_type_script = "uid://dt04phs8a5k3h"
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("20_1v4xr")
 entities = Array[ExtResource("1_pliob")]([SubResource("Resource_b5ttb"), SubResource("Resource_ab0a5"), SubResource("Resource_xjnb4"), SubResource("Resource_ylr8c"), SubResource("Resource_2gvgd"), SubResource("Resource_s0rfh"), SubResource("Resource_waavr"), SubResource("Resource_ib33g"), SubResource("Resource_mtfob"), SubResource("Resource_4wgnf"), SubResource("Resource_ucrp2"), SubResource("Resource_b2xe6"), SubResource("Resource_tyhfv"), SubResource("Resource_5ur83"), SubResource("Resource_tp66j"), SubResource("Resource_jdffx"), SubResource("Resource_tq0so"), SubResource("Resource_fdobi"), SubResource("Resource_3ta5i")])

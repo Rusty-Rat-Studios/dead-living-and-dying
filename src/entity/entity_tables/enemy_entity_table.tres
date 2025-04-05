@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://caxs80c62syve" path="res://src/entity/entity_table.gd" id="5_53opc"]
 
 [sub_resource type="Resource" id="Resource_mbjog"]
+resource_local_to_scene = true
 script = ExtResource("1_77xku")
 entity = ExtResource("2_n1cha")
 base_chance = 80.0
@@ -13,6 +14,7 @@ max_spawn = -1
 min_spawn = -1
 
 [sub_resource type="Resource" id="Resource_sbsac"]
+resource_local_to_scene = true
 script = ExtResource("1_77xku")
 base_chance = 20.0
 chance_change = 0.0
@@ -20,5 +22,6 @@ max_spawn = -1
 min_spawn = -1
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("5_53opc")
 entities = Array[ExtResource("1_77xku")]([SubResource("Resource_mbjog"), SubResource("Resource_sbsac")])
