@@ -42,6 +42,10 @@ var light_enabled_permanent: bool = false
 @onready var at_target: bool = false
 @onready var movement_timeout_timer: Timer = $MovementTimeoutTimer
 
+@onready var ghost_sfx: AudioStreamPlayer3D = $Sounds/GhostSFX
+@onready var player_sound_detector: Area3D = $Sounds/PlayerSoundDetector
+
+
 # store initial position to return to when calling reset()
 @onready var starting_position: Vector3 = position
 
@@ -74,6 +78,8 @@ func _ready() -> void:
 	# defer connection to allow state-specific logic to execute before changing states
 	hit.connect(_on_hit, CONNECT_DEFERRED)
 	SignalBus.hit.connect(_on_hit)
+	# play sounds if player nearby
+	player_sound_detector.body_entered.connect(_on_body_entered)
 
 
 func _physics_process(delta: float) -> void:
@@ -224,3 +230,7 @@ func _on_key_item_dropped() -> void:
 	stats.remove_modifier(GhostStats.Stats.POSSESSION_WAIT_CHANCE, "key_item")
 	stats.remove_modifier(GhostStats.Stats.POSSESSION_ATTACK_WINDUP, "key_item") 
 	stats.remove_modifier(GhostStats.Stats.STATE_ATTACKING_CHANCE, "key_item")
+
+
+func _on_body_entered(_body: Node3D) -> void:
+	ghost_sfx.play_sound()

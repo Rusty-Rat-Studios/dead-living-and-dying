@@ -86,21 +86,26 @@ func consume() -> void:
 		$Sprite3D.replace_texture(TEXTURE_CONSUMED)
 
 
-func _on_body_entered(_body: Node3D) -> void:
-	# type-checking for player is unneeded as shrine collides on layer PLAYER
+func _on_body_entered(body: Node3D) -> void:
 	if (not consumed 
 		and not activated 
 		and PlayerHandler.get_player_state() != PlayerStateMachine.States.DEAD):
 		# display interaction text
 		$Interactable.show()
 		$Interactable.enabled = true
+	
+	body.footsteps_sfx.stream = body.footsteps_sfx.FOOTSTEPS_WOOD
+	body.footsteps_sfx.play()
 
 
-func _on_body_exited(_body: Node3D) -> void:
+func _on_body_exited(body: Node3D) -> void:
 	# no guard check -> should always be non-interactable when player leaves
 	# regardless of shrine and player states
 	$Interactable.hide()
 	$Interactable.enabled = false
+	
+	body.footsteps_sfx.stream = body.footsteps_sfx.FOOTSTEPS_GRASS
+	body.footsteps_sfx.play()
 
 
 func _on_interaction(input_name: String) -> void:

@@ -94,6 +94,9 @@ func _on_player_entered_room(body: Node3D) -> void:
 		PlayerHandler.register_current_room(self)
 		if not room_discovered:
 			player_discovered_room.emit()
+		
+		if body.footsteps_sfx.stream != body.footsteps_sfx.FOOTSTEPS_WOOD:
+			body.footsteps_sfx.stream = body.footsteps_sfx.FOOTSTEPS_WOOD
 
 
 func _on_player_exited_room(body: Node3D) -> void:

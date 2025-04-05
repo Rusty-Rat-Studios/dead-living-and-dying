@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://d1lsqw58va6up"]
+[gd_scene load_steps=8 format=3 uid="uid://d1lsqw58va6up"]
 
 [ext_resource type="Texture2D" uid="uid://curlcs6otrt6g" path="res://src/ui/resources/title.png" id="1_6lwwj"]
 [ext_resource type="Script" uid="uid://1dmwrug5ubap" path="res://src/ui/menus/main_menu.gd" id="1_85sq6"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://e6l8r6x4mqfq" path="res://src/ui/menus/menu_background.tscn" id="1_xct2y"]
 [ext_resource type="Theme" uid="uid://casdoijkjemc2" path="res://src/ui/resources/menu_theme.tres" id="4_31m45"]
 [ext_resource type="PackedScene" uid="uid://d2i1eypiamq2d" path="res://src/ui/menus/how_to_play.tscn" id="6_s0122"]
+[ext_resource type="PackedScene" uid="uid://c3r030661il6l" path="res://src/ui/menus/options_menu.tscn" id="7_csvuu"]
 
 [node name="MainMenu" instance=ExtResource("1_xct2y")]
 script = ExtResource("1_85sq6")
@@ -106,3 +107,7 @@ text = "Quit"
 
 [node name="HowToPlay" parent="." index="3" instance=ExtResource("6_s0122")]
 visible = false
+
+[node name="OptionsMenu" parent="." index="4" instance=ExtResource("7_csvuu")]
+visible = false
+layout_mode = 1

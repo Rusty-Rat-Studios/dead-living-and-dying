@@ -17,6 +17,7 @@ func _ready() -> void:
 		$HowToPlay.close_requested.connect(func() -> void: resume(), CONNECT_ONE_SHOT)
 	
 	buttons.get_node("ButtonContinue").pressed.connect(_on_continue_pressed)
+	buttons.get_node("ButtonOptions").pressed.connect(_on_options_pressed)
 	buttons.get_node("ButtonHow").pressed.connect(_on_how_pressed)
 	buttons.get_node("ButtonQuit").pressed.connect(_on_quit_pressed)
 	SignalBus.game_over.connect(_on_game_over)
@@ -44,6 +45,10 @@ func pause() -> void:
 
 func _on_continue_pressed() -> void:
 	resume()
+
+
+func _on_options_pressed() -> void:
+	$OptionsMenu.show()
 
 
 func _on_how_pressed() -> void:

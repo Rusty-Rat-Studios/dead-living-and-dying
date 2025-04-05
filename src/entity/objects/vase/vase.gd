@@ -1,6 +1,7 @@
 extends RigidBody3D
 
 @onready var break_after_throw_timer: Timer = $BreakAfterThrowTimer
+@onready var break_sfx: AudioStreamPlayer3D = $Break
 
 
 func _ready() -> void:
@@ -30,6 +31,7 @@ func _on_body_entered(_body: Node3D) -> void:
 	
 	visible = false
 	
-	# PLAY SOUND HERE (await finished)
+	AudioManager.play_modulated(break_sfx)
+	await break_sfx.finished
 	
 	queue_free()

@@ -35,9 +35,9 @@ func use() -> void:
 	active = true
 	count -= 1
 	item_used.emit()
+	if (count <= 0):
+		queue_free()
 
 
 func _on_active_timer_timeout() -> void:
 	active = false
-	if (count <= 0):
-		queue_free()

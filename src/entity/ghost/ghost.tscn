@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://yihpxsaeuqdi"]
+[gd_scene load_steps=20 format=3 uid="uid://yihpxsaeuqdi"]
 
 [ext_resource type="Script" uid="uid://bhwqa6bloe8me" path="res://src/entity/ghost/ghost.gd" id="1_vr82v"]
 [ext_resource type="SpriteFrames" uid="uid://bygn7dpqwa3pk" path="res://src/entity/ghost/ghost_sprite_frames.tres" id="2_8v45s"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" uid="uid://dnejv78e6bqw6" path="res://src/entity/ghost/state_machine/state_stunned.gd" id="7_yplap"]
 [ext_resource type="Script" uid="uid://bwxdjfnmqcqlx" path="res://src/entity/ghost/state_machine/state_attacking.gd" id="8_a4kr4"]
 [ext_resource type="Script" uid="uid://2ngv1mk144l5" path="res://src/entity/ghost/state_machine/state_moving.gd" id="9_cmmm8"]
+[ext_resource type="Script" uid="uid://byol6wcxqtshl" path="res://src/entity/ghost/ghost_sfx.gd" id="10_n16t3"]
+[ext_resource type="AudioStream" uid="uid://dbdul01turlyv" path="res://src/sound/ghost/wheeze/ghost_wheeze2.mp3" id="11_cker6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cokcw"]
 
@@ -40,6 +42,9 @@ height = 0.1
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_rrxp0"]
 radius = 5.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_8v45s"]
+radius = 1.5
 
 [node name="Ghost" type="CharacterBody3D" groups=["ghosts"]]
 collision_layer = 8
@@ -121,3 +126,19 @@ disabled = true
 [node name="MovementTimeoutTimer" type="Timer" parent="."]
 wait_time = 6.0
 one_shot = true
+
+[node name="Sounds" type="Node3D" parent="."]
+
+[node name="GhostSFX" type="AudioStreamPlayer3D" parent="Sounds" groups=["sfx"]]
+stream = ExtResource("11_cker6")
+max_db = -3.502
+bus = &"Sfx"
+script = ExtResource("10_n16t3")
+
+[node name="PlayerSoundDetector" type="Area3D" parent="Sounds"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sounds/PlayerSoundDetector"]
+shape = SubResource("SphereShape3D_8v45s")
