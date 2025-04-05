@@ -45,6 +45,8 @@ var _player_has_key_item: bool = false
 
 var _dialogue_stage: String
 
+var _door: Door
+
 @onready var dialogue_popup: DialoguePopup = get_tree().root.get_node("Game/UI/DialoguePopup")
 
 func _ready() -> void:
@@ -59,18 +61,19 @@ func _ready() -> void:
 	$Interactable.hide()
 	$Interactable.enabled = false
 	
+	_door = get_parent().doors.values()[0]
+	_door.lock(false)
+	
 	_dialogue_stage = "intro"
-
-
-# called by game.gd and passed in the current level's key item
-# to initialize old man's reference to key item
-func init(key_item: KeyItemInventory) -> void:
-	_key_item = key_item
 
 
 func reset() -> void:
 	$Interactable.hide()
 	$Interactable.enabled = false
+	
+	# lock door so player can't leave before speaking to old man
+	_door.lock(false)
+	
 	_dialogue_stage = "fetch"
 
 
@@ -101,6 +104,8 @@ func _on_response_selected(next_stage: String) -> void:
 		"crucifix":
 			var crucifix: ItemWorld = crucifix_scene.instantiate()
 			crucifix.pick_up()
+			# unlock the door so the player can leave
+			_door.unlock()
 		"return_success":
 			SignalBus.level_complete.emit()
 	
