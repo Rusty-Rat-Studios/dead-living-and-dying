@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://bqvpuvkoom4d2"]
+
+[ext_resource type="PackedScene" uid="uid://e6l8r6x4mqfq" path="res://src/ui/menus/menu_background.tscn" id="1_yh765"]
+[ext_resource type="Script" uid="uid://dua8loynpadt4" path="res://src/ui/game_over_screen.gd" id="2_fi6o4"]
+[ext_resource type="FontFile" uid="uid://bvx6yxwpx1rfq" path="res://src/ui/resources/princess_sofia_font/PrincessSofia-Regular.ttf" id="3_61wcr"]
+[ext_resource type="Texture2D" uid="uid://yg1f6tea1m18" path="res://src/ui/resources/main_menu_border.png" id="4_qssuw"]
+
+[node name="GameOverScreen" instance=ExtResource("1_yh765")]
+top_level = true
+script = ExtResource("2_fi6o4")
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer" index="0"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/CenterContainer" index="0"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_61wcr")
+theme_override_font_sizes/font_size = 100
+text = "Game Over"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer" index="1"]
+layout_mode = 2
+texture = ExtResource("4_qssuw")
+expand_mode = 1
