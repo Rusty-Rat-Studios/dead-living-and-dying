@@ -1,11 +1,11 @@
 # Dead, Living, and Dying
 
+## [View Trailer](https://youtu.be/PIR2D62m74M)
+
 ## Overview
 Dead, Living, and Dying is a 2.5D horror roguelike game about defending yourself from ghosts in a haunted mansion where taking damage exposes you to the dangers of the spirit world.
 
 ![Dead Living and Dying Poster!](./doc/DLD-Poster.png)
-
-## [View Trailer](https://youtu.be/PIR2D62m74M)
 
 ## Features
 - **Dynamic Horror Gameplay**: Horror elements are built into the gameplay itself and the dynamic interactions between the player and ghosts allowing for greater replayability.
