@@ -120,6 +120,9 @@ func _init_all_rooms() -> void:
 	for node: Node in self.get_children():
 		if node is Room:
 			node.init()
+	
+	for shrine: Shrine in ShrineManager.shrines:
+		shrine.init()
 
 
 func _spawn_entities() -> void:
